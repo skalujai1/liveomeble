@@ -1,0 +1,240 @@
+{
+  "id": "site",
+  "_notes": [
+    "Elementy wspólne dla wszystkich stron: nawigacja, stopka, mikroteksty, komunikaty, strona 404.",
+    "Klucze zaczynające się od _ to notatki dla redakcji — nie renderować.",
+    "Placeholdery w nawiasach klamrowych ({price}, {n}) podstawia szablon. Formy liczby mnogiej: Intl.PluralRules('pl') → one / few / many."
+  ],
+  "brand": {
+    "name": "Liveo Meble",
+    "legalName": "Liveo Meble sp. z o.o.",
+    "shortName": "Liveo",
+    "titleSuffix": " | Liveo",
+    "locality": "Raniżów",
+    "region": "podkarpackie",
+    "country": "PL",
+    "logo": "[do potwierdzenia: logo SVG od klienta]",
+    "logoAlt": "Liveo Meble — strona główna"
+  },
+  "skipLink": "Przejdź do treści",
+  "nav": {
+    "ariaLabel": "Menu główne",
+    "openLabel": "Menu",
+    "closeLabel": "Zamknij menu",
+    "items": [
+      { "label": "Kolekcje", "href": "/kolekcje/" },
+      {
+        "label": "Meble",
+        "href": "/meble/",
+        "submenuLabel": "Meble według pomieszczenia",
+        "children": [
+          { "label": "Salon", "href": "/pomieszczenia/salon/" },
+          { "label": "Jadalnia", "href": "/pomieszczenia/jadalnia/" },
+          { "label": "Sypialnia", "href": "/pomieszczenia/sypialnia/" },
+          { "label": "Pokój młodzieżowy", "href": "/pomieszczenia/pokoj-mlodziezowy/" },
+          { "label": "Przedpokój", "href": "/pomieszczenia/przedpokoj/" },
+          { "label": "Domowe biuro", "href": "/pomieszczenia/biuro/" },
+          { "label": "Wszystkie meble", "href": "/meble/" }
+        ]
+      },
+      { "label": "Promocje", "href": "/promocje/" },
+      { "label": "Doradca wnętrz", "href": "/doradca-wnetrz/" },
+      { "label": "Poradnik", "href": "/poradnik/" }
+    ],
+    "cta": { "label": "Gdzie kupić", "href": "/gdzie-kupic/" },
+    "secondary": [
+      { "label": "Dla partnerów", "href": "/dla-partnerow/" },
+      { "label": "Strefa partnera", "href": "/strefa-partnera/" }
+    ]
+  },
+  "breadcrumbs": {
+    "ariaLabel": "Ścieżka nawigacji",
+    "home": "Strona główna"
+  },
+  "footer": {
+    "lead": "Meble projektowane w kolekcjach. Producent z Raniżowa na Podkarpaciu.",
+    "columns": [
+      {
+        "title": "Kolekcje",
+        "source": "collections.json",
+        "items": [],
+        "more": { "label": "Wszystkie kolekcje", "href": "/kolekcje/" }
+      },
+      {
+        "title": "Meble",
+        "items": [
+          { "label": "Salon", "href": "/pomieszczenia/salon/" },
+          { "label": "Jadalnia", "href": "/pomieszczenia/jadalnia/" },
+          { "label": "Sypialnia", "href": "/pomieszczenia/sypialnia/" },
+          { "label": "Pokój młodzieżowy", "href": "/pomieszczenia/pokoj-mlodziezowy/" },
+          { "label": "Przedpokój", "href": "/pomieszczenia/przedpokoj/" },
+          { "label": "Domowe biuro", "href": "/pomieszczenia/biuro/" }
+        ],
+        "more": { "label": "Wszystkie meble", "href": "/meble/" }
+      },
+      {
+        "title": "Pomoc w wyborze",
+        "items": [
+          { "label": "Gdzie kupić", "href": "/gdzie-kupic/" },
+          { "label": "Doradca wnętrz", "href": "/doradca-wnetrz/" },
+          { "label": "Poradnik", "href": "/poradnik/" },
+          { "label": "Promocje", "href": "/promocje/" }
+        ]
+      },
+      {
+        "title": "Liveo",
+        "items": [
+          { "label": "O nas", "href": "/o-nas/" },
+          { "label": "Kontakt", "href": "/kontakt/" },
+          { "label": "Dla partnerów", "href": "/dla-partnerow/" },
+          { "label": "Strefa partnera", "href": "/strefa-partnera/" }
+        ]
+      }
+    ],
+    "legal": [
+      { "label": "Polityka prywatności", "href": "/polityka-prywatnosci/" },
+      { "label": "Regulamin", "href": "/regulamin/" },
+      { "label": "Ustawienia plików cookie", "action": "open-consent", "_note": "Pokazać tylko, jeśli strona używa cookies wymagających zgody." }
+    ],
+    "company": "Liveo Meble sp. z o.o. · Raniżów [do potwierdzenia: ulica, kod pocztowy] · NIP [do potwierdzenia] · KRS [do potwierdzenia]",
+    "copyright": "© {year} Liveo Meble sp. z o.o.",
+    "demoNotice": "Wersja demonstracyjna: kolekcje, meble, ceny, promocje i sklepy na tej stronie są przykładowe."
+  },
+  "demo": {
+    "badge": "DEMO",
+    "banner": "To wersja demonstracyjna strony. Kolekcje, meble, ceny, promocje i sklepy są przykładowe.",
+    "storesNote": "Sklepy na liście są przykładowe (dane demo)."
+  },
+  "buttons": {
+    "seeCollection": "Zobacz kolekcję {name}",
+    "seeProduct": "Zobacz mebel",
+    "seeAll": "Zobacz wszystkie",
+    "whereToBuy": "Gdzie kupić",
+    "showStores": "Pokaż sklepy",
+    "showMore": "Pokaż więcej",
+    "clearFilters": "Wyczyść filtry",
+    "openAdvisor": "Otwórz doradcę",
+    "back": "Wróć",
+    "close": "Zamknij",
+    "send": "Wyślij"
+  },
+  "price": {
+    "label": "Cena",
+    "regular": "Cena regularna",
+    "promo": "Cena promocyjna",
+    "before": "Cena przed obniżką: {price}",
+    "lowest30": "Najniższa cena z 30 dni przed obniżką: {price}",
+    "from": "od {price}",
+    "promoUntil": "Promocja trwa do {lastDay} włącznie",
+    "note": "Cena producenta [do potwierdzenia: „cena sugerowana”]. Ostateczną cenę podaje sklep partnerski.",
+    "srCurrent": "Aktualna cena",
+    "srOld": "Poprzednia cena",
+    "_notes": [
+      "Cenę liczy zawsze priceFor() z src/lib/pricing.js — w HTML statycznie z dnia budowy, w przeglądarce z API (z fallbackiem).",
+      "{lastDay} = dzień przed endsAt (endsAt to północ rozpoczynająca pierwszy dzień PO promocji), format: 30 października 2026.",
+      "Przekreślona cena regularna zawsze razem z linią lowest30 — nigdy sama."
+    ]
+  },
+  "stock": {
+    "dostepny": "Dostępny",
+    "na-zamowienie": "Na zamówienie — ok. {days} dni",
+    "na-zamowienie-short": "Na zamówienie",
+    "wyprzedany": "Wyprzedany",
+    "unknown": "Dostępność sprawdź w sklepie",
+    "note": "Stan w magazynie producenta. Sklep partnerski może mieć mebel na miejscu.",
+    "_note": "Jeśli dane o stanach są starsze niż 24 h (API niedostępne), pokazujemy stock.unknown zamiast statusu."
+  },
+  "dims": {
+    "title": "Wymiary",
+    "width": "Szerokość",
+    "height": "Wysokość",
+    "depth": "Głębokość",
+    "weight": "Waga",
+    "format": "{w} × {h} × {d} cm",
+    "formatLong": "szer. {w} × wys. {h} × gł. {d} cm",
+    "weightFormat": "ok. {kg} kg"
+  },
+  "plural": {
+    "products": { "one": "{n} mebel", "few": "{n} meble", "many": "{n} mebli" },
+    "colors": { "one": "{n} kolor", "few": "{n} kolory", "many": "{n} kolorów" },
+    "stores": { "one": "{n} sklep", "few": "{n} sklepy", "many": "{n} sklepów" },
+    "collections": { "one": "{n} kolekcja", "few": "{n} kolekcje", "many": "{n} kolekcji" },
+    "days": { "one": "{n} dzień", "few": "{n} dni", "many": "{n} dni" },
+    "minutes": { "one": "{n} minuta", "few": "{n} minuty", "many": "{n} minut" },
+    "items": { "one": "{n} pozycja", "few": "{n} pozycje", "many": "{n} pozycji" }
+  },
+  "labels": {
+    "collection": "Kolekcja",
+    "color": "Kolor",
+    "colors": "Kolory",
+    "room": "Pomieszczenie",
+    "type": "Rodzaj mebla",
+    "new": "Nowość",
+    "bestseller": "Często wybierany",
+    "promo": "Promocja",
+    "assembly": "Montaż",
+    "features": "Szczegóły",
+    "readingTime": "{n} min czytania",
+    "updated": "Aktualizacja: {date}",
+    "distance": "{km} km w linii prostej"
+  },
+  "handles": {
+    "edge": "wyprofilowana krawędź frontu, bez uchwytów",
+    "knob": "małe okrągłe gałki",
+    "bar": "podłużne uchwyty",
+    "push": "bez uchwytów — otwieranie naciśnięciem (push-to-open)",
+    "groove": "uchwyt wyfrezowany we froncie"
+  },
+  "bases": {
+    "legsWood": "drewniane nóżki",
+    "legsMetal": "cienkie metalowe nogi",
+    "plinth": "niski, cofnięty cokół"
+  },
+  "styles": {
+    "naturalny": { "label": "naturalny", "in": "w stylu naturalnym" },
+    "skandynawski": { "label": "skandynawski", "in": "w stylu skandynawskim" },
+    "loft": { "label": "loftowy", "in": "w stylu loftowym" },
+    "glamour-lekki": { "label": "lekki glamour", "in": "z nutą glamour" },
+    "nowoczesny": { "label": "nowoczesny", "in": "w stylu nowoczesnym" },
+    "klasyczny-nowoczesny": { "label": "klasyka w nowoczesnym wydaniu", "in": "w stylu nowoczesnej klasyki" },
+    "minimalistyczny": { "label": "minimalistyczny", "in": "w stylu minimalistycznym" }
+  },
+  "forms": {
+    "required": "To pole jest wymagane.",
+    "optional": "(opcjonalnie)",
+    "email": "Wpisz adres e-mail w formacie nazwa@domena.pl.",
+    "phone": "Wpisz numer telefonu — same cyfry, np. 600 100 200.",
+    "postcode": "Wpisz kod pocztowy w formacie 00-000, np. 35-060.",
+    "nip": "Wpisz 10 cyfr NIP, bez kresek.",
+    "tooLong": "Tekst jest za długi — maksymalnie {max} znaków.",
+    "sending": "Wysyłamy…",
+    "error": "Nie udało się wysłać. Spróbuj ponownie za chwilę albo napisz na adres {email}.",
+    "consent": "Administratorem danych jest Liveo Meble sp. z o.o. Użyjemy ich tylko, żeby odpowiedzieć na wiadomość. Szczegóły w [polityce prywatności](/polityka-prywatnosci/).",
+    "antispamNote": "Formularz chroni przed spamem niewidoczny test — nie musisz niczego klikać."
+  },
+  "cookies": {
+    "_note": "Baner pokazujemy TYLKO, jeśli strona używa plików cookie lub podobnych technologii wymagających zgody (np. analityka). Bez nich — brak banera, tylko informacja w polityce prywatności.",
+    "title": "Pliki cookie",
+    "text": "Używamy plików cookie niezbędnych do działania strony. Za Twoją zgodą użyjemy też narzędzia do statystyk odwiedzin [do uzupełnienia: nazwa narzędzia], żeby wiedzieć, które strony są przydatne.",
+    "accept": "Zgadzam się na statystyki",
+    "reject": "Tylko niezbędne",
+    "settings": "Ustawienia",
+    "link": "Więcej w polityce prywatności"
+  },
+  "notFound": {
+    "seo": {
+      "title": "Nie znaleziono strony | Liveo",
+      "description": "Tej strony nie ma. Sprawdź kolekcje mebli Liveo, wszystkie meble albo znajdź najbliższy sklep partnerski.",
+      "noindex": true
+    },
+    "h1": "Tej strony nie ma",
+    "lead": "Adres mógł się zmienić po przebudowie strony albo zawiera literówkę. Oto miejsca, od których warto zacząć:",
+    "links": [
+      { "label": "Kolekcje mebli", "href": "/kolekcje/" },
+      { "label": "Wszystkie meble", "href": "/meble/" },
+      { "label": "Gdzie kupić", "href": "/gdzie-kupic/" },
+      { "label": "Strona główna", "href": "/" }
+    ],
+    "oldSiteNote": "Szukasz czegoś ze starej strony Liveo? Napisz do nas przez [formularz kontaktowy](/kontakt/) — pomożemy."
+  }
+}

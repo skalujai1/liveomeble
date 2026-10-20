@@ -1,0 +1,152 @@
+{
+  "id": "gdzie-kupic",
+  "url": "/gdzie-kupic/",
+  "status": "draft",
+  "seo": {
+    "title": "Gdzie kupić meble Liveo — sklepy partnerskie blisko Ciebie",
+    "description": "Wpisz kod pocztowy i znajdź najbliższy sklep partnerski z meblami Liveo. Sprawdź, które kolekcje ma na ekspozycji i czy oferuje dostawę lub montaż.",
+    "jsonLd": ["WebPage", "BreadcrumbList", "FAQPage"],
+    "_note": "ItemList sklepów (FurnitureStore) w JSON-LD dopiero po zgodzie partnerów na publikację danych — patrz ia.md."
+  },
+  "h1": "Gdzie kupić meble Liveo",
+  "sections": [
+    {
+      "id": "wyszukiwarka",
+      "type": "store-finder",
+      "lead": "Liveo nie ma własnych salonów — nasze meble sprzedają sklepy partnerskie. Wpisz kod pocztowy, a pokażemy najbliższe.",
+      "form": {
+        "postcodeLabel": "Kod pocztowy",
+        "postcodeHint": "np. 35-060",
+        "postcodeAutocomplete": "postal-code",
+        "collectionLabel": "Kolekcja",
+        "collectionAll": "Wszystkie kolekcje",
+        "submit": "Pokaż sklepy",
+        "or": "albo",
+        "geoButton": "Użyj mojej lokalizacji",
+        "geoNote": "Zapytamy przeglądarkę o lokalizację dopiero po kliknięciu. Użyjemy jej tylko do posortowania sklepów i nigdzie jej nie zapisujemy.",
+        "geoLoading": "Ustalamy lokalizację…"
+      },
+      "ipHint": {
+        "text": "Wygląda na to, że jesteś w okolicy: {region}. To tylko przybliżenie.",
+        "action": "Pokaż sklepy w tej okolicy",
+        "dismiss": "Wpiszę kod",
+        "_notes": [
+          "Podpowiedź z IP (np. nagłówek CF-IPCountry/request.cf z Cloudflare Workera) — tylko gdy kraj = PL i znany region; nigdy nie wypełniamy pola kodu automatycznie i nie sortujemy bez kliknięcia.",
+          "IP nie jest zapisywane ani logowane przez naszą aplikację."
+        ]
+      },
+      "errors": {
+        "invalid": "Wpisz kod pocztowy w formacie 00-000, np. 35-060.",
+        "unknown": "Nie rozpoznajemy tego kodu. Sprawdź, czy jest poprawny.",
+        "geoDenied": "Nie mamy dostępu do lokalizacji. Wpisz kod pocztowy — działa tak samo dobrze.",
+        "geoUnavailable": "Nie udało się ustalić lokalizacji. Wpisz kod pocztowy.",
+        "noneNearby": "W promieniu {km} km nie ma sklepu z kolekcją {collection}. Pokazujemy najbliższe sklepy, które ją mają:",
+        "noneAtAll": "Żaden sklep nie ma teraz kolekcji {collection} w ofercie. Zobacz sklepy z innymi kolekcjami albo napisz do nas.",
+        "showAllCollections": "Pokaż sklepy z innymi kolekcjami"
+      }
+    },
+    {
+      "id": "wyniki",
+      "type": "store-results",
+      "title": "Najbliższe sklepy",
+      "titleWithPlace": "Sklepy najbliżej: {place}",
+      "resultsAnnounce": "Znaleziono {count}.",
+      "resultsCount": "plural.stores",
+      "item": {
+        "distance": "{km} km w linii prostej",
+        "collections": "Kolekcje w ofercie",
+        "services": {
+          "ekspozycja": "Meble na ekspozycji",
+          "dostawa": "Dostawa",
+          "montaz": "Montaż"
+        },
+        "hours": "Godziny otwarcia",
+        "route": "Wyznacz trasę",
+        "routeAria": "Wyznacz trasę do: {name} (otwiera mapę w nowej karcie)",
+        "phone": "Zadzwoń",
+        "email": "Napisz",
+        "highlight": "Ma kolekcję {collection}"
+      },
+      "accuracyNote": "Odległość liczymy w linii prostej od środka okręgu pocztowego (pierwsze dwie cyfry kodu), więc jest przybliżona.",
+      "demoNote": "Sklepy na liście są przykładowe (dane demo).",
+      "more": "Pokaż kolejne sklepy",
+      "mapNote": "Mapa jest poglądowa. Dokładny adres sprawdzisz w trasie.",
+      "_notes": [
+        "Domyślnie 5 wyników (nearestResellers, limit 5), przycisk „Pokaż kolejne” +5.",
+        "Mapa: uproszczony kontur Polski w SVG z punktami sklepów — bez zewnętrznych kafelków (wydajność, prywatność). Link „Wyznacz trasę” otwiera zewnętrzną mapę z adresem.",
+        "Telefon i e-mail tylko, jeśli partner zgodził się na publikację (w danych demo: null)."
+      ]
+    },
+    {
+      "id": "przed-wizyta",
+      "type": "features",
+      "title": "Zanim pojedziesz do sklepu",
+      "items": [
+        {
+          "title": "Zapisz nazwę kolekcji i koloru",
+          "text": "Na przykład „OLMO, dąb naturalny”. Sprzedawca szybciej znajdzie meble i sprawdzi dostępność."
+        },
+        {
+          "title": "Zmierz miejsce",
+          "text": "Weź ze sobą wymiary pokoju albo wnęki. Jak mierzyć, opisujemy w poradniku.",
+          "link": { "label": "Jak zmierzyć wnękę pod szafę", "href": "/poradnik/jak-zmierzyc-wneke-pod-szafe/" }
+        },
+        {
+          "title": "Zadzwoń przed wizytą",
+          "text": "Zapytaj, czy wybrane meble są na ekspozycji. Sklepy nie zawsze pokazują wszystkie meble z kolekcji."
+        },
+        {
+          "title": "Zapytaj o dostawę i montaż",
+          "text": "Koszty i terminy dostawy oraz montażu ustala sklep."
+        }
+      ]
+    },
+    {
+      "id": "partnerzy",
+      "type": "band",
+      "title": "Masz sklep meblowy?",
+      "text": "Dołącz do sieci partnerów Liveo — Twój sklep pojawi się w tej wyszukiwarce.",
+      "cta": { "label": "Współpraca dla sklepów", "href": "/dla-partnerow/" }
+    }
+  ],
+  "faq": {
+    "title": "Pytania o zakup",
+    "items": [
+      {
+        "q": "Jak znaleźć najbliższy sklep z meblami Liveo?",
+        "a": "Wpisz kod pocztowy w wyszukiwarce na tej stronie — pokażemy sklepy partnerskie posortowane od najbliższego. Możesz też zawęzić wyniki do jednej kolekcji."
+      },
+      {
+        "q": "Dlaczego pytacie o kod pocztowy, a nie o lokalizację?",
+        "a": "Kod pocztowy wystarczy, żeby znaleźć najbliższe sklepy, i nie wymaga dostępu do Twojej lokalizacji. Lokalizacji z przeglądarki użyjemy tylko wtedy, gdy klikniesz „Użyj mojej lokalizacji” i się zgodzisz."
+      },
+      {
+        "q": "Czy każdy sklep ma wszystkie kolekcje Liveo?",
+        "a": "Nie — każdy sklep sam wybiera kolekcje, które sprzedaje. Przy sklepie podajemy listę jego kolekcji, a filtr „Kolekcja” pokaże tylko sklepy z wybraną."
+      },
+      {
+        "q": "Czy sklep zamówi mebel, którego nie ma na ekspozycji?",
+        "a": "Zapytaj w sklepie — sklepy partnerskie mogą zamawiać u nas meble z kolekcji, które sprzedają, także te, których nie pokazują na ekspozycji [do potwierdzenia]."
+      },
+      {
+        "q": "Jak dokładna jest odległość do sklepu?",
+        "a": "Odległość jest przybliżona: liczymy ją w linii prostej od środka okręgu pocztowego, czyli obszaru o tych samych dwóch pierwszych cyfrach kodu. Trasa samochodem będzie dłuższa."
+      },
+      {
+        "q": "Czy sklep dowiezie i zmontuje meble?",
+        "a": "To zależy od sklepu — przy każdym podajemy, czy oferuje dostawę i montaż. Koszty i terminy ustalisz bezpośrednio ze sprzedawcą."
+      },
+      {
+        "q": "Gdzie złożyć reklamację mebla Liveo?",
+        "a": "Reklamację złóż w sklepie, w którym kupiłeś mebel — to sprzedawca odpowiada wobec Ciebie za zgodność towaru z umową. Zasady ewentualnej gwarancji producenta: [do potwierdzenia]."
+      }
+    ]
+  },
+  "urlRules": {
+    "_notes": [
+      "Parametry: /gdzie-kupic/?kod=35-060&kolekcja=olmo — strona działa po wejściu z linku (np. z karty mebla). Canonical: /gdzie-kupic/, noindex dla wersji z parametrami.",
+      "Bez JS: formularz GET + statyczna lista wszystkich sklepów pogrupowana według województw (HTML), żeby treść była dostępna dla wyszukiwarek i czytników.",
+      "Obliczenia (normalizePostcode, lookupPostcode, nearestResellers) w przeglądarce — kod pocztowy nie jest wysyłany na serwer."
+    ]
+  }
+}

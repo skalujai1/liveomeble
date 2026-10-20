@@ -1,0 +1,153 @@
+{
+  "id": "dla-partnerow",
+  "url": "/dla-partnerow/",
+  "status": "draft",
+  "seo": {
+    "title": "Współpraca dla sklepów meblowych — zostań partnerem Liveo",
+    "description": "Sprzedawaj kolekcje mebli Liveo w swoim sklepie. Strefa partnera z cenami, stanami i zamówieniami online. Zobacz, jak zacząć współpracę.",
+    "jsonLd": ["WebPage", "BreadcrumbList", "FAQPage"]
+  },
+  "h1": "Sprzedawaj meble Liveo <br>w swoim sklepie",
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "lead": "Szukamy sklepów meblowych, które chcą sprzedawać kolekcje Liveo. Dajemy meble projektowane w kompletach, materiały do sprzedaży i strefę partnera z cenami i zamówieniami online.",
+      "cta": [
+        { "label": "Zgłoś sklep", "href": "#zgloszenie", "variant": "primary" },
+        { "label": "Zaloguj się do strefy partnera", "href": "/strefa-partnera/", "variant": "secondary" }
+      ]
+    },
+    {
+      "id": "co-dostajesz",
+      "type": "features",
+      "title": "Co dostajesz jako partner",
+      "items": [
+        {
+          "title": "Meble projektowane w kompletach",
+          "text": "Klient, który kupił szafkę RTV, może dobrać komodę i witrynę z tej samej kolekcji. Kolekcje obejmują salon, jadalnię, sypialnię, przedpokój, pokój młodzieżowy i domowe biuro."
+        },
+        {
+          "title": "Klienci z naszej strony",
+          "text": "Wyszukiwarka sklepów na stronie Liveo kieruje klientów do najbliższego partnera z wybraną kolekcją. Twój sklep pojawi się w wynikach z adresem, godzinami i kolekcjami."
+        },
+        {
+          "title": "Strefa partnera online",
+          "text": "Ceny partnerskie, stany magazynowe i zamówienia, które trafiają prosto do naszego systemu ERP. Bez przepisywania zamówień z maila."
+        },
+        {
+          "title": "Materiały do sprzedaży",
+          "text": "Zdjęcia aranżacji i mebli, opisy, wymiary i dane techniczne — także do Twojego sklepu internetowego [do potwierdzenia: zakres i format]."
+        },
+        {
+          "title": "Stały kontakt",
+          "text": "Opiekun handlowy po stronie Liveo, który zna Twój sklep i Twoje zamówienia [do potwierdzenia]."
+        }
+      ]
+    },
+    {
+      "id": "jak-zaczac",
+      "type": "steps",
+      "title": "Jak zostać partnerem",
+      "items": [
+        {
+          "title": "Wypełnij formularz",
+          "text": "Kilka informacji o sklepie: lokalizacja, profil i kolekcje, które Cię interesują."
+        },
+        {
+          "title": "Porozmawiajmy",
+          "text": "Handlowiec Liveo oddzwoni [do potwierdzenia: w ciągu ilu dni roboczych] i omówi warunki współpracy."
+        },
+        {
+          "title": "Podpisujemy umowę",
+          "text": "Ustalamy kolekcje, ekspozycję, ceny partnerskie i sposób zamawiania."
+        },
+        {
+          "title": "Dostajesz dostęp do strefy partnera",
+          "text": "Logujesz się, widzisz cennik i stany, składasz zamówienia online. Twój sklep pojawia się w wyszukiwarce na stronie Liveo."
+        }
+      ]
+    },
+    {
+      "id": "kogo-szukamy",
+      "type": "text",
+      "title": "Kogo szukamy",
+      "text": "Sklepów meblowych — stacjonarnych i internetowych [do potwierdzenia] — które chcą pokazywać meble w kompletach i dbają o obsługę klienta. Szczegółowe warunki (ekspozycja, minimalne zamówienie, regiony) omawiamy w rozmowie [do potwierdzenia: czy podawać je publicznie]."
+    },
+    {
+      "id": "zgloszenie",
+      "type": "form",
+      "title": "Zgłoś swój sklep",
+      "lead": "Odpowiemy na zgłoszenie i umówimy rozmowę. Cennika nie wysyłamy mailem — partnerzy widzą go w strefie partnera.",
+      "endpoint": "POST /api/forms/partner",
+      "fields": [
+        { "name": "company", "label": "Nazwa firmy", "type": "text", "required": true, "autocomplete": "organization" },
+        { "name": "nip", "label": "NIP", "type": "text", "required": true, "inputmode": "numeric", "hint": "10 cyfr, bez kresek." },
+        { "name": "name", "label": "Imię i nazwisko", "type": "text", "required": true, "autocomplete": "name" },
+        { "name": "email", "label": "E-mail", "type": "email", "required": true, "autocomplete": "email" },
+        { "name": "phone", "label": "Telefon", "type": "tel", "required": true, "autocomplete": "tel" },
+        { "name": "postcode", "label": "Kod pocztowy sklepu", "type": "text", "required": true, "autocomplete": "postal-code", "hint": "np. 35-060" },
+        { "name": "city", "label": "Miejscowość", "type": "text", "required": true, "autocomplete": "address-level2" },
+        {
+          "name": "shopType",
+          "label": "Rodzaj sprzedaży",
+          "type": "radio",
+          "required": true,
+          "options": ["Sklep stacjonarny", "Sklep internetowy", "Stacjonarny i internetowy"]
+        },
+        { "name": "website", "label": "Strona internetowa sklepu", "type": "url", "required": false },
+        {
+          "name": "collections",
+          "label": "Kolekcje, które Cię interesują",
+          "type": "checkbox-group",
+          "required": false,
+          "source": "collections.json"
+        },
+        { "name": "message", "label": "Wiadomość", "type": "textarea", "required": false, "maxLength": 2000, "hint": "Np. powierzchnia ekspozycji, obecni dostawcy, pytania." }
+      ],
+      "consent": "Administratorem danych jest Liveo Meble sp. z o.o. Użyjemy ich, żeby odpowiedzieć na zgłoszenie i omówić współpracę. Szczegóły w [polityce prywatności](/polityka-prywatnosci/).",
+      "submit": "Wyślij zgłoszenie",
+      "success": {
+        "title": "Dziękujemy za zgłoszenie",
+        "text": "Odezwiemy się w ciągu [do potwierdzenia] dni roboczych. Kopię zgłoszenia wysłaliśmy na adres {email}."
+      },
+      "error": "Nie udało się wysłać zgłoszenia. Spróbuj ponownie za chwilę albo napisz na [do potwierdzenia: e-mail działu handlowego]."
+    },
+    {
+      "id": "logowanie",
+      "type": "band",
+      "title": "Już z nami współpracujesz?",
+      "text": "Zaloguj się do strefy partnera, żeby zobaczyć ceny, stany i złożyć zamówienie.",
+      "cta": { "label": "Strefa partnera", "href": "/strefa-partnera/" }
+    }
+  ],
+  "faq": {
+    "title": "Pytania o współpracę",
+    "items": [
+      {
+        "q": "Jak zostać partnerem handlowym Liveo?",
+        "a": "Wypełnij formularz na tej stronie — handlowiec Liveo skontaktuje się z Tobą i omówi warunki. Po podpisaniu umowy dostaniesz dostęp do strefy partnera."
+      },
+      {
+        "q": "Czy cennik partnerski jest dostępny publicznie?",
+        "a": "Nie — ceny partnerskie widzą tylko zalogowani partnerzy w strefie partnera. Warunki handlowe omawiamy indywidualnie."
+      },
+      {
+        "q": "Czy sklep internetowy może zostać partnerem Liveo?",
+        "a": "Tak, przyjmujemy zgłoszenia sklepów stacjonarnych i internetowych [do potwierdzenia]. Zasady sprzedaży online omawiamy przy podpisaniu umowy."
+      },
+      {
+        "q": "Jak partnerzy składają zamówienia?",
+        "a": "Przez strefę partnera na tej stronie: wybierasz meble, kolory i ilości, a zamówienie trafia bezpośrednio do systemu ERP Liveo. Status zamówienia sprawdzisz w tym samym miejscu."
+      },
+      {
+        "q": "Czy muszę mieć meble Liveo na ekspozycji?",
+        "a": "Wymagania dotyczące ekspozycji ustalamy indywidualnie [do potwierdzenia]. W wyszukiwarce sklepów oznaczamy partnerów z ekspozycją, bo wielu klientów chce zobaczyć meble przed zakupem."
+      },
+      {
+        "q": "Czy dostanę zdjęcia i opisy mebli do swojego sklepu?",
+        "a": "Tak, partnerzy dostają zdjęcia, opisy i wymiary mebli [do potwierdzenia: format i sposób udostępnienia, np. paczka plików albo plik produktowy]."
+      }
+    ]
+  }
+}

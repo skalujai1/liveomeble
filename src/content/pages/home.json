@@ -1,0 +1,158 @@
+{
+  "id": "home",
+  "url": "/",
+  "status": "draft",
+  "seo": {
+    "title": "Liveo Meble — kolekcje mebli do całego domu",
+    "description": "Meble projektowane w kolekcjach: szafki RTV, komody, witryny, łóżka i szafy w spójnych kolorach. Wybierz kolekcję i znajdź sklep partnerski blisko domu.",
+    "jsonLd": ["Organization", "WebSite", "FAQPage"],
+    "ogImage": "/og/home.jpg"
+  },
+  "h1": "Meble, które pasują do siebie <br>w każdym pokoju",
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "lead": "Liveo to polski producent mebli z Raniżowa na Podkarpaciu. Projektujemy je w kolekcjach: szafka RTV, komoda, witryna i stół z jednej kolekcji mają te same kolory, uchwyty i proporcje.",
+      "cta": [
+        { "label": "Zobacz kolekcje", "href": "/kolekcje/", "variant": "primary" },
+        { "label": "Znajdź sklep", "href": "/gdzie-kupic/", "variant": "secondary" }
+      ],
+      "image": {
+        "source": "collections.json → heroRoom kolekcji z order = 1",
+        "alt": "Salon urządzony meblami z kolekcji {name} w kolorze {color}"
+      }
+    },
+    {
+      "id": "kolekcje",
+      "type": "collections",
+      "title": "Zacznij od kolekcji",
+      "lead": "Każda kolekcja ma swój charakter — od jasnego dębu na drewnianych nóżkach po matową czerń z mosiądzem. Wybierz tę, która pasuje do Twojego wnętrza, a potem dobierz meble.",
+      "source": "collections.json (sortowanie: order)",
+      "card": {
+        "title": "{name}",
+        "text": "{tagline}",
+        "meta": "{roomsList}",
+        "link": "Zobacz kolekcję {name}",
+        "imageAlt": "Meble z kolekcji {name} — {heroRoomLocative}"
+      },
+      "more": { "label": "Wszystkie kolekcje", "href": "/kolekcje/" }
+    },
+    {
+      "id": "pomieszczenia",
+      "type": "rooms",
+      "title": "Albo od pokoju, który urządzasz",
+      "lead": "Pokazujemy meble ze wszystkich kolekcji, które pasują do danego pomieszczenia.",
+      "source": "rooms.json (sortowanie: order)",
+      "card": {
+        "title": "{name}",
+        "text": "{description}",
+        "link": "Meble do pomieszczenia: {name}",
+        "imageAlt": "Aranżacja: {name} z meblami Liveo"
+      }
+    },
+    {
+      "id": "jak-kupic",
+      "type": "steps",
+      "title": "Wybierasz tutaj, <br>kupujesz w sklepie obok",
+      "lead": "Liveo nie ma własnych salonów. Meble sprzedają sklepy partnerskie — strona prowadzi Cię do najbliższego.",
+      "items": [
+        {
+          "title": "Wybierz kolekcję i kolor",
+          "text": "Przy każdym meblu podajemy wymiary, dostępne kolory i aktualną cenę."
+        },
+        {
+          "title": "Wpisz kod pocztowy",
+          "text": "Pokażemy najbliższe sklepy partnerskie, które mają wybraną kolekcję."
+        },
+        {
+          "title": "Zobacz meble na żywo",
+          "text": "W sklepie sprawdzisz kolor i wykończenie, zanim zdecydujesz."
+        },
+        {
+          "title": "Kup i umów dostawę",
+          "text": "Sklep przyjmie zamówienie i ustali z Tobą dostawę. Część sklepów oferuje też montaż."
+        }
+      ],
+      "cta": { "label": "Znajdź sklep po kodzie pocztowym", "href": "/gdzie-kupic/" }
+    },
+    {
+      "id": "doradca",
+      "type": "feature",
+      "title": "Wyślij zdjęcie pokoju — <br>podpowiemy komplet",
+      "text": "Doradca wnętrz rozpoznaje pomieszczenie i kolory na zdjęciu, a potem proponuje meble z jednej kolekcji, które do nich pasują. Zdjęcie zostaje na Twoim urządzeniu.",
+      "note": "Doradca podpowiada, ale nie mierzy. Przed zakupem sprawdź wymiary.",
+      "cta": { "label": "Wypróbuj doradcę wnętrz", "href": "/doradca-wnetrz/" }
+    },
+    {
+      "id": "promocje",
+      "type": "promotions",
+      "title": "Teraz w niższych cenach",
+      "lead": "Przy każdej obniżce podajemy najniższą cenę z 30 dni przed nią — od razu widać, ile naprawdę zyskujesz.",
+      "source": "promotions.json → activePromotions(now); meble: priceFor()",
+      "empty": "Teraz nie mamy promocji. Zajrzyj za kilka dni.",
+      "cta": { "label": "Wszystkie promocje", "href": "/promocje/" },
+      "hideWhenEmpty": true
+    },
+    {
+      "id": "producent",
+      "type": "text",
+      "title": "Prosto od producenta z Podkarpacia",
+      "text": "Meble Liveo powstają w Raniżowie [do potwierdzenia: miejsce produkcji]. Projektujemy je w kompletach, bo tak urządza się dom: najpierw salon, potem sypialnia, przedpokój. Kolekcje sprzedajemy przez sklepy partnerskie [do potwierdzenia: zasięg sieci, np. „w całej Polsce”].",
+      "cta": { "label": "Poznaj Liveo", "href": "/o-nas/" }
+    },
+    {
+      "id": "poradnik",
+      "type": "articles",
+      "title": "Zanim kupisz",
+      "lead": "Krótkie poradniki: jak zmierzyć wnękę, dobrać szafkę RTV, urządzić małą sypialnię i na co patrzeć przy płycie meblowej.",
+      "source": "src/content/poradnik/*.md (najnowsze, maks. 4)",
+      "cta": { "label": "Wszystkie poradniki", "href": "/poradnik/" }
+    },
+    {
+      "id": "partnerzy",
+      "type": "band",
+      "title": "Prowadzisz sklep meblowy?",
+      "text": "Zostań partnerem Liveo. Dostaniesz strefę partnera z cenami, stanami i zamówieniami online, a klienci z naszej strony trafią do Twojego sklepu.",
+      "cta": { "label": "Współpraca dla sklepów", "href": "/dla-partnerow/" }
+    }
+  ],
+  "faq": {
+    "title": "Najczęstsze pytania",
+    "items": [
+      {
+        "q": "Gdzie kupię meble Liveo?",
+        "a": "Meble Liveo kupisz w sklepach partnerskich — Liveo nie ma własnych salonów. Wpisz kod pocztowy na stronie [Gdzie kupić](/gdzie-kupic/), a pokażemy najbliższe sklepy z wybraną kolekcją."
+      },
+      {
+        "q": "Czy mogę kupić meble Liveo przez internet?",
+        "a": "Na tej stronie nie sprzedajemy mebli — tu wybierasz meble i znajdujesz sklep, który je sprzeda. Część sklepów partnerskich może sprzedawać też przez internet [do potwierdzenia]."
+      },
+      {
+        "q": "Czym jest kolekcja mebli?",
+        "a": "Kolekcja to meble zaprojektowane razem: mają te same kolory, uchwyty, podstawę i podobne proporcje. Dzięki temu szafka RTV, komoda i witryna z jednej kolekcji tworzą spójny komplet."
+      },
+      {
+        "q": "Z czego są wykonane meble Liveo?",
+        "a": "Korpusy i fronty mebli Liveo są z płyty laminowanej w dekorach drewna i kolorach jednolitych [do potwierdzenia: rodzaj i grubość płyty]. Okucia, wymiary i wykończenie każdego mebla opisujemy na jego stronie."
+      },
+      {
+        "q": "Czy meble Liveo trzeba składać samodzielnie?",
+        "a": "Tak, meble Liveo są dostarczane w paczkach do samodzielnego montażu, z instrukcją i okuciami [do potwierdzenia]. Niektóre sklepy partnerskie oferują montaż — informację znajdziesz przy sklepie na stronie Gdzie kupić."
+      },
+      {
+        "q": "Czy zobaczę meble na żywo przed zakupem?",
+        "a": "Tak, w sklepach partnerskich z ekspozycją. Przy każdym sklepie na stronie [Gdzie kupić](/gdzie-kupic/) podajemy, czy ma meble na ekspozycji i które kolekcje oferuje."
+      },
+      {
+        "q": "Czy ceny na stronie są takie same jak w sklepie?",
+        "a": "Na stronie pokazujemy ceny producenta [do potwierdzenia: „ceny sugerowane”]. Sklep partnerski może mieć własne ceny i promocje — ostateczną cenę potwierdzi sprzedawca."
+      }
+    ]
+  },
+  "_notes": [
+    "Hero: jedno duże zdjęcie aranżacji (LCP) — bez karuzeli. Preload tylko tego obrazu.",
+    "Sekcja „producent”: nie dodawać liczb (lata, pracownicy, sklepy) bez potwierdzenia klienta — patrz docs/brief.md.",
+    "Promocje: sekcję ukrywamy, gdy activePromotions(now) jest puste — nie pokazujemy pustego miejsca na stronie głównej."
+  ]
+}

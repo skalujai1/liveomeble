@@ -1,0 +1,131 @@
+{
+  "id": "produkt",
+  "urlPattern": "/produkt/{slug}/",
+  "status": "draft",
+  "_notes": [
+    "Szablon strony mebla. Dane: products.json (+ collections, finishes, types, rooms, promotions, resellers).",
+    "Wariant koloru w adresie: /produkt/{slug}/?kolor={code} — canonical zawsze bez parametru. Domyślny wariant: pierwszy dostępny (nie „wyprzedany”).",
+    "Cena: priceFor(product, code, promotions, now). Linia Omnibus tylko, gdy promo != null.",
+    "FAQ jest generowany z danych — każda odpowiedź wynika z pól mebla, nic nie dopisujemy ręcznie."
+  ],
+  "seo": {
+    "title": "{name} — {colorLabel} | Liveo",
+    "titleLong": "{name} — wymiary, kolory, cena | Liveo",
+    "description": "{name}: {dimsLong}. {descriptionFirstSentence} Kolory: {colorLabels}.",
+    "descriptionMax": 155,
+    "jsonLd": ["ProductGroup", "Product", "Offer", "BreadcrumbList", "FAQPage"],
+    "_notes": [
+      "title: gdy {name} + kolor > 60 znaków, użyj titleLong; gdy nadal za długi — sam „{name} | Liveo”.",
+      "description: przycinamy na granicy zdania do 155 znaków; gdy opis jest za długi, pomijamy zdanie z kolorami."
+    ]
+  },
+  "h1": "{name}",
+  "sections": [
+    {
+      "id": "galeria",
+      "type": "gallery",
+      "ariaLabel": "Zdjęcia: {name}",
+      "imageAlt": [
+        "{name} w kolorze {colorLabel} — widok z przodu",
+        "{name} w kolorze {colorLabel} — aranżacja {roomLocative}",
+        "{name} — szczegół: {detail}"
+      ],
+      "zoom": "Powiększ zdjęcie",
+      "prev": "Poprzednie zdjęcie",
+      "next": "Następne zdjęcie",
+      "counter": "Zdjęcie {i} z {n}",
+      "colorDisclaimer": "Kolor na ekranie może się nieco różnić od rzeczywistego."
+    },
+    {
+      "id": "podsumowanie",
+      "type": "summary",
+      "collectionLink": "Kolekcja {collectionName}",
+      "colorTitle": "Kolor: {colorLabel}",
+      "colorGroupLabel": "Wybierz kolor",
+      "colorUnavailable": "{colorLabel} — wyprzedany",
+      "dims": "{dimsLong}",
+      "priceBlock": "site.price",
+      "stockBlock": "site.stock",
+      "assembly": "Montaż: {assembly}",
+      "ctaPrimary": { "label": "Gdzie kupić", "href": "#gdzie-kupic" },
+      "ctaSecondary": { "label": "Zobacz komplet {collectionName}", "href": "#komplet" }
+    },
+    {
+      "id": "opis",
+      "type": "text",
+      "title": "Opis",
+      "text": "{description}"
+    },
+    {
+      "id": "wymiary",
+      "type": "dimensions",
+      "title": "Wymiary",
+      "lead": "Wymiary zewnętrzne w centymetrach. Przed zakupem porównaj je z miejscem, w którym mebel ma stanąć.",
+      "rows": [
+        { "label": "Szerokość", "value": "{w} cm" },
+        { "label": "Wysokość", "value": "{h} cm" },
+        { "label": "Głębokość", "value": "{d} cm" },
+        { "label": "Waga", "value": "ok. {weightKg} kg" }
+      ],
+      "drawingAlt": "Rysunek wymiarowy: {name}, szerokość {w} cm, wysokość {h} cm, głębokość {d} cm",
+      "guideLink": { "label": "Jak zmierzyć miejsce na mebel", "href": "/poradnik/jak-zmierzyc-wneke-pod-szafe/" }
+    },
+    {
+      "id": "szczegoly",
+      "type": "list",
+      "title": "Szczegóły",
+      "source": "product.features[]"
+    },
+    {
+      "id": "gdzie-kupic",
+      "type": "store-finder",
+      "title": "Gdzie kupić: {name}",
+      "lead": "Wpisz kod pocztowy — pokażemy najbliższe sklepy partnerskie z kolekcją {collectionName}.",
+      "presetCollection": "{collection}",
+      "limit": 3,
+      "more": { "label": "Więcej sklepów", "href": "/gdzie-kupic/?kolekcja={collection}" },
+      "note": "Zanim pojedziesz, zadzwoń i zapytaj, czy mebel jest na ekspozycji."
+    },
+    {
+      "id": "komplet",
+      "type": "products",
+      "title": "Komplet z kolekcji {collectionName}",
+      "lead": "Meble z tej samej kolekcji, w tym samym kolorze. Pasują do siebie wymiarami i wykończeniem.",
+      "rule": "ta sama kolekcja, ten sam kod koloru, pokoje wspólne z bieżącym meblem; maks. 6, bez bieżącego",
+      "more": { "label": "Cała kolekcja {collectionName}", "href": "/kolekcje/{collection}/" }
+    },
+    {
+      "id": "doradca",
+      "type": "band",
+      "title": "Nie wiesz, czy pasuje do Twojego wnętrza?",
+      "text": "Wyślij zdjęcie pokoju — doradca wnętrz podpowie kolekcję i kolor.",
+      "cta": { "label": "Otwórz doradcę", "href": "/doradca-wnetrz/" }
+    }
+  ],
+  "faq": {
+    "title": "Pytania o ten mebel",
+    "items": [
+      {
+        "q": "Jakie wymiary ma {name}?",
+        "a": "{name} ma {w} cm szerokości, {h} cm wysokości i {d} cm głębokości. Waży ok. {weightKg} kg."
+      },
+      {
+        "q": "W jakich kolorach jest {name}?",
+        "a": "{name} występuje w kolorach: {colorLabels}. Kolor wybierzesz na tej stronie, nad ceną."
+      },
+      {
+        "q": "Czy mebel trzeba złożyć samodzielnie?",
+        "a": "Tak, mebel jest {assembly}. W paczce jest instrukcja i okucia [do potwierdzenia]; część sklepów partnerskich oferuje montaż.",
+        "showIf": "assembly == 'do samodzielnego montażu'"
+      },
+      {
+        "q": "Gdzie można zobaczyć ten mebel na żywo?",
+        "a": "W sklepach partnerskich, które mają kolekcję {collectionName}. Wpisz kod pocztowy w sekcji „Gdzie kupić” na tej stronie — pokażemy najbliższe."
+      },
+      {
+        "q": "Jakie meble pasują do tego mebla?",
+        "a": "Najlepiej pasują meble z kolekcji {collectionName} w tym samym kolorze: {siblingTypesList}. Wszystkie mają te same uchwyty i wykończenie."
+      }
+    ]
+  }
+}
