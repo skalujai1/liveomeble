@@ -89,6 +89,7 @@ export function recommendSets(products, room, prefs, { skip = new Set(), maxPric
   const units = new Map();
   for (const p of products) {
     if (!types.includes(p.type) || (maxPrice && p.price > maxPrice) || !fitsRoom(p, room)) continue;
+    if (p.rooms?.length && !p.rooms.includes(room)) continue; // katalog mówi, do jakich pomieszczeń jest mebel
     const key = `${p.collection}|${p.color?.label ?? '-'}`;
     if (!units.has(key)) units.set(key, { collection: p.collection, color: p.color, items: [] });
     units.get(key).items.push(p);

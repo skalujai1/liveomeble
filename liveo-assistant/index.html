@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Doradca wnętrz Liveo – strona testowa</title>
+<link rel="icon" href="data:,">
+<style>
+  body { margin: 0; font: 16px/1.6 system-ui, sans-serif; color: #1d1d1b; background: #f6f5f2; }
+  main { max-width: 680px; margin: 0 auto; padding: 48px 16px; }
+  code { background: #ebe8e2; padding: 1px 5px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Doradca wnętrz Liveo – strona testowa</h1>
+  <p>Lokalny podgląd widżetu: <code>python3 server.py</code> → <code>http://localhost:5180</code>.</p>
+  <p>Czat z modelem AI: dodaj <code>?chat=http://127.0.0.1:8787/chat</code> (Worker uruchomiony przez <code>npx wrangler dev</code> w katalogu <code>worker</code>). Bez parametru widżet działa w trybie lokalnym.</p>
+</main>
+<script>
+  window.LiveoAssistantConfig = {
+    chatUrl: new URLSearchParams(location.search).get('chat') || '',
+    demoSamples: false,
+    teaserDelay: 600,
+  };
+</script>
+<script type="module" src="widget/liveo-assistant.js"></script>
+</body>
+</html>

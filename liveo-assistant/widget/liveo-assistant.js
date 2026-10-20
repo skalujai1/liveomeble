@@ -4,7 +4,10 @@
 //   <script type="module" src="/liveo-assistant/widget/liveo-assistant.js"></script>
 //
 // Opcjonalna konfiguracja (przed skryptem):
-//   <script>window.LiveoAssistantConfig = { demoSamples: false }</script>
+//   <script>window.LiveoAssistantConfig = { demoSamples: false, chatUrl: 'https://liveo-doradca.<konto>.workers.dev/chat' }</script>
+//
+// chatUrl – adres Workera z modelem językowym (../worker). Pusty = tryb lokalny: proste polecenia
+// rozumiane bez AI. Gdy Worker nie odpowie, widżet też wraca do trybu lokalnego.
 
 import { VisionEngine, loadImage } from './engine.js';
 import {
@@ -18,6 +21,9 @@ const CFG = {
   cssUrl: new URL('liveo-assistant.css', HERE).href,
   logoUrl: 'https://liveomeble.pl/img/liveo_logo.svg',
   contactUrl: 'https://liveomeble.pl/kontakt',
+  storesUrl: '/gdzie-kupic/',
+  chatUrl: '',          // Worker z modelem językowym; pusty = tylko tryb lokalny
+  chatTimeout: 30000,
   demoSamples: true, // przykładowe zdjęcia do testów (prototyp)
   teaserDelay: 1800,
   ...(window.LiveoAssistantConfig || {}),
@@ -145,6 +151,7 @@ class LiveoAssistant {
     this.opts = {};         // { budget, maxPrice }
     this.shown = new Set(); // pokazane kolekcje
     this.busy = false;
+    this.history = [];      // tekst rozmowy dla modelu językowego (bez zdjęć)
     this.engine = new VisionEngine({
       embeddingsUrl: CFG.embeddingsUrl,
       onProgress: p => this.setStatus(p < 1 ? `Przygotowuję analizę zdjęć… ${Math.round(p * 100)}%` : null),
@@ -220,7 +227,9 @@ class LiveoAssistant {
           h('button', { class: 'attach', type: 'button', 'aria-label': 'Dodaj zdjęcie', title: 'Dodaj zdjęcie', html: I.imagePlus,
                         onclick: () => this.fileInput.click() }),
           this.input, this.sendBtn),
-        h('p', { class: 'fineprint' }, 'Wersja testowa · zdjęcia są analizowane tylko na Twoim urządzeniu')),
+        h('p', { class: 'fineprint' }, CFG.chatUrl
+          ? 'Odpowiada asystent AI – może się mylić · zdjęcia zostają na Twoim urządzeniu'
+          : 'Wersja testowa · zdjęcia są analizowane tylko na Twoim urządzeniu')),
       this.fileInput, this.cameraInput, this.dropzone);
 
     // przeciągnij i upuść
@@ -265,7 +274,7 @@ class LiveoAssistant {
   restart() {
     if (this.busy) return;
     this.messages.replaceChildren();
-    Object.assign(this, { analysis: null, room: null, prefs: { ...NEUTRAL }, opts: {}, shown: new Set(), busy: false });
+    Object.assign(this, { analysis: null, room: null, prefs: { ...NEUTRAL }, opts: {}, shown: new Set(), busy: false, history: [], current: null });
     this.greet();
   }
 
@@ -302,10 +311,19 @@ class LiveoAssistant {
     const typing = this.add(h('div', { class: 'msg bot typing', 'aria-label': 'Doradca pisze' }, h('i'), h('i'), h('i')));
     await sleep(Math.min(900, 280 + text.length * 4));
     typing.remove();
+    this.remember('assistant', text);
     return this.bot(md(text), extra);
   }
 
-  user(text) { this.add(h('div', { class: 'msg user' }, text)); }
+  user(text) {
+    this.remember('user', text);
+    this.add(h('div', { class: 'msg user' }, text));
+  }
+
+  remember(role, content) {
+    this.history.push({ role, content: String(content).slice(0, 1000) });
+    if (this.history.length > 16) this.history.splice(0, this.history.length - 16);
+  }
 
   userPhoto(src) {
     this.add(h('div', { class: 'msg user photo' }, h('img', { src, alt: 'Twoje zdjęcie' })));
@@ -331,8 +349,15 @@ class LiveoAssistant {
     return this.add(box, { scroll: false });
   }
 
+  /** Pomieszczenia, do których katalog ma meble (przed wczytaniem katalogu – wszystkie). */
+  availableRooms() {
+    if (!this.products.length) return Object.keys(ROOMS);
+    return Object.keys(ROOMS).filter(k => this.products.some(p => (p.rooms?.length ? p.rooms.includes(k) : ROOMS[k].types.includes(p.type))));
+  }
+
   roomChips(keys = Object.keys(ROOMS), extra = []) {
-    const order = [...new Set([...keys, ...Object.keys(ROOMS)])];
+    const available = this.availableRooms();
+    const order = [...new Set([...keys, ...Object.keys(ROOMS)])].filter(k => available.includes(k));
     return [...extra, ...order.map(k => ({ label: `${ROOMS[k].emoji} ${ROOMS[k].label}`, run: () => this.showRoom(k) }))];
   }
 
@@ -346,7 +371,9 @@ class LiveoAssistant {
   greet() {
     this.bot(md('Cześć! 👋 Jestem **doradcą wnętrz Liveo**.\nPokaż mi pomieszczenie, które urządzasz, a w kilka sekund dobiorę pasujące meble z naszej oferty.'));
     this.add(this.buildUpload(), { scroll: false });
-    this.chips(this.roomChips(), 'Nie masz zdjęcia pod ręką? Wybierz pomieszczenie:');
+    // pokoje z katalogu – po jego wczytaniu (bez czekania, gdy katalog się nie wczyta)
+    const showRooms = () => this.chips(this.roomChips(), 'Nie masz zdjęcia pod ręką? Wybierz pomieszczenie:');
+    (this.catalogReady || Promise.resolve()).then(showRooms, showRooms);
   }
 
   buildUpload() {
@@ -658,8 +685,106 @@ class LiveoAssistant {
     this.clearChips();
     this.user(text);
     await this.catalogReady;
-    const q = parse(text);
+    if (CFG.chatUrl) {
+      const answer = await this.askAI();
+      if (answer) return this.runAction(answer.action);
+    }
+    return this.localReply(parse(text));
+  }
 
+  // ----- model językowy (Worker → OpenRouter) ------------------------------------
+  /** Wysyła rozmowę do Workera. Zwraca { reply, action } albo null (wtedy tryb lokalny). */
+  async askAI() {
+    this.busy = true;
+    const typing = this.add(h('div', { class: 'msg bot typing', 'aria-label': 'Doradca pisze' }, h('i'), h('i'), h('i')));
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), CFG.chatTimeout);
+    try {
+      const res = await fetch(CFG.chatUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: this.history.slice(-12), context: this.aiContext() }),
+        signal: ctrl.signal,
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      if (typeof data.reply !== 'string' || !data.reply.trim()) throw new Error('pusta odpowiedź');
+      typing.remove();
+      this.remember('assistant', data.reply);
+      this.bot(md(data.reply));
+      return { reply: data.reply, action: data.action || null };
+    } catch (err) {
+      typing.remove();
+      console.warn('[Liveo] asystent AI niedostępny – tryb lokalny', err);
+      return null;
+    } finally {
+      clearTimeout(timer);
+      this.busy = false;
+    }
+  }
+
+  /** Krótki opis oferty i stanu rozmowy – model widzi tylko to, co jest w katalogu. */
+  aiContext() {
+    const cols = new Map();
+    for (const p of this.products) {
+      const c = cols.get(p.collection) || { types: new Set(), colors: new Set(), rooms: new Set(), min: Infinity, promo: false };
+      c.types.add(TYPES[p.type]?.[0] || p.type);
+      if (p.color?.label) c.colors.add(p.color.label);
+      (p.rooms || []).forEach(r => c.rooms.add(ROOMS[r]?.name || r));
+      c.min = Math.min(c.min, p.price);
+      c.promo ||= !!p.regular;
+      cols.set(p.collection, c);
+    }
+    const catalog = [...cols].map(([name, c]) => `${name}: ${[...c.types].join(', ')}; pomieszczenia: ${[...c.rooms].join(', ')}; kolory: ${[...c.colors].slice(0, 4).join(', ')}; ceny od ${formatPrice(c.min)}${c.promo ? '; trwa promocja' : ''}`).join('\n');
+    const s = this.current;
+    return {
+      catalog: catalog.slice(0, 4000),
+      state: {
+        room: this.room,
+        lastSet: s ? `${s.collection}${s.color ? ` (${s.color.label})` : ''}: ${s.items.map(p => `${p.name} ${formatPrice(p.price)}`).join('; ')}`.slice(0, 600) : null,
+        hasPhoto: !!this.analysis,
+        maxPrice: this.opts.maxPrice || null,
+      },
+    };
+  }
+
+  /** Wykonuje akcję wybraną przez model – produkty zawsze pochodzą z lokalnego katalogu. */
+  async runAction(a) {
+    const roomFor = type => Object.keys(ROOMS).find(k => ROOMS[k].types.includes(type));
+    const priceOpts = a?.maxPrice ? { maxPrice: a.maxPrice } : {};
+    switch (a?.type) {
+      case 'room':
+        if (ROOMS[a.room]) return this.showRoom(a.room, { analysis: this.analysis, confirmed: !!this.analysis, opts: priceOpts });
+        break;
+      case 'furniture':
+        if (TYPES[a.furnitureType]) {
+          if (ROOMS[a.room]) this.room = a.room;
+          else if (!this.room || !ROOMS[this.room].types.includes(a.furnitureType)) this.room = roomFor(a.furnitureType) || this.room;
+          this.opts = priceOpts;
+          return this.showType(a.furnitureType);
+        }
+        break;
+      case 'more':
+        if (this.room) {
+          if (a.tone) return this.shiftTone(a.tone === 'lighter' ? 1 : -1);
+          if (a.cheaper) { this.opts.budget = true; return this.showSet({ cheaper: true }); }
+          return this.showSet();
+        }
+        return this.chips(this.roomChips(undefined, [this.photoChip()]), 'Do jakiego pomieszczenia?');
+      case 'photo':
+        return this.chips([this.photoChip(), ...this.roomChips().slice(0, 3)]);
+      case 'stores':
+        return this.chips([{ label: 'Znajdź sklep partnerski ↗', href: CFG.storesUrl }, this.photoChip(false)]);
+      case 'contact':
+        return this.chips([{ label: 'Kontakt z Liveo ↗', href: CFG.contactUrl }, this.photoChip(false)]);
+    }
+    return this.chips(this.room
+      ? [{ label: '🔁 Inna kolekcja', echo: 'Pokaż inną kolekcję', run: () => this.showSet() }, this.photoChip(false)]
+      : this.roomChips(undefined, [this.photoChip()]));
+  }
+
+  // ----- tryb lokalny (bez modelu językowego) -------------------------------------
+  async localReply(q) {
     if (q.nofurn) {
       await this.say(q.nofurn === 'lazienka'
         ? 'W ofercie Liveo nie ma mebli łazienkowych 🛁, ale chętnie pomogę urządzić inne pomieszczenie.'

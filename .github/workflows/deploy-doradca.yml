@@ -1,0 +1,78 @@
+# Doradca wnętrz Liveo – testy i wdrożenie Cloudflare Workera (widżet → Worker → OpenRouter).
+# Sekrety repozytorium (Settings → Secrets and variables → Actions):
+#   CLOUDFLARE_API_TOKEN   – token z uprawnieniem „Edit Cloudflare Workers”
+#   CLOUDFLARE_ACCOUNT_ID  – ID konta Cloudflare
+#   OPENROUTER_API_KEY     – klucz OpenRouter (najlepiej z limitem wydatków)
+# Bez sekretów testy i tak się wykonają, a wdrożenie zostanie pominięte z ostrzeżeniem.
+name: Doradca wnętrz – Worker
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'liveo-assistant/worker/**'
+      - 'liveo-assistant/data/wiedza.txt'
+      - '.github/workflows/deploy-doradca.yml'
+  pull_request:
+    paths:
+      - 'liveo-assistant/worker/**'
+      - 'liveo-assistant/data/wiedza.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-doradca-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: liveo-assistant/worker
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Instalacja
+        run: npm ci
+
+      - name: Testy Workera
+        run: npm test
+
+      - name: Sprawdzenie sekretów
+        id: secrets
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          OR_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          if [ -z "$CF_TOKEN" ] || [ -z "$CF_ACCOUNT" ] || [ -z "$OR_KEY" ]; then
+            echo "::warning::Brak sekretów CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID lub OPENROUTER_API_KEY – wdrożenie pominięte."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Wdrożenie na Cloudflare
+        if: steps.secrets.outputs.ready == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: liveo-assistant/worker
+          wranglerVersion: '4.151.3'
+          secrets: |
+            OPENROUTER_API_KEY
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+
+      - name: Test zdrowia po wdrożeniu
+        if: steps.secrets.outputs.ready == 'true'
+        run: echo "Sprawdź /health pod adresem Workera (workers.dev) – powinno zwrócić {\"ok\":true,\"configured\":true}."
