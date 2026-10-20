@@ -1,0 +1,16 @@
+{
+  "name": "liveo-render",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Silnik renderów 3D mebli (three.js, headless Chromium) — atrapy zdjęć produktów i aranżacji",
+  "scripts": {
+    "sample": "node render.mjs specs/sample.json ../../src/assets/renders/sample",
+    "rooms": "node rooms.mjs"
+  },
+  "dependencies": {
+    "playwright-core": "1.64.1",
+    "sharp": "0.34.4",
+    "three": "0.186.1"
+  }
+}
