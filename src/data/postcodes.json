@@ -1,0 +1,603 @@
+{
+  "precision": "prefix-2",
+  "note": "Przybliżone środki okręgów pocztowych (pierwsze 2 cyfry kodu); dokładność rzędu kilkudziesięciu km. Opracowanie własne.",
+  "unusedPrefixes": [
+    "79"
+  ],
+  "prefixes": {
+    "10": {
+      "region": "Olsztyn",
+      "voivodeship": "warmińsko-mazurskie",
+      "lat": 53.778,
+      "lng": 20.48
+    },
+    "11": {
+      "region": "Okolice Olsztyna, Kętrzyn, Giżycko, Mrągowo, Bartoszyce",
+      "voivodeship": "warmińsko-mazurskie",
+      "lat": 54,
+      "lng": 21.1
+    },
+    "12": {
+      "region": "Szczytno, Pisz",
+      "voivodeship": "warmińsko-mazurskie",
+      "lat": 53.6,
+      "lng": 21.4
+    },
+    "13": {
+      "region": "Działdowo, Nidzica, Nowe Miasto Lubawskie",
+      "voivodeship": "warmińsko-mazurskie",
+      "lat": 53.3,
+      "lng": 20.1
+    },
+    "14": {
+      "region": "Ostróda, Iława, Braniewo, Pasłęk",
+      "voivodeship": "warmińsko-mazurskie",
+      "lat": 53.85,
+      "lng": 19.8
+    },
+    "15": {
+      "region": "Białystok",
+      "voivodeship": "podlaskie",
+      "lat": 53.133,
+      "lng": 23.164
+    },
+    "16": {
+      "region": "Okolice Białegostoku, Suwałki, Augustów, Sokółka",
+      "voivodeship": "podlaskie",
+      "lat": 53.7,
+      "lng": 23.1
+    },
+    "17": {
+      "region": "Bielsk Podlaski, Hajnówka, Siemiatycze",
+      "voivodeship": "podlaskie",
+      "lat": 52.7,
+      "lng": 23.3
+    },
+    "18": {
+      "region": "Łomża, Zambrów, Kolno, Wysokie Mazowieckie",
+      "voivodeship": "podlaskie",
+      "lat": 53.15,
+      "lng": 22.1
+    },
+    "19": {
+      "region": "Ełk, Grajewo, Olecko, Gołdap, Mońki",
+      "voivodeship": "warmińsko-mazurskie",
+      "lat": 53.85,
+      "lng": 22.4
+    },
+    "20": {
+      "region": "Lublin",
+      "voivodeship": "lubelskie",
+      "lat": 51.246,
+      "lng": 22.568
+    },
+    "21": {
+      "region": "Okolice Lublina, Biała Podlaska, Lubartów, Radzyń Podlaski",
+      "voivodeship": "lubelskie",
+      "lat": 51.65,
+      "lng": 22.8
+    },
+    "22": {
+      "region": "Chełm, Zamość, Hrubieszów, Krasnystaw, Tomaszów Lubelski",
+      "voivodeship": "lubelskie",
+      "lat": 50.95,
+      "lng": 23.3
+    },
+    "23": {
+      "region": "Kraśnik, Biłgoraj, Janów Lubelski",
+      "voivodeship": "lubelskie",
+      "lat": 50.75,
+      "lng": 22.45
+    },
+    "24": {
+      "region": "Puławy, Opole Lubelskie, Bełżyce",
+      "voivodeship": "lubelskie",
+      "lat": 51.3,
+      "lng": 22
+    },
+    "25": {
+      "region": "Kielce",
+      "voivodeship": "świętokrzyskie",
+      "lat": 50.866,
+      "lng": 20.628
+    },
+    "26": {
+      "region": "Radom, Skarżysko-Kamienna, Końskie, Opoczno",
+      "voivodeship": "mazowieckie",
+      "lat": 51.25,
+      "lng": 20.85
+    },
+    "27": {
+      "region": "Starachowice, Ostrowiec Świętokrzyski, Sandomierz, Opatów",
+      "voivodeship": "świętokrzyskie",
+      "lat": 50.9,
+      "lng": 21.45
+    },
+    "28": {
+      "region": "Busko-Zdrój, Jędrzejów, Pińczów, Staszów",
+      "voivodeship": "świętokrzyskie",
+      "lat": 50.5,
+      "lng": 20.75
+    },
+    "29": {
+      "region": "Włoszczowa i okolice",
+      "voivodeship": "świętokrzyskie",
+      "lat": 50.85,
+      "lng": 19.95
+    },
+    "30": {
+      "region": "Kraków – Śródmieście, Krowodrza, Podgórze",
+      "voivodeship": "małopolskie",
+      "lat": 50.05,
+      "lng": 19.92
+    },
+    "31": {
+      "region": "Kraków – Nowa Huta, Czyżyny, Prądnik",
+      "voivodeship": "małopolskie",
+      "lat": 50.075,
+      "lng": 20.01
+    },
+    "32": {
+      "region": "Okolice Krakowa, Olkusz, Chrzanów, Oświęcim, Bochnia, Wieliczka",
+      "voivodeship": "małopolskie",
+      "lat": 50.1,
+      "lng": 19.8
+    },
+    "33": {
+      "region": "Tarnów, Nowy Sącz, Dąbrowa Tarnowska",
+      "voivodeship": "małopolskie",
+      "lat": 49.85,
+      "lng": 20.85
+    },
+    "34": {
+      "region": "Nowy Targ, Zakopane, Wadowice, Żywiec, Limanowa, Myślenice",
+      "voivodeship": "małopolskie",
+      "lat": 49.65,
+      "lng": 19.8
+    },
+    "35": {
+      "region": "Rzeszów",
+      "voivodeship": "podkarpackie",
+      "lat": 50.041,
+      "lng": 21.999
+    },
+    "36": {
+      "region": "Okolice Rzeszowa, Kolbuszowa, Strzyżów, Brzozów",
+      "voivodeship": "podkarpackie",
+      "lat": 50,
+      "lng": 21.9
+    },
+    "37": {
+      "region": "Przemyśl, Jarosław, Przeworsk, Łańcut, Leżajsk, Stalowa Wola, Nisko, Lubaczów",
+      "voivodeship": "podkarpackie",
+      "lat": 50.2,
+      "lng": 22.5
+    },
+    "38": {
+      "region": "Krosno, Jasło, Sanok, Gorlice, Lesko, Ustrzyki Dolne",
+      "voivodeship": "podkarpackie",
+      "lat": 49.6,
+      "lng": 21.9
+    },
+    "39": {
+      "region": "Dębica, Mielec, Tarnobrzeg, Ropczyce",
+      "voivodeship": "podkarpackie",
+      "lat": 50.25,
+      "lng": 21.5
+    },
+    "40": {
+      "region": "Katowice",
+      "voivodeship": "śląskie",
+      "lat": 50.264,
+      "lng": 19.024
+    },
+    "41": {
+      "region": "Sosnowiec, Chorzów, Bytom, Zabrze, Ruda Śląska",
+      "voivodeship": "śląskie",
+      "lat": 50.3,
+      "lng": 18.95
+    },
+    "42": {
+      "region": "Częstochowa, Będzin, Zawiercie, Lubliniec, Tarnowskie Góry",
+      "voivodeship": "śląskie",
+      "lat": 50.65,
+      "lng": 19
+    },
+    "43": {
+      "region": "Bielsko-Biała, Tychy, Pszczyna, Cieszyn, Jaworzno",
+      "voivodeship": "śląskie",
+      "lat": 49.95,
+      "lng": 19
+    },
+    "44": {
+      "region": "Gliwice, Rybnik, Wodzisław Śląski, Jastrzębie-Zdrój, Żory",
+      "voivodeship": "śląskie",
+      "lat": 50.1,
+      "lng": 18.6
+    },
+    "45": {
+      "region": "Opole",
+      "voivodeship": "opolskie",
+      "lat": 50.675,
+      "lng": 17.921
+    },
+    "46": {
+      "region": "Kluczbork, Namysłów, Olesno",
+      "voivodeship": "opolskie",
+      "lat": 50.95,
+      "lng": 18.1
+    },
+    "47": {
+      "region": "Kędzierzyn-Koźle, Strzelce Opolskie, Racibórz",
+      "voivodeship": "opolskie",
+      "lat": 50.3,
+      "lng": 18.2
+    },
+    "48": {
+      "region": "Nysa, Prudnik, Głubczyce",
+      "voivodeship": "opolskie",
+      "lat": 50.4,
+      "lng": 17.5
+    },
+    "49": {
+      "region": "Brzeg, Grodków, Niemodlin",
+      "voivodeship": "opolskie",
+      "lat": 50.75,
+      "lng": 17.4
+    },
+    "50": {
+      "region": "Wrocław – Śródmieście, Stare Miasto",
+      "voivodeship": "dolnośląskie",
+      "lat": 51.108,
+      "lng": 17.035
+    },
+    "51": {
+      "region": "Wrocław – Psie Pole",
+      "voivodeship": "dolnośląskie",
+      "lat": 51.135,
+      "lng": 17.08
+    },
+    "52": {
+      "region": "Wrocław – Krzyki (Brochów, Klecina)",
+      "voivodeship": "dolnośląskie",
+      "lat": 51.075,
+      "lng": 17.01
+    },
+    "53": {
+      "region": "Wrocław – Fabryczna, Krzyki",
+      "voivodeship": "dolnośląskie",
+      "lat": 51.095,
+      "lng": 16.975
+    },
+    "54": {
+      "region": "Wrocław – Fabryczna (Leśnica, Kozanów)",
+      "voivodeship": "dolnośląskie",
+      "lat": 51.13,
+      "lng": 16.93
+    },
+    "55": {
+      "region": "Okolice Wrocławia, Oława, Trzebnica, Środa Śląska",
+      "voivodeship": "dolnośląskie",
+      "lat": 51.1,
+      "lng": 17
+    },
+    "56": {
+      "region": "Oleśnica, Milicz, Syców, Góra",
+      "voivodeship": "dolnośląskie",
+      "lat": 51.4,
+      "lng": 17.3
+    },
+    "57": {
+      "region": "Kłodzko, Ząbkowice Śląskie, Strzelin",
+      "voivodeship": "dolnośląskie",
+      "lat": 50.55,
+      "lng": 16.8
+    },
+    "58": {
+      "region": "Wałbrzych, Świdnica, Jelenia Góra, Dzierżoniów",
+      "voivodeship": "dolnośląskie",
+      "lat": 50.8,
+      "lng": 16.1
+    },
+    "59": {
+      "region": "Legnica, Lubin, Bolesławiec, Zgorzelec, Jawor",
+      "voivodeship": "dolnośląskie",
+      "lat": 51.2,
+      "lng": 15.9
+    },
+    "60": {
+      "region": "Poznań – Grunwald, Jeżyce",
+      "voivodeship": "wielkopolskie",
+      "lat": 52.4,
+      "lng": 16.88
+    },
+    "61": {
+      "region": "Poznań – Stare Miasto, Nowe Miasto, Wilda",
+      "voivodeship": "wielkopolskie",
+      "lat": 52.405,
+      "lng": 16.95
+    },
+    "62": {
+      "region": "Gniezno, Konin, Września, Kalisz, Koło, Turek",
+      "voivodeship": "wielkopolskie",
+      "lat": 52.25,
+      "lng": 17.95
+    },
+    "63": {
+      "region": "Ostrów Wielkopolski, Jarocin, Krotoszyn, Kępno, Gostyń",
+      "voivodeship": "wielkopolskie",
+      "lat": 51.7,
+      "lng": 17.6
+    },
+    "64": {
+      "region": "Leszno, Piła, Kościan, Szamotuły, Nowy Tomyśl",
+      "voivodeship": "wielkopolskie",
+      "lat": 52.4,
+      "lng": 16.6
+    },
+    "65": {
+      "region": "Zielona Góra",
+      "voivodeship": "lubuskie",
+      "lat": 51.936,
+      "lng": 15.506
+    },
+    "66": {
+      "region": "Gorzów Wielkopolski, Świebodzin, Międzyrzecz, Krosno Odrzańskie",
+      "voivodeship": "lubuskie",
+      "lat": 52.4,
+      "lng": 15.3
+    },
+    "67": {
+      "region": "Nowa Sól, Głogów, Wschowa",
+      "voivodeship": "lubuskie",
+      "lat": 51.7,
+      "lng": 15.9
+    },
+    "68": {
+      "region": "Żary, Żagań, Lubsko",
+      "voivodeship": "lubuskie",
+      "lat": 51.6,
+      "lng": 15.1
+    },
+    "69": {
+      "region": "Słubice, Sulęcin, Rzepin",
+      "voivodeship": "lubuskie",
+      "lat": 52.4,
+      "lng": 14.8
+    },
+    "70": {
+      "region": "Szczecin – Śródmieście, Zachód, Prawobrzeże",
+      "voivodeship": "zachodniopomorskie",
+      "lat": 53.425,
+      "lng": 14.56
+    },
+    "71": {
+      "region": "Szczecin – Północ, Pogodno",
+      "voivodeship": "zachodniopomorskie",
+      "lat": 53.455,
+      "lng": 14.53
+    },
+    "72": {
+      "region": "Police, Goleniów, Świnoujście, Kamień Pomorski, Gryfice",
+      "voivodeship": "zachodniopomorskie",
+      "lat": 53.7,
+      "lng": 14.8
+    },
+    "73": {
+      "region": "Stargard, Choszczno, Łobez",
+      "voivodeship": "zachodniopomorskie",
+      "lat": 53.35,
+      "lng": 15.3
+    },
+    "74": {
+      "region": "Gryfino, Myślibórz, Pyrzyce, Dębno",
+      "voivodeship": "zachodniopomorskie",
+      "lat": 53,
+      "lng": 14.7
+    },
+    "75": {
+      "region": "Koszalin",
+      "voivodeship": "zachodniopomorskie",
+      "lat": 54.194,
+      "lng": 16.172
+    },
+    "76": {
+      "region": "Słupsk, Sławno, Darłowo",
+      "voivodeship": "pomorskie",
+      "lat": 54.4,
+      "lng": 16.8
+    },
+    "77": {
+      "region": "Bytów, Miastko, Człuchów, Złotów",
+      "voivodeship": "pomorskie",
+      "lat": 53.85,
+      "lng": 17.1
+    },
+    "78": {
+      "region": "Kołobrzeg, Białogard, Szczecinek, Wałcz, Drawsko Pomorskie",
+      "voivodeship": "zachodniopomorskie",
+      "lat": 53.7,
+      "lng": 16
+    },
+    "80": {
+      "region": "Gdańsk",
+      "voivodeship": "pomorskie",
+      "lat": 54.352,
+      "lng": 18.647
+    },
+    "81": {
+      "region": "Gdynia, Sopot",
+      "voivodeship": "pomorskie",
+      "lat": 54.5,
+      "lng": 18.54
+    },
+    "82": {
+      "region": "Elbląg, Malbork, Kwidzyn, Sztum",
+      "voivodeship": "warmińsko-mazurskie",
+      "lat": 54,
+      "lng": 19.2
+    },
+    "83": {
+      "region": "Tczew, Starogard Gdański, Kościerzyna, Kartuzy, Pruszcz Gdański",
+      "voivodeship": "pomorskie",
+      "lat": 54.1,
+      "lng": 18.3
+    },
+    "84": {
+      "region": "Wejherowo, Lębork, Puck, Rumia",
+      "voivodeship": "pomorskie",
+      "lat": 54.6,
+      "lng": 18
+    },
+    "85": {
+      "region": "Bydgoszcz",
+      "voivodeship": "kujawsko-pomorskie",
+      "lat": 53.123,
+      "lng": 18.008
+    },
+    "86": {
+      "region": "Świecie, Chełmno, Grudziądz, Solec Kujawski",
+      "voivodeship": "kujawsko-pomorskie",
+      "lat": 53.35,
+      "lng": 18.5
+    },
+    "87": {
+      "region": "Toruń, Włocławek, Brodnica, Lipno, Rypin",
+      "voivodeship": "kujawsko-pomorskie",
+      "lat": 52.95,
+      "lng": 18.95
+    },
+    "88": {
+      "region": "Inowrocław, Mogilno, Żnin, Radziejów",
+      "voivodeship": "kujawsko-pomorskie",
+      "lat": 52.75,
+      "lng": 18
+    },
+    "89": {
+      "region": "Nakło nad Notecią, Chojnice, Tuchola, Szubin",
+      "voivodeship": "kujawsko-pomorskie",
+      "lat": 53.4,
+      "lng": 17.6
+    },
+    "90": {
+      "region": "Łódź – Śródmieście, Polesie",
+      "voivodeship": "łódzkie",
+      "lat": 51.768,
+      "lng": 19.457
+    },
+    "91": {
+      "region": "Łódź – Bałuty",
+      "voivodeship": "łódzkie",
+      "lat": 51.8,
+      "lng": 19.445
+    },
+    "92": {
+      "region": "Łódź – Widzew",
+      "voivodeship": "łódzkie",
+      "lat": 51.758,
+      "lng": 19.53
+    },
+    "93": {
+      "region": "Łódź – Górna, Polesie",
+      "voivodeship": "łódzkie",
+      "lat": 51.73,
+      "lng": 19.46
+    },
+    "94": {
+      "region": "Łódź – Polesie (Retkinia, Teofilów)",
+      "voivodeship": "łódzkie",
+      "lat": 51.765,
+      "lng": 19.385
+    },
+    "95": {
+      "region": "Zgierz, Pabianice, Ozorków, Brzeziny, Koluszki",
+      "voivodeship": "łódzkie",
+      "lat": 51.8,
+      "lng": 19.45
+    },
+    "96": {
+      "region": "Skierniewice, Żyrardów, Sochaczew, Rawa Mazowiecka",
+      "voivodeship": "łódzkie",
+      "lat": 52,
+      "lng": 20.2
+    },
+    "97": {
+      "region": "Piotrków Trybunalski, Bełchatów, Tomaszów Mazowiecki, Radomsko",
+      "voivodeship": "łódzkie",
+      "lat": 51.3,
+      "lng": 19.7
+    },
+    "98": {
+      "region": "Sieradz, Wieluń, Zduńska Wola, Łask, Wieruszów",
+      "voivodeship": "łódzkie",
+      "lat": 51.5,
+      "lng": 18.8
+    },
+    "99": {
+      "region": "Kutno, Łowicz, Łęczyca, Poddębice",
+      "voivodeship": "łódzkie",
+      "lat": 52.15,
+      "lng": 19.4
+    },
+    "00": {
+      "region": "Warszawa – Śródmieście",
+      "voivodeship": "mazowieckie",
+      "lat": 52.231,
+      "lng": 21.006
+    },
+    "01": {
+      "region": "Warszawa – Wola, Bemowo, Bielany, Żoliborz",
+      "voivodeship": "mazowieckie",
+      "lat": 52.262,
+      "lng": 20.945
+    },
+    "02": {
+      "region": "Warszawa – Mokotów, Ochota, Ursynów, Włochy",
+      "voivodeship": "mazowieckie",
+      "lat": 52.18,
+      "lng": 20.99
+    },
+    "03": {
+      "region": "Warszawa – Praga-Północ, Targówek, Białołęka",
+      "voivodeship": "mazowieckie",
+      "lat": 52.285,
+      "lng": 21.05
+    },
+    "04": {
+      "region": "Warszawa – Praga-Południe, Wawer, Wesoła",
+      "voivodeship": "mazowieckie",
+      "lat": 52.225,
+      "lng": 21.125
+    },
+    "05": {
+      "region": "Okolice Warszawy (Pruszków, Piaseczno, Legionowo, Otwock, Mińsk Mazowiecki)",
+      "voivodeship": "mazowieckie",
+      "lat": 52.2,
+      "lng": 21.05
+    },
+    "06": {
+      "region": "Ciechanów, Mława, Pułtusk, Przasnysz",
+      "voivodeship": "mazowieckie",
+      "lat": 52.85,
+      "lng": 20.8
+    },
+    "07": {
+      "region": "Ostrołęka, Wyszków, Ostrów Mazowiecka, Węgrów",
+      "voivodeship": "mazowieckie",
+      "lat": 52.85,
+      "lng": 21.6
+    },
+    "08": {
+      "region": "Siedlce, Garwolin, Sokołów Podlaski, Łuków",
+      "voivodeship": "mazowieckie",
+      "lat": 52.05,
+      "lng": 22.1
+    },
+    "09": {
+      "region": "Płock, Płońsk, Sierpc, Gostynin",
+      "voivodeship": "mazowieckie",
+      "lat": 52.55,
+      "lng": 19.9
+    }
+  }
+}

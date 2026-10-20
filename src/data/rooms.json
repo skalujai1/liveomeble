@@ -1,0 +1,68 @@
+[
+  {
+    "slug": "salon",
+    "name": "Salon",
+    "shortName": "Salon",
+    "genitive": "salonu",
+    "accusative": "salon",
+    "locative": "w salonie",
+    "assistantKey": "salon",
+    "description": "Szafki RTV, komody, witryny, regały, ławy i półki do strefy dziennej.",
+    "order": 1
+  },
+  {
+    "slug": "jadalnia",
+    "name": "Jadalnia",
+    "shortName": "Jadalnia",
+    "genitive": "jadalni",
+    "accusative": "jadalnię",
+    "locative": "w jadalni",
+    "assistantKey": "jadalnia",
+    "description": "Stoły, kredensy, witryny i komody — miejsce na zastawę i wspólne posiłki.",
+    "order": 2
+  },
+  {
+    "slug": "sypialnia",
+    "name": "Sypialnia",
+    "shortName": "Sypialnia",
+    "genitive": "sypialni",
+    "accusative": "sypialnię",
+    "locative": "w sypialni",
+    "assistantKey": "sypialnia",
+    "description": "Łóżka, szafki nocne, szafy, komody, toaletki i lustra.",
+    "order": 3
+  },
+  {
+    "slug": "pokoj-mlodziezowy",
+    "name": "Pokój młodzieżowy",
+    "shortName": "Pokój młodzieżowy",
+    "genitive": "pokoju młodzieżowego",
+    "accusative": "pokój młodzieżowy",
+    "locative": "w pokoju młodzieżowym",
+    "assistantKey": "mlodziezowy",
+    "description": "Biurka, łóżka 90 i 120 cm, regały, komody i szafy do pokoju nastolatka.",
+    "order": 4
+  },
+  {
+    "slug": "przedpokoj",
+    "name": "Przedpokój",
+    "shortName": "Przedpokój",
+    "genitive": "przedpokoju",
+    "accusative": "przedpokój",
+    "locative": "w przedpokoju",
+    "assistantKey": "przedpokoj",
+    "description": "Szafy, szafki na buty, wieszaki, lustra i komody do strefy wejścia.",
+    "order": 5
+  },
+  {
+    "slug": "biuro",
+    "name": "Domowe biuro",
+    "shortName": "Biuro",
+    "genitive": "domowego biura",
+    "accusative": "domowe biuro",
+    "locative": "w domowym biurze",
+    "assistantKey": "biuro",
+    "description": "Biurka, regały, komody i półki do pracy w domu.",
+    "order": 6
+  }
+]

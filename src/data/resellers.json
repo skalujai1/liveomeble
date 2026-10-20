@@ -1,0 +1,1247 @@
+[
+  {
+    "id": "rs-rzeszow-slocina",
+    "name": "Salon partnerski Liveo — Rzeszów, Słocina (dane przykładowe)",
+    "address": "ul. Przykładowa 16",
+    "city": "Rzeszów",
+    "district": "Słocina",
+    "postcode": "35-326",
+    "voivodeship": "podkarpackie",
+    "lat": 50.053,
+    "lng": 22.0533,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "nokta",
+      "solma",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-rzeszow-zachod",
+    "name": "Salon partnerski Liveo — Rzeszów, Zachód (dane przykładowe)",
+    "address": "ul. Przykładowa 79",
+    "city": "Rzeszów",
+    "district": "Zachód",
+    "postcode": "35-060",
+    "voivodeship": "podkarpackie",
+    "lat": 50.0386,
+    "lng": 21.9771,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-kolbuszowa",
+    "name": "Salon partnerski Liveo — Kolbuszowa (dane przykładowe)",
+    "address": "ul. Przykładowa 66",
+    "city": "Kolbuszowa",
+    "district": null,
+    "postcode": "36-100",
+    "voivodeship": "podkarpackie",
+    "lat": 50.2524,
+    "lng": 21.7692,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "solma",
+      "liran",
+      "melva"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00",
+    "demo": true
+  },
+  {
+    "id": "rs-mielec",
+    "name": "Salon partnerski Liveo — Mielec (dane przykładowe)",
+    "address": "ul. Przykładowa 6",
+    "city": "Mielec",
+    "district": null,
+    "postcode": "39-300",
+    "voivodeship": "podkarpackie",
+    "lat": 50.2845,
+    "lng": 21.4341,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "solma",
+      "liran",
+      "melva",
+      "verno"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–19:00, sob. 10:00–15:00",
+    "demo": true
+  },
+  {
+    "id": "rs-debica",
+    "name": "Salon partnerski Liveo — Dębica (dane przykładowe)",
+    "address": "ul. Przykładowa 32",
+    "city": "Dębica",
+    "district": null,
+    "postcode": "39-200",
+    "voivodeship": "podkarpackie",
+    "lat": 50.042,
+    "lng": 21.4151,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "nokta",
+      "solma",
+      "liran",
+      "melva",
+      "briso"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-krosno",
+    "name": "Salon partnerski Liveo — Krosno (dane przykładowe)",
+    "address": "ul. Przykładowa 81",
+    "city": "Krosno",
+    "district": null,
+    "postcode": "38-400",
+    "voivodeship": "podkarpackie",
+    "lat": 49.6817,
+    "lng": 21.7832,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "nokta",
+      "solma",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-jaslo",
+    "name": "Salon partnerski Liveo — Jasło (dane przykładowe)",
+    "address": "ul. Przykładowa 56",
+    "city": "Jasło",
+    "district": null,
+    "postcode": "38-200",
+    "voivodeship": "podkarpackie",
+    "lat": 49.7529,
+    "lng": 21.4736,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "melva",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–18:00, sob. 9:00–14:00",
+    "demo": true
+  },
+  {
+    "id": "rs-sanok",
+    "name": "Salon partnerski Liveo — Sanok (dane przykładowe)",
+    "address": "ul. Przykładowa 62",
+    "city": "Sanok",
+    "district": null,
+    "postcode": "38-500",
+    "voivodeship": "podkarpackie",
+    "lat": 49.5542,
+    "lng": 22.2035,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "nokta",
+      "liran",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–19:00, sob. 10:00–15:00",
+    "demo": true
+  },
+  {
+    "id": "rs-przemysl",
+    "name": "Salon partnerski Liveo — Przemyśl (dane przykładowe)",
+    "address": "ul. Przykładowa 85",
+    "city": "Przemyśl",
+    "district": null,
+    "postcode": "37-700",
+    "voivodeship": "podkarpackie",
+    "lat": 49.7859,
+    "lng": 22.7771,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "solma",
+      "liran",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–19:00, sob. 10:00–15:00",
+    "demo": true
+  },
+  {
+    "id": "rs-jaroslaw",
+    "name": "Salon partnerski Liveo — Jarosław (dane przykładowe)",
+    "address": "ul. Przykładowa 99",
+    "city": "Jarosław",
+    "district": null,
+    "postcode": "37-500",
+    "voivodeship": "podkarpackie",
+    "lat": 50.009,
+    "lng": 22.6693,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "talve",
+      "nokta",
+      "solma",
+      "liran",
+      "melva",
+      "verno"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-stalowa-wola",
+    "name": "Salon partnerski Liveo — Stalowa Wola (dane przykładowe)",
+    "address": "ul. Przykładowa 118",
+    "city": "Stalowa Wola",
+    "district": null,
+    "postcode": "37-450",
+    "voivodeship": "podkarpackie",
+    "lat": 50.5864,
+    "lng": 22.0563,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "melva",
+      "briso"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-tarnobrzeg",
+    "name": "Salon partnerski Liveo — Tarnobrzeg (dane przykładowe)",
+    "address": "ul. Przykładowa 14",
+    "city": "Tarnobrzeg",
+    "district": null,
+    "postcode": "39-400",
+    "voivodeship": "podkarpackie",
+    "lat": 50.5829,
+    "lng": 21.6715,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "liran",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": false,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00",
+    "demo": true
+  },
+  {
+    "id": "rs-lancut",
+    "name": "Salon partnerski Liveo — Łańcut (dane przykładowe)",
+    "address": "ul. Przykładowa 113",
+    "city": "Łańcut",
+    "district": null,
+    "postcode": "37-100",
+    "voivodeship": "podkarpackie",
+    "lat": 50.0757,
+    "lng": 22.2151,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "liran",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–19:00, sob. 10:00–15:00",
+    "demo": true
+  },
+  {
+    "id": "rs-warszawa-bemowo",
+    "name": "Salon partnerski Liveo — Warszawa, Bemowo (dane przykładowe)",
+    "address": "ul. Przykładowa 67",
+    "city": "Warszawa",
+    "district": "Bemowo",
+    "postcode": "01-494",
+    "voivodeship": "mazowieckie",
+    "lat": 52.2559,
+    "lng": 20.9075,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "talve",
+      "solma",
+      "liran",
+      "melva",
+      "briso"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-warszawa-bialoleka",
+    "name": "Salon partnerski Liveo — Warszawa, Białołęka (dane przykładowe)",
+    "address": "ul. Przykładowa 63",
+    "city": "Warszawa",
+    "district": "Białołęka",
+    "postcode": "03-289",
+    "voivodeship": "mazowieckie",
+    "lat": 52.3091,
+    "lng": 21.0004,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "liran",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": false,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00",
+    "demo": true
+  },
+  {
+    "id": "rs-warszawa-mokotow",
+    "name": "Salon partnerski Liveo — Warszawa, Mokotów (dane przykładowe)",
+    "address": "ul. Przykładowa 32",
+    "city": "Warszawa",
+    "district": "Mokotów",
+    "postcode": "02-675",
+    "voivodeship": "mazowieckie",
+    "lat": 52.1866,
+    "lng": 21.0122,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "liran",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-krakow-bronowice",
+    "name": "Salon partnerski Liveo — Kraków, Bronowice (dane przykładowe)",
+    "address": "ul. Przykładowa 74",
+    "city": "Kraków",
+    "district": "Bronowice",
+    "postcode": "30-394",
+    "voivodeship": "małopolskie",
+    "lat": 50.0772,
+    "lng": 19.8968,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "liran",
+      "melva",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–18:00, sob. 9:00–14:00",
+    "demo": true
+  },
+  {
+    "id": "rs-krakow-czyzyny",
+    "name": "Salon partnerski Liveo — Kraków, Czyżyny (dane przykładowe)",
+    "address": "ul. Przykładowa 66",
+    "city": "Kraków",
+    "district": "Czyżyny",
+    "postcode": "31-564",
+    "voivodeship": "małopolskie",
+    "lat": 50.0659,
+    "lng": 19.9893,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "liran",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": false
+    },
+    "openingHours": "pon.–pt. 10:00–19:00, sob. 10:00–15:00",
+    "demo": true
+  },
+  {
+    "id": "rs-wroclaw-fabryczna",
+    "name": "Salon partnerski Liveo — Wrocław, Fabryczna (dane przykładowe)",
+    "address": "ul. Przykładowa 76",
+    "city": "Wrocław",
+    "district": "Fabryczna",
+    "postcode": "54-204",
+    "voivodeship": "dolnośląskie",
+    "lat": 51.1123,
+    "lng": 16.9483,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "talve",
+      "nokta",
+      "liran",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–18:00, sob. 9:00–14:00",
+    "demo": true
+  },
+  {
+    "id": "rs-wroclaw-krzyki",
+    "name": "Salon partnerski Liveo — Wrocław, Krzyki (dane przykładowe)",
+    "address": "ul. Przykładowa 70",
+    "city": "Wrocław",
+    "district": "Krzyki",
+    "postcode": "50-541",
+    "voivodeship": "dolnośląskie",
+    "lat": 51.0791,
+    "lng": 17.0173,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "liran",
+      "melva"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00",
+    "demo": true
+  },
+  {
+    "id": "rs-poznan-grunwald",
+    "name": "Salon partnerski Liveo — Poznań, Grunwald (dane przykładowe)",
+    "address": "ul. Przykładowa 25",
+    "city": "Poznań",
+    "district": "Grunwald",
+    "postcode": "60-185",
+    "voivodeship": "wielkopolskie",
+    "lat": 52.4028,
+    "lng": 16.8725,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": true,
+      "ekspozycja": false
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-poznan-nowe-miasto",
+    "name": "Salon partnerski Liveo — Poznań, Nowe Miasto (dane przykładowe)",
+    "address": "ul. Przykładowa 92",
+    "city": "Poznań",
+    "district": "Nowe Miasto",
+    "postcode": "61-315",
+    "voivodeship": "wielkopolskie",
+    "lat": 52.3937,
+    "lng": 17.0007,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "liran",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–19:00, sob. 10:00–15:00",
+    "demo": true
+  },
+  {
+    "id": "rs-lodz",
+    "name": "Salon partnerski Liveo — Łódź (dane przykładowe)",
+    "address": "ul. Przykładowa 60",
+    "city": "Łódź",
+    "district": null,
+    "postcode": "93-457",
+    "voivodeship": "łódzkie",
+    "lat": 51.7432,
+    "lng": 19.444,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "liran",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–18:00, sob. 9:00–14:00",
+    "demo": true
+  },
+  {
+    "id": "rs-gdansk",
+    "name": "Salon partnerski Liveo — Gdańsk (dane przykładowe)",
+    "address": "ul. Przykładowa 90",
+    "city": "Gdańsk",
+    "district": null,
+    "postcode": "80-298",
+    "voivodeship": "pomorskie",
+    "lat": 54.3687,
+    "lng": 18.5725,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "liran",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00",
+    "demo": true
+  },
+  {
+    "id": "rs-gdynia",
+    "name": "Salon partnerski Liveo — Gdynia (dane przykładowe)",
+    "address": "ul. Przykładowa 30",
+    "city": "Gdynia",
+    "district": null,
+    "postcode": "81-537",
+    "voivodeship": "pomorskie",
+    "lat": 54.476,
+    "lng": 18.5178,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "liran",
+      "briso"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00",
+    "demo": true
+  },
+  {
+    "id": "rs-szczecin",
+    "name": "Salon partnerski Liveo — Szczecin (dane przykładowe)",
+    "address": "ul. Przykładowa 61",
+    "city": "Szczecin",
+    "district": null,
+    "postcode": "70-814",
+    "voivodeship": "zachodniopomorskie",
+    "lat": 53.3884,
+    "lng": 14.6316,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "nokta",
+      "solma",
+      "liran",
+      "melva",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-katowice",
+    "name": "Salon partnerski Liveo — Katowice (dane przykładowe)",
+    "address": "ul. Przykładowa 63",
+    "city": "Katowice",
+    "district": null,
+    "postcode": "40-750",
+    "voivodeship": "śląskie",
+    "lat": 50.2203,
+    "lng": 18.9848,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "liran",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–18:00, sob. 9:00–14:00",
+    "demo": true
+  },
+  {
+    "id": "rs-lublin",
+    "name": "Salon partnerski Liveo — Lublin (dane przykładowe)",
+    "address": "ul. Przykładowa 30",
+    "city": "Lublin",
+    "district": null,
+    "postcode": "20-468",
+    "voivodeship": "lubelskie",
+    "lat": 51.234,
+    "lng": 22.5501,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–18:00, sob. 9:00–14:00",
+    "demo": true
+  },
+  {
+    "id": "rs-bydgoszcz",
+    "name": "Salon partnerski Liveo — Bydgoszcz (dane przykładowe)",
+    "address": "ul. Przykładowa 61",
+    "city": "Bydgoszcz",
+    "district": null,
+    "postcode": "85-791",
+    "voivodeship": "kujawsko-pomorskie",
+    "lat": 53.1513,
+    "lng": 18.083,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "liran",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": true,
+      "ekspozycja": false
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-bialystok",
+    "name": "Salon partnerski Liveo — Białystok (dane przykładowe)",
+    "address": "ul. Przykładowa 120",
+    "city": "Białystok",
+    "district": null,
+    "postcode": "15-660",
+    "voivodeship": "podlaskie",
+    "lat": 53.1172,
+    "lng": 23.2057,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–18:00, sob. 9:00–14:00",
+    "demo": true
+  },
+  {
+    "id": "rs-kielce",
+    "name": "Salon partnerski Liveo — Kielce (dane przykładowe)",
+    "address": "ul. Przykładowa 69",
+    "city": "Kielce",
+    "district": null,
+    "postcode": "25-116",
+    "voivodeship": "świętokrzyskie",
+    "lat": 50.8754,
+    "lng": 20.6762,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "melva",
+      "briso"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-tarnow",
+    "name": "Salon partnerski Liveo — Tarnów (dane przykładowe)",
+    "address": "ul. Przykładowa 69",
+    "city": "Tarnów",
+    "district": null,
+    "postcode": "33-100",
+    "voivodeship": "małopolskie",
+    "lat": 50.0115,
+    "lng": 20.9871,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "liran",
+      "melva",
+      "briso"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00",
+    "demo": true
+  },
+  {
+    "id": "rs-nowy-sacz",
+    "name": "Salon partnerski Liveo — Nowy Sącz (dane przykładowe)",
+    "address": "ul. Przykładowa 113",
+    "city": "Nowy Sącz",
+    "district": null,
+    "postcode": "33-300",
+    "voivodeship": "małopolskie",
+    "lat": 49.6308,
+    "lng": 20.687,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "talve",
+      "nokta",
+      "briso"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-opole",
+    "name": "Salon partnerski Liveo — Opole (dane przykładowe)",
+    "address": "ul. Przykładowa 3",
+    "city": "Opole",
+    "district": null,
+    "postcode": "45-325",
+    "voivodeship": "opolskie",
+    "lat": 50.6603,
+    "lng": 17.9389,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "solma",
+      "liran"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–18:00, sob. 9:00–14:00",
+    "demo": true
+  },
+  {
+    "id": "rs-czestochowa",
+    "name": "Salon partnerski Liveo — Częstochowa (dane przykładowe)",
+    "address": "ul. Przykładowa 113",
+    "city": "Częstochowa",
+    "district": null,
+    "postcode": "42-200",
+    "voivodeship": "śląskie",
+    "lat": 50.8167,
+    "lng": 19.1107,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "solma",
+      "liran",
+      "melva",
+      "briso"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00",
+    "demo": true
+  },
+  {
+    "id": "rs-torun",
+    "name": "Salon partnerski Liveo — Toruń (dane przykładowe)",
+    "address": "ul. Przykładowa 65",
+    "city": "Toruń",
+    "district": null,
+    "postcode": "87-100",
+    "voivodeship": "kujawsko-pomorskie",
+    "lat": 53.0107,
+    "lng": 18.5931,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "solma",
+      "melva"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": false,
+      "ekspozycja": false
+    },
+    "openingHours": "pon.–pt. 10:00–18:00, sob. 9:00–14:00",
+    "demo": true
+  },
+  {
+    "id": "rs-olsztyn",
+    "name": "Salon partnerski Liveo — Olsztyn (dane przykładowe)",
+    "address": "ul. Przykładowa 37",
+    "city": "Olsztyn",
+    "district": null,
+    "postcode": "10-685",
+    "voivodeship": "warmińsko-mazurskie",
+    "lat": 53.7538,
+    "lng": 20.4915,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "nokta",
+      "solma",
+      "liran",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": false
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-zielona-gora",
+    "name": "Salon partnerski Liveo — Zielona Góra (dane przykładowe)",
+    "address": "ul. Przykładowa 104",
+    "city": "Zielona Góra",
+    "district": null,
+    "postcode": "65-120",
+    "voivodeship": "lubuskie",
+    "lat": 51.928,
+    "lng": 15.4983,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "solma",
+      "liran",
+      "melva"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00",
+    "demo": true
+  },
+  {
+    "id": "rs-koszalin",
+    "name": "Salon partnerski Liveo — Koszalin (dane przykładowe)",
+    "address": "ul. Przykładowa 14",
+    "city": "Koszalin",
+    "district": null,
+    "postcode": "75-136",
+    "voivodeship": "zachodniopomorskie",
+    "lat": 54.1895,
+    "lng": 16.1629,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "talve",
+      "solma",
+      "melva",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": false,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00",
+    "demo": true
+  },
+  {
+    "id": "rs-radom",
+    "name": "Salon partnerski Liveo — Radom (dane przykładowe)",
+    "address": "ul. Przykładowa 97",
+    "city": "Radom",
+    "district": null,
+    "postcode": "26-600",
+    "voivodeship": "mazowieckie",
+    "lat": 51.3942,
+    "lng": 21.1463,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "solma",
+      "liran"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–19:00, sob. 10:00–15:00",
+    "demo": true
+  },
+  {
+    "id": "rs-zamosc",
+    "name": "Salon partnerski Liveo — Zamość (dane przykładowe)",
+    "address": "ul. Przykładowa 44",
+    "city": "Zamość",
+    "district": null,
+    "postcode": "22-400",
+    "voivodeship": "lubelskie",
+    "lat": 50.7181,
+    "lng": 23.2623,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "solma",
+      "liran",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": false,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-bielsko-biala",
+    "name": "Salon partnerski Liveo — Bielsko-Biała (dane przykładowe)",
+    "address": "ul. Przykładowa 33",
+    "city": "Bielsko-Biała",
+    "district": null,
+    "postcode": "43-300",
+    "voivodeship": "śląskie",
+    "lat": 49.8225,
+    "lng": 19.0526,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "talve",
+      "nokta",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": false,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–19:00, sob. 10:00–15:00",
+    "demo": true
+  },
+  {
+    "id": "rs-plock",
+    "name": "Salon partnerski Liveo — Płock (dane przykładowe)",
+    "address": "ul. Przykładowa 2",
+    "city": "Płock",
+    "district": null,
+    "postcode": "09-400",
+    "voivodeship": "mazowieckie",
+    "lat": 52.5552,
+    "lng": 19.7141,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "talve",
+      "liran",
+      "melva",
+      "verno"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": true,
+      "ekspozycja": false
+    },
+    "openingHours": "pon.–pt. 9:00–17:00, sob. 9:00–13:00",
+    "demo": true
+  },
+  {
+    "id": "rs-kalisz",
+    "name": "Salon partnerski Liveo — Kalisz (dane przykładowe)",
+    "address": "ul. Przykładowa 12",
+    "city": "Kalisz",
+    "district": null,
+    "postcode": "62-800",
+    "voivodeship": "wielkopolskie",
+    "lat": 51.7643,
+    "lng": 18.0934,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "nokta",
+      "solma",
+      "melva",
+      "verno"
+    ],
+    "services": {
+      "montaz": true,
+      "dostawa": false,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–19:00, sob. 10:00–15:00",
+    "demo": true
+  },
+  {
+    "id": "rs-siedlce",
+    "name": "Salon partnerski Liveo — Siedlce (dane przykładowe)",
+    "address": "ul. Przykładowa 100",
+    "city": "Siedlce",
+    "district": null,
+    "postcode": "08-110",
+    "voivodeship": "mazowieckie",
+    "lat": 52.1718,
+    "lng": 22.2944,
+    "phone": null,
+    "email": null,
+    "collections": [
+      "olmo",
+      "talve",
+      "nokta",
+      "solma",
+      "briso",
+      "verno"
+    ],
+    "services": {
+      "montaz": false,
+      "dostawa": true,
+      "ekspozycja": true
+    },
+    "openingHours": "pon.–pt. 10:00–19:00, sob. 10:00–15:00",
+    "demo": true
+  }
+]

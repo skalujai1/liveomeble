@@ -1,0 +1,340 @@
+[
+  {
+    "slug": "olmo",
+    "name": "OLMO",
+    "tagline": "Dekor jasnego dębu, spokojne proporcje i drewniane nóżki.",
+    "description": "OLMO to komplet do salonu, jadalni i sypialni w dekorze dębu naturalnego. Fronty chwyta się za wyprofilowaną krawędź, więc na meblach nie ma widocznych uchwytów. Szafki stoją na nóżkach 12 cm, dzięki czemu łatwo pod nimi posprzątać.",
+    "style": "naturalny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "sypialnia"
+    ],
+    "heroRoom": "salon",
+    "handle": "edge",
+    "base": "legsWood",
+    "finishes": [
+      {
+        "code": "DN",
+        "label": "Dąb naturalny",
+        "body": "dab-naturalny",
+        "front": "dab-naturalny",
+        "legs": "dab-naturalny",
+        "metal": "czarny"
+      },
+      {
+        "code": "KA-DN",
+        "label": "Kaszmir / dąb naturalny",
+        "body": "kaszmir",
+        "front": "kaszmir",
+        "top": "dab-naturalny",
+        "legs": "dab-naturalny",
+        "metal": "czarny"
+      },
+      {
+        "code": "BM-DN",
+        "label": "Biały mat / dąb naturalny",
+        "body": "bialy-mat",
+        "front": "bialy-mat",
+        "top": "dab-naturalny",
+        "legs": "dab-naturalny",
+        "metal": "czarny"
+      }
+    ],
+    "isNew": false,
+    "order": 1,
+    "demo": true
+  },
+  {
+    "slug": "talve",
+    "name": "TALVE",
+    "tagline": "Matowe fronty, dębowe blaty i małe okrągłe gałki.",
+    "description": "TALVE łączy gładkie, matowe fronty z blatami w dekorze dębu naturalnego. Meble stoją na wysokich drewnianych nóżkach, a małe czarne gałki są jedynym metalowym akcentem. Kolekcja ma meble do salonu, sypialni i pokoju nastolatka.",
+    "style": "skandynawski",
+    "rooms": [
+      "salon",
+      "sypialnia",
+      "pokoj-mlodziezowy"
+    ],
+    "heroRoom": "sypialnia",
+    "handle": "knob",
+    "base": "legsWood",
+    "finishes": [
+      {
+        "code": "BM-DN",
+        "label": "Biały mat / dąb naturalny",
+        "body": "bialy-mat",
+        "front": "bialy-mat",
+        "top": "dab-naturalny",
+        "legs": "dab-naturalny",
+        "metal": "czarny"
+      },
+      {
+        "code": "SZ-DN",
+        "label": "Szałwia / dąb naturalny",
+        "body": "szalwia",
+        "front": "szalwia",
+        "top": "dab-naturalny",
+        "legs": "dab-naturalny",
+        "metal": "czarny"
+      },
+      {
+        "code": "GR-DN",
+        "label": "Grafit / dąb naturalny",
+        "body": "grafit",
+        "front": "grafit",
+        "top": "dab-naturalny",
+        "legs": "dab-naturalny",
+        "metal": "czarny"
+      }
+    ],
+    "isNew": false,
+    "order": 2,
+    "demo": true
+  },
+  {
+    "slug": "nokta",
+    "name": "NOKTA",
+    "tagline": "Ciepłe drewno na czarnym, metalowym stelażu.",
+    "description": "NOKTA zestawia fronty w dekorze dębu miodowego albo orzecha z ciemnym, matowym korpusem. Meble stoją na cienkich metalowych nogach, a długie czarne uchwyty podkreślają poziome linie. Pasuje do salonu, jadalni i domowego biura.",
+    "style": "loft",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "biuro"
+    ],
+    "heroRoom": "jadalnia",
+    "handle": "bar",
+    "base": "legsMetal",
+    "finishes": [
+      {
+        "code": "DM-CM",
+        "label": "Dąb miodowy / czarny mat",
+        "body": "czarny-mat",
+        "front": "dab-miodowy",
+        "metal": "czarny"
+      },
+      {
+        "code": "OR-GR",
+        "label": "Orzech / grafit",
+        "body": "grafit",
+        "front": "orzech",
+        "metal": "czarny"
+      }
+    ],
+    "isNew": false,
+    "order": 3,
+    "demo": true
+  },
+  {
+    "slug": "solma",
+    "name": "SOLMA",
+    "tagline": "Gładkie fronty i akcenty w kolorze szczotkowanego mosiądzu.",
+    "description": "SOLMA to kolekcja z lekkim akcentem glamour: gładkie fronty, cienkie nogi i uchwyty w kolorze szczotkowanego mosiądzu. Obejmuje meble do sypialni, salonu i przedpokoju — od łóżka i toaletki po szafę i szafkę na buty. Do wyboru biały połysk, kaszmir albo czarny mat.",
+    "style": "glamour-lekki",
+    "rooms": [
+      "salon",
+      "sypialnia",
+      "przedpokoj"
+    ],
+    "heroRoom": "sypialnia",
+    "handle": "bar",
+    "base": "legsMetal",
+    "finishes": [
+      {
+        "code": "BP-ZL",
+        "label": "Biały połysk / złoty",
+        "body": "bialy-mat",
+        "front": "bialy-polysk",
+        "top": "bialy-polysk",
+        "metal": "zloty"
+      },
+      {
+        "code": "KA-ZL",
+        "label": "Kaszmir / złoty",
+        "body": "kaszmir",
+        "front": "kaszmir",
+        "metal": "zloty"
+      },
+      {
+        "code": "CM-ZL",
+        "label": "Czarny mat / złoty",
+        "body": "czarny-mat",
+        "front": "czarny-mat",
+        "metal": "zloty"
+      }
+    ],
+    "isNew": false,
+    "order": 4,
+    "demo": true
+  },
+  {
+    "slug": "liran",
+    "name": "LIRAN",
+    "tagline": "Fronty bez uchwytów, cofnięty cokół i blaty w dekorze dębu.",
+    "description": "LIRAN ma fronty bez uchwytów — szuflady i drzwi otwiera się lekkim naciśnięciem (push-to-open). Korpusy stoją na cofniętym cokole albo wiszą na ścianie, więc bryły wyglądają lekko. Matowa czerń lub biel z blatem w dekorze dębu, a także jednolity grafit.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "biuro"
+    ],
+    "heroRoom": "salon",
+    "handle": "push",
+    "base": "plinth",
+    "finishes": [
+      {
+        "code": "CM-DN",
+        "label": "Czarny mat / dąb naturalny",
+        "body": "czarny-mat",
+        "front": "czarny-mat",
+        "top": "dab-naturalny",
+        "metal": "stal"
+      },
+      {
+        "code": "BM-DN",
+        "label": "Biały mat / dąb naturalny",
+        "body": "bialy-mat",
+        "front": "bialy-mat",
+        "top": "dab-naturalny",
+        "metal": "stal"
+      },
+      {
+        "code": "GR",
+        "label": "Grafit",
+        "body": "grafit",
+        "front": "grafit",
+        "metal": "stal"
+      }
+    ],
+    "isNew": false,
+    "order": 5,
+    "demo": true
+  },
+  {
+    "slug": "melva",
+    "name": "MELVA",
+    "tagline": "Stonowane kolory, blaty w dekorze dębu miodowego i złote gałki.",
+    "description": "MELVA to klasyka w nowoczesnym wydaniu: fronty w kolorze kaszmiru lub szałwii, blaty w dekorze dębu miodowego i małe gałki w kolorze mosiądzu. Kolekcja ma meble do jadalni, salonu i sypialni, w tym kredens z przeszkleniem i rozkładany stół.",
+    "style": "klasyczny-nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "sypialnia"
+    ],
+    "heroRoom": "jadalnia",
+    "handle": "knob",
+    "base": "legsWood",
+    "finishes": [
+      {
+        "code": "KA-DM",
+        "label": "Kaszmir / dąb miodowy",
+        "body": "kaszmir",
+        "front": "kaszmir",
+        "top": "dab-miodowy",
+        "legs": "dab-miodowy",
+        "metal": "zloty"
+      },
+      {
+        "code": "SZ-DM",
+        "label": "Szałwia / dąb miodowy",
+        "body": "szalwia",
+        "front": "szalwia",
+        "top": "dab-miodowy",
+        "legs": "dab-miodowy",
+        "metal": "zloty"
+      },
+      {
+        "code": "OR",
+        "label": "Orzech",
+        "body": "orzech",
+        "front": "orzech",
+        "legs": "orzech",
+        "metal": "zloty"
+      }
+    ],
+    "isNew": false,
+    "order": 6,
+    "demo": true
+  },
+  {
+    "slug": "briso",
+    "name": "BRISO",
+    "tagline": "Biurka, regały i łóżka do nauki i odpoczynku w jednym stylu.",
+    "description": "BRISO to kolekcja do pokoju młodzieżowego i domowego biura: biurka z szufladami, otwarte regały, łóżka 90 i 120 cm oraz szafa. Uchwyty są wyfrezowane we frontach, więc nic nie wystaje. Korpusy białe albo grafitowe, fronty w dekorze dębu lub w kolorze szałwii.",
+    "style": "nowoczesny",
+    "rooms": [
+      "pokoj-mlodziezowy",
+      "biuro"
+    ],
+    "heroRoom": "pokoj-mlodziezowy",
+    "handle": "groove",
+    "base": "legsMetal",
+    "finishes": [
+      {
+        "code": "BM-DN",
+        "label": "Biały mat / dąb naturalny",
+        "body": "bialy-mat",
+        "front": "dab-naturalny",
+        "metal": "czarny"
+      },
+      {
+        "code": "BM-SZ",
+        "label": "Biały mat / szałwia",
+        "body": "bialy-mat",
+        "front": "szalwia",
+        "metal": "czarny"
+      },
+      {
+        "code": "GR-DM",
+        "label": "Grafit / dąb miodowy",
+        "body": "grafit",
+        "front": "dab-miodowy",
+        "metal": "czarny"
+      }
+    ],
+    "isNew": true,
+    "order": 7,
+    "demo": true
+  },
+  {
+    "slug": "verno",
+    "name": "VERNO",
+    "tagline": "Pojemne szafy i meble do przedpokoju o prostych, cichych frontach.",
+    "description": "VERNO porządkuje przedpokój i sypialnię: szafy 100 i 150 cm, szafki na buty z uchylnymi komorami, wieszak, lustro, komoda i łóżka z pojemnikiem. Fronty mają wyfrezowany uchwyt, a korpusy stoją na niskim cokole. Biel z dekorem dębu, kaszmir albo grafit z dębem miodowym.",
+    "style": "minimalistyczny",
+    "rooms": [
+      "przedpokoj",
+      "sypialnia"
+    ],
+    "heroRoom": "przedpokoj",
+    "handle": "groove",
+    "base": "plinth",
+    "finishes": [
+      {
+        "code": "BM-DN",
+        "label": "Biały mat / dąb naturalny",
+        "body": "bialy-mat",
+        "front": "dab-naturalny",
+        "metal": "stal"
+      },
+      {
+        "code": "KA",
+        "label": "Kaszmir",
+        "body": "kaszmir",
+        "front": "kaszmir",
+        "metal": "stal"
+      },
+      {
+        "code": "GR-DM",
+        "label": "Grafit / dąb miodowy",
+        "body": "grafit",
+        "front": "dab-miodowy",
+        "metal": "stal"
+      }
+    ],
+    "isNew": true,
+    "order": 8,
+    "demo": true
+  }
+]

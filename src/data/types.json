@@ -1,0 +1,309 @@
+[
+  {
+    "id": "rtv",
+    "name": "Szafka RTV",
+    "plural": "Szafki RTV",
+    "genitivePlural": "szafek RTV",
+    "slug": "szafki-rtv",
+    "rooms": [
+      "salon"
+    ],
+    "priceRange": [
+      499,
+      1399
+    ],
+    "kind": "cabinet",
+    "skuCode": "RTV",
+    "order": 1,
+    "priceRangeSource": "brief"
+  },
+  {
+    "id": "komoda",
+    "name": "Komoda",
+    "plural": "Komody",
+    "genitivePlural": "komód",
+    "slug": "komody",
+    "rooms": [
+      "salon",
+      "sypialnia",
+      "przedpokoj",
+      "jadalnia",
+      "pokoj-mlodziezowy",
+      "biuro"
+    ],
+    "priceRange": [
+      699,
+      1699
+    ],
+    "kind": "cabinet",
+    "skuCode": "KOM",
+    "order": 2,
+    "priceRangeSource": "brief"
+  },
+  {
+    "id": "witryna",
+    "name": "Witryna",
+    "plural": "Witryny",
+    "genitivePlural": "witryn",
+    "slug": "witryny",
+    "rooms": [
+      "salon",
+      "jadalnia"
+    ],
+    "priceRange": [
+      899,
+      1899
+    ],
+    "kind": "cabinet",
+    "skuCode": "WIT",
+    "order": 3,
+    "priceRangeSource": "brief"
+  },
+  {
+    "id": "regal",
+    "name": "Regał",
+    "plural": "Regały",
+    "genitivePlural": "regałów",
+    "slug": "regaly",
+    "rooms": [
+      "salon",
+      "pokoj-mlodziezowy",
+      "biuro"
+    ],
+    "priceRange": [
+      449,
+      1199
+    ],
+    "kind": "cabinet",
+    "skuCode": "REG",
+    "order": 4,
+    "priceRangeSource": "brief"
+  },
+  {
+    "id": "lawa",
+    "name": "Ława",
+    "plural": "Ławy",
+    "genitivePlural": "ław",
+    "slug": "lawy",
+    "rooms": [
+      "salon"
+    ],
+    "priceRange": [
+      399,
+      899
+    ],
+    "kind": "coffeeTable",
+    "skuCode": "LAW",
+    "order": 5,
+    "priceRangeSource": "brief"
+  },
+  {
+    "id": "polka",
+    "name": "Półka",
+    "plural": "Półki",
+    "genitivePlural": "półek",
+    "slug": "polki",
+    "rooms": [
+      "salon",
+      "pokoj-mlodziezowy",
+      "biuro",
+      "przedpokoj",
+      "sypialnia"
+    ],
+    "priceRange": [
+      149,
+      299
+    ],
+    "kind": "wallShelf",
+    "skuCode": "POL",
+    "order": 6,
+    "priceRangeSource": "brief"
+  },
+  {
+    "id": "stol",
+    "name": "Stół",
+    "plural": "Stoły",
+    "genitivePlural": "stołów",
+    "slug": "stoly",
+    "rooms": [
+      "jadalnia"
+    ],
+    "priceRange": [
+      799,
+      1899
+    ],
+    "kind": "table",
+    "skuCode": "STO",
+    "order": 7,
+    "priceRangeSource": "brief"
+  },
+  {
+    "id": "kredens",
+    "name": "Kredens",
+    "plural": "Kredensy",
+    "genitivePlural": "kredensów",
+    "slug": "kredensy",
+    "rooms": [
+      "jadalnia",
+      "salon"
+    ],
+    "priceRange": [
+      1099,
+      2199
+    ],
+    "kind": "cabinet",
+    "skuCode": "KRE",
+    "order": 8,
+    "priceRangeSource": "założenie"
+  },
+  {
+    "id": "lozko",
+    "name": "Łóżko",
+    "plural": "Łóżka",
+    "genitivePlural": "łóżek",
+    "slug": "lozka",
+    "rooms": [
+      "sypialnia",
+      "pokoj-mlodziezowy"
+    ],
+    "priceRange": [
+      1199,
+      2799
+    ],
+    "kind": "bed",
+    "skuCode": "LOZ",
+    "order": 9,
+    "priceRangeSource": "brief"
+  },
+  {
+    "id": "szafka_nocna",
+    "name": "Szafka nocna",
+    "plural": "Szafki nocne",
+    "genitivePlural": "szafek nocnych",
+    "slug": "szafki-nocne",
+    "rooms": [
+      "sypialnia",
+      "pokoj-mlodziezowy"
+    ],
+    "priceRange": [
+      249,
+      499
+    ],
+    "kind": "cabinet",
+    "skuCode": "SZN",
+    "order": 10,
+    "priceRangeSource": "brief"
+  },
+  {
+    "id": "szafa",
+    "name": "Szafa",
+    "plural": "Szafy",
+    "genitivePlural": "szaf",
+    "slug": "szafy",
+    "rooms": [
+      "sypialnia",
+      "przedpokoj",
+      "pokoj-mlodziezowy"
+    ],
+    "priceRange": [
+      1199,
+      2999
+    ],
+    "kind": "cabinet",
+    "skuCode": "SZA",
+    "order": 11,
+    "priceRangeSource": "brief"
+  },
+  {
+    "id": "toaletka",
+    "name": "Toaletka",
+    "plural": "Toaletki",
+    "genitivePlural": "toaletek",
+    "slug": "toaletki",
+    "rooms": [
+      "sypialnia"
+    ],
+    "priceRange": [
+      599,
+      1199
+    ],
+    "kind": "desk",
+    "skuCode": "TOA",
+    "order": 12,
+    "priceRangeSource": "założenie"
+  },
+  {
+    "id": "lustro",
+    "name": "Lustro",
+    "plural": "Lustra",
+    "genitivePlural": "luster",
+    "slug": "lustra",
+    "rooms": [
+      "przedpokoj",
+      "sypialnia"
+    ],
+    "priceRange": [
+      199,
+      599
+    ],
+    "kind": "mirror",
+    "skuCode": "LUS",
+    "order": 13,
+    "priceRangeSource": "brief"
+  },
+  {
+    "id": "biurko",
+    "name": "Biurko",
+    "plural": "Biurka",
+    "genitivePlural": "biurek",
+    "slug": "biurka",
+    "rooms": [
+      "biuro",
+      "pokoj-mlodziezowy"
+    ],
+    "priceRange": [
+      449,
+      1299
+    ],
+    "kind": "desk",
+    "skuCode": "BIU",
+    "order": 14,
+    "priceRangeSource": "brief"
+  },
+  {
+    "id": "szafka_na_buty",
+    "name": "Szafka na buty",
+    "plural": "Szafki na buty",
+    "genitivePlural": "szafek na buty",
+    "slug": "szafki-na-buty",
+    "rooms": [
+      "przedpokoj"
+    ],
+    "priceRange": [
+      399,
+      999
+    ],
+    "kind": "cabinet",
+    "skuCode": "SZB",
+    "order": 15,
+    "priceRangeSource": "założenie"
+  },
+  {
+    "id": "wieszak",
+    "name": "Wieszak",
+    "plural": "Wieszaki",
+    "genitivePlural": "wieszaków",
+    "slug": "wieszaki",
+    "rooms": [
+      "przedpokoj"
+    ],
+    "priceRange": [
+      199,
+      499
+    ],
+    "kind": "coatRack",
+    "skuCode": "WIE",
+    "order": 16,
+    "priceRangeSource": "założenie"
+  }
+]
