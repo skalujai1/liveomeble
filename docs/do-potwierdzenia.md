@@ -92,3 +92,11 @@ Lista otwartych pytań i założeń przyjętych na czas prac na danych demonstra
     Boty wyszukiwania AI (OAI-SearchBot, PerplexityBot) rekomendujemy wpuścić — od nich zależy, czy strona pojawi się jako źródło w ChatGPT i Perplexity.
 43. **Autor poradników** — „Redakcja Liveo” czy konkretna osoba (imię, rola); kto zatwierdza treści przed publikacją.
 44. **Ton komunikacji** — akceptacja zasad i słownika z `brief.md`, rozdz. 6.
+
+## Ze starej strony liveomeble.pl (21.10.2026)
+
+45. Czy przenosimy prawdziwą listę salonów partnerskich ze starej strony (za zgodą partnerów) w miejsce danych przykładowych?
+46. Czy publikujemy przedstawicieli handlowych (imię, telefon, e-mail, województwa) w strefie „Dla partnerów”?
+47. Meble tapicerowane oraz materace i stelaże — czy wchodzą do nowej strony (dziś modelujemy tylko meble skrzyniowe)?
+48. Czy deklaracje „lata 90.” i „blisko 400 pracowników” możemy podać na stronie (aktualność liczby)?
+49. Meble do obiektów użyteczności publicznej (kontrakty) — osobna sekcja B2B?

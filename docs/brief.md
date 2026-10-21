@@ -210,3 +210,15 @@ To **ton producenta mebli**, nie agencji. Mówimy jak dobry sprzedawca w salonie
 | `docs/` | brief, architektura informacji, integracja z Navireo, lista pytań do klienta |
 
 Struktura plików treści jest opisana w [`ia.md`, rozdział 6](ia.md#6-struktura-treści-w-srccontent).
+
+## Fakty ze starej strony liveomeble.pl (odczyt 21.10.2026)
+
+Źródło: liveomeble.pl (strony „O nas”, „Kontakt”, „Salony partnerskie”, stopka). To deklaracje firmy — na nowej stronie używamy ich po potwierdzeniu przez klienta.
+
+- **Firma:** LIVEO Meble Spółka z ograniczoną odpowiedzialnością, 36-130 Raniżów, ul. Borki 5, woj. podkarpackie. Zakład produkcyjny pod tym samym adresem.
+- **Kontakt ogólny:** biuro@liveomeble.pl, tel. +48 17 58 18 000. Formularz kontaktowy z tematami: kadry, meble skrzyniowe, meble tapicerowane, ogólny, reklamacje, webmaster, współpraca.
+- **Asortyment (menu starej strony):** meble skrzyniowe, materace i stelaże, meble tapicerowane; działy „Promocje” i „Wyprzedaże”. W tekście „O nas”: komody, witryny, szafy, stoły, krzesła, regały, biurka, akcesoria (oświetlenie, materace); meble do mieszkań i do obiektów użyteczności publicznej.
+- **O firmie (deklaracje):** tradycja sięgająca lat 90., „blisko 400 wykwalifikowanych pracowników”, własna infrastruktura produkcyjna, udział w targach w Polsce i za granicą, materiały przyjazne środowisku, wspieranie organizacji na rzecz dzieci.
+- **Sprzedaż:** przez salony partnerskie — stara strona ma ich listę według województw (16 województw + „pozostałe”). Po zgodzie klienta i partnerów można ją przenieść do `src/data/resellers.json` zamiast danych przykładowych.
+- **Przedstawiciele handlowi (B2B)** — 3 osoby z podziałem na województwa (imiona, telefony i e-maile są na stronie /kontakt). Na nowej stronie publikujemy je tylko po potwierdzeniu klienta (dane osobowe pracowników).
+- **Gwarancja, reklamacje, regulacje i bezpieczeństwo, nota prawna** — osobne strony w stopce starej strony; treść do przeniesienia po weryfikacji.
