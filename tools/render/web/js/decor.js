@@ -180,9 +180,10 @@ export function framedArt({ w = 0.5, h = 0.7, style = 'arches', palette = {}, fr
   art.receiveShadow = true;
   g.add(art);
   // szyba (delikatne odbicie)
-  const glass = new THREE.Mesh(new THREE.PlaneGeometry(iw, ih), patchMaterial(new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.05, transparent: true, opacity: 0.06, depthWrite: false })));
+  const glass = new THREE.Mesh(new THREE.PlaneGeometry(iw, ih), patchMaterial(new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.18, specularIntensity: 0.7, transparent: true, opacity: 0.06, depthWrite: false })));
   glass.position.set(0, 0, depth - 0.004);
   glass.userData.noAO = true;
+  glass.material.userData.directSpec = 0.15;
   g.add(glass);
   g.traverse((o) => { if (o.isMesh && o !== glass) { o.castShadow = true; o.receiveShadow = true; } });
   return wallMounted(g);
@@ -424,13 +425,20 @@ export function hat({ color = '#c8b28a' } = {}) {
 
 /** Torba płócienna wisząca (prosta bryła poduszkowa). */
 export function toteBag({ color = '#e3dbcc' } = {}) {
-  const body = new THREE.Mesh(pillowGeometry(0.36, 0.05, 0.4, { seed: 31, wrinkle: 0.006, boxy: 0.2, pinch: 0.6 }), fabricMaterial(color, 'linen', { repeat: 10 }));
+  const mat = fabricMaterial(color, 'linen', { repeat: 10 });
+  const body = new THREE.Mesh(pillowGeometry(0.36, 0.022, 0.4, { seed: 31, wrinkle: 0.009, boxy: 0.06, pinch: 0.92 }), mat);
   body.rotation.x = Math.PI / 2;
-  body.position.y = -0.27;
-  const strap = new THREE.Mesh(new THREE.TorusGeometry(0.07, 0.006, 8, 32, Math.PI), fabricMaterial(color, 'linen', { repeat: 10 }));
-  strap.position.y = -0.07;
-  strap.scale.set(1, 1.2, 1);
-  return shadowAll(grp(body, strap));
+  body.position.set(0, -0.3, 0.004);
+  // dwa ucha (taśmy) zawieszone na haczyku
+  const straps = [];
+  for (const k of [-1, 1]) {
+    const st = new THREE.Mesh(new THREE.TorusGeometry(0.075, 0.0055, 8, 40, Math.PI), mat);
+    st.scale.set(1, 1.35, 1);
+    st.position.set(0, -0.1, k * 0.006);
+    st.rotation.z = k * 0.04;
+    straps.push(st);
+  }
+  return shadowAll(grp(body, ...straps));
 }
 
 // ---------------------------------------------------------------------------------------------

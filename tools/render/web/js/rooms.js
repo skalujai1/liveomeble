@@ -98,7 +98,7 @@ export const ROOMS = {
     },
     sun: { azimuth: -62, elevation: 24 },
     light: { sunIntensity: 4.2, skyIntensity: 2.8, bounce: 2.2, exposure: 1 },
-    post: { warmth: -0.03 },
+    post: { warmth: 0.0 },
     capture: [0.3, 1.3, 2.4],
     populate(g) {
       const x = 0.55;
@@ -132,7 +132,7 @@ export const ROOMS = {
     },
     sun: { azimuth: 64, elevation: 26 },
     light: { sunIntensity: 3.9, skyIntensity: 2.8, bounce: 2.2, exposure: 1 },
-    post: { warmth: -0.02 },
+    post: { warmth: 0.005 },
     capture: [-0.3, 1.3, 2.4],
     populate(g) {
       const kx = -0.7;
@@ -166,7 +166,7 @@ export const ROOMS = {
     },
     sun: { azimuth: -58, elevation: 20 },
     light: { sunIntensity: 3.4, skyIntensity: 3.0, bounce: 2.2, exposure: 1 },
-    post: { warmth: -0.02 },
+    post: { warmth: 0.005 },
     capture: [0.6, 1.3, 2.8],
     populate(g) {
       const bx = 0.95;
@@ -199,16 +199,16 @@ export const ROOMS = {
     },
     sun: { azimuth: -55, elevation: 27 },
     light: { sunIntensity: 3.9, skyIntensity: 2.8, bounce: 2.2, exposure: 1 },
-    post: { warmth: -0.03 },
+    post: { warmth: 0.0 },
     capture: [0.6, 1.3, 2.6],
     populate(g) {
       const tx = 0.9, tz = 2.2;
       put(g, buildModel(M.stol160), tx, 0, tz);
       const ch = { finish: 'dab-naturalny', seatColor: '#d6ccbc' };
-      put(g, D.chair(ch), tx - 0.4, 0, tz - 0.62, 180 + 3);
-      put(g, D.chair(ch), tx + 0.42, 0, tz - 0.6, 180 - 4);
+      put(g, D.chair(ch), tx - 0.4, 0, tz - 0.62, 3);
+      put(g, D.chair(ch), tx + 0.42, 0, tz - 0.6, -4);
       put(g, D.chair(ch), tx + 1.06, 0, tz + 0.02, -90 + 3);
-      put(g, D.chair(ch), tx + 0.38, 0, tz + 0.66, 2);
+      put(g, D.chair(ch), tx + 0.38, 0, tz + 0.7, 180 + 6);
       put(g, D.pendantLamp({ drop: 1.0, r: 0.22 }), tx, 2.8, tz);
       put(g, D.bowl({ d: 0.32, h: 0.09, color: '#d4c8b6' }), tx + 0.25, 0.76, tz + 0.05);
       put(g, D.vaseWithBranches({ h: 0.26, color: '#ece6dc', seed: 41, branchH: 0.85 }), tx - 0.3, 0.76, tz - 0.05);
@@ -237,7 +237,7 @@ export const ROOMS = {
     },
     sun: { azimuth: -40, elevation: 28 },
     light: { sunIntensity: 3.9, skyIntensity: 3.0, bounce: 2.3, exposure: 1 },
-    post: { warmth: -0.02 },
+    post: { warmth: 0.005 },
     capture: [0.2, 1.3, 2.4],
     populate(g) {
       atBack(g, M.szafkaNaButy, 0.45);
@@ -245,7 +245,7 @@ export const ROOMS = {
       put(g, D.wallMounted(buildModel(M.wieszak)), 1.25, 0, 0.05);
       const h = put(g, D.hat({ color: '#c8b28a' }), 1.25 - 0.36, 1.55, 0.13);
       h.rotation.set(-0.25, 0, 0);
-      put(g, D.toteBag({ color: '#e3dbcc' }), 1.25 + 0.18, 1.58, 0.12);
+      put(g, D.toteBag({ color: '#cbb894' }), 1.25 + 0.18, 1.58, 0.12).rotation.z = 0.05;
       put(g, D.vaseWithBranches({ h: 0.22, color: '#e9e3d8', seed: 14, branchH: 0.9 }), 0.78, 0.92, 0.18);
       put(g, D.bowl({ d: 0.18, h: 0.05, color: '#2e2b29' }), 0.48, 0.92, 0.2);
       put(g, D.basket({ r: 0.17, h: 0.36, color: '#b99d77' }), -0.55, 0, 0.3);
@@ -269,12 +269,12 @@ export const ROOMS = {
     },
     sun: { azimuth: -64, elevation: 25 },
     light: { sunIntensity: 3.9, skyIntensity: 2.8, bounce: 2.2, exposure: 1 },
-    post: { warmth: -0.03 },
+    post: { warmth: 0.0 },
     capture: [0.5, 1.3, 2.4],
     populate(g) {
       const dx = 0.55;
       atBack(g, M.biurko120, dx, 0.03);
-      put(g, D.chair({ finish: 'dab-naturalny', seatColor: '#cfc3b1' }), dx - 0.2, 0, 0.98, 12);
+      put(g, D.chair({ finish: 'dab-naturalny', seatColor: '#cfc3b1' }), dx - 0.18, 0, 0.92, 180 + 14);
       put(g, D.deskLamp({ metal: 'czarny' }), dx - 0.45, 0.76, 0.2, 20);
       put(g, D.bookStack({ count: 3, seed: 17, colors: ['#e3dccd', '#7d8a72', '#c9b79c'] }), dx + 0.28, 0.76, 0.2, -8);
       put(g, D.smallVase({ h: 0.16, color: '#ece6dc', shape: 1 }), dx + 0.02, 0.76, 0.16);

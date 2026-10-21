@@ -13,7 +13,7 @@ const outDir = path.resolve(flag('--out', path.join(RENDERS, 'rooms')));
 const only = flag('--only');
 const frames = flag('--frame') ? [flag('--frame')] : ['wide', 'tall'];
 const SIZES = { wide: [2400, 1350], tall: [1200, 1500] };
-const samples = Number(flag('--samples', preview ? 48 : 224));
+const samples = Number(flag('--samples', preview ? 48 : 64));
 
 const R = await openRenderer();
 const rooms = await R.page.evaluate(async () => (await import('./js/rooms.js')).ROOM_LIST());
@@ -31,11 +31,10 @@ try {
       const res = await R.render({ kind: 'room', room: room.name, frame, width: w, height: h, samples, preview });
       await saveJpeg(res.png, file, 88);
       console.log(`${fmtMs(res.ms)} (${Math.round(fs.statSync(file).size / 1024)} kB)`);
-      if (!preview) entries.push(await describeRoom(file, room, frame, [w, h]));
+      if (!preview) { const e = await describeRoom(file, room, frame, [w, h]); entries.push(e); updateManifest([e]); }
     }
   }
 } finally {
   await R.close();
 }
-if (entries.length) updateManifest(entries);
 console.log(`Gotowe w ${fmtMs(Date.now() - t0)}`);

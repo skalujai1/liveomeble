@@ -1,0 +1,740 @@
+{
+  "note": "Atrapy zdjęć (rendery 3D z tools/render) — do podmiany na zdjęcia klienta.",
+  "items": [
+    {
+      "file": "rooms/biuro-tall.jpg",
+      "type": "aranzacja",
+      "room": "biuro",
+      "frame": "tall",
+      "title": "Domowe biuro — biurko 120 szałwia + dąb, regał dąb miodowy",
+      "description": "Domowe biuro: biurko 120 w kolorze szałwii z dębowym blatem i kontenerem z szufladami, drewniane krzesło, lampka biurkowa, regał 80×190 z dębu miodowego z książkami i ceramiką, grafiki na ścianie, drzewko oliwne, dębowa podłoga, światło z okna po lewej.",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#b4aca4",
+        "#eceae6",
+        "#470503",
+        "#c8c4bb"
+      ],
+      "palette": "szałwia, dąb, dąb miodowy, ciepła biel, czarne akcenty",
+      "textSpace": "górne ~25% kadru — ściana nad biurkiem (miejsce na tekst)",
+      "placeholder": true
+    },
+    {
+      "file": "rooms/biuro-wide.jpg",
+      "type": "aranzacja",
+      "room": "biuro",
+      "frame": "wide",
+      "title": "Domowe biuro — biurko 120 szałwia + dąb, regał dąb miodowy",
+      "description": "Domowe biuro: biurko 120 w kolorze szałwii z dębowym blatem i kontenerem z szufladami, drewniane krzesło, lampka biurkowa, regał 80×190 z dębu miodowego z książkami i ceramiką, grafiki na ścianie, drzewko oliwne, dębowa podłoga, światło z okna po lewej.",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#bbb7b5",
+        "#eceae7",
+        "#9c9488",
+        "#460503"
+      ],
+      "palette": "szałwia, dąb, dąb miodowy, ciepła biel, czarne akcenty",
+      "textSpace": "lewa ~1/3 kadru — jasna ściana z miękkim światłem okna (miejsce na tekst)",
+      "placeholder": true
+    },
+    {
+      "file": "rooms/jadalnia-tall.jpg",
+      "type": "aranzacja",
+      "room": "jadalnia",
+      "frame": "tall",
+      "title": "Jadalnia — stół 160 dąb naturalny, komoda orzech",
+      "description": "Jadalnia: dębowy stół 160×90 z drewnianymi krzesłami z tapicerowanym siedziskiem, czarna lampa wisząca, w tle niska komoda z orzecha z grafikami i ceramiką, dębowa podłoga, światło dzienne z okna po lewej.",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#b6ada4",
+        "#c9c5c3",
+        "#784707",
+        "#866947"
+      ],
+      "palette": "dąb naturalny, orzech, ciepła biel, czerń, beż",
+      "textSpace": "górne ~25% kadru — ściana i lampa wisząca (miejsce na krótki tekst)",
+      "placeholder": true
+    },
+    {
+      "file": "rooms/jadalnia-wide.jpg",
+      "type": "aranzacja",
+      "room": "jadalnia",
+      "frame": "wide",
+      "title": "Jadalnia — stół 160 dąb naturalny, komoda orzech",
+      "description": "Jadalnia: dębowy stół 160×90 z drewnianymi krzesłami z tapicerowanym siedziskiem, czarna lampa wisząca, w tle niska komoda z orzecha z grafikami i ceramiką, dębowa podłoga, światło dzienne z okna po lewej.",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#b4ada5",
+        "#c8c5c4",
+        "#f6f5f3",
+        "#9c9389"
+      ],
+      "palette": "dąb naturalny, orzech, ciepła biel, czerń, beż",
+      "textSpace": "lewa 1/3 kadru — jasna ściana z miękkim światłem okna (miejsce na tekst)",
+      "placeholder": true
+    },
+    {
+      "file": "rooms/przedpokoj-tall.jpg",
+      "type": "aranzacja",
+      "room": "przedpokoj",
+      "frame": "tall",
+      "title": "Przedpokój — szafka na buty kaszmir, lustro w łuku, wieszak dąb",
+      "description": "Jasny przedpokój: szafka na buty w kolorze kaszmiru z dębowym blatem i złotymi uchwytami krawędziowymi, lustro w łuku w dębowej ramie, dębowy wieszak z półką, kapelusz i lniana torba na haczykach, pleciony kosz, jasna posadzka betonowa.",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#aca59a",
+        "#e9e3db",
+        "#87837b",
+        "#896437"
+      ],
+      "palette": "kaszmir, ciepła biel, dąb, złoto, jasny beton",
+      "textSpace": "górne ~20% kadru — ściana nad lustrem (miejsce na krótki tekst)",
+      "placeholder": true
+    },
+    {
+      "file": "rooms/przedpokoj-wide.jpg",
+      "type": "aranzacja",
+      "room": "przedpokoj",
+      "frame": "wide",
+      "title": "Przedpokój — szafka na buty kaszmir, lustro w łuku, wieszak dąb",
+      "description": "Jasny przedpokój: szafka na buty w kolorze kaszmiru z dębowym blatem i złotymi uchwytami krawędziowymi, lustro w łuku w dębowej ramie, dębowy wieszak z półką, kapelusz i lniana torba na haczykach, pleciony kosz, jasna posadzka betonowa.",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#aba49a",
+        "#948e83",
+        "#78746b",
+        "#f2ece5"
+      ],
+      "palette": "kaszmir, ciepła biel, dąb, złoto, jasny beton",
+      "textSpace": "lewa ~1/3 kadru — jasna ściana (miejsce na tekst)",
+      "placeholder": true
+    },
+    {
+      "file": "rooms/salon-jasny-tall.jpg",
+      "type": "aranzacja",
+      "room": "salon-jasny",
+      "frame": "tall",
+      "title": "Salon jasny — szafka RTV 180, dąb naturalny",
+      "description": "Jasny salon w słońcu: szafka RTV 180 z dębu naturalnego na czarnych nogach, nad nią dwie grafiki, wazon z suchymi gałązkami, drzewko oliwne w donicy, beżowy dywan, dębowa podłoga w deskach; plamy słońca z okna po lewej.",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#b9b2aa",
+        "#eae8e5",
+        "#d3cdc4",
+        "#d8b585"
+      ],
+      "palette": "ciepła biel ścian, miodowy dąb, beż dywanu, akcenty terakoty i czerni",
+      "textSpace": "górne ~30% kadru — jasna ściana nad grafikami (miejsce na tekst)",
+      "placeholder": true
+    },
+    {
+      "file": "rooms/salon-jasny-wide.jpg",
+      "type": "aranzacja",
+      "room": "salon-jasny",
+      "frame": "wide",
+      "title": "Salon jasny — szafka RTV 180, dąb naturalny",
+      "description": "Jasny salon w słońcu: szafka RTV 180 z dębu naturalnego na czarnych nogach, nad nią dwie grafiki, wazon z suchymi gałązkami, drzewko oliwne w donicy, beżowy dywan, dębowa podłoga w deskach; plamy słońca z okna po lewej.",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#bcb8b4",
+        "#a59d94",
+        "#eae8e5",
+        "#dab684"
+      ],
+      "palette": "ciepła biel ścian, miodowy dąb, beż dywanu, akcenty terakoty i czerni",
+      "textSpace": "lewa 1/3 kadru — gładka jasna ściana z miękkim światłem i plamą słońca (miejsce na tekst)",
+      "placeholder": true
+    },
+    {
+      "file": "rooms/salon-szalwia-tall.jpg",
+      "type": "aranzacja",
+      "room": "salon-szalwia",
+      "frame": "tall",
+      "title": "Salon ze ścianą w kolorze szałwii — komoda 120 biały mat",
+      "description": "Salon ze ścianą w kolorze szałwii: biała matowa komoda 120 ze złotymi uchwytami i nogami, nad nią lustro w łuku w dębowej ramie, ceramiczna lampa z lnianym abażurem, książki i wazon z gałązkami; obok grafitowa witryna, dębowa podłoga, światło z okna po prawej.",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#73755d",
+        "#595857",
+        "#050404",
+        "#b8b3ad"
+      ],
+      "palette": "szałwia (zgaszona zieleń), biel, złoto, dąb, grafit",
+      "textSpace": "górne ~25% kadru — ściana w kolorze szałwii nad lustrem (miejsce na tekst)",
+      "placeholder": true
+    },
+    {
+      "file": "rooms/salon-szalwia-wide.jpg",
+      "type": "aranzacja",
+      "room": "salon-szalwia",
+      "frame": "wide",
+      "title": "Salon ze ścianą w kolorze szałwii — komoda 120 biały mat",
+      "description": "Salon ze ścianą w kolorze szałwii: biała matowa komoda 120 ze złotymi uchwytami i nogami, nad nią lustro w łuku w dębowej ramie, ceramiczna lampa z lnianym abażurem, książki i wazon z gałązkami; obok grafitowa witryna, dębowa podłoga, światło z okna po prawej.",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#767a65",
+        "#5a5857",
+        "#191918",
+        "#aca49b"
+      ],
+      "palette": "szałwia (zgaszona zieleń), biel, złoto, dąb, grafit",
+      "textSpace": "prawa 1/3 kadru — ściana w kolorze szałwii z miękkim światłem (miejsce na tekst)",
+      "placeholder": true
+    },
+    {
+      "file": "rooms/sypialnia-tall.jpg",
+      "type": "aranzacja",
+      "room": "sypialnia",
+      "frame": "tall",
+      "title": "Sypialnia — łóżko 160 tapicerowane kaszmir, szafki nocne czarny mat + dąb",
+      "description": "Spokojna sypialnia: tapicerowane łóżko 160×200 w kolorze kaszmiru z wezgłowiem w pionowe przeszycia, lniana pościel, pled i poduszki dekoracyjne, dwie szafki nocne czarny mat z dębem, ceramiczne lampki, grafika nad łóżkiem, wełniany dywan, światło z okna po lewej.",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#b5ada3",
+        "#988876",
+        "#8c7359",
+        "#cdc8c3"
+      ],
+      "palette": "kaszmir, len, ciepła biel, dąb, czarne akcenty, zgaszona oliwka",
+      "textSpace": "górne ~25% kadru — ściana nad grafiką (miejsce na tekst)",
+      "placeholder": true
+    },
+    {
+      "file": "rooms/sypialnia-wide.jpg",
+      "type": "aranzacja",
+      "room": "sypialnia",
+      "frame": "wide",
+      "title": "Sypialnia — łóżko 160 tapicerowane kaszmir, szafki nocne czarny mat + dąb",
+      "description": "Spokojna sypialnia: tapicerowane łóżko 160×200 w kolorze kaszmiru z wezgłowiem w pionowe przeszycia, lniana pościel, pled i poduszki dekoracyjne, dwie szafki nocne czarny mat z dębem, ceramiczne lampki, grafika nad łóżkiem, wełniany dywan, światło z okna po lewej.",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#b4aca4",
+        "#9c9387",
+        "#d9c5a8",
+        "#8b7359"
+      ],
+      "palette": "kaszmir, len, ciepła biel, dąb, czarne akcenty, zgaszona oliwka",
+      "textSpace": "lewa ~1/3 kadru — jasna ściana i światło z okna (miejsce na tekst)",
+      "placeholder": true
+    },
+    {
+      "file": "sample/biurko-szalwia.webp",
+      "type": "packshot",
+      "title": "Biurko 120 — szałwia, blat dąb",
+      "description": "Biurko 120 — szałwia, blat dąb. Packshot na przezroczystym tle z miękkim cieniem kontaktowym, widok 3/4 z lekkiego nadwidoku. Wykończenie: szałwia, blat dąb naturalny, szczotkowany mosiądz (złoty).",
+      "width": 1600,
+      "height": 1200,
+      "format": "webp (alfa)",
+      "dominantColors": [
+        "#c0c8b8",
+        "#838e78",
+        "#d6b689",
+        "#a6a287"
+      ],
+      "textSpace": "tło przezroczyste — tekst poza obrazem lub na tle strony",
+      "model": {
+        "kind": "desk",
+        "w": 120,
+        "h": 76,
+        "d": 60,
+        "base": "legsWood",
+        "top": 2.5,
+        "pedestal": 40,
+        "columns": [
+          {
+            "w": 1,
+            "cells": [
+              {
+                "t": "drawer",
+                "h": 1
+              },
+              {
+                "t": "drawer",
+                "h": 1
+              },
+              {
+                "t": "drawer",
+                "h": 1.3
+              }
+            ]
+          }
+        ],
+        "handle": "groove",
+        "finish": {
+          "body": "szalwia",
+          "front": "szalwia",
+          "top": "dab-naturalny",
+          "legs": "szalwia",
+          "metal": "zloty"
+        }
+      },
+      "placeholder": true
+    },
+    {
+      "file": "sample/komoda-bialy-mat.webp",
+      "type": "packshot",
+      "title": "Komoda 120 — biały mat, złote uchwyty i nogi",
+      "description": "Komoda 120 — biały mat, złote uchwyty i nogi. Packshot na przezroczystym tle z miękkim cieniem kontaktowym, widok 3/4 z lekkiego nadwidoku. Wykończenie: biały mat, szczotkowany mosiądz (złoty).",
+      "width": 1600,
+      "height": 1200,
+      "format": "webp (alfa)",
+      "dominantColors": [
+        "#e8e8e6",
+        "#c8c6c4",
+        "#baa789",
+        "#a18f77"
+      ],
+      "textSpace": "tło przezroczyste — tekst poza obrazem lub na tle strony",
+      "model": {
+        "kind": "cabinet",
+        "w": 120,
+        "h": 86,
+        "d": 42,
+        "base": "legsMetal",
+        "legH": 14,
+        "columns": [
+          {
+            "w": 1,
+            "cells": [
+              {
+                "t": "door",
+                "h": 1
+              }
+            ]
+          },
+          {
+            "w": 1,
+            "cells": [
+              {
+                "t": "drawer",
+                "h": 1
+              },
+              {
+                "t": "drawer",
+                "h": 1
+              },
+              {
+                "t": "drawer",
+                "h": 1
+              }
+            ]
+          }
+        ],
+        "handle": "bar",
+        "finish": {
+          "body": "bialy-mat",
+          "front": "bialy-mat",
+          "metal": "zloty"
+        }
+      },
+      "placeholder": true
+    },
+    {
+      "file": "sample/lawa-orzech.webp",
+      "type": "packshot",
+      "title": "Ława 110 — orzech, z półką",
+      "description": "Ława 110 — orzech, z półką. Packshot na przezroczystym tle z miękkim cieniem kontaktowym, widok 3/4 z lekkiego nadwidoku. Wykończenie: orzech.",
+      "width": 1600,
+      "height": 1200,
+      "format": "webp (alfa)",
+      "dominantColors": [
+        "#986443",
+        "#47240c",
+        "#774627",
+        "#270700"
+      ],
+      "textSpace": "tło przezroczyste — tekst poza obrazem lub na tle strony",
+      "model": {
+        "kind": "coffeeTable",
+        "w": 110,
+        "h": 42,
+        "d": 60,
+        "base": "legsWood",
+        "top": 3.5,
+        "shelf": true,
+        "finish": {
+          "body": "orzech"
+        }
+      },
+      "placeholder": true
+    },
+    {
+      "file": "sample/lozko-kaszmir.webp",
+      "type": "packshot",
+      "title": "Łóżko 160×200 — tapicerowane, kaszmir, wezgłowie z przeszyciami",
+      "description": "Łóżko 160×200 — tapicerowane, kaszmir, wezgłowie z przeszyciami. Packshot na przezroczystym tle z miękkim cieniem kontaktowym, widok 3/4 z lekkiego nadwidoku. Wykończenie: kaszmir.",
+      "width": 1600,
+      "height": 1200,
+      "format": "webp (alfa)",
+      "dominantColors": [
+        "#e8e7e4",
+        "#dad2c7",
+        "#bcb9b2",
+        "#a99a87"
+      ],
+      "textSpace": "tło przezroczyste — tekst poza obrazem lub na tle strony",
+      "model": {
+        "kind": "bed",
+        "w": 176,
+        "h": 108,
+        "d": 214,
+        "base": "legsWood",
+        "legH": 8,
+        "headboard": "channels",
+        "upholstered": true,
+        "mattress": [
+          160,
+          200
+        ],
+        "throw": "#b9a48c",
+        "finish": {
+          "body": "kaszmir",
+          "front": "kaszmir",
+          "legs": "dab-naturalny",
+          "metal": "czarny"
+        }
+      },
+      "placeholder": true
+    },
+    {
+      "file": "sample/regal-dab-miodowy.webp",
+      "type": "packshot",
+      "title": "Regał 80×190 otwarty — dąb miodowy",
+      "description": "Regał 80×190 otwarty — dąb miodowy. Packshot na przezroczystym tle z miękkim cieniem kontaktowym, widok 3/4 z lekkiego nadwidoku. Wykończenie: dąb miodowy.",
+      "width": 1600,
+      "height": 1200,
+      "format": "webp (alfa)",
+      "dominantColors": [
+        "#8b5419",
+        "#ab7336",
+        "#693701",
+        "#c28b4b"
+      ],
+      "textSpace": "tło przezroczyste — tekst poza obrazem lub na tle strony",
+      "model": {
+        "kind": "cabinet",
+        "w": 80,
+        "h": 190,
+        "d": 35,
+        "base": "plinth",
+        "legH": 6,
+        "columns": [
+          {
+            "w": 1,
+            "cells": [
+              {
+                "t": "open",
+                "h": 1
+              },
+              {
+                "t": "open",
+                "h": 1
+              },
+              {
+                "t": "open",
+                "h": 1
+              },
+              {
+                "t": "open",
+                "h": 1
+              },
+              {
+                "t": "open",
+                "h": 1.1
+              }
+            ]
+          }
+        ],
+        "handle": "push",
+        "finish": {
+          "body": "dab-miodowy",
+          "front": "dab-miodowy"
+        }
+      },
+      "placeholder": true
+    },
+    {
+      "file": "sample/stol-dab-naturalny.webp",
+      "type": "packshot",
+      "title": "Stół 160×90 — dąb naturalny",
+      "description": "Stół 160×90 — dąb naturalny. Packshot na przezroczystym tle z miękkim cieniem kontaktowym, widok 3/4 z lekkiego nadwidoku. Wykończenie: dąb naturalny.",
+      "width": 1600,
+      "height": 1200,
+      "format": "webp (alfa)",
+      "dominantColors": [
+        "#d6b689",
+        "#c39c6a",
+        "#9b7345",
+        "#7b5b34"
+      ],
+      "textSpace": "tło przezroczyste — tekst poza obrazem lub na tle strony",
+      "model": {
+        "kind": "table",
+        "w": 160,
+        "h": 76,
+        "d": 90,
+        "base": "legsWood",
+        "top": 4,
+        "finish": {
+          "body": "dab-naturalny"
+        }
+      },
+      "placeholder": true
+    },
+    {
+      "file": "sample/szafa-bialy-mat.webp",
+      "type": "packshot",
+      "title": "Szafa 150×210 dwudrzwiowa z szufladami — biały mat + dąb",
+      "description": "Szafa 150×210 dwudrzwiowa z szufladami — biały mat + dąb. Packshot na przezroczystym tle z miękkim cieniem kontaktowym, widok 3/4 z lekkiego nadwidoku. Wykończenie: dąb naturalny, fronty biały mat, czarny metal.",
+      "width": 1600,
+      "height": 1200,
+      "format": "webp (alfa)",
+      "dominantColors": [
+        "#e8e8e6",
+        "#9b7343",
+        "#d4b589",
+        "#bbbbb9"
+      ],
+      "textSpace": "tło przezroczyste — tekst poza obrazem lub na tle strony",
+      "model": {
+        "kind": "cabinet",
+        "w": 150,
+        "h": 210,
+        "d": 60,
+        "base": "plinth",
+        "legH": 8,
+        "columns": [
+          {
+            "w": 1,
+            "cells": [
+              {
+                "t": "door",
+                "h": 4.2
+              },
+              {
+                "t": "drawer",
+                "h": 0.75
+              },
+              {
+                "t": "drawer",
+                "h": 0.75
+              }
+            ]
+          },
+          {
+            "w": 1,
+            "cells": [
+              {
+                "t": "door",
+                "h": 4.2
+              },
+              {
+                "t": "drawer",
+                "h": 0.75
+              },
+              {
+                "t": "drawer",
+                "h": 0.75
+              }
+            ]
+          }
+        ],
+        "handle": "bar",
+        "finish": {
+          "body": "dab-naturalny",
+          "front": "bialy-mat",
+          "top": "dab-naturalny",
+          "metal": "czarny"
+        }
+      },
+      "placeholder": true
+    },
+    {
+      "file": "sample/szafka-nocna-czarny-mat.webp",
+      "type": "packshot",
+      "title": "Szafka nocna — czarny mat + dąb",
+      "description": "Szafka nocna — czarny mat + dąb. Packshot na przezroczystym tle z miękkim cieniem kontaktowym, widok 3/4 z lekkiego nadwidoku. Wykończenie: czarny mat, fronty dąb naturalny, blat dąb naturalny, czarny metal.",
+      "width": 1600,
+      "height": 1200,
+      "format": "webp (alfa)",
+      "dominantColors": [
+        "#010101",
+        "#d7b688",
+        "#a57d4c",
+        "#bc9665"
+      ],
+      "textSpace": "tło przezroczyste — tekst poza obrazem lub na tle strony",
+      "model": {
+        "kind": "cabinet",
+        "w": 50,
+        "h": 56,
+        "d": 40,
+        "base": "legsWood",
+        "legH": 15,
+        "columns": [
+          {
+            "w": 1,
+            "cells": [
+              {
+                "t": "drawer",
+                "h": 1
+              },
+              {
+                "t": "open",
+                "h": 1.1
+              }
+            ]
+          }
+        ],
+        "handle": "groove",
+        "finish": {
+          "body": "czarny-mat",
+          "front": "dab-naturalny",
+          "top": "dab-naturalny",
+          "legs": "dab-naturalny",
+          "metal": "czarny"
+        }
+      },
+      "placeholder": true
+    },
+    {
+      "file": "sample/szafka-rtv-dab-naturalny.webp",
+      "type": "packshot",
+      "title": "Szafka RTV 160 — dąb naturalny, czarne nogi metalowe",
+      "description": "Szafka RTV 160 — dąb naturalny, czarne nogi metalowe. Packshot na przezroczystym tle z miękkim cieniem kontaktowym, widok 3/4 z lekkiego nadwidoku. Wykończenie: dąb naturalny, czarny metal.",
+      "width": 1600,
+      "height": 1200,
+      "format": "webp (alfa)",
+      "dominantColors": [
+        "#d5b484",
+        "#9a734c",
+        "#bb976b",
+        "#795738"
+      ],
+      "textSpace": "tło przezroczyste — tekst poza obrazem lub na tle strony",
+      "model": {
+        "kind": "cabinet",
+        "w": 160,
+        "h": 52,
+        "d": 40,
+        "base": "legsMetal",
+        "legH": 12,
+        "columns": [
+          {
+            "w": 1,
+            "cells": [
+              {
+                "t": "door",
+                "h": 1
+              }
+            ]
+          },
+          {
+            "w": 1,
+            "cells": [
+              {
+                "t": "open",
+                "h": 1
+              },
+              {
+                "t": "drawer",
+                "h": 1
+              }
+            ]
+          },
+          {
+            "w": 1,
+            "cells": [
+              {
+                "t": "door",
+                "h": 1
+              }
+            ]
+          }
+        ],
+        "handle": "bar",
+        "finish": {
+          "body": "dab-naturalny",
+          "front": "dab-naturalny",
+          "metal": "czarny"
+        }
+      },
+      "placeholder": true
+    },
+    {
+      "file": "sample/witryna-grafit.webp",
+      "type": "packshot",
+      "title": "Witryna 90×190 — grafit, szkło przydymione",
+      "description": "Witryna 90×190 — grafit, szkło przydymione. Packshot na przezroczystym tle z miękkim cieniem kontaktowym, widok 3/4 z lekkiego nadwidoku. Wykończenie: grafit, czarny metal.",
+      "width": 1600,
+      "height": 1200,
+      "format": "webp (alfa)",
+      "dominantColors": [
+        "#585a5b",
+        "#333536",
+        "#757779",
+        "#0f100d"
+      ],
+      "textSpace": "tło przezroczyste — tekst poza obrazem lub na tle strony",
+      "model": {
+        "kind": "cabinet",
+        "w": 90,
+        "h": 190,
+        "d": 40,
+        "base": "legsMetal",
+        "legH": 10,
+        "columns": [
+          {
+            "w": 1,
+            "cells": [
+              {
+                "t": "doorGlass",
+                "h": 3.4
+              },
+              {
+                "t": "drawer",
+                "h": 0.62
+              },
+              {
+                "t": "drawer",
+                "h": 0.62
+              }
+            ]
+          }
+        ],
+        "handle": "bar",
+        "finish": {
+          "body": "grafit",
+          "front": "grafit",
+          "metal": "czarny"
+        }
+      },
+      "placeholder": true
+    }
+  ],
+  "generated": "2026-10-21"
+}

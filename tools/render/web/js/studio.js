@@ -210,7 +210,7 @@ export async function renderPackshot(engine, job) {
       dome.aim(d, Id, domeCol);
     },
   });
-  const dataURL = engine.output({ exposure: job.exposure ?? 0.9, transparent: true, saturation: 1.0, contrast: 1.03 });
+  const dataURL = engine.output({ exposure: job.exposure ?? 0.9, transparent: true, saturation: 1.0, contrast: 1.04, toe: job.toe ?? 0.012 });
   // sprzątanie
   scene.traverse((o) => { if (o.geometry) o.geometry.dispose(); });
   key.light.shadow.map?.dispose(); dome.light.shadow.map?.dispose();

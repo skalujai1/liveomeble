@@ -382,7 +382,7 @@ export async function renderRoom(engine, job) {
   // ---- światła
   const L = Object.assign({ sunIntensity: 7, skyIntensity: 3.2, bounce: 1, envDiffuse: 0.35, exposure: 1 }, def.light || {});
   const roomBox = shell.box.clone();
-  const sun = new ShadowDirLight(scene, { mapSize: 4096, box: roomBox, casterLayer: L_DAY, bias: -0.0002, normalBias: 0.012, radius: 1.5 });
+  const sun = new ShadowDirLight(scene, { mapSize: job.sunMap || (job.preview ? 2048 : 3072), box: roomBox, casterLayer: L_DAY, bias: -0.0002, normalBias: 0.012, radius: 1.5 });
   const contentBox = new THREE.Box3().setFromObject(content);
   contentBox.min.y = -0.02;
   contentBox.expandByVector(new THREE.Vector3(0.6, 0.05, 0.6));
@@ -446,8 +446,8 @@ export async function renderRoom(engine, job) {
   cols.forEach((c) => avg.add(c));
   avg.multiplyScalar(1 / cols.length);
   const avgLum = Math.max(1e-5, avg.r * 0.2126 + avg.g * 0.7152 + avg.b * 0.0722);
-  const autoExp = (L.autoKey ?? 0.2) / avgLum;
-  const wbS = L.wb ?? 0.55;
+  const autoExp = (L.autoKey ?? 0.225) / avgLum;
+  const wbS = L.wb ?? 0.4;
   let wb = [avg.r, avg.g, avg.b].map((c) => Math.pow(avgLum / Math.max(1e-6, c), wbS));
   const wbl = wb[0] * 0.2126 + wb[1] * 0.7152 + wb[2] * 0.0722;
   wb = wb.map((x) => x / wbl);
@@ -461,7 +461,7 @@ export async function renderRoom(engine, job) {
   engine.computeAO(scene, camera, { ao: { radius: L.aoRadius ?? 0.35, thickness: 1.0, distanceExponent: 1.6, scale: 1.0, samples: 24 } });
   AO.indirectScale.value = L.envDiffuse;
   AO.aoDirect.value = L.aoDirect ?? 0.12;
-  AO.aoIntensity.value = 1;
+  AO.aoIntensity.value = (job.debug && job.debug.noAO) ? 0 : 1;
 
   const ms = await engine.accumulate(scene, camera, {
     samples: N,
@@ -483,7 +483,7 @@ export async function renderRoom(engine, job) {
       if (dbg.bounceDir) { bounce.aim(new THREE.Vector3().fromArray(dbg.bounceDir), 5, new THREE.Color(1, 1, 1)); bounce.light.shadow.intensity = 1; }
     },
   });
-  const post = Object.assign({ exposure: 1, saturation: 0.97, contrast: 1.04, lift: 0.012, vignette: 0.14, warmth: 0.0, wb }, def.post || {}, { exposure: L.exposure * autoExp });
+  const post = Object.assign({ exposure: 1, saturation: 0.98, contrast: 1.07, toe: 0.015, lift: 0.006, vignette: 0.12, warmth: 0.0, wb }, def.post || {}, { exposure: L.exposure * autoExp });
   const dataURL = engine.output(post);
   env1.dispose(); env2.dispose(); mirrorCubes.forEach((c) => c.dispose());
   scene.traverse((o) => { if (o.geometry) o.geometry.dispose(); });

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Packshoty: node tools/render/render.mjs <spec.json|products.json> <out-dir> [--only a,b] [--samples N] [--size 1600x1200] [--png] [--no-manifest] [--variants]
+// Packshoty: node tools/render/render.mjs <spec.json|products.json> <out-dir> [--only a,b] [--samples N] [--size 1600x1200] [--png] [--no-manifest] [--variants] [--manifest-only]
 // spec.json: { "defaults": {...}, "items": [ { "file": "szafka-rtv-dab-naturalny.webp", "title": "...", "model": { model3d } } ] }
 import fs from 'node:fs';
 import path from 'node:path';
@@ -8,7 +8,7 @@ import { updateManifest, describePackshot } from './lib/manifest.mjs';
 
 const args = process.argv.slice(2);
 const flag = (name, def) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : def; };
-const BOOL = ['--png', '--no-manifest', '--variants'];
+const BOOL = ['--png', '--no-manifest', '--variants', '--manifest-only'];
 const [specPath, outDir] = args.filter((a, i) => !a.startsWith('--') && !(i > 0 && args[i - 1].startsWith('--') && !BOOL.includes(args[i - 1])));
 if (!specPath || !outDir) {
   console.error('Użycie: node tools/render/render.mjs <spec.json|products.json> <out-dir> [--only nazwa] [--samples N] [--size 1600x1200] [--png] [--no-manifest] [--variants]');
@@ -46,6 +46,17 @@ function fileName(it) {
   return `${kind}-${m.finish.front || m.finish.body}.webp`;
 }
 
+// --manifest-only: bez renderowania — tylko opisy istniejących plików w manifest.json
+if (args.includes('--manifest-only')) {
+  for (const it of items) {
+    const out = path.resolve(outDir, fileName(it));
+    if (!fs.existsSync(out)) { console.log(`(brak) ${out}`); continue; }
+    const job = Object.assign({ kind: 'packshot' }, defaults, it.render || {}, { spec: it.model });
+    updateManifest([await describePackshot(out, it, job)]);
+    console.log(`manifest ← ${path.basename(out)}`);
+  }
+  process.exit(0);
+}
 const R = await openRenderer();
 const t0 = Date.now();
 const manifest = [];
@@ -63,11 +74,10 @@ try {
     else await saveWebp(res.png, out, 88);
     const kb = Math.round(fs.statSync(args.includes('--png') ? out.replace(/\.webp$/, '.png') : out).size / 1024);
     console.log(`${fmtMs(res.ms)} (${kb} kB)`);
-    if (!args.includes('--png') && !args.includes('--no-manifest')) manifest.push(await describePackshot(out, it, job));
+    if (!args.includes('--png') && !args.includes('--no-manifest')) { const e = await describePackshot(out, it, job); manifest.push(e); updateManifest([e]); }
     done++;
   }
 } finally {
   await R.close();
 }
-if (!args.includes('--no-manifest') && manifest.length) updateManifest(manifest);
 console.log(`Gotowe: ${done} plików w ${fmtMs(Date.now() - t0)}`);

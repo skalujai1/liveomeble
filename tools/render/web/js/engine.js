@@ -43,10 +43,11 @@ uniform sampler2D tAO; uniform vec2 aoRes; uniform float aoIntensity; uniform fl
   reflectedLight.indirectSpecular *= computeSpecularOcclusion( dNV_, ssao, material.roughness );
   float dAO_ = mix( 1.0, ssao, aoDirect );
   reflectedLight.directDiffuse *= dAO_;
-  reflectedLight.directSpecular *= dAO_;
+  reflectedLight.directSpecular *= dAO_ * ${(m.userData.directSpec ?? 1).toFixed(3)};
 }`);
   };
-  m.customProgramCacheKey = () => 'liveo-ao-v1';
+  // directSpec < 1: słabszy odblask świateł punktowych/słońca (szkło: zamiast „kropki” słońca zostaje odbicie otoczenia)
+  m.customProgramCacheKey = () => 'liveo-ao-v1|' + (m.userData.directSpec ?? 1);
   return m;
 }
 
@@ -145,12 +146,12 @@ const postShader = {
   uniforms: {
     tAcc: { value: null }, exposure: { value: 1 }, transparent: { value: 0 }, saturation: { value: 1 },
     contrast: { value: 1 }, lift: { value: 0 }, vignette: { value: 0 }, warmth: { value: 0 }, resolution: { value: new THREE.Vector2() },
-    highlightRoll: { value: 0 }, wb: { value: new THREE.Vector3(1, 1, 1) },
+    highlightRoll: { value: 0 }, wb: { value: new THREE.Vector3(1, 1, 1) }, toe: { value: 0 },
   },
   vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }',
   fragmentShader: /* glsl */`precision highp float;
     varying vec2 vUv;
-    uniform sampler2D tAcc; uniform float exposure, transparent, saturation, contrast, lift, vignette, warmth, highlightRoll; uniform vec2 resolution; uniform vec3 wb;
+    uniform sampler2D tAcc; uniform float exposure, transparent, saturation, contrast, lift, vignette, warmth, highlightRoll, toe; uniform vec2 resolution; uniform vec3 wb;
     vec3 RRTAndODTFit( vec3 v ) { vec3 a = v * ( v + 0.0245786 ) - 0.000090537; vec3 b = v * ( 0.983729 * v + 0.4329510 ) + 0.238081; return a / b; }
     vec3 aces( vec3 color ) {
       const mat3 ACESInputMat = mat3( vec3( 0.59719, 0.07600, 0.02840 ), vec3( 0.35458, 0.90834, 0.13383 ), vec3( 0.04823, 0.01566, 0.83777 ) );
@@ -169,10 +170,14 @@ const postShader = {
       c = c / ( 1.0 + highlightRoll * max( max( c.r, c.g ), c.b ) * 0.0 );
       c *= wb * vec3( 1.0 + warmth, 1.0, 1.0 - warmth );
       c = aces( c );
+      // „stopka” filmu: podniesienie najgłębszych cieni (ACES zgniata ciemne wykończenia — grafit, czarny mat — do czerni);
+      // czerń absolutna zostaje czarna, średnie tony prawie bez zmian
+      c += toe * ( 1.0 - exp( -c / 0.01 ) ) * pow( 1.0 - clamp( c, 0.0, 1.0 ), vec3( 3.0 ) );
       float l = dot( c, vec3( 0.2126, 0.7152, 0.0722 ) );
       c = mix( vec3( l ), c, saturation );
-      c = clamp( ( c - 0.5 ) * contrast + 0.5, 0.0, 1.0 );
-      c = srgb( c );
+      c = srgb( clamp( c, 0.0, 1.0 ) );
+      // kontrast jako krzywa S w przestrzeni sRGB (0 → 0, 1 → 1) — bez obcinania cieni do czerni
+      c = mix( c, c * c * ( 3.0 - 2.0 * c ), clamp( ( contrast - 1.0 ) * 2.0, 0.0, 1.0 ) );
       c = lift + ( 1.0 - lift ) * c;
       if ( vignette > 0.0 ) {
         vec2 q = vUv - 0.5; q.x *= resolution.x / resolution.y;
@@ -311,6 +316,7 @@ export class Engine {
     u.lift.value = post.lift ?? 0;
     u.vignette.value = post.vignette ?? 0;
     u.warmth.value = post.warmth ?? 0;
+    u.toe.value = post.toe ?? 0;
     if (post.wb) u.wb.value.set(post.wb[0], post.wb[1], post.wb[2]); else u.wb.value.set(1, 1, 1);
     u.resolution.value.set(W, H);
     this.quad.material = this.postMat;

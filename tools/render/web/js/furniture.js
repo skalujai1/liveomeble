@@ -115,8 +115,8 @@ function addFront(c, rect, kind, zFace, opts = {}) {
     c.slab(fw, fh, FT, finish, fx, fy, zFace - FT / 2, { grain, radius: 0.0022 });
   }
   if (groove) {
-    // dno frezu: materiał korpusu (w cieniu frezu ciemnieje sam dzięki AO/cieniom)
-    const dark = c.mat(c.F.body);
+    // dno frezu: przyciemniony kolor korpusu (wnętrze frezu jest w cieniu — sam AO tego nie oddaje)
+    const dark = plainMaterial('#' + new THREE.Color((FINISHES[c.F.body] || {}).color || '#808080').multiplyScalar(0.42).getHexString(), 0.85);
     if (kind === 'door') {
       const gx = opts.hinge === 'right' ? cx - w / 2 + gs / 2 : cx + w / 2 - gs / 2;
       c.slab(gs - 0.002, h, 0.004, null, gx, cy, zFace - FT + 0.004, { material: dark });
@@ -398,13 +398,18 @@ function buildBed(c, s) {
   // poduszki
   const pillowHex = s.pillow || '#eeeae3';
   const pn = mw >= 1.35 ? 2 : 1;
+  // poduszki oparte o wezgłowie: pochylenie dobrane tak, by nie wystawały ponad wezgłowie (niskie wezgłowia)
+  const pExt = THREE.MathUtils.clamp(H - 0.06 - mTop + 0.04, 0.24, 0.52);
+  const pAng = Math.asin(THREE.MathUtils.clamp((pExt - 0.06) / 0.5, 0.25, 0.925));
+  const pY = mTop - 0.04 + pExt / 2;
+  const pZ = zHead + hbT + (0.5 * Math.cos(pAng) + 0.16 * Math.sin(pAng)) / 2 - 0.025;
   for (let i = 0; i < pn; i++) {
     const pw = Math.min(0.7, (mw - 0.06) / pn - 0.02);
     const geo = pillowGeometry(pw, 0.16, 0.5, { seed: 10 + i, wrinkle: 0.006 });
     const p = new THREE.Mesh(geo, fabricMaterial(pillowHex, 'linen', { repeat: 12 }));
     const px = pn === 1 ? 0 : (i - 0.5) * (pw + 0.03);
-    p.position.set(px, mTop + 0.22, zHead + hbT + 0.14);
-    p.rotation.set(-1.18, (i - 0.5) * 0.05, (i - 0.5) * 0.03);
+    p.position.set(px, pY, pZ);
+    p.rotation.set(-pAng, (i - 0.5) * 0.05, (i - 0.5) * 0.03);
     p.castShadow = p.receiveShadow = true;
     c.group.add(p);
   }
@@ -415,8 +420,9 @@ function buildBed(c, s) {
       const kind = i % 2 ? 'linen' : 'boucle';
       const p = new THREE.Mesh(geo, fabricMaterial(hex, kind, { repeat: 10 }));
       const px = (i - (arr.length - 1) / 2) * 0.42;
-      p.position.set(px, mTop + 0.2, zHead + hbT + 0.33);
-      p.rotation.set(-1.05, (i - (arr.length - 1) / 2) * 0.12, (i - (arr.length - 1) / 2) * -0.05);
+      const cAng = Math.min(1.05, pAng * 0.95);
+      p.position.set(px, mTop - 0.03 + (0.46 * Math.sin(cAng) + 0.14 * Math.cos(cAng)) / 2, pZ + 0.19);
+      p.rotation.set(-cAng, (i - (arr.length - 1) / 2) * 0.12, (i - (arr.length - 1) / 2) * -0.05);
       p.castShadow = p.receiveShadow = true;
       c.group.add(p);
     });

@@ -75,6 +75,7 @@ export function glassMaterial(tint = '#8a8d8f') {
       transparent: true, opacity: 0.32, specularIntensity: 1, ior: 1.5, envMapIntensity: 1.4, depthWrite: false,
     });
     m.userData.glass = true;
+    m.userData.directSpec = 0.03;
     return m;
   });
 }
