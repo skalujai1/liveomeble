@@ -1,0 +1,32 @@
+# Strona Liveo — testy danych i build z kontrolą dist/ (JSON-LD, FAQ, nagłówki, linki, sitemap).
+# Bez wdrożenia: hosting wybierzemy osobno (docs/navireo-integracja.md).
+name: Strona – build i kontrola
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalacja
+        run: npm ci
+
+      - name: Testy danych
+        run: npm test
+
+      - name: Build + kontrola dist/
+        run: npm run build

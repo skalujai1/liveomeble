@@ -63,7 +63,8 @@ function setupFinder(root: HTMLElement) {
   let all: Store[] = [];
   let shown = 0;
 
-  if (geoWrap && 'geolocation' in navigator) geoWrap.hidden = false;
+  // Przycisk jest widoczny od razu (bez przesunięcia układu); bez JS ukrywa go CSS (.no-js), bez API — tutaj.
+  if (geoWrap && !('geolocation' in navigator)) geoWrap.hidden = true;
   const warm = () => { loadData().catch(() => {}); };
   form.addEventListener('focusin', warm, { once: true });
   form.addEventListener('pointerenter', warm, { once: true });

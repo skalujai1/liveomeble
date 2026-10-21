@@ -94,7 +94,7 @@ Porównuj zawsze **wymiary zewnętrzne** mebla, a nie wnętrza. Doliczaj element
 
 Rodzaj drzwi decyduje o tym, ile miejsca potrzebujesz przed szafą.
 
-| | Drzwi uchylne | Drzwi przesuwne |
+| Cecha | Drzwi uchylne | Drzwi przesuwne |
 |---|---|---|
 | Miejsce przed szafą | szerokość skrzydła i miejsce, żeby stanąć | wystarczy przejście |
 | Dostęp do wnętrza | całe wnętrze naraz | część wnętrza naraz, druga za drzwiami |

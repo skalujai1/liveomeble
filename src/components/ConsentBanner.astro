@@ -17,7 +17,7 @@ const categories = [
 {enabled && (
   <>
     {CONSENT_SCRIPTS.map(s => <script type="text/plain" is:inline data-consent={s.category} data-src={s.src}></script>)}
-    <section class="consent" aria-labelledby="zgody-tytul" data-consent-banner hidden>
+    <aside class="consent" aria-labelledby="zgody-tytul" data-consent-banner hidden>
       <h2 class="consent__title" id="zgody-tytul">{c.title}</h2>
       <p class="consent__text"><Rich text={c.text} /> <a href="/polityka-prywatnosci/">{c.link}</a></p>
       <form class="consent__settings" data-consent-settings hidden>
@@ -35,7 +35,7 @@ const categories = [
         <button class="btn btn--secondary" type="button" data-consent-reject>{c.reject}</button>
         <button class="btn btn--text" type="button" data-consent-open-settings>{c.settings}</button>
       </p>
-    </section>
+    </aside>
     <script>
       import { initConsent } from '../scripts/consent';
       initConsent();

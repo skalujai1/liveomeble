@@ -18,7 +18,7 @@ const boot = {
   config: cfg,
 };
 ---
-<button class="assistant-launcher" type="button" data-open-assistant="launcher" aria-label="Otwórz doradcę wnętrz" hidden>
+<button class="assistant-launcher" type="button" data-open-assistant="launcher" aria-haspopup="dialog" hidden>
   <span class="assistant-launcher__label">Doradca wnętrz</span>
 </button>
 <script type="application/json" is:inline data-assistant-boot set:html={JSON.stringify(boot).replace(/</g, '\\u003c')} />

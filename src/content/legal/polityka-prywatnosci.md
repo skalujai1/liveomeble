@@ -66,8 +66,6 @@ Dane sklepów partnerskich widoczne w wyszukiwarce publikujemy za ich zgodą [do
 
 Zamówienia złożone w strefie partnera przekazujemy do naszego systemu ERP (Navireo) [do uzupełnienia: kto hostuje i obsługuje system].
 
-<a id="doradca-wnetrz"></a>
-
 ### Doradca wnętrz (czat AI)
 
 Doradca wnętrz to asystent oparty na sztucznej inteligencji. Działa w dwóch częściach:

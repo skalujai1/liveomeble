@@ -36,6 +36,17 @@ export function keyTakeawayClass() {
   };
 }
 
+const childEls = (n, tag) => (n?.children || []).filter(c => c.type === 'element' && (!tag || c.tagName === tag));
+
+/** Etykieta regionu z nagłówków kolumn (unikalna na stronie): „Tabela: Na nóżkach, Na cokole, Wisząca”. */
+function tableLabel(table, ctx) {
+  const head = childEls(table, 'thead')[0] ?? table;
+  const row = childEls(head, 'tr')[0];
+  const cells = childEls(row).map(c => ctx.textContent(c).trim()).filter(Boolean);
+  const cols = cells.length > 1 ? cells.slice(1) : cells;
+  return cols.length ? `Tabela: ${cols.join(', ')}` : 'Tabela';
+}
+
 /** Tabele w przewijanym kontenerze — szerokie tabele nie rozpychają strony na telefonie. */
 export function scrollableTables() {
   return {
@@ -48,7 +59,7 @@ export function scrollableTables() {
         ctx.wrapNode(node, {
           type: 'element',
           tagName: 'div',
-          properties: { className: ['table-scroll'], tabIndex: 0, role: 'region', ariaLabel: 'Tabela — przewiń w poziomie' },
+          properties: { className: ['table-scroll'], tabIndex: 0, role: 'region', ariaLabel: tableLabel(node, ctx) },
           children: [],
         });
       },

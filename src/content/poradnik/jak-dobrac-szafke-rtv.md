@@ -82,7 +82,7 @@ Przykład: ekran 65 cali ma ok. 81 cm wysokości. Szafka ma 50 cm, a dolna kraw�
 
 Wybór zależy od tego, gdzie będzie telewizor i jak wygląda Twój salon.
 
-| | Na nóżkach | Na cokole | Wisząca |
+| Cecha | Na nóżkach | Na cokole | Wisząca |
 |---|---|---|---|
 | Wygląd | lekka, widać podłogę | zwarta, spokojna bryła | najlżejsza, cała podłoga wolna |
 | Sprzątanie | odkurzasz pod spodem | kurz nie wpada pod szafkę | podłoga całkiem wolna |

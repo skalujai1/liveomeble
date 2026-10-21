@@ -133,7 +133,8 @@ function setupForm(form: HTMLFormElement) {
     }
     delete data.fax_number;
     if (!endpoint) {
-      showResult(true, m.demo, t.success.title);
+      // Wersja demonstracyjna: dane poprawne, ale nic nie wysyłamy — tytuł nie może mówić „wysłana”.
+      showResult(true, m.demo, 'Dane są poprawne (DEMO)');
       return;
     }
     const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
