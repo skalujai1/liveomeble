@@ -1,0 +1,154 @@
+---
+// Sekcje tekstowe z plików treści (src/content/pages/*.json) według pola `type`:
+// intro, text, features, steps, band, feature, facts, explainer, rules, two-lists, routing, contact-details, company, links.
+// Sekcje z danymi (kolekcje, meble, sklepy, formularze) renderują strony.
+import Section from './Section.astro';
+import Rich from './Rich.astro';
+import AssistantButton from './AssistantButton.astro';
+
+interface Props { s: any; headingId?: string }
+const { s } = Astro.props;
+const ctas: any[] = Array.isArray(s.cta) ? s.cta : s.cta ? [s.cta] : [];
+const isBand = s.type === 'band' || s.type === 'feature';
+---
+{s.type === 'intro' ? (
+  <div class="page-intro container" id={s.id}>
+    <p class="page-intro__lead"><Rich text={s.lead} /></p>
+  </div>
+) : s.type === 'links' && !(s.items?.length) ? null : (
+  <Section id={s.id} title={s.title} lead={s.lead} class={`section--${s.type}`} width={['text', 'rules', 'company', 'contact-details'].includes(s.type) ? 'narrow' : 'wide'}>
+    {s.type === 'text' && (
+      <div class="prose">
+        {s.text && <p><Rich text={s.text} /></p>}
+        {s.items?.map((it: any) => (
+          <div class="prose__item">
+            <h3><Rich text={it.title} /></h3>
+            <p><Rich text={it.text} /></p>
+          </div>
+        ))}
+        {s.link && <p><a href={s.link.href}>{s.link.label}</a></p>}
+      </div>
+    )}
+
+    {(s.type === 'features' || s.type === 'routing') && (
+      <ul class:list={['feature-list', { 'feature-list--routing': s.type === 'routing' }]}>
+        {s.items.map((it: any) => (
+          <li class="feature-list__item">
+            <h3 class="feature-list__title"><Rich text={it.title} /></h3>
+            <p class="feature-list__text"><Rich text={it.text} /></p>
+            {it.link && <p class="feature-list__link"><a href={it.link.href}>{it.link.label}</a></p>}
+            {it.cta && <p class="feature-list__link"><a class="btn btn--secondary" href={it.cta.href}>{it.cta.label}</a></p>}
+          </li>
+        ))}
+      </ul>
+    )}
+
+    {s.type === 'steps' && (
+      <ol class="steps">
+        {s.items.map((it: any) => (
+          <li class="steps__item">
+            <h3 class="steps__title"><Rich text={it.title} /></h3>
+            <p class="steps__text"><Rich text={it.text} /></p>
+          </li>
+        ))}
+      </ol>
+    )}
+
+    {isBand && (
+      <div class="band">
+        {s.text && <p class="band__text"><Rich text={s.text} /></p>}
+        {s.note && <p class="band__note"><Rich text={s.note} /></p>}
+      </div>
+    )}
+
+    {s.type === 'facts' && (
+      <dl class="facts">
+        {s.items.map((it: any) => (
+          <div class="facts__row">
+            <dt>{it.label}</dt>
+            <dd><Rich text={it.value} /></dd>
+          </div>
+        ))}
+      </dl>
+    )}
+
+    {s.type === 'company' && (
+      <dl class="facts facts--company">
+        {s.items.map((it: any) => (
+          <div class="facts__row">
+            <dt>{it.label}</dt>
+            <dd><Rich text={it.value} /></dd>
+          </div>
+        ))}
+      </dl>
+    )}
+
+    {s.type === 'contact-details' && (
+      <>
+        <dl class="facts facts--contact">
+          {s.items.map((it: any) => (
+            <div class="facts__row">
+              <dt>{it.label}</dt>
+              <dd><Rich text={it.value} /></dd>
+            </div>
+          ))}
+        </dl>
+        {s.note && <p class="section__note"><Rich text={s.note} /></p>}
+        {s.company && <p class="section__note"><Rich text={s.company} /></p>}
+      </>
+    )}
+
+    {s.type === 'explainer' && (
+      <>
+        <dl class="explainer">
+          {s.items.map((it: any) => (
+            <div class="explainer__row">
+              <dt class="explainer__term">{it.term}</dt>
+              <dd class="explainer__text"><Rich text={it.text} /></dd>
+            </div>
+          ))}
+        </dl>
+        {s.example && (
+          <div class="explainer__example">
+            <h3>{s.example.title}</h3>
+            <p><Rich text={s.example.text} /></p>
+          </div>
+        )}
+      </>
+    )}
+
+    {s.type === 'rules' && (
+      <ul class="rules">
+        {s.items.map((it: string) => <li><Rich text={it} /></li>)}
+      </ul>
+    )}
+
+    {s.type === 'two-lists' && (
+      <>
+        <div class="two-lists">
+          {[s.can, s.cannot].map((l: any, i: number) => (
+            <div class:list={['two-lists__col', i ? 'two-lists__col--no' : 'two-lists__col--yes']}>
+              <h3>{l.title}</h3>
+              <ul>{l.items.map((x: string) => <li><Rich text={x} /></li>)}</ul>
+            </div>
+          ))}
+        </div>
+        {s.note && <p class="section__note"><Rich text={s.note} /></p>}
+      </>
+    )}
+
+    {s.type === 'links' && (
+      <ul class="link-list">{s.items.map((it: any) => <li><a href={it.href}>{it.label}</a></li>)}</ul>
+    )}
+
+    {ctas.length > 0 && (
+      <p class="cta-row">
+        {ctas.map((c: any, i: number) =>
+          c.action
+            ? <AssistantButton mode={c.action === 'open-assistant-chat' ? 'chat' : 'photo'} variant={c.variant ?? (i ? 'secondary' : 'primary')}>{c.label}</AssistantButton>
+            : <a class:list={['btn', `btn--${c.variant ?? (isBand || i ? 'secondary' : 'primary')}`]} href={c.href}>{c.label}</a>,
+        )}
+      </p>
+    )}
+  </Section>
+)}

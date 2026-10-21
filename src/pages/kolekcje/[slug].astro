@@ -1,0 +1,136 @@
+---
+// Kolekcja — docs/ia.md 3.3, szablon: src/content/pages/kolekcje.json → template
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import ProductGrid from '../../components/ProductGrid.astro';
+import CollectionCard from '../../components/CollectionCard.astro';
+import StoreFinder from '../../components/StoreFinder.astro';
+import Faq from '../../components/Faq.astro';
+import Rich from '../../components/Rich.astro';
+import { collectionImage } from '../../lib/images';
+import { faqPage, itemList, webPage } from '../../lib/jsonld';
+import {
+  baseLabel, collections, finishById, finishLabels, finishLabelsSentence, handleLabel, pages, productCount,
+  productsByCollection, roomBySlug, rooms, roomsList, styleOf, typePluralList, types, url, type Collection, type Product,
+} from '../../lib/site';
+import { fill, truncateSentence } from '../../lib/text';
+
+export function getStaticPaths() {
+  return collections.map(c => ({ params: { slug: c.slug }, props: { c } }));
+}
+interface Props { c: Collection }
+const { c } = Astro.props;
+const tpl = pages.kolekcje.template;
+const sec = (id: string) => tpl.sections.find(s => s.id === id) as any;
+const path = url.collection(c.slug);
+const style = styleOf(c);
+const heroRoom = roomBySlug.get(c.heroRoom)!;
+const list = productsByCollection(c.slug);
+const vars = {
+  name: c.name, slug: c.slug, tagline: c.tagline, description: c.description, styleIn: style.in, styleLabel: style.label,
+  roomsList: roomsList(c.rooms), finishLabels: finishLabelsSentence(c), heroRoomLocative: heroRoom.locative,
+  finishLabel: c.finishes[0].label.toLocaleLowerCase('pl'), handleLabel: handleLabel(c), baseLabel: baseLabel(c),
+  typePluralList: typePluralList([...new Set(list.map(p => p.type))]),
+};
+let title = fill(tpl.seo.title, vars);
+if (title.length > 60) title = fill(tpl.seo.titleFallback, vars);
+const description = truncateSentence(fill(tpl.seo.description, vars), 155);
+const h1 = fill(tpl.h1, vars);
+
+// Meble pogrupowane po pomieszczeniach (każdy mebel raz — w pierwszym swoim pomieszczeniu z kolekcji).
+const groups = rooms
+  .filter(r => c.rooms.includes(r.slug))
+  .map(r => ({ room: r, items: [] as Product[] }));
+for (const p of list) {
+  const g = groups.find(x => p.rooms.includes(x.room.slug)) ?? groups[0];
+  g.items.push(p);
+}
+const typeLinks = types.filter(t => list.some(p => p.type === t.id));
+
+// Podobne: wspólne pomieszczenia (+1 za każde) i ten sam styl (+2), maks. 3.
+const similar = collections
+  .filter(x => x.slug !== c.slug)
+  .map(x => ({ x, score: x.rooms.filter(r => c.rooms.includes(r)).length + (x.style === c.style ? 2 : 0) }))
+  .filter(o => o.score > 0)
+  .sort((a, b) => b.score - a.score || a.x.order - b.x.order)
+  .slice(0, 3)
+  .map(o => o.x);
+
+const faq = tpl.faq.items.map(it => ({ q: fill(it.q, vars), a: fill(it.a, vars) }));
+const img = collectionImage(c);
+const heroAlt = img?.approximate && img.title ? `Aranżacja poglądowa: ${img.title}` : fill(sec('hero').image.alt, vars);
+const swatch = (id?: string) => (id ? finishById.get(id)?.hex : undefined);
+---
+<BaseLayout
+  {title}
+  {description}
+  {path}
+  pageClass="page-collection"
+  breadcrumbs={[{ name: 'Kolekcje', url: url.collections }, { name: c.name, url: path }]}
+  jsonLd={[
+    webPage('CollectionPage', { path, title, description, hasBreadcrumb: true }),
+    itemList(path, list.map(p => ({ url: url.product(p.slug), name: p.name })), h1),
+    faqPage(path, faq),
+  ]}
+>
+  <PageHeader {h1} lead={c.tagline} image={img} imageAlt={heroAlt} placeholderLabel={h1} ctas={[{ label: 'Gdzie kupić', href: '#gdzie-kupic' }, { label: 'Meble w kolekcji', href: '#meble', variant: 'secondary' }]} />
+
+  <Section id="opis" title={fill(sec('opis').title, vars)} width="narrow">
+    <div class="prose"><p><Rich text={c.description} /></p></div>
+  </Section>
+
+  <Section id="meble" title={fill(sec('meble').title, vars)} lead={`W kolekcji: ${productCount(list.length)}.`}>
+    {groups.filter(g => g.items.length).map(g => (
+      <div class="room-group">
+        <h3 class="room-group__title">{g.room.name}</h3>
+        <ProductGrid products={g.items} headingLevel={4} />
+        <p class="section__more"><a href={url.room(g.room.slug)}>Wszystkie meble do pomieszczenia: {g.room.name}</a></p>
+      </div>
+    ))}
+    <p class="section__note">Rodzaje mebli w kolekcji {c.name}:</p>
+    <ul class="link-list">{typeLinks.map(t => <li><a href={url.category(t.slug)}>{t.plural}</a></li>)}</ul>
+  </Section>
+
+  <Section id="kolory" title={fill(sec('kolory').title, vars)} lead={sec('kolory').lead}>
+    <ul class="swatches">
+      {c.finishes.map(f => {
+        const a = swatch(f.front) ?? '#ccc';
+        const b = swatch((f as { top?: string }).top ?? f.body) ?? a;
+        return (
+          <li class="swatches__item">
+            <span class="swatches__chip swatches__chip--split" style={`--swatch: ${a}; --swatch-2: ${b}`} aria-hidden="true"></span>
+            <span>{fill(sec('kolory').item, { label: f.label })}</span>
+          </li>
+        );
+      })}
+    </ul>
+  </Section>
+
+  <Section id="szczegoly" title={sec('szczegoly').title} width="narrow">
+    <dl class="facts">
+      {sec('szczegoly').items.map((it: any) => (
+        <div class="facts__row"><dt>{it.label}</dt><dd>{fill(it.value, vars)}</dd></div>
+      ))}
+    </dl>
+  </Section>
+
+  <Section id="gdzie-kupic" title={fill(sec('gdzie-kupic').title, vars)} lead={sec('gdzie-kupic').lead}>
+    <StoreFinder id="sklepy-kolekcja" presetCollection={c.slug} limit={3} more={{ label: 'Więcej sklepów z tą kolekcją', href: url.stores(c.slug) }} />
+  </Section>
+
+  {similar.length > 0 && (
+    <Section id="podobne" title={sec('podobne').title}>
+      <ul class="card-grid card-grid--collections">
+        {similar.map(x => <CollectionCard collection={x} />)}
+      </ul>
+    </Section>
+  )}
+
+  <Section id="doradca" title="Nie wiesz, który kolor wybrać?" class="section--band">
+    <div class="band"><p class="band__text">Wyślij zdjęcie pokoju — doradca wnętrz podpowie kolor kolekcji {c.name} pasujący do podłogi i ścian.</p></div>
+    <p class="cta-row"><a class="btn btn--secondary" href={url.advisor}>Doradca wnętrz</a></p>
+  </Section>
+
+  <Faq title={fill(tpl.faq.title, vars)} items={faq} />
+</BaseLayout>

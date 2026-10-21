@@ -1,0 +1,210 @@
+---
+// Mebel — docs/ia.md 3.7, szablon: src/content/pages/produkt.json
+import { getImage } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import Media from '../../components/Media.astro';
+import PriceBlock from '../../components/PriceBlock.astro';
+import PriceData from '../../components/PriceData.astro';
+import ProductGrid from '../../components/ProductGrid.astro';
+import StoreFinder from '../../components/StoreFinder.astro';
+import FurnitureDrawing from '../../components/FurnitureDrawing.astro';
+import ContentSection from '../../components/ContentSection.astro';
+import Faq from '../../components/Faq.astro';
+import Rich from '../../components/Rich.astro';
+import { packshotFor } from '../../lib/images';
+import { abs, faqPage, productLd, webPage, type VariantLd } from '../../lib/jsonld';
+import {
+  collectionOf, defaultVariant, dimsLong, finishById, pages, priceAt, products, productsSorted, site, stockText, typeOf, url,
+  type Product,
+} from '../../lib/site';
+import { fill, firstSentence, listJoin, lowerFirst, promoLastDay } from '../../lib/text';
+
+export function getStaticPaths() {
+  return products.map(p => ({ params: { slug: p.slug }, props: { p } }));
+}
+interface Props { p: Product }
+const { p } = Astro.props;
+const tpl = pages.produkt;
+const sec = (id: string) => tpl.sections.find(s => s.id === id) as any;
+const c = collectionOf(p);
+const t = typeOf(p);
+const path = url.product(p.slug);
+const dv = defaultVariant(p);
+const colorLabels = listJoin(p.variants.map(v => lowerFirst(v.colorLabel)));
+
+// Komplet: ta sama kolekcja i kod koloru, wspólne pomieszczenie; maks. 6, bez bieżącego.
+const komplet = productsSorted
+  .filter(x => x.collection === p.collection && x.id !== p.id && x.rooms.some(r => p.rooms.includes(r)) && x.variants.some(v => v.code === dv.code))
+  .slice(0, 6);
+const siblingTypes = [...new Set(komplet.map(x => lowerFirst(typeOf(x).name)))];
+
+const vars = {
+  name: p.name, colorLabel: dv.colorLabel, collectionName: c.name, collection: c.slug, dimsLong: dimsLong(p),
+  w: p.dims.w, h: p.dims.h, d: p.dims.d, weightKg: p.weightKg, assembly: p.assembly, colorLabels,
+  siblingTypesList: listJoin(siblingTypes), description: p.description,
+};
+
+// <title>: „{name} — {kolor} | Liveo” → za długi: „{name} — wymiary, kolory, cena | Liveo” → „{name} | Liveo”.
+let title = fill(tpl.seo.title, vars);
+if (title.length > 60) title = fill(tpl.seo.titleLong, vars);
+if (title.length > 60) title = `${p.name}${site.brand.titleSuffix}`;
+// description: nazwa + wymiary, pierwsze zdanie opisu, kolory — przycinane całymi zdaniami do 155 znaków.
+const descParts = [`${p.name}: ${dimsLong(p)}.`, firstSentence(p.description), `Kolory: ${p.variants.map(v => v.colorLabel).join(', ')}.`];
+let description = descParts.join(' ');
+if (description.length > tpl.seo.descriptionMax) description = descParts.slice(0, 2).join(' ');
+if (description.length > tpl.seo.descriptionMax) description = descParts[0];
+
+const faq = tpl.faq.items
+  .filter(it => !('showIf' in it) || p.assembly === 'do samodzielnego montażu')
+  .filter(it => !it.a.includes('{siblingTypesList}') || siblingTypes.length > 0)
+  .map(it => ({ q: fill(it.q, vars), a: fill(it.a, vars) }));
+
+// Obrazy wariantów (packshot albo placeholder z rysunkiem).
+const variants = await Promise.all(
+  p.variants.map(async v => {
+    const img = packshotFor(p, v);
+    const own = img && !img.approximate ? img : null;
+    const ldImage = own ? (await getImage({ src: own.src, format: 'webp', width: Math.min(1200, own.src.width) })).src : undefined;
+    const alt = img?.approximate && img.title
+      ? `Zdjęcie poglądowe tego rodzaju mebla: ${img.title}`
+      : fill(sec('galeria').imageAlt[0], { name: p.name, colorLabel: v.colorLabel.toLocaleLowerCase('pl') });
+    const f = v.finish as Record<string, string | undefined>;
+    return { v, img, alt, ldImage, c1: finishById.get(f.front ?? f.body ?? '')?.hex ?? '#ccc', c2: finishById.get(f.top ?? f.body ?? '')?.hex ?? '#ccc' };
+  }),
+);
+const ogImage = variants.find(x => x.v.code === dv.code)?.ldImage ?? null;
+
+const ld: VariantLd[] = variants.map(({ v, ldImage }) => {
+  const pr = priceAt(p, v.code);
+  return {
+    code: v.code, sku: v.sku, color: v.colorLabel, url: url.product(p.slug, v.code), image: ldImage,
+    offer: { price: pr.price, regular: pr.regular, validUntil: promoLastDay(pr.promo?.endsAt), stock: v.stock, url: url.product(p.slug, v.code) },
+  };
+});
+const summary = sec('podsumowanie');
+const dimsSec = sec('wymiary');
+const shop = sec('gdzie-kupic');
+const kompletSec = sec('komplet');
+---
+<BaseLayout
+  {title}
+  {description}
+  {path}
+  pageClass="page-product"
+  ogType="product"
+  {ogImage}
+  ogImageAlt={variants[0].alt}
+  breadcrumbs={[{ name: 'Meble', url: url.products }, { name: t.plural, url: url.category(t.slug) }, { name: p.name, url: path }]}
+  jsonLd={[
+    webPage('ItemPage', { path, title, description, hasBreadcrumb: true, extra: { mainEntity: { '@id': `${abs(path)}#product` } } }),
+    productLd({ path, name: p.name, description: p.description, sku: p.sku, category: t.plural, dims: p.dims, weightKg: p.weightKg, variants: ld }),
+    faqPage(path, faq),
+  ]}
+>
+  <article class="product container" data-product-page data-default-variant={dv.code}>
+    <header class="product__head">
+      <p class="summary__collection"><a href={url.collection(c.slug)}>{fill(summary.collectionLink, vars)}</a></p>
+      <h1 class="summary__title">{p.name}</h1>
+      <p class="summary__dims">{dimsLong(p)}</p>
+    </header>
+
+    <section class="product__gallery gallery" id="galeria" aria-label={fill(sec('galeria').ariaLabel, vars)}>
+      {variants.map(({ v, img, alt }, i) => (
+        <figure class:list={['gallery__item', { 'is-active': v.code === dv.code }]} data-gallery-item data-variant={v.code}>
+          <Media
+            image={img}
+            alt={alt}
+            widths={[480, 720, 960, 1280]}
+            sizes="(min-width: 64rem) 55vw, 100vw"
+            ratio="4 / 3"
+            fit="contain"
+            priority={v.code === dv.code}
+            placeholderLabel={t.name}
+            model={{ ...p.model3d, finish: v.finish }}
+          />
+          <figcaption class="gallery__caption">{v.colorLabel}</figcaption>
+        </figure>
+      ))}
+      <p class="gallery__disclaimer">{sec('galeria').colorDisclaimer}</p>
+    </section>
+
+    <div class="product__summary summary">
+      <fieldset class="variants" data-variant-picker>
+        <legend class="variants__legend">
+          <span class="visually-hidden">{summary.colorGroupLabel}. </span>
+          <span data-color-title data-template={summary.colorTitle}>{fill(summary.colorTitle, vars)}</span>
+        </legend>
+        <ul class="variants__list">
+          {variants.map(({ v, c1, c2 }) => (
+            <li>
+              <label class="variant">
+                <input type="radio" name="kolor" value={v.code} checked={v.code === dv.code} data-label={v.colorLabel} />
+                <span class="variant__chip" style={`--c1: ${c1}; --c2: ${c2}`} aria-hidden="true"></span>
+                <span class="variant__text">
+                  <span>{v.stock === 'wyprzedany' ? fill(summary.colorUnavailable, { colorLabel: v.colorLabel }) : v.colorLabel}</span>
+                  <span class="variant__meta">{stockText(v)}</span>
+                </span>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </fieldset>
+
+      <PriceBlock product={p} code={dv.code} size="full" />
+      <p class="stock" data-stock={dv.stock} data-product={p.sku} data-variant={dv.code}>
+        <span data-stock-text>{stockText(dv)}</span>
+      </p>
+      <p class="summary__assembly">{fill(summary.assembly, vars)}</p>
+      <p class="summary__assembly"><Rich text={site.price.note} /></p>
+      <p class="cta-row">
+        <a class="btn btn--primary" href={summary.ctaPrimary.href}>{summary.ctaPrimary.label}</a>
+        {komplet.length > 0 && <a class="btn btn--secondary" href={summary.ctaSecondary.href}>{fill(summary.ctaSecondary.label, vars)}</a>}
+      </p>
+    </div>
+  </article>
+
+  <Section id="opis" title={sec('opis').title} width="narrow">
+    <div class="prose"><p>{p.description}</p></div>
+  </Section>
+
+  <Section id="wymiary" title={dimsSec.title} lead={dimsSec.lead}>
+    <div class="dims-layout">
+      <table class="data-table">
+        <caption class="visually-hidden">{dimsSec.title}: {p.name}</caption>
+        <tbody>
+          {dimsSec.rows.map((r: any) => (
+            <tr><th scope="row">{r.label}</th><td>{fill(r.value, vars)}</td></tr>
+          ))}
+        </tbody>
+      </table>
+      <FurnitureDrawing model={p.model3d} dimensions label={fill(dimsSec.drawingAlt, vars)} class="dims-drawing" />
+    </div>
+    <p class="section__more"><a href={dimsSec.guideLink.href}>{dimsSec.guideLink.label}</a></p>
+  </Section>
+
+  <Section id="szczegoly" title={sec('szczegoly').title} width="narrow">
+    <ul class="feature-bullets">{p.features.map(f => <li>{f}</li>)}</ul>
+  </Section>
+
+  <Section id="gdzie-kupic" title={fill(shop.title, vars)} lead={fill(shop.lead, vars)}>
+    <StoreFinder id="sklepy-mebel" presetCollection={c.slug} limit={shop.limit} more={{ label: shop.more.label, href: fill(shop.more.href, vars) }} note={shop.note} />
+  </Section>
+
+  {komplet.length > 0 && (
+    <Section id="komplet" title={fill(kompletSec.title, vars)} lead={kompletSec.lead}>
+      <ProductGrid products={komplet} code={dv.code} withPriceData={false} />
+      <p class="section__more"><a href={fill(kompletSec.more.href, vars)}>{fill(kompletSec.more.label, vars)}</a></p>
+    </Section>
+  )}
+
+  <ContentSection s={sec('doradca')} />
+
+  <Faq title={tpl.faq.title} items={faq} />
+  <PriceData products={[p, ...komplet]} />
+</BaseLayout>
+
+<script>
+  import { initProductPage } from '../../scripts/product';
+  initProductPage();
+</script>

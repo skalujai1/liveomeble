@@ -1,0 +1,72 @@
+---
+// Nagłówek: logo, menu główne (podmenu pomieszczeń), przycisk „Gdzie kupić”, linki dla partnerów.
+// Menu mobilne: przycisk z aria-expanded/aria-controls, Esc zamyka i oddaje fokus na przycisk.
+import { site } from '../lib/site';
+
+interface Props { path: string }
+const { path } = Astro.props;
+
+type NavItem = { label: string; href: string; children?: { label: string; href: string }[]; submenuLabel?: string };
+const meble = site.nav.items.find(i => 'children' in i) as { children: { label: string; href: string }[]; submenuLabel: string };
+const roomLinks = meble.children.filter(c => c.href.startsWith('/pomieszczenia/'));
+const label = (href: string) => site.nav.items.find(i => i.href === href)?.label;
+
+const primary: NavItem[] = [
+  { label: label('/kolekcje/') ?? 'Kolekcje', href: '/kolekcje/' },
+  { label: label('/meble/') ?? 'Meble', href: '/meble/' },
+  { label: 'Pomieszczenia', href: '/pomieszczenia/', children: roomLinks, submenuLabel: meble.submenuLabel },
+  { label: label('/promocje/') ?? 'Promocje', href: '/promocje/' },
+  { label: label('/doradca-wnetrz/') ?? 'Doradca wnętrz', href: '/doradca-wnetrz/' },
+  { label: label('/poradnik/') ?? 'Poradnik', href: '/poradnik/' },
+];
+const secondary = site.nav.secondary;
+const cta = site.nav.cta;
+
+const isCurrent = (href: string) => path === href;
+const inSection = (href: string) => href !== '/' && path.startsWith(href) && path !== href;
+const current = (href: string) => (isCurrent(href) ? 'page' : undefined);
+---
+<header class="site-header">
+  <div class="site-header__inner container">
+    <a class="site-header__logo" href="/" aria-label={site.brand.logoAlt} aria-current={current('/')}>
+      <img src="/brand/liveo-logo.svg" alt="" width="112" height="28" />
+    </a>
+    <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="menu-glowne" data-menu-toggle hidden>
+      <span class="site-header__toggle-icon" aria-hidden="true"></span>
+      <span data-menu-label data-open={site.nav.openLabel} data-close={site.nav.closeLabel}>{site.nav.openLabel}</span>
+    </button>
+    <nav id="menu-glowne" class="site-nav" aria-label={site.nav.ariaLabel} data-menu>
+      <ul class="site-nav__list">
+        {primary.map(item => (
+          <li class:list={['site-nav__item', { 'site-nav__item--has-sub': item.children, 'is-active': inSection(item.href) }]}>
+            <a class="site-nav__link" href={item.href} aria-current={current(item.href)}>{item.label}</a>
+            {item.children && (
+              <>
+                <button class="site-nav__sub-toggle" type="button" aria-expanded="false" aria-controls="podmenu-pomieszczenia" data-submenu-toggle>
+                  <span class="visually-hidden">{item.submenuLabel}</span>
+                  <svg class="site-nav__chevron" aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
+                </button>
+                <ul id="podmenu-pomieszczenia" class="site-nav__sub" data-submenu>
+                  {item.children.map(c => (
+                    <li><a class="site-nav__sub-link" href={c.href} aria-current={current(c.href)}>{c.label}</a></li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+      <a class="btn btn--primary site-nav__cta" href={cta.href} aria-current={current(cta.href)}>{cta.label}</a>
+      <ul class="site-nav__secondary">
+        {secondary.map(s => (
+          <li><a class="site-nav__secondary-link" href={s.href} aria-current={current(s.href)}>{s.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  import { initMenu } from '../scripts/menu';
+  initMenu();
+</script>

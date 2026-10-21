@@ -1,0 +1,30 @@
+{
+  "name": "liveo-meble-www",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Strona Liveo Meble — statyczny build w Astro (szkielet techniczny, dane demonstracyjne).",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "data": "node tools/data/generate.mjs",
+    "assistant:catalog": "node tools/data/export-assistant-catalog.mjs",
+    "assistant:sync": "node tools/sync-assistant.mjs",
+    "prepare:site": "npm run data && npm run assistant:catalog && npm run assistant:sync",
+    "predev": "npm run assistant:sync",
+    "dev": "astro dev",
+    "prebuild": "npm run prepare:site",
+    "build": "astro build",
+    "postbuild": "node tools/check/run-all.mjs",
+    "preview": "astro preview --port 8803",
+    "test": "node --test tools/data/",
+    "check:dist": "node tools/check/run-all.mjs"
+  },
+  "dependencies": {
+    "@astrojs/markdown-satteri": "^0.4.4",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.1",
+    "sharp": "^0.35.5"
+  }
+}

@@ -1,0 +1,16 @@
+---
+// Karta poradnika: tytuł, opis, czas czytania, link „Czytaj: …”.
+import { pages, url } from '../lib/site';
+import { fill } from '../lib/text';
+
+interface Props { article: { slug: string; title: string; description: string; readingTime: number }; headingLevel?: 2 | 3 }
+const { article: a, headingLevel = 3 } = Astro.props;
+const card = (pages.poradnik.sections.find(s => s.id === 'lista') as any).card;
+const H = `h${headingLevel}` as 'h2' | 'h3';
+---
+<li class="article-card">
+  <H class="article-card__title">{a.title}</H>
+  <p class="article-card__text">{a.description}</p>
+  <p class="article-card__meta">{fill(card.meta, { readingTime: a.readingTime })}</p>
+  <a class="article-card__link stretched-link" href={url.guide(a.slug)}>{fill(card.link, { title: a.title })}</a>
+</li>

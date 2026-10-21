@@ -1,0 +1,20 @@
+---
+// Strona 404 — docs/ia.md 3.17, treść: src/content/pages/site.json → notFound (noindex).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Rich from '../components/Rich.astro';
+import { site } from '../lib/site';
+
+const nf = site.notFound;
+---
+<BaseLayout title={nf.seo.title} description={nf.seo.description} path="/404/" robots="noindex, follow" canonical={false} pageClass="page-404">
+  <header class="page-header">
+    <div class="container page-header__inner">
+      <div class="page-header__text">
+        <h1 class="page-header__title">{nf.h1}</h1>
+        <p class="page-header__lead">{nf.lead}</p>
+        <ul class="link-list">{nf.links.map(l => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+        <p class="page-header__note"><Rich text={nf.oldSiteNote} /></p>
+      </div>
+    </div>
+  </header>
+</BaseLayout>

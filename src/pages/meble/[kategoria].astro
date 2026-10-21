@@ -1,0 +1,77 @@
+---
+// Kategoria (rodzaj mebla) — docs/ia.md 3.5, treść: src/content/pages/kategorie.json
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import ProductListing from '../../components/ProductListing.astro';
+import CategoryTiles from '../../components/CategoryTiles.astro';
+import Faq from '../../components/Faq.astro';
+import { getArticles } from '../../lib/articles';
+import { faqPage, itemList, webPage } from '../../lib/jsonld';
+import { collectionNames, collections, pages, priceRangeOf, productsByType, rooms, types, url, type FurnitureType } from '../../lib/site';
+import { fill, lowerFirst } from '../../lib/text';
+
+export function getStaticPaths() {
+  return types.map(t => ({ params: { kategoria: t.slug }, props: { t } }));
+}
+interface Props { t: FurnitureType }
+const { t } = Astro.props;
+const cfg = pages.kategorie;
+const item = cfg.items.find(i => i.slug === t.slug);
+if (!item) throw new Error(`Brak treści kategorii ${t.slug} w kategorie.json`);
+const tpl = cfg.template;
+const path = url.category(t.slug);
+const list = productsByType(t.id);
+const range = priceRangeOf(list);
+const widths = list.map(p => p.dims.w);
+const colls = collections.filter(c => list.some(p => p.collection === c.slug));
+const vars = {
+  plural: t.plural, pluralLower: lowerFirst(t.plural), minPrice: range.minText, maxPrice: range.maxText,
+  collectionsList: collectionNames(colls.map(c => c.slug)), minWidth: Math.min(...widths), maxWidth: Math.max(...widths),
+};
+const h1 = fill(tpl.h1, vars);
+const faq = tpl.faq.items.map(it => ({ q: fill(it.q, vars), a: fill(it.a, vars) }));
+const guide = item.guide ? (await getArticles()).find(a => a.data.slug === item.guide) : null;
+const typeRooms = rooms.filter(r => t.rooms.includes(r.slug));
+---
+<BaseLayout
+  title={item.seo.title}
+  description={item.seo.description}
+  {path}
+  pageClass="page-category"
+  breadcrumbs={[{ name: 'Meble', url: url.products }, { name: t.plural, url: path }]}
+  jsonLd={[
+    webPage('CollectionPage', { path, title: item.seo.title, description: item.seo.description, hasBreadcrumb: true }),
+    itemList(path, list.map(p => ({ url: url.product(p.slug), name: p.name })), h1),
+    faqPage(path, faq),
+  ]}
+>
+  <PageHeader {h1} lead={item.intro} />
+
+  <Section id="lista" title={`${t.plural} — lista`} titleHidden>
+    <ProductListing products={list} action={path} hide={['typ']} />
+  </Section>
+
+  <Section id="jak-wybrac" title={fill(tpl.tipsTitle, vars)} width="narrow">
+    <ul class="feature-bullets">{item.tips.map(tip => <li>{tip}</li>)}</ul>
+    {guide && <p class="section__more">Więcej w poradniku: <a href={url.guide(guide.data.slug)}>{guide.data.title}</a></p>}
+  </Section>
+
+  <Section id="pomieszczenia" title={fill(tpl.roomsTitle, vars)}>
+    <ul class="link-list">
+      {typeRooms.map(r => <li><a href={url.room(r.slug)}>Meble do {r.genitive}</a></li>)}
+    </ul>
+  </Section>
+
+  <Section id="kolekcje" title={`${t.plural} w kolekcjach`}>
+    <ul class="link-list">
+      {colls.map(c => <li><a href={url.collection(c.slug)}>Kolekcja {c.name}</a></li>)}
+    </ul>
+  </Section>
+
+  <Section id="inne-rodzaje" title="Inne rodzaje mebli">
+    <CategoryTiles list={types.filter(x => x.id !== t.id)} />
+  </Section>
+
+  <Faq title={fill(tpl.faq.title, vars)} items={faq} />
+</BaseLayout>

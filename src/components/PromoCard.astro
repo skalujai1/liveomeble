@@ -1,0 +1,25 @@
+---
+// Karta promocji. Widoczność zależy od okna startsAt–endsAt: przy budowie i ponownie w przeglądarce
+// (scripts/prices.ts → [data-promo-window]), więc promocja pojawia się i znika o czasie bez przebudowy.
+import { BUILD_NOW, pages, typeById, url, type Promotion } from '../lib/site';
+import { isActive } from '../lib/pricing.js';
+import { dateLong, fill, promoLastDay } from '../lib/text';
+
+interface Props { promo: Promotion; headingLevel?: 2 | 3; count?: string }
+const { promo: p, headingLevel = 3, count } = Astro.props;
+const item = (pages.promocje.sections.find(s => s.id === 'aktywne') as any).item;
+const lastDay = promoLastDay(p.endsAt);
+const scope = p.scope as { collections?: string[]; types?: string[]; skus?: string[] };
+const params = new URLSearchParams({ promocje: '1' });
+if (scope.collections?.length) params.set('kolekcja', scope.collections.join(','));
+if (scope.types?.length) params.set('typ', scope.types.map(t => typeById.get(t)?.slug ?? t).join(','));
+const href = `${url.products}?${params.toString().replace(/%2C/g, ',')}`;
+const H = `h${headingLevel}` as 'h2' | 'h3';
+---
+<li class="promo-card" data-promo-window data-start={p.startsAt ?? ''} data-end={p.endsAt ?? ''} hidden={!isActive(p, BUILD_NOW)}>
+  <H class="promo-card__title">{p.label}</H>
+  <p class="promo-card__text">{p.description}</p>
+  {lastDay && <p class="promo-card__until">{fill(item.until, { lastDay: dateLong(lastDay) })}</p>}
+  {count && <p class="promo-card__count">{count}</p>}
+  <a class="promo-card__link" href={href}>{item.link}<span class="visually-hidden">: {p.label}</span></a>
+</li>

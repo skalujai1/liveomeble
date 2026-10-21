@@ -1,0 +1,184 @@
+---
+// Rysunek frontu mebla w skali, liczony z model3d (src/data/products.json).
+// Służy jako rysunek wymiarowy (sekcja „Wymiary”) i jako tło placeholdera, dopóki nie ma zdjęcia.
+// Linie w currentColor — kolor ustawia CSS (tokeny).
+
+interface Cell { t: string; h: number }
+interface Column { w: number; cells: Cell[] }
+interface Model {
+  kind: string; w: number; h: number; d: number; base?: string; legH?: number; top?: number;
+  columns?: Column[]; handle?: string; pedestal?: number; pedestalSide?: string; drawerH?: number;
+  headboardH?: number; frameH?: number; storage?: boolean; mattress?: number[]; shelf?: boolean;
+  style?: string; dividers?: number; shelves?: number; frame?: number; shape?: string; hooks?: number;
+}
+interface Props {
+  model: Model;
+  /** Linie wymiarowe z opisem w cm. */
+  dimensions?: boolean;
+  /** Tekst alternatywny; bez niego rysunek jest dekoracyjny (aria-hidden). */
+  label?: string;
+  class?: string;
+}
+const { model: m, dimensions = false, label, class: cls } = Astro.props;
+
+const W = m.w, H = m.h;
+const legH = m.legH ?? 0;
+const s = Math.max(W, H);
+const font = Math.max(5, s / 18);
+const pad = dimensions ? font * 3.2 : s * 0.04;
+const Y = (y: number) => H - y; // y od podłogi → współrzędna SVG
+
+type Shape = { d: string; cls?: string };
+const shapes: Shape[] = [];
+const rect = (x: number, y: number, w: number, h: number, cls?: string) =>
+  shapes.push({ d: `M${x} ${Y(y + h)}h${w}v${h}h${-w}z`, cls });
+const line = (x1: number, y1: number, x2: number, y2: number, cls?: string) =>
+  shapes.push({ d: `M${x1} ${Y(y1)}L${x2} ${Y(y2)}`, cls });
+const circle = (cx: number, cy: number, r: number, cls?: string) =>
+  shapes.push({ d: `M${cx - r} ${Y(cy)}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0`, cls });
+
+function legs(x0: number, w: number, h: number, base = m.base) {
+  if (h <= 0) return;
+  if (base === 'plinth') return rect(x0 + 3, 0, w - 6, h, 'fd-base');
+  const lw = base === 'legsWood' ? 3.2 : 1.6;
+  const inset = Math.min(6, w * 0.06);
+  rect(x0 + inset, 0, lw, h, 'fd-base');
+  rect(x0 + w - inset - lw, 0, lw, h, 'fd-base');
+  if (base === 'frame') line(x0 + inset, h * 0.15, x0 + w - inset, h * 0.15, 'fd-base');
+}
+
+function handleMark(x: number, y: number, w: number, h: number, t: string) {
+  const hd = m.handle;
+  if (!hd || hd === 'push' || hd === 'edge' || t === 'open') return;
+  const cx = x + w / 2;
+  const top = y + h - Math.min(4, h * 0.2);
+  if (hd === 'knob') return circle(t === 'door' ? x + w - 4 : cx, t === 'door' ? y + h / 2 : top, 0.9, 'fd-handle');
+  if (hd === 'groove') return line(x + 2, y + h - 1.2, x + w - 2, y + h - 1.2, 'fd-handle');
+  // bar
+  if (t === 'door' || t === 'doorGlass') return line(x + w - 4, y + h / 2 - 5, x + w - 4, y + h / 2 + 5, 'fd-handle');
+  return line(cx - Math.min(8, w * 0.2), top, cx + Math.min(8, w * 0.2), top, 'fd-handle');
+}
+
+function grid(x0: number, y0: number, w: number, h: number, columns: Column[]) {
+  const t = 1.8;
+  rect(x0, y0, w, h, 'fd-body');
+  const total = columns.reduce((a, c) => a + c.w, 0);
+  let x = x0 + t;
+  const innerW = w - 2 * t;
+  columns.forEach((col, ci) => {
+    const cw = (innerW * col.w) / total;
+    if (ci > 0) line(x, y0 + t, x, y0 + h - t, 'fd-line');
+    const sum = col.cells.reduce((a, c) => a + c.h, 0);
+    let yTop = y0 + h - t;
+    for (const cell of col.cells) {
+      const ch = ((h - 2 * t) * cell.h) / sum;
+      const cy = yTop - ch;
+      const g = 0.35;
+      if (cell.t === 'open') {
+        line(x, cy, x + cw, cy, 'fd-line');
+      } else {
+        rect(x + g, cy + g, cw - 2 * g, ch - 2 * g, 'fd-front');
+        if (cell.t === 'doorGlass') rect(x + 3, cy + 3, cw - 6, ch - 6, 'fd-glass');
+        handleMark(x, cy, cw, ch, cell.t);
+      }
+      yTop = cy;
+    }
+    x += cw;
+  });
+}
+
+switch (m.kind) {
+  case 'cabinet': {
+    legs(0, W, legH);
+    grid(0, legH, W, H - legH, m.columns ?? [{ w: 1, cells: [{ t: 'door', h: 1 }] }]);
+    break;
+  }
+  case 'desk': {
+    const top = m.top ?? 2.5;
+    rect(0, H - top, W, top, 'fd-body');
+    const pw = m.pedestal ?? W * 0.35;
+    const px = m.pedestalSide === 'left' ? 0 : W - pw;
+    const ph = Math.min(H - top - 4, 60);
+    grid(px, H - top - ph, pw, ph, m.columns ?? [{ w: 1, cells: [{ t: 'drawer', h: 1 }] }]);
+    const lx = m.pedestalSide === 'left' ? pw : 0;
+    legs(lx, W - pw, H - top, m.base);
+    if (m.drawerH) rect(lx + 4, H - top - m.drawerH, W - pw - 8, m.drawerH, 'fd-front');
+    break;
+  }
+  case 'table':
+  case 'coffeeTable': {
+    const top = m.top ?? 3;
+    rect(0, H - top, W, top, 'fd-body');
+    legs(0, W, H - top);
+    if (m.shelf) rect(6, (H - top) * 0.25, W - 12, 1.8, 'fd-line');
+    break;
+  }
+  case 'bed': {
+    const frameH = m.frameH ?? 28;
+    const head = m.headboardH ?? H;
+    rect(4, legH, W - 8, head - legH, 'fd-glass');
+    rect(0, legH, W, frameH - legH, 'fd-body');
+    if (m.storage) line(4, legH + (frameH - legH) / 2, W - 4, legH + (frameH - legH) / 2, 'fd-line');
+    rect(2, frameH, W - 4, Math.min(22, head - frameH - 4), 'fd-front');
+    legs(0, W, legH);
+    break;
+  }
+  case 'wallShelf': {
+    rect(0, 0, W, H, 'fd-body');
+    const n = Math.max(1, m.shelves ?? 1);
+    if (m.style === 'box') for (let i = 1; i < n; i++) line(1.8, (H * i) / n, W - 1.8, (H * i) / n, 'fd-line');
+    const dv = m.dividers ?? 0;
+    for (let i = 1; i <= dv; i++) line((W * i) / (dv + 1), 1.8, (W * i) / (dv + 1), H - 1.8, 'fd-line');
+    break;
+  }
+  case 'mirror': {
+    const f = m.frame ?? 2;
+    if (m.shape === 'arch') {
+      const r = W / 2;
+      shapes.push({ d: `M0 ${Y(0)}V${Y(H - r)}A${r} ${r} 0 0 1 ${W} ${Y(H - r)}V${Y(0)}Z`, cls: 'fd-body' });
+      shapes.push({ d: `M${f} ${Y(f)}V${Y(H - r)}A${r - f} ${r - f} 0 0 1 ${W - f} ${Y(H - r)}V${Y(f)}Z`, cls: 'fd-glass' });
+    } else {
+      rect(0, 0, W, H, 'fd-body');
+      rect(f, f, W - 2 * f, H - 2 * f, 'fd-glass');
+    }
+    break;
+  }
+  case 'coatRack': {
+    const barY = H * 0.55;
+    rect(0, barY, W, 3, 'fd-body');
+    const n = m.hooks ?? 4;
+    for (let i = 0; i < n; i++) {
+      const x = (W * (i + 1)) / (n + 1);
+      line(x, barY, x, barY - 7, 'fd-handle');
+    }
+    if (m.shelf) rect(0, H - 2, W, 2, 'fd-body');
+    break;
+  }
+  default:
+    rect(0, 0, W, H, 'fd-body');
+}
+
+const vb = dimensions ? [-font, -font, W + font * 8, H + font * 5] : [-pad, -pad, W + pad * 2, H + pad * 2];
+const dimY = H + font * 1.6;
+const dimX = W + font * 1.6;
+---
+<svg
+  class:list={['furniture-drawing', cls]}
+  viewBox={vb.map(v => +v.toFixed(2)).join(' ')}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  focusable="false"
+  preserveAspectRatio="xMidYMid meet"
+>
+  {dimensions && <line class="fd-floor" x1={-pad * 0.4} y1={H} x2={W + pad * 0.4} y2={H} />}
+  {shapes.map(sh => <path d={sh.d.replace(/-?\d+\.\d+/g, m => String(+(+m).toFixed(1)))} class={sh.cls} />)}
+  {dimensions && (
+    <g class="fd-dims" font-size={font.toFixed(1)}>
+      <path class="fd-dim" d={`M0 ${dimY}H${W}M0 ${dimY - font * 0.5}v${font}M${W} ${dimY - font * 0.5}v${font}`} />
+      <text x={W / 2} y={dimY + font * 1.25} text-anchor="middle">{`${W} cm`}</text>
+      <path class="fd-dim" d={`M${dimX} 0V${H}M${dimX - font * 0.5} 0h${font}M${dimX - font * 0.5} ${H}h${font}`} />
+      <text x={dimX + font * 0.6} y={H / 2} dominant-baseline="middle">{`${H} cm`}</text>
+    </g>
+  )}
+</svg>

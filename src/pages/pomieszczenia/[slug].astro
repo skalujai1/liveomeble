@@ -1,0 +1,85 @@
+---
+// Pomieszczenie — docs/ia.md 3.6, treść: src/content/pages/pomieszczenia.json (items + template)
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import CollectionCard from '../../components/CollectionCard.astro';
+import ProductGrid from '../../components/ProductGrid.astro';
+import AssistantButton from '../../components/AssistantButton.astro';
+import Faq from '../../components/Faq.astro';
+import { getArticles } from '../../lib/articles';
+import { roomImage } from '../../lib/images';
+import { faqPage, itemList, webPage } from '../../lib/jsonld';
+import { collectionNames, collections, pages, productsByRoom, rooms, types, url, type Room } from '../../lib/site';
+import { fill } from '../../lib/text';
+
+export function getStaticPaths() {
+  return rooms.map(r => ({ params: { slug: r.slug }, props: { r } }));
+}
+interface Props { r: Room }
+const { r } = Astro.props;
+const cfg = pages.pomieszczenia;
+const item = cfg.items.find(i => i.slug === r.slug);
+if (!item) throw new Error(`Brak treści pomieszczenia ${r.slug} w pomieszczenia.json`);
+const tpl = cfg.template;
+const path = url.room(r.slug);
+const colls = collections.filter(c => c.rooms.includes(r.slug));
+const list = productsByRoom(r.slug);
+const byType = types.map(t => ({ t, items: list.filter(p => p.type === t.id) })).filter(g => g.items.length);
+const vars = {
+  roomGenitive: r.genitive, roomAccusative: r.accusative, roomLocative: r.locative,
+  collectionsList: collectionNames(colls.map(c => c.slug)),
+};
+const h1 = item.h1 ?? fill(tpl.h1, vars);
+const faq = [...item.faq, ...tpl.faqShared.items].map(it => ({ q: fill(it.q, vars), a: fill(it.a, vars) }));
+const guide = item.guide ? (await getArticles()).find(a => a.data.slug === item.guide) : null;
+const img = roomImage(r.slug, 'wide');
+---
+<BaseLayout
+  title={item.seo.title}
+  description={item.seo.description}
+  {path}
+  pageClass="page-room"
+  breadcrumbs={[{ name: 'Pomieszczenia', url: url.rooms }, { name: r.name, url: path }]}
+  jsonLd={[
+    webPage('CollectionPage', { path, title: item.seo.title, description: item.seo.description, hasBreadcrumb: true }),
+    itemList(path, list.map(p => ({ url: url.product(p.slug), name: p.name })), h1),
+    faqPage(path, faq),
+  ]}
+>
+  <PageHeader {h1} lead={item.intro} image={img} imageAlt={img?.title ? `Aranżacja: ${img.title}` : `Aranżacja: ${r.name}`} placeholderLabel={r.name} />
+
+  <Section id="kolekcje" title={fill(tpl.collectionsTitle, vars)}>
+    <ul class="card-grid card-grid--collections">
+      {colls.map(c => <CollectionCard collection={c} />)}
+    </ul>
+  </Section>
+
+  <Section id="meble" title={fill(tpl.productsTitle, vars)}>
+    {byType.map(g => (
+      <div class="room-group">
+        <h3 class="room-group__title"><a href={url.category(g.t.slug)}>{g.t.plural}</a></h3>
+        <ProductGrid products={g.items} headingLevel={4} />
+      </div>
+    ))}
+  </Section>
+
+  <Section id="wskazowki" title={tpl.tipsTitle}>
+    <ul class="feature-list">
+      {item.tips.map(tip => (
+        <li class="feature-list__item">
+          <h3 class="feature-list__title">{tip.title}</h3>
+          <p class="feature-list__text">{tip.text}</p>
+        </li>
+      ))}
+    </ul>
+    {guide && <p class="section__more">Poradnik: <a href={url.guide(guide.data.slug)}>{guide.data.title}</a></p>}
+  </Section>
+
+  <Section id="doradca" title={fill(tpl.advisor.title, vars)} class="section--band">
+    <div class="band"><p class="band__text">{tpl.advisor.text}</p></div>
+    <p class="cta-row"><AssistantButton room={r.assistantKey} variant="secondary">{tpl.advisor.cta}</AssistantButton></p>
+  </Section>
+
+  <Faq title={`Pytania o meble do ${r.genitive}`} items={faq} />
+</BaseLayout>

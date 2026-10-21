@@ -1,0 +1,44 @@
+---
+// <title>, description, canonical, robots, Open Graph, Twitter i JSON-LD (jeden @graph).
+import { SITE_URL } from '../config';
+import { graph, type Node } from '../lib/jsonld';
+import { site } from '../lib/site';
+
+export interface Props {
+  title: string;
+  description: string;
+  /** Ścieżka kanoniczna, zawsze z ukośnikiem na końcu i bez parametrów. */
+  path: string;
+  robots?: string;
+  ogType?: 'website' | 'article' | 'product';
+  /** Adres obrazu OG (ścieżka albo pełny URL) — gdy brak, karta „summary” bez obrazu. */
+  ogImage?: string | null;
+  ogImageAlt?: string;
+  jsonLd?: Node[];
+  /** false = bez <link rel=canonical> (strona 404). */
+  canonical?: boolean;
+}
+
+const { title, description, path, robots = 'index, follow', ogType = 'website', ogImage, ogImageAlt, jsonLd = [], canonical: withCanonical = true } = Astro.props;
+const canonical = new URL(path, SITE_URL).href;
+const image = ogImage ? new URL(ogImage, SITE_URL).href : null;
+// Escapowanie „<”, żeby tekst nie zamknął znacznika <script>.
+const ld = jsonLd.length ? JSON.stringify(graph(jsonLd)).replace(/</g, '\\u003c') : null;
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+{withCanonical && <link rel="canonical" href={canonical} />}
+<meta name="robots" content={robots} />
+<meta property="og:type" content={ogType} />
+<meta property="og:locale" content="pl_PL" />
+<meta property="og:site_name" content={site.brand.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+{image && <meta property="og:image" content={image} />}
+{image && ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
+<meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{image && <meta name="twitter:image" content={image} />}
+{ld && <script type="application/ld+json" is:inline set:html={ld} />}

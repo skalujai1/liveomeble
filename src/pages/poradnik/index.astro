@@ -1,0 +1,37 @@
+---
+// Poradnik — lista artykułów (docs/ia.md 3.15), treść: src/content/pages/poradnik.json
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import ContentSection from '../../components/ContentSection.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { articleCard, getArticles } from '../../lib/articles';
+import { itemList, webPage } from '../../lib/jsonld';
+import { pages, section, url } from '../../lib/site';
+
+const page = pages.poradnik;
+const path = url.guides;
+const articles = await getArticles();
+---
+<BaseLayout
+  title={page.seo.title}
+  description={page.seo.description}
+  {path}
+  pageClass="page-guides"
+  breadcrumbs={[{ name: page.h1, url: path }]}
+  jsonLd={[
+    webPage('CollectionPage', { path, title: page.seo.title, description: page.seo.description, hasBreadcrumb: true }),
+    itemList(path, articles.map(a => ({ url: url.guide(a.data.slug), name: a.data.title })), page.h1),
+  ]}
+>
+  <PageHeader h1={page.h1} lead={section(page, 'wstep').lead} />
+  {page.sections.slice(1).map((s: any) =>
+    s.type === 'articles' ? (
+      <Section id={s.id} title={s.title} titleHidden={s.titleVisuallyHidden}>
+        <ul class="card-grid card-grid--articles">
+          {articles.map(a => <ArticleCard article={articleCard(a)} />)}
+        </ul>
+      </Section>
+    ) : <ContentSection s={s} />,
+  )}
+</BaseLayout>

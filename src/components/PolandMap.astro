@@ -1,0 +1,22 @@
+---
+// Mapa poglądowa: kontur Polski i punkty sklepów partnerskich (SVG z danych, bez zewnętrznych map).
+// scripts/store-finder.ts wyróżnia sklepy z wyników i zaznacza punkt wyszukiwania.
+import { MAP, outlinePath, project } from '../lib/geo';
+import type { Reseller } from '../lib/site';
+
+interface Props { stores: Reseller[]; note: string; label?: string }
+const { stores, note, label = 'Mapa poglądowa sklepów partnerskich Liveo w Polsce' } = Astro.props;
+---
+<figure class="poland-map" data-sf-map>
+  <svg viewBox={`-10 -10 ${MAP.width + 20} ${MAP.height + 20}`} role="img" aria-label={label} data-map-lng0={MAP.lng0} data-map-lat0={MAP.lat0} data-map-kx={MAP.kx} data-map-ky={MAP.ky}>
+    <path class="poland-map__outline" d={outlinePath()} />
+    <g class="poland-map__stores">
+      {stores.map(s => {
+        const { x, y } = project(s.lat, s.lng);
+        return <circle class="poland-map__store" cx={x} cy={y} r="5" data-store-id={s.id} />;
+      })}
+    </g>
+    <circle class="poland-map__me" r="8" cx="-100" cy="-100" data-map-me />
+  </svg>
+  <figcaption class="poland-map__note">{note}</figcaption>
+</figure>

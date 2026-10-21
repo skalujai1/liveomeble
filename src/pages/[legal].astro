@@ -1,0 +1,52 @@
+---
+// Strony prawne: /polityka-prywatnosci/, /regulamin/ — docs/ia.md 3.16, treść: src/content/legal/*.md (wzory do weryfikacji przez prawnika).
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { DEMO } from '../config';
+import { webPage } from '../lib/jsonld';
+import { dateLong } from '../lib/text';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('legal');
+  return docs.map(doc => {
+    if (doc.data.slug !== doc.id) throw new Error(`Strona prawna ${doc.id}: slug "${doc.data.slug}" musi być równy nazwie pliku`);
+    if (!DEMO && doc.data.status !== 'zatwierdzony') {
+      throw new Error(`Strona prawna ${doc.id} ma status "${doc.data.status}" — do publikacji potrzebny „zatwierdzony” (weryfikacja prawnika).`);
+    }
+    return { params: { legal: doc.data.slug }, props: { doc } };
+  });
+}
+interface Props { doc: CollectionEntry<'legal'> }
+const { doc } = Astro.props;
+const d = doc.data;
+const path = `/${d.slug}/`;
+const html = doc.rendered?.html ?? '';
+const toc = ((doc.rendered?.metadata?.headings ?? []) as { depth: number; slug: string; text: string }[]).filter(h => h.depth === 2);
+const cut = html.indexOf('<h2');
+---
+<BaseLayout
+  title={d.seoTitle}
+  description={d.description}
+  {path}
+  pageClass="page-legal"
+  breadcrumbs={[{ name: d.title, url: path }]}
+  jsonLd={[webPage('WebPage', { path, title: d.seoTitle, description: d.description, hasBreadcrumb: true })]}
+>
+  <article class="article-layout container">
+    <header class="page-header__text">
+      <h1 class="page-header__title">{d.title}</h1>
+      <p class="page-meta"><span>Wersja {d.version}</span><span>Aktualizacja: {dateLong(d.updated)}</span></p>
+    </header>
+    <div class="article-body">
+      <Fragment set:html={cut > 0 ? html.slice(0, cut) : ''} />
+      {toc.length > 2 && (
+        <nav class="toc" aria-labelledby="spis-tresci">
+          <h2 class="toc__title" id="spis-tresci">Spis treści</h2>
+          <ol>{toc.map(h => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+        </nav>
+      )}
+      <Fragment set:html={cut > 0 ? html.slice(cut) : html} />
+      <p class="article-disclaimer">Wersja {d.version} · aktualizacja {dateLong(d.updated)} · obowiązuje od: {d.effectiveFrom}</p>
+    </div>
+  </article>
+</BaseLayout>

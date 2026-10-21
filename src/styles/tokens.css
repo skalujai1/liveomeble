@@ -1,0 +1,96 @@
+/*
+ * Tokeny projektu — JEDYNE miejsce z kolorami, fontami, odstępami i ruchem.
+ * Wygląd jest TYMCZASOWY i neutralny (szkielet techniczny). Warstwa wizualna
+ * podmieni wartości poniżej (i fonty self-hosted przez @font-face w <head>),
+ * bez zmian w komponentach.
+ */
+:root {
+  /* Kolory — baza neutralna + 1 akcent + kolor ceny promocyjnej */
+  --color-bg: #ffffff;
+  --color-surface: #f3f3f2;
+  --color-surface-2: #e8e8e6;
+  --color-text: #1b1b1a;
+  --color-text-muted: #5a5a57;      /* 6.9:1 na --color-bg */
+  --color-line: #d4d4d1;
+  --color-line-strong: #8a8a86;     /* obramowania pól formularza: 3.5:1 */
+  --color-accent: #1b1b1a;          /* przyciski główne */
+  --color-accent-contrast: #ffffff;
+  --color-link: #1b1b1a;
+  --color-promo: #a3261b;           /* cena promocyjna: 6.9:1 */
+  --color-success: #1d6b3a;
+  --color-error: #a3261b;
+  --color-focus: #b4501a;           /* obrys fokusu: 4.8:1 na białym */
+  --color-todo-bg: #fff1a8;         /* znaczniki [do potwierdzenia] w wersji demo */
+  --color-demo-bg: #1b1b1a;
+  --color-demo-text: #ffffff;
+  --color-placeholder: #ecebe8;
+  --color-placeholder-ink: #8c8b86;
+
+  /* Typografia — fonty systemowe do czasu wyboru kierunku wizualnego */
+  --font-sans: system-ui, -apple-system, "Segoe UI", "Noto Sans", "Liberation Sans", sans-serif;
+  --font-display: var(--font-sans);
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  --text-xl: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  --text-2xl: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+  --text-3xl: clamp(2.125rem, 1.6rem + 2.6vw, 3.5rem);
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-body: 1.6;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 650;
+  --measure: 68ch;
+
+  /* Odstępy */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: clamp(3rem, 2rem + 4vw, 5rem);
+  --space-9: clamp(4rem, 2.5rem + 6vw, 8rem);
+
+  /* Układ */
+  --container: 76rem;
+  --gutter: 1rem;
+  --header-h: 4rem;
+  --radius-sm: 2px;
+  --radius: 4px;
+  --border: 1px solid var(--color-line);
+
+  /* Ruch — spokojny, tylko transform/opacity */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.24, 1);
+  --ease-in-out: cubic-bezier(0.65, 0.05, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur: 240ms;
+  --dur-slow: 420ms;
+
+  --shadow-overlay: 0 12px 40px rgb(0 0 0 / 0.16);
+  --z-header: 20;
+  --z-overlay: 40;
+  --z-assistant: 50;
+  --z-consent: 60;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --gutter: 2rem;
+    --header-h: 4.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur: 0ms;
+    --dur-slow: 0ms;
+  }
+}

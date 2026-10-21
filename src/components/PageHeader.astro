@@ -1,0 +1,53 @@
+---
+// Nagłówek strony: H1 (może zawierać <br>), lead, przyciski, opcjonalnie duży obraz (LCP — eager, fetchpriority=high).
+import Media from './Media.astro';
+import Rich from './Rich.astro';
+import AssistantButton from './AssistantButton.astro';
+import type { ImageRef } from '../lib/images';
+
+interface Cta { label: string; href?: string; action?: string; variant?: string }
+interface Props {
+  h1: string;
+  lead?: string;
+  ctas?: Cta[];
+  /** undefined = bez obrazu; null = placeholder (obraz jeszcze nie istnieje). */
+  image?: ImageRef | null;
+  imageAlt?: string;
+  placeholderLabel?: string;
+  /** Dopisek pod przyciskami (np. „Odpowiada asystent AI…”). */
+  note?: string;
+}
+const { h1, lead, ctas = [], image, imageAlt = '', placeholderLabel = '', note } = Astro.props;
+const hasMedia = image !== undefined;
+---
+<header class:list={['page-header', { 'page-header--media': hasMedia }]}>
+  <div class="container page-header__inner">
+    <div class="page-header__text">
+      <h1 class="page-header__title"><Rich text={h1} /></h1>
+      {lead && <p class="page-header__lead"><Rich text={lead} /></p>}
+      <slot />
+      {ctas.length > 0 && (
+        <p class="cta-row">
+          {ctas.map((c, i) =>
+            c.action
+              ? <AssistantButton mode={c.action === 'open-assistant-chat' ? 'chat' : 'photo'} variant={c.variant ?? (i ? 'secondary' : 'primary')}>{c.label}</AssistantButton>
+              : <a class:list={['btn', `btn--${c.variant ?? (i ? 'secondary' : 'primary')}`]} href={c.href}>{c.label}</a>,
+          )}
+        </p>
+      )}
+      {note && <p class="page-header__note"><Rich text={note} /></p>}
+    </div>
+    {hasMedia && (
+      <Media
+        image={image ?? null}
+        alt={imageAlt}
+        widths={[480, 768, 1024, 1440, 1920]}
+        sizes="(min-width: 64rem) 60vw, 100vw"
+        ratio="16 / 10"
+        placeholderLabel={placeholderLabel}
+        priority
+        class="page-header__media"
+      />
+    )}
+  </div>
+</header>

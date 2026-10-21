@@ -1,0 +1,30 @@
+---
+// Meble według pomieszczenia — docs/ia.md 3.6, treść: src/content/pages/pomieszczenia.json
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import RoomCard from '../../components/RoomCard.astro';
+import { webPage, itemList } from '../../lib/jsonld';
+import { pages, rooms, url } from '../../lib/site';
+
+const page = pages.pomieszczenia;
+const path = url.rooms;
+---
+<BaseLayout
+  title={page.seo.title}
+  description={page.seo.description}
+  {path}
+  pageClass="page-rooms"
+  breadcrumbs={[{ name: 'Pomieszczenia', url: path }]}
+  jsonLd={[
+    webPage('CollectionPage', { path, title: page.seo.title, description: page.seo.description, hasBreadcrumb: true }),
+    itemList(path, rooms.map(r => ({ url: url.room(r.slug), name: r.name })), page.h1),
+  ]}
+>
+  <PageHeader h1={page.h1} lead={page.lead} />
+  <Section id="lista" title="Pomieszczenia" titleHidden>
+    <ul class="card-grid card-grid--rooms">
+      {rooms.map(r => <RoomCard room={r} />)}
+    </ul>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,65 @@
+---
+// Szkielet każdej strony: <head> (SEO + JSON-LD), skip-link, pasek DEMO, nagłówek, <main>, stopka,
+// zgody cookies i leniwy doradca wnętrz.
+import '../styles/tokens.css';
+import '../styles/base.css';
+import SeoHead from '../components/SeoHead.astro';
+import DemoBar from '../components/DemoBar.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
+import AssistantLoader from '../components/AssistantLoader.astro';
+import { DEMO } from '../config';
+import { breadcrumbList, organization, website, type Crumb, type Node } from '../lib/jsonld';
+import { site } from '../lib/site';
+
+export interface Props {
+  title: string;
+  description: string;
+  path: string;
+  robots?: string;
+  ogType?: 'website' | 'article' | 'product';
+  ogImage?: string | null;
+  ogImageAlt?: string;
+  /** Węzły JSON-LD tej strony (WebSite i Organization dokładamy zawsze). */
+  jsonLd?: Node[];
+  /** Okruszki bez strony głównej — ostatni element to bieżąca strona. */
+  breadcrumbs?: Crumb[];
+  /** Klasa na <body> opisująca rodzaj strony (np. "page-product"). */
+  pageClass?: string;
+  /** Doradca wnętrz na stronie (domyślnie tak; wyłączony np. w strefie partnera). */
+  assistant?: boolean;
+  /** false = bez canonical (404). */
+  canonical?: boolean;
+}
+
+const { title, description, path, robots, ogType, ogImage, ogImageAlt, jsonLd = [], breadcrumbs, pageClass, assistant = true, canonical = true } = Astro.props;
+const crumbs: Crumb[] | null = breadcrumbs?.length ? [{ name: site.breadcrumbs.home, url: '/' }, ...breadcrumbs] : null;
+const ld: Node[] = [website(), organization(), ...jsonLd, ...(crumbs ? [breadcrumbList(path, crumbs)] : [])];
+---
+<!doctype html>
+<html lang="pl" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
+    <SeoHead {title} {description} {path} {robots} {ogType} {ogImage} {ogImageAlt} {canonical} jsonLd={ld} />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <slot name="head" />
+  </head>
+  <body class={pageClass}>
+    <a class="skip-link" href="#tresc">{site.skipLink}</a>
+    {DEMO && <DemoBar />}
+    <SiteHeader {path} />
+    <main id="tresc" tabindex="-1">
+      {crumbs && <Breadcrumbs items={crumbs} />}
+      <slot />
+    </main>
+    <SiteFooter />
+    <ConsentBanner />
+    {assistant && <AssistantLoader />}
+  </body>
+</html>

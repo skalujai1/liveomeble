@@ -1,0 +1,50 @@
+---
+// Obraz przez astro:assets (<picture> AVIF + WebP, width/height, sizes, lazy/eager)
+// albo — gdy pliku jeszcze nie ma — placeholder z rysunkiem mebla i nazwą rodzaju. Brak pliku nie psuje budowy.
+import { Picture } from 'astro:assets';
+import FurnitureDrawing from './FurnitureDrawing.astro';
+import type { ImageRef } from '../lib/images';
+
+interface Props {
+  image: ImageRef | null;
+  alt: string;
+  widths: number[];
+  sizes: string;
+  /** Obraz LCP: eager + fetchpriority=high. Pozostałe: lazy. */
+  priority?: boolean;
+  /** Proporcje ramki, np. "4 / 3" — rezerwuje miejsce (bez przesunięć układu). */
+  ratio?: string;
+  fit?: 'cover' | 'contain';
+  /** Podpis placeholdera (np. „Szafka RTV”). */
+  placeholderLabel: string;
+  /** Model 3D do rysunku w placeholderze. */
+  model?: any;
+  class?: string;
+}
+const { image, alt, widths, sizes, priority = false, ratio = '4 / 3', fit = 'cover', placeholderLabel, model, class: cls } = Astro.props;
+const format = image?.src.format;
+const fitted = image ? widths.filter(w => w <= image.src.width) : [];
+if (image && !fitted.length) fitted.push(image.src.width);
+---
+<div class:list={['media', `media--${fit}`, { 'media--placeholder': !image, 'media--approx': image?.approximate }, cls]} style={`--media-ratio: ${ratio}`}>
+  {image ? (
+    <Picture
+      src={image.src}
+      alt={alt}
+      formats={['avif', 'webp']}
+      fallbackFormat={format === 'jpg' || format === 'jpeg' ? 'jpg' : 'webp'}
+      widths={fitted}
+      sizes={sizes}
+      loading={priority ? 'eager' : 'lazy'}
+      decoding={priority ? 'sync' : 'async'}
+      fetchpriority={priority ? 'high' : 'auto'}
+      class="media__img"
+    />
+  ) : (
+    <div class="media__placeholder" role="img" aria-label={`${alt} — zdjęcie w przygotowaniu`}>
+      {model && <FurnitureDrawing model={model} class="media__drawing" />}
+      <span class="media__placeholder-label" aria-hidden="true">{placeholderLabel}</span>
+    </div>
+  )}
+  {image?.approximate && <span class="media__note" aria-hidden="true">Zdjęcie poglądowe</span>}
+</div>

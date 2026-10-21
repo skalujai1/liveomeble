@@ -1,0 +1,28 @@
+---
+// Leniwe ładowanie widżetu „Doradca wnętrz” (liveo-assistant/widget, kopiowany do public/liveo-assistant/).
+// Skrypt widżetu NIE jest pobierany przy ładowaniu strony: dopiero po kliknięciu przycisku
+// albo gdy przeglądarka jest bezczynna (ASSISTANT.idleLoadDelayMs po zdarzeniu load).
+import { ASSISTANT, CHAT_URL } from '../config';
+
+const cfg = {
+  chatUrl: CHAT_URL,
+  contactUrl: ASSISTANT.contactUrl,
+  storesUrl: ASSISTANT.storesUrl,
+  logoUrl: ASSISTANT.logoUrl,
+  demoSamples: ASSISTANT.demoSamples,
+};
+const boot = {
+  scriptUrl: ASSISTANT.scriptUrl,
+  fontsCssUrl: ASSISTANT.fontsCssUrl,
+  idleLoadDelayMs: ASSISTANT.idleLoadDelayMs,
+  config: cfg,
+};
+---
+<button class="assistant-launcher" type="button" data-open-assistant="launcher" aria-label="Otwórz doradcę wnętrz" hidden>
+  <span class="assistant-launcher__label">Doradca wnętrz</span>
+</button>
+<script type="application/json" is:inline data-assistant-boot set:html={JSON.stringify(boot).replace(/</g, '\\u003c')} />
+<script>
+  import { initAssistant } from '../scripts/assistant';
+  initAssistant();
+</script>

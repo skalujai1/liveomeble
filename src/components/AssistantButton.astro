@@ -1,0 +1,6 @@
+---
+// Przycisk otwierający doradcę wnętrz. Bez JS to zwykły link do kolekcji (doradca wymaga JavaScriptu).
+interface Props { mode?: 'photo' | 'chat'; variant?: string; room?: string; class?: string }
+const { mode = 'photo', variant = 'primary', room, class: cls } = Astro.props;
+---
+<a class:list={['btn', `btn--${variant}`, cls]} href="/kolekcje/" data-open-assistant={mode} data-assistant-room={room}><slot /></a>

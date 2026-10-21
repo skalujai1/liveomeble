@@ -1,0 +1,77 @@
+---
+// Artykuł poradnika — docs/ia.md 3.15 i 6.2, treść: src/content/poradnik/<slug>.md
+// FAQPage z frontmatter `faq` — test po buildzie sprawdza, że to słowo w słowo tekst sekcji „Najczęstsze pytania”.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import Rich from '../../components/Rich.astro';
+import { articleCard, getArticles, type Article } from '../../lib/articles';
+import { article as articleLd, faqPage, webPage } from '../../lib/jsonld';
+import { pages, url } from '../../lib/site';
+import { dateLong, fill } from '../../lib/text';
+
+export async function getStaticPaths() {
+  const all = await getArticles();
+  return all.map(a => ({ params: { slug: a.data.slug }, props: { a, all } }));
+}
+interface Props { a: Article; all: Article[] }
+const { a, all } = Astro.props;
+const d = a.data;
+const tpl = pages.poradnik.article;
+const path = url.guide(d.slug);
+const html = a.rendered?.html ?? '';
+const headings = (a.rendered?.metadata?.headings ?? []) as { depth: number; slug: string; text: string }[];
+const toc = headings.filter(h => h.depth === 2);
+// Spis treści po leadzie i „Najważniejsze w jednym zdaniu” — przed pierwszym H2.
+const cut = html.indexOf('<h2');
+const intro = cut > 0 ? html.slice(0, cut) : '';
+const body = cut > 0 ? html.slice(cut) : html;
+const related = [
+  ...d.related.map(s => all.find(x => x.data.slug === s)).filter((x): x is Article => !!x),
+  ...all.filter(x => x.data.slug !== d.slug && !d.related.includes(x.data.slug)),
+].filter(x => x.data.slug !== d.slug).slice(0, 2);
+---
+<BaseLayout
+  title={d.seoTitle}
+  description={d.description}
+  {path}
+  ogType="article"
+  pageClass="page-article"
+  breadcrumbs={[{ name: pages.poradnik.h1, url: url.guides }, { name: d.title, url: path }]}
+  jsonLd={[
+    webPage('WebPage', { path, title: d.seoTitle, description: d.description, hasBreadcrumb: true }),
+    articleLd({ path, headline: d.title, description: d.description, datePublished: d.date, dateModified: d.updated }),
+    faqPage(path, d.faq),
+  ]}
+>
+  <article class="article-layout container">
+    <header class="page-header__text">
+      <h1 class="page-header__title">{d.title}</h1>
+      <p class="page-meta">
+        <span>{d.author}{d.authorNote && <> <Rich text={d.authorNote} /></>}</span>
+        <span>{fill(tpl.meta.date, { date: dateLong(d.date) })}</span>
+        {d.updated && d.updated !== d.date && <span>{fill(tpl.meta.updated, { updated: dateLong(d.updated) })}</span>}
+        <span>{fill(tpl.meta.readingTime, { readingTime: d.readingTime })}</span>
+      </p>
+    </header>
+    <div class="article-body" data-article-body>
+      <Fragment set:html={intro} />
+      {toc.length > 2 && (
+        <nav class="toc" aria-labelledby="spis-tresci">
+          <h2 class="toc__title" id="spis-tresci">{tpl.tocTitle}</h2>
+          <ol>{toc.map(h => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+        </nav>
+      )}
+      <Fragment set:html={body} />
+      <p class="article-disclaimer">{tpl.disclaimer}</p>
+    </div>
+  </article>
+
+  {related.length > 0 && (
+    <Section id="przeczytaj-tez" title={tpl.relatedTitle}>
+      <ul class="card-grid card-grid--articles">
+        {related.map(r => <ArticleCard article={articleCard(r)} />)}
+      </ul>
+    </Section>
+  )}
+</BaseLayout>

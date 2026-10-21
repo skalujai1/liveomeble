@@ -1,0 +1,37 @@
+---
+// Kontakt — docs/ia.md 3.14, treść: src/content/pages/kontakt.json (dane kontaktowe [do potwierdzenia])
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Section from '../components/Section.astro';
+import ContentSection from '../components/ContentSection.astro';
+import Form from '../components/Form.astro';
+import Faq from '../components/Faq.astro';
+import { faqPage, ORG_ID, webPage } from '../lib/jsonld';
+import { pages, section, url } from '../lib/site';
+
+const page = pages.kontakt;
+const path = url.contact;
+---
+<BaseLayout
+  title={page.seo.title}
+  description={page.seo.description}
+  {path}
+  pageClass="page-contact"
+  breadcrumbs={[{ name: page.h1, url: path }]}
+  jsonLd={[
+    webPage('ContactPage', { path, title: page.seo.title, description: page.seo.description, hasBreadcrumb: true, extra: { about: { '@id': ORG_ID } } }),
+    faqPage(path, page.faq.items),
+  ]}
+>
+  <PageHeader h1={page.h1} lead={section(page, 'wstep').lead} />
+
+  {page.sections.slice(1).map((s: any) =>
+    s.type === 'form' ? (
+      <Section id={s.id} title={s.title} lead={s.lead} width="narrow">
+        <Form id="formularz-kontaktowy" formId="contact" fields={s.fields} consent={s.consent} submit={s.submit} success={s.success} error={s.error} />
+      </Section>
+    ) : <ContentSection s={s} />,
+  )}
+
+  <Faq title={page.faq.title} items={page.faq.items} />
+</BaseLayout>

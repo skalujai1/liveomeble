@@ -1,0 +1,9 @@
+---
+// Tekst z plików treści: [link](/adres/), **pogrubienie**, <br>, znaczniki [do potwierdzenia] (wyróżnione).
+// Bez wrappera — wstawia sam HTML w miejscu użycia.
+import { inlineMd } from '../lib/text';
+
+interface Props { text?: string | null }
+const { text } = Astro.props;
+---
+<Fragment set:html={inlineMd(text)} />

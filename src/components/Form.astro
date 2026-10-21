@@ -1,0 +1,122 @@
+---
+// Formularz z definicji pól w pliku treści (kontakt, zgłoszenie partnera).
+// Walidacja w przeglądarce (scripts/forms.ts), komunikaty po polsku, pole-pułapka na boty, zgoda RODO.
+// Wysyłka tylko, gdy FORM_ENDPOINT w src/config.ts jest ustawiony — inaczej komunikat wersji demonstracyjnej.
+import Rich from './Rich.astro';
+import { DEMO, FORM_ENDPOINT } from '../config';
+import { collections, resolveRef, site } from '../lib/site';
+
+interface Field {
+  name: string; label: string; type: string; required?: boolean; autocomplete?: string; inputmode?: string;
+  hint?: string; maxLength?: number; options?: string[]; source?: string;
+}
+interface Props {
+  id: string;
+  /** Nazwa formularza w adresie wysyłki: {FORM_ENDPOINT}/{formId}. */
+  formId: 'contact' | 'partner';
+  fields: Field[];
+  consent?: string;
+  submit: string;
+  success: { title: string; text: string };
+  error?: string;
+}
+const { id, formId, fields, consent, submit, success, error } = Astro.props;
+const f = site.forms;
+const endpoint = FORM_ENDPOINT ? `${FORM_ENDPOINT.replace(/\/$/, '')}/${formId}` : '';
+const validateOf = (fl: Field) =>
+  fl.name === 'nip' ? 'nip' : fl.name === 'postcode' ? 'postcode' : fl.type === 'email' ? 'email' : fl.type === 'tel' ? 'phone' : fl.type === 'url' ? 'url' : undefined;
+const messages = {
+  required: f.required, email: f.email, phone: f.phone, postcode: f.postcode, nip: f.nip, tooLong: f.tooLong,
+  url: 'Wpisz pełny adres strony, np. https://sklep.pl.', consent: 'Zaznacz, że znasz zasady przetwarzania danych.',
+  summary: 'Popraw zaznaczone pola:', sending: f.sending, error: (resolveRef(error) ?? f.error).replace('{email}', 'adres z zakładki Kontakt'),
+  demo: 'Wersja demonstracyjna: dane są poprawne, ale formularz niczego nie wysłał.',
+};
+const fid = (name: string) => `${id}-${name}`;
+const consentText = resolveRef(consent) ?? '';
+---
+<form class="form" id={id} method="post" action={endpoint || undefined} novalidate data-form={formId} data-endpoint={endpoint}>
+  <div class="form__summary" tabindex="-1" data-form-summary hidden>
+    <p><strong>{messages.summary}</strong></p>
+    <ul></ul>
+  </div>
+
+  {fields.map(fl => {
+    const required = !!fl.required;
+    const hintId = fl.hint ? `${fid(fl.name)}-hint` : undefined;
+    const errId = `${fid(fl.name)}-blad`;
+    const described = [hintId, errId].filter(Boolean).join(' ');
+    const label = (
+      <>{fl.label}{!required && <span class="field__optional"> {f.optional}</span>}</>
+    );
+    if (fl.type === 'radio' || fl.type === 'checkbox-group') {
+      const opts = fl.source === 'collections.json' ? collections.map(c => ({ value: c.slug, label: c.name })) : (fl.options ?? []).map(o => ({ value: o, label: o }));
+      return (
+        <fieldset class="field" data-field={fl.name} data-required={required ? '1' : undefined} aria-describedby={described}>
+          <legend class="field__label">{label}</legend>
+          {fl.hint && <p class="field__hint" id={hintId}>{fl.hint}</p>}
+          <div class="field__options">
+            {opts.map((o, i) => (
+              <label class="check">
+                <input type={fl.type === 'radio' ? 'radio' : 'checkbox'} name={fl.name} value={o.value} id={i === 0 ? fid(fl.name) : undefined} />
+                <span>{o.label}</span>
+              </label>
+            ))}
+          </div>
+          <p class="field__error" id={errId} hidden></p>
+        </fieldset>
+      );
+    }
+    return (
+      <div class="field" data-field={fl.name}>
+        <label class="field__label" for={fid(fl.name)}>{label}</label>
+        {fl.hint && <p class="field__hint" id={hintId}>{fl.hint}</p>}
+        {fl.type === 'textarea' ? (
+          <textarea class="field__control" id={fid(fl.name)} name={fl.name} required={required} maxlength={fl.maxLength} aria-describedby={described} rows="6"></textarea>
+        ) : fl.type === 'select' ? (
+          <select class="field__control" id={fid(fl.name)} name={fl.name} required={required} aria-describedby={described}>
+            <option value="">Wybierz…</option>
+            {(fl.options ?? []).map(o => <option value={o}>{o}</option>)}
+          </select>
+        ) : (
+          <input
+            class="field__control"
+            id={fid(fl.name)}
+            name={fl.name}
+            type={fl.type === 'url' ? 'url' : fl.type === 'email' ? 'email' : fl.type === 'tel' ? 'tel' : 'text'}
+            required={required}
+            autocomplete={fl.autocomplete}
+            inputmode={fl.inputmode as any}
+            maxlength={fl.maxLength}
+            aria-describedby={described}
+            data-validate={validateOf(fl)}
+          />
+        )}
+        <p class="field__error" id={errId} hidden></p>
+      </div>
+    );
+  })}
+
+  <div class="form__honeypot" aria-hidden="true">
+    <label>Nie wypełniaj tego pola <input type="text" name="fax_number" tabindex="-1" autocomplete="off" /></label>
+  </div>
+
+  <div class="field form__consent" data-field="consent">
+    <label class="check">
+      <input type="checkbox" name="consent" value="1" id={fid('consent')} required aria-describedby={`${fid('consent')}-blad`} />
+      <span>Zapoznałem(-am) się z informacją o przetwarzaniu danych osobowych.</span>
+    </label>
+    <p class="field__hint"><Rich text={consentText} /></p>
+    <p class="field__hint">{f.antispamNote}</p>
+    <p class="field__error" id={`${fid('consent')}-blad`} hidden></p>
+  </div>
+
+  {!endpoint && DEMO && <p class="form__demo-note">DEMO: formularz sprawdza dane, ale niczego nie wysyła.</p>}
+  <p><button class="btn btn--primary" type="submit">{submit}</button></p>
+  <div class="form__result" role="status" aria-live="polite" tabindex="-1" data-form-result hidden></div>
+  <script type="application/json" is:inline data-form-texts set:html={JSON.stringify({ messages, success }).replace(/</g, '\\u003c')} />
+</form>
+
+<script>
+  import { initForms } from '../scripts/forms';
+  initForms();
+</script>

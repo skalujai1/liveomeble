@@ -1,0 +1,30 @@
+---
+// Sekcja strony: kotwica (id z pliku treści), H2, opcjonalny lead. Jedna myśl na sekcję.
+import Rich from './Rich.astro';
+
+interface Props {
+  id: string;
+  title?: string;
+  /** Tytuł tylko dla czytników ekranu (np. lista kart pod H1). */
+  titleHidden?: boolean;
+  lead?: string;
+  /** Dodatkowa klasa roli, np. "section--band". */
+  class?: string;
+  /** Szerokość treści: "wide" (domyślnie) albo "narrow" (tekst). */
+  width?: 'wide' | 'narrow';
+}
+const { id, title, titleHidden = false, lead, class: cls, width = 'wide' } = Astro.props;
+const titleId = `${id}-tytul`;
+---
+<section class:list={['section', cls]} id={id} aria-labelledby={title ? titleId : undefined}>
+  <div class:list={['container', { 'container--narrow': width === 'narrow' }]}>
+    {(title || lead || Astro.slots.has('aside')) && (
+      <header class="section__header">
+        {title && <h2 class:list={['section__title', { 'visually-hidden': titleHidden }]} id={titleId}><Rich text={title} /></h2>}
+        {lead && <p class="section__lead"><Rich text={lead} /></p>}
+        <slot name="aside" />
+      </header>
+    )}
+    <slot />
+  </div>
+</section>

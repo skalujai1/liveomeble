@@ -1,0 +1,96 @@
+---
+// Wyszukiwarka sklepów partnerskich: kod pocztowy (główna metoda), filtr kolekcji, lokalizacja tylko po kliknięciu.
+// Obliczenia w przeglądarce (src/lib/locator.js) — kod pocztowy nie trafia na serwer.
+// Dane: /data/resellers.json i /data/postcodes.json (pobierane dopiero przy pierwszym użyciu).
+import PolandMap from './PolandMap.astro';
+import { DEMO } from '../config';
+import { collections, pages, resellers, site } from '../lib/site';
+import { fill } from '../lib/text';
+
+interface Props {
+  id: string;
+  presetCollection?: string;
+  limit?: number;
+  /** Poziom nagłówka listy wyników (nazwy sklepów są o poziom niżej). */
+  headingLevel?: 2 | 3;
+  /** Link do pełnej wyszukiwarki (karta mebla, kolekcja). */
+  more?: { label: string; href: string };
+  showMap?: boolean;
+  /** Synchronizuj ?kod=&kolekcja= z adresem (strona /gdzie-kupic/). */
+  syncUrl?: boolean;
+  note?: string;
+}
+const { id, presetCollection, limit = 5, headingLevel = 3, more, showMap = false, syncUrl = false, note } = Astro.props;
+const gk = pages.gdzieKupic;
+const finder = gk.sections.find(s => s.id === 'wyszukiwarka')! as any;
+const results = gk.sections.find(s => s.id === 'wyniki')! as any;
+const form = finder.form;
+const H = `h${headingLevel}` as 'h2' | 'h3';
+const texts = {
+  errors: finder.errors,
+  ipHint: finder.ipHint,
+  geoLoading: form.geoLoading,
+  item: results.item,
+  title: results.title,
+  titleWithPlace: results.titleWithPlace,
+  resultsAnnounce: results.resultsAnnounce,
+  stores: site.plural.stores,
+  myLocation: 'Twojej lokalizacji',
+  collectionNames: Object.fromEntries(collections.map(c => [c.slug, c.name])),
+  headingLevel: headingLevel + 1,
+};
+---
+<div class="store-finder" id={id} data-store-finder data-limit={limit} data-sync-url={syncUrl ? '1' : undefined}>
+  <form class="store-finder__form" action="/gdzie-kupic/" method="get" novalidate data-sf-form>
+    <div class="field store-finder__postcode">
+      <label class="field__label" for={`${id}-kod`}>{form.postcodeLabel}</label>
+      <input
+        class="field__control"
+        id={`${id}-kod`}
+        name="kod"
+        type="text"
+        inputmode="numeric"
+        autocomplete={form.postcodeAutocomplete}
+        maxlength="8"
+        placeholder={form.postcodeHint}
+        aria-describedby={`${id}-kod-blad`}
+        required
+        data-sf-postcode
+      />
+      <p class="field__error" id={`${id}-kod-blad`} data-sf-error hidden></p>
+    </div>
+    <div class="field store-finder__collection">
+      <label class="field__label" for={`${id}-kolekcja`}>{form.collectionLabel}</label>
+      <select class="field__control" id={`${id}-kolekcja`} name="kolekcja" data-sf-collection>
+        <option value="">{form.collectionAll}</option>
+        {collections.map(c => <option value={c.slug} selected={c.slug === presetCollection}>{c.name}</option>)}
+      </select>
+    </div>
+    <button class="btn btn--primary store-finder__submit" type="submit">{form.submit}</button>
+    <div class="store-finder__geo" data-sf-geo-wrap hidden>
+      <span class="store-finder__or">{form.or}</span>
+      <button class="btn btn--secondary" type="button" data-sf-geo>{form.geoButton}</button>
+      <p class="field__hint">{form.geoNote}</p>
+    </div>
+  </form>
+  <p class="store-finder__ip" data-sf-ip hidden></p>
+  <p class="store-finder__status" role="status" aria-live="polite" data-sf-status></p>
+
+  <div class="store-finder__results" data-sf-results hidden>
+    <H class="store-finder__title" data-sf-title tabindex="-1">{results.title}</H>
+    <p class="store-finder__note" data-sf-note hidden></p>
+    <ol class="store-list" data-sf-list></ol>
+    <button class="btn btn--secondary" type="button" data-sf-more hidden>{results.more}</button>
+    {more && <p class="store-finder__more"><a href={more.href} data-sf-more-link>{more.label}</a></p>}
+    <p class="store-finder__accuracy">{results.accuracyNote}</p>
+    {DEMO && <p class="store-finder__demo">{results.demoNote}</p>}
+  </div>
+  {note && <p class="store-finder__tip">{note}</p>}
+  {showMap && <PolandMap stores={resellers} note={results.mapNote} />}
+  <script type="application/json" is:inline data-sf-texts set:html={JSON.stringify(texts).replace(/</g, '\\u003c')} />
+</div>
+
+<script>
+  import { initStoreFinders } from '../scripts/store-finder';
+  initStoreFinders();
+</script>

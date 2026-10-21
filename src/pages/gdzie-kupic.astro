@@ -1,0 +1,38 @@
+---
+// Gdzie kupić — docs/ia.md 3.9, treść: src/content/pages/gdzie-kupic.json
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Section from '../components/Section.astro';
+import ContentSection from '../components/ContentSection.astro';
+import StoreFinder from '../components/StoreFinder.astro';
+import StoreDirectory from '../components/StoreDirectory.astro';
+import Faq from '../components/Faq.astro';
+import { faqPage, webPage } from '../lib/jsonld';
+import { pages, section, url } from '../lib/site';
+
+const page = pages.gdzieKupic;
+const path = url.stores();
+const finder = section(page, 'wyszukiwarka');
+---
+<BaseLayout
+  title={page.seo.title}
+  description={page.seo.description}
+  {path}
+  pageClass="page-stores"
+  breadcrumbs={[{ name: 'Gdzie kupić', url: path }]}
+  jsonLd={[webPage('WebPage', { path, title: page.seo.title, description: page.seo.description, hasBreadcrumb: true }), faqPage(path, page.faq.items)]}
+>
+  <PageHeader h1={page.h1} lead={finder.lead} />
+
+  <Section id="wyszukiwarka" title="Wyszukiwarka sklepów" titleHidden>
+    <StoreFinder id="sklepy" headingLevel={2} showMap syncUrl />
+  </Section>
+
+  <Section id="wyniki" title="Sklepy partnerskie według województw">
+    <StoreDirectory />
+  </Section>
+
+  {page.sections.filter(s => !['wyszukiwarka', 'wyniki'].includes(s.id)).map((s: any) => <ContentSection s={s} />)}
+
+  <Faq title={page.faq.title} items={page.faq.items} />
+</BaseLayout>

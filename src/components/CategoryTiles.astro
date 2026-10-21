@@ -1,0 +1,17 @@
+---
+// Kafle rodzajów mebli (16 kategorii) z liczbą mebli — linki do /meble/<kategoria>/.
+import { productCount, productsByType, types, url, type FurnitureType } from '../lib/site';
+
+interface Props { list?: FurnitureType[]; headingLevel?: 3 | 4; current?: string }
+const { list = types, current } = Astro.props;
+---
+<ul class="category-tiles">
+  {list.map(t => (
+    <li class="category-tile">
+      <a class="category-tile__link" href={url.category(t.slug)} aria-current={current === t.slug ? 'page' : undefined}>
+        <span class="category-tile__name">{t.plural}</span>
+        <span class="category-tile__count">{productCount(productsByType(t.id).length)}</span>
+      </a>
+    </li>
+  ))}
+</ul>

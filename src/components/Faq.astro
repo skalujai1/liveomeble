@@ -1,0 +1,24 @@
+---
+// FAQ na dole strony: H2 = tytuł, H3 = pytanie, akapit = odpowiedź.
+// Z TEJ SAMEJ listy powstaje FAQPage w JSON-LD (lib/jsonld.ts → faqPage), więc tekst jest identyczny.
+import Rich from './Rich.astro';
+import type { FaqItem } from '../lib/site';
+
+interface Props { title: string; items: FaqItem[]; id?: string }
+const { title, items, id = 'pytania' } = Astro.props;
+---
+{items.length > 0 && (
+  <section class="section faq" id={id} aria-labelledby={`${id}-tytul`}>
+    <div class="container">
+      <h2 class="section__title" id={`${id}-tytul`}>{title}</h2>
+      <div class="faq__list" data-faq>
+        {items.map(it => (
+          <div class="faq__item">
+            <h3 class="faq__q"><Rich text={it.q} /></h3>
+            <p class="faq__a" data-faq-answer><Rich text={it.a} /></p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

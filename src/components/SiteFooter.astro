@@ -1,0 +1,45 @@
+---
+// Stopka: kolekcje (z danych), pomieszczenia, pomoc w wyborze, firma i partnerzy, linki prawne, dane spółki, notka DEMO.
+import Rich from './Rich.astro';
+import { CONSENT_SCRIPTS, DEMO } from '../config';
+import { collections, site, url, year } from '../lib/site';
+import { fill } from '../lib/text';
+
+const f = site.footer;
+const columns = f.columns.map(col =>
+  col.source === 'collections.json'
+    ? { ...col, items: collections.map(c => ({ label: c.name, href: url.collection(c.slug) })) }
+    : col,
+);
+const legal = f.legal.filter(l => !('action' in l) || CONSENT_SCRIPTS.length > 0);
+---
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <p class="site-footer__lead">{f.lead}</p>
+    <div class="site-footer__columns">
+      {columns.map((col, i) => (
+        <nav class="site-footer__col" aria-labelledby={`stopka-${i}`}>
+          <h2 class="site-footer__title" id={`stopka-${i}`}>{col.title}</h2>
+          <ul class="site-footer__list">
+            {col.items.map(it => <li><a href={it.href}>{it.label}</a></li>)}
+            {col.more && <li class="site-footer__more"><a href={col.more.href}>{col.more.label}</a></li>}
+          </ul>
+        </nav>
+      ))}
+    </div>
+    <div class="site-footer__bottom">
+      <ul class="site-footer__legal">
+        {legal.map(l => (
+          <li>
+            {'href' in l && l.href
+              ? <a href={l.href}>{l.label}</a>
+              : <button type="button" class="link-button" data-open-consent>{l.label}</button>}
+          </li>
+        ))}
+      </ul>
+      <p class="site-footer__company"><Rich text={f.company} /></p>
+      <p class="site-footer__copy">{fill(f.copyright, { year })}</p>
+      {DEMO && <p class="site-footer__demo"><strong>DEMO.</strong> {f.demoNotice}</p>}
+    </div>
+  </div>
+</footer>

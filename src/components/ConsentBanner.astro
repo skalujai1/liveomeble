@@ -1,0 +1,44 @@
+---
+// Zgody na pliki cookie (lekki moduł, decyzja w localStorage, kategorie: analytics, marketing).
+// Skrypty śledzące trafiają na stronę jako <script type="text/plain" data-consent="...">
+// i uruchamia je scripts/consent.ts dopiero po zgodzie. Bez takich skryptów (CONSENT_SCRIPTS = [])
+// baner i jego skrypt nie są w ogóle wstawiane — strona używa tylko pamięci niezbędnej.
+import { CONSENT_SCRIPTS } from '../config';
+import { site } from '../lib/site';
+import Rich from './Rich.astro';
+
+const c = site.cookies;
+const enabled = CONSENT_SCRIPTS.length > 0;
+const categories = [
+  { id: 'analytics', label: 'Statystyki odwiedzin' },
+  { id: 'marketing', label: 'Marketing' },
+].filter(cat => CONSENT_SCRIPTS.some(s => s.category === cat.id));
+---
+{enabled && (
+  <>
+    {CONSENT_SCRIPTS.map(s => <script type="text/plain" is:inline data-consent={s.category} data-src={s.src}></script>)}
+    <section class="consent" aria-labelledby="zgody-tytul" data-consent-banner hidden>
+      <h2 class="consent__title" id="zgody-tytul">{c.title}</h2>
+      <p class="consent__text"><Rich text={c.text} /> <a href="/polityka-prywatnosci/">{c.link}</a></p>
+      <form class="consent__settings" data-consent-settings hidden>
+        <fieldset>
+          <legend>{c.settings}</legend>
+          <label class="check"><input type="checkbox" checked disabled /> <span>Niezbędne (zawsze włączone)</span></label>
+          {categories.map(cat => (
+            <label class="check"><input type="checkbox" name={cat.id} /> <span>{cat.label}</span></label>
+          ))}
+        </fieldset>
+        <button class="btn btn--primary" type="submit">Zapisz wybór</button>
+      </form>
+      <p class="consent__actions">
+        <button class="btn btn--primary" type="button" data-consent-accept>{c.accept}</button>
+        <button class="btn btn--secondary" type="button" data-consent-reject>{c.reject}</button>
+        <button class="btn btn--text" type="button" data-consent-open-settings>{c.settings}</button>
+      </p>
+    </section>
+    <script>
+      import { initConsent } from '../scripts/consent';
+      initConsent();
+    </script>
+  </>
+)}

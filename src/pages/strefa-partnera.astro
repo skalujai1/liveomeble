@@ -1,0 +1,285 @@
+---
+// Strefa partnera — WERSJA DEMONSTRACYJNA (docs/ia.md 3.11, treść: src/content/pages/strefa-partnera.json).
+// Logowanie dowolnymi danymi otwiera panel w przeglądarce. Cennik partnerski wyliczony przykładowo
+// (cena katalogowa netto − rabat z PARTNER_DEMO). Zamówienia zapisywane tylko w localStorage — nic nie jest wysyłane.
+// noindex, nofollow; poza sitemap.xml i llms.txt; bez FAQPage i cen w JSON-LD.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Faq from '../components/Faq.astro';
+import { PARTNER_DEMO } from '../config';
+import { webPage } from '../lib/jsonld';
+import { BUILD_NOW, collectionOf, collections, pages, priceAt, productsSorted, resellers, site, typeOf, types, url } from '../lib/site';
+import { fill } from '../lib/text';
+
+const page = pages.strefaPartnera;
+const path = url.partnerZone;
+const L = page.login;
+const P = page.panel;
+const vat = PARTNER_DEMO.vatRate;
+const round2 = (n: number) => Math.round(n * 100) / 100;
+
+const rows = productsSorted.flatMap(p =>
+  p.variants.map(v => {
+    const pr = priceAt(p, v.code);
+    const retail = pr.regular ?? pr.price;
+    return {
+      sku: v.sku,
+      name: p.name,
+      color: v.colorLabel,
+      collection: p.collection,
+      collectionName: collectionOf(p).name,
+      type: typeOf(p).slug,
+      retail,
+      promo: pr.promo?.label ?? null,
+      net: round2((retail / (1 + vat / 100)) * (1 - PARTNER_DEMO.discountPercent / 100)),
+      stock: v.stock,
+      leadTimeDays: (v as { leadTimeDays?: number }).leadTimeDays ?? null,
+    };
+  }),
+);
+const store = resellers[0];
+const boot = {
+  rows,
+  vat,
+  builtAt: BUILD_NOW.toISOString(),
+  company: PARTNER_DEMO.company,
+  addresses: [`${store.address}, ${store.postcode} ${store.city} (DEMO)`, 'ul. Magazynowa 2, 00-000 Przykładowo (DEMO)'],
+  t: {
+    stock: site.stock,
+    statuses: P.history.statuses,
+    plural: site.plural.items,
+    addedAnnounce: P.pricelist.addedAnnounce,
+    remove: P.order.remove,
+    confirm: P.order.confirm,
+    success: P.order.success,
+    loginError: L.errors.invalid,
+    greeting: P.greeting,
+    accountMeta: P.accountMeta,
+    vatLabel: P.order.summary.vat,
+    updated: P.pricelist.updated,
+  },
+};
+const tabs = P.nav.items;
+---
+<BaseLayout
+  title={page.seo.title}
+  description={page.seo.description}
+  {path}
+  robots={page.seo.robots}
+  pageClass="page-partner-zone"
+  assistant={false}
+  breadcrumbs={[{ name: page.h1, url: path }]}
+  jsonLd={[webPage('WebPage', { path, title: page.seo.title, description: page.seo.description, hasBreadcrumb: true })]}
+>
+  <div class="container partner-zone" data-partner-app>
+    <header class="page-header__text">
+      <h1 class="page-header__title">{page.h1}</h1>
+      <div class="demo-banner" role="note">
+        <p class="demo-banner__title"><strong>DEMO — {page.demoBanner.title}</strong></p>
+        <p>{page.demoBanner.text}</p>
+      </div>
+    </header>
+    <noscript><p class="section__note">Strefa partnera działa w przeglądarce i wymaga włączonego JavaScriptu.</p></noscript>
+
+    <!-- Logowanie -->
+    <section class="section" id={L.id} data-view="login" aria-labelledby="logowanie-tytul">
+      <h2 id="logowanie-tytul" class="section__title">Logowanie</h2>
+      <p class="section__lead">{L.lead}</p>
+      <div class="form__row">
+        <form class="form" data-login novalidate>
+          <div class="field">
+            <label class="field__label" for="pz-email">{L.form.emailLabel}</label>
+            <input class="field__control" id="pz-email" name="email" type="email" autocomplete="username" required />
+          </div>
+          <div class="field">
+            <label class="field__label" for="pz-haslo">{L.form.passwordLabel}</label>
+            <input class="field__control" id="pz-haslo" name="password" type="password" autocomplete="current-password" required />
+            <label class="check"><input type="checkbox" data-show-password /> <span>{L.form.showPassword}</span></label>
+          </div>
+          <p class="field__error" role="alert" data-login-error hidden></p>
+          <p><button class="btn btn--primary" type="submit">{L.form.submit}</button></p>
+          <details class="partner-forgot">
+            <summary>{L.form.forgot}</summary>
+            <p class="field__hint">{L.form.forgotText}</p>
+            <p class="field__hint">DEMO: link nie zostanie wysłany. {L.form.forgotDone}</p>
+          </details>
+        </form>
+        <div class="partner-aside">
+          <div class="feature-list__item">
+            <h3>{L.demoEntry.title}</h3>
+            <p>{L.demoEntry.text}</p>
+            <p><button class="btn btn--secondary" type="button" data-demo-login>{L.demoEntry.button}</button></p>
+          </div>
+          <div class="feature-list__item">
+            <h3>{L.noAccount.title}</h3>
+            <p>{L.noAccount.text}</p>
+            <p><a href={L.noAccount.cta.href}>{L.noAccount.cta.label}</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel (po zalogowaniu) -->
+    <section class="section partner-panel" data-view="panel" aria-labelledby="panel-tytul" hidden>
+      <div class="partner-panel__head">
+        <h2 id="panel-tytul" class="section__title" data-greeting>Panel partnera</h2>
+        <p class="page-meta" data-account-meta></p>
+        <p><button class="btn btn--text" type="button" data-logout>{P.logout}</button></p>
+      </div>
+
+      <div class="partner-tabs" role="tablist" aria-label={P.nav.ariaLabel}>
+        {tabs.map((t, i) => (
+          <button type="button" role="tab" id={`tab-${t.id}`} aria-controls={`panel-${t.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-tab={t.id}>{t.label}</button>
+        ))}
+      </div>
+
+      <div role="tabpanel" id="panel-cennik" aria-labelledby="tab-cennik" data-panel="cennik" class="partner-panel__body">
+        <h3>{P.pricelist.title}</h3>
+        <p>{P.pricelist.lead}</p>
+        <p class="page-meta" data-updated></p>
+        <form class="partner-filters" data-pricelist-filters>
+          <label class="field field--inline"><span class="field__label">{P.pricelist.search}</span><input class="field__control" type="search" name="q" /></label>
+          <label class="field field--inline"><span class="field__label">{P.pricelist.filterCollection}</span>
+            <select class="field__control" name="kolekcja"><option value="">Wszystkie</option>{collections.map(c => <option value={c.slug}>{c.name}</option>)}</select>
+          </label>
+          <label class="field field--inline"><span class="field__label">{P.pricelist.filterType}</span>
+            <select class="field__control" name="typ"><option value="">Wszystkie</option>{types.map(t => <option value={t.slug}>{t.plural}</option>)}</select>
+          </label>
+          <label class="check"><input type="checkbox" name="dostepne" /> <span>{P.pricelist.filterStock}</span></label>
+        </form>
+        <p class="visually-hidden" role="status" aria-live="polite" data-pricelist-status></p>
+        <div class="partner-table-wrap" tabindex="0" role="region" aria-label={P.pricelist.title}>
+          <table class="partner-table">
+            <thead>
+              <tr>
+                <th scope="col">{P.pricelist.columns.sku}</th>
+                <th scope="col">{P.pricelist.columns.name}</th>
+                <th scope="col">{P.pricelist.columns.color}</th>
+                <th scope="col" class="num">{P.pricelist.columns.retail}</th>
+                <th scope="col" class="num">{P.pricelist.columns.partner}</th>
+                <th scope="col">{P.pricelist.columns.promo}</th>
+                <th scope="col">{P.pricelist.columns.stock}</th>
+                <th scope="col">{P.pricelist.columns.qty}</th>
+                <th scope="col"><span class="visually-hidden">{P.pricelist.columns.add}</span></th>
+              </tr>
+            </thead>
+            <tbody data-pricelist-body></tbody>
+          </table>
+        </div>
+        <p><button class="btn btn--secondary" type="button" data-export>{P.pricelist.export}</button></p>
+        <p class="form__demo-note">{P.pricelist.demoNote} Przykładowy rabat: {PARTNER_DEMO.discountPercent}%.</p>
+        <p class="visually-hidden" role="status" aria-live="polite" data-added-status></p>
+      </div>
+
+      <div role="tabpanel" id="panel-zamowienie" aria-labelledby="tab-zamowienie" data-panel="zamowienie" class="partner-panel__body" hidden>
+        <h3>{P.order.title}</h3>
+        <form class="partner-filters" data-quick-add>
+          <label class="field field--inline"><span class="field__label">Indeks (SKU)</span>
+            <input class="field__control" name="sku" list="pz-skus" autocomplete="off" required />
+          </label>
+          <label class="field field--inline"><span class="field__label">{P.order.columns.qty}</span>
+            <input class="field__control" name="qty" type="number" min="1" max="999" value="1" required />
+          </label>
+          <button class="btn btn--secondary" type="submit">{P.pricelist.addButton}</button>
+          <p class="field__error" data-quick-error hidden></p>
+          <datalist id="pz-skus">{rows.map(r => <option value={r.sku}>{`${r.name} — ${r.color}`}</option>)}</datalist>
+        </form>
+        <p data-order-empty>{P.order.empty}</p>
+        <div class="partner-table-wrap" tabindex="0" role="region" aria-label={P.order.title} data-order-wrap hidden>
+          <table class="partner-table">
+            <thead>
+              <tr>
+                <th scope="col">{P.order.columns.item}</th>
+                <th scope="col">{P.order.columns.qty}</th>
+                <th scope="col" class="num">{P.order.columns.unit}</th>
+                <th scope="col" class="num">{P.order.columns.total}</th>
+                <th scope="col"><span class="visually-hidden">Usuń</span></th>
+              </tr>
+            </thead>
+            <tbody data-order-body></tbody>
+          </table>
+        </div>
+        <div class="order-summary" data-order-summary hidden>
+          <div><span>{P.order.summary.net}</span><strong data-sum-net></strong></div>
+          <div><span data-sum-vat-label></span><span data-sum-vat></span></div>
+          <div><span>{P.order.summary.gross}</span><strong data-sum-gross></strong></div>
+          <div><span>Pozycje</span><span data-sum-items></span></div>
+        </div>
+        <form class="form" data-order-form novalidate>
+          <fieldset class="field">
+            <legend class="field__label">{P.order.delivery.title}</legend>
+            <label class="field"><span class="field__label">{P.order.delivery.addressLabel}</span>
+              <select class="field__control" name="address" data-addresses></select>
+              <span class="field__hint">{P.order.delivery.addressHint}</span>
+            </label>
+            <label class="field"><span class="field__label">{P.order.delivery.dateLabel}</span>
+              <input class="field__control" type="date" name="date" />
+              <span class="field__hint">{P.order.delivery.dateHint}</span>
+            </label>
+          </fieldset>
+          <label class="field"><span class="field__label">{P.order.referenceLabel}</span>
+            <input class="field__control" name="reference" maxlength="40" />
+            <span class="field__hint">{P.order.referenceHint}</span>
+          </label>
+          <label class="field"><span class="field__label">{P.order.notesLabel}</span>
+            <textarea class="field__control" name="notes" maxlength="1000" rows="3"></textarea>
+          </label>
+          <p class="field__hint">{P.order.leadTimeNote}</p>
+          <p class="field__error" data-order-error hidden></p>
+          <p class="cta-row">
+            <button class="btn btn--primary" type="submit" data-order-submit>{P.order.submitDemo}</button>
+            <button class="btn btn--primary" type="button" data-order-confirm hidden></button>
+            <button class="btn btn--text" type="button" data-order-cancel hidden>Wróć do edycji</button>
+          </p>
+          <p class="form__demo-note">W wersji produkcyjnej zamówienie trafi do Navireo (ERP Liveo) — tu nic nie jest wysyłane.</p>
+        </form>
+        <div class="form__result" role="status" aria-live="polite" tabindex="-1" data-order-result hidden></div>
+      </div>
+
+      <div role="tabpanel" id="panel-historia" aria-labelledby="tab-historia" data-panel="historia" class="partner-panel__body" hidden>
+        <h3>{P.history.title}</h3>
+        <p data-history-empty>{P.history.empty}</p>
+        <div class="partner-table-wrap" tabindex="0" role="region" aria-label={P.history.title} data-history-wrap hidden>
+          <table class="partner-table">
+            <thead>
+              <tr>
+                <th scope="col">{P.history.columns.date}</th>
+                <th scope="col">{P.history.columns.web}</th>
+                <th scope="col">{P.history.columns.erp}</th>
+                <th scope="col" class="num">{P.history.columns.value}</th>
+                <th scope="col">{P.history.columns.status}</th>
+              </tr>
+            </thead>
+            <tbody data-history-body></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div role="tabpanel" id="panel-materialy" aria-labelledby="tab-materialy" data-panel="materialy" class="partner-panel__body" hidden>
+        <h3>{P.materials.title}</h3>
+        <p>{P.materials.lead}</p>
+        <ul class="feature-bullets">{P.materials.items.map(i => <li>{i.label} <span class="field__hint">(DEMO — plik niedostępny)</span></li>)}</ul>
+        <p class="field__hint">{P.materials.license}</p>
+      </div>
+
+      <div role="tabpanel" id="panel-konto" aria-labelledby="tab-konto" data-panel="konto" class="partner-panel__body" hidden>
+        <h3>{P.account.title}</h3>
+        <dl class="facts">
+          <div class="facts__row"><dt>{P.account.company}</dt><dd>{PARTNER_DEMO.company.name}, NIP {PARTNER_DEMO.company.nip}</dd></div>
+          <div class="facts__row"><dt>{P.account.manager}</dt><dd>{PARTNER_DEMO.company.manager}</dd></div>
+          <div class="facts__row"><dt>{P.account.storeListing}</dt><dd>{store.name}, {store.address}, {store.postcode} {store.city}</dd></div>
+        </dl>
+        <p class="field__hint">{P.account.companyNote}</p>
+        <p class="field__hint">{P.account.storeListingText}</p>
+        <p><button class="btn btn--secondary" type="button" disabled>{P.account.changePassword} (DEMO)</button></p>
+      </div>
+    </section>
+  </div>
+
+  <Faq title={page.faq.title} items={page.faq.items} id="pomoc" />
+  <script type="application/json" is:inline data-partner-boot set:html={JSON.stringify(boot).replace(/</g, '\\u003c')} />
+</BaseLayout>
+
+<script>
+  import { initPartnerZone } from '../scripts/partner-demo';
+  initPartnerZone();
+</script>

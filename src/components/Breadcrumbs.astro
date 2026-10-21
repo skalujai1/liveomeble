@@ -1,0 +1,20 @@
+---
+// Okruszki — ta sama ścieżka trafia do BreadcrumbList (BaseLayout).
+import { plainText } from '../lib/text';
+import { site } from '../lib/site';
+import type { Crumb } from '../lib/jsonld';
+
+interface Props { items: Crumb[] }
+const { items } = Astro.props;
+---
+<nav class="breadcrumbs container" aria-label={site.breadcrumbs.ariaLabel}>
+  <ol class="breadcrumbs__list">
+    {items.map((c, i) => (
+      <li class="breadcrumbs__item">
+        {i === items.length - 1
+          ? <span aria-current="page">{plainText(c.name)}</span>
+          : <a href={c.url}>{plainText(c.name)}</a>}
+      </li>
+    ))}
+  </ol>
+</nav>

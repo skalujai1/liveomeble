@@ -1,0 +1,67 @@
+---
+// Karta mebla na listach. Atrybuty data-* opisują mebel dla filtrów (scripts/listing.ts) —
+// bez JS karta jest zwykłym linkiem z ceną z dnia budowy.
+import Media from './Media.astro';
+import PriceBlock from './PriceBlock.astro';
+import { packshotFor } from '../lib/images';
+import { collectionOf, colorCount, defaultVariant, dims, pages, priceAt, site, typeOf, url, variantBoardColors, type Product } from '../lib/site';
+import { fill } from '../lib/text';
+
+interface Props {
+  product: Product;
+  /** Kod koloru (np. komplet w tym samym kolorze); domyślnie pierwszy dostępny. */
+  code?: string;
+  headingLevel?: 3 | 4;
+  /** Pozycja w kolejności „polecane”. */
+  order?: number;
+  sizes?: string;
+}
+const { product: p, code, headingLevel = 3, order = 0, sizes = '(min-width: 75rem) 18rem, (min-width: 48rem) 30vw, 46vw' } = Astro.props;
+const v = (code && p.variants.find(x => x.code === code)) || defaultVariant(p);
+const img = packshotFor(p, v);
+const card = pages.meble.sections.find(s => s.id === 'lista')!.card!;
+const alt = img?.approximate && img.title
+  ? `Zdjęcie poglądowe tego rodzaju mebla: ${img.title}`
+  : fill(card.imageAlt, { name: p.name, colorLabel: v.colorLabel.toLocaleLowerCase('pl') });
+const price = priceAt(p, v.code);
+const colors = [...new Set(p.variants.flatMap(variantBoardColors))];
+const H = `h${headingLevel}` as 'h3' | 'h4';
+const href = url.product(p.slug, v.code === defaultVariant(p).code ? undefined : v.code);
+---
+<li
+  class="product-card"
+  data-listing-item
+  data-product={p.sku}
+  data-rooms={p.rooms.join(' ')}
+  data-type={typeOf(p).slug}
+  data-collection={p.collection}
+  data-colors={colors.join(' ')}
+  data-price={price.price}
+  data-promo={price.promo ? '1' : '0'}
+  data-new={p.isNew ? '1' : '0'}
+  data-width={p.dims.w}
+  data-order={order}
+>
+  <a class="product-card__link" href={href}>
+    <Media
+      image={img}
+      alt={alt}
+      widths={[320, 480, 640, 960]}
+      sizes={sizes}
+      ratio="4 / 3"
+      fit="contain"
+      placeholderLabel={typeOf(p).name}
+      model={{ ...p.model3d, finish: v.finish }}
+    />
+    <H class="product-card__title">{p.name}</H>
+  </a>
+  <p class="product-card__meta">
+    <span class="product-card__collection">{site.labels.collection} {collectionOf(p).name}</span>
+    <span>{colorCount(p)} · {dims(p)}</span>
+  </p>
+  <PriceBlock product={p} code={v.code} />
+  <p class="product-card__badges">
+    <span class="badge badge--promo" data-promo-badge hidden={!price.promo}>{price.promo?.label ?? ''}</span>
+    {p.isNew && <span class="badge">{site.labels.new}</span>}
+  </p>
+</li>

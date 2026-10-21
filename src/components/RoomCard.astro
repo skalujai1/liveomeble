@@ -1,0 +1,28 @@
+---
+// Karta pomieszczenia: aranżacja, nazwa, opis, link do mebli dla tego pokoju.
+import Media from './Media.astro';
+import { roomImage } from '../lib/images';
+import { pages, url, type Room } from '../lib/site';
+import { fill } from '../lib/text';
+
+interface Props { room: Room; headingLevel?: 2 | 3 }
+const { room: r, headingLevel = 3 } = Astro.props;
+const card = (pages.home.sections.find(s => s.id === 'pomieszczenia') as any).card;
+const img = roomImage(r.slug, 'tall');
+const H = `h${headingLevel}` as 'h2' | 'h3';
+---
+<li class="room-card">
+  <Media
+    image={img}
+    alt={img?.title ? `Aranżacja: ${img.title}` : fill(card.imageAlt, { name: r.name })}
+    widths={[320, 480, 640, 960]}
+    sizes="(min-width: 75rem) 16rem, (min-width: 48rem) 30vw, 46vw"
+    ratio="4 / 5"
+    placeholderLabel={r.name}
+  />
+  <div class="room-card__body">
+    <H class="room-card__title">{r.name}</H>
+    <p class="room-card__text">{r.description}</p>
+    <a class="room-card__link stretched-link" href={url.room(r.slug)}>{fill(card.link, { name: r.name })}</a>
+  </div>
+</li>

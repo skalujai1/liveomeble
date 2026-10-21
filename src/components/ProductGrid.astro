@@ -1,0 +1,21 @@
+---
+// Siatka kart mebli (bez filtrów) + dane do odświeżenia cen w przeglądarce.
+import ProductCard from './ProductCard.astro';
+import PriceData from './PriceData.astro';
+import type { Product } from '../lib/site';
+
+interface Props {
+  products: Product[];
+  /** Kod koloru dla wszystkich kart (komplet w jednym kolorze). */
+  code?: string;
+  headingLevel?: 3 | 4;
+  label?: string;
+  /** false, gdy dane cen osadza już strona (np. lista z filtrami). */
+  withPriceData?: boolean;
+}
+const { products, code, headingLevel = 3, label, withPriceData = true } = Astro.props;
+---
+<ul class="product-grid" aria-label={label}>
+  {products.map((p, i) => <ProductCard product={p} code={code} headingLevel={headingLevel} order={i} />)}
+</ul>
+{withPriceData && <PriceData products={products} />}

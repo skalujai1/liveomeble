@@ -1,0 +1,109 @@
+---
+// Lista mebli z filtrami (pomieszczenie, rodzaj, kolekcja, kolor, cena, tylko promocje) i sortowaniem.
+// Bez JS: zwykły formularz GET i pełna lista w HTML. Z JS (scripts/listing.ts): filtrowanie bez przeładowania,
+// adres aktualizowany przez history.replaceState (canonical zostaje bez parametrów).
+import ProductCard from './ProductCard.astro';
+import PriceData from './PriceData.astro';
+import { boardFinishes, collections, pages, productCount, rooms, site, types, type Product } from '../lib/site';
+import { fill } from '../lib/text';
+
+interface Props {
+  products: Product[];
+  /** Adres formularza (strona bez parametrów). */
+  action: string;
+  /** Ukryte grupy filtrów, gdy strona ma je ustawione na stałe (np. kategoria → bez „Rodzaj mebla”). */
+  hide?: string[];
+  headingLevel?: 3 | 4;
+  id?: string;
+}
+const { products, action, hide = [], headingLevel = 3, id = 'lista-mebli' } = Astro.props;
+const cfg = pages.meble.sections.find(s => s.id === 'lista')!;
+const f = cfg.filters!;
+const g = (gid: string) => f.groups.find(x => x.id === gid)!;
+
+// Opcje tylko z wartościami, które występują na tej liście (bez pustych wyników „na start”).
+const has = {
+  pokoj: new Set(products.flatMap(p => p.rooms)),
+  typ: new Set(products.map(p => types.find(t => t.id === p.type)!.slug)),
+  kolekcja: new Set(products.map(p => p.collection)),
+};
+const options: Record<string, { value: string; label: string }[]> = {
+  pokoj: rooms.filter(r => has.pokoj.has(r.slug)).map(r => ({ value: r.slug, label: r.name })),
+  typ: types.filter(t => has.typ.has(t.slug)).map(t => ({ value: t.slug, label: t.plural })),
+  kolekcja: collections.filter(c => has.kolekcja.has(c.slug)).map(c => ({ value: c.slug, label: c.name })),
+  kolor: boardFinishes.map(b => ({ value: b.id, label: b.label })),
+};
+const swatch = Object.fromEntries(boardFinishes.map(b => [b.id, b.hex]));
+const multi = ['pokoj', 'typ', 'kolekcja', 'kolor'].filter(x => !hide.includes(x) && options[x].length > 1);
+const cena = g('cena');
+const promo = g('promocje');
+const total = productCount(products.length);
+---
+<div class="listing" id={id} data-listing data-action={action}>
+  <button class="btn btn--secondary listing__filters-toggle" type="button" aria-expanded="false" aria-controls={`${id}-filtry`} data-listing-toggle hidden>
+    {f.open}
+  </button>
+  <form class="filters" id={`${id}-filtry`} action={action} method="get" data-listing-form aria-label={f.title}>
+    <div class="filters__groups">
+      {multi.map(key => (
+        <fieldset class="filters__group" data-filter={key}>
+          <legend class="filters__legend">{g(key).label}</legend>
+          {'hint' in g(key) && <p class="filters__hint">{(g(key) as { hint?: string }).hint}</p>}
+          <ul class="filters__options">
+            {options[key].map(o => (
+              <li>
+                <label class="check">
+                  <input type="checkbox" name={g(key).param} value={o.value} />
+                  {key === 'kolor' && <span class="swatch" style={`--swatch: ${swatch[o.value]}`} aria-hidden="true"></span>}
+                  <span>{o.label}</span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </fieldset>
+      ))}
+      <fieldset class="filters__group" data-filter="cena">
+        <legend class="filters__legend">{cena.label}</legend>
+        <ul class="filters__options">
+          <li><label class="check"><input type="radio" name={cena.param} value="" checked /> <span>Dowolna</span></label></li>
+          {cena.options!.map(o => (
+            <li><label class="check"><input type="radio" name={cena.param} value={o.value} /> <span>{o.label}</span></label></li>
+          ))}
+        </ul>
+      </fieldset>
+      <div class="filters__group filters__group--inline">
+        <label class="check check--toggle">
+          <input type="checkbox" name={promo.param} value={promo.value} />
+          <span>{promo.label}</span>
+        </label>
+      </div>
+    </div>
+    <div class="filters__footer">
+      <label class="field field--inline">
+        <span class="field__label">{cfg.sort!.label}</span>
+        <select class="field__control" name="sort" data-listing-sort>
+          {cfg.sort!.options.map(o => <option value={o.value}>{o.label}</option>)}
+        </select>
+      </label>
+      <button class="btn btn--primary filters__submit" type="submit" data-listing-submit>Pokaż meble</button>
+      <button class="btn btn--text" type="reset" data-listing-clear>{f.clear}</button>
+    </div>
+  </form>
+
+  <p class="listing__count" role="status" aria-live="polite" data-listing-count data-total={products.length} data-forms={JSON.stringify(site.plural.products)}>{total}</p>
+
+  <ul class="product-grid" data-listing-list aria-label={cfg.title}>
+    {products.map((p, i) => <ProductCard product={p} headingLevel={headingLevel} order={i} />)}
+  </ul>
+  <div class="listing__empty" data-listing-empty hidden>
+    <p class="listing__empty-title"><strong>{cfg.empty!.title}</strong></p>
+    <p>{cfg.empty!.text}</p>
+    <button class="btn btn--secondary" type="button" data-listing-clear>{f.clear}</button>
+  </div>
+</div>
+<PriceData products={products} />
+
+<script>
+  import { initListings } from '../scripts/listing';
+  initListings();
+</script>
