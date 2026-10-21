@@ -60,11 +60,26 @@ export function slab(w, h, d, mat, { radius = 0.0018, grain, seed = 1, segments 
   return m;
 }
 
+/** Zerowe normalne (zdegenerowane trójkąty na osi brył obrotowych) → NaN w shaderze; zastępuje je osią Y. */
+export function fixZeroNormals(geo) {
+  const n = geo.attributes.normal, p = geo.attributes.position;
+  if (!n) return geo;
+  geo.computeBoundingBox();
+  const cy = (geo.boundingBox.min.y + geo.boundingBox.max.y) / 2;
+  for (let i = 0; i < n.count; i++) {
+    const l = Math.hypot(n.getX(i), n.getY(i), n.getZ(i));
+    if (!(l > 1e-6)) n.setXYZ(i, 0, p.getY(i) >= cy ? 1 : -1, 0);
+  }
+  n.needsUpdate = true;
+  return geo;
+}
+
 /** Bryła obrotowa z profilu [[r, y], ...]. */
 export function lathe(profile, mat, segments = 64) {
   const pts = profile.map(([r, y]) => new THREE.Vector2(Math.max(0, r), y));
   const geo = new THREE.LatheGeometry(pts, segments);
   geo.computeVertexNormals();
+  fixZeroNormals(geo);
   const m = new THREE.Mesh(geo, mat);
   m.castShadow = m.receiveShadow = true;
   return m;
@@ -111,6 +126,7 @@ export function pillowGeometry(w, t, d, { seed = 1, wrinkle = 0.004, boxy = 0.28
     pos.setXYZ(i, X + k * amp * Math.sign(X) * 0.5, Y + k * amp * Math.sign(v3.y), Z + k * amp * Math.sign(Z) * 0.5);
   }
   geo.computeVertexNormals();
+  fixZeroNormals(geo);
   const uv = new Float32Array(pos.count * 2);
   for (let i = 0; i < pos.count; i++) { uv[i * 2] = pos.getX(i) + 0.5; uv[i * 2 + 1] = pos.getZ(i) + pos.getY(i) * 0.5 + 0.5; }
   geo.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
@@ -163,6 +179,7 @@ export function drapeGeometry({ w, lTop, topY, z0 = 0, side = 0.25, foot = 0.25,
     uv.setXY(i, s + 2, t);
   }
   geo.computeVertexNormals();
+  fixZeroNormals(geo);
   return geo;
 }
 
@@ -180,5 +197,6 @@ export function curtainGeometry(width, height, { folds = 9, depth = 0.05, seed =
     uv.setXY(i, x + 1, y);
   }
   geo.computeVertexNormals();
+  fixZeroNormals(geo);
   return geo;
 }

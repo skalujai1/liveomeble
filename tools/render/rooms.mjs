@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Aranżacje: node tools/render/rooms.mjs [--only salon-jasny] [--frame wide|tall] [--samples N] [--preview] [--out <dir>]
+// Aranżacje: node tools/render/rooms.mjs [--only salon-jasny,biuro] [--frame wide|tall] [--samples N] [--preview] [--scale 0.4] [--out <dir>]
 // Domyślnie: wszystkie pokoje, oba kadry → src/assets/renders/rooms/<nazwa>-wide.jpg (2400×1350) i -tall.jpg (1200×1500).
 import path from 'node:path';
 import fs from 'node:fs';
@@ -24,7 +24,8 @@ try {
     if (only && !only.split(',').includes(room.name)) continue;
     for (const frame of frames) {
       let [w, h] = SIZES[frame];
-      if (preview) { w = Math.round(w / 2.5); h = Math.round(h / 2.5); }
+      const sc = Number(flag('--scale', preview ? 0.4 : 1));
+      if (sc !== 1) { w = Math.round(w * sc); h = Math.round(h * sc); }
       const file = path.join(outDir, `${room.name}-${frame}.jpg`);
       process.stdout.write(`→ ${room.name} (${frame}, ${w}×${h}, ${samples} próbek) … `);
       const res = await R.render({ kind: 'room', room: room.name, frame, width: w, height: h, samples, preview });

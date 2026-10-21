@@ -95,7 +95,7 @@ export function fabricMaterial(hex, kind = 'linen', opts = {}) {
     const m = new THREE.MeshPhysicalMaterial({
       name: 'fabric-' + kind, color: c, map, roughness: 1.0, roughnessMap: data, bumpMap: data,
       bumpScale: kind === 'knit' ? 2.5 : kind === 'boucle' ? 2.0 : 0.8,
-      sheen: opts.sheen ?? 0.6, sheenRoughness: 0.75, sheenColor: c.clone().lerp(new THREE.Color(1, 1, 1), 0.35),
+      sheen: opts.sheen ?? (kind === 'boucle' ? 0.35 : 0.5), sheenRoughness: 0.8, sheenColor: c.clone().lerp(new THREE.Color(1, 1, 1), 0.15),
       specularIntensity: 0.25,
     });
     m.userData.texInfo = { lenM: 1, widM: 1, uvMode: 'repeat' };

@@ -10,6 +10,12 @@ const T = 0.018; // płyta
 const GAP = 0.003; // szczelina frontów
 const FT = 0.018; // grubość frontu
 
+/** Wysokość montażu mebla wiszącego (dolna krawędź od podłogi, m): mountH, a w starszych specach legH. */
+function mountHeight(s, defCm) {
+  const v = s.mountH ?? (s.legH > 0 ? s.legH : defCm);
+  return v * CM;
+}
+
 class Ctx {
   constructor(spec) {
     this.spec = spec;
@@ -109,7 +115,8 @@ function addFront(c, rect, kind, zFace, opts = {}) {
     c.slab(fw, fh, FT, finish, fx, fy, zFace - FT / 2, { grain, radius: 0.0022 });
   }
   if (groove) {
-    const dark = finishMaterial('czarny-mat');
+    // dno frezu: materiał korpusu (w cieniu frezu ciemnieje sam dzięki AO/cieniom)
+    const dark = c.mat(c.F.body);
     if (kind === 'door') {
       const gx = opts.hinge === 'right' ? cx - w / 2 + gs / 2 : cx + w / 2 - gs / 2;
       c.slab(gs - 0.002, h, 0.004, null, gx, cy, zFace - FT + 0.004, { material: dark });
@@ -168,14 +175,14 @@ function addBase(c, base, W, D, legH, zc, Dc) {
     const splay = THREE.MathUtils.degToRad(6);
     const rTop = Math.min(0.024, W * 0.05), rBot = rTop * 0.6;
     for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
-      const leg = taperedLeg(legH / Math.cos(splay) + 0.004, rTop, rBot, mat);
+      const len = legH / Math.cos(splay) + 0.004;
+      const leg = taperedLeg(len, rTop, rBot, mat);
       const holder = new THREE.Group();
       holder.position.set(sx * (W / 2 - 0.06), legH + 0.002, zc + sz * (Dc / 2 - 0.06));
-      leg.rotation.x = Math.PI; // od góry w dół
-      leg.position.y = 0;
+      leg.position.y = -len; // noga zwisa od mocowania (grubsza u góry, zwęża się ku podłodze)
       holder.add(leg);
-      holder.rotation.z = -sx * splay * 0.8;
-      holder.rotation.x = sz * splay * 0.8;
+      holder.rotation.z = sx * splay * 0.8; // rozchylenie na zewnątrz
+      holder.rotation.x = -sz * splay * 0.8;
       c.group.add(holder);
     }
   } else if (base === 'frame') {
@@ -204,13 +211,15 @@ function addBase(c, base, W, D, legH, zc, Dc) {
 function buildCabinet(c, s, origin = { x: 0, y: 0 }) {
   const W = s.w * CM, H = s.h * CM, D = s.d * CM;
   const base = s.base || 'plinth';
-  const legH = (s.legH ?? (base === 'plinth' ? 8 : base === 'hanging' ? 40 : 12)) * CM;
+  const hanging = base === 'hanging';
+  // mebel wiszący: legH = 0, wysokość montażu (dolna krawędź od podłogi) w mountH
+  const legH = hanging ? 0 : (s.legH ?? (base === 'plinth' ? 8 : 12)) * CM;
   const cols = s.columns || [{ w: 1, cells: [{ t: 'door', h: 1 }] }];
   const hasFronts = cols.some((col) => col.cells.some((cl) => cl.t !== 'open'));
   const Dc = hasFronts ? D - FT : D;
   const zc = hasFronts ? -FT / 2 : 0;
   const zFront = D / 2;
-  const y0 = base === 'hanging' ? legH : legH;
+  const y0 = (hanging ? mountHeight(s, 40) : 0) + legH + (origin.y || 0);
   const Hc = H - legH;
   const topSep = c.F.top && c.F.top !== c.F.body;
   const Tt = topSep ? (s.topT ?? 2.2) * CM : T;
@@ -290,27 +299,42 @@ function buildCabinet(c, s, origin = { x: 0, y: 0 }) {
 // Łóżko
 // ---------------------------------------------------------------------------------------------
 function buildBed(c, s) {
-  const W = s.w * CM, L = s.d * CM, H = s.h * CM;
-  const [mw, ml] = (s.mattress || [160, 200]).map((v) => v * CM);
+  const W = s.w * CM, L = s.d * CM;
+  const H = (s.headboardH ?? s.h) * CM;
+  let mt = s.mattress || [160, 200];
+  if (typeof mt === 'string') mt = mt.split(/[x×]/).map(Number);
+  const [mw, ml] = mt.map((v) => v * CM);
+  const base = s.base || 'legsWood';
   const legH = (s.legH ?? 8) * CM;
-  const railTop = legH + 0.24;
+  const frameH = (s.frameH ?? 24) * CM;
+  const railTop = legH + frameH;
   const upholstered = s.upholstered !== false;
   const fabricHex = (FINISHES[c.F.body] || {}).color || '#d6c8b8';
   const frameMat = upholstered ? fabricMaterial(fabricHex, 'boucle', { repeat: 9 }) : null;
   const zHead = -L / 2;
-  const hbT = 0.1; // grubość wezgłowia
+  const hbT = upholstered ? 0.1 : 0.025; // grubość wezgłowia
   const frameL = L - hbT;
   const fz = zHead + hbT + frameL / 2;
   // rama
-  const railW = (W - mw) / 2 + 0.01;
+  const railW = upholstered ? Math.max(0.03, (W - mw) / 2 + 0.01) : T + 0.004;
   const rails = [
-    [railW, railTop - legH, frameL, -W / 2 + railW / 2, fz],
-    [railW, railTop - legH, frameL, W / 2 - railW / 2, fz],
-    [W - 2 * railW, railTop - legH, railW, 0, zHead + L - railW / 2],
+    [railW, frameH, frameL, -W / 2 + railW / 2, fz, 'z'],
+    [railW, frameH, frameL, W / 2 - railW / 2, fz, 'z'],
+    [W - 2 * railW, frameH, upholstered ? railW : T + 0.004, 0, zHead + L - (upholstered ? railW : T + 0.004) / 2, 'x'],
   ];
-  for (const [w, h, d, x, z] of rails) {
+  for (const [w, h, d, x, z, gr] of rails) {
     if (upholstered) c.slab(w, h, d, null, x, legH + h / 2, z, { material: frameMat, radius: 0.025, segments: 4 });
-    else c.slab(w, h, d, c.F.body, x, legH + h / 2, z, { radius: 0.003 });
+    else c.slab(w, h, d, c.F.body, x, legH + h / 2, z, { radius: 0.003, grain: gr });
+  }
+  // szuflady pod łóżkiem (rama płytowa, storage): dwie na każdym boku
+  if (s.storage && !upholstered && frameH > 0.17) {
+    const dl = (frameL - 0.24) / 2;
+    for (const sx of [-1, 1]) for (let i = 0; i < 2; i++) {
+      const z0 = fz - frameL / 2 + 0.16 + i * (dl + 0.006);
+      c.slab(0.004, frameH - 0.05, dl, c.F.front, sx * (W / 2 + 0.002), legH + frameH / 2 - 0.006, z0 + dl / 2, { grain: 'z', radius: 0.001 });
+      // frezowany uchwyt — ciemna szczelina wzdłuż górnej krawędzi
+      c.slab(0.003, 0.012, dl - 0.02, null, sx * (W / 2 + 0.003), legH + frameH - 0.04, z0 + dl / 2, { material: finishMaterial('czarny-mat') });
+    }
   }
   // wezgłowie
   const hbH = H - legH;
@@ -323,14 +347,22 @@ function buildBed(c, s) {
   } else if (upholstered) {
     c.slab(W, hbH, hbT, null, 0, legH + hbH / 2, zHead + hbT / 2, { material: frameMat, radius: 0.04, segments: 5 });
   } else {
-    c.slab(W, hbH, 0.03, c.F.front || c.F.body, 0, legH + hbH / 2, zHead + 0.015, { grain: 'x', radius: 0.003 });
+    // płytowe: panel (wykończenie frontu jako akcent) + listwa górna z korpusu
+    c.slab(W, hbH, hbT, c.F.front || c.F.body, 0, legH + hbH / 2, zHead + hbT / 2, { grain: 'x', radius: 0.003 });
   }
-  // nogi
-  if (legH > 0.01) {
-    const m = s.base === 'legsMetal' ? metalMaterial(c.F.metal) : c.mat(c.F.legs || 'dab-naturalny');
-    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
-      const leg = taperedLeg(legH, 0.022, 0.017, m);
-      leg.position.set(sx * (W / 2 - 0.08), 0, sz > 0 ? zHead + L - 0.08 : zHead + 0.14);
+  // podstawa
+  if (base === 'plinth' && legH > 0.005) {
+    c.slab(W - 0.12, legH, frameL - 0.12, c.F.body, 0, legH / 2, fz, { radius: 0.001, material: finishMaterial('czarny-mat') });
+  } else if (legH > 0.01) {
+    const metal = base === 'legsMetal' || base === 'frame';
+    const m = metal ? metalMaterial(c.F.metal) : c.mat(c.F.legs || 'dab-naturalny');
+    const zs = [zHead + 0.07, zHead + L - 0.07];
+    if (L > 1.9 && W > 1.3) zs.push(fz); // środkowa para nóg pod szerokim łóżkiem
+    for (const sx of [-1, 1]) for (const z of zs) {
+      let leg;
+      if (metal) { leg = slab(0.02, legH, 0.02, m, { radius: 0.003 }); leg.position.set(sx * (W / 2 - 0.06), legH / 2, z); }
+      else { leg = taperedLeg(legH, 0.024, 0.018, m); leg.position.set(sx * (W / 2 - 0.07), 0, z); }
+      if (z === fz) leg.position.x = sx * (W / 2 - 0.25);
       c.group.add(leg);
     }
   }
@@ -432,13 +464,14 @@ function tableLegs(c, base, W, D, H, inset, legFinish, opts = {}) {
     const splay = THREE.MathUtils.degToRad(opts.splay ?? 3);
     const rTop = opts.rTop || 0.026, rBot = opts.rBot || 0.017;
     for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
-      const leg = taperedLeg(legLen / Math.cos(splay) + 0.003, rTop, rBot, mat);
+      const len = legLen / Math.cos(splay) + 0.003;
+      const leg = taperedLeg(len, rTop, rBot, mat);
       const holder = new THREE.Group();
       holder.position.set(sx * (W / 2 - inset), H + 0.001, sz * (D / 2 - inset));
-      leg.rotation.x = Math.PI;
+      leg.position.y = -len;
       holder.add(leg);
-      holder.rotation.z = -sx * splay;
-      holder.rotation.x = sz * splay;
+      holder.rotation.z = sx * splay;
+      holder.rotation.x = -sz * splay;
       c.group.add(holder);
     }
     if (opts.apron) {
@@ -480,16 +513,24 @@ function buildDesk(c, s) {
   const legF = c.F.legs || c.F.body;
   const legLen = H - tt;
   const inset = 0.06;
-  if (s.base === 'legsMetal') {
+  if (s.base === 'frame') {
+    // zamknięta rama z profilu 30×30 (płoza + poprzeczka pod blatem)
+    const m = metalMaterial(c.F.metal);
+    const p = 0.03, x = -side * (W / 2 - 0.04);
+    for (const sz of [-1, 1]) { const leg = slab(p, legLen, p, m, { radius: 0.004 }); leg.position.set(x, legLen / 2, sz * (D / 2 - 0.05)); c.group.add(leg); }
+    for (const y of [p / 2, legLen - p / 2]) { const r = slab(p, p, D - 0.1 + p, m, { radius: 0.004 }); r.position.set(x, y, 0); c.group.add(r); }
+  } else if (s.base === 'legsMetal') {
     const m = metalMaterial(c.F.metal);
     for (const sz of [-1, 1]) { const leg = slab(0.03, legLen, 0.03, m, { radius: 0.004 }); leg.position.set(-side * (W / 2 - inset), legLen / 2, sz * (D / 2 - inset)); c.group.add(leg); }
+    const r = slab(0.02, 0.04, D - 2 * inset, m, { radius: 0.003 }); r.position.set(-side * (W / 2 - inset), legLen - 0.02, 0); c.group.add(r);
   } else {
     const mat = c.mat(legF);
     for (const sz of [-1, 1]) {
-      const leg = taperedLeg(legLen + 0.002, 0.025, 0.016, mat);
+      const len = legLen + 0.003;
+      const leg = taperedLeg(len, 0.025, 0.016, mat);
       const h = new THREE.Group(); h.position.set(-side * (W / 2 - inset), legLen + 0.001, sz * (D / 2 - inset));
-      leg.rotation.x = Math.PI; h.add(leg);
-      h.rotation.z = side * THREE.MathUtils.degToRad(2.5); h.rotation.x = sz * THREE.MathUtils.degToRad(2.5);
+      leg.position.y = -len; h.add(leg);
+      h.rotation.z = -side * THREE.MathUtils.degToRad(2.5); h.rotation.x = -sz * THREE.MathUtils.degToRad(2.5);
       c.group.add(h);
     }
   }
@@ -502,11 +543,29 @@ function buildDesk(c, s) {
 // Półka wisząca, lustro, wieszak
 // ---------------------------------------------------------------------------------------------
 function buildWallShelf(c, s) {
-  const W = s.w * CM, D = s.d * CM;
-  const n = s.shelves || 1;
+  const W = s.w * CM, D = s.d * CM, H = (s.h || 4) * CM;
   const t = (s.top || 2.5) * CM;
-  const y0 = (s.legH ?? 120) * CM;
-  for (let i = 0; i < n; i++) c.slab(W, t, D, c.F.body, 0, y0 + i * 0.32, 0, { grain: 'x', radius: 0.003 });
+  const y0 = mountHeight(s, 140);
+  const n = Math.max(1, s.shelves || 1);
+  const style = s.style || (H > t * 2.5 ? 'box' : 'board');
+  if (style === 'board') {
+    // pojedyncza deska na ukrytych wspornikach (n > 1 → kilka desek co ~32 cm)
+    for (let i = 0; i < n; i++) c.slab(W, t, D, c.F.body, 0, y0 + t / 2 + i * 0.32, 0, { grain: 'x', radius: 0.003 });
+    return;
+  }
+  // „box”: otwarta skrzynka — wieniec górny i dolny (+ półki pośrednie), boki, przegrody pionowe, cienkie plecy
+  const nH = Math.max(2, n);
+  const pitch = (H - t) / (nH - 1);
+  for (let i = 0; i < nH; i++) c.slab(W - 2 * t, t, D, c.F.body, 0, y0 + t / 2 + i * pitch, 0, { grain: 'x', radius: 0.0015 });
+  for (const sx of [-1, 1]) c.slab(t, H, D, c.F.body, sx * (W / 2 - t / 2), y0 + H / 2, 0, { grain: 'y', radius: 0.002 });
+  const nd = s.dividers || 0;
+  for (let k = 1; k <= nd; k++) {
+    const x = -W / 2 + (W * k) / (nd + 1);
+    for (let i = 0; i < nH - 1; i++) {
+      const a = y0 + t + i * pitch, b = y0 + (i + 1) * pitch;
+      c.slab(t, b - a, D - 0.004, c.F.body, x, (a + b) / 2, -0.002, { grain: 'y', radius: 0.001 });
+    }
+  }
 }
 
 function archShape(w, h, inset = 0) {
@@ -530,25 +589,29 @@ function rectShape(w, h, inset = 0, rad = 0.004) {
 
 function buildMirror(c, s) {
   const W = s.w * CM, H = s.h * CM;
-  const fw = (s.frame ?? 3) * CM;
-  const depth = 0.025;
+  const metalFrame = s.frameMaterial === 'metal';
+  const fw = Math.max(0.006, (s.frame ?? 3) * CM);
+  const depth = metalFrame ? 0.018 : 0.025;
   const shapeFn = s.shape === 'arch' ? archShape : rectShape;
   const outer = shapeFn(W, H, 0);
   const inner = shapeFn(W, H, fw);
   outer.holes.push(new THREE.Path(inner.getPoints(64).reverse()));
-  const geo = new THREE.ExtrudeGeometry(outer, { depth, bevelEnabled: true, bevelThickness: 0.003, bevelSize: 0.003, bevelSegments: 3, curveSegments: 64 });
+  const bev = metalFrame ? Math.min(0.0025, fw * 0.3) : 0.003;
+  const geo = new THREE.ExtrudeGeometry(outer, { depth, bevelEnabled: true, bevelThickness: bev, bevelSize: bev, bevelSegments: 3, curveSegments: 64 });
   geo.computeVertexNormals();
-  const mat = c.mat(c.F.body);
+  const mat = metalFrame ? metalMaterial(c.F.metal) : c.mat(c.F.body);
   boxUV(geo, 'y', mat.userData.texInfo || {}, c.seed());
   const frame = new THREE.Mesh(geo, mat);
   frame.castShadow = frame.receiveShadow = true;
-  const y0 = (s.legH ?? 0) * CM;
+  const y0 = mountHeight(s, 0);
   frame.position.set(0, y0, -depth / 2 - 0.003);
   c.group.add(frame);
   const glassGeo = new THREE.ShapeGeometry(shapeFn(W, H, fw - 0.004), 64);
   const glass = new THREE.Mesh(glassGeo, mirrorMaterial());
   glass.position.set(0, y0, 0.006 - depth / 2);
   glass.receiveShadow = true;
+  glass.userData.mirror = true; // packshot/aranżacja podmienia na idealne lustro z mapą otoczenia
+  glass.userData.noAO = true;
   c.group.add(glass);
   const back = slab(W - 0.01, H - 0.01, 0.006, plainMaterial('#3a3a3a', 0.9), { radius: 0.001 });
   back.position.set(0, y0 + H / 2, -depth / 2 - 0.004);
@@ -557,14 +620,21 @@ function buildMirror(c, s) {
 
 function buildCoatRack(c, s) {
   const W = s.w * CM, H = s.h * CM;
-  const y0 = (s.legH ?? 100) * CM;
+  const y0 = mountHeight(s, 100);
   const pt = 0.02;
-  c.slab(W, H, pt, c.F.body, 0, y0 + H / 2, -0.05 + pt / 2, { grain: 'x', radius: 0.003 });
+  // wysoki panel: deski pionowe z wąskimi szczelinami (lamele), niski: jedna deska
+  if (H > 0.45) {
+    const nl = Math.max(3, Math.round(W / 0.13));
+    const lw = W / nl;
+    for (let i = 0; i < nl; i++) c.slab(lw - 0.003, H, pt, c.F.body, -W / 2 + lw * (i + 0.5), y0 + H / 2, -0.05 + pt / 2, { grain: 'y', radius: 0.002 });
+  } else {
+    c.slab(W, H, pt, c.F.body, 0, y0 + H / 2, -0.05 + pt / 2, { grain: 'x', radius: 0.003 });
+  }
   const n = s.hooks || Math.max(3, Math.round(W / 0.17));
   const m = metalMaterial(c.F.metal);
   for (let i = 0; i < n; i++) {
     const x = -W / 2 + (W / n) * (i + 0.5);
-    const y = y0 + H * 0.62;
+    const y = H > 0.45 ? y0 + H - 0.2 : y0 + H * 0.62;
     const z0 = -0.05 + pt;
     const a = cylinderBetween(new THREE.Vector3(x, y, z0), new THREE.Vector3(x, y - 0.012, z0 + 0.06), 0.005, m);
     const b = cylinderBetween(new THREE.Vector3(x, y - 0.012, z0 + 0.06), new THREE.Vector3(x, y + 0.02, z0 + 0.075), 0.005, m);

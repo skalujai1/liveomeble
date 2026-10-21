@@ -7,6 +7,9 @@ import { AO, ShadowDirLight, halton, coneDir, dirFromAngles, resetAO, patchMater
 import { plasterTexture, floorTexture, concreteTexture } from './textures.js';
 import { finishMaterial, plainMaterial } from './materials.js';
 import { ROOMS } from './rooms.js';
+import { applyMirrors } from './studio.js';
+import { fabricMaterial } from './materials.js';
+import { curtainGeometry } from './geom.js';
 
 export const L_ALL = 0, L_BOUNCE = 1, L_DAY = 2; // warstwy: widoczne, rzucają cień „odbity”, rzucają cień dzienny
 
@@ -15,7 +18,7 @@ export const L_ALL = 0, L_BOUNCE = 1, L_DAY = 2; // warstwy: widoczne, rzucają 
 // ---------------------------------------------------------------------------------------------
 function wallMaterial(hex, strength = 1) {
   const t = plasterTexture(hex, { strength });
-  return patchMaterial(new THREE.MeshPhysicalMaterial({ color: 0xffffff, map: t.map, roughness: 1, roughnessMap: t.data, bumpMap: t.data, bumpScale: 0.35, specularIntensity: 0.25 }));
+  return patchMaterial(new THREE.MeshPhysicalMaterial({ color: 0xffffff, map: t.map, roughness: 1, roughnessMap: t.data, bumpMap: t.data, bumpScale: 0.14, specularIntensity: 0.25 }));
 }
 
 /** UV w metrach z pozycji świata (rzut pudełkowy) — ciągłość tekstury między kawałkami ścian. */
@@ -162,6 +165,32 @@ function buildWindow(scene, R, ww, side, wallBox) {
     if (isX) box(scene, Math.min(inner + sign * 0.0, mid) - (sign > 0 ? 0 : 0.04), Math.max(inner, mid) + (sign > 0 ? 0.04 : 0), y0 - 0.025, y0, c - hw - 0.05, c + hw + 0.05, sillMat);
     else box(scene, c - hw - 0.05, c + hw + 0.05, y0 - 0.025, y0, Math.min(inner, mid) - (sign > 0 ? 0 : 0.04), Math.max(inner, mid) + (sign > 0 ? 0.04 : 0), sillMat);
   }
+  // zasłony z lnu (odsunięte na boki okna) + karnisz
+  if (ww.curtains) {
+    const cw = ww.curtainW || 0.55;
+    const top = R.h - 0.04, ch = top - 0.015;
+    const off = 0.13; // odległość od lica ściany do wnętrza
+    const cm = fabricMaterial(ww.curtainColor || '#efebe4', 'linen', { repeat: 9, sheen: 0.4 }).clone();
+    cm.side = THREE.DoubleSide; patchMaterial(cm);
+    const inward = -sign;
+    for (const k of [-1, 1]) {
+      const geo = curtainGeometry(cw, ch, { folds: Math.round(cw * 11), depth: 0.035, seed: 5 + k });
+      const m = new THREE.Mesh(geo, cm);
+      const a = c + k * (hw + cw * 0.5 - 0.12);
+      if (isX) { m.position.set(inner + inward * off, ch / 2 + 0.012, a); m.rotation.y = Math.PI / 2; }
+      else { m.position.set(a, ch / 2 + 0.012, inner + inward * off); }
+      m.castShadow = m.receiveShadow = true;
+      m.layers.disableAll(); m.layers.enable(L_ALL); m.layers.enable(L_DAY); m.layers.enable(L_BOUNCE);
+      scene.add(m);
+    }
+    const rodMat = patchMaterial(new THREE.MeshPhysicalMaterial({ color: 0x2a2a2a, roughness: 0.4, metalness: 0.6 }));
+    const rodL = ww.width + 2 * cw + 0.1;
+    const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.01, rodL, 16), rodMat);
+    rod.rotation.z = Math.PI / 2; if (isX) rod.rotation.set(Math.PI / 2, 0, 0);
+    if (isX) rod.position.set(inner + inward * off, top + 0.012, c); else rod.position.set(c, top + 0.012, inner + inward * off);
+    rod.castShadow = true; rod.layers.enable(L_DAY);
+    scene.add(rod);
+  }
   // tło za oknem — prześwietlone niebo/zieleń (widoczne tylko w kadrze, bez cieni)
   const bgMat = new THREE.ShaderMaterial({
     uniforms: { top: { value: new THREE.Color(ww.skyTop || '#dfe7ef').multiplyScalar(ww.skyGain ?? 9) }, bottom: { value: new THREE.Color(ww.skyBottom || '#c9d3c2').multiplyScalar(ww.skyGain ?? 9) } },
@@ -193,7 +222,7 @@ const cubeAccShader = {
       if (f == 3) return vec3(c.x, -1.0, -c.y);
       if (f == 4) return vec3(c.x, -c.y, 1.0);
       return vec3(-c.x, -c.y, -1.0); }
-    void main(){ vec3 d = normalize(dirFor(face, vUv)); vec4 a = textureCube(tPrev, d); vec4 b = textureCube(tNew, d); gl_FragColor = mix(a, b, w); }`,
+    void main(){ vec3 d = normalize(dirFor(face, vUv)); vec4 a = textureCube(tPrev, d); vec4 b = textureCube(tNew, d); if (any(isnan(b)) || any(isinf(b))) b = a; b = clamp(b, vec4(0.0), vec4(64.0)); gl_FragColor = mix(a, b, w); }`,
 };
 
 const probeShader = {
@@ -278,6 +307,45 @@ function sphereDirs(n, seed = 0.37) {
 }
 
 // ---------------------------------------------------------------------------------------------
+// Niebo przez okno: okno jako światło powierzchniowe próbkowane punktowo (reflektor z cieniem na lico
+// otworu, emisja ~cos, oś lekko w dół — do wnętrza wpada głównie światło z nieba nad horyzontem).
+// Daje miękkie, gładkie oświetlenie ścian (bez „plam” w kształcie okna jak przy próbkowaniu kierunków).
+// ---------------------------------------------------------------------------------------------
+class WindowSky {
+  constructor(scene, R, ww, { mapSize = 2048, tilt = 22 } = {}) {
+    const L = new THREE.SpotLight(0xffffff, 1, 0, THREE.MathUtils.degToRad(78), 1, 2);
+    L.castShadow = true;
+    L.shadow.mapSize.set(mapSize, mapSize);
+    L.shadow.bias = -0.0004; L.shadow.normalBias = 0.02; L.shadow.radius = 3;
+    L.shadow.camera.near = 0.04; L.shadow.camera.far = 30;
+    L.shadow.camera.layers.set(L_BOUNCE);
+    scene.add(L, L.target);
+    this.light = L;
+    this.ww = ww;
+    const side = ww.wall;
+    const x0 = -R.w / 2, x1 = R.w / 2;
+    this.n = side === 'left' ? new THREE.Vector3(1, 0, 0) : side === 'right' ? new THREE.Vector3(-1, 0, 0) : side === 'back' ? new THREE.Vector3(0, 0, 1) : new THREE.Vector3(0, 0, -1);
+    this.plane = side === 'left' ? x0 : side === 'right' ? x1 : side === 'back' ? 0 : R.d;
+    this.isX = side === 'left' || side === 'right';
+    const t = THREE.MathUtils.degToRad(tilt);
+    this.axis = this.n.clone().multiplyScalar(Math.cos(t)).add(new THREE.Vector3(0, -Math.sin(t), 0)).normalize();
+    this.area = ww.width * ww.height;
+  }
+  sample(u, v, intensity, color) {
+    const ww = this.ww, L = this.light;
+    const a = ww.center + (u - 0.5) * ww.width * 0.94;
+    const y = ww.sill + (0.03 + v * 0.94) * ww.height;
+    const off = 0.03;
+    if (this.isX) L.position.set(this.plane + this.n.x * off, y, a);
+    else L.position.set(a, y, this.plane + this.n.z * off);
+    L.target.position.copy(L.position).add(this.axis);
+    L.intensity = intensity * this.area;
+    if (color) L.color.copy(color);
+    L.updateMatrixWorld(); L.target.updateMatrixWorld();
+  }
+}
+
+// ---------------------------------------------------------------------------------------------
 // Render aranżacji
 // ---------------------------------------------------------------------------------------------
 export async function renderRoom(engine, job) {
@@ -294,7 +362,12 @@ export async function renderRoom(engine, job) {
   scene.add(content);
   def.populate(content, { frame: job.frame });
   // warstwy: zawartość rzuca cienie odbite i dzienne
-  content.traverse((o) => { if (o.isMesh || o.isInstancedMesh) { if (!o.userData.layersSet) { o.layers.disableAll(); o.layers.enable(L_ALL); o.layers.enable(L_BOUNCE); o.layers.enable(L_DAY); } } });
+  content.traverse((o) => {
+    if ((o.isMesh || o.isInstancedMesh) && !o.userData.layersSet) {
+      o.layers.disableAll(); o.layers.enable(L_ALL); o.layers.enable(L_DAY);
+      if (!o.userData.noBounceCast) o.layers.enable(L_BOUNCE); // płaskie (dywan) nie zasłaniają światła odbitego
+    }
+  });
   scene.updateMatrixWorld(true);
 
   // kamera (poziomo, bez zbieżności pionów; kadr przez przesunięcie obiektywu)
@@ -310,13 +383,13 @@ export async function renderRoom(engine, job) {
   const L = Object.assign({ sunIntensity: 7, skyIntensity: 3.2, bounce: 1, envDiffuse: 0.35, exposure: 1 }, def.light || {});
   const roomBox = shell.box.clone();
   const sun = new ShadowDirLight(scene, { mapSize: 4096, box: roomBox, casterLayer: L_DAY, bias: -0.0002, normalBias: 0.012, radius: 1.5 });
-  const sky = new ShadowDirLight(scene, { mapSize: 4096, box: roomBox, casterLayer: L_DAY, bias: -0.0002, normalBias: 0.012, radius: 2.5 });
   const contentBox = new THREE.Box3().setFromObject(content);
   contentBox.min.y = -0.02;
   contentBox.expandByVector(new THREE.Vector3(0.6, 0.05, 0.6));
   contentBox.intersect(new THREE.Box3(new THREE.Vector3(-R.w / 2, -0.05, 0), new THREE.Vector3(R.w / 2, R.h, R.d)));
-  const bounce = new ShadowDirLight(scene, { mapSize: 2048, box: contentBox, casterLayer: L_BOUNCE, bias: -0.0004, normalBias: 0.01, radius: 3 });
+  const bounce = new ShadowDirLight(scene, { mapSize: 2048, box: contentBox, casterLayer: L_BOUNCE, bias: -0.0004, normalBias: 0.01, radius: 5 });
   const win = R.windows ? R.windows[0] : R.window;
+  const sky = new WindowSky(scene, R, win);
   const out = win.wall === 'left' ? new THREE.Vector3(-1, 0, 0) : win.wall === 'right' ? new THREE.Vector3(1, 0, 0) : win.wall === 'back' ? new THREE.Vector3(0, 0, -1) : new THREE.Vector3(0, 0, 1);
   const sunDir = def.sun ? dirFromAngles(def.sun.azimuth, def.sun.elevation) : null;
   const sunCol = new THREE.Color(def.sun?.color || '#fff0dc');
@@ -327,14 +400,9 @@ export async function renderRoom(engine, job) {
     // słońce: tarcza ~1.2° (miękka półcień)
     if (sunDir) sun.aim(coneDir(sunDir, THREE.MathUtils.degToRad(1.2), (halton(k + 1, 2) + 0.5) % 1, (halton(k + 1, 3) + 0.5) % 1), L.sunIntensity, sunCol);
     else sun.light.visible = false;
-    // niebo za oknem: kierunki z półsfery na zewnątrz (cos-ważone wokół normalnej okna), poniżej horyzontu — odbicie od ziemi
+    // niebo: punkt na powierzchni okna (Halton 2D)
     const u = (halton(k + 1, 5) + rot[0]) % 1, v = (halton(k + 1, 7) + rot[1]) % 1;
-    const sMax = 0.995;
-    const st = Math.sqrt(u) * sMax, ct = Math.sqrt(1 - st * st), ph = 2 * Math.PI * v;
-    const t1 = new THREE.Vector3(0, 1, 0), t2 = new THREE.Vector3().crossVectors(out, t1);
-    const d = out.clone().multiplyScalar(ct).addScaledVector(t1, st * Math.sin(ph)).addScaledVector(t2, st * Math.cos(ph)).normalize();
-    if (d.y < 0.03) { d.y = Math.abs(d.y) * 0.6 + 0.03; d.normalize(); sky.aim(d, L.skyIntensity * 0.55, groundOut); }
-    else sky.aim(d, L.skyIntensity * (0.75 + 0.5 * d.y), skyCol);
+    sky.sample(u, v, L.skyIntensity * (L.skyArea ?? 0.6), skyCol);
   };
 
   // ---- mapa otoczenia: 2 odbicia
@@ -353,13 +421,37 @@ export async function renderRoom(engine, job) {
   const env2 = await captureEnv(engine, scene, rig, capPos, { samples: job.preview ? 12 : 24 });
   scene.environment = env2.texture;
   scene.environmentIntensity = L.envIntensity ?? 1;
+  // lustra: mapa sześcienna przechwycona sprzed lustra (odbicie pokoju)
+  const mirrorCubes = [];
+  const mirrors = [];
+  content.traverse((o) => { if (o.isMesh && o.userData.mirror) mirrors.push(o); });
+  for (const m of mirrors) {
+    const b = new THREE.Box3().setFromObject(m);
+    const c = b.getCenter(new THREE.Vector3());
+    const nrm = new THREE.Vector3(0, 0, 1).applyQuaternion(m.getWorldQuaternion(new THREE.Quaternion()));
+    m.visible = false;
+    const cube = await captureEnv(engine, scene, rig, c.addScaledVector(nrm, 0.2), { samples: job.preview ? 6 : 16, size: job.preview ? 256 : 512 });
+    m.visible = true;
+    applyMirrors(m, cube.texture, 0xd9dcdb);
+    mirrorCubes.push(cube);
+  }
   console.log(`[render] mapa otoczenia gotowa (${((performance.now() - t0) / 1000).toFixed(1)} s)`);
 
   // ---- światło odbite jako kierunkowe próbki (cienie mebli)
   const N = job.samples || 128;
   const dirs = sphereDirs(N);
   const cols = probeDirs(engine, env2, dirs, 3.5);
-  { const lums = cols.map((c) => c.r * 0.2126 + c.g * 0.7152 + c.b * 0.0722); console.log(`[render] otoczenie: lum śr. ${(lums.reduce((a, b) => a + b, 0) / lums.length).toFixed(3)}, max ${Math.max(...lums).toFixed(3)}, min ${Math.min(...lums).toFixed(3)}`); }
+  // automatyczna ekspozycja i balans bieli z uśrednionego otoczenia (jak aparat: szare ściany → białe)
+  const avg = new THREE.Color(0, 0, 0);
+  cols.forEach((c) => avg.add(c));
+  avg.multiplyScalar(1 / cols.length);
+  const avgLum = Math.max(1e-5, avg.r * 0.2126 + avg.g * 0.7152 + avg.b * 0.0722);
+  const autoExp = (L.autoKey ?? 0.2) / avgLum;
+  const wbS = L.wb ?? 0.55;
+  let wb = [avg.r, avg.g, avg.b].map((c) => Math.pow(avgLum / Math.max(1e-6, c), wbS));
+  const wbl = wb[0] * 0.2126 + wb[1] * 0.7152 + wb[2] * 0.0722;
+  wb = wb.map((x) => x / wbl);
+  console.log(`[render] otoczenie: lum śr. ${avgLum.toFixed(4)} (rgb ${avg.r.toFixed(4)} ${avg.g.toFixed(4)} ${avg.b.toFixed(4)}), ekspozycja auto ${autoExp.toFixed(2)} × ${L.exposure}, wb ${wb.map((x) => x.toFixed(3)).join(' ')}`);
   bounce.light.visible = true;
   const kB = (1 - L.envDiffuse) * L.bounce * 4 * Math.PI;
 
@@ -381,12 +473,20 @@ export async function renderRoom(engine, job) {
       const c = cols[i];
       const lum = Math.max(1e-4, c.r * 0.2126 + c.g * 0.7152 + c.b * 0.0722);
       bounce.aim(dirs[i], kB * lum, c.clone().multiplyScalar(1 / lum));
+      // światło od podłogi (z dołu): bez cieni — źródłem jest podłoga tuż pod meblami, nie odległe niebo
+      bounce.light.shadow.intensity = THREE.MathUtils.clamp((dirs[i].y + 0.05) / 0.3, 0, 1);
+      const dbg = job.debug || {};
+      if (dbg.noSun) sun.light.visible = false;
+      if (dbg.noSky) sky.light.visible = false;
+      if (dbg.noBounce) bounce.light.visible = false;
+      if (dbg.bounceNoShadow) bounce.light.shadow.intensity = 0;
+      if (dbg.bounceDir) { bounce.aim(new THREE.Vector3().fromArray(dbg.bounceDir), 5, new THREE.Color(1, 1, 1)); bounce.light.shadow.intensity = 1; }
     },
   });
-  const post = Object.assign({ exposure: 1, saturation: 0.97, contrast: 1.04, lift: 0.012, vignette: 0.14, warmth: 0.015 }, def.post || {}, { exposure: L.exposure });
+  const post = Object.assign({ exposure: 1, saturation: 0.97, contrast: 1.04, lift: 0.012, vignette: 0.14, warmth: 0.0, wb }, def.post || {}, { exposure: L.exposure * autoExp });
   const dataURL = engine.output(post);
-  env1.dispose(); env2.dispose();
+  env1.dispose(); env2.dispose(); mirrorCubes.forEach((c) => c.dispose());
   scene.traverse((o) => { if (o.geometry) o.geometry.dispose(); });
   [sun, sky, bounce].forEach((l) => l.light.shadow.map?.dispose());
-  return { dataURL, info: { ms, totalMs: performance.now() - t0 } };
+  return { dataURL, info: { ms, totalMs: performance.now() - t0, exposure: post.exposure, avgLum } };
 }

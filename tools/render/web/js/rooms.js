@@ -94,27 +94,29 @@ export const ROOMS = {
     palette: 'ciepła biel ścian, miodowy dąb, beż dywanu, akcenty terakoty i czerni',
     room: {
       w: 6.4, d: 6.0, h: 2.8, wallColor: WARM_WHITE, floor: { type: 'oak', color: '#c9ab86' },
-      window: { wall: 'left', center: 2.5, width: 2.8, height: 2.3, sill: 0.35, cols: 3, transom: 0.55 },
+      window: { wall: 'left', center: 2.5, width: 2.8, height: 2.3, sill: 0.35, cols: 3, transom: 0.55, curtains: true },
     },
     sun: { azimuth: -62, elevation: 24 },
-    light: { sunIntensity: 3.2, skyIntensity: 2.4, bounce: 3.0, exposure: 3.1 },
+    light: { sunIntensity: 4.2, skyIntensity: 2.8, bounce: 2.2, exposure: 1 },
     post: { warmth: -0.03 },
     capture: [0.3, 1.3, 2.4],
     populate(g) {
-      atBack(g, M.rtv180, 0.75);
+      const x = 0.55;
+      atBack(g, M.rtv180, x);
       const top = 0.5;
-      put(g, D.framedArt({ w: 0.62, h: 0.84, style: 'arches', frame: 'oak', palette: { bg: '#efe9df', a: '#c26e4b', b: '#dcc29b', c: '#7a8467', d: '#2e2b28' } }), 0.42, 1.46, 0);
-      put(g, D.framedArt({ w: 0.42, h: 0.54, style: 'lines', frame: 'black', palette: { bg: '#f2eee7', a: '#c9a27a', d: '#3a3633' } }), 1.17, 1.33, 0);
-      put(g, D.vaseWithBranches({ h: 0.3, color: '#e6e0d4', seed: 5 }), 1.43, top, 0.2);
-      const books = put(g, D.bookStack({ count: 3, seed: 4, colors: ['#e3dccd', '#b8a58a', '#7d8a72'] }), 0.12, top, 0.22, 8);
-      put(g, D.smallVase({ h: 0.14, color: '#2e2b29' }), 0.12, top + books.userData.height, 0.22);
-      put(g, D.bowl({ d: 0.24, h: 0.07, color: '#cbbfae' }), 0.55, top, 0.24);
-      put(g, D.oliveTree({ h: 1.75, seed: 11 }), 2.38, 0, 0.55);
-      put(g, D.rug({ w: 2.7, d: 1.9, base: '#e4ddd0', line: '#c6b8a2', pattern: 'diamond' }), 0.65, 0, 1.55);
+      put(g, D.framedArt({ w: 0.62, h: 0.84, style: 'arches', frame: 'oak', palette: { bg: '#efe9df', a: '#c26e4b', b: '#dcc29b', c: '#7a8467', d: '#2e2b28' } }), x - 0.33, 1.46, 0);
+      put(g, D.framedArt({ w: 0.42, h: 0.54, style: 'lines', frame: 'black', palette: { bg: '#f2eee7', a: '#c9a27a', d: '#3a3633' } }), x + 0.42, 1.33, 0);
+      put(g, D.vaseWithBranches({ h: 0.3, color: '#e6e0d4', seed: 5 }), x + 0.68, top, 0.2);
+      const books = put(g, D.bookStack({ count: 3, seed: 4, colors: ['#e3dccd', '#b8a58a', '#7d8a72'] }), x - 0.63, top, 0.22, 8);
+      put(g, D.smallVase({ h: 0.14, color: '#2e2b29' }), x - 0.63, top + books.userData.height, 0.22);
+      put(g, D.bowl({ d: 0.24, h: 0.07, color: '#cbbfae' }), x - 0.2, top, 0.24);
+      put(g, D.oliveTree({ h: 1.75, seed: 11 }), 2.1, 0, 0.5);
+      put(g, D.armchair({ color: '#e3dccf', kind: 'boucle', seed: 4 }), 1.0, 0, 2.45, -32);
+      put(g, D.rug({ w: 2.6, d: 1.8, base: '#ddd5c7', line: '#c2b49d', pattern: 'diamond' }), 0.7, 0, 1.6);
     },
     cameras: {
-      wide: { pos: [0.3, 1.0, 5.0], fov: 36, shiftY: 0.04 },
-      tall: { pos: [0.78, 1.05, 3.9], fov: 48, shiftY: 0.0 },
+      wide: { pos: [-1.0, 1.0, 4.4], yaw: 12, fov: 36, shiftY: 0.03 },
+      tall: { pos: [0.1, 1.05, 3.6], yaw: 6, fov: 46, shiftY: 0.02 },
     },
     notes: { wide: 'lewa 1/3 kadru — gładka jasna ściana z miękkim światłem i plamą słońca (miejsce na tekst)', tall: 'górne ~30% kadru — jasna ściana nad grafikami (miejsce na tekst)' },
   },
@@ -129,24 +131,26 @@ export const ROOMS = {
       window: { wall: 'right', center: 2.6, width: 2.4, height: 2.3, sill: 0.35, cols: 2, transom: 0.55 },
     },
     sun: { azimuth: 64, elevation: 26 },
-    light: { sunIntensity: 3.0, skyIntensity: 2.4, bounce: 3.0, exposure: 3.0 },
+    light: { sunIntensity: 3.9, skyIntensity: 2.8, bounce: 2.2, exposure: 1 },
     post: { warmth: -0.02 },
     capture: [-0.3, 1.3, 2.4],
     populate(g) {
-      atBack(g, M.komoda120, -0.55);
+      const kx = -0.7;
+      atBack(g, M.komoda120, kx);
       const top = 0.86;
-      put(g, buildModel(M.lustroLuk), -0.55, 0, 0.03);
-      put(g, D.tableLamp({ baseColor: '#e9e4da', shadeColor: '#efe8dc', h: 0.52 }), -0.95, top, 0.22);
-      const books = put(g, D.bookStack({ count: 2, seed: 9, colors: ['#e7e0d2', '#c4a98a'] }), -0.15, top, 0.22, -6);
-      put(g, D.vaseWithBranches({ h: 0.24, color: '#3a3532', seed: 21, shape: 'round', branchH: 0.9 }), -0.15, top + books.userData.height, 0.22);
-      put(g, D.candle({ h: 0.1 }), 0.12, top, 0.26);
-      atBack(g, M.witryna, 0.75);
-      put(g, D.rug({ w: 2.4, d: 1.7, base: '#e7e1d6', line: '#cfc4b2', pattern: 'stripes' }), -0.3, 0, 1.55);
-      put(g, D.basket({ r: 0.19, h: 0.3, color: '#b89c78' }), -1.55, 0, 0.35);
+      put(g, D.wallMounted(buildModel(M.lustroLuk)), kx, 0, 0.03);
+      put(g, D.tableLamp({ baseColor: '#e9e4da', shadeColor: '#efe8dc', h: 0.52 }), kx - 0.4, top, 0.22);
+      const books = put(g, D.bookStack({ count: 2, seed: 9, colors: ['#e7e0d2', '#c4a98a'] }), kx + 0.4, top, 0.22, -6);
+      put(g, D.vaseWithBranches({ h: 0.24, color: '#3a3532', seed: 21, shape: 'round', branchH: 0.9 }), kx + 0.4, top + books.userData.height, 0.22);
+      put(g, D.candle({ h: 0.1 }), kx + 0.12, top, 0.26);
+      atBack(g, M.witryna, 0.45);
+      put(g, D.rug({ w: 2.4, d: 1.7, base: '#e2dbcf', line: '#c9bca7', pattern: 'stripes' }), -0.4, 0, 1.55);
+      put(g, D.basket({ r: 0.19, h: 0.3, color: '#b89c78' }), -1.65, 0, 0.35);
+      put(g, D.armchair({ color: '#d8cdbd', kind: 'linen', seed: 8 }), -1.15, 0, 2.5, 30);
     },
     cameras: {
-      wide: { pos: [-0.35, 1.0, 5.0], fov: 36, shiftY: 0.04 },
-      tall: { pos: [-0.35, 1.08, 3.9], fov: 48, shiftY: 0.0 },
+      wide: { pos: [1.1, 1.0, 4.4], yaw: -15, fov: 36, shiftY: 0.03 },
+      tall: { pos: [-0.25, 1.08, 3.7], yaw: -3, fov: 46, shiftY: 0.0 },
     },
     notes: { wide: 'prawa 1/3 kadru — ściana w kolorze szałwii z miękkim światłem (miejsce na tekst)', tall: 'górne ~25% kadru — ściana w kolorze szałwii nad lustrem (miejsce na tekst)' },
   },
@@ -161,7 +165,7 @@ export const ROOMS = {
       window: { wall: 'left', center: 3.0, width: 2.2, height: 2.25, sill: 0.4, cols: 2, transom: 0.5 },
     },
     sun: { azimuth: -58, elevation: 20 },
-    light: { sunIntensity: 2.6, skyIntensity: 2.6, bounce: 3.0, exposure: 3.0 },
+    light: { sunIntensity: 3.4, skyIntensity: 3.0, bounce: 2.2, exposure: 1 },
     post: { warmth: -0.02 },
     capture: [0.6, 1.3, 2.8],
     populate(g) {
@@ -175,11 +179,11 @@ export const ROOMS = {
       put(g, D.bookStack({ count: 2, seed: 12, colors: ['#e6dfd1', '#7d8a72'] }), bx - 1.19 + 0.1, 0.56, 0.26, 12);
       put(g, D.framedArt({ w: 1.0, h: 0.7, style: 'landscape', frame: 'oak', palette: { bg: '#efe9df', a: '#c9875f', b: '#dccbb0', c: '#a7ae97', d: '#5e6a58' } }), bx, 1.62, 0);
       put(g, D.rug({ w: 2.6, d: 2.0, base: '#e5ded2', line: '#cdbfaa', pattern: 'diamond' }), bx, 0, 1.75);
-      put(g, D.vaseWithBranches({ h: 0.36, color: '#cfc6b8', seed: 33, shape: 'round', branchH: 1.0, spread: 1.2 }), -1.25, 0, 0.35);
+      put(g, D.vaseWithBranches({ h: 0.36, color: '#cfc6b8', seed: 33, shape: 'round', branchH: 1.0, spread: 1.2 }), -0.75, 0, 0.35);
     },
     cameras: {
-      wide: { pos: [0.25, 1.1, 5.6], fov: 36, shiftY: 0.07 },
-      tall: { pos: [0.95, 1.15, 4.7], fov: 48, shiftY: 0.04 },
+      wide: { pos: [-0.6, 1.15, 5.2], yaw: 10, fov: 36, shiftY: 0.06 },
+      tall: { pos: [0.95, 1.2, 5.1], fov: 46, shiftY: 0.04 },
     },
     notes: { wide: 'lewa ~1/3 kadru — jasna ściana i światło z okna (miejsce na tekst)', tall: 'górne ~25% kadru — ściana nad grafiką (miejsce na tekst)' },
   },
@@ -194,7 +198,7 @@ export const ROOMS = {
       window: { wall: 'left', center: 2.4, width: 2.6, height: 2.3, sill: 0.35, cols: 3, transom: 0.55 },
     },
     sun: { azimuth: -55, elevation: 27 },
-    light: { sunIntensity: 3.0, skyIntensity: 2.4, bounce: 3.0, exposure: 3.0 },
+    light: { sunIntensity: 3.9, skyIntensity: 2.8, bounce: 2.2, exposure: 1 },
     post: { warmth: -0.03 },
     capture: [0.6, 1.3, 2.6],
     populate(g) {
@@ -216,8 +220,8 @@ export const ROOMS = {
       put(g, D.bookStack({ count: 2, seed: 8, colors: ['#e3dccd', '#b4654a'] }), 1.7, 0.78, 0.23, 5);
     },
     cameras: {
-      wide: { pos: [0.2, 1.2, 6.1], fov: 36, shiftY: 0.06 },
-      tall: { pos: [0.95, 1.25, 5.3], fov: 48, shiftY: 0.05 },
+      wide: { pos: [-0.6, 1.2, 5.9], yaw: 8, fov: 36, shiftY: 0.05 },
+      tall: { pos: [0.95, 1.25, 5.0], fov: 46, shiftY: 0.05 },
     },
     notes: { wide: 'lewa 1/3 kadru — jasna ściana z miękkim światłem okna (miejsce na tekst)', tall: 'górne ~25% kadru — ściana i lampa wisząca (miejsce na krótki tekst)' },
   },
@@ -232,13 +236,13 @@ export const ROOMS = {
       window: { wall: 'left', center: 3.4, width: 1.4, height: 2.1, sill: 0.6, cols: 1, transom: 0.5 },
     },
     sun: { azimuth: -40, elevation: 28 },
-    light: { sunIntensity: 3.0, skyIntensity: 2.6, bounce: 3.2, exposure: 3.1 },
+    light: { sunIntensity: 3.9, skyIntensity: 3.0, bounce: 2.3, exposure: 1 },
     post: { warmth: -0.02 },
     capture: [0.2, 1.3, 2.4],
     populate(g) {
       atBack(g, M.szafkaNaButy, 0.45);
-      put(g, buildModel(M.lustroLuk), 0.2, 0, 0.03);
-      put(g, buildModel(M.wieszak), 1.25, 0, 0.05);
+      put(g, D.wallMounted(buildModel(M.lustroLuk)), 0.2, 0, 0.03);
+      put(g, D.wallMounted(buildModel(M.wieszak)), 1.25, 0, 0.05);
       const h = put(g, D.hat({ color: '#c8b28a' }), 1.25 - 0.36, 1.55, 0.13);
       h.rotation.set(-0.25, 0, 0);
       put(g, D.toteBag({ color: '#e3dbcc' }), 1.25 + 0.18, 1.58, 0.12);
@@ -248,8 +252,8 @@ export const ROOMS = {
       put(g, D.rug({ w: 0.9, d: 1.8, base: '#e2dacb', line: '#b9a98f', pattern: 'stripes' }), 0.45, 0, 1.45);
     },
     cameras: {
-      wide: { pos: [0.05, 1.1, 4.6], fov: 40, shiftY: 0.06 },
-      tall: { pos: [0.5, 1.15, 3.9], fov: 50, shiftY: 0.02 },
+      wide: { pos: [-0.3, 1.15, 3.4], yaw: 9, fov: 40, shiftY: 0.05 },
+      tall: { pos: [0.5, 1.15, 3.5], yaw: 2, fov: 48, shiftY: 0.02 },
     },
     notes: { wide: 'lewa ~1/3 kadru — jasna ściana (miejsce na tekst)', tall: 'górne ~20% kadru — ściana nad lustrem (miejsce na krótki tekst)' },
   },
@@ -264,7 +268,7 @@ export const ROOMS = {
       window: { wall: 'left', center: 2.3, width: 2.4, height: 2.25, sill: 0.45, cols: 2, transom: 0.5 },
     },
     sun: { azimuth: -64, elevation: 25 },
-    light: { sunIntensity: 3.0, skyIntensity: 2.4, bounce: 3.0, exposure: 3.0 },
+    light: { sunIntensity: 3.9, skyIntensity: 2.8, bounce: 2.2, exposure: 1 },
     post: { warmth: -0.03 },
     capture: [0.5, 1.3, 2.4],
     populate(g) {
@@ -288,12 +292,12 @@ export const ROOMS = {
       put(g, D.smallVase({ h: 0.2, color: '#cfc6b8', shape: 1 }), rx - 0.18, cells[3].y0, zS);
       put(g, D.bookRow({ length: 0.3, maxH: 0.26, seed: 9 }), rx + 0.14, cells[3].y0, zS);
       put(g, D.basket({ r: 0.15, h: 0.24, color: '#bba07c' }), rx, cells[4].y0, zS - 0.01);
-      put(g, D.oliveTree({ h: 1.45, seed: 23, potR: 0.18, potH: 0.36 }), -0.55, 0, 0.45);
+      put(g, D.oliveTree({ h: 1.55, seed: 23, potR: 0.18, potH: 0.36 }), 2.55, 0, 0.5);
       put(g, D.rug({ w: 2.0, d: 1.5, base: '#e3dccf', line: '#b8ab95', pattern: 'stripes' }), dx, 0, 1.15);
     },
     cameras: {
-      wide: { pos: [0.1, 1.05, 4.9], fov: 36, shiftY: 0.04 },
-      tall: { pos: [0.95, 1.1, 3.8], fov: 48, shiftY: 0.0 },
+      wide: { pos: [-0.6, 1.05, 4.4], yaw: 11, fov: 36, shiftY: 0.03 },
+      tall: { pos: [0.75, 1.1, 4.0], yaw: 2, fov: 46, shiftY: 0.0 },
     },
     notes: { wide: 'lewa ~1/3 kadru — jasna ściana z miękkim światłem okna (miejsce na tekst)', tall: 'górne ~25% kadru — ściana nad biurkiem (miejsce na tekst)' },
   },

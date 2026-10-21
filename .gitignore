@@ -3,3 +3,6 @@ dist/
 .astro/
 .dev.vars
 .wrangler/
+# Generowane przed dev/build przez tools/sync-assistant.mjs
+public/liveo-assistant/
+public/media/produkty/

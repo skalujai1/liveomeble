@@ -185,6 +185,12 @@ export function framedArt({ w = 0.5, h = 0.7, style = 'arches', palette = {}, fr
   glass.userData.noAO = true;
   g.add(glass);
   g.traverse((o) => { if (o.isMesh && o !== glass) { o.castShadow = true; o.receiveShadow = true; } });
+  return wallMounted(g);
+}
+
+/** Obiekty na ścianie nie rzucają cieni od światła odbitego (przy kątach ślizgowych dawały długie „prostokąty”). */
+export function wallMounted(g) {
+  g.traverse((o) => { if (o.isMesh) o.userData.noBounceCast = true; });
   return g;
 }
 
@@ -312,6 +318,7 @@ export function rug({ w = 2.0, d = 1.4, base = '#e6dfd3', line = '#b9ac98', patt
   const m = new THREE.Mesh(geo, mat);
   m.position.y = t / 2;
   m.receiveShadow = true; m.castShadow = true;
+  m.userData.noBounceCast = true;
   return grp(m);
 }
 
@@ -424,4 +431,86 @@ export function toteBag({ color = '#e3dbcc' } = {}) {
   strap.position.y = -0.07;
   strap.scale.set(1, 1.2, 1);
   return shadowAll(grp(body, strap));
+}
+
+// ---------------------------------------------------------------------------------------------
+// Meble tapicerowane do aranżacji (dekor, nie z katalogu): fotel, sofa, puf
+// ---------------------------------------------------------------------------------------------
+function softBlock(w, h, d, mat, r = 0.04) {
+  const m = slab(w, h, d, mat, { radius: Math.min(r, w / 2 - 0.002, h / 2 - 0.002, d / 2 - 0.002), segments: 5 });
+  return m;
+}
+function woodLegs(g, W, D, h, finish = 'dab-naturalny', inset = 0.06, rTop = 0.02, rBot = 0.013) {
+  const mat = finishMaterial(finish, 1);
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+    const len = h + 0.004;
+    const leg = taperedLeg(len, rTop, rBot, mat);
+    const holder = new THREE.Group();
+    holder.position.set(sx * (W / 2 - inset), h, sz * (D / 2 - inset));
+    leg.position.y = -len;
+    holder.add(leg);
+    holder.rotation.z = sx * 0.06; holder.rotation.x = -sz * 0.06;
+    g.add(holder);
+  }
+}
+
+/** Fotel: rama z zaokrąglonych brył, poduszka siedziska, oparcie; tkanina bouclé lub len. */
+export function armchair({ color = '#e2dbcf', kind = 'boucle', w = 0.78, d = 0.8, legs = 'dab-naturalny', seed = 3 } = {}) {
+  const g = new THREE.Group();
+  const fab = fabricMaterial(color, kind, { repeat: 9 });
+  const legH = 0.14, baseH = 0.2, armW = 0.14, armH = 0.6, backH = 0.78;
+  woodLegs(g, w, d, legH, legs);
+  const base = softBlock(w, baseH, d, fab, 0.05); base.position.set(0, legH + baseH / 2, 0); g.add(base);
+  for (const sx of [-1, 1]) { const a = softBlock(armW, armH - legH, d, fab, 0.06); a.position.set(sx * (w / 2 - armW / 2), legH + (armH - legH) / 2, 0); g.add(a); }
+  const back = softBlock(w, backH - legH, 0.17, fab, 0.07); back.position.set(0, legH + (backH - legH) / 2, -d / 2 + 0.085); back.rotation.x = -0.06; g.add(back);
+  const seat = new THREE.Mesh(pillowGeometry(w - 2 * armW + 0.02, 0.14, d - 0.2, { seed, wrinkle: 0.003, boxy: 0.22, pinch: 0.4 }), fab);
+  seat.position.set(0, legH + baseH + 0.055, 0.07); g.add(seat);
+  const bc = new THREE.Mesh(pillowGeometry(w - 2 * armW, 0.13, 0.42, { seed: seed + 1, wrinkle: 0.004, boxy: 0.25, pinch: 0.5 }), fab);
+  bc.rotation.x = Math.PI / 2 - 0.22; bc.position.set(0, legH + baseH + 0.27, -d / 2 + 0.22); g.add(bc);
+  return shadowAll(g);
+}
+
+/** Sofa trzyosobowa. */
+export function sofa({ color = '#d9d1c4', kind = 'linen', w = 2.2, d = 0.95, legs = 'dab-naturalny', seats = 3, pillows = [] } = {}) {
+  const g = new THREE.Group();
+  const fab = fabricMaterial(color, kind, { repeat: 9 });
+  const legH = 0.12, baseH = 0.22, armW = 0.2, armH = 0.6, backH = 0.8;
+  woodLegs(g, w, d, legH, legs, 0.08);
+  const base = softBlock(w, baseH, d, fab, 0.05); base.position.set(0, legH + baseH / 2, 0); g.add(base);
+  for (const sx of [-1, 1]) { const a = softBlock(armW, armH - legH, d, fab, 0.07); a.position.set(sx * (w / 2 - armW / 2), legH + (armH - legH) / 2, 0); g.add(a); }
+  const back = softBlock(w, backH - legH, 0.2, fab, 0.08); back.position.set(0, legH + (backH - legH) / 2, -d / 2 + 0.1); g.add(back);
+  const sw = (w - 2 * armW) / seats;
+  for (let i = 0; i < seats; i++) {
+    const x = -w / 2 + armW + sw * (i + 0.5);
+    const seat = new THREE.Mesh(pillowGeometry(sw - 0.01, 0.16, d - 0.26, { seed: 20 + i, wrinkle: 0.004, boxy: 0.2, pinch: 0.38 }), fab);
+    seat.position.set(x, legH + baseH + 0.065, 0.08); g.add(seat);
+    const bc = new THREE.Mesh(pillowGeometry(sw - 0.02, 0.17, 0.46, { seed: 30 + i, wrinkle: 0.006, boxy: 0.24, pinch: 0.5 }), fab);
+    bc.rotation.x = Math.PI / 2 - 0.25; bc.position.set(x, legH + baseH + 0.3, -d / 2 + 0.27); g.add(bc);
+  }
+  pillows.forEach((hex, i) => {
+    const p = new THREE.Mesh(pillowGeometry(0.45, 0.14, 0.45, { seed: 50 + i, wrinkle: 0.005, boxy: 0.3 }), fabricMaterial(hex, i % 2 ? 'linen' : 'boucle', { repeat: 10 }));
+    const side = i % 2 ? 1 : -1;
+    p.position.set(side * (w / 2 - armW - 0.26 - Math.floor(i / 2) * 0.2), legH + baseH + 0.33, -d / 2 + 0.38);
+    p.rotation.set(Math.PI / 2 - 0.35, side * 0.2, side * -0.08);
+    g.add(p);
+  });
+  return shadowAll(g);
+}
+
+/** Puf okrągły (dzianina / bouclé). */
+export function pouf({ r = 0.26, h = 0.4, color = '#cdbfa9', kind = 'knit' } = {}) {
+  const m = new THREE.Mesh(pillowGeometry(2 * r, h, 2 * r, { seed: 61, wrinkle: 0.004, boxy: 0.75, pinch: 0.25 }), fabricMaterial(color, kind, { repeat: 7 }));
+  m.position.y = h / 2;
+  return shadowAll(grp(m));
+}
+
+/** Okrągły stolik boczny (blat drewniany na metalowej nodze). */
+export function sideTable({ r = 0.22, h = 0.52, finish = 'dab-naturalny', metal = 'czarny' } = {}) {
+  const top = lathe([[0, 0], [r - 0.004, 0], [r, 0.004], [r, 0.018], [r - 0.004, 0.022], [0, 0.022]], finishMaterial(finish, 0), 64);
+  top.position.y = h - 0.022;
+  const m = metalMaterial(metal);
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, h - 0.03, 24), m);
+  stem.position.y = (h - 0.03) / 2 + 0.008;
+  const base = lathe([[0, 0], [r * 0.7, 0], [r * 0.7, 0.008], [0.02, 0.014], [0, 0.014]], m, 48);
+  return shadowAll(grp(top, stem, base));
 }
