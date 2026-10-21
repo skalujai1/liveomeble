@@ -184,6 +184,32 @@ const postShader = {
     }`,
 };
 
+/**
+ * three.js (r186) filtruje rzucających cień warstwami GŁÓWNEJ kamery, nie `shadow.camera.layers`,
+ * więc każdy widoczny obiekt rzuca cień od każdego światła (np. ściany pokoju zasłaniały „światło odbite”).
+ * Łatka: mapy cieni renderowane osobno dla każdego światła, z ukryciem obiektów spoza jego warstwy rzucających.
+ */
+function patchShadowCasterLayers(renderer) {
+  const sm = renderer.shadowMap;
+  const orig = sm.render;
+  sm.render = function (lights, scene, camera) {
+    if (sm.enabled === false) return;
+    if (sm.autoUpdate === false && sm.needsUpdate === false) return;
+    if (!lights || lights.length === 0) return;
+    const casters = [];
+    scene.traverse((o) => { if (o.castShadow && o.visible && (o.isMesh || o.isLine || o.isPoints)) casters.push(o); });
+    for (const light of lights) {
+      const lay = light.shadow && light.shadow.camera && light.shadow.camera.layers;
+      const hidden = [];
+      if (lay) for (const o of casters) if (!o.layers.test(lay)) { o.visible = false; hidden.push(o); }
+      sm.needsUpdate = true;
+      orig.call(sm, [light], scene, camera);
+      for (const o of hidden) o.visible = true;
+    }
+    sm.needsUpdate = false;
+  };
+}
+
 export class Engine {
   constructor(canvas) {
     this.canvas = canvas;
@@ -195,6 +221,7 @@ export class Engine {
     r.outputColorSpace = THREE.SRGBColorSpace;
     r.setPixelRatio(1);
     this.renderer = r;
+    patchShadowCasterLayers(r);
     this.accMat = new THREE.ShaderMaterial(Object.assign({}, accShader, { uniforms: THREE.UniformsUtils.clone(accShader.uniforms), depthTest: false, depthWrite: false, blending: THREE.NoBlending }));
     this.postMat = new THREE.ShaderMaterial(Object.assign({}, postShader, { uniforms: THREE.UniformsUtils.clone(postShader.uniforms), depthTest: false, depthWrite: false, blending: THREE.NoBlending }));
     this.quad = new FullScreenQuad(this.accMat);
