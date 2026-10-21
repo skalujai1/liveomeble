@@ -103,7 +103,16 @@ const catalog = {
   products: out,
 };
 
+// Gdy produkty i kolekcje się nie zmieniły, zostawiamy plik w spokoju (bez zmiany samego „updated”),
+// żeby każdy build nie tworzył pustej zmiany w repo.
 mkdirSync(dirname(OUT), { recursive: true });
-writeFileSync(OUT, JSON.stringify(catalog) + '\n');
+let previous = null;
+try { previous = JSON.parse(readFileSync(OUT, 'utf8')); } catch { /* brak pliku albo zły JSON – zapisujemy od nowa */ }
+const same = previous
+  && JSON.stringify(previous.products) === JSON.stringify(catalog.products)
+  && JSON.stringify(previous.collections) === JSON.stringify(catalog.collections);
+if (!same) writeFileSync(OUT, JSON.stringify(catalog) + '\n');
 const onSale = out.filter(x => x.regular).length;
-console.log(`Zapisano ${out.length} rekordów (warianty), w tym ${onSale} w promocji → ${OUT}`);
+console.log(same
+  ? `Katalog bez zmian (${out.length} rekordów, ${onSale} w promocji) — plik nie nadpisany: ${OUT}`
+  : `Zapisano ${out.length} rekordów (warianty), w tym ${onSale} w promocji → ${OUT}`);
