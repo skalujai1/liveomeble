@@ -72,7 +72,7 @@
       "lng": 22.568
     },
     "21": {
-      "region": "Okolice Lublina, Biała Podlaska, Lubartów, Radzyń Podlaski",
+      "region": "Okolice Lublina, Biała Podlaska, Lubartów, Radzyń Podlaski, Łuków",
       "voivodeship": "lubelskie",
       "lat": 51.65,
       "lng": 22.8
@@ -138,7 +138,7 @@
       "lng": 20.01
     },
     "32": {
-      "region": "Okolice Krakowa, Olkusz, Chrzanów, Oświęcim, Bochnia, Wieliczka",
+      "region": "Okolice Krakowa, Olkusz, Chrzanów, Oświęcim, Bochnia, Wieliczka, Myślenice",
       "voivodeship": "małopolskie",
       "lat": 50.1,
       "lng": 19.8
@@ -150,7 +150,7 @@
       "lng": 20.85
     },
     "34": {
-      "region": "Nowy Targ, Zakopane, Wadowice, Żywiec, Limanowa, Myślenice",
+      "region": "Nowy Targ, Zakopane, Wadowice, Żywiec, Limanowa, Sucha Beskidzka",
       "voivodeship": "małopolskie",
       "lat": 49.65,
       "lng": 19.8
@@ -162,7 +162,7 @@
       "lng": 21.999
     },
     "36": {
-      "region": "Okolice Rzeszowa, Kolbuszowa, Strzyżów, Brzozów",
+      "region": "Okolice Rzeszowa, Kolbuszowa, Brzozów, Głogów Małopolski",
       "voivodeship": "podkarpackie",
       "lat": 50,
       "lng": 21.9
@@ -174,7 +174,7 @@
       "lng": 22.5
     },
     "38": {
-      "region": "Krosno, Jasło, Sanok, Gorlice, Lesko, Ustrzyki Dolne",
+      "region": "Krosno, Jasło, Sanok, Gorlice, Strzyżów, Lesko, Ustrzyki Dolne",
       "voivodeship": "podkarpackie",
       "lat": 49.6,
       "lng": 21.9
@@ -588,7 +588,7 @@
       "lng": 21.6
     },
     "08": {
-      "region": "Siedlce, Garwolin, Sokołów Podlaski, Łuków",
+      "region": "Siedlce, Garwolin, Sokołów Podlaski, Łosice",
       "voivodeship": "mazowieckie",
       "lat": 52.05,
       "lng": 22.1

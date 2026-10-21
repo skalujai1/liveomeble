@@ -26,6 +26,14 @@
         {
           "q": "Jakie wymiary mają {pluralLower} Liveo?",
           "a": "{plural} Liveo mają od {minWidth} do {maxWidth} cm szerokości. Wysokość i głębokość każdego mebla podajemy na jego stronie."
+        },
+        {
+          "q": "Jak dopasować {pluralLower} do reszty mebli?",
+          "a": "Najprościej wybrać {pluralLower} z tej samej kolekcji co pozostałe meble w pokoju, bo mają te same kolory, uchwyty i podstawę. Kolekcje z tym rodzajem mebla wymieniamy wyżej na tej stronie."
+        },
+        {
+          "q": "Gdzie kupić {pluralLower} Liveo?",
+          "a": "{plural} Liveo kupisz w sklepach partnerskich — Liveo nie ma własnych salonów. Wpisz kod pocztowy na stronie [Gdzie kupić](/gdzie-kupic/), a pokażemy najbliższe sklepy z wybraną kolekcją."
         }
       ],
       "_note": "{minPrice}/{maxPrice} — z priceFor() w dniu budowy, sformatowane przez formatPrice(). Po każdej zmianie cen strona się przebudowuje (patrz navireo-integracja.md)."
@@ -86,7 +94,8 @@
       "tips": [
         "Wysoki regał zawsze przymocuj do ściany, zwłaszcza gdy w domu są dzieci.",
         "Najcięższe rzeczy układaj na dolnych półkach — regał stoi wtedy stabilniej."
-      ]
+      ],
+      "guide": "plyta-meblowa-laminowana"
     },
     {
       "type": "lawa",

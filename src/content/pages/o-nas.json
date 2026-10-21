@@ -1,0 +1,108 @@
+{
+  "id": "o-nas",
+  "url": "/o-nas/",
+  "status": "draft",
+  "_notes": [
+    "Wszystkie fakty o firmie poza tymi z briefu mają znacznik [do potwierdzenia]. Przed publikacją: albo klient potwierdza i podaje źródło, albo zdanie usuwamy.",
+    "Nie dopisywać liczb (lata, pracownicy, metry hali, sklepy, klienci), certyfikatów ani nagród bez potwierdzenia — patrz docs/brief.md, rozdz. 7.",
+    "Zdjęcia: prawdziwe zdjęcia zakładu i ludzi Liveo (za zgodą) albo żadne — bez zdjęć stockowych."
+  ],
+  "seo": {
+    "title": "O nas — producent mebli z Raniżowa | Liveo",
+    "description": "Liveo Meble to polski producent mebli skrzyniowych i systemowych z Raniżowa. Projektujemy meble w kolekcjach i sprzedajemy je przez sklepy partnerskie.",
+    "jsonLd": ["AboutPage", "Organization", "BreadcrumbList", "FAQPage"],
+    "_note": "Organization: name, legalName, url, logo, address (Raniżów — pełny adres po potwierdzeniu), sameAs (profile social media — po potwierdzeniu). Bez foundingDate i numberOfEmployees, dopóki klient ich nie potwierdzi."
+  },
+  "h1": "Meble z Raniżowa, <br>projektowane w kolekcjach",
+  "sections": [
+    {
+      "id": "wstep",
+      "type": "intro",
+      "lead": "Liveo Meble to polski producent mebli skrzyniowych i systemowych. Firma ma siedzibę w Raniżowie, w powiecie kolbuszowskim na Podkarpaciu. Projektujemy meble do całego domu i sprzedajemy je przez sklepy partnerskie."
+    },
+    {
+      "id": "kolekcje",
+      "type": "text",
+      "title": "Dlaczego kolekcje",
+      "text": "Dom rzadko urządza się w jeden dzień. Najpierw salon, za rok sypialnia, potem przedpokój. Dlatego meble projektujemy w kolekcjach: szafka RTV, komoda, witryna, stół i szafa z jednej kolekcji mają te same kolory, uchwyty i podstawę. Możesz dokupić kolejny mebel po latach i nadal będzie pasował [do potwierdzenia: jak długo kolekcje pozostają w ofercie].",
+      "cta": { "label": "Zobacz kolekcje", "href": "/kolekcje/" }
+    },
+    {
+      "id": "produkcja",
+      "type": "facts",
+      "title": "Jak powstają meble Liveo",
+      "lead": "[do potwierdzenia: cała sekcja — uzupełnić faktami od klienta albo usunąć]",
+      "items": [
+        { "label": "Miejsce produkcji", "value": "Raniżów, Podkarpacie [do potwierdzenia: czy cała produkcja odbywa się w Raniżowie]" },
+        { "label": "Materiały", "value": "płyta laminowana w dekorach drewna i kolorach jednolitych [do potwierdzenia: rodzaj, grubości, dostawcy, klasa emisji]" },
+        { "label": "Okucia", "value": "[do potwierdzenia: np. prowadnice i zawiasy z cichym domykiem — w których meblach]" },
+        { "label": "Kontrola jakości", "value": "[do potwierdzenia: co sprawdzamy przed wysyłką]" },
+        { "label": "Pakowanie", "value": "meble w paczkach do samodzielnego montażu, z instrukcją i okuciami [do potwierdzenia]" }
+      ],
+      "image": {
+        "alt": "[do potwierdzenia: zdjęcie z zakładu w Raniżowie, opis tego, co widać]",
+        "_note": "Tylko prawdziwe zdjęcie z zakładu."
+      }
+    },
+    {
+      "id": "historia",
+      "type": "text",
+      "title": "Skąd jesteśmy",
+      "text": "[do potwierdzenia: krótka historia firmy — rok założenia, początki, ważne momenty. W wynikach wyszukiwania pojawia się informacja o działalności „od lat 90.” — nie publikujemy jej bez potwierdzenia.]",
+      "_note": "Jeśli klient nie poda historii, sekcję usuwamy — strona ma sens bez niej."
+    },
+    {
+      "id": "jak-sprzedajemy",
+      "type": "text",
+      "title": "Kupujesz w sklepie blisko domu",
+      "text": "Nie mamy własnych salonów. Meble Liveo sprzedają sklepy partnerskie — tam zobaczysz je na żywo, porównasz kolory i ustalisz dostawę. Na naszej stronie wybierasz meble i znajdujesz najbliższy sklep, który ma wybraną kolekcję.",
+      "cta": { "label": "Gdzie kupić", "href": "/gdzie-kupic/" }
+    },
+    {
+      "id": "dla-sklepow",
+      "type": "band",
+      "title": "Współpracujemy ze sklepami meblowymi",
+      "text": "Jeśli prowadzisz sklep i chcesz sprzedawać kolekcje Liveo, zobacz, jak wygląda współpraca.",
+      "cta": { "label": "Dla partnerów", "href": "/dla-partnerow/" }
+    },
+    {
+      "id": "dane-firmy",
+      "type": "company",
+      "title": "Dane firmy",
+      "items": [
+        { "label": "Nazwa", "value": "Liveo Meble sp. z o.o." },
+        { "label": "Adres", "value": "[do potwierdzenia: ulica i numer], [do potwierdzenia: kod pocztowy] Raniżów" },
+        { "label": "NIP", "value": "[do potwierdzenia]" },
+        { "label": "KRS", "value": "[do potwierdzenia]" },
+        { "label": "REGON", "value": "[do potwierdzenia]" },
+        { "label": "Kapitał zakładowy", "value": "[do potwierdzenia — jeśli spółka chce go podawać]" }
+      ],
+      "cta": { "label": "Kontakt", "href": "/kontakt/" }
+    }
+  ],
+  "faq": {
+    "title": "Pytania o Liveo",
+    "items": [
+      {
+        "q": "Gdzie produkowane są meble Liveo?",
+        "a": "Liveo Meble ma siedzibę w Raniżowie na Podkarpaciu [do potwierdzenia: czy cała produkcja odbywa się w Raniżowie]. To polski producent mebli skrzyniowych i systemowych."
+      },
+      {
+        "q": "Czy Liveo ma własne salony meblowe?",
+        "a": "Nie, Liveo nie ma własnych salonów. Meble sprzedają sklepy partnerskie — najbliższy znajdziesz na stronie [Gdzie kupić](/gdzie-kupic/)."
+      },
+      {
+        "q": "Jakie meble produkuje Liveo?",
+        "a": "Liveo produkuje meble skrzyniowe i systemowe do domu: szafki RTV, komody, witryny, regały, ławy, półki, stoły, kredensy, łóżka, szafki nocne, szafy, toaletki, lustra, biurka, szafki na buty i wieszaki. Projektujemy je w kolekcjach, czyli kompletach w tych samych kolorach."
+      },
+      {
+        "q": "Co to są meble skrzyniowe i systemowe?",
+        "a": "Meble skrzyniowe to meble o konstrukcji z płyt — szafy, komody, szafki, regały. Systemowe to takie, które projektuje się jako zestaw elementów do łączenia ze sobą, na przykład w komplet do salonu."
+      },
+      {
+        "q": "Czy można kupić meble bezpośrednio od Liveo?",
+        "a": "Klienci indywidualni kupują meble Liveo w sklepach partnerskich, a nie bezpośrednio u producenta [do potwierdzenia: decyzja o sprzedaży online]. Firmy, które chcą sprzedawać meble Liveo, zapraszamy na stronę [Dla partnerów](/dla-partnerow/)."
+      }
+    ]
+  }
+}

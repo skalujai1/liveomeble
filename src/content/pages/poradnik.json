@@ -1,0 +1,63 @@
+{
+  "id": "poradnik",
+  "url": "/poradnik/",
+  "status": "draft",
+  "seo": {
+    "title": "Poradnik — jak wybrać i ustawić meble | Liveo",
+    "description": "Praktyczne poradniki przed zakupem mebli: jak zmierzyć wnękę, dobrać szafkę RTV, urządzić małą sypialnię i na co patrzeć przy płycie meblowej.",
+    "jsonLd": ["CollectionPage", "ItemList", "BreadcrumbList"]
+  },
+  "h1": "Poradnik",
+  "sections": [
+    {
+      "id": "wstep",
+      "type": "intro",
+      "lead": "Konkretne wskazówki, zanim kupisz mebel: jak mierzyć, jak ustawiać, na co patrzeć w sklepie. Piszemy ogólnie i rzetelnie — bez reklamy w środku tekstu."
+    },
+    {
+      "id": "lista",
+      "type": "articles",
+      "title": "Wszystkie poradniki",
+      "titleVisuallyHidden": true,
+      "source": "src/content/poradnik/*.md (sortowanie: date malejąco, potem title)",
+      "card": {
+        "title": "{title}",
+        "text": "{description}",
+        "meta": "{readingTime} min czytania",
+        "link": "Czytaj: {title}"
+      }
+    },
+    {
+      "id": "doradca",
+      "type": "band",
+      "title": "Wolisz zapytać?",
+      "text": "Wyślij zdjęcie pokoju — doradca wnętrz zaproponuje komplet mebli z jednej kolekcji.",
+      "cta": { "label": "Otwórz doradcę wnętrz", "href": "/doradca-wnetrz/" }
+    }
+  ],
+  "article": {
+    "_notes": [
+      "Szablon strony /poradnik/{slug}/ — treść z src/content/poradnik/{slug}.md (slug = nazwa pliku).",
+      "JSON-LD: Article (headline = title, description, datePublished = date, dateModified = updated ?? date, author = Organization „Liveo Meble” dopóki autor nie jest potwierdzony, publisher = Organization, image), BreadcrumbList, FAQPage z frontmatter faq[] — pytania i odpowiedzi muszą być słowo w słowo jak w sekcji FAQ artykułu (sprawdza test treści).",
+      "Spis treści generowany z nagłówków H2 (pytania). Kotwice: slug nagłówka bez polskich znaków.",
+      "Pole „Najważniejsze w jednym zdaniu” renderujemy jako wyróżniony akapit pod leadem — to też kandydat na description w llms.txt."
+    ],
+    "seo": {
+      "title": "{title} | Liveo",
+      "titleFallback": "{title}",
+      "description": "{description}",
+      "jsonLd": ["Article", "BreadcrumbList", "FAQPage"]
+    },
+    "meta": {
+      "author": "{author}",
+      "date": "Opublikowano: {date}",
+      "updated": "Aktualizacja: {updated}",
+      "readingTime": "{readingTime} min czytania"
+    },
+    "tocTitle": "W tym poradniku",
+    "keyTakeawayLabel": "Najważniejsze w jednym zdaniu",
+    "relatedTitle": "Przeczytaj też",
+    "relatedRule": "maks. 2 inne artykuły, najpierw te z pola related",
+    "disclaimer": "Poradnik zawiera ogólne wskazówki. Wymiary i cechy konkretnego mebla sprawdzisz na jego stronie i w sklepie."
+  }
+}

@@ -39,6 +39,16 @@ const F = Object.fromEntries(finishes.map(f => [f.id, f]));
 const C = Object.fromEntries(collections.map(c => [c.slug, c]));
 const ROOM_KEY = Object.fromEntries(rooms.map(r => [r.slug, r.assistantKey]));
 
+// Kuchni na razie nie modelujemy (docs/do-potwierdzenia.md), ale widżet ma przycisk „Kuchnia”.
+// Stoły i kredensy z jadalni pasują też do kuchni z częścią jadalną — dzięki temu ta ścieżka
+// doradcy nie kończy się pustą listą.
+const KITCHEN_TYPES = new Set(['stol', 'kredens']);
+const assistantRooms = p => {
+  const keys = p.rooms.map(r => ROOM_KEY[r]).filter(Boolean);
+  if (KITCHEN_TYPES.has(p.type) && p.rooms.includes('jadalnia')) keys.push('kuchnia');
+  return [...new Set(keys)];
+};
+
 /** Cechy kolorystyczne wariantu dla recommender.colorScore(): jasność, drewno, czerń, połysk. */
 function colorProfile(finish, model, label) {
   const boards = [
@@ -71,7 +81,7 @@ for (const p of products) {
       collection: coll.name.toLocaleUpperCase('pl'),
       model: p.name,
       type: p.type,
-      rooms: [...new Set(p.rooms.map(r => ROOM_KEY[r]).filter(Boolean))],
+      rooms: assistantRooms(p),
       price: price.price,
       regular: price.regular,
       url: `/produkt/${p.slug}/`,

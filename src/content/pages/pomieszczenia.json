@@ -9,7 +9,7 @@
     "Kuchnia: brak strony, dopóki klient nie zdecyduje o kuchniach (docs/do-potwierdzenia.md)."
   ],
   "seo": {
-    "title": "Meble według pomieszczenia — salon, sypialnia, przedpokój | Liveo",
+    "title": "Meble według pomieszczenia — od salonu po przedpokój | Liveo",
     "description": "Wybierz pokój, który urządzasz: salon, jadalnia, sypialnia, pokój młodzieżowy, przedpokój albo domowe biuro. Pokażemy pasujące meble i kolekcje.",
     "jsonLd": ["CollectionPage", "BreadcrumbList"]
   },
@@ -25,6 +25,19 @@
       "title": "Urządzasz {roomAccusative}? Wyślij zdjęcie",
       "text": "Doradca wnętrz zaproponuje komplet z jednej kolekcji dopasowany do kolorów Twojego pokoju.",
       "cta": "Otwórz doradcę"
+    },
+    "faqShared": {
+      "_note": "FAQ strony pomieszczenia = items[].faq (3 pytania specyficzne) + te 2 pytania wspólne, w tej kolejności. Razem 5 — jedno źródło dla HTML i FAQPage.",
+      "items": [
+        {
+          "q": "Gdzie kupić meble Liveo do {roomGenitive}?",
+          "a": "Meble Liveo do {roomGenitive} kupisz w sklepach partnerskich — Liveo nie ma własnych salonów. Wpisz kod pocztowy na stronie [Gdzie kupić](/gdzie-kupic/), a pokażemy najbliższe sklepy z wybraną kolekcją."
+        },
+        {
+          "q": "Czy doradca wnętrz pomoże urządzić {roomAccusative}?",
+          "a": "Tak — wyślij zdjęcie pomieszczenia, a [doradca wnętrz](/doradca-wnetrz/) zaproponuje komplet z jednej kolekcji dopasowany do kolorów podłogi i ścian. Wymiary mebli sprawdzisz przy każdej propozycji."
+        }
+      ]
     },
     "_note": "{roomGenitive}, {roomAccusative}, {roomLocative} — z rooms.json (genitive, accusative, locative). H1 dla biura: „Meble do domowego biura” (patrz items[].h1)."
   },

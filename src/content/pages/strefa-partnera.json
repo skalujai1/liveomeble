@@ -1,0 +1,213 @@
+{
+  "id": "strefa-partnera",
+  "url": "/strefa-partnera/",
+  "status": "draft",
+  "demo": true,
+  "seo": {
+    "title": "Strefa partnera — logowanie | Liveo",
+    "description": "Logowanie do strefy partnera Liveo: ceny partnerskie, stany magazynowe i zamówienia online dla sklepów współpracujących z Liveo.",
+    "robots": "noindex, nofollow",
+    "jsonLd": ["WebPage"],
+    "_notes": [
+      "Strona logowania jest publiczna, ale wyłączona z indeksu (noindex) i z sitemap.xml. Panel po zalogowaniu: noindex, Cache-Control: private, no-store.",
+      "Nie umieszczać w llms.txt ani w JSON-LD żadnych cen partnerskich."
+    ]
+  },
+  "h1": "Strefa partnera",
+  "demoBanner": {
+    "title": "Wersja demonstracyjna",
+    "text": "To DEMO strefy partnera. Ceny, stany i zamówienia są przykładowe — zamówienia nie trafiają do systemu Navireo i nie są realizowane.",
+    "_note": "Baner widoczny na każdym widoku strefy, dopóki demo = true. Nie da się go zamknąć."
+  },
+  "login": {
+    "id": "logowanie",
+    "lead": "Strefa dla sklepów, które współpracują z Liveo. Zaloguj się, żeby zobaczyć ceny partnerskie i stany oraz złożyć zamówienie.",
+    "form": {
+      "emailLabel": "E-mail",
+      "passwordLabel": "Hasło",
+      "showPassword": "Pokaż hasło",
+      "hidePassword": "Ukryj hasło",
+      "submit": "Zaloguj się",
+      "forgot": "Nie pamiętam hasła",
+      "forgotText": "Wpisz e-mail konta — wyślemy link do ustawienia nowego hasła. Link działa przez [do potwierdzenia] minut.",
+      "forgotSubmit": "Wyślij link",
+      "forgotDone": "Jeśli to konto istnieje, link jest już w drodze. Sprawdź też folder ze spamem."
+    },
+    "demoEntry": {
+      "title": "Zobacz, jak działa strefa",
+      "text": "Wejdź na konto przykładowego sklepu. Niczego nie zamówisz — to tylko podgląd.",
+      "button": "Wejdź do wersji demo"
+    },
+    "errors": {
+      "invalid": "E-mail albo hasło są nieprawidłowe.",
+      "locked": "Za dużo prób logowania. Spróbuj ponownie za {minutes}.",
+      "expired": "Sesja wygasła. Zaloguj się ponownie.",
+      "server": "Logowanie chwilowo nie działa. Spróbuj za kilka minut albo zadzwoń do opiekuna handlowego."
+    },
+    "noAccount": {
+      "title": "Nie masz konta?",
+      "text": "Dostęp do strefy dostają sklepy po podpisaniu umowy partnerskiej.",
+      "cta": { "label": "Jak zostać partnerem", "href": "/dla-partnerow/" }
+    },
+    "_notes": [
+      "Docelowy sposób logowania (hasło + 2FA, link e-mail, konta per pracownik sklepu) — do ustalenia, patrz docs/navireo-integracja.md, rozdz. Logowanie partnera.",
+      "Pola z autocomplete=\"username\" i \"current-password\"."
+    ]
+  },
+  "panel": {
+    "greeting": "Dzień dobry, {companyName}",
+    "accountMeta": "Konto: {companyName} · NIP {nip} · opiekun: {managerName}",
+    "logout": "Wyloguj",
+    "nav": {
+      "ariaLabel": "Strefa partnera",
+      "items": [
+        { "id": "cennik", "label": "Cennik i stany" },
+        { "id": "zamowienie", "label": "Nowe zamówienie" },
+        { "id": "historia", "label": "Zamówienia" },
+        { "id": "materialy", "label": "Materiały" },
+        { "id": "konto", "label": "Konto" }
+      ]
+    },
+    "pricelist": {
+      "id": "cennik",
+      "title": "Cennik partnerski",
+      "lead": "Ceny netto dla Twojego sklepu. Stany pokazujemy z magazynu producenta.",
+      "updated": "Ceny i stany z: {datetime}",
+      "search": "Szukaj po nazwie albo indeksie",
+      "filterCollection": "Kolekcja",
+      "filterType": "Rodzaj mebla",
+      "filterStock": "Tylko dostępne od ręki",
+      "columns": {
+        "sku": "Indeks",
+        "name": "Mebel",
+        "color": "Kolor",
+        "retail": "Cena katalogowa brutto",
+        "partner": "Twoja cena netto",
+        "promo": "Promocja",
+        "stock": "Stan",
+        "qty": "Ilość",
+        "add": "Dodaj"
+      },
+      "addButton": "Dodaj do zamówienia",
+      "addedAnnounce": "Dodano: {name}, {color}, {qty} szt.",
+      "export": "Pobierz cennik (CSV)",
+      "demoNote": "DEMO: cena partnerska jest wyliczona przykładowo (cena katalogowa netto minus rabat przykładowej grupy). Prawdziwe ceny przyjdą z cennika partnera w Navireo.",
+      "_notes": [
+        "Dane: GET /api/b2b/pricelist (sesja partnera). Pola: sku wariantu, cena netto z cennika kontrahenta w Navireo, stan, czas realizacji.",
+        "Kolumna „Promocja”: czy promocja producenta obejmuje też ceny partnerskie — [do potwierdzenia]."
+      ]
+    },
+    "order": {
+      "id": "zamowienie",
+      "title": "Nowe zamówienie",
+      "empty": "Zamówienie jest puste. Dodaj meble z cennika.",
+      "columns": {
+        "item": "Mebel",
+        "qty": "Ilość",
+        "unit": "Cena netto",
+        "total": "Wartość netto"
+      },
+      "remove": "Usuń {name} z zamówienia",
+      "summary": {
+        "net": "Razem netto",
+        "vat": "VAT {rate}%",
+        "gross": "Razem brutto",
+        "items": "plural.items"
+      },
+      "delivery": {
+        "title": "Dostawa",
+        "addressLabel": "Adres dostawy",
+        "addressHint": "Adresy z karty Twojej firmy w Navireo.",
+        "dateLabel": "Preferowany termin",
+        "dateHint": "Termin potwierdzi opiekun handlowy."
+      },
+      "referenceLabel": "Twój numer zamówienia (opcjonalnie)",
+      "referenceHint": "Np. numer zamówienia klienta sklepu — pojawi się na dokumentach.",
+      "notesLabel": "Uwagi do zamówienia",
+      "leadTimeNote": "Pozycje „na zamówienie” wydłużają realizację — termin podajemy przy każdej pozycji.",
+      "submit": "Wyślij zamówienie",
+      "submitDemo": "Wyślij zamówienie (DEMO)",
+      "confirm": "Wysłać zamówienie na {gross} brutto?",
+      "success": {
+        "title": "Zamówienie przyjęte",
+        "text": "Numer zamówienia na stronie: {webOrderId}. Gdy trafi do systemu Liveo, zobaczysz tu jego numer w Navireo i status.",
+        "demo": "DEMO: zamówienie zapisaliśmy tylko w tej przeglądarce. Nie trafiło do Navireo i nie będzie realizowane."
+      },
+      "error": "Nie udało się wysłać zamówienia. Niczego nie zamówiliśmy — spróbuj ponownie albo zadzwoń do opiekuna.",
+      "_notes": [
+        "Wysyłka: POST /api/b2b/orders z kluczem idempotencji (podwójne kliknięcie nie tworzy dwóch zamówień).",
+        "W DEMO zamówienie zapisujemy w localStorage i symulujemy statusy — bez wywołania API."
+      ]
+    },
+    "history": {
+      "id": "historia",
+      "title": "Zamówienia",
+      "columns": {
+        "date": "Data",
+        "web": "Nr na stronie",
+        "erp": "Nr w Navireo",
+        "value": "Wartość netto",
+        "status": "Status"
+      },
+      "statuses": {
+        "received": "Przyjęte przez stronę",
+        "queued": "Czeka na przekazanie do Navireo",
+        "inErp": "W realizacji",
+        "partial": "Częściowo wysłane",
+        "shipped": "Wysłane",
+        "cancelled": "Anulowane",
+        "error": "Wymaga kontaktu — zadzwoń do opiekuna"
+      },
+      "empty": "Nie masz jeszcze zamówień złożonych przez stronę.",
+      "_note": "Statusy po stronie Navireo i ich mapowanie — [do potwierdzenia z wdrożeniowcem], patrz docs/navireo-integracja.md."
+    },
+    "materials": {
+      "id": "materialy",
+      "title": "Materiały do sprzedaży",
+      "lead": "Zdjęcia aranżacji i mebli, opisy i wymiary do Twojego sklepu i sklepu internetowego.",
+      "items": [
+        { "label": "Zdjęcia mebli (paczki według kolekcji)", "_note": "[do potwierdzenia: format, rozdzielczość, licencja]" },
+        { "label": "Plik produktowy (CSV) z opisami, wymiarami i indeksami" },
+        { "label": "Karty kolekcji do druku (PDF)", "_note": "[do potwierdzenia]" }
+      ],
+      "license": "Materiały możesz używać do sprzedaży mebli Liveo zgodnie z umową partnerską [do potwierdzenia: zasady licencji]."
+    },
+    "account": {
+      "id": "konto",
+      "title": "Konto",
+      "company": "Dane firmy",
+      "companyNote": "Dane firmy pochodzą z systemu Liveo. Zmiany zgłoś opiekunowi handlowemu.",
+      "users": "Osoby z dostępem",
+      "storeListing": "Twój sklep w wyszukiwarce na stronie",
+      "storeListingText": "Tak widzą Twój sklep klienci na stronie Gdzie kupić. Zmiany w godzinach, kolekcjach na ekspozycji lub usługach zgłoś opiekunowi.",
+      "manager": "Twój opiekun handlowy",
+      "changePassword": "Zmień hasło"
+    }
+  },
+  "faq": {
+    "title": "Pomoc",
+    "_note": "FAQ tylko jako pomoc na stronie logowania — bez FAQPage w JSON-LD (strona noindex).",
+    "items": [
+      {
+        "q": "Jak dostać dostęp do strefy partnera?",
+        "a": "Dostęp dostają sklepy, które podpisały umowę partnerską z Liveo. Jeśli chcesz zacząć współpracę, wypełnij formularz na stronie [Dla partnerów](/dla-partnerow/)."
+      },
+      {
+        "q": "Czy ceny w strefie są cenami netto?",
+        "a": "Tak, ceny partnerskie pokazujemy netto, a podsumowanie zamówienia także brutto. Cena katalogowa brutto obok to cena producenta widoczna dla klientów na stronie."
+      },
+      {
+        "q": "Skąd są stany magazynowe?",
+        "a": "Stany pochodzą z systemu Liveo (Navireo) i dotyczą magazynu producenta. Przy każdej pozycji podajemy, kiedy dane były ostatnio odświeżone."
+      },
+      {
+        "q": "Co się dzieje z zamówieniem po wysłaniu?",
+        "a": "Zamówienie trafia do systemu Liveo, a Ty widzisz jego numer i status w zakładce „Zamówienia”. Termin dostawy potwierdza opiekun handlowy."
+      },
+      {
+        "q": "Czy kilka osób ze sklepu może mieć dostęp?",
+        "a": "Tak, każda osoba może mieć własne konto przypisane do firmy [do potwierdzenia]. Poproś o to opiekuna handlowego."
+      }
+    ]
+  }
+}

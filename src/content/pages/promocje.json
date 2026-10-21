@@ -1,0 +1,130 @@
+{
+  "id": "promocje",
+  "url": "/promocje/",
+  "status": "draft",
+  "seo": {
+    "title": "Promocje na meble Liveo — aktualne obniżki cen",
+    "description": "Aktualne promocje na meble Liveo: rabaty na kolekcje i rodzaje mebli. Przy każdej obniżce podajemy najniższą cenę z 30 dni przed nią.",
+    "jsonLd": ["CollectionPage", "ItemList", "BreadcrumbList", "FAQPage"],
+    "_note": "ItemList = meble objęte aktywnymi promocjami w dniu budowy (priceFor). Offer w JSON-LD tylko na stronach produktów, nie tutaj."
+  },
+  "h1": "Promocje",
+  "sections": [
+    {
+      "id": "wstep",
+      "type": "intro",
+      "lead": "Tu zbieramy wszystkie obniżki cen mebli Liveo. Przy każdej podajemy datę końca promocji i najniższą cenę z 30 dni przed obniżką — od razu widać, ile naprawdę zyskujesz.",
+      "updated": "Ceny aktualne na: {date}",
+      "_note": "{date} = chwila pobrania cen z API (albo data budowy, gdy API nie odpowiada)."
+    },
+    {
+      "id": "aktywne",
+      "type": "promotions",
+      "title": "Trwające promocje",
+      "source": "promotions.json → activePromotions(now), od najwcześniej kończącej się",
+      "item": {
+        "title": "{label}",
+        "text": "{description}",
+        "until": "Do {lastDay} włącznie",
+        "endsSoon": "Kończy się jutro",
+        "endsToday": "Ostatni dzień promocji",
+        "count": "plural.products",
+        "link": "Zobacz meble w promocji",
+        "href": "/meble/?promocje=1&{scopeParams}"
+      },
+      "products": {
+        "title": "Meble w promocji: {label}",
+        "limit": 8,
+        "card": "meble.sections[lista].card",
+        "sort": "największa obniżka kwotowo"
+      },
+      "empty": {
+        "title": "Teraz nie mamy promocji",
+        "text": "Zajrzyj za kilka dni albo zobacz wszystkie meble — ceny regularne też podajemy przy każdym meblu.",
+        "cta": { "label": "Wszystkie meble", "href": "/meble/" }
+      },
+      "_notes": [
+        "Lista liczona w przeglądarce z API (/api/prices + /api/promotions) z fallbackiem na dane z budowy — promocja ustawiona w Navireo pojawia się bez przebudowy strony.",
+        "Promocje zaplanowane (startsAt > now) nie są pokazywane. Wygasłe znikają same w chwili endsAt."
+      ]
+    },
+    {
+      "id": "jak-czytac-ceny",
+      "type": "explainer",
+      "title": "Jak czytać ceny w promocji",
+      "lead": "Przy meblu w promocji zobaczysz trzy informacje:",
+      "items": [
+        {
+          "term": "Cena promocyjna",
+          "text": "Tyle kosztuje mebel teraz, w czasie promocji."
+        },
+        {
+          "term": "Cena przed obniżką",
+          "text": "Cena regularna — przekreślona, żeby było widać różnicę."
+        },
+        {
+          "term": "Najniższa cena z 30 dni przed obniżką",
+          "text": "Najniższa cena, w jakiej ten mebel był u nas w ciągu 30 dni, zanim zaczęła się promocja. To z nią porównuj obniżkę."
+        }
+      ],
+      "example": {
+        "title": "Przykład",
+        "text": "Szafka kosztowała 849 zł. Od 13 października jest tańsza o 15% i kosztuje 721 zł. W ciągu 30 dni przed 13 października jej cena nie spadała poniżej 849 zł — więc pod ceną promocyjną piszemy: „Najniższa cena z 30 dni przed obniżką: 849 zł”.",
+        "_note": "Przykład zgodny z danymi demo LV-OLMO-RTV160 (849 zł → 721 zł od 2026-10-13). Po przejściu na dane z Navireo podmienić na dowolny prawdziwy przypadek albo zostawić jako przykład ogólny."
+      }
+    },
+    {
+      "id": "zasady",
+      "type": "rules",
+      "title": "Zasady promocji w prostych słowach",
+      "items": [
+        "Gdy obniżamy cenę, zawsze podajemy najniższą cenę z 30 dni przed obniżką. Tak wymaga prawo — art. 6a ustawy o informowaniu o cenach towarów i usług (tzw. dyrektywa Omnibus). Dzięki temu nikt nie może podnieść ceny tuż przed promocją, żeby obniżka wyglądała na większą.",
+        "Jeśli mebel jest w sprzedaży krócej niż 30 dni, podajemy najniższą cenę od dnia, w którym pojawił się w sprzedaży.",
+        "Jeśli obniżka rośnie stopniowo — na przykład najpierw −10%, potem −20% — podajemy najniższą cenę sprzed pierwszej obniżki.",
+        "Promocje się nie łączą. Gdy mebel obejmują dwie promocje, pokazujemy tę, która daje niższą cenę.",
+        "Promocja trwa do dnia podanego przy niej, do końca tego dnia (czas polski).",
+        "Ceny na stronie to ceny producenta [do potwierdzenia: „ceny sugerowane”]. Sklepy partnerskie mogą mieć własne ceny i własne promocje — ostateczną cenę podaje sprzedawca."
+      ],
+      "_notes": [
+        "Punkt 2 i 3: wymagają obsługi w danych (data wprowadzenia mebla do sprzedaży, łańcuch kolejnych obniżek) — patrz docs/navireo-integracja.md, rozdz. Omnibus.",
+        "Ostatni punkt — kluczowe pytanie do klienta: czy promocja ustawiona w Navireo obowiązuje automatycznie w sklepach partnerskich (docs/do-potwierdzenia.md)."
+      ]
+    },
+    {
+      "id": "gdzie-kupic",
+      "type": "band",
+      "title": "Promocja Ci się podoba?",
+      "text": "Sprawdź, który sklep partnerski blisko Ciebie ma meble z tej kolekcji. Przed wizytą zapytaj w sklepie, czy promocja obowiązuje także u niego [do potwierdzenia].",
+      "cta": { "label": "Znajdź sklep", "href": "/gdzie-kupic/" }
+    }
+  ],
+  "faq": {
+    "title": "Pytania o promocje",
+    "items": [
+      {
+        "q": "Co oznacza „najniższa cena z 30 dni przed obniżką”?",
+        "a": "To najniższa cena, w jakiej mebel był u nas w ciągu 30 dni przed rozpoczęciem promocji. Porównaj z nią cenę promocyjną — wtedy widać prawdziwą obniżkę."
+      },
+      {
+        "q": "Dlaczego najniższa cena z 30 dni jest czasem taka sama jak cena przed obniżką?",
+        "a": "Bo w ciągu 30 dni przed promocją cena mebla się nie zmieniała. Wtedy cena regularna i najniższa cena z 30 dni to ta sama kwota — i tak powinno być."
+      },
+      {
+        "q": "Czy promocje na meble Liveo się łączą?",
+        "a": "Nie, promocje się nie łączą. Jeśli mebel obejmują dwie promocje, pokazujemy tę, która daje niższą cenę."
+      },
+      {
+        "q": "Do kiedy trwa promocja?",
+        "a": "Do dnia podanego przy promocji, do końca tego dnia według czasu polskiego. Po tym terminie przy meblu wraca cena regularna."
+      },
+      {
+        "q": "Czy cena promocyjna obowiązuje w każdym sklepie partnerskim?",
+        "a": "Zapytaj w sklepie przed zakupem — sklepy partnerskie ustalają własne ceny i mogą mieć inne promocje [do potwierdzenia: zasady promocji producenta w sieci partnerów]. Na stronie pokazujemy ceny producenta."
+      },
+      {
+        "q": "Jak znaleźć wszystkie meble w promocji?",
+        "a": "Wszystkie trwające promocje są na tej stronie. Na liście [wszystkich mebli](/meble/) możesz też zaznaczyć filtr „Tylko promocje” i połączyć go z pokojem, kolorem albo ceną."
+      }
+    ]
+  }
+}

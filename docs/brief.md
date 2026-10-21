@@ -204,7 +204,7 @@ To **ton producenta mebli**, nie agencji. Mówimy jak dobry sprzedawca w salonie
 | Miejsce | Co |
 |---|---|
 | `src/data/` | dane demo: kolekcje, meble, pokoje, typy, wykończenia, promocje, sklepy, kody pocztowe |
-| `src/content/pages/*.json` | teksty sekcji stron (strona główna, kolekcje, meble, gdzie kupić, dla partnerów, strefa partnera, doradca, o nas, kontakt, promocje, pomieszczenia, kategorie, produkt, elementy wspólne) |
+| `src/content/pages/*.json` | teksty sekcji stron (strona główna, kolekcje, meble, kategorie, pomieszczenia, produkt, promocje, gdzie kupić, dla partnerów, strefa partnera, doradca, o nas, kontakt, poradnik, elementy wspólne i 404) |
 | `src/content/poradnik/*.md` | artykuły poradnika (Markdown + frontmatter z FAQ) |
 | `src/content/legal/*.md` | wzory: polityka prywatności, regulamin |
 | `docs/` | brief, architektura informacji, integracja z Navireo, lista pytań do klienta |

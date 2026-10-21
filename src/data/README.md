@@ -52,3 +52,10 @@ Wymiary w cm (`w`, `h`, `d` = `dims`). `finish` w `model3d` to wariant domyślny
   Najlepsza pojedyncza promocja (bez łączenia), aktywna gdy `startsAt <= now < endsAt`, cena w dół do pełnych zł, min. 1 zł.
   Zakres promocji: listy `collections`/`types`/`skus` łączone przez AND, wartości w liście przez OR.
 - `locator.js` — `normalizePostcode`, `lookupPostcode`, `haversineKm`, `nearestResellers` (filtr po kolekcji).
+
+## Eksport dla doradcy wnętrz
+
+`node tools/data/export-assistant-catalog.mjs [--now=ISO]` → `liveo-assistant/data/catalog.json`
+(jeden rekord na wariant, ceny z `priceFor()` w chwili `--now`, bez wariantów wyprzedanych).
+Pokoje mapowane przez `rooms[].assistantKey`; stoły i kredensy z jadalni dostają też klucz `kuchnia`,
+bo widżet ma przycisk „Kuchnia”, a kuchni na razie nie modelujemy.

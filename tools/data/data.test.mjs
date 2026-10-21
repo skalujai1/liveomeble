@@ -62,3 +62,41 @@ test('promocje działają na danych: OLMO −15%, komody −10%, Omnibus', () =>
   assert.equal(later.price, week.value);
   assert.ok(later.lowest30 < target.basePrice);
 });
+
+test('eksport katalogu doradcy: format widżetu, jeden rekord na wariant, ceny z pricing.js', async () => {
+  const { execFileSync } = await import('node:child_process');
+  const { mkdtempSync, rmSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const dir = mkdtempSync(join(tmpdir(), 'liveo-catalog-'));
+  try {
+    const out = join(dir, 'catalog.json');
+    const script = new URL('./export-assistant-catalog.mjs', import.meta.url).pathname;
+    execFileSync(process.execPath, [script, `--now=${NOON}`, `--out=${out}`], { stdio: 'pipe' });
+    const cat = JSON.parse(readFileSync(out, 'utf8'));
+    const keys = new Set(['salon', 'jadalnia', 'kuchnia', 'sypialnia', 'mlodziezowy', 'biuro', 'przedpokoj']);
+    const sellable = data.products.flatMap(p => p.variants.filter(v => v.stock !== 'wyprzedany').map(v => [p, v]));
+    assert.equal(cat.products.length, sellable.length);
+    assert.equal(Object.keys(cat.collections).length, 8);
+    const bySku = Object.fromEntries(data.products.map(p => [p.sku, p]));
+    for (const x of cat.products) {
+      const [sku, code] = x.id.split('--');
+      const p = bySku[sku];
+      assert.ok(p, x.id);
+      assert.equal(x.collection, x.collection.toUpperCase());
+      assert.ok(cat.collections[x.collection], x.collection);
+      assert.ok(x.rooms.length && x.rooms.every(r => keys.has(r)), `${x.id}: ${x.rooms}`);
+      assert.equal(x.url, `/produkt/${p.slug}/`);
+      assert.equal(x.img, `/media/produkty/${sku}--${code}.webp`);
+      const pr = priceFor(p, code, data.promotions, NOON);
+      assert.equal(x.price, pr.price);
+      assert.equal(x.regular, pr.regular);
+      for (const k of ['light', 'wood', 'black', 'gloss']) assert.ok(k in x.color, `${x.id}: color.${k}`);
+      assert.ok(x.color.light >= 0 && x.color.light <= 1);
+    }
+    // „Kuchnia” w doradcy: stoły i kredensy z jadalni
+    assert.ok(cat.products.some(x => x.rooms.includes('kuchnia') && x.type === 'stol'));
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});

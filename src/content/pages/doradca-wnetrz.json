@@ -1,0 +1,150 @@
+{
+  "id": "doradca-wnetrz",
+  "url": "/doradca-wnetrz/",
+  "status": "draft",
+  "seo": {
+    "title": "Doradca wnętrz — dobierz meble ze zdjęcia pokoju | Liveo",
+    "description": "Wyślij zdjęcie pokoju, a doradca wnętrz Liveo zaproponuje komplet mebli z jednej kolekcji dopasowany do kolorów wnętrza. Zdjęcie zostaje na urządzeniu.",
+    "jsonLd": ["WebPage", "BreadcrumbList", "FAQPage"],
+    "_note": "Bez SoftwareApplication/Review — nie mamy ocen ani opinii, nie dodajemy aggregateRating."
+  },
+  "h1": "Doradca wnętrz",
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "lead": "Wyślij zdjęcie pokoju, który urządzasz. Doradca rozpozna pomieszczenie i jego kolory, a potem zaproponuje komplet mebli z jednej kolekcji, który do nich pasuje.",
+      "cta": [
+        { "label": "Wyślij zdjęcie pokoju", "action": "open-assistant", "variant": "primary" },
+        { "label": "Napisz, czego szukasz", "action": "open-assistant-chat", "variant": "secondary" }
+      ],
+      "aiNote": "Odpowiada asystent AI. Może się mylić — przed zakupem sprawdź wymiary i kolory w sklepie.",
+      "image": {
+        "alt": "Okno doradcy wnętrz: zdjęcie salonu i propozycja kompletu mebli z kolekcji {name}",
+        "_note": "Zrzut prawdziwego widżetu z danymi demo, nie makieta."
+      },
+      "_notes": [
+        "Przycisk otwiera widżet z liveo-assistant/ (ładowany dopiero po kliknięciu albo gdy przeglądarka jest bezczynna — nie blokuje LCP).",
+        "Bez JS: przycisk prowadzi do /kolekcje/ z komunikatem, że doradca wymaga włączonego JavaScriptu."
+      ]
+    },
+    {
+      "id": "jak-dziala",
+      "type": "steps",
+      "title": "Jak to działa",
+      "items": [
+        {
+          "title": "Zrób albo wybierz zdjęcie",
+          "text": "Najlepiej w świetle dziennym, z drzwi albo z rogu pokoju, tak żeby było widać podłogę i ściany."
+        },
+        {
+          "title": "Doradca czyta kolory i rodzaj pokoju",
+          "text": "Rozpoznaje, czy to salon, sypialnia czy przedpokój, i jakie kolory dominują: podłoga, ściany, tkaniny."
+        },
+        {
+          "title": "Dostajesz komplet z jednej kolekcji",
+          "text": "Meble w kolorze dopasowanym do wnętrza, z wymiarami i ceną. Możesz poprosić o inny kolor, mniejszy budżet albo inne meble."
+        },
+        {
+          "title": "Sprawdzasz, gdzie je zobaczyć",
+          "text": "Z każdej propozycji przejdziesz do strony mebla i do najbliższych sklepów z tą kolekcją."
+        }
+      ]
+    },
+    {
+      "id": "co-potrafi",
+      "type": "two-lists",
+      "title": "Co doradca potrafi, a czego nie",
+      "can": {
+        "title": "Potrafi",
+        "items": [
+          "rozpoznać rodzaj pokoju i główne kolory na zdjęciu,",
+          "zaproponować komplet z jednej kolekcji w pasującym kolorze,",
+          "pokazać meble do konkretnego pokoju albo w określonej cenie,",
+          "odpowiedzieć na ogólne pytania o kolekcje, ceny na stronie i zakup."
+        ]
+      },
+      "cannot": {
+        "title": "Nie potrafi",
+        "items": [
+          "zmierzyć pokoju ani sprawdzić, czy mebel się zmieści,",
+          "zagwarantować, że kolor na ekranie będzie identyczny z rzeczywistym,",
+          "sprawdzić stanu w konkretnym sklepie,",
+          "przyjąć zamówienia ani reklamacji."
+        ]
+      },
+      "note": "Doradca proponuje tylko meble, które są w naszym katalogu, z cenami z tej strony. Nie wymyśla mebli ani rabatów."
+    },
+    {
+      "id": "prywatnosc",
+      "type": "text",
+      "title": "Co się dzieje ze zdjęciem i rozmową",
+      "items": [
+        {
+          "title": "Zdjęcie zostaje na Twoim urządzeniu",
+          "text": "Analizuje je Twoja przeglądarka. Nie wysyłamy zdjęcia na serwer i go nie zapisujemy. Przy pierwszym zdjęciu przeglądarka pobiera model do analizy obrazu — to kilkadziesiąt MB [do potwierdzenia: rozmiar po wdrożeniu], więc lepiej użyć Wi-Fi."
+        },
+        {
+          "title": "Tekst rozmowy trafia do modelu AI",
+          "text": "Wiadomości, które piszesz, przesyłamy do modelu językowego przez naszego pośrednika [do uzupełnienia: dostawca, np. OpenRouter, i dostawca modelu]. Nie zapisujemy treści rozmów. Nie wpisuj w czacie danych osobowych."
+        },
+        {
+          "title": "Wiesz, że rozmawiasz z AI",
+          "text": "Każda odpowiedź w okienku doradcy jest oznaczona jako odpowiedź asystenta AI."
+        }
+      ],
+      "link": { "label": "Szczegóły w polityce prywatności", "href": "/polityka-prywatnosci/#doradca-wnetrz" }
+    },
+    {
+      "id": "wskazowki",
+      "type": "features",
+      "title": "Jak zrobić zdjęcie, które zadziała",
+      "items": [
+        { "title": "Światło dzienne", "text": "Przy sztucznym, żółtym świetle kolory ścian i podłogi wychodzą cieplejsze, niż są." },
+        { "title": "Szeroki kadr", "text": "Pokaż jak najwięcej pokoju — podłogę, ścianę i okno. Zbliżenie na jeden przedmiot niewiele powie." },
+        { "title": "Bez filtrów", "text": "Filtry i tryb portretowy zmieniają kolory. Zrób zwykłe zdjęcie aparatem telefonu." },
+        { "title": "Pusty pokój też jest dobry", "text": "Doradca dobiera meble do podłogi i ścian, więc nie musisz mieć już mebli." }
+      ]
+    },
+    {
+      "id": "dalej",
+      "type": "band",
+      "title": "Wolisz wybrać sam?",
+      "text": "Przejrzyj kolekcje — przy każdej zobaczysz meble w aranżacji, kolory i ceny.",
+      "cta": { "label": "Zobacz kolekcje", "href": "/kolekcje/" }
+    }
+  ],
+  "faq": {
+    "title": "Pytania o doradcę wnętrz",
+    "items": [
+      {
+        "q": "Czy doradca wnętrz jest bezpłatny?",
+        "a": "Tak, doradca wnętrz jest bezpłatny i nie wymaga zakładania konta. Wystarczy wysłać zdjęcie pokoju albo napisać, czego szukasz."
+      },
+      {
+        "q": "Czy moje zdjęcie jest gdzieś wysyłane?",
+        "a": "Nie, zdjęcie analizuje Twoja przeglądarka i nie wysyłamy go na żaden serwer. Do modelu AI trafia tylko tekst, który wpiszesz w czacie."
+      },
+      {
+        "q": "Jak doradca dobiera meble do zdjęcia?",
+        "a": "Doradca rozpoznaje rodzaj pokoju i dominujące kolory podłogi, ścian i dodatków, a potem wybiera kolekcję i kolor mebli, które do nich pasują. Proponuje meble z jednej kolekcji, żeby komplet był spójny."
+      },
+      {
+        "q": "Czy doradca sprawdzi, czy mebel zmieści się w pokoju?",
+        "a": "Nie, doradca nie mierzy pokoju ze zdjęcia. Wymiary mebli podajemy przy każdej propozycji — porównaj je z miejscem, które zmierzysz miarką."
+      },
+      {
+        "q": "Czy mogę kupić meble przez doradcę?",
+        "a": "Nie, doradca pomaga wybrać meble, a kupisz je w sklepie partnerskim. Z każdej propozycji przejdziesz do listy najbliższych sklepów z daną kolekcją."
+      },
+      {
+        "q": "Dlaczego doradca proponuje meble tylko z jednej kolekcji?",
+        "a": "Bo meble z jednej kolekcji mają te same kolory, uchwyty i podstawę, więc razem wyglądają spokojnie. Jeśli chcesz, poproś o inną kolekcję albo pojedynczy mebel."
+      },
+      {
+        "q": "Czy doradca działa na telefonie?",
+        "a": "Tak, doradca działa w przeglądarce na telefonie i komputerze. Na telefonie możesz od razu zrobić zdjęcie aparatem."
+      }
+    ]
+  }
+}

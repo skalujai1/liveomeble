@@ -1,0 +1,138 @@
+{
+  "id": "kontakt",
+  "url": "/kontakt/",
+  "status": "draft",
+  "_notes": [
+    "Wszystkie dane kontaktowe są [do potwierdzenia] — nie wpisywać żadnych numerów ani adresów ze starej strony bez potwierdzenia klienta.",
+    "Strona najpierw kieruje sprawy tam, gdzie zostaną załatwione (sklep, dział handlowy), a dopiero potem pokazuje formularz."
+  ],
+  "seo": {
+    "title": "Kontakt — Liveo Meble, Raniżów",
+    "description": "Kontakt z Liveo Meble: adres, telefon i e-mail producenta. Pytania o zakup, reklamacje i współpracę — sprawdź, gdzie najszybciej załatwisz sprawę.",
+    "jsonLd": ["ContactPage", "Organization", "BreadcrumbList", "FAQPage"],
+    "_note": "Organization.contactPoint (telephone, email, contactType: customer service / sales) — dopiero po potwierdzeniu danych."
+  },
+  "h1": "Kontakt",
+  "sections": [
+    {
+      "id": "wstep",
+      "type": "intro",
+      "lead": "Napisz albo zadzwoń. Zanim to zrobisz, sprawdź niżej, kto najszybciej pomoże w Twojej sprawie — przy zakupie i reklamacji zwykle jest to sklep."
+    },
+    {
+      "id": "sprawy",
+      "type": "routing",
+      "title": "W jakiej sprawie piszesz?",
+      "items": [
+        {
+          "title": "Chcę kupić meble albo zobaczyć je na żywo",
+          "text": "Meble sprzedają sklepy partnerskie. Wpisz kod pocztowy — pokażemy najbliższe.",
+          "cta": { "label": "Gdzie kupić", "href": "/gdzie-kupic/" }
+        },
+        {
+          "title": "Mam pytanie o dostawę, montaż albo reklamację",
+          "text": "Skontaktuj się ze sklepem, w którym kupiłeś mebel — to on ustala dostawę i przyjmuje reklamacje. Jeśli sprawa utknęła, napisz do nas.",
+          "cta": { "label": "Napisz do nas", "href": "#formularz" }
+        },
+        {
+          "title": "Brakuje części albo zgubiłem instrukcję",
+          "text": "Napisz do nas: podaj nazwę mebla, kolor i numer z etykiety na paczce [do potwierdzenia: gdzie jest numer i jak wygląda proces].",
+          "cta": { "label": "Napisz do nas", "href": "#formularz" }
+        },
+        {
+          "title": "Prowadzę sklep i chcę współpracować",
+          "text": "Zgłoś sklep przez formularz dla partnerów — odpowie dział handlowy.",
+          "cta": { "label": "Dla partnerów", "href": "/dla-partnerow/" }
+        }
+      ]
+    },
+    {
+      "id": "dane",
+      "type": "contact-details",
+      "title": "Liveo Meble sp. z o.o.",
+      "items": [
+        { "label": "Adres", "value": "[do potwierdzenia: ulica i numer], [do potwierdzenia: kod pocztowy] Raniżów", "type": "address" },
+        { "label": "Telefon", "value": "[do potwierdzenia]", "type": "tel" },
+        { "label": "E-mail", "value": "[do potwierdzenia]", "type": "email" },
+        { "label": "Dział handlowy (partnerzy)", "value": "[do potwierdzenia: telefon i e-mail]", "type": "text" },
+        { "label": "Godziny pracy biura", "value": "[do potwierdzenia: np. pon.–pt.]", "type": "hours" }
+      ],
+      "note": "To adres biura i zakładu — nie ma tu sklepu ani ekspozycji dla klientów [do potwierdzenia].",
+      "map": {
+        "label": "Pokaż dojazd na mapie",
+        "_note": "Link do zewnętrznej mapy (nowa karta), bez osadzonej mapy — wydajność i prywatność."
+      },
+      "company": "NIP [do potwierdzenia] · KRS [do potwierdzenia] · REGON [do potwierdzenia]"
+    },
+    {
+      "id": "formularz",
+      "type": "form",
+      "title": "Napisz do nas",
+      "lead": "Odpowiadamy w dni robocze [do potwierdzenia: w ciągu ilu dni].",
+      "endpoint": "POST /api/forms/contact",
+      "fields": [
+        {
+          "name": "topic",
+          "label": "Temat",
+          "type": "select",
+          "required": true,
+          "options": [
+            "Pytanie o meble",
+            "Brakujące części lub instrukcja",
+            "Sprawa po zakupie (gdy sklep nie pomógł)",
+            "Współpraca dla sklepów",
+            "Inna sprawa"
+          ]
+        },
+        { "name": "name", "label": "Imię", "type": "text", "required": true, "autocomplete": "given-name" },
+        { "name": "email", "label": "E-mail", "type": "email", "required": true, "autocomplete": "email" },
+        { "name": "phone", "label": "Telefon", "type": "tel", "required": false, "autocomplete": "tel", "hint": "Jeśli wolisz, żebyśmy oddzwonili." },
+        { "name": "product", "label": "Mebel, którego dotyczy wiadomość", "type": "text", "required": false, "hint": "Np. Komoda 120 OLMO, dąb naturalny." },
+        { "name": "message", "label": "Wiadomość", "type": "textarea", "required": true, "maxLength": 3000 }
+      ],
+      "consent": "site.forms.consent",
+      "submit": "Wyślij wiadomość",
+      "success": {
+        "title": "Wiadomość wysłana",
+        "text": "Dziękujemy. Odpowiemy na adres {email} [do potwierdzenia: w ciągu ilu dni roboczych]."
+      },
+      "error": "site.forms.error",
+      "_notes": [
+        "Zdjęcia w formularzu (np. uszkodzenia) — [do potwierdzenia]. Jeśli tak: max 3 pliki JPG/PNG do 5 MB, przechowywanie zgodnie z polityką prywatności.",
+        "Antyspam: pole-pułapka i limit zgłoszeń w Workerze, bez zewnętrznych skryptów CAPTCHA."
+      ]
+    },
+    {
+      "id": "social",
+      "type": "links",
+      "title": "Liveo w sieci",
+      "items": [],
+      "_note": "[do potwierdzenia: profile social media]. Sekcję pokazujemy tylko, gdy lista nie jest pusta."
+    }
+  ],
+  "faq": {
+    "title": "Pytania przed kontaktem",
+    "items": [
+      {
+        "q": "Gdzie złożyć reklamację mebla Liveo?",
+        "a": "Reklamację złóż w sklepie, w którym kupiłeś mebel — to sprzedawca odpowiada wobec Ciebie za zgodność towaru z umową. Jeśli sprawa się przedłuża, napisz do nas przez formularz na tej stronie."
+      },
+      {
+        "q": "Czy mogę przyjechać do Raniżowa i obejrzeć meble?",
+        "a": "W Raniżowie mamy biuro i zakład, a nie sklep z ekspozycją [do potwierdzenia]. Meble na żywo zobaczysz w sklepach partnerskich — znajdziesz je na stronie [Gdzie kupić](/gdzie-kupic/)."
+      },
+      {
+        "q": "Co zrobić, gdy w paczce brakuje części?",
+        "a": "Napisz do nas przez formularz na tej stronie i podaj nazwę mebla, kolor oraz numer z etykiety paczki [do potwierdzenia: proces wysyłki brakujących części]. Możesz też zgłosić brak w sklepie, w którym kupiłeś mebel."
+      },
+      {
+        "q": "Jak szybko odpowiadacie na wiadomości?",
+        "a": "Odpowiadamy w dni robocze [do potwierdzenia: w ciągu ilu dni]. Sprawy dotyczące zakupu najszybciej załatwisz bezpośrednio w sklepie partnerskim."
+      },
+      {
+        "q": "Jak skontaktować się w sprawie współpracy ze sklepem?",
+        "a": "Wypełnij formularz na stronie [Dla partnerów](/dla-partnerow/) — trafi bezpośrednio do działu handlowego. Obecni partnerzy kontaktują się ze swoim opiekunem handlowym."
+      }
+    ]
+  }
+}
