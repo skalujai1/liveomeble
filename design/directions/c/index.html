@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liveo Meble — kierunek C: Dom w pokojach</title>
+<meta name="description" content="Liveo — producent mebli z Raniżowa. Meble w kolekcjach do salonu, sypialni, jadalni i przedpokoju. Obejrzyj kolekcje i znajdź sklep partnerski blisko domu.">
+<meta name="theme-color" content="#FBFAF7">
+<link rel="icon" href="data:,">
+<link rel="preload" href="fonts/parkinsans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* ── Fonty (self-hosted, latin + latin-ext) ─────────────────────────── */
+@font-face{font-family:'Parkinsans';font-style:normal;font-display:swap;font-weight:300 800;src:url(fonts/parkinsans-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Parkinsans';font-style:normal;font-display:swap;font-weight:300 800;src:url(fonts/parkinsans-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Figtree';font-style:normal;font-display:swap;font-weight:300 900;src:url(fonts/figtree-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Figtree';font-style:normal;font-display:swap;font-weight:300 900;src:url(fonts/figtree-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+/* ── Tokeny: mini design system „Dom w pokojach” ──────────────────── */
+:root{
+  /* baza */
+  --paper:#FBFAF7;          /* biel ściany — tło strony */
+  --white:#FFFFFF;          /* karty, pola formularza */
+  --ink:#2A2327;            /* tekst, ciepły grafit z nutą śliwki */
+  --ink-2:#574E54;          /* tekst drugorzędny (AA na wszystkich tonach) */
+  --line:#E5E0DD;           /* linie, obrysy pól */
+  --plum:#5C2950;           /* akcent: przyciski, fokus, logo */
+  --plum-deep:#47203E;      /* hover */
+  --plum-wash:#F2E8EF;      /* tło miękkich przycisków */
+
+  /* tony pomieszczeń: wash = tło, deep = tekst/kropka w tym pokoju */
+  --salon:#E2E6DA;       --salon-deep:#4E5C45;
+  --sypialnia:#E5E1EA;   --sypialnia-deep:#5A4F6B;
+  --jadalnia:#F0E4D6;    --jadalnia-deep:#7E5131;
+  --mlodziezowy:#ECE8D3; --mlodziezowy-deep:#625A22;
+  --przedpokoj:#EEE0DB;  --przedpokoj-deep:#804A43;
+  --biuro:#DEE5E8;       --biuro-deep:#405B67;
+
+  /* typografia */
+  --f-display:'Parkinsans', ui-rounded, 'Segoe UI', system-ui, sans-serif;
+  --f-text:'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fs-hero:clamp(2.25rem, 1.2rem + 4.4vw, 4.5rem);
+  --fs-h2:clamp(1.75rem, 1.3rem + 1.9vw, 2.875rem);
+  --fs-h3:clamp(1.375rem, 1.25rem + .4vw, 1.625rem);
+  --fs-lead:clamp(1.0625rem, 1rem + .3vw, 1.25rem);
+  --fs-body:1rem;
+  --fs-small:.875rem;
+  --lh-tight:1.04;
+  --lh-text:1.55;
+
+  /* odstępy (siatka 4/8) */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px; --s10:128px;
+  --gutter:clamp(16px, 4vw, 56px);
+  --inset:clamp(8px, 1.4vw, 20px);
+  --wrap:1360px;
+
+  /* promienie: kontrolki pełne, kontenery duże, zdjęcia pomieszczeń w łuku */
+  --r-ctl:999px;
+  --r-sm:12px;
+  --r-md:20px;
+  --r-lg:clamp(22px, 2.4vw, 32px);
+  --r-xl:clamp(26px, 3.2vw, 48px);
+
+  /* cienie: miękkie, ciepłe */
+  --sh-1:0 1px 2px rgba(42,35,39,.06), 0 2px 8px rgba(42,35,39,.05);
+  --sh-2:0 2px 4px rgba(42,35,39,.05), 0 18px 40px -14px rgba(42,35,39,.22);
+
+  /* ruch */
+  --ease-out:cubic-bezier(.2,.8,.2,1);       /* wyhamowanie, jak domykane drzwi */
+  --ease-io:cubic-bezier(.55,.05,.25,1);     /* przenikanie tonów */
+  --t-fast:160ms; --t-mid:420ms; --t-slow:760ms;
+}
+
+/* ── Baza ─────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 var(--fs-body)/var(--lh-text) var(--f-text);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--f-display);font-weight:650;letter-spacing:-.022em;line-height:var(--lh-tight);margin:0;text-wrap:balance}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+:focus-visible{outline:3px solid var(--plum);outline-offset:3px;border-radius:6px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.wrap{width:min(100% - 2*var(--gutter), var(--wrap));margin-inline:auto}
+.skip{position:absolute;left:var(--s4);top:var(--s3);z-index:50;background:var(--ink);color:var(--white);padding:10px 18px;border-radius:var(--r-ctl);text-decoration:none;font-weight:600;transform:translateY(-160%);transition:transform var(--t-fast) var(--ease-out)}
+.skip:focus{transform:none}
+.ico{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── Przyciski ────────────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border:0;border-radius:var(--r-ctl);font-weight:650;font-size:1rem;text-decoration:none;cursor:pointer;white-space:nowrap;transition:transform var(--t-fast) var(--ease-out), background-color var(--t-fast) linear}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--plum);color:var(--white)}
+.btn-primary:hover{background:var(--plum-deep)}
+.btn-soft{background:var(--plum-wash);color:var(--plum)}
+.btn-soft:hover{background:#EADCE6}
+.link-arrow{display:inline-flex;align-items:center;gap:8px;font-weight:650;text-decoration:none;color:var(--ink);border-bottom:2px solid currentColor;padding-bottom:2px}
+.link-arrow .ico{width:18px;height:18px;transition:transform var(--t-mid) var(--ease-out)}
+.link-arrow:hover .ico{transform:translateX(4px)}
+
+/* ── Nagłówek ─────────────────────────────────────────────────────── */
+.site-header{position:relative;z-index:20}
+.bar{display:flex;align-items:center;gap:var(--s5);min-height:84px}
+.logo{display:inline-flex;align-items:center;font:750 1.75rem/1 var(--f-display);letter-spacing:.06em;text-decoration:none;color:var(--ink);margin-right:var(--s4)}
+.logo-o{display:inline-block;width:.64em;height:.76em;margin-left:.06em;border:.15em solid var(--plum);border-radius:.5em .5em .16em .16em}
+.nav-main{display:none}
+.nav-main ul{display:flex;gap:2px}
+.nav-main a,.nav-partner{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--r-ctl);text-decoration:none;font-weight:560;font-size:.98rem;transition:background-color var(--t-fast) linear}
+.nav-main a:hover,.nav-partner:hover{background:rgba(42,35,39,.06)}
+.nav-tools{display:flex;align-items:center;gap:var(--s2);margin-left:auto}
+.nav-partner{display:none;color:var(--ink-2)}
+.nav-partner .ico{width:18px;height:18px}
+.btn-advisor{min-height:46px;padding:0 20px 0 16px;font-size:.95rem}
+.btn-advisor .lbl-short{display:none}
+.menu-btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 16px;border:1.5px solid var(--line);background:var(--white);border-radius:var(--r-ctl);font-weight:650;cursor:pointer}
+.menu-panel{position:fixed;inset:0;z-index:40;background:var(--paper);padding:var(--s4) var(--gutter) var(--s7);overflow-y:auto;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity var(--t-mid) var(--ease-out), transform var(--t-mid) var(--ease-out), visibility 0s linear var(--t-mid)}
+.menu-panel.is-open{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.menu-top{display:flex;align-items:center;justify-content:space-between;min-height:52px;margin-bottom:var(--s5)}
+.menu-panel .menu-links a{display:block;padding:12px 0;font:600 1.75rem/1.15 var(--f-display);letter-spacing:-.02em;text-decoration:none;border-bottom:1px solid var(--line)}
+.menu-rooms{display:grid;grid-template-columns:1fr 1fr;gap:var(--s2);margin-top:var(--s3)}
+.menu-rooms a{display:flex;align-items:center;gap:10px;padding:14px 16px;border-radius:var(--r-md);background:var(--tone);text-decoration:none;font-weight:600}
+.menu-label{margin-top:var(--s6);font-size:var(--fs-small);font-weight:650;color:var(--ink-2)}
+
+@media (max-width:719px){
+  .bar{min-height:68px;gap:var(--s2)}
+  .logo{font-size:1.5rem;margin-right:auto}
+  .btn-advisor{min-height:46px;padding:0 14px}
+  .btn-advisor .lbl-long{display:none}
+  .btn-advisor .lbl-short{display:inline}
+}
+@media (min-width:1120px){
+  .nav-main{display:block}
+  .nav-partner{display:inline-flex}
+  .menu-btn{display:none}
+}
+
+/* ── Hero: ściana w tonie pokoju, drzwi stoją na podłodze ─────────── */
+[data-room="salon"]{--tone:var(--salon);--tone-deep:var(--salon-deep)}
+[data-room="sypialnia"]{--tone:var(--sypialnia);--tone-deep:var(--sypialnia-deep)}
+[data-room="jadalnia"]{--tone:var(--jadalnia);--tone-deep:var(--jadalnia-deep)}
+[data-room="mlodziezowy"]{--tone:var(--mlodziezowy);--tone-deep:var(--mlodziezowy-deep)}
+[data-room="przedpokoj"]{--tone:var(--przedpokoj);--tone-deep:var(--przedpokoj-deep)}
+[data-room="biuro"]{--tone:var(--biuro);--tone-deep:var(--biuro-deep)}
+
+.hero{padding-inline:var(--inset)}
+.hero-panel{position:relative;isolation:isolate;background:var(--tone);border-radius:var(--r-xl);max-width:1720px;margin-inline:auto;display:flex;flex-direction:column;padding:28px 18px 18px}
+.tone-wash{position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--wash, transparent);opacity:0;pointer-events:none}
+.tone-wash.is-fading{transition:opacity var(--t-slow) var(--ease-io);opacity:1}
+.hero-copy,.hero-room{display:contents}
+.hero-head{order:1}
+.rooms{order:2}
+.door{order:3}
+.finder{order:4}
+.advisor-note{order:5}
+
+.eyebrow{display:flex;align-items:center;gap:10px;font-weight:650;font-size:.9375rem;letter-spacing:.01em;color:var(--tone-deep)}
+.eyebrow::before{content:"";width:10px;height:13px;border-radius:5px 5px 2px 2px;background:currentColor;flex:none}
+.hero h1{font-size:var(--fs-hero);margin-top:var(--s4)}
+.hero .lead{font-size:var(--fs-lead);color:var(--ink-2);max-width:33rem;margin-top:var(--s4)}
+
+/* przełącznik pokoi */
+.rooms{margin-top:var(--s5)}
+.rooms-label{font-size:var(--fs-small);font-weight:650;color:var(--ink-2);margin-bottom:var(--s2)}
+.rooms-list{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-inline:-18px;padding:2px 18px 4px;scrollbar-width:none}
+.rooms-list::-webkit-scrollbar{display:none}
+.room-btn{flex:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px 0 11px;border:1.5px solid rgba(42,35,39,.13);border-radius:var(--r-ctl);background:rgba(255,255,255,.5);font-weight:600;font-size:.95rem;cursor:pointer;transition:background-color var(--t-fast) linear, border-color var(--t-fast) linear, transform var(--t-fast) var(--ease-out)}
+.room-btn:hover{background:rgba(255,255,255,.85)}
+.room-btn:active{transform:scale(.97)}
+.room-btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--white)}
+.room-dot{flex:none;width:14px;height:17px;border-radius:7px 7px 3px 3px;background:var(--dot);box-shadow:inset 0 0 0 1.5px rgba(42,35,39,.18)}
+.room-btn[aria-pressed="true"] .room-dot{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)}
+
+/* drzwi: zdjęcie pokoju w łuku */
+.door{position:relative;margin:var(--s4) 0 0;height:clamp(330px, 104vw, 540px)}
+.arch{position:absolute;inset:0;overflow:hidden;border-radius:50% 50% 22px 22px / 46vw 46vw 22px 22px;background:color-mix(in srgb, var(--tone) 82%, #000)}
+.arch img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 64%}
+.arch img.is-in{animation:settle 1.2s var(--ease-out) both}
+.arch img.is-entering{opacity:0;transform:scale(1.035);transition:opacity var(--t-slow) var(--ease-io), transform 1.2s var(--ease-out)}
+.arch img.is-entering.go{opacity:1;transform:none}
+@keyframes settle{from{transform:scale(1.05)}to{transform:none}}
+.door-cap{position:absolute;left:50%;top:clamp(52px, 15%, 76px);transform:translateX(-50%);white-space:nowrap;padding:6px 12px;border-radius:var(--r-ctl);background:rgba(255,255,255,.88);font-size:.8rem;font-weight:550;color:var(--ink);line-height:1.3}
+
+/* wyszukiwarka sklepu */
+.finder{position:relative;z-index:2;margin:-52px 8px 0;background:var(--white);border-radius:22px;padding:20px 18px 18px;box-shadow:var(--sh-2)}
+.finder-title{font-size:1.25rem;letter-spacing:-.015em}
+.finder-hint{color:var(--ink-2);font-size:.95rem;margin-top:6px;line-height:1.45}
+.finder-row{display:flex;gap:var(--s2);margin-top:var(--s4)}
+.field{flex:1;min-width:0;position:relative}
+.field input{width:100%;min-height:56px;padding:21px 18px 6px;border:1.5px solid var(--line);border-radius:var(--r-ctl);background:var(--paper);font-size:1.0625rem;font-weight:600;letter-spacing:.04em;font-variant-numeric:tabular-nums;transition:border-color var(--t-fast) linear}
+.field input::placeholder{color:#746B70}
+.field input:hover{border-color:#CFC8C4}
+.field input:focus{outline:none;border-color:var(--plum)}
+.field input:focus-visible{outline:3px solid var(--plum);outline-offset:2px}
+.field label{position:absolute;left:19px;top:8px;font-size:.75rem;font-weight:650;color:var(--ink-2);pointer-events:none}
+.finder .btn{min-height:56px;padding:0 22px}
+.finder-more{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2) var(--s4);margin-top:var(--s3)}
+.link-geo{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:4px 2px;border:0;background:none;font-size:.92rem;font-weight:600;color:var(--ink-2);cursor:pointer;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.link-geo .ico{width:17px;height:17px}
+.finder-msg{margin-top:var(--s3);font-size:.92rem;color:var(--ink-2)}
+.finder-msg:empty{display:none}
+.results{margin-top:var(--s2);display:grid}
+.results:empty{display:none}
+.results li{display:flex;justify-content:space-between;gap:var(--s3);padding:10px 0;border-top:1px solid var(--line);font-size:.95rem;line-height:1.4}
+.results b{font-weight:650}
+.results .km{color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* Doradca wnętrz */
+.advisor-note{display:flex;gap:var(--s3);align-items:center;margin:var(--s3) 8px 0;padding:14px 16px;background:rgba(255,255,255,.55);border-radius:var(--r-md);text-decoration:none;transition:transform var(--t-mid) var(--ease-out), background-color var(--t-fast) linear}
+.advisor-note:hover{transform:translateY(-3px);background:var(--white)}
+.advisor-ico{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--plum-wash);color:var(--plum);flex:none}
+.advisor-txt strong{display:block;font-family:var(--f-display);font-weight:650;font-size:1.0625rem;letter-spacing:-.01em}
+.advisor-txt{flex:1;min-width:0}
+.advisor-txt span{display:block;font-size:.92rem;color:var(--ink-2);margin-top:2px;line-height:1.45}
+.advisor-go{flex:none;align-self:center;width:20px;height:20px;color:var(--plum);transition:transform var(--t-mid) var(--ease-out)}
+.advisor-note:hover .advisor-go{transform:translateX(3px)}
+
+@media (min-width:600px) and (max-width:999px){
+  .hero-panel{padding:40px 40px 32px}
+  .rooms-list{margin-inline:-40px;padding-inline:40px}
+  .door{height:clamp(420px, 70vw, 620px)}
+  .arch{border-radius:50% 50% 28px 28px / 310px 310px 28px 28px}
+  .finder,.advisor-note{margin-inline:32px}
+}
+
+/* desktop: ściana (tekst) + drzwi (zdjęcie) dosunięte do podłogi */
+@media (min-width:1000px){
+  .hero-panel{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,1fr);column-gap:clamp(40px, 5vw, 96px);padding:clamp(32px, 3.6vw, 56px) clamp(28px, 4.4vw, 72px) 0;min-height:clamp(640px, calc(100svh - 104px), 860px)}
+  .hero-copy{display:block;align-self:center;padding-bottom:clamp(40px, 4.4vw, 72px)}
+  .hero h1{font-size:min(var(--fs-hero), 4.9vw)}
+  .hero-room{display:flex;flex-direction:column;align-items:flex-end;min-width:0}
+  .rooms{margin:0 0 var(--s4);width:min(100%, 540px)}
+  .rooms-list{flex-wrap:wrap;overflow:visible;margin:0;padding:0;gap:5px}
+  .room-btn{padding:0 13px 0 10px;font-size:.94rem}
+  .door{flex:1 1 auto;width:min(100%, 540px);height:auto;min-height:420px;margin:0}
+  .arch{border-radius:50% 50% 0 0 / 240px 240px 0 0}
+  .finder{margin:var(--s6) 0 0;max-width:33rem;border-radius:var(--r-lg);padding:var(--s5);box-shadow:var(--sh-1)}
+  .advisor-note{margin:var(--s3) 0 0;max-width:33rem;padding:14px 20px 14px 16px}
+}
+
+/* ── Kolekcje ─────────────────────────────────────────────────────── */
+.collections{padding:clamp(64px, 9vw, 136px) 0 clamp(72px, 10vw, 152px)}
+.sec-head{display:grid;gap:var(--s4);margin-bottom:clamp(32px, 4.5vw, 64px)}
+.sec-head h2{font-size:var(--fs-h2);max-width:16ch}
+.sec-head p{color:var(--ink-2);font-size:var(--fs-lead);max-width:36rem}
+.sec-head .link-arrow{justify-self:start}
+@media (min-width:900px){
+  .sec-head{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) auto;align-items:end;column-gap:var(--s7)}
+  .sec-head .link-arrow{margin-bottom:6px}
+}
+.col-list{display:grid;gap:clamp(16px, 2vw, 28px)}
+.col-card a{display:block;text-decoration:none;border-radius:var(--r-lg)}
+.col-media{position:relative;aspect-ratio:1/1;background:var(--tone);border-radius:var(--r-lg);overflow:hidden;display:grid;place-items:center}
+.col-media img{width:92%;height:auto;transform:translateY(4%);transition:transform var(--t-slow) var(--ease-out)}
+.col-card a:hover .col-media img{transform:translateY(4%) scale(1.045)}
+.col-rooms{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:12px;font-size:.875rem;font-weight:600;color:var(--ink)}
+.col-rooms li{display:inline-flex;align-items:center;gap:7px}
+.col-rooms li::before{content:"";width:10px;height:12px;border-radius:5px 5px 2px 2px;background:var(--dot)}
+.promo{position:absolute;right:14px;bottom:14px;font-size:.82rem;font-weight:700;padding:7px 12px;border-radius:var(--r-ctl);background:var(--plum);color:var(--white)}
+.col-body{padding:var(--s4) 4px 0}
+.col-name{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s3)}
+.col-card h3{font-size:var(--fs-h3);letter-spacing:.02em}
+.col-card p{margin-top:6px;color:var(--ink-2);font-size:.98rem;line-height:1.5}
+.swatches{display:flex;align-items:center;gap:0}
+.swatches li{width:18px;height:18px;border-radius:50%;background:var(--sw);box-shadow:0 0 0 2px var(--paper), inset 0 0 0 1px rgba(42,35,39,.18)}
+.swatches li+li{margin-left:-4px}
+
+@media (max-width:719px){
+  .col-list{grid-auto-flow:column;grid-auto-columns:80%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);padding-inline:var(--gutter);margin-inline:calc(-1 * var(--gutter));padding-bottom:var(--s3);scrollbar-width:none}
+  .col-list::-webkit-scrollbar{display:none}
+  .col-card{scroll-snap-align:start}
+}
+@media (min-width:720px) and (max-width:1099px){ .col-list{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (min-width:1100px){ .col-list{grid-template-columns:repeat(4,minmax(0,1fr))} }
+
+/* ruch: wejście strony (tylko transform/opacity) */
+@media (prefers-reduced-motion:no-preference){
+  .finder{animation:rise .8s var(--ease-out) .1s both}
+  .advisor-note{animation:rise .9s var(--ease-out) .3s both}
+}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Przejdź do treści</a>
+
+<header class="site-header">
+  <div class="bar wrap">
+    <a class="logo" href="#" aria-label="Liveo — strona główna">LIVE<span class="logo-o" aria-hidden="true"></span></a>
+    <nav class="nav-main" aria-label="Główna">
+      <ul>
+        <li><a href="#kolekcje">Kolekcje</a></li>
+        <li><a href="#">Meble</a></li>
+        <li><a href="#pokoje">Pomieszczenia</a></li>
+        <li><a href="#">Promocje</a></li>
+        <li><a href="#gdzie-kupic">Gdzie kupić</a></li>
+      </ul>
+    </nav>
+    <div class="nav-tools">
+      <a class="nav-partner" href="#">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5V20h16v-9.5"/><path d="M3 6.5 5 3h14l2 3.5c0 1.9-1.4 3.2-3 3.2s-3-1.3-3-3.2c0 1.9-1.4 3.2-3 3.2s-3-1.3-3-3.2c0 1.9-1.4 3.2-3 3.2S3 8.4 3 6.5Z"/><path d="M10 20v-5h4v5"/></svg>
+        Dla partnerów
+      </a>
+      <a class="btn btn-soft btn-advisor" href="#doradca">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12.5c0 4-3.6 7-8 7-1.2 0-2.3-.2-3.3-.6L4 20l1.2-3.6C4.4 15.2 4 13.9 4 12.5c0-4 3.6-7 8-7s8 3 8 7Z"/><path d="M9 12.5h.01M12 12.5h.01M15 12.5h.01"/></svg>
+        <span class="lbl-long">Doradca wnętrz</span><span class="lbl-short">Doradca</span>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+        Menu
+      </button>
+    </div>
+  </div>
+
+  <div class="menu-panel" id="menu" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="menu-top">
+      <span class="logo" aria-hidden="true">LIVE<span class="logo-o"></span></span>
+      <button class="menu-btn" type="button" data-close>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        Zamknij
+      </button>
+    </div>
+    <nav aria-label="Menu mobilne">
+      <ul class="menu-links">
+        <li><a href="#kolekcje">Kolekcje</a></li>
+        <li><a href="#">Meble</a></li>
+        <li><a href="#pokoje">Pomieszczenia</a></li>
+        <li><a href="#">Promocje</a></li>
+        <li><a href="#gdzie-kupic">Gdzie kupić</a></li>
+        <li><a href="#">Dla partnerów</a></li>
+      </ul>
+    </nav>
+    <p class="menu-label">Pomieszczenia</p>
+    <ul class="menu-rooms">
+      <li><a href="#" data-room="salon"><span class="room-dot" style="--dot:var(--salon-deep)"></span>Salon</a></li>
+      <li><a href="#" data-room="sypialnia"><span class="room-dot" style="--dot:var(--sypialnia-deep)"></span>Sypialnia</a></li>
+      <li><a href="#" data-room="jadalnia"><span class="room-dot" style="--dot:var(--jadalnia-deep)"></span>Jadalnia</a></li>
+      <li><a href="#" data-room="mlodziezowy"><span class="room-dot" style="--dot:var(--mlodziezowy-deep)"></span>Pokój młodzieżowy</a></li>
+      <li><a href="#" data-room="przedpokoj"><span class="room-dot" style="--dot:var(--przedpokoj-deep)"></span>Przedpokój</a></li>
+      <li><a href="#" data-room="biuro"><span class="room-dot" style="--dot:var(--biuro-deep)"></span>Domowe biuro</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-panel" data-room="salon" id="pokoje">
+      <span class="tone-wash" aria-hidden="true"></span>
+
+      <div class="hero-copy">
+        <div class="hero-head">
+          <p class="eyebrow">Producent mebli z Raniżowa na Podkarpaciu</p>
+          <h1 id="hero-title">Urządź dom <br>pokój po pokoju</h1>
+          <p class="lead">Projektujemy meble w kolekcjach, więc szafka RTV, komoda i&nbsp;stół z&nbsp;jednej linii pasują do siebie. Obejrzyj je tutaj, a&nbsp;kup w&nbsp;sklepie meblowym blisko domu.</p>
+        </div>
+
+        <form class="finder" id="gdzie-kupic" role="search" aria-labelledby="finder-title" novalidate>
+          <h2 class="finder-title" id="finder-title">Gdzie kupić meble Liveo?</h2>
+          <p class="finder-hint">Sprzedajemy przez sklepy partnerskie. Podaj kod pocztowy, a&nbsp;pokażemy najbliższe.</p>
+          <div class="finder-row">
+            <div class="field">
+              <label for="kod">Kod pocztowy</label>
+              <input id="kod" name="kod" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="00-000" maxlength="6" aria-describedby="finder-msg">
+            </div>
+            <button class="btn btn-primary" type="submit">Pokaż sklepy</button>
+          </div>
+          <div class="finder-more">
+            <button class="link-geo" type="button" data-geo>
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.4-6.5-11a6.5 6.5 0 0 1 13 0c0 5.6-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></svg>
+              Użyj mojej lokalizacji
+            </button>
+          </div>
+          <p class="finder-msg" id="finder-msg" role="status" aria-live="polite"></p>
+          <ul class="results" aria-label="Najbliższe sklepy"></ul>
+        </form>
+
+        <a class="advisor-note" href="#doradca">
+          <span class="advisor-ico"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.7l1.3-2h5l1.3 2h1.7A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-8Z"/><circle cx="12" cy="12.5" r="3.3"/></svg></span>
+          <span class="advisor-txt"><strong>Doradca wnętrz</strong><span>Wyślij zdjęcie swojego pokoju. Doradca dobierze komplet z&nbsp;jednej kolekcji w&nbsp;pasujących kolorach.</span></span>
+          <svg class="ico advisor-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="hero-room">
+        <div class="rooms">
+          <p class="rooms-label" id="rooms-label">Zajrzyj do pokoju</p>
+          <div class="rooms-list" role="group" aria-labelledby="rooms-label">
+            <button class="room-btn" type="button" data-room-btn="salon" aria-pressed="true"><span class="room-dot" style="--dot:var(--salon-deep)"></span>Salon</button>
+            <button class="room-btn" type="button" data-room-btn="sypialnia" aria-pressed="false"><span class="room-dot" style="--dot:var(--sypialnia-deep)"></span>Sypialnia</button>
+            <button class="room-btn" type="button" data-room-btn="jadalnia" aria-pressed="false"><span class="room-dot" style="--dot:var(--jadalnia-deep)"></span>Jadalnia</button>
+            <button class="room-btn" type="button" data-room-btn="przedpokoj" aria-pressed="false"><span class="room-dot" style="--dot:var(--przedpokoj-deep)"></span>Przedpokój</button>
+            <button class="room-btn" type="button" data-room-btn="biuro" aria-pressed="false"><span class="room-dot" style="--dot:var(--biuro-deep)"></span>Biuro</button>
+          </div>
+        </div>
+
+        <figure class="door">
+          <div class="arch">
+            <img class="is-in" src="../../../src/assets/renders/rooms/salon-szalwia-tall.jpg" width="1200" height="1500" fetchpriority="high" alt="Salon ze ścianą w kolorze szałwii: biała komoda ze złotymi uchwytami, czarna witryna i lustro w łuku">
+          </div>
+          <figcaption class="door-cap" data-cap>Salon · komoda 120, biały mat</figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="collections" id="kolekcje" aria-labelledby="col-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="col-title">Kolekcje, które do siebie pasują</h2>
+        <p>Każdą kolekcję projektujemy w&nbsp;całości: meble do kilku pokoi w&nbsp;tych samych kolorach i&nbsp;z&nbsp;tymi samymi uchwytami. Kupisz jeden mebel albo cały komplet.</p>
+        <a class="link-arrow" href="#">Wszystkie kolekcje <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+
+      <ul class="col-list">
+        <li class="col-card" data-room="jadalnia">
+          <a href="#">
+            <div class="col-media">
+              <img src="../../../src/assets/renders/sample/stol-dab-naturalny.webp" width="1600" height="1200" loading="lazy" alt="Stół 160×90 w dekorze dębu naturalnego na drewnianych nogach">
+              <span class="promo">−15% do 30.10</span>
+            </div>
+            <div class="col-body">
+              <div class="col-name">
+                <h3>OLMO</h3>
+                <ul class="swatches" aria-label="Wykończenia: dąb naturalny, kaszmir, biały mat"><li style="--sw:#c49a6c"></li><li style="--sw:#d6c8b8"></li><li style="--sw:#eeece8"></li></ul>
+              </div>
+              <p>Dekor jasnego dębu, spokojne proporcje i&nbsp;drewniane nóżki.</p>
+              <ul class="col-rooms" aria-label="Pasuje do pomieszczeń"><li style="--dot:var(--salon-deep)">Salon</li><li style="--dot:var(--jadalnia-deep)">Jadalnia</li><li style="--dot:var(--sypialnia-deep)">Sypialnia</li></ul>
+            </div>
+          </a>
+        </li>
+        <li class="col-card" data-room="salon">
+          <a href="#">
+            <div class="col-media">
+              <img src="../../../src/assets/renders/sample/szafka-rtv-dab-naturalny.webp" width="1600" height="1200" loading="lazy" alt="Szafka RTV 160 w dekorze dębu z czarnymi uchwytami na metalowych nogach">
+            </div>
+            <div class="col-body">
+              <div class="col-name">
+                <h3>NOKTA</h3>
+                <ul class="swatches" aria-label="Wykończenia: dąb miodowy z czarnym, orzech z grafitem"><li style="--sw:#b07b45"></li><li style="--sw:#6b4a32"></li></ul>
+              </div>
+              <p>Ciepłe drewno na czarnym, metalowym stelażu.</p>
+              <ul class="col-rooms" aria-label="Pasuje do pomieszczeń"><li style="--dot:var(--salon-deep)">Salon</li><li style="--dot:var(--jadalnia-deep)">Jadalnia</li><li style="--dot:var(--biuro-deep)">Biuro</li></ul>
+            </div>
+          </a>
+        </li>
+        <li class="col-card" data-room="przedpokoj">
+          <a href="#">
+            <div class="col-media">
+              <img src="../../../src/assets/renders/sample/komoda-bialy-mat.webp" width="1600" height="1200" loading="lazy" alt="Biała komoda 120 z trzema szufladami, złotymi uchwytami i nogami">
+            </div>
+            <div class="col-body">
+              <div class="col-name">
+                <h3>SOLMA</h3>
+                <ul class="swatches" aria-label="Wykończenia: biały połysk, kaszmir, czarny mat — ze złotymi dodatkami"><li style="--sw:#f3f2ef"></li><li style="--sw:#d6c8b8"></li><li style="--sw:#222223"></li></ul>
+              </div>
+              <p>Gładkie fronty i&nbsp;akcenty w&nbsp;kolorze szczotkowanego mosiądzu.</p>
+              <ul class="col-rooms" aria-label="Pasuje do pomieszczeń"><li style="--dot:var(--salon-deep)">Salon</li><li style="--dot:var(--sypialnia-deep)">Sypialnia</li><li style="--dot:var(--przedpokoj-deep)">Przedpokój</li></ul>
+            </div>
+          </a>
+        </li>
+        <li class="col-card" data-room="mlodziezowy">
+          <a href="#">
+            <div class="col-media">
+              <img src="../../../src/assets/renders/sample/biurko-szalwia.webp" width="1600" height="1200" loading="lazy" alt="Biurko 120 w kolorze szałwii z dębowym blatem i kontenerem z szufladami">
+            </div>
+            <div class="col-body">
+              <div class="col-name">
+                <h3>BRISO</h3>
+                <ul class="swatches" aria-label="Wykończenia: biały mat, szałwia, grafit"><li style="--sw:#eeece8"></li><li style="--sw:#9aa58f"></li><li style="--sw:#4a4b4d"></li></ul>
+              </div>
+              <p>Biurka, regały i&nbsp;łóżka do nauki i&nbsp;odpoczynku w&nbsp;jednym stylu.</p>
+              <ul class="col-rooms" aria-label="Pasuje do pomieszczeń"><li style="--dot:var(--mlodziezowy-deep)">Pokój młodzieżowy</li><li style="--dot:var(--biuro-deep)">Biuro</li></ul>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const R = '../../../src/assets/renders/rooms/';
+  const ROOMS = {
+    salon:      { img: 'salon-szalwia-tall.jpg', cap: 'Salon · komoda 120, biały mat', alt: 'Salon ze ścianą w kolorze szałwii: biała komoda ze złotymi uchwytami, czarna witryna i lustro w łuku' },
+    sypialnia:  { img: 'sypialnia-tall.jpg', cap: 'Sypialnia · łóżko 160, kaszmir', alt: 'Sypialnia: tapicerowane łóżko w kolorze kaszmiru i szafki nocne w czarnym macie z dębem' },
+    jadalnia:   { img: 'jadalnia-tall.jpg', cap: 'Jadalnia · stół 160×90, dąb naturalny', alt: 'Jadalnia: dębowy stół z drewnianymi krzesłami pod czarną lampą wiszącą' },
+    przedpokoj: { img: 'przedpokoj-tall.jpg', cap: 'Przedpokój · szafka na buty, kaszmir', alt: 'Przedpokój: szafka na buty w kolorze kaszmiru, lustro w łuku i dębowy wieszak' },
+    biuro:      { img: 'biuro-tall.jpg', cap: 'Biuro · biurko 120, szałwia i dąb', alt: 'Domowe biuro: biurko w kolorze szałwii z dębowym blatem i regał z dębu miodowego' }
+  };
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const panel = document.querySelector('.hero-panel');
+  const wash = panel.querySelector('.tone-wash');
+  const arch = panel.querySelector('.arch');
+  const cap = panel.querySelector('[data-cap]');
+  const btns = [...panel.querySelectorAll('[data-room-btn]')];
+  let current = 'salon', busy = false;
+
+  async function setRoom(room) {
+    if (room === current || busy || !ROOMS[room]) return;
+    busy = true;
+    const d = ROOMS[room];
+    btns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.roomBtn === room)));
+    const img = new Image();
+    img.width = 1200; img.height = 1500; img.alt = d.alt;
+    img.src = R + d.img;
+    try { await img.decode(); } catch (e) {}
+    const old = arch.querySelector('img');
+    if (reduce.matches) {
+      old.replaceWith(img);
+      panel.dataset.room = room;
+    } else {
+      wash.style.setProperty('--wash', getComputedStyle(document.documentElement).getPropertyValue('--' + room));
+      img.className = 'is-entering';
+      arch.appendChild(img);
+      requestAnimationFrame(() => requestAnimationFrame(() => { img.classList.add('go'); wash.classList.add('is-fading'); }));
+      await new Promise(r => setTimeout(r, 780));
+      panel.dataset.room = room;
+      wash.classList.remove('is-fading');
+      old.remove();
+      img.className = '';
+    }
+    cap.textContent = d.cap;
+    current = room;
+    busy = false;
+  }
+  btns.forEach(b => b.addEventListener('click', () => setRoom(b.dataset.roomBtn)));
+
+  /* menu mobilne */
+  const menu = document.getElementById('menu');
+  const openBtn = document.querySelector('.bar .menu-btn');
+  const closeBtn = menu.querySelector('[data-close]');
+  const toggle = (open) => {
+    menu.classList.toggle('is-open', open);
+    openBtn.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+    (open ? closeBtn : openBtn).focus();
+  };
+  openBtn.addEventListener('click', () => toggle(true));
+  closeBtn.addEventListener('click', () => toggle(false));
+  menu.addEventListener('click', e => { if (e.target.closest('a')) toggle(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && menu.classList.contains('is-open')) toggle(false); });
+
+  /* wyszukiwarka sklepu: kod pocztowy (dane demo z repo) */
+  const form = document.getElementById('gdzie-kupic');
+  const input = form.querySelector('#kod');
+  const msg = form.querySelector('#finder-msg');
+  const list = form.querySelector('.results');
+  input.addEventListener('input', () => {
+    const v = input.value.replace(/\D/g, '').slice(0, 5);
+    input.value = v.length > 2 ? v.slice(0, 2) + '-' + v.slice(2) : v;
+  });
+  let data;
+  const load = () => data ||= Promise.all([
+    fetch('../../../src/data/postcodes.json').then(r => r.json()),
+    fetch('../../../src/data/resellers.json').then(r => r.json())
+  ]);
+  const km = (a, b) => {
+    const t = Math.PI / 180, dLat = (b.lat - a.lat) * t, dLng = (b.lng - a.lng) * t;
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * t) * Math.cos(b.lat * t) * Math.sin(dLng / 2) ** 2;
+    return 12742 * Math.asin(Math.sqrt(h));
+  };
+  const show = (point, label) => load().then(([, shops]) => {
+    const near = shops.map(s => ({ s, d: km(point, s) })).sort((x, y) => x.d - y.d).slice(0, 3);
+    msg.textContent = 'Najbliższe sklepy ' + label + ' (dane przykładowe):';
+    list.innerHTML = near.map(({ s, d }) =>
+      `<li><span><b>${s.city}${s.district ? ', ' + s.district : ''}</b> · ${s.address}</span><span class="km">ok. ${Math.max(1, Math.round(d))} km</span></li>`).join('');
+  }).catch(() => { msg.textContent = 'Nie udało się wczytać listy sklepów. Spróbuj ponownie.'; });
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    list.innerHTML = '';
+    if (!/^\d{2}-\d{3}$/.test(input.value)) { msg.textContent = 'Wpisz kod w formacie 00-000.'; input.focus(); return; }
+    load().then(([pc]) => {
+      const p = pc.prefixes[input.value.slice(0, 2)];
+      if (!p) { msg.textContent = 'Nie znamy tego kodu. Sprawdź cyfry.'; return; }
+      show(p, 'dla ' + input.value);
+    });
+  });
+  form.querySelector('[data-geo]').addEventListener('click', () => {
+    if (!('geolocation' in navigator)) { msg.textContent = 'Twoja przeglądarka nie udostępnia lokalizacji. Wpisz kod pocztowy.'; return; }
+    msg.textContent = 'Czekamy na Twoją zgodę na lokalizację…';
+    navigator.geolocation.getCurrentPosition(
+      pos => show({ lat: pos.coords.latitude, lng: pos.coords.longitude }, 'w pobliżu'),
+      () => { msg.textContent = 'Bez zgody na lokalizację też znajdziesz sklep — wpisz kod pocztowy.'; },
+      { timeout: 8000, maximumAge: 600000 }
+    );
+  });
+})();
+</script>
+</body>
+</html>

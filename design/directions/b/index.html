@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liveo Meble — kierunek B „Wymiar”</title>
+<meta name="description" content="Liveo Meble — producent mebli w kolekcjach z Raniżowa na Podkarpaciu. Obejrzyj kolekcje i znajdź sklep partnerski najbliżej Ciebie.">
+<link rel="icon" href="data:,">
+<link rel="preload" href="fonts/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/archivo-latin-ext-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* ── Fonty (self-hosted, @fontsource-variable; latin + latin-ext przez unicode-range) ── */
+@font-face{font-family:"Archivo";font-style:normal;font-display:swap;font-weight:100 900;font-stretch:62% 125%;
+  src:url(fonts/archivo-latin-ext-standard-normal.woff2) format("woff2-variations"),url(fonts/archivo-latin-ext-standard-normal.woff2) format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Archivo";font-style:normal;font-display:swap;font-weight:100 900;font-stretch:62% 125%;
+  src:url(fonts/archivo-latin-standard-normal.woff2) format("woff2-variations"),url(fonts/archivo-latin-standard-normal.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Martian Mono";font-style:normal;font-display:swap;font-weight:100 800;font-stretch:75% 112.5%;
+  src:url(fonts/martian-mono-latin-ext-standard-normal.woff2) format("woff2-variations"),url(fonts/martian-mono-latin-ext-standard-normal.woff2) format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Martian Mono";font-style:normal;font-display:swap;font-weight:100 800;font-stretch:75% 112.5%;
+  src:url(fonts/martian-mono-latin-standard-normal.woff2) format("woff2-variations"),url(fonts/martian-mono-latin-standard-normal.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+/* ── Mini design system: tokeny ── */
+:root{
+  /* kolor — kreda, grafit, minia */
+  --c-chalk:#F3F3F1;        /* tło strony — kredowa biel */
+  --c-paper:#FBFBFA;        /* etykiety, pola formularzy */
+  --c-stone:#E7E8E5;        /* cokół pod packshoty */
+  --c-line:#CDD0CD;         /* linie włosowe */
+  --c-line-2:#9EA29F;       /* linie mocniejsze (obrys pól) */
+  --c-graphite:#24272B;     /* tekst, przyciski */
+  --c-graphite-2:#3A3E43;   /* hover przycisków */
+  --c-mute:#5D6166;         /* tekst drugorzędny (5,6:1 na kredzie) */
+  --c-minium:#C23A16;       /* akcent: minia — linie wymiarowe, indeksy (4,8:1) */
+  --c-minium-ink:#A93212;   /* minia na kamieniu (tekst) */
+
+  /* typografia */
+  --f-sans:"Archivo",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Martian Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --t-mono:12px;  --t-mono-s:11px;
+  --t-body:17px;  --t-small:15px;
+  --t-lead:clamp(17px, .45vw + 13.5px, 19px);
+  --t-h3:clamp(22px, 1.1vw + 14px, 28px);
+  --t-h2:clamp(30px, 2.4vw + 16px, 50px);
+  --t-h1:clamp(38px, 4.1vw + 6px, 76px);
+  --w-h1:108%;  --w-wide:125%;  --w-mono:87.5%;
+
+  /* siatka i odstępy (skala 4) */
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px; --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px; --s-10:144px;
+  --gutter:clamp(16px, 2.8vw, 40px);
+  --gap:clamp(12px, 1.7vw, 24px);
+  --maxw:1680px;
+  --hdr-h:68px;
+
+  /* promienie, cienie */
+  --r-0:0; --r-1:2px;
+  --sh-plate:0 1px 0 rgba(36,39,43,.05), 0 18px 40px -18px rgba(36,39,43,.35);
+
+  /* ruch — fizyczny, spokojny */
+  --e-draw:cubic-bezier(.7,0,.2,1);      /* kreślenie linii: start z oporem, miękkie dojście */
+  --e-settle:cubic-bezier(.16,1,.3,1);   /* osiadanie elementów */
+  --e-press:cubic-bezier(.3,.7,.4,1);    /* reakcja na hover/klik */
+  --d-1:160ms; --d-2:320ms; --d-3:640ms; --d-4:900ms;
+}
+
+/* ── Baza ── */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--c-chalk);color:var(--c-graphite);font:400 var(--t-body)/1.55 var(--f-sans);font-stretch:100%;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3,p,ul,ol,dl,dd,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--c-minium);outline-offset:3px}
+.mono{font-family:var(--f-mono);font-stretch:var(--w-mono);font-size:var(--t-mono);font-weight:400;letter-spacing:.02em;line-height:1.5;font-variant-numeric:tabular-nums}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+
+.skip{position:absolute;left:var(--gutter);top:-80px;z-index:100;background:var(--c-graphite);color:var(--c-chalk);padding:12px 16px;text-decoration:none;font-weight:500;transition:transform var(--d-2) var(--e-settle)}
+.skip:focus{transform:translateY(96px)}
+
+/* ── Nagłówek ── */
+.hdr{position:relative;z-index:20;border-bottom:1px solid var(--c-line);background:var(--c-chalk)}
+.hdr__in{display:flex;align-items:center;gap:var(--s-6);height:var(--hdr-h)}
+.logo{display:inline-flex;flex-direction:column;align-items:stretch;gap:5px;text-decoration:none;padding-block:6px}
+.logo__dim{position:relative;height:7px;display:block}
+.logo__dim::before{content:"";position:absolute;left:0;right:0;top:3px;height:1px;background:var(--c-minium)}
+.logo__dim::after{content:"";position:absolute;inset:0;border-inline:1px solid var(--c-minium)}
+.logo__word{font-stretch:var(--w-wide);font-weight:640;font-size:21px;letter-spacing:.2em;line-height:1;margin-right:-.2em}
+.nav{flex:1}
+.nav__list{display:flex;align-items:center;gap:clamp(18px,2vw,32px)}
+.nav__list a{display:inline-flex;align-items:center;gap:7px;min-height:44px;text-decoration:none;font-size:15.5px;font-weight:450;letter-spacing:.005em;position:relative}
+.nav__list a::after{content:"";position:absolute;left:0;right:0;bottom:9px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:0 50%;transition:transform var(--d-2) var(--e-press)}
+.nav__list a:hover::after{transform:scaleX(1)}
+.nav__idx{display:none}
+.nav__dot{width:6px;height:6px;background:var(--c-minium);display:inline-block}
+.nav__b2b{margin-left:auto;padding-left:clamp(18px,2vw,32px);border-left:1px solid var(--c-line)}
+.nav__b2b a{color:var(--c-mute)}
+.hdr__end{display:flex;align-items:center;gap:var(--s-3)}
+.advisor{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px 0 13px;border:1px solid var(--c-graphite);border-radius:var(--r-1);text-decoration:none;font-size:15px;font-weight:500;
+  transition:background-color var(--d-1) var(--e-press),color var(--d-1) var(--e-press)}
+.advisor svg{flex:none}
+.advisor:hover{background:var(--c-graphite);color:var(--c-chalk)}
+.menu-btn{display:none}
+
+/* ── Hero ── */
+.hero{padding-top:clamp(22px,2.6vw,40px)}
+.hero__intro{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);row-gap:var(--s-5);align-items:end}
+.hero__head{grid-column:1/span 8;display:grid;gap:clamp(16px,1.6vw,24px)}
+.eyebrow{color:var(--c-mute);display:flex;flex-wrap:wrap;gap:4px 14px;text-transform:uppercase;letter-spacing:.06em;font-size:var(--t-mono-s)}
+.eyebrow span+span::before{content:"";display:inline-block;width:14px;height:1px;background:var(--c-line-2);vertical-align:middle;margin-right:14px}
+.hero h1{font-size:var(--t-h1);font-weight:470;font-stretch:var(--w-h1);line-height:1.02;letter-spacing:-.028em;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--c-minium)}
+.hero__aside{grid-column:9/-1;display:grid;gap:var(--s-5);padding-bottom:6px}
+.lead{font-size:var(--t-lead);line-height:1.55;color:var(--c-graphite);max-width:44ch;text-wrap:pretty}
+.actions{display:flex;flex-wrap:wrap;gap:var(--s-3)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:50px;padding:0 22px;border-radius:var(--r-1);text-decoration:none;font-size:16px;font-weight:500;letter-spacing:.005em;border:1px solid var(--c-graphite);
+  transition:background-color var(--d-1) var(--e-press),color var(--d-1) var(--e-press),border-color var(--d-1) var(--e-press)}
+.btn svg{transition:transform var(--d-2) var(--e-press)}
+.btn:hover svg{transform:translateX(4px)}
+.btn--solid{background:var(--c-graphite);color:var(--c-chalk)}
+.btn--solid:hover{background:var(--c-graphite-2);border-color:var(--c-graphite-2)}
+.btn--line:hover{background:var(--c-paper)}
+
+.stage{position:relative;margin-top:clamp(24px,2.6vw,40px)}
+.shot{position:relative;aspect-ratio:2400/1030;overflow:hidden;background:#D9D6D1}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+.overlay{position:absolute;inset:0;pointer-events:none}
+
+/* linie wymiarowe — współrzędne w % kadru */
+.dim{position:absolute;height:0}
+.dim__line{position:absolute;left:0;right:0;top:-.75px;height:1.5px;background:var(--c-minium)}
+.dim::before,.dim::after{content:"";position:absolute;top:-8px;width:1.5px;height:16px;background:var(--c-minium);transform:rotate(45deg)}
+.dim::before{left:-.75px}.dim::after{right:-.75px}
+.dim--h{left:var(--x1);width:calc(var(--x2) - var(--x1));top:var(--y)}
+.dim--v{top:var(--y1);height:calc(var(--y2) - var(--y1));left:var(--x);width:0}
+.dim--v .dim__line{top:0;bottom:0;left:-.75px;right:auto;width:1.5px;height:auto}
+.dim--v::before,.dim--v::after{left:-.75px;top:auto;width:1.5px;height:16px}
+.dim--v::before{top:-8px}.dim--v::after{bottom:-8px;right:auto}
+.dim__val{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);background:var(--c-chalk);color:var(--c-graphite);padding:4px 8px 3px;white-space:nowrap;font-size:12px}
+.dim--v .dim__val{top:50%}
+.wit{position:absolute;background:var(--c-minium);opacity:.75}
+.wit--v{left:var(--x);top:var(--y1);height:calc(var(--y2) - var(--y1));width:1px}
+.wit--h{top:var(--y);left:var(--x1);width:calc(var(--x2) - var(--x1));height:1px}
+
+/* desktop: kadr salon-jasny-wide przycięty od góry (2400×1030, wyrównany do dołu) */
+.d-w{--x1:44.8%;--x2:80.5%;--y:87.7%}
+.d-h{--x:83.4%;--y1:53.3%;--y2:79.3%}
+.w-1{--x:44.8%;--y1:73.3%;--y2:89.9%}
+.w-2{--x:80.5%;--y1:73.3%;--y2:89.9%}
+.w-3{--x1:80.5%;--x2:85.2%;--y:53.3%}
+.w-4{--x1:80.5%;--x2:85.2%;--y:79.3%}
+
+/* tabliczka — jak etykieta przy obrazie w galerii */
+.plate{position:absolute;left:calc(var(--gutter) + clamp(14px,1.6vw,24px));bottom:clamp(14px,1.6vw,24px);width:min(368px,31%);background:var(--c-paper);padding:18px 20px 16px;box-shadow:var(--sh-plate)}
+.plate__top{display:flex;justify-content:space-between;gap:12px;color:var(--c-mute);border-bottom:1px solid var(--c-line);padding-bottom:10px;margin-bottom:12px}
+.plate__top b{font-weight:500;color:var(--c-minium)}
+.plate__top a{color:var(--c-graphite);text-decoration:none;border-bottom:1px solid var(--c-line-2)}
+.plate__top a:hover{border-color:var(--c-minium)}
+.plate__title{font-size:20px;font-weight:520;font-stretch:104%;letter-spacing:-.01em;line-height:1.2}
+.plate__title span{font-stretch:var(--w-wide);font-size:13px;font-weight:600;letter-spacing:.16em;margin-left:6px;color:var(--c-mute)}
+.plate__dims{margin-top:4px;color:var(--c-graphite);font-size:13px}
+.finder{margin-top:16px;padding-top:14px;border-top:1px solid var(--c-line)}
+.finder__label{display:block;font-size:14.5px;font-weight:500;margin-bottom:8px}
+.finder__row{display:flex}
+.finder input{flex:1;min-width:0;height:46px;border:1px solid var(--c-line-2);border-right:0;border-radius:var(--r-1) 0 0 var(--r-1);background:#fff;padding:0 12px;font-family:var(--f-mono);font-stretch:var(--w-mono);font-size:14px;letter-spacing:.04em}
+.finder input::placeholder{color:#767A7F}
+.finder input:focus-visible{outline-offset:-2px}
+.finder button[type=submit]{height:46px;padding:0 16px;border:1px solid var(--c-graphite);background:var(--c-graphite);color:var(--c-chalk);border-radius:0 var(--r-1) var(--r-1) 0;font-weight:500;font-size:15px;cursor:pointer;white-space:nowrap;
+  transition:background-color var(--d-1) var(--e-press)}
+.finder button[type=submit]:hover{background:var(--c-graphite-2)}
+.finder__geo{flex:none;width:46px;height:46px;display:grid;place-items:center;background:#fff;border:1px solid var(--c-line-2);border-right:0;cursor:pointer;color:var(--c-graphite);transition:color var(--d-1) var(--e-press)}
+.finder__geo:hover{color:var(--c-minium)}
+.finder__geo:focus-visible{outline-offset:-2px}
+.finder__msg{font-size:14px;color:var(--c-graphite)}
+.finder__msg:not(:empty){margin-top:10px}
+
+.caption{display:flex;justify-content:space-between;gap:var(--s-5);margin-top:12px;color:var(--c-mute)}
+
+/* ── Kolekcje ── */
+.coll{padding-block:clamp(88px,10vw,152px) clamp(72px,8vw,128px)}
+.sec-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);row-gap:var(--s-5);align-items:end;margin-bottom:clamp(36px,4vw,64px)}
+.sec-idx{grid-column:1/-1;display:flex;align-items:center;gap:12px;color:var(--c-mute);text-transform:uppercase;letter-spacing:.06em;font-size:var(--t-mono-s)}
+.sec-idx b{color:var(--c-minium);font-weight:500}
+.sec-idx::after{content:"";flex:1;height:1px;background:var(--c-line)}
+.sec-head h2{grid-column:1/span 7;font-size:var(--t-h2);font-weight:470;font-stretch:var(--w-h1);line-height:1.06;letter-spacing:-.022em;text-wrap:balance}
+.sec-head__aside{grid-column:9/-1;display:grid;gap:var(--s-4);justify-items:start}
+.sec-head__aside p{color:var(--c-graphite);max-width:46ch;text-wrap:pretty}
+.arrow-link{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-weight:500;text-decoration:none;border-bottom:1px solid var(--c-graphite)}
+.arrow-link svg{transition:transform var(--d-2) var(--e-press)}
+.arrow-link:hover svg{transform:translateX(4px)}
+
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap);counter-reset:kol}
+.grid4 li{counter-increment:kol}
+.card{display:block;text-decoration:none;height:100%}
+.card__plinth{position:relative;aspect-ratio:4/5;background:var(--c-stone);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.card__meta{display:flex;justify-content:space-between;gap:10px;padding:14px 16px 0;color:var(--c-graphite)}
+.card__meta b{font-weight:500;color:var(--c-minium-ink)}
+.card__pack{position:relative;aspect-ratio:4/3;margin-bottom:6%}
+.card__pack img{width:100%;height:100%;object-fit:contain;transition:transform var(--d-3) var(--e-settle)}
+.card .dim{--y:96%}
+.card .dim__val{background:var(--c-stone);font-size:11px;padding:3px 6px 2px}
+.card .dim::before,.card .dim::after{top:-6px;height:12px}
+.card__body{padding-top:18px;display:grid;gap:8px}
+.card__name{font-size:var(--t-h3);font-stretch:var(--w-wide);font-weight:560;letter-spacing:.1em;line-height:1.1;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.card__name svg{flex:none;opacity:.0;transform:translateX(-8px);transition:opacity var(--d-2) var(--e-press),transform var(--d-2) var(--e-press)}
+.card__tag{color:var(--c-graphite);font-size:15.5px;line-height:1.5;max-width:34ch}
+.card__spec{margin-top:6px;border-top:1px solid var(--c-line)}
+.card__spec div{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--c-line)}
+.card__spec dt{color:var(--c-mute)}
+.card__spec dd{text-align:right}
+.sw{display:inline-flex;gap:4px;vertical-align:middle}
+.sw i{width:14px;height:14px;display:block;box-shadow:inset 0 0 0 1px rgba(36,39,43,.18);background:linear-gradient(to bottom,var(--t,var(--f)) 0 34%,var(--f) 34%)}
+.card:hover .card__pack img{transform:translateY(-6px)}
+.card:hover .card__name svg{opacity:1;transform:none}
+.card:hover .card__name span{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.card:focus-visible{outline-offset:6px}
+
+/* ── Wejście: spokojne, tylko transform/opacity ── */
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes settle{from{opacity:0;transform:scale(1.035)}to{opacity:1;transform:none}}
+@keyframes draw-x{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes draw-y{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.eyebrow,.hero h1,.hero__aside{animation:rise var(--d-4) var(--e-settle) both}
+.hero h1{animation-delay:60ms}.hero__aside{animation-delay:140ms}
+.shot img{animation:settle 1100ms var(--e-settle) 80ms both}
+.overlay .dim--h .dim__line,.overlay .wit--h{animation:draw-x var(--d-4) var(--e-draw) 420ms both}
+.overlay .dim--v .dim__line,.overlay .wit--v{animation:draw-y var(--d-4) var(--e-draw) 420ms both}
+.overlay .dim::before,.overlay .dim::after,.overlay .dim__val{animation:fade var(--d-2) linear 980ms both}
+.plate{animation:rise var(--d-4) var(--e-settle) 300ms both}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:1ms!important;animation-delay:0ms!important;transition-duration:1ms!important;scroll-behavior:auto!important}
+}
+
+/* ── Tablet ── */
+@media (max-width:1180px){
+  .nav__list{gap:20px}
+  .nav__list a{font-size:15px}
+}
+@media (max-width:1099px){
+  :root{--hdr-h:64px}
+  .menu-btn{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 4px 0 12px;background:none;border:0;font-weight:500;font-size:15px;cursor:pointer}
+  .menu-btn__bars{position:relative;width:20px;height:9px;display:block}
+  .menu-btn__bars::before,.menu-btn__bars::after{content:"";position:absolute;left:0;right:0;height:1.5px;background:currentColor;transition:transform var(--d-2) var(--e-press)}
+  .menu-btn__bars::before{top:0}.menu-btn__bars::after{bottom:0}
+  .is-open .menu-btn__bars::before{transform:translateY(3.75px) rotate(45deg)}
+  .is-open .menu-btn__bars::after{transform:translateY(-3.75px) rotate(-45deg)}
+  .hdr__in{gap:var(--s-3)}
+  .hdr__end{margin-left:auto}
+  .nav{position:fixed;inset:var(--hdr-h) 0 0 0;z-index:19;background:var(--c-chalk);padding:var(--s-5) var(--gutter) var(--s-7);overflow-y:auto;
+    visibility:hidden;opacity:0;transform:translateY(-8px);transition:opacity var(--d-2) var(--e-settle),transform var(--d-2) var(--e-settle),visibility 0s linear var(--d-2)}
+  .is-open .nav{visibility:visible;opacity:1;transform:none;transition:opacity var(--d-2) var(--e-settle),transform var(--d-3) var(--e-settle),visibility 0s}
+  .nav__list{flex-direction:column;align-items:stretch;gap:0}
+  .nav__list li{border-bottom:1px solid var(--c-line)}
+  .nav__list a{display:flex;min-height:64px;font-size:26px;font-weight:450;font-stretch:104%;letter-spacing:-.01em;gap:14px}
+  .nav__list a::after{display:none}
+  .nav__idx{display:inline;color:var(--c-minium);font-size:var(--t-mono-s);width:28px}
+  .nav__b2b{margin:0;padding:0;border-left:0}
+  .nav__b2b a{color:var(--c-graphite)}
+  .hero__head{grid-column:1/-1}
+  .hero__aside{grid-column:1/span 9}
+  .plate{position:relative;left:auto;bottom:auto;width:auto;box-shadow:none;background:transparent;padding:18px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--gap);align-items:start}
+  .plate__top{grid-column:1/-1}
+  .plate__title,.plate__dims{grid-column:1}
+  .finder{grid-column:2;grid-row:2/span 2;margin-top:0;padding-top:0;border-top:0}
+  .sec-head h2{grid-column:1/-1}
+  .sec-head__aside{grid-column:1/span 9}
+  .grid4{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--s-8)}
+  body.menu-lock{overflow:hidden}
+}
+
+/* ── Telefon: osobny układ, nie ściśnięty desktop ── */
+@media (max-width:759px){
+  :root{--hdr-h:60px;--t-body:16px}
+  .logo__word{font-size:19px}
+  .advisor{padding:0 12px 0 10px;font-size:14.5px;gap:8px}
+  .advisor .lg{display:none}
+  .hero{padding-top:22px}
+  .hero__intro{row-gap:20px}
+  .hero__head{gap:14px}
+  .eyebrow{gap:2px 10px}
+  .eyebrow span+span::before{width:10px;margin-right:10px}
+  .hero h1{font-stretch:94%;font-size:clamp(35px,10vw,46px);line-height:1.03;letter-spacing:-.022em;font-weight:480}
+  .hero__aside{grid-column:1/-1;gap:var(--s-5)}
+  .actions{display:grid;grid-template-columns:1fr;gap:var(--s-2)}
+  .btn{min-height:52px;justify-content:space-between;padding:0 18px}
+  .btn--line{display:none}
+  .eyebrow__brand{display:none}
+  .eyebrow span:nth-child(2)::before{display:none}
+  .stage{margin-top:var(--s-5);padding-inline:0}
+  .shot{aspect-ratio:1200/1260}
+  /* telefon: kadr salon-jasny-tall przycięty od góry (1200×1260, wyrównany do dołu) */
+  .d-w{--x1:13.3%;--x2:94.8%;--y:89.9%}
+  .d-h{--x:7.2%;--y1:60%;--y2:84%}
+  .w-1{--x:13.3%;--y1:78.6%;--y2:91.9%}
+  .w-2{--x:94.8%;--y1:78.6%;--y2:91.9%}
+  .w-3{--x1:5.2%;--x2:13.3%;--y:60%}
+  .w-4{--x1:5.2%;--x2:15%;--y:84%}
+  .dim__val{font-size:11px;padding:3px 6px 2px}
+  .plate{display:block;padding:16px var(--gutter) 0}
+  .plate__title{font-size:22px}
+  .finder{margin-top:18px;padding-top:16px;border-top:1px solid var(--c-line)}
+  .finder input{height:52px;font-size:16px}
+  .finder button[type=submit]{height:52px}
+  .finder__geo{width:52px;height:52px}
+
+  .coll{padding-block:72px 64px}
+  .sec-head{margin-bottom:36px}
+  .sec-head h2{font-stretch:96%;font-size:clamp(29px,8vw,36px);letter-spacing:-.025em}
+  .sec-head__aside{grid-column:1/-1}
+  .grid4{grid-template-columns:1fr;row-gap:0;border-top:1px solid var(--c-line)}
+  .grid4 li{border-bottom:1px solid var(--c-line)}
+  .card{display:grid;grid-template-columns:minmax(0,44%) minmax(0,1fr);gap:16px;padding:16px 0;align-items:start}
+  .card__plinth{aspect-ratio:4/3;justify-content:flex-end}
+  .card__meta{display:none}
+  .card__pack{margin-bottom:0}
+  .card__name::before{content:counter(kol,decimal-leading-zero);font:500 11px/1 var(--f-mono);font-stretch:var(--w-mono);letter-spacing:.02em;color:var(--c-minium);margin-right:10px}
+  .card__name span{margin-right:auto}
+  .card .dim__val{font-size:10px;padding:2px 4px 1px}
+  .card__body{padding-top:2px;gap:6px}
+  .card__name{font-size:20px;letter-spacing:.09em}
+  .card__name svg{opacity:1;transform:none}
+  .card__tag{font-size:14.5px;line-height:1.45}
+  .card__spec{margin-top:4px;border-top:0}
+  .card__spec div{padding:3px 0;border:0;justify-content:flex-start}
+  .card__spec div:not(.spec-dims){display:none}
+  .card__spec dt{display:none}
+  .card__spec dd{text-align:left;font-size:11px}
+}
+@media (max-width:374px){
+  .advisor{padding:0 10px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#tresc">Przejdź do treści</a>
+
+<header class="hdr" id="hdr">
+  <div class="hdr__in wrap">
+    <a class="logo" href="./" aria-label="Liveo Meble — strona główna">
+      <span class="logo__dim" aria-hidden="true"></span>
+      <span class="logo__word" aria-hidden="true">LIVEO</span>
+    </a>
+    <nav class="nav" id="menu" aria-label="Główna">
+      <ul class="nav__list">
+        <li><a href="#kolekcje"><span class="nav__idx mono" aria-hidden="true">01</span>Kolekcje</a></li>
+        <li><a href="#meble"><span class="nav__idx mono" aria-hidden="true">02</span>Meble</a></li>
+        <li><a href="#pomieszczenia"><span class="nav__idx mono" aria-hidden="true">03</span>Pomieszczenia</a></li>
+        <li><a href="#promocje"><span class="nav__idx mono" aria-hidden="true">04</span>Promocje<span class="nav__dot" aria-hidden="true"></span><span class="vh">(trwają promocje)</span></a></li>
+        <li><a href="#gdzie-kupic"><span class="nav__idx mono" aria-hidden="true">05</span>Gdzie kupić</a></li>
+        <li class="nav__b2b"><a href="#partnerzy"><span class="nav__idx mono" aria-hidden="true">06</span>Dla partnerów</a></li>
+      </ul>
+    </nav>
+    <div class="hdr__end">
+      <a class="advisor" href="#doradca">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 5V1h4M13 1h4v4M17 13v4h-4M5 17H1v-4"/><path d="M4.5 12.5l3-3.5 2.2 2.4 1.6-1.6 2.2 2.7"/><circle cx="12" cy="6" r="1.2"/></svg>
+        <span><span class="sm">Doradca</span><span class="lg"> wnętrz</span></span>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span>Menu</span><span class="menu-btn__bars" aria-hidden="true"></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="tresc">
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hero__intro wrap">
+      <div class="hero__head">
+        <p class="eyebrow mono"><span class="eyebrow__brand">Liveo Meble</span><span>Producent mebli</span><span>Raniżów, Podkarpacie</span></p>
+        <h1 id="hero-h">Meble w&nbsp;kolekcjach, <br> dobrane co do centymetra.</h1>
+      </div>
+      <div class="hero__aside">
+        <p class="lead">Szafka RTV, komoda, stół i&nbsp;łóżko z&nbsp;jednej kolekcji mają ten sam dekor, uchwyty i&nbsp;proporcje. Wybierz komplet tutaj, a&nbsp;my wskażemy sklep partnerski najbliżej Ciebie.</p>
+        <div class="actions">
+          <a class="btn btn--solid" href="#kolekcje">Przeglądaj kolekcje <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 6h14M9.5 1.5 14 6l-4.5 4.5"/></svg></a>
+          <a class="btn btn--line" href="#gdzie-kupic">Gdzie kupić</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage wrap">
+      <figure class="shot">
+        <picture>
+          <source media="(max-width: 759px)" srcset="../../../src/assets/renders/rooms/salon-jasny-tall.jpg" width="1200" height="1500">
+          <img src="../../../src/assets/renders/rooms/salon-jasny-wide.jpg" width="2400" height="1350" fetchpriority="high" decoding="async"
+               alt="Jasny salon: niska szafka RTV w dekorze dębu na czarnych metalowych nogach, nad nią dwie grafiki w ramach, obok wazon z gałązkami i fotel.">
+        </picture>
+        <div class="overlay" aria-hidden="true">
+          <span class="wit wit--v w-1"></span><span class="wit wit--v w-2"></span>
+          <span class="wit wit--h w-3"></span><span class="wit wit--h w-4"></span>
+          <span class="dim dim--h d-w"><span class="dim__line"></span><span class="dim__val mono">180 cm</span></span>
+          <span class="dim dim--v d-h"><span class="dim__line"></span><span class="dim__val mono">50</span></span>
+        </div>
+      </figure>
+
+      <div class="plate" id="gdzie-kupic">
+        <p class="plate__top mono"><span><b>Ryc. 01</b> · Salon</span><a href="#kolekcja-nokta">Cała kolekcja →</a></p>
+        <p class="plate__title">Szafka RTV 180 <span>NOKTA</span></p>
+        <p class="plate__dims mono">180 × 50 × 40 cm · dąb, metal</p>
+        <form class="finder" action="#" novalidate>
+          <label class="finder__label" for="kod">Gdzie ją zobaczyć na żywo?</label>
+          <div class="finder__row">
+            <input id="kod" name="kod" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="Kod pocztowy" maxlength="6" pattern="[0-9]{2}-[0-9]{3}" aria-describedby="kod-msg">
+            <button type="button" class="finder__geo" id="geo" aria-label="Użyj mojej lokalizacji" title="Użyj mojej lokalizacji"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="9" cy="9" r="5"/><circle cx="9" cy="9" r="1.2" fill="currentColor" stroke="none"/><path d="M9 0v3.5M9 14.5V18M0 9h3.5M14.5 9H18"/></svg></button>
+            <button type="submit">Pokaż sklepy</button>
+          </div>
+          <p class="finder__msg" id="kod-msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="coll" id="kolekcje" aria-labelledby="kolekcje-h">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="sec-idx mono"><b>02</b> Kolekcje</p>
+        <h2 id="kolekcje-h">Zacznij od kolekcji, <br> nie od jednej szafki.</h2>
+        <div class="sec-head__aside">
+          <p>Meble z&nbsp;jednej kolekcji mają ten sam dekor, uchwyty i&nbsp;podstawę. Dzięki temu salon, jadalnia i&nbsp;sypialnia wyglądają spójnie, nawet gdy kompletujesz je stopniowo.</p>
+          <a class="arrow-link" href="#kolekcje-wszystkie">Wszystkie kolekcje <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 6h14M9.5 1.5 14 6l-4.5 4.5"/></svg></a>
+        </div>
+      </header>
+
+      <ol class="grid4">
+        <li>
+          <a class="card" href="#kolekcja-olmo">
+            <div class="card__plinth">
+              <p class="card__meta mono"><b>01</b><span>Salon · Jadalnia · Sypialnia</span></p>
+              <div class="card__pack">
+                <img src="../../../src/assets/renders/sample/stol-dab-naturalny.webp" width="1600" height="1200" loading="lazy" alt="Stół 160 z kolekcji OLMO w dekorze dębu naturalnego, na drewnianych nogach.">
+                <span class="dim dim--h" style="--x1:7.5%;--x2:92%" aria-hidden="true"><span class="dim__line"></span><span class="dim__val mono">160</span></span>
+              </div>
+            </div>
+            <div class="card__body">
+              <h3 class="card__name"><span>OLMO</span><svg width="18" height="14" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 6h14M9.5 1.5 14 6l-4.5 4.5"/></svg></h3>
+              <p class="card__tag">Dekor jasnego dębu, spokojne proporcje i&nbsp;drewniane nóżki.</p>
+              <dl class="card__spec mono">
+                <div class="spec-dims"><dt>Stół 160</dt><dd>160 × 76 × 90 cm</dd></div>
+                <div><dt>Wersje</dt><dd><span class="sw" aria-hidden="true"><i style="--f:#c49a6c"></i><i style="--f:#d6c8b8;--t:#c49a6c"></i><i style="--f:#eeece8;--t:#c49a6c"></i></span><span class="vh">3 wersje kolorystyczne</span></dd></div>
+                <div><dt>Meble</dt><dd>12</dd></div>
+              </dl>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="card" href="#kolekcja-talve">
+            <div class="card__plinth">
+              <p class="card__meta mono"><b>02</b><span>Salon · Sypialnia · Pokój</span></p>
+              <div class="card__pack">
+                <img src="../../../src/assets/renders/sample/biurko-szalwia.webp" width="1600" height="1200" loading="lazy" alt="Biurko 110 z kolekcji TALVE: szałwiowy kontener z szufladami i blat w dekorze dębu.">
+                <span class="dim dim--h" style="--x1:12.5%;--x2:86.5%" aria-hidden="true"><span class="dim__line"></span><span class="dim__val mono">110</span></span>
+              </div>
+            </div>
+            <div class="card__body">
+              <h3 class="card__name"><span>TALVE</span><svg width="18" height="14" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 6h14M9.5 1.5 14 6l-4.5 4.5"/></svg></h3>
+              <p class="card__tag">Matowe fronty, dębowe blaty i&nbsp;małe okrągłe gałki.</p>
+              <dl class="card__spec mono">
+                <div class="spec-dims"><dt>Biurko 110</dt><dd>110 × 76 × 55 cm</dd></div>
+                <div><dt>Wersje</dt><dd><span class="sw" aria-hidden="true"><i style="--f:#eeece8;--t:#c49a6c"></i><i style="--f:#9aa58f;--t:#c49a6c"></i><i style="--f:#4a4b4d;--t:#c49a6c"></i></span><span class="vh">3 wersje kolorystyczne</span></dd></div>
+                <div><dt>Meble</dt><dd>11</dd></div>
+              </dl>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="card" href="#kolekcja-nokta">
+            <div class="card__plinth">
+              <p class="card__meta mono"><b>03</b><span>Salon · Jadalnia · Biuro</span></p>
+              <div class="card__pack">
+                <img src="../../../src/assets/renders/sample/szafka-rtv-dab-naturalny.webp" width="1600" height="1200" loading="lazy" alt="Szafka RTV 180 z kolekcji NOKTA w dekorze dębu, na cienkich czarnych metalowych nogach.">
+                <span class="dim dim--h" style="--x1:8.8%;--x2:91.5%" aria-hidden="true"><span class="dim__line"></span><span class="dim__val mono">180</span></span>
+              </div>
+            </div>
+            <div class="card__body">
+              <h3 class="card__name"><span>NOKTA</span><svg width="18" height="14" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 6h14M9.5 1.5 14 6l-4.5 4.5"/></svg></h3>
+              <p class="card__tag">Ciepłe drewno na czarnym, metalowym stelażu.</p>
+              <dl class="card__spec mono">
+                <div class="spec-dims"><dt>Szafka RTV 180</dt><dd>180 × 50 × 40 cm</dd></div>
+                <div><dt>Wersje</dt><dd><span class="sw" aria-hidden="true"><i style="--f:#b07b45;--t:#222223"></i><i style="--f:#6b4a32;--t:#4a4b4d"></i></span><span class="vh">2 wersje kolorystyczne</span></dd></div>
+                <div><dt>Meble</dt><dd>10</dd></div>
+              </dl>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="card" href="#kolekcja-solma">
+            <div class="card__plinth">
+              <p class="card__meta mono"><b>04</b><span>Salon · Sypialnia · Przedpokój</span></p>
+              <div class="card__pack">
+                <img src="../../../src/assets/renders/sample/komoda-bialy-mat.webp" width="1600" height="1200" loading="lazy" alt="Komoda 120 z kolekcji SOLMA: białe gładkie fronty, złote uchwyty i nóżki.">
+                <span class="dim dim--h" style="--x1:18.8%;--x2:82.8%" aria-hidden="true"><span class="dim__line"></span><span class="dim__val mono">120</span></span>
+              </div>
+            </div>
+            <div class="card__body">
+              <h3 class="card__name"><span>SOLMA</span><svg width="18" height="14" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 6h14M9.5 1.5 14 6l-4.5 4.5"/></svg></h3>
+              <p class="card__tag">Gładkie fronty i&nbsp;akcenty w&nbsp;kolorze szczotkowanego mosiądzu.</p>
+              <dl class="card__spec mono">
+                <div class="spec-dims"><dt>Komoda 120</dt><dd>120 × 82 × 42 cm</dd></div>
+                <div><dt>Wersje</dt><dd><span class="sw" aria-hidden="true"><i style="--f:#f3f2ef;--t:#b8935a"></i><i style="--f:#d6c8b8;--t:#b8935a"></i><i style="--f:#222223;--t:#b8935a"></i></span><span class="vh">3 wersje kolorystyczne</span></dd></div>
+                <div><dt>Meble</dt><dd>11</dd></div>
+              </dl>
+            </div>
+          </a>
+        </li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const hdr = document.getElementById('hdr');
+  const btn = hdr.querySelector('.menu-btn');
+  const nav = document.getElementById('menu');
+  const setOpen = (open) => {
+    hdr.classList.toggle('is-open', open);
+    document.body.classList.toggle('menu-lock', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.firstElementChild.textContent = open ? 'Zamknij' : 'Menu';
+    if (open) nav.querySelector('a').focus();
+  };
+  btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
+  nav.addEventListener('click', (e) => { if (e.target.closest('a') && hdr.classList.contains('is-open')) setOpen(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && hdr.classList.contains('is-open')) { setOpen(false); btn.focus(); }
+  });
+
+  // Kod pocztowy: format 00-000 w trakcie pisania (bez odczytu układu)
+  const kod = document.getElementById('kod');
+  const msg = document.getElementById('kod-msg');
+  kod.addEventListener('input', () => {
+    const d = kod.value.replace(/\D/g, '').slice(0, 5);
+    kod.value = d.length > 2 ? d.slice(0, 2) + '-' + d.slice(2) : d;
+  });
+  kod.form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    msg.textContent = /^\d{2}-\d{3}$/.test(kod.value)
+      ? 'Szkic: tu pojawią się sklepy partnerskie najbliżej kodu ' + kod.value + '.'
+      : 'Wpisz kod w formacie 00-000, np. 35-001.';
+  });
+  document.getElementById('geo').addEventListener('click', () => {
+    msg.textContent = 'Szkic: przeglądarka zapyta o zgodę na lokalizację. Bez zgody wystarczy kod pocztowy.';
+  });
+})();
+</script>
+</body>
+</html>

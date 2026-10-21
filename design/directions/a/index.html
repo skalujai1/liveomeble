@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liveo Meble — kolekcje mebli z Raniżowa · kierunek A „Wzornik”</title>
+<meta name="description" content="Liveo Meble: producent mebli z Raniżowa. Przeglądaj kolekcje mebli do salonu, jadalni, sypialni i przedpokoju i znajdź najbliższy sklep partnerski.">
+<link rel="icon" href="data:,">
+<link rel="preload" href="fonts/bricolage-grotesque-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/bricolage-grotesque-latin-ext-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="../../../src/assets/renders/rooms/salon-jasny-wide.jpg" media="(min-width: 48em)" fetchpriority="high">
+<link rel="preload" as="image" href="../../../src/assets/renders/rooms/salon-jasny-tall.jpg" media="(max-width: 47.99em)" fetchpriority="high">
+<style>
+/* ===== Fonty (self-hosted, latin + latin-ext) ===== */
+@font-face { font-family: "Bricolage"; font-style: normal; font-display: swap; font-weight: 200 800;
+  src: url(fonts/bricolage-grotesque-latin-ext-opsz-normal.woff2) format("woff2");
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "Bricolage"; font-style: normal; font-display: swap; font-weight: 200 800;
+  src: url(fonts/bricolage-grotesque-latin-opsz-normal.woff2) format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Plex Mono"; font-style: normal; font-display: swap; font-weight: 400;
+  src: url(fonts/ibm-plex-mono-latin-ext-400-normal.woff2) format("woff2");
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "Plex Mono"; font-style: normal; font-display: swap; font-weight: 400;
+  src: url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Plex Mono"; font-style: normal; font-display: swap; font-weight: 500;
+  src: url(fonts/ibm-plex-mono-latin-ext-500-normal.woff2) format("woff2");
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "Plex Mono"; font-style: normal; font-display: swap; font-weight: 500;
+  src: url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+
+/* ===== Mini design system — kierunek A „Wzornik”
+   Każdy kolor strony to wykończenie z katalogu Liveo (src/data/finishes.json). ===== */
+:root {
+  /* kolory: baza */
+  --paper: #EEECE8;        /* Biały mat — tło strony */
+  --paper-hi: #F7F6F3;     /* Biały połysk — metryczki, pola formularza */
+  --paper-lo: #E3E0D9;     /* cień płyty — tła packshotów */
+  --ink: #222223;          /* Czarny mat — tekst, przyciski */
+  --ink-2: #4A4B4D;        /* Grafit — tekst drugorzędny (7,4:1) */
+  --ink-3: #5E5D5A;        /* opisy, podpisy (5,6:1) */
+  --line: #CFCCC6;         /* krawędź płyty — linie podziału */
+  --line-strong: #A9A6A0;
+  /* kolory: akcenty (wykończenia) */
+  --honey: #B07B45;        /* Dąb miodowy — akcent graficzny (nie do drobnego tekstu) */
+  --honey-ink: #7A4F22;    /* przyciemniony dąb miodowy — akcent w tekście (6:1) */
+  --sage: #9AA58F;         /* Szałwia — drugi akcent, powierzchnie */
+  --f-dn: #C49A6C; --f-dm: #B07B45; --f-or: #6B4A32; --f-ka: #D6C8B8; --f-sz: #9AA58F;
+  --f-gr: #4A4B4D; --f-cm: #222223; --f-bm: #EEECE8; --f-bp: #F3F2EF; --f-zl: #B8935A;
+
+  /* typografia */
+  --font-display: "Bricolage", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --fs-mono: .78rem;
+  --fs-small: .9375rem;
+  --fs-body: 1.0625rem;
+  --fs-lead: clamp(1.0625rem, .98rem + .35vw, 1.25rem);
+  --fs-h3: clamp(1.75rem, 1.4rem + 1vw, 2.25rem);
+  --fs-h2: clamp(2.125rem, 1.3rem + 2.9vw, 3.75rem);
+  --fs-h1: clamp(2.5rem, 1.15rem + 4vw, 4.625rem);
+  --lh-tight: .96;
+  --lh-body: 1.55;
+
+  /* odstępy (skala 4 px) */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px;
+  --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 136px;
+  --gutter: clamp(16px, 3.6vw, 56px);
+  --maxw: 1520px;
+
+  /* promienie: płyta ma tylko lekko złamaną krawędź */
+  --r-1: 2px; --r-2: 4px;
+
+  /* cienie: fizyczne, jak próbka leżąca na zdjęciu */
+  --sh-chip: 0 1px 1px rgba(34,34,35,.18), 0 10px 18px -8px rgba(34,34,35,.42);
+  --sh-chip-up: 0 2px 2px rgba(34,34,35,.16), 0 22px 28px -12px rgba(34,34,35,.5);
+  --sh-label: 0 1px 0 rgba(34,34,35,.06), 0 12px 30px -16px rgba(34,34,35,.35);
+
+  /* ruch: „szuflada z cichym domykiem” — szybki start, długie miękkie wyhamowanie */
+  --ease-domyk: cubic-bezier(.22, .8, .16, 1);
+  --ease-wysuw: cubic-bezier(.34, 1.28, .5, 1);   /* lekki dobieg próbki przy wysunięciu */
+  --ease-fade: cubic-bezier(.4, 0, .2, 1);
+  --t-fast: 180ms; --t-mid: 420ms; --t-slow: 900ms;
+
+  /* słoje (tekstury z silnika renderów, src: tools/render/web/js/textures.js) */
+  --wood-dn: url(img/probka-dab-naturalny.webp);
+  --wood-dm: url(img/probka-dab-miodowy.webp);
+  --wood-or: url(img/probka-orzech.webp);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===== Baza ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--font-display); font-size: var(--fs-body); line-height: var(--lh-body);
+  font-weight: 400; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
+ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: var(--r-1); }
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip {
+  position: absolute; left: var(--gutter); top: 8px; z-index: 50; padding: 10px 16px;
+  background: var(--ink); color: var(--paper); text-decoration: none; border-radius: var(--r-1);
+  transform: translateY(-160%); transition: transform var(--t-fast) var(--ease-domyk);
+}
+.skip:focus { transform: none; }
+.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+.mono {
+  font-family: var(--font-mono); font-size: var(--fs-mono); font-weight: 400;
+  letter-spacing: .06em; text-transform: uppercase; line-height: 1.4;
+}
+
+/* ===== Tekstury wykończeń (próbki) ===== */
+.t { background-color: var(--c, #ccc); background-image: var(--grain); background-size: 140px; }
+.t-dn { --c: var(--f-dn); background-image: var(--wood-dn); background-size: cover; background-position: 30% 0; }
+.t-dm { --c: var(--f-dm); background-image: var(--wood-dm); background-size: cover; background-position: 60% 0; }
+.t-or { --c: var(--f-or); background-image: var(--wood-or); background-size: cover; background-position: 20% 0; }
+.t-ka { --c: var(--f-ka); }
+.t-sz { --c: var(--f-sz); }
+.t-gr { --c: var(--f-gr); }
+.t-cm { --c: var(--f-cm); }
+.t-bm { --c: var(--f-bm); }
+.t-bp { --c: var(--f-bp); background-image: linear-gradient(115deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.9) 46%, rgba(255,255,255,0) 60%); }
+.t-zl { --c: var(--f-zl); background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.12) 0 1px, rgba(0,0,0,.05) 1px 3px), linear-gradient(180deg, rgba(255,255,255,.25), rgba(0,0,0,.08)); }
+
+/* ===== Nagłówek ===== */
+.top { position: relative; z-index: 20; }
+.top__bar { display: flex; align-items: center; gap: var(--s-6); min-height: 76px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; flex: none; }
+.brand__chip {
+  width: 15px; height: 21px; border-radius: 1px; box-shadow: inset 0 -2px 0 rgba(0,0,0,.18);
+  -webkit-mask: radial-gradient(circle at 50% 5px, #0000 2px, #000 2.5px); mask: radial-gradient(circle at 50% 5px, #0000 2px, #000 2.5px);
+}
+.brand__word { font-size: 1.625rem; font-weight: 760; letter-spacing: -.035em; line-height: 1; }
+.brand__sub { align-self: flex-end; margin-bottom: 2px; color: var(--ink-3); font-size: .6875rem; }
+.nav { margin-left: auto; }
+.nav__list { display: flex; gap: clamp(18px, 2vw, 32px); }
+.nav__list a {
+  display: inline-block; padding-block: 8px; font-size: var(--fs-small); font-weight: 500; text-decoration: none;
+  background: linear-gradient(var(--honey), var(--honey)) 0 100% / 0 2px no-repeat;
+  transition: background-size var(--t-mid) var(--ease-domyk);
+}
+.nav__list a:hover { background-size: 100% 2px; }
+.advisor {
+  display: inline-flex; align-items: center; gap: 10px; flex: none; min-height: 44px; padding: 0 16px 0 12px;
+  border: 1px solid var(--ink); border-radius: var(--r-1); background: transparent; text-decoration: none;
+  font-size: var(--fs-small); font-weight: 560;
+  transition: background-color var(--t-fast) var(--ease-fade), color var(--t-fast) var(--ease-fade);
+}
+.advisor:hover { background: var(--ink); color: var(--paper); }
+.advisor svg { width: 20px; height: 20px; flex: none; }
+.menu-btn { display: none; }
+.menu { display: none; }
+
+/* ===== Hero ===== */
+.hero { padding-block: clamp(20px, 3vw, 40px) 0; }
+.hero__grid { display: grid; grid-template-columns: minmax(0, 5.5fr) minmax(0, 6.5fr); column-gap: clamp(32px, 4.4vw, 80px); align-items: start; }
+.hero__copy { padding-top: 6px; }
+.eyebrow { display: flex; align-items: center; gap: 12px; color: var(--ink-2); }
+.eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--honey); flex: none; }
+.hero h1 {
+  margin-top: var(--s-5); font-size: var(--fs-h1); line-height: var(--lh-tight); font-weight: 620;
+  letter-spacing: -.022em; text-wrap: balance; max-width: 13.5ch;
+}
+.hero h1 em { font-style: normal; color: var(--honey-ink); }
+.hero__lead { margin-top: var(--s-5); max-width: 34em; font-size: var(--fs-lead); color: var(--ink-2); text-wrap: pretty; }
+.hero__actions { margin-top: var(--s-6); display: flex; flex-wrap: wrap; gap: var(--s-3); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 54px; padding: 0 22px;
+  border: 1px solid var(--ink); border-radius: var(--r-1); text-decoration: none; font-weight: 560; cursor: pointer;
+  transition: background-color var(--t-fast) var(--ease-fade), color var(--t-fast) var(--ease-fade);
+}
+.btn--primary { background: var(--ink); color: var(--paper); }
+.btn--primary:hover { background: #3A3836; }
+.btn--ghost { background: transparent; }
+.btn--ghost:hover { background: var(--ink); color: var(--paper); }
+.btn svg { width: 18px; height: 18px; transition: transform var(--t-mid) var(--ease-domyk); }
+.btn:hover svg { transform: translateX(4px); }
+
+/* wyszukiwarka sklepu (kod pocztowy) */
+.finder { margin-top: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--line); max-width: 30rem; }
+.finder__label { display: block; color: var(--ink-2); }
+.finder__row { margin-top: var(--s-3); display: flex; }
+.finder__input {
+  flex: 1 1 auto; width: 0; min-width: 0; min-height: 54px; padding: 0 16px; border: 1px solid var(--line-strong); border-right: 0;
+  border-radius: var(--r-1) 0 0 var(--r-1); background: var(--paper-hi);
+  font-family: var(--font-mono); font-size: 1.0625rem; letter-spacing: .08em;
+}
+.finder__input::placeholder { color: #7A7874; }
+.finder__input:focus-visible { outline-offset: -2px; }
+.finder__btn { flex: none; border-radius: 0 var(--r-1) var(--r-1) 0; white-space: nowrap; padding-inline: 20px; }
+.finder__note { margin-top: var(--s-3); font-size: var(--fs-small); color: var(--ink-3); }
+
+/* scena: zdjęcie aranżacji + wzornik */
+.stage { position: relative; margin-right: calc(-1 * var(--gutter)); }
+.stage__frame { position: relative; height: clamp(460px, calc(100svh - 176px), 760px); overflow: hidden; background: var(--paper-lo); }
+.slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity var(--t-slow) var(--ease-fade), visibility 0s linear var(--t-slow); }
+.slide.is-on { opacity: 1; visibility: visible; transition: opacity var(--t-slow) var(--ease-fade), visibility 0s; }
+.slide img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50%) 50%; transform: scale(1.045); transition: transform 1.6s var(--ease-domyk); }
+.slide.is-on img { transform: none; }
+
+/* metryczka — naklejka producenta */
+.label {
+  position: absolute; top: clamp(16px, 2vw, 28px); right: clamp(16px, 2vw, 28px); z-index: 4; width: 19rem;
+  background: var(--paper-hi); color: var(--ink); box-shadow: var(--sh-label); border-radius: var(--r-1);
+  font-family: var(--font-mono); font-size: .75rem; letter-spacing: .02em; line-height: 1.35;
+}
+.label__head { display: flex; justify-content: space-between; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--ink); text-transform: uppercase; letter-spacing: .08em; font-weight: 500; }
+.label__rows { padding: 2px 14px 4px; }
+.label__row { display: grid; grid-template-columns: 8.6em 1fr; gap: 8px; padding: 7px 0; border-bottom: 1px dashed var(--line-strong); }
+.label__row:last-child { border-bottom: 0; }
+.label__row dt { color: var(--ink-3); text-transform: uppercase; letter-spacing: .06em; }
+.label__row dd { font-weight: 500; }
+.label__link {
+  display: flex; justify-content: space-between; align-items: center; padding: 11px 14px; border-top: 1px solid var(--ink);
+  font-family: var(--font-display); font-size: .9375rem; font-weight: 560; letter-spacing: 0; text-decoration: none;
+  transition: background-color var(--t-fast) var(--ease-fade);
+}
+.label__link:hover { background: var(--paper); }
+.label__link svg { width: 16px; height: 16px; }
+
+/* wzornik: próbki wykończeń wysunięte na zdjęcie */
+.swatches { position: relative; z-index: 3; display: flex; align-items: flex-end; gap: var(--s-6); margin-top: -76px; padding-left: clamp(16px, 2.2vw, 32px); padding-right: var(--gutter); }
+.swatches__list { display: flex; gap: 10px; }
+.chip {
+  --w: 84px; --h: 116px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px; width: var(--w); padding: 0; border: 0; background: none;
+  text-align: left; cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.chip__face {
+  position: relative; display: block; width: var(--w); height: var(--h); border-radius: var(--r-1);
+  filter: drop-shadow(0 1px 1px rgba(34,34,35,.2)) drop-shadow(0 10px 10px rgba(34,34,35,.18));
+  transition: transform var(--t-mid) var(--ease-wysuw), filter var(--t-mid) var(--ease-fade);
+}
+.chip__face .t {
+  position: absolute; inset: 0; border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(34,34,35,.1), inset 0 -3px 0 rgba(34,34,35,.16), inset 0 1px 0 rgba(255,255,255,.35);
+  -webkit-mask: radial-gradient(circle at 50% 13px, #0000 4.5px, #000 5px); mask: radial-gradient(circle at 50% 13px, #0000 4.5px, #000 5px);
+}
+.chip__face .t::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(165deg, rgba(255,255,255,.22), rgba(255,255,255,0) 38%, rgba(0,0,0,.07)); }
+.chip__code { font-family: var(--font-mono); font-size: .75rem; font-weight: 500; letter-spacing: .08em; line-height: 1; padding-bottom: 5px; border-bottom: 2px solid transparent; transition: border-color var(--t-mid) var(--ease-fade); }
+.chip__name { display: block; margin-top: -4px; font-size: .8125rem; line-height: 1.25; color: var(--ink-3); }
+.chip:hover .chip__face { transform: translateY(-6px); }
+.chip[aria-pressed="true"] .chip__face { transform: translateY(-14px); filter: drop-shadow(0 2px 2px rgba(34,34,35,.2)) drop-shadow(0 18px 14px rgba(34,34,35,.24)); }
+.chip[aria-pressed="true"] .chip__code { border-color: var(--honey); }
+.chip[aria-pressed="true"] .chip__name { color: var(--ink); }
+.swatches__hint { padding-bottom: 2px; max-width: 14rem; font-size: var(--fs-small); line-height: 1.4; color: var(--ink-3); }
+.swatches__hint .mono { display: block; margin-bottom: 4px; color: var(--ink); font-weight: 500; }
+
+/* ===== Metryka producenta (pas faktów) ===== */
+.facts { margin-top: clamp(48px, 6vw, 88px); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); }
+.facts__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.facts__item { padding: var(--s-5) var(--s-5) var(--s-5) 0; }
+.facts__item + .facts__item { padding-left: var(--s-5); border-left: 1px solid var(--line); }
+.facts__item dt { color: var(--ink-3); }
+.facts__item dd { margin-top: 6px; font-size: 1.0625rem; font-weight: 520; line-height: 1.35; text-wrap: balance; }
+
+/* ===== Pas kolekcji ===== */
+.collections { padding-block: clamp(72px, 9vw, 136px) clamp(72px, 8vw, 120px); }
+.sec-head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); column-gap: clamp(32px, 6vw, 112px); align-items: end; }
+.kicker { display: flex; gap: 14px; align-items: baseline; color: var(--ink-2); }
+.kicker b { font-weight: 500; color: var(--honey-ink); }
+.sec-head h2 { margin-top: var(--s-4); font-size: var(--fs-h2); line-height: 1; font-weight: 620; letter-spacing: -.03em; text-wrap: balance; }
+.sec-head__side p { color: var(--ink-2); text-wrap: pretty; }
+.more {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: var(--s-4); font-weight: 560; text-decoration: none;
+  padding-bottom: 4px; border-bottom: 2px solid var(--honey);
+}
+.more svg { width: 18px; height: 18px; transition: transform var(--t-mid) var(--ease-domyk); }
+.more:hover svg { transform: translateX(4px); }
+
+.cards { margin-top: clamp(40px, 5vw, 72px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 1.8vw, 28px); }
+.card { position: relative; }
+.card__panel { position: relative; aspect-ratio: 4 / 4.4; background: var(--tint, var(--paper-lo)); border-radius: var(--r-1); overflow: hidden; }
+.card__panel::before { content: ""; position: absolute; inset: 0; background-image: var(--grain); background-size: 140px; opacity: .7; }
+.card__no { position: absolute; top: 14px; left: 16px; color: var(--ink-2); }
+.card__panel img { position: absolute; left: 6%; right: 6%; bottom: 7%; width: 88%; transition: transform var(--t-slow) var(--ease-domyk); }
+.card:hover .card__panel img { transform: translateY(-8px); }
+.card__body { padding-top: var(--s-5); }
+.card__title { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.card h3 { font-size: var(--fs-h3); line-height: 1; font-weight: 640; letter-spacing: -.02em; }
+.card h3 a { text-decoration: none; }
+.card h3 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.card h3 a:focus-visible { outline: none; }
+.card:focus-within .card__panel { outline: 2px solid var(--ink); outline-offset: 3px; }
+.card__style { color: var(--ink-3); }
+.card__tag { margin-top: var(--s-3); color: var(--ink-2); font-size: var(--fs-small); line-height: 1.45; text-wrap: pretty; }
+.card__meta { margin-top: var(--s-4); padding-top: var(--s-4); border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.mini { display: flex; gap: 6px; }
+.mini li { position: relative; width: 22px; height: 30px; border-radius: 1px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(34,34,35,.14), 0 1px 2px rgba(34,34,35,.18); }
+.mini .t { position: absolute; inset: 0; }
+.mini .t + .t { inset: 0 0 auto 0; height: 30%; box-shadow: 0 1px 0 rgba(34,34,35,.18); }
+.mini .t.t-zl + .t, .mini .t + .t.t-zl { inset: auto 4px 6px 4px; height: 2px; box-shadow: none; }
+.card__rooms { color: var(--ink-3); text-align: right; font-size: .6875rem; letter-spacing: .04em; }
+
+/* ===== Ruch przy wejściu (tylko transform / opacity) ===== */
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+@keyframes pull { from { opacity: 0; transform: translateY(40px); } }
+.js .hero__copy > :not(form) { animation: rise .9s var(--ease-domyk) backwards; }
+.js .hero__copy > :nth-child(2) { animation-delay: 60ms; }
+.js .hero__copy > :nth-child(3) { animation-delay: 140ms; }
+.js .hero__copy > :nth-child(4) { animation-delay: 200ms; }
+.js .swatches__list > li { animation: pull .8s var(--ease-wysuw) backwards; }
+.js .swatches__list > li:nth-child(1) { animation-delay: 380ms; }
+.js .swatches__list > li:nth-child(2) { animation-delay: 440ms; }
+.js .swatches__list > li:nth-child(3) { animation-delay: 500ms; }
+.js .swatches__list > li:nth-child(4) { animation-delay: 560ms; }
+.js .swatches__list > li:nth-child(5) { animation-delay: 620ms; }
+.js .label { animation: rise .9s var(--ease-domyk) 700ms backwards; }
+
+/* ===== Tablet ===== */
+@media (max-width: 74.99em) {
+  .nav, .top .advisor { display: none; }
+  .menu-btn {
+    display: inline-flex; align-items: center; gap: 10px; margin-left: auto; min-height: 44px; padding: 0 14px;
+    border: 1px solid var(--ink); border-radius: var(--r-1); background: transparent; font-weight: 560; cursor: pointer;
+  }
+  .menu-btn__icon { position: relative; width: 18px; height: 10px; }
+  .menu-btn__icon::before, .menu-btn__icon::after { content: ""; position: absolute; left: 0; right: 0; height: 2px; background: currentColor; transition: transform var(--t-mid) var(--ease-domyk); }
+  .menu-btn__icon::before { top: 0; } .menu-btn__icon::after { bottom: 0; }
+  .menu-btn[aria-expanded="true"] .menu-btn__icon::before { transform: translateY(4px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] .menu-btn__icon::after { transform: translateY(-4px) rotate(-45deg); }
+  .top .advisor--icon { display: inline-flex; padding: 0; width: 44px; justify-content: center; margin-left: auto; }
+  .advisor--icon + .menu-btn { margin-left: 0; }
+  .menu {
+    display: block; position: absolute; left: 0; right: 0; top: 100%; z-index: 30; background: var(--paper);
+    border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: var(--s-4) var(--gutter) var(--s-6);
+    opacity: 0; transform: translateY(-8px); visibility: hidden;
+    transition: opacity var(--t-mid) var(--ease-fade), transform var(--t-mid) var(--ease-domyk), visibility 0s linear var(--t-mid);
+  }
+  .menu.is-open { opacity: 1; transform: none; visibility: visible; transition: opacity var(--t-mid) var(--ease-fade), transform var(--t-mid) var(--ease-domyk), visibility 0s; }
+  .menu__list a { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 1.75rem; font-weight: 600; letter-spacing: -.02em; text-decoration: none; }
+  .menu__list a span { color: var(--ink-3); }
+  .menu .advisor { display: flex; margin-top: var(--s-5); min-height: 54px; justify-content: center; }
+  .hero__grid { grid-template-columns: minmax(0, 1fr); }
+  .hero h1 { max-width: 14ch; }
+  .stage { margin-top: var(--s-7); margin-left: calc(-1 * var(--gutter)); }
+  .stage__frame { height: auto; aspect-ratio: 16 / 10; }
+  .facts__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts__item:nth-child(3) { padding-left: 0; border-left: 0; }
+  .facts__item:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .sec-head { grid-template-columns: minmax(0, 1fr); row-gap: var(--s-5); }
+  .sec-head__side { max-width: 36rem; }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--s-7); }
+}
+@media (min-width: 75em) { .advisor--icon { display: none; } }
+
+/* ===== Telefon ===== */
+@media (max-width: 47.99em) {
+  .top__bar { min-height: 64px; gap: var(--s-2); }
+  .brand__word { font-size: 1.5rem; }
+  .hero { padding-top: var(--s-3); }
+  .hero__copy { padding-top: var(--s-4); }
+  .hero h1 { margin-top: var(--s-4); letter-spacing: -.02em; }
+  .hero__lead { margin-top: var(--s-4); }
+  .hero__actions { margin-top: var(--s-5); }
+  .hero__actions .btn { flex: 1 1 100%; }
+  .stage { margin-top: var(--s-6); margin-right: calc(-1 * var(--gutter)); }
+  .stage__frame { aspect-ratio: 1 / 1.08; }
+  .slide img { object-position: 50% 78%; }
+  .label { position: static; width: auto; margin: var(--s-5) var(--gutter) 0; }
+  .swatches { flex-direction: column; align-items: stretch; gap: var(--s-4); margin-top: -54px; padding-inline: var(--gutter); }
+  .swatches__list { justify-content: space-between; gap: 6px; }
+  .swatches__list li { flex: 1 1 0; max-width: 72px; }
+  .chip { --h: 86px; width: 100%; gap: 8px; }
+  .chip__face { width: 100%; }
+  .chip__face .t { -webkit-mask: radial-gradient(circle at 50% 10px, #0000 3.5px, #000 4px); mask: radial-gradient(circle at 50% 10px, #0000 3.5px, #000 4px); }
+  .chip[aria-pressed="true"] .chip__face { transform: translateY(-10px); }
+  .chip__name { display: none; }
+  .swatches__hint { max-width: none; }
+  .swatches__hint .mono { display: inline; margin-right: 8px; }
+  .finder { max-width: none; }
+  .finder--stage { margin-top: var(--s-6); }
+  .facts { margin-top: var(--s-8); }
+  .facts__list { grid-template-columns: 1fr; }
+  .facts__item, .facts__item + .facts__item { padding: var(--s-4) 0; border-left: 0; display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; align-items: baseline; }
+  .facts__item + .facts__item { border-top: 1px solid var(--line); }
+  .facts__item dd { margin-top: 0; font-size: 1rem; }
+  .cards {
+    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 80%; gap: var(--s-4);
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); padding-bottom: 4px;
+  }
+  .collections .cards { padding-inline: var(--gutter); }
+  .cards::-webkit-scrollbar { display: none; }
+  .card { scroll-snap-align: start; }
+  .swipe { display: flex; align-items: center; gap: 10px; margin-top: var(--s-5); color: var(--ink-3); }
+  .swipe::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+}
+@media (min-width: 48em) { .swipe, .finder--stage, .hero__actions .btn--ghost { display: none; } }
+@media (max-width: 47.99em) { .hero__copy .finder { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
+  .slide img { transform: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#tresc">Przejdź do treści</a>
+
+<header class="top">
+  <div class="wrap top__bar">
+    <a class="brand" href="#" aria-label="Liveo Meble — strona główna">
+      <span class="brand__chip t t-dm" aria-hidden="true"></span>
+      <span class="brand__word">LIVEO</span>
+      <span class="brand__sub mono" aria-hidden="true">meble</span>
+    </a>
+    <nav class="nav" aria-label="Główna">
+      <ul class="nav__list" role="list">
+        <li><a href="#kolekcje">Kolekcje</a></li>
+        <li><a href="#">Meble</a></li>
+        <li><a href="#">Pomieszczenia</a></li>
+        <li><a href="#">Promocje</a></li>
+        <li><a href="#gdzie-kupic">Gdzie kupić</a></li>
+        <li><a href="#">Dla partnerów</a></li>
+      </ul>
+    </nav>
+    <a class="advisor" href="#doradca">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 5.5h16v11H11l-4.5 3.5v-3.5H4z"/><path d="M8 13.5l2.6-3 2 2.2 1.4-1.5 2 2.3"/></svg>
+      Doradca wnętrz
+    </a>
+    <a class="advisor advisor--icon" href="#doradca" aria-label="Doradca wnętrz">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 5.5h16v11H11l-4.5 3.5v-3.5H4z"/><path d="M8 13.5l2.6-3 2 2.2 1.4-1.5 2 2.3"/></svg>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">
+      <span class="menu-btn__icon" aria-hidden="true"></span>Menu
+    </button>
+  </div>
+  <div class="menu" id="menu">
+    <nav aria-label="Główna (telefon)">
+      <ul class="menu__list" role="list">
+        <li><a href="#kolekcje">Kolekcje <span class="mono">01</span></a></li>
+        <li><a href="#">Meble <span class="mono">02</span></a></li>
+        <li><a href="#">Pomieszczenia <span class="mono">03</span></a></li>
+        <li><a href="#">Promocje <span class="mono">04</span></a></li>
+        <li><a href="#gdzie-kupic">Gdzie kupić <span class="mono">05</span></a></li>
+        <li><a href="#">Dla partnerów <span class="mono">06</span></a></li>
+      </ul>
+    </nav>
+    <a class="advisor" href="#doradca">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 5.5h16v11H11l-4.5 3.5v-3.5H4z"/><path d="M8 13.5l2.6-3 2 2.2 1.4-1.5 2 2.3"/></svg>
+      Doradca wnętrz — wyślij zdjęcie pokoju
+    </a>
+  </div>
+</header>
+
+<main id="tresc">
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow mono">Producent mebli · Raniżów, Podkarpacie</p>
+        <h1 id="hero-h">Meble, które pasują do siebie, bo powstają <em>razem.</em></h1>
+        <p class="hero__lead">Projektujemy i&nbsp;produkujemy kolekcje mebli do salonu, jadalni, sypialni i&nbsp;przedpokoju. Wybierz kolekcję i&nbsp;wykończenie, a&nbsp;pokażemy Ci sklep partnerski najbliżej domu.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#kolekcje">Przeglądaj kolekcje
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 10h13M11 4.5 16.5 10 11 15.5"/></svg>
+          </a>
+          <a class="btn btn--ghost" href="#gdzie-kupic-m">Gdzie kupić?</a>
+        </div>
+        <form class="finder" id="gdzie-kupic" action="#" role="search" aria-label="Znajdź sklep partnerski">
+          <label class="finder__label mono" for="kod">Znajdź sklep — wpisz kod pocztowy</label>
+          <div class="finder__row">
+            <input class="finder__input" id="kod" name="kod" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{2}-?[0-9]{3}" maxlength="6" placeholder="00-000">
+            <button class="btn btn--primary finder__btn" type="submit">Pokaż sklepy</button>
+          </div>
+          <p class="finder__note">Nie mamy własnych salonów. Nasze meble sprzedają sklepy meblowe, z&nbsp;którymi współpracujemy.</p>
+        </form>
+      </div>
+
+      <figure class="stage" aria-label="Aranżacje z kolekcji Liveo">
+        <div class="stage__frame">
+          <picture class="slide is-on" data-slide="dn">
+            <source media="(max-width: 47.99em)" srcset="../../../src/assets/renders/rooms/salon-jasny-tall.jpg" width="1200" height="1500">
+            <img src="../../../src/assets/renders/rooms/salon-jasny-wide.jpg" width="2400" height="1350" style="--pos: 74%" fetchpriority="high" decoding="async" alt="Jasny salon z szafką RTV w dekorze dębu naturalnego, grafikami na ścianie i białym fotelem">
+          </picture>
+          <picture class="slide" data-slide="sz" aria-hidden="true">
+            <source media="(max-width: 47.99em)" data-srcset="../../../src/assets/renders/rooms/biuro-tall.jpg" width="1200" height="1500">
+            <img data-src="../../../src/assets/renders/rooms/biuro-wide.jpg" width="2400" height="1350" style="--pos: 76%" decoding="async" alt="Domowe biuro z biurkiem w kolorze szałwii z blatem w dekorze dębu i regałem w dekorze dębu miodowego">
+          </picture>
+          <picture class="slide" data-slide="ka" aria-hidden="true">
+            <source media="(max-width: 47.99em)" data-srcset="../../../src/assets/renders/rooms/przedpokoj-tall.jpg" width="1200" height="1500">
+            <img data-src="../../../src/assets/renders/rooms/przedpokoj-wide.jpg" width="2400" height="1350" style="--pos: 80%" decoding="async" alt="Przedpokój z szafką na buty w kolorze kaszmir, lustrem w drewnianej ramie i wieszakiem">
+          </picture>
+          <picture class="slide" data-slide="or" aria-hidden="true">
+            <source media="(max-width: 47.99em)" data-srcset="../../../src/assets/renders/rooms/jadalnia-tall.jpg" width="1200" height="1500">
+            <img data-src="../../../src/assets/renders/rooms/jadalnia-wide.jpg" width="2400" height="1350" style="--pos: 72%" decoding="async" alt="Jadalnia ze stołem w dekorze dębu, krzesłami i komodą w kolorze orzecha pod ścianą">
+          </picture>
+          <picture class="slide" data-slide="gr" aria-hidden="true">
+            <source media="(max-width: 47.99em)" data-srcset="../../../src/assets/renders/rooms/salon-szalwia-tall.jpg" width="1200" height="1500">
+            <img data-src="../../../src/assets/renders/rooms/salon-szalwia-wide.jpg" width="2400" height="1350" style="--pos: 44%" decoding="async" alt="Salon ze ścianą w kolorze szałwii, białą komodą i grafitową witryną z przydymionym szkłem">
+          </picture>
+
+        </div>
+
+        <div class="swatches">
+          <ul class="swatches__list" role="list" aria-label="Wzornik wykończeń — wybierz, aby zobaczyć je we wnętrzu">
+            <li><button class="chip" type="button" aria-pressed="false" aria-label="Kaszmir (KA)" data-k="ka" data-col="VERNO" data-fin="KA — kaszmir" data-pc="Szafka na buty 100, przedpokój">
+              <span class="chip__face" aria-hidden="true"><span class="t t-ka"></span></span>
+              <span class="chip__code">KA</span><span class="chip__name">Kaszmir</span></button></li>
+            <li><button class="chip" type="button" aria-pressed="true" aria-label="Dąb naturalny (DN)" data-k="dn" data-col="OLMO" data-fin="DN — dąb naturalny" data-pc="Szafka RTV 160, salon">
+              <span class="chip__face" aria-hidden="true"><span class="t t-dn"></span></span>
+              <span class="chip__code">DN</span><span class="chip__name">Dąb naturalny</span></button></li>
+            <li><button class="chip" type="button" aria-pressed="false" aria-label="Szałwia (SZ)" data-k="sz" data-col="TALVE" data-fin="SZ — szałwia / dąb" data-pc="Biurko 110, domowe biuro">
+              <span class="chip__face" aria-hidden="true"><span class="t t-sz"></span></span>
+              <span class="chip__code">SZ</span><span class="chip__name">Szałwia</span></button></li>
+            <li><button class="chip" type="button" aria-pressed="false" aria-label="Orzech (OR)" data-k="or" data-col="MELVA" data-fin="OR — orzech" data-pc="Komoda 160, jadalnia">
+              <span class="chip__face" aria-hidden="true"><span class="t t-or"></span></span>
+              <span class="chip__code">OR</span><span class="chip__name">Orzech</span></button></li>
+            <li><button class="chip" type="button" aria-pressed="false" aria-label="Grafit (GR)" data-k="gr" data-col="LIRAN" data-fin="GR — grafit" data-pc="Witryna i komoda, salon">
+              <span class="chip__face" aria-hidden="true"><span class="t t-gr"></span></span>
+              <span class="chip__code">GR</span><span class="chip__name">Grafit</span></button></li>
+          </ul>
+          <p class="swatches__hint"><span class="mono">Wzornik</span> Wybierz próbkę, a&nbsp;pokażemy to wykończenie we&nbsp;wnętrzu.</p>
+        </div>
+
+        <div class="label" aria-live="polite">
+          <p class="label__head"><span>Liveo Meble</span><span>Raniżów</span></p>
+          <dl class="label__rows">
+            <div class="label__row"><dt>Kolekcja</dt><dd data-l="col">OLMO</dd></div>
+            <div class="label__row"><dt>Wykończenie</dt><dd data-l="fin">DN — dąb naturalny</dd></div>
+            <div class="label__row"><dt>Na zdjęciu</dt><dd data-l="pc">Szafka RTV 160, salon</dd></div>
+          </dl>
+          <a class="label__link" href="#kolekcje" data-l="link">Zobacz kolekcję OLMO
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 10h13M11 4.5 16.5 10 11 15.5"/></svg>
+          </a>
+        </div>
+
+      </figure>
+      <form class="finder finder--stage" id="gdzie-kupic-m" action="#" role="search" aria-label="Znajdź sklep partnerski (telefon)">
+        <label class="finder__label mono" for="kod-m">Gdzie kupić? Wpisz kod pocztowy</label>
+        <div class="finder__row">
+          <input class="finder__input" id="kod-m" name="kod" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{2}-?[0-9]{3}" maxlength="6" placeholder="00-000">
+          <button class="btn btn--primary finder__btn" type="submit">Pokaż sklepy</button>
+        </div>
+        <p class="finder__note">Nie mamy własnych salonów — meble sprzedają nasi partnerzy, sklepy meblowe w&nbsp;Twojej okolicy.</p>
+      </form>
+    </div>
+
+    <div class="wrap">
+      <dl class="facts facts__list">
+        <div class="facts__item"><dt class="mono">Projekt i produkcja</dt><dd>Raniżów, województwo podkarpackie</dd></div>
+        <div class="facts__item"><dt class="mono">Materiał</dt><dd>Płyta laminowana w&nbsp;dekorach drewna, w&nbsp;macie i&nbsp;połysku</dd></div>
+        <div class="facts__item"><dt class="mono">Sprzedaż</dt><dd>W sklepach meblowych naszych partnerów</dd></div>
+        <div class="facts__item"><dt class="mono">Dla sklepów</dt><dd>Strefa partnera: ceny, dostępność i&nbsp;zamówienia</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="collections" id="kolekcje" aria-labelledby="kolekcje-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="kicker mono"><b>01</b> Kolekcje</p>
+          <h2 id="kolekcje-h">Jedna kolekcja, cały dom.</h2>
+        </div>
+        <div class="sec-head__side">
+          <p>W kolekcji wszystkie meble mają te same wykończenia, uchwyty i&nbsp;nóżki. Szafkę RTV, komodę i&nbsp;stół postawisz obok siebie i&nbsp;będą wyglądać jak komplet — bo nim są.</p>
+          <a class="more" href="#">Wszystkie kolekcje
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 10h13M11 4.5 16.5 10 11 15.5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <ul class="cards" role="list">
+        <li class="card">
+          <div class="card__panel" style="--tint:#E4DCCF">
+            <span class="card__no mono">Nr 01</span>
+            <img src="../../../src/assets/renders/sample/szafka-rtv-dab-naturalny.webp" width="1600" height="1200" loading="lazy" alt="Szafka RTV w dekorze dębu naturalnego z czarnymi metalowymi nóżkami">
+          </div>
+          <div class="card__body">
+            <div class="card__title"><h3><a href="#">OLMO</a></h3><span class="card__style mono">naturalny</span></div>
+            <p class="card__tag">Dekor jasnego dębu, spokojne proporcje i&nbsp;drewniane nóżki.</p>
+            <div class="card__meta">
+              <ul class="mini" role="list" aria-label="Wykończenia">
+                <li><span class="t t-dn"></span><span class="sr-only">Dąb naturalny</span></li>
+                <li><span class="t t-ka"></span><span class="t t-dn"></span><span class="sr-only">Kaszmir / dąb naturalny</span></li>
+                <li><span class="t t-bm"></span><span class="t t-dn"></span><span class="sr-only">Biały mat / dąb naturalny</span></li>
+              </ul>
+              <span class="card__rooms mono">Salon · Jadalnia · Sypialnia</span>
+            </div>
+          </div>
+        </li>
+        <li class="card">
+          <div class="card__panel" style="--tint:#DCE0D6">
+            <span class="card__no mono">Nr 02</span>
+            <img src="../../../src/assets/renders/sample/biurko-szalwia.webp" width="1600" height="1200" loading="lazy" alt="Biurko w kolorze szałwii z kontenerem z szufladami i blatem w dekorze dębu">
+          </div>
+          <div class="card__body">
+            <div class="card__title"><h3><a href="#">TALVE</a></h3><span class="card__style mono">skandynawski</span></div>
+            <p class="card__tag">Matowe fronty, blaty w&nbsp;dekorze dębu i&nbsp;małe okrągłe gałki.</p>
+            <div class="card__meta">
+              <ul class="mini" role="list" aria-label="Wykończenia">
+                <li><span class="t t-bm"></span><span class="t t-dn"></span><span class="sr-only">Biały mat / dąb naturalny</span></li>
+                <li><span class="t t-sz"></span><span class="t t-dn"></span><span class="sr-only">Szałwia / dąb naturalny</span></li>
+                <li><span class="t t-gr"></span><span class="t t-dn"></span><span class="sr-only">Grafit / dąb naturalny</span></li>
+              </ul>
+              <span class="card__rooms mono">Salon · Sypialnia · Pokój</span>
+            </div>
+          </div>
+        </li>
+        <li class="card">
+          <div class="card__panel" style="--tint:#DEDAD4">
+            <span class="card__no mono">Nr 03</span>
+            <img src="../../../src/assets/renders/sample/szafka-nocna-czarny-mat.webp" width="1600" height="1200" loading="lazy" alt="Szafka nocna w czarnym macie z szufladą w dekorze dębu na drewnianych nóżkach">
+          </div>
+          <div class="card__body">
+            <div class="card__title"><h3><a href="#">NOKTA</a></h3><span class="card__style mono">loft</span></div>
+            <p class="card__tag">Ciepłe drewno na czarnym, metalowym stelażu.</p>
+            <div class="card__meta">
+              <ul class="mini" role="list" aria-label="Wykończenia">
+                <li><span class="t t-dm"></span><span class="t t-cm"></span><span class="sr-only">Dąb miodowy / czarny mat</span></li>
+                <li><span class="t t-or"></span><span class="t t-gr"></span><span class="sr-only">Orzech / grafit</span></li>
+              </ul>
+              <span class="card__rooms mono">Salon · Jadalnia · Biuro</span>
+            </div>
+          </div>
+        </li>
+        <li class="card">
+          <div class="card__panel" style="--tint:#E8E1D7">
+            <span class="card__no mono">Nr 04</span>
+            <img src="../../../src/assets/renders/sample/komoda-bialy-mat.webp" width="1600" height="1200" loading="lazy" alt="Biała komoda z szufladami, złotymi uchwytami i złotymi nóżkami">
+          </div>
+          <div class="card__body">
+            <div class="card__title"><h3><a href="#">SOLMA</a></h3><span class="card__style mono">glamour</span></div>
+            <p class="card__tag">Gładkie fronty i&nbsp;akcenty w&nbsp;kolorze szczotkowanego mosiądzu.</p>
+            <div class="card__meta">
+              <ul class="mini" role="list" aria-label="Wykończenia">
+                <li><span class="t t-bp"></span><span class="t t-zl"></span><span class="sr-only">Biały połysk / złoty</span></li>
+                <li><span class="t t-ka"></span><span class="t t-zl"></span><span class="sr-only">Kaszmir / złoty</span></li>
+                <li><span class="t t-cm"></span><span class="t t-zl"></span><span class="sr-only">Czarny mat / złoty</span></li>
+              </ul>
+              <span class="card__rooms mono">Salon · Sypialnia · Hol</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <p class="swipe mono" aria-hidden="true">Przesuń, aby zobaczyć więcej</p>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const d = document;
+  d.documentElement.classList.add('js');
+
+  // Menu (telefon / tablet)
+  const btn = d.querySelector('.menu-btn'), menu = d.getElementById('menu');
+  const setMenu = (open) => { btn.setAttribute('aria-expanded', String(open)); menu.classList.toggle('is-open', open); if (open) menu.querySelector('a').focus(); };
+  btn.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
+  d.addEventListener('keydown', (e) => { if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') { setMenu(false); btn.focus(); } });
+  menu.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+
+  // Wzornik: próbka wykończenia przełącza aranżację i metryczkę
+  const slides = new Map([...d.querySelectorAll('[data-slide]')].map((s) => [s.dataset.slide, s]));
+  const chips = [...d.querySelectorAll('.chip')];
+  const label = d.querySelector('.label');
+  const hydrate = (s) => {
+    s.querySelectorAll('[data-srcset]').forEach((el) => { el.srcset = el.dataset.srcset; el.removeAttribute('data-srcset'); });
+    const img = s.querySelector('img');
+    if (img.dataset.src) { img.src = img.dataset.src; img.removeAttribute('data-src'); }
+    return img;
+  };
+  let warmed = false;
+  const warm = () => { if (!warmed) { warmed = true; slides.forEach(hydrate); } };
+  const list = d.querySelector('.swatches__list');
+  ['pointerenter', 'focusin', 'touchstart'].forEach((ev) => list.addEventListener(ev, warm, { once: true, passive: true }));
+
+  let token = 0;
+  chips.forEach((chip) => chip.addEventListener('click', async () => {
+    if (chip.getAttribute('aria-pressed') === 'true') return;
+    const my = ++token;
+    chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+    const slide = slides.get(chip.dataset.k);
+    const img = hydrate(slide);
+    try { await img.decode(); } catch (e) { /* obraz pokaże się po wczytaniu */ }
+    if (my !== token) return;
+    slides.forEach((s) => { const on = s === slide; s.classList.toggle('is-on', on); s.toggleAttribute('aria-hidden', !on); });
+    label.querySelector('[data-l="col"]').textContent = chip.dataset.col;
+    label.querySelector('[data-l="fin"]').textContent = chip.dataset.fin;
+    label.querySelector('[data-l="pc"]').textContent = chip.dataset.pc;
+    label.querySelector('[data-l="link"]').firstChild.textContent = 'Zobacz kolekcję ' + chip.dataset.col + '\n';
+  }));
+
+  // Packshoty poniżej pierwszego ekranu: lazy, a gdy strona już stoi — dociągamy je w wolnej chwili
+  const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 1));
+  addEventListener('load', () => idle(() => d.querySelectorAll('img[loading="lazy"]').forEach((i) => { i.loading = 'eager'; }), { timeout: 1500 }), { once: true });
+})();
+</script>
+</body>
+</html>
