@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liveo Meble: kolekcje do całego domu</title>
+<meta name="description" content="Liveo Meble, producent mebli z Raniżowa. Kolekcje mebli do salonu, jadalni, sypialni i przedpokoju. Kupisz je w salonach partnerskich.">
+<link rel="icon" href="data:,">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preload" href="fonts/gloock-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="../../../src/assets/renders/rooms/jadalnia-wide.jpg" media="(min-width: 768px)" fetchpriority="high">
+<link rel="preload" as="image" href="../../../src/assets/renders/rooms/jadalnia-tall.jpg" media="(max-width: 767px)" fetchpriority="high">
+<style>
+/* ===== Tokeny: kierunek C „Ciepłe popołudnie” ===== */
+:root{
+  --bg:#FCFBF8;          /* ciepła biel: tło strony */
+  --linen:#ECE6DC;       /* len: packshoty, co trzecia sekcja */
+  --ink:#2A2420;         /* ciepła czerń: tekst 14,8:1 */
+  --muted:#6E655C;       /* szary orzechowy: pomocnicze, Omnibus */
+  --walnut:#4A3427;      /* orzech: pasek promocji, przyciski, stopka */
+  --walnut-hover:#3A291F;
+  --forest:#2F4637;      /* las: Gdzie kupić, Dla sklepów, Nowość */
+  --wine:#9E2A35;        /* wino: cena promocyjna, rabat */
+  --field:#8B8278;       /* obrys pól 3,6:1 */
+  --logo:#2B2A29;
+  --white:#fff;
+  --scrim:28,20,14;      /* ciepły scrim na zdjęciach */
+  --grade:sepia(.18) saturate(1.25) contrast(1.06) brightness(.93);
+  --grade-light:linear-gradient(115deg,rgba(255,206,140,.30) 0%,rgba(214,150,90,.22) 60%,rgba(120,80,50,.25));
+  --serif:"Gloock",Georgia,"Times New Roman",serif;
+  --sans:"Onest","Onest Variable",ui-sans-serif,system-ui,sans-serif;
+  --gutter:40px;
+  --max:1360px;
+  --bar-h:36px;
+  --hdr-h:76px;
+  --ease-soft:cubic-bezier(.2,.6,.2,1);
+  --focus:var(--forest);
+}
+@media (max-width:767px){:root{--gutter:16px;--bar-h:32px;--hdr-h:56px}}
+
+/* ===== Fonty (self-hosting, latin + latin-ext) ===== */
+@font-face{font-family:"Gloock";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/gloock-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Gloock";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/gloock-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Onest";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/onest-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/onest-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+/* ===== Baza ===== */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--hdr-h) + 16px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/28px var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+ul{list-style:none;margin:0;padding:0}
+h1,h2,h3,p{margin:0}
+s{text-decoration-thickness:1px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+.on-dark{--focus:#fff}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:calc(var(--max) + 2*var(--gutter));margin-inline:auto;padding-inline:var(--gutter)}
+.skip{position:absolute;left:16px;top:8px;z-index:100;background:var(--ink);color:#fff;padding:12px 18px;font-weight:500;transform:translateY(-200%)}
+.skip:focus{transform:none;--focus:#fff}
+.icon{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* Typografia */
+.h2{font:400 48px/52px var(--serif);letter-spacing:-.005em;text-align:center;text-wrap:balance}
+.lead{color:var(--muted);text-align:center;max-width:620px;margin:14px auto 0}
+.sec-head{padding-top:88px;padding-bottom:40px}
+@media (max-width:767px){
+  .h2{font-size:32px;line-height:36px}
+  .lead{font-size:16px;line-height:26px;margin-top:10px}
+  .sec-head{padding-top:48px;padding-bottom:24px}
+}
+
+/* Przyciski: ostre narożniki */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 26px;font:500 15px/1 var(--sans);text-decoration:none;border:1px solid transparent;border-radius:0;white-space:nowrap}
+.btn--primary{background:var(--walnut);color:#fff}
+.btn--primary:hover{background:var(--walnut-hover)}
+.btn--photo{border-color:#fff;color:#fff}
+.btn--photo:hover{background:#fff;color:var(--walnut)}
+.btn--ghost{border-color:var(--ink);color:var(--ink)}
+.btn--ghost:hover{background:var(--ink);color:var(--bg)}
+.btn--light{background:#fff;color:var(--ink)}
+.btn--light:hover{background:var(--linen)}
+.link-arrow{display:inline-flex;align-items:center;gap:8px;font-weight:500;font-size:15px;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.link-arrow:hover{text-decoration-thickness:2px}
+.center{text-align:center}
+
+/* Plakietki: prostokąty 12/600 */
+.badge{display:inline-flex;align-items:center;height:24px;padding:0 8px;font:600 12px/1 var(--sans);background:#fff;color:var(--ink);white-space:nowrap}
+.badge--sale{background:var(--wine);color:#fff}
+.badge--new{background:var(--forest);color:#fff}
+
+/* Wspólny „popołudniowy” grading zdjęć (docelowo w renderach z tools/render) */
+.ph{position:relative;overflow:hidden;background:#cdbfae}
+.ph img{width:100%;height:100%;object-fit:cover;filter:var(--grade)}
+.ph::after{content:"";position:absolute;inset:0;background:var(--grade-light);mix-blend-mode:multiply;pointer-events:none}
+
+/* ===== Pasek promocji ===== */
+.promo{position:relative;z-index:31;background:var(--walnut);color:#fff;height:var(--bar-h);font-size:14px;line-height:20px}
+.promo .wrap{height:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.promo-msgs{grid-column:2;display:flex;align-items:center;gap:10px;min-width:0}
+.promo-list{position:relative;height:20px;min-width:360px;text-align:center}
+.promo-list li{position:absolute;inset:0;opacity:0;transition:opacity .4s ease;white-space:nowrap}
+.promo-list li.is-active{opacity:1}
+.promo-list a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.promo-pause{width:28px;height:28px;display:grid;place-items:center;color:#fff;opacity:.85}
+.promo-pause:hover{opacity:1}
+.promo-pause .icon{width:14px;height:14px}
+.promo-pause .i-play{display:none}
+.promo-pause[aria-pressed="true"] .i-play{display:block}
+.promo-pause[aria-pressed="true"] .i-pause{display:none}
+.audience{grid-column:3;justify-self:end;display:flex;align-items:center;gap:8px;font-size:14px}
+.audience a{text-decoration:none;opacity:.8;padding:4px 0}
+.audience a[aria-current]{opacity:1;text-decoration:underline;text-underline-offset:4px}
+.audience a:hover{opacity:1}
+.audience span{opacity:.5}
+@media (max-width:767px){
+  .promo{font-size:13px}
+  .promo .wrap{grid-template-columns:1fr}
+  .promo-msgs{grid-column:1;justify-content:center}
+  .promo-list{min-width:0;flex:1;max-width:300px}
+  .audience{display:none}
+}
+
+/* ===== Nagłówek ===== */
+.hdr{position:sticky;top:0;z-index:30;height:var(--hdr-h);color:var(--ink);--knock:transparent}
+.hdr::before{content:"";position:absolute;inset:0;background:var(--bg);box-shadow:0 1px 0 rgba(42,36,32,.08);transition:opacity .25s ease}
+.hdr .wrap{position:relative;height:100%;display:flex;align-items:center;gap:40px;max-width:none}
+html.js .hdr:not(.is-solid){color:#fff;--knock:rgba(32,24,18,.92);--focus:#fff}
+html.js .hdr:not(.is-solid)::before{opacity:0}
+html.js .hdr:not(.is-solid) .logo{color:#fff}
+.logo-link{display:block;flex:none;line-height:0}
+.logo{display:block;width:118px;height:44px;color:var(--logo)}
+.nav{flex:1;min-width:0}
+.nav ul{display:flex;gap:28px}
+.nav a,.tools a,.tools button{font:500 15px/20px var(--sans);text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:10px 0;white-space:nowrap}
+.nav a:hover,.tools a:hover,.tools button:hover{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px}
+.tools{display:flex;align-items:center;gap:26px}
+.tools .t-icon-only{display:none}
+.tools .menu-btn{display:none}
+@media (max-width:1179px){
+  .nav{display:none}
+  .hdr .wrap{justify-content:space-between}
+  .tools .menu-btn{display:inline-flex}
+}
+@media (max-width:767px){
+  .hdr .wrap{gap:4px}
+  .logo{width:96px;height:36px}
+  .tools{gap:0;margin-right:-10px}
+  .tools .t-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .tools a,.tools button{width:44px;height:44px;justify-content:center;padding:0}
+  .tools .t-fav{display:none}
+  .tools .icon{width:22px;height:22px}
+}
+
+/* ===== Hero ===== */
+.hero{position:relative;margin-top:calc(-1 * var(--hdr-h));display:grid;grid-template-columns:2fr 1fr;gap:4px;height:90vh;min-height:640px;max-height:980px;background:var(--bg)}
+.hero-cell{position:relative;color:#fff;--focus:#fff}
+.hero-cell .ph{position:absolute;inset:0}
+.hero-cell .ph::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(rgba(var(--scrim),.55),rgba(var(--scrim),0) 190px),radial-gradient(80% 72% at 0% 100%,rgba(var(--scrim),.52),rgba(var(--scrim),0)),linear-gradient(to top,rgba(var(--scrim),.58),rgba(var(--scrim),.28) 40%,rgba(var(--scrim),0) 64%)}
+.hero-main .ph img{object-position:68% 50%}
+.hero-side .ph img{object-position:46% 50%}
+.hero-copy{position:absolute;z-index:2;left:var(--gutter);right:var(--gutter);bottom:56px}
+.hero-main .hero-copy{max-width:820px}
+.hero h1{font:400 72px/76px var(--serif);letter-spacing:-.01em;text-wrap:balance}
+.hero-sub{font-size:18px;line-height:28px;margin-top:16px;opacity:.95}
+.hero-actions{display:flex;align-items:center;gap:28px;margin-top:28px}
+.hero-actions .link-arrow{color:#fff}
+.hero-side .hero-copy{left:32px;right:32px;bottom:56px}
+.hero-side h2{font:400 40px/44px var(--serif);margin-top:16px}
+.hero-side p{font-size:16px;line-height:24px;margin-top:10px;opacity:.95}
+.hero-side .link-arrow{margin-top:18px;color:#fff}
+@media (prefers-reduced-motion:no-preference){
+  .hero-copy{animation:fade-in .4s ease-out both .1s}
+}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+@media (max-width:1023px){
+  .hero{grid-template-columns:1fr}
+  .hero-side{display:none}
+}
+@media (max-width:767px){
+  .hero{height:84svh;min-height:560px;max-height:760px}
+  .hero-main .ph img{object-position:50% 60%}
+  .hero h1{font-size:44px;line-height:46px}
+  .hero-copy{bottom:24px}
+  .hero-sub{font-size:16px;line-height:24px;margin-top:12px}
+  .hero-actions{flex-direction:column;align-items:stretch;gap:6px;margin-top:20px}
+  .hero-actions .btn{width:100%}
+  .hero-actions .link-arrow{justify-content:center;min-height:44px}
+}
+
+/* ===== Kolekcje: kafle 3:4 od krawędzi do krawędzi ===== */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.tile a{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;color:#fff;text-decoration:none;--focus:#fff}
+.tile .ph{position:absolute;inset:0}
+.tile .ph img{transition:transform .9s var(--ease-soft)}
+.tile a::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(rgba(var(--scrim),.46),rgba(var(--scrim),0) 30%),linear-gradient(to top,rgba(var(--scrim),.66),rgba(var(--scrim),.3) 17%,rgba(var(--scrim),0) 32%)}
+.tile h3{position:absolute;z-index:2;top:28px;left:16px;right:16px;text-align:center;font:400 32px/36px var(--serif);letter-spacing:.01em;transition:transform .9s var(--ease-soft)}
+.tile-meta{position:absolute;z-index:2;left:20px;right:20px;bottom:18px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;line-height:20px;font-weight:500}
+.tile a:focus-visible{outline-offset:-4px}
+@media (hover:hover){
+  .tile a:hover .ph img{transform:scale(1.04)}
+  .tile a:hover h3{transform:translateY(-6px)}
+}
+.more{display:flex;justify-content:center;padding:40px var(--gutter) 0}
+@media (max-width:1023px) and (min-width:768px){.tiles{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:767px){
+  .tiles{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 var(--gutter);scroll-padding-inline:var(--gutter);scrollbar-width:none;overscroll-behavior-x:contain}
+  .tiles::-webkit-scrollbar{display:none}
+  .tile{flex:0 0 80%;scroll-snap-align:start}
+  .tile h3{top:22px}
+  .more{padding-top:24px}
+  .more .btn{width:100%}
+}
+
+/* ===== Kolekcja miesiąca: split 50/50 ===== */
+.feature{display:grid;grid-template-columns:1fr 1fr;margin-top:96px;background:var(--linen)}
+.feature-media{min-height:100%;aspect-ratio:1/1}
+.feature-media img{object-position:40% 50%}
+.feature-body{padding:72px clamp(32px,5vw,88px);display:flex;flex-direction:column;justify-content:center}
+.kicker{font-size:15px;line-height:20px;font-weight:500;color:var(--muted)}
+.feature-body .h2{text-align:left;margin-top:12px}
+.feature-body p.desc{margin-top:16px;max-width:520px}
+.feature-body .btn{align-self:flex-start;margin-top:28px}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.mini-media{background:var(--bg);aspect-ratio:1;display:grid;place-items:center;overflow:hidden}
+.mini-media img{width:100%;height:100%;object-fit:contain;transform:scale(var(--s,1))}
+.mini h3{font:500 15px/20px var(--sans);margin-top:12px}
+.mini h3 a{text-decoration:none}
+.mini h3 a:hover{text-decoration:underline;text-underline-offset:4px}
+.mini .price{margin-top:6px}
+.mini .now{font-size:16px}
+.mini .was{font-size:14px}
+.mini .omni{font-size:12px;line-height:16px}
+@media (max-width:1023px){
+  .feature{grid-template-columns:1fr;margin-top:48px}
+  .feature-media{aspect-ratio:4/3}
+  .feature-body{padding:40px var(--gutter) 48px}
+}
+@media (max-width:767px){
+  .feature-media{aspect-ratio:4/5}
+  .mini{gap:10px;margin-top:32px}
+  .mini h3{font-size:14px;line-height:18px}
+  .feature-body .btn{align-self:stretch}
+}
+
+/* ===== Karta produktu ===== */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.card{position:relative;display:flex;flex-direction:column}
+.card-media{position:relative;aspect-ratio:4/5;background:var(--linen);overflow:hidden}
+.card-media img{position:absolute;inset:0;width:100%;height:100%}
+.card-media .pack{object-fit:contain;transform:scale(var(--s,1));transform-origin:50% var(--oy,55%)}
+.card-media .room{object-fit:cover;opacity:0;transition:opacity .45s ease,transform .9s var(--ease-soft);filter:var(--grade)}
+@media (hover:hover){
+  .card:hover .room{opacity:1;transform:scale(1.02)}
+}
+.badges{position:absolute;z-index:2;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap}
+.fav{position:absolute;z-index:3;top:4px;right:4px;width:44px;height:44px;display:grid;place-items:center;color:var(--ink)}
+.fav[aria-pressed="true"] .icon{fill:var(--wine);stroke:var(--wine)}
+.card h3{font:500 16px/22px var(--sans);margin-top:16px}
+.card h3 a{text-decoration:none}
+.card h3 a::after{content:"";position:absolute;z-index:1;inset:0}
+.card:hover h3 a{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.card-meta{font-size:14px;line-height:20px;color:var(--muted);margin-top:4px}
+.swatches{position:relative;z-index:2;display:flex;align-items:center;gap:0;margin:6px 0 0 -6px}
+.sw{width:32px;height:32px;display:grid;place-items:center}
+.sw i{display:block;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(42,36,32,.16)}
+.sw[aria-pressed="true"] i{box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--ink)}
+.sw-more{font-size:13px;color:var(--muted);padding-left:4px}
+.price{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-top:6px}
+.now{font:600 19px/24px var(--sans);font-variant-numeric:tabular-nums}
+.now.is-sale{color:var(--wine)}
+.was{font-size:15px;line-height:20px;color:var(--muted)}
+.omni{font-size:13px;line-height:18px;color:var(--muted);margin-top:4px}
+@media (max-width:1023px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:767px){
+  .grid{gap:28px 12px}
+  .card h3{font-size:15px;line-height:20px;margin-top:12px}
+  .card-meta{font-size:13px;line-height:18px}
+  .now{font-size:17px}
+  .was{font-size:14px}
+  .omni{font-size:12px;line-height:16px}
+  .badges{top:8px;left:8px;gap:4px;flex-direction:column;align-items:flex-start}
+  .badge{height:22px;font-size:11.5px;padding:0 6px}
+}
+/* Wykończenia: słoje dla dekorów drewna, płaski kolor dla matów */
+.f-dn{--w:#c49a6c}.f-dm{--w:#b07b45}.f-or{--w:#6b4a32}
+.sw i.wood{background:repeating-linear-gradient(80deg,rgba(255,236,205,.22) 0 1px,transparent 1px 3px,rgba(96,58,28,.22) 3px 4px,transparent 4px 7px),radial-gradient(120% 60% at 30% 40%,rgba(96,58,28,.22),transparent 60%),var(--w)}
+.sw i.two{background:linear-gradient(135deg,var(--m) 0 50%,transparent 50%),repeating-linear-gradient(80deg,rgba(255,236,205,.22) 0 1px,transparent 1px 3px,rgba(96,58,28,.22) 3px 4px,transparent 4px 7px),var(--w)}
+.sw i.mat{background:var(--m)}
+.m-bm{--m:#eeece8}.m-ka{--m:#d6c8b8}.m-sz{--m:#9aa58f}.m-gr{--m:#4a4b4d}.m-cm{--m:#222223}
+
+/* ===== Detal materiału ===== */
+.detail{position:relative;height:460px;color:#fff;--focus:#fff;margin-top:0}
+.detail .ph{position:absolute;inset:0}
+.detail .ph img{object-position:50% 80%}
+.detail .ph::before{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(70% 90% at 0% 100%,rgba(var(--scrim),.5),rgba(var(--scrim),0)),linear-gradient(90deg,rgba(var(--scrim),.62),rgba(var(--scrim),.38) 42%,rgba(var(--scrim),0) 72%)}
+.detail .wrap{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:56px}
+.detail .h2{text-align:left;max-width:560px}
+.detail p{max-width:470px;margin-top:14px}
+@media (max-width:767px){
+  .detail{height:420px}
+  .detail .ph img{object-position:66% 78%}
+  .detail .ph::before{background:linear-gradient(to top,rgba(var(--scrim),.74),rgba(var(--scrim),.45) 45%,rgba(var(--scrim),.1) 80%)}
+  .detail .wrap{padding-bottom:32px}
+  .detail p{font-size:16px;line-height:26px}
+}
+
+/* ===== Gdzie kupić (las) ===== */
+.where{background:var(--forest);color:#fff;margin-top:96px}
+.where .wrap{padding-top:88px;padding-bottom:88px}
+.where-top{display:grid;grid-template-columns:1fr 1fr;gap:48px 80px;align-items:end}
+.where .h2{text-align:left}
+.where-top p{margin-top:16px;max-width:520px;opacity:.92}
+.pc-form label{display:block;font-size:15px;font-weight:500;margin-bottom:10px}
+.pc-row{display:flex;gap:8px}
+.pc-input{flex:1;min-width:0;width:100%;height:64px;padding:0 20px;font:500 24px/1 var(--sans);letter-spacing:.06em;background:#fff;color:var(--ink);border:1px solid var(--field);border-radius:0}
+.pc-input::placeholder{color:#857b70;letter-spacing:.04em}
+.pc-input:focus{outline:2px solid var(--forest);outline-offset:0;box-shadow:0 0 0 4px #fff}
+.where .btn--light{height:64px;padding:0 30px}
+.pc-hint{font-size:14px;line-height:20px;margin-top:10px;opacity:.85}
+.results{margin-top:24px}
+.results:empty{display:none}
+.res{display:grid;gap:2px;padding:16px 0}
+.res + .res{box-shadow:0 -1px 0 rgba(255,255,255,.18)}
+.res b{font-weight:600}
+.res small{font-size:14px;line-height:20px;opacity:.88}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:72px}
+.step .icon{width:32px;height:32px;stroke-width:1.25}
+.step h3{font:400 28px/32px var(--serif);margin-top:18px}
+.step p{margin-top:8px;opacity:.9;font-size:16px;line-height:26px}
+@media (max-width:1023px){.where-top{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:767px){
+  .where{margin-top:48px}
+  .where .wrap{padding-top:48px;padding-bottom:48px}
+  .pc-row{flex-direction:column}
+  .where .btn--light{height:56px}
+  .pc-input{height:60px}
+  .steps{grid-template-columns:1fr;gap:28px;margin-top:40px}
+  .step{display:grid;grid-template-columns:40px 1fr;column-gap:14px}
+  .step .icon{grid-row:1/3}
+  .step h3{margin-top:0}
+  .step p{margin-top:4px}
+}
+
+/* ===== Dla sklepów (las) ===== */
+.b2b{background:var(--forest);color:#fff}
+.b2b .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:32px 80px;align-items:center;padding-top:72px;padding-bottom:72px}
+.b2b .h2{text-align:left}
+.b2b p{opacity:.92;max-width:540px}
+.b2b-actions{display:flex;align-items:center;gap:28px;margin-top:24px;flex-wrap:wrap}
+.b2b .link-arrow{color:#fff}
+@media (max-width:1023px){.b2b .wrap{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:767px){
+  .b2b .wrap{padding-top:48px;padding-bottom:48px}
+  .b2b-actions .btn{width:100%}
+}
+
+/* ===== Stopka (orzech) ===== */
+.foot{background:var(--walnut);color:#fff;--knock:var(--walnut)}
+.foot .wrap{padding-top:64px;padding-bottom:32px}
+.foot-top{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:40px}
+.foot .logo{color:#fff;width:132px;height:50px}
+.foot-about{font-size:15px;line-height:24px;margin-top:20px;max-width:300px;color:rgba(255,255,255,.85)}
+.foot h2{font:600 15px/20px var(--sans)}
+.foot ul{margin-top:14px;display:grid;gap:6px}
+.foot ul a{font-size:15px;line-height:24px;text-decoration:none;color:rgba(255,255,255,.85)}
+.foot ul a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px}
+.foot-bottom{display:flex;justify-content:space-between;gap:16px 32px;flex-wrap:wrap;margin-top:56px;padding-top:24px;box-shadow:0 -1px 0 rgba(255,255,255,.16);font-size:14px;line-height:20px;color:rgba(255,255,255,.8)}
+@media (max-width:1023px){.foot-top{grid-template-columns:repeat(2,1fr)}.foot-brand{grid-column:1/-1}}
+@media (max-width:767px){.foot .wrap{padding-top:48px}.foot-top{gap:32px 16px}}
+
+/* ===== Panel „Gdzie kupić” (420 px z prawej) ===== */
+.scrim-bg{position:fixed;inset:0;z-index:50;background:rgba(42,36,32,.42);opacity:0;visibility:hidden;transition:opacity .28s ease,visibility 0s linear .28s}
+.drawer{position:fixed;z-index:51;top:0;right:0;bottom:0;width:420px;max-width:100%;background:var(--bg);box-shadow:0 0 48px rgba(42,36,32,.18);transform:translateX(100%);visibility:hidden;transition:transform .28s cubic-bezier(.3,.7,.2,1),visibility 0s linear .28s;display:flex;flex-direction:column;overflow-y:auto}
+.is-open > .scrim-bg,.scrim-bg.is-open{opacity:1;visibility:visible;transition:opacity .28s ease}
+.drawer.is-open{transform:none;visibility:visible;transition:transform .28s cubic-bezier(.3,.7,.2,1)}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:20px 24px 0}
+.drawer-head h2{font:400 32px/36px var(--serif)}
+.x{width:44px;height:44px;display:grid;place-items:center;margin-right:-10px}
+.drawer-body{padding:12px 24px 32px}
+.drawer-body > p{color:var(--muted);font-size:16px;line-height:26px}
+.drawer .pc-form{margin-top:24px}
+.drawer .pc-input{height:56px;font-size:20px}
+.drawer .btn--primary{height:56px}
+.drawer .results .res + .res{box-shadow:0 -1px 0 rgba(42,36,32,.14)}
+.drawer .res small{color:var(--muted);opacity:1}
+.drawer .res .exp{color:var(--ink)}
+.drawer-foot{margin-top:auto;padding:20px 24px 28px;background:var(--linen)}
+.drawer-foot p{font-size:14px;line-height:20px;color:var(--muted);margin-top:6px}
+/* Menu mobilne */
+.mnav{left:0;right:auto;transform:translateX(-100%);width:100%;max-width:420px}
+.mnav ul{display:grid}
+.mnav li a{display:flex;align-items:center;min-height:52px;font:500 20px/28px var(--sans);text-decoration:none;box-shadow:0 1px 0 rgba(42,36,32,.1)}
+.mnav .audience-m{display:flex;gap:16px;margin-top:28px;font-size:16px}
+.mnav .audience-m a{padding:8px 0}
+.mnav .audience-m a[aria-current]{text-decoration:underline;text-underline-offset:5px}
+html.lock{overflow:hidden}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:0s!important;animation:none!important}
+  .tile a:hover .ph img,.tile a:hover h3,.card:hover .room{transform:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Przejdź do treści</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="liveo" viewBox="0 0 300 111.91">
+    <polygon points="279.6,111.4 279.6,73.5 114.6,73.5 133.1,111.4" style="fill:var(--knock,transparent)"/>
+    <polygon fill="currentColor" points="0,0.95 7.44,0.95 7.44,60.59 47.66,60.59 47.66,64.49 0,64.49"/>
+    <polygon fill="currentColor" points="60.09,0.95 67.53,0.95 67.53,64.49 60.09,64.49"/>
+    <polygon fill="currentColor" points="78.61,0.95 127.39,0.95 106.34,41.96 113.1,56.32 141.24,0.95 146.14,0.95 113.19,65.4 109.92,65.4"/>
+    <polygon fill="currentColor" points="153.4,0.95 205.6,0.95 205.6,4.85 160.85,4.85 160.85,28.46 200.33,28.46 200.33,32.27 160.85,32.27 160.85,60.59 205.6,60.59 205.6,64.49 153.4,64.49"/>
+    <path fill="currentColor" d="M280.26 111.96l0 -39.03 -166.69 0 19.07 39.03 147.62 0zm-105.31 -6.79l-2.8 0 0 -20.82 -0.07 0 -10.75 17.49 -1.38 0 -10.82 -17.49 -0.01 0 0 20.82 -2.79 0 0 -26.18 2.4 0 11.91 19.31 0.11 0 11.8 -19.31 2.4 0 0 26.18zm26.45 -9.84c0,0.13 0,0.26 -0.02,0.39 -0.01,0.14 -0.02,0.28 -0.02,0.43l-17.34 0 0 0.14c0.11,1.15 0.43,2.19 0.99,3.1 0.69,1.13 1.66,2.02 2.91,2.65 1.25,0.64 2.67,0.96 4.27,0.96 1.26,0 2.44,-0.21 3.53,-0.64 1.08,-0.42 2.02,-1.07 2.81,-1.94l1.58 1.72c-0.92,1.04 -2.07,1.84 -3.45,2.39 -1.38,0.55 -2.89,0.82 -4.55,0.82 -2.15,0 -4.04,-0.43 -5.67,-1.29 -1.62,-0.86 -2.9,-2.04 -3.82,-3.55 -0.91,-1.51 -1.37,-3.23 -1.37,-5.18 0,-1.94 0.44,-3.66 1.32,-5.16 0.88,-1.5 2.08,-2.67 3.62,-3.54 1.53,-0.86 3.26,-1.28 5.17,-1.28 1.95,0 3.67,0.41 5.18,1.25 1.51,0.83 2.7,2.01 3.57,3.51 0.86,1.51 1.29,3.25 1.29,5.22zm26.7 0c0,1.97 -0.45,3.71 -1.34,5.22 -0.9,1.51 -2.12,2.69 -3.68,3.53 -1.56,0.85 -3.33,1.27 -5.3,1.27 -1.81,0 -3.44,-0.39 -4.88,-1.17 -1.27,-0.69 -2.29,-1.68 -3.09,-2.92l-0.02 0 0 3.91 -2.68 0 0 -27.75 2.8 0 0 11.85c0.8,-1.18 1.8,-2.11 3.03,-2.76 1.44,-0.78 3.06,-1.16 4.84,-1.16 1.97,0 3.74,0.41 5.3,1.25 1.56,0.83 2.78,2 3.68,3.5 0.89,1.49 1.34,3.24 1.34,5.23zm8.5 9.84l-2.8 0 0 -27.75 2.8 0 0 27.75zm25.86 -9.84c0,0.13 0,0.26 -0.02,0.39 -0.01,0.14 -0.02,0.28 -0.02,0.43l-17.34 0 0 0.08c0.1,1.18 0.42,2.23 0.99,3.16 0.69,1.13 1.66,2.02 2.91,2.65 1.25,0.64 2.67,0.96 4.27,0.96 1.26,0 2.44,-0.21 3.52,-0.64 1.09,-0.42 2.03,-1.07 2.82,-1.94l1.58 1.72c-0.93,1.04 -2.07,1.84 -3.45,2.39 -1.38,0.55 -2.89,0.82 -4.55,0.82 -2.15,0 -4.04,-0.43 -5.67,-1.29 -1.62,-0.86 -2.9,-2.04 -3.82,-3.55 -0.91,-1.51 -1.37,-3.23 -1.37,-5.18 0,-1.94 0.44,-3.66 1.32,-5.16 0.87,-1.5 2.08,-2.67 3.62,-3.54 1.53,-0.86 3.26,-1.28 5.17,-1.28 1.95,0 3.67,0.41 5.18,1.25 1.51,0.83 2.7,2.01 3.57,3.51 0.86,1.51 1.29,3.25 1.29,5.22zm-17.38 -1.16l14.69 0 0 -0.03c-0.1,-1.09 -0.39,-2.09 -0.91,-2.98 -0.64,-1.11 -1.51,-1.98 -2.62,-2.6 -1.1,-0.62 -2.37,-0.93 -3.82,-0.93 -1.41,0 -2.69,0.31 -3.81,0.93 -1.13,0.62 -2.01,1.5 -2.64,2.62 -0.5,0.89 -0.79,1.88 -0.89,2.97l0 0.02zm-20.8 5.18c0.68,-1.16 1.02,-2.5 1.02,-4.02 0,-1.55 -0.34,-2.89 -1.02,-4.04 -0.69,-1.15 -1.61,-2.04 -2.76,-2.67 -1.16,-0.64 -2.47,-0.96 -3.94,-0.96 -1.47,0 -2.79,0.32 -3.95,0.96 -1.17,0.63 -2.09,1.52 -2.76,2.67 -0.67,1.15 -1,2.49 -1,4.04 0,1.52 0.33,2.86 1,4.02 0.67,1.16 1.59,2.06 2.76,2.69 1.16,0.64 2.48,0.96 3.95,0.96 1.47,0 2.78,-0.32 3.94,-0.96 1.15,-0.63 2.07,-1.53 2.76,-2.69zm-14.37 -10.05l0 -0.03c-0.01,0.01 -0.02,0.02 -0.02,0.03l0.02 0zm-25.89 4.87l14.7 0c-0.1,-1.1 -0.4,-2.11 -0.92,-3.01 -0.64,-1.11 -1.51,-1.98 -2.62,-2.6 -1.1,-0.62 -2.37,-0.93 -3.82,-0.93 -1.41,0 -2.69,0.31 -3.81,0.93 -1.13,0.62 -2.01,1.5 -2.64,2.62 -0.49,0.87 -0.78,1.86 -0.89,2.93l0 0.06zm14.7 0c0,0.01 0,0.01 0,0.02l0 -0.02 0 0z"/>
+    <path fill="currentColor" d="M297.14 1.68c0.91,0.49 1.62,1.18 2.11,2.07 0.5,0.88 0.75,1.9 0.75,3.06 0,1.15 -0.25,2.17 -0.75,3.06 -0.49,0.88 -1.2,1.57 -2.11,2.06 -0.9,0.49 -1.95,0.73 -3.13,0.73 -1.19,0 -2.23,-0.24 -3.14,-0.73 -0.91,-0.49 -1.61,-1.18 -2.11,-2.06 -0.5,-0.89 -0.75,-1.91 -0.75,-3.06 0,-1.16 0.25,-2.18 0.75,-3.06 0.5,-0.89 1.2,-1.58 2.11,-2.07 0.91,-0.48 1.95,-0.73 3.14,-0.73 1.18,0 2.23,0.25 3.13,0.73zm-0.37 9.69c0.81,-0.44 1.43,-1.05 1.87,-1.84 0.44,-0.79 0.66,-1.7 0.66,-2.72 0,-1.03 -0.22,-1.94 -0.66,-2.73 -0.44,-0.79 -1.06,-1.4 -1.86,-1.84 -0.8,-0.43 -1.72,-0.65 -2.77,-0.65 -1.04,0 -1.96,0.22 -2.76,0.65 -0.8,0.44 -1.42,1.05 -1.86,1.84 -0.44,0.79 -0.66,1.7 -0.66,2.73 0,1.02 0.22,1.93 0.66,2.72 0.44,0.79 1.06,1.4 1.86,1.84 0.8,0.44 1.72,0.65 2.76,0.65 1.04,0 1.96,-0.21 2.76,-0.65zm-0.09 -2.06c0.11,0.2 0.24,0.38 0.41,0.53l0 0.1 -1.03 0c-0.2,-0.26 -0.39,-0.64 -0.57,-1.13 -0.13,-0.36 -0.27,-0.65 -0.42,-0.86 -0.15,-0.21 -0.37,-0.37 -0.67,-0.47l-0.16 0 -1.63 0 0 2.46 -0.97 0 0 -6.42 2.6 0c0.77,0 1.37,0.17 1.81,0.51 0.43,0.33 0.65,0.8 0.65,1.41 0,0.45 -0.11,0.84 -0.33,1.16 -0.23,0.31 -0.55,0.54 -0.96,0.69 0.25,0.15 0.44,0.32 0.58,0.53 0.14,0.21 0.27,0.47 0.38,0.79 0.1,0.27 0.2,0.51 0.31,0.7zm-2.44 -2.49c0.48,0 0.85,-0.12 1.11,-0.36 0.26,-0.25 0.39,-0.59 0.39,-1.02 0,-0.4 -0.13,-0.71 -0.39,-0.93 -0.26,-0.22 -0.63,-0.34 -1.11,-0.34l-1.63 0 0 2.65 1.63 0z"/>
+    <path fill="currentColor" d="M228.74 61.5c-5.02,-2.61 -8.85,-6.37 -11.48,-11.3 -2.63,-4.94 -3.95,-10.85 -3.95,-17.75 0,-6.78 1.33,-12.6 3.99,-17.47 2.67,-4.87 6.51,-8.58 11.53,-11.12 5.03,-2.55 11.02,-3.82 17.98,-3.82 6.96,0 12.93,1.27 17.92,3.82 5,2.54 8.82,6.25 11.49,11.12 2.66,4.87 3.99,10.69 3.99,17.47 0,6.9 -1.32,12.81 -3.95,17.75 -2.63,4.93 -6.46,8.69 -11.48,11.3 -5.02,2.6 -11.01,3.9 -17.97,3.9 -7.03,0 -13.05,-1.3 -18.07,-3.9zm37.22 -7.63c4.54,-5.08 6.81,-12.22 6.81,-21.42 0,-9.08 -2.26,-16.1 -6.77,-21.06 -4.5,-4.96 -10.9,-7.44 -19.19,-7.44 -8.3,0 -14.71,2.48 -19.25,7.44 -4.54,4.96 -6.81,11.98 -6.81,21.06 0,9.2 2.27,16.34 6.81,21.42 4.54,5.08 10.95,7.63 19.25,7.63 8.23,0 14.61,-2.55 19.15,-7.63z"/>
+  </symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-6.2-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.8" r="2.3"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.1A4.2 4.2 0 0 1 12 7.4a4.2 4.2 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20Z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3.5 7h17M3.5 12h17M3.5 17h17"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="m5.5 5.5 13 13M18.5 5.5l-13 13"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.8v14.4L19 12 7 4.8Z"/></symbol>
+  <symbol id="i-browse" viewBox="0 0 32 32"><rect x="4" y="6" width="24" height="17"/><path d="M12 27h8M16 23v4M9 17.5h6v-5H9zM18 12.5h5M18 15.5h5"/></symbol>
+  <symbol id="i-store" viewBox="0 0 32 32"><path d="M5 13v14h22V13M3.5 13 6 5h20l2.5 8zM12 27v-7h8v7"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 32 32"><path d="M3 16s4.8-8.5 13-8.5S29 16 29 16s-4.8 8.5-13 8.5S3 16 3 16Z"/><circle cx="16" cy="16" r="4.2"/></symbol>
+</svg>
+
+<div class="promo on-dark" role="region" aria-label="Komunikaty">
+  <div class="wrap">
+    <div class="promo-msgs">
+      <ul class="promo-list" id="promo-list" aria-live="off">
+        <li class="is-active"><a href="#gdzie-kupic" data-open-finder>Znajdź salon partnerski blisko domu</a></li>
+        <li>Komody 10% taniej do 7 listopada</li>
+        <li>Nowa kolekcja BRISO do pokoju nastolatka</li>
+      </ul>
+      <button class="promo-pause" type="button" aria-pressed="false" aria-label="Wstrzymaj zmianę komunikatów" aria-controls="promo-list">
+        <svg class="icon i-pause" aria-hidden="true"><use href="#i-pause"/></svg>
+        <svg class="icon i-play" aria-hidden="true"><use href="#i-play"/></svg>
+      </button>
+    </div>
+    <nav class="audience" aria-label="Wersja strony">
+      <a href="#" aria-current="page">Dla domu</a><span aria-hidden="true">|</span><a href="#dla-sklepow">Dla sklepów</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="logo-link" href="#" aria-label="Liveo Meble, strona główna">
+      <svg class="logo" role="img" aria-label="Liveo Meble"><use href="#liveo"/></svg>
+    </a>
+    <nav class="nav" aria-label="Główna">
+      <ul>
+        <li><a href="#kolekcje">Kolekcje</a></li>
+        <li><a href="#meble">Meble</a></li>
+        <li><a href="#">Pomieszczenia</a></li>
+        <li><a href="#">Promocje</a></li>
+        <li><a href="#">Inspiracje</a></li>
+        <li><a href="#">Doradca wnętrz</a></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <a href="#"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><span class="t-label">Szukaj</span></a>
+      <button type="button" data-open-finder aria-controls="finder"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span class="t-label">Gdzie kupić</span></button>
+      <a class="t-fav" href="#"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg><span class="t-label">Ulubione</span></a>
+      <button class="menu-btn" type="button" aria-controls="mnav" aria-expanded="false" data-open-menu><svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg><span class="t-label">Menu</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <!-- HERO: 2/3 kampania (LCP) + 1/3 nowość -->
+  <section class="hero" aria-labelledby="hero-title">
+    <span class="hdr-sentinel" aria-hidden="true" style="position:absolute;top:0;left:0;width:1px;height:96px"></span>
+    <div class="hero-cell hero-main">
+      <picture class="ph">
+        <source media="(max-width: 767px)" srcset="../../../src/assets/renders/rooms/jadalnia-tall.jpg" width="1200" height="1500">
+        <img src="../../../src/assets/renders/rooms/jadalnia-wide.jpg" width="2400" height="1350" fetchpriority="high" decoding="async"
+             alt="Jadalnia w popołudniowym słońcu: dębowy stół z krzesłami, w tle niska komoda i czarna lampa wisząca">
+      </picture>
+      <div class="hero-copy">
+        <h1 id="hero-title">Jesień z dębem: 15% taniej na OLMO</h1>
+        <p class="hero-sub">Do 31 października w sklepach partnerskich</p>
+        <div class="hero-actions">
+          <a class="btn btn--photo" href="#kolekcje">Zobacz kolekcję</a>
+          <a class="link-arrow" href="#gdzie-kupic" data-open-finder><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Gdzie kupić</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-cell hero-side">
+      <div class="ph">
+        <img src="../../../src/assets/renders/rooms/przedpokoj-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async"
+             alt="Jasny przedpokój: szafka na buty w kolorze kaszmiru, lustro w dębowej ramie i wieszak z półką">
+      </div>
+      <div class="hero-copy">
+        <span class="badge badge--new">Nowość</span>
+        <h2>Kolekcja VERNO</h2>
+        <p>Szafy, szafki na buty i łóżka z pojemnikiem do przedpokoju i sypialni. Od 209 zł.</p>
+        <a class="link-arrow" href="#kolekcje">Poznaj VERNO<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- KOLEKCJE -->
+  <section id="kolekcje" aria-labelledby="kol-title">
+    <div class="wrap sec-head">
+      <h2 class="h2" id="kol-title">Kolekcje do całego domu</h2>
+      <p class="lead">Każda kolekcja to meble do kilku pokoi w tych samych kolorach i wykończeniach.</p>
+    </div>
+    <ul class="tiles">
+      <li class="tile"><a href="#">
+        <span class="ph"><img src="../../../src/assets/renders/rooms/salon-jasny-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async" alt="Salon: dębowa szafka RTV na nóżkach i grafiki na jasnej ścianie" style="object-position:50% 62%"></span>
+        <h3>OLMO</h3>
+        <span class="tile-meta"><span class="badge badge--sale">−15%</span><span>od 211&nbsp;zł · 3 kolory</span></span>
+      </a></li>
+      <li class="tile"><a href="#">
+        <span class="ph"><img src="../../../src/assets/renders/rooms/sypialnia-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async" alt="Sypialnia: łóżko z miękkim wezgłowiem i szafki nocne w czerni z dębem" style="object-position:50% 60%"></span>
+        <h3>TALVE</h3>
+        <span class="tile-meta"><span>od 209&nbsp;zł · 3 kolory</span></span>
+      </a></li>
+      <li class="tile"><a href="#">
+        <span class="ph"><img src="../../../src/assets/renders/rooms/jadalnia-wide.jpg" width="2400" height="1350" loading="lazy" decoding="async" alt="Jadalnia: niska komoda w dekorze orzecha i dębowy stół z krzesłami" style="object-position:84% 50%"></span>
+        <h3>NOKTA</h3>
+        <span class="tile-meta"><span>od 259&nbsp;zł · 2 kolory</span></span>
+      </a></li>
+      <li class="tile"><a href="#">
+        <span class="ph"><img src="../../../src/assets/renders/rooms/salon-szalwia-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async" alt="Salon ze ścianą w kolorze szałwii: biała komoda ze złotymi uchwytami i grafitowa witryna" style="object-position:40% 62%"></span>
+        <h3>SOLMA</h3>
+        <span class="tile-meta"><span>od 399&nbsp;zł · 3 kolory</span></span>
+      </a></li>
+      <li class="tile"><a href="#">
+        <span class="ph"><img src="../../../src/assets/renders/rooms/salon-szalwia-wide.jpg" width="2400" height="1350" loading="lazy" decoding="async" alt="Grafitowa witryna z przeszklonymi drzwiami przy ścianie w kolorze szałwii" style="object-position:66% 50%"></span>
+        <h3>LIRAN</h3>
+        <span class="tile-meta"><span>od 189&nbsp;zł · 3 kolory</span></span>
+      </a></li>
+      <li class="tile"><a href="#">
+        <span class="ph"><img src="../../../src/assets/renders/rooms/sypialnia-wide.jpg" width="2400" height="1350" loading="lazy" decoding="async" alt="Łóżko z wezgłowiem w kolorze kaszmiru i szafka nocna z lampką" style="object-position:84% 50%"></span>
+        <h3>MELVA</h3>
+        <span class="tile-meta"><span>od 449&nbsp;zł · 3 kolory</span></span>
+      </a></li>
+      <li class="tile"><a href="#">
+        <span class="ph"><img src="../../../src/assets/renders/rooms/biuro-wide.jpg" width="2400" height="1350" loading="lazy" decoding="async" alt="Regał w dekorze dębu miodowego z książkami i ceramiką, obok drzewko oliwne" style="object-position:90% 50%"></span>
+        <h3>BRISO</h3>
+        <span class="tile-meta"><span class="badge badge--new">Nowość</span><span>od 199&nbsp;zł · 3 kolory</span></span>
+      </a></li>
+      <li class="tile"><a href="#">
+        <span class="ph"><img src="../../../src/assets/renders/rooms/przedpokoj-wide.jpg" width="2400" height="1350" loading="lazy" decoding="async" alt="Przedpokój: szafka na buty w kolorze kaszmiru, lustro i wieszak z półką" style="object-position:56% 50%"></span>
+        <h3>VERNO</h3>
+        <span class="tile-meta"><span class="badge badge--new">Nowość</span><span>od 209&nbsp;zł · 3 kolory</span></span>
+      </a></li>
+    </ul>
+    <div class="more"><a class="btn btn--ghost" href="#">Wszystkie kolekcje (8)</a></div>
+  </section>
+
+  <!-- KOLEKCJA MIESIĄCA -->
+  <section class="feature" aria-labelledby="feat-title">
+    <div class="feature-media ph">
+      <img src="../../../src/assets/renders/rooms/biuro-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async"
+           alt="Domowe biuro: biurko w kolorze szałwii z dębowym blatem, drewniane krzesło i regał z książkami">
+    </div>
+    <div class="feature-body">
+      <p class="kicker">Kolekcja miesiąca</p>
+      <h2 class="h2" id="feat-title">TALVE</h2>
+      <p class="desc">TALVE łączy gładkie, matowe fronty z blatami w dekorze dębu naturalnego. Meble stoją na wysokich drewnianych nóżkach, a małe czarne gałki są jedynym metalowym akcentem.</p>
+      <a class="btn btn--primary" href="#">Zobacz kolekcję</a>
+      <ul class="mini">
+        <li>
+          <div class="mini-media"><img src="../../../src/assets/renders/sample/biurko-szalwia.webp" width="1600" height="1200" loading="lazy" alt="Biurko 110 TALVE w kolorze szałwii z dębowym blatem" style="--s:1.12"></div>
+          <h3><a href="#">Biurko 110 TALVE</a></h3>
+          <p class="price"><span class="now">499,00&nbsp;zł</span></p>
+        </li>
+        <li>
+          <div class="mini-media"><img src="../../../src/assets/renders/sample/komoda-bialy-mat.webp" width="1600" height="1200" loading="lazy" alt="Komoda 100 TALVE, biały mat" style="--s:1.12"></div>
+          <h3><a href="#">Komoda 100 TALVE</a></h3>
+          <p class="price"><span class="now is-sale">854,00&nbsp;zł</span><s class="was">949,00&nbsp;zł</s></p>
+          <p class="omni">Najniższa cena z 30 dni przed obniżką: 949,00&nbsp;zł</p>
+        </li>
+        <li>
+          <div class="mini-media"><img src="../../../src/assets/renders/sample/szafka-nocna-czarny-mat.webp" width="1600" height="1200" loading="lazy" alt="Szafka nocna 45 TALVE, grafit i dąb naturalny" style="--s:1.2"></div>
+          <h3><a href="#">Szafka nocna 45 TALVE</a></h3>
+          <p class="price"><span class="now">349,00&nbsp;zł</span></p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- POLECANE MEBLE -->
+  <section id="meble" aria-labelledby="meble-title">
+    <div class="wrap sec-head">
+      <h2 class="h2" id="meble-title">Polecane meble</h2>
+    </div>
+    <div class="wrap">
+      <div class="grid">
+        <article class="card">
+          <div class="card-media">
+            <img class="pack" src="../../../src/assets/renders/sample/szafka-rtv-dab-naturalny.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Szafka RTV 160 OLMO w dekorze dębu naturalnego, z szufladą i otwartą wnęką" style="--s:0.98">
+            <img class="room" src="../../../src/assets/renders/rooms/salon-jasny-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async" alt="" aria-hidden="true">
+            <ul class="badges"><li class="badge badge--sale">−15%</li><li class="badge">Na zamówienie, 14 dni</li></ul>
+            <button class="fav" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych: Szafka RTV 160 OLMO"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></button>
+          </div>
+          <h3><a href="#">Szafka RTV 160 OLMO</a></h3>
+          <p class="card-meta"><span data-finish>Dąb naturalny</span> · 160&nbsp;×&nbsp;52&nbsp;×&nbsp;40&nbsp;cm</p>
+          <div class="swatches" role="group" aria-label="Wykończenie: Szafka RTV 160 OLMO"><button class="sw" type="button" aria-pressed="true" aria-label="Dąb naturalny" data-label="Dąb naturalny"><i class="wood f-dn"></i></button></div>
+          <p class="price"><span class="sr-only">Cena promocyjna</span><span class="now is-sale">721,00&nbsp;zł</span><span class="sr-only">, cena regularna</span><s class="was">849,00&nbsp;zł</s></p>
+          <p class="omni">Najniższa cena z 30 dni przed obniżką: 849,00&nbsp;zł</p>
+        </article>
+        <article class="card">
+          <div class="card-media">
+            <img class="pack" src="../../../src/assets/renders/sample/szafa-bialy-mat.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Szafa 150 VERNO, biały mat i dąb naturalny, dwoje drzwi i szuflady" style="--s:1.42">
+            <img class="room" src="../../../src/assets/renders/rooms/przedpokoj-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async" alt="" aria-hidden="true">
+            <ul class="badges"><li class="badge badge--new">Nowość</li></ul>
+            <button class="fav" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych: Szafa 150 VERNO"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></button>
+          </div>
+          <h3><a href="#">Szafa 150 VERNO</a></h3>
+          <p class="card-meta"><span data-finish>Biały mat / dąb naturalny</span> · 150&nbsp;×&nbsp;200&nbsp;×&nbsp;60&nbsp;cm</p>
+          <div class="swatches" role="group" aria-label="Wykończenie: Szafa 150 VERNO"><button class="sw" type="button" aria-pressed="true" aria-label="Biały mat / dąb naturalny" data-label="Biały mat / dąb naturalny"><i class="two m-bm f-dn"></i></button><button class="sw" type="button" aria-pressed="false" aria-label="Kaszmir" data-label="Kaszmir"><i class="mat m-ka"></i></button><button class="sw" type="button" aria-pressed="false" aria-label="Grafit / dąb miodowy" data-label="Grafit / dąb miodowy"><i class="two m-gr f-dm"></i></button></div>
+          <p class="price"><span class="now">2&nbsp;499,00&nbsp;zł</span></p>
+        </article>
+        <article class="card">
+          <div class="card-media">
+            <img class="pack" src="../../../src/assets/renders/sample/witryna-grafit.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Witryna LIRAN w kolorze grafitu z przeszklonymi drzwiami i dwiema szufladami" style="--s:1.42">
+            <img class="room" src="../../../src/assets/renders/rooms/salon-szalwia-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async" alt="" aria-hidden="true">
+            
+            <button class="fav" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych: Witryna 50 LIRAN"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></button>
+          </div>
+          <h3><a href="#">Witryna 50 LIRAN</a></h3>
+          <p class="card-meta"><span data-finish>Grafit</span> · 50&nbsp;×&nbsp;190&nbsp;×&nbsp;38&nbsp;cm</p>
+          <div class="swatches" role="group" aria-label="Wykończenie: Witryna 50 LIRAN"><button class="sw" type="button" aria-pressed="false" aria-label="Czarny mat / dąb naturalny" data-label="Czarny mat / dąb naturalny"><i class="two m-cm f-dn"></i></button><button class="sw" type="button" aria-pressed="false" aria-label="Biały mat / dąb naturalny" data-label="Biały mat / dąb naturalny"><i class="two m-bm f-dn"></i></button><button class="sw" type="button" aria-pressed="true" aria-label="Grafit" data-label="Grafit"><i class="mat m-gr"></i></button></div>
+          <p class="price"><span class="now">1&nbsp;199,00&nbsp;zł</span></p>
+        </article>
+        <article class="card">
+          <div class="card-media">
+            <img class="pack" src="../../../src/assets/renders/sample/lawa-orzech.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Ława 100 MELVA w dekorze orzecha, z dolną półką" style="--s:0.96">
+            <img class="room" src="../../../src/assets/renders/rooms/jadalnia-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async" alt="" aria-hidden="true">
+            
+            <button class="fav" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych: Ława 100 MELVA"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></button>
+          </div>
+          <h3><a href="#">Ława 100 MELVA</a></h3>
+          <p class="card-meta"><span data-finish>Orzech</span> · 100&nbsp;×&nbsp;46&nbsp;×&nbsp;60&nbsp;cm</p>
+          <div class="swatches" role="group" aria-label="Wykończenie: Ława 100 MELVA"><button class="sw" type="button" aria-pressed="false" aria-label="Kaszmir / dąb miodowy" data-label="Kaszmir / dąb miodowy"><i class="two m-ka f-dm"></i></button><button class="sw" type="button" aria-pressed="true" aria-label="Orzech" data-label="Orzech"><i class="wood f-or"></i></button></div>
+          <p class="price"><span class="now">649,00&nbsp;zł</span></p>
+        </article>
+      </div>
+      <div class="more" style="padding-inline:0"><a class="btn btn--ghost" href="#">Wszystkie meble</a></div>
+    </div>
+  </section>
+
+  <!-- GDZIE KUPIĆ -->
+  <section class="where on-dark" id="gdzie-kupic" aria-labelledby="where-title">
+    <div class="wrap">
+      <div class="where-top">
+        <div>
+          <h2 class="h2" id="where-title">Znajdź salon partnerski blisko domu</h2>
+          <p>Meble Liveo kupisz w salonach partnerskich. Wpisz kod pocztowy, a pokażemy trzy najbliższe i kolekcje, które mają na ekspozycji.</p>
+        </div>
+        <form class="pc-form" data-finder-form novalidate>
+          <label for="pc-main">Kod pocztowy</label>
+          <div class="pc-row">
+            <input class="pc-input" id="pc-main" name="kod" inputmode="numeric" autocomplete="postal-code" placeholder="00-000" maxlength="6" aria-describedby="pc-main-hint">
+            <button class="btn btn--light" type="submit">Pokaż salony</button>
+          </div>
+          <p class="pc-hint" id="pc-main-hint">Odległość liczymy w linii prostej od środka okręgu pocztowego.</p>
+          <div class="results" aria-live="polite"></div>
+        </form>
+      </div>
+      <ul class="steps">
+        <li class="step">
+          <svg class="icon" aria-hidden="true" viewBox="0 0 32 32"><use href="#i-browse"/></svg>
+          <h3>Wybierasz tutaj</h3>
+          <p>Przeglądasz kolekcje, wymiary i kolory, a wybrane meble zapisujesz w ulubionych.</p>
+        </li>
+        <li class="step">
+          <svg class="icon" aria-hidden="true" viewBox="0 0 32 32"><use href="#i-eye"/></svg>
+          <h3>Oglądasz w salonie</h3>
+          <p>W salonie partnerskim zobaczysz meble na żywo i porównasz wykończenia.</p>
+        </li>
+        <li class="step">
+          <svg class="icon" aria-hidden="true" viewBox="0 0 32 32"><use href="#i-store"/></svg>
+          <h3>Kupujesz w sklepie</h3>
+          <p>Zamówienie, termin dostawy i montaż ustalasz bezpośrednio ze sprzedawcą.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- DETAL MATERIAŁU -->
+  <section class="detail" aria-labelledby="detail-title">
+    <div class="ph">
+      <img src="../../../src/assets/renders/rooms/salon-jasny-wide.jpg" width="2400" height="1350" loading="lazy" decoding="async"
+           alt="Dębowa szafka RTV na nóżkach w salonie, na jasnym dywanie plama popołudniowego słońca">
+    </div>
+    <div class="wrap">
+      <h2 class="h2" id="detail-title">Dekor dębu z wyraźnym rysunkiem słojów</h2>
+      <p>Płyta laminowana w dekorze drewna, obrzeża ABS 2 mm i szuflady z cichym domykiem.</p>
+    </div>
+  </section>
+
+  <!-- DLA SKLEPÓW -->
+  <section class="b2b on-dark" id="dla-sklepow" aria-labelledby="b2b-title">
+    <div class="wrap">
+      <h2 class="h2" id="b2b-title">Prowadzisz sklep meblowy?</h2>
+      <div>
+        <p>Meble skrzyniowe, tapicerowane i materace od producenta z Raniżowa. Przedstawimy kolekcje i warunki współpracy dla salonów partnerskich.</p>
+        <div class="b2b-actions">
+          <a class="btn btn--photo" href="#">Współpraca dla sklepów</a>
+          <a class="link-arrow" href="#">Strefa partnera<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot on-dark">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <svg class="logo" role="img" aria-label="Liveo Meble"><use href="#liveo"/></svg>
+        <p class="foot-about">Producent mebli z Raniżowa na Podkarpaciu. Meble Liveo kupisz w salonach partnerskich.</p>
+      </div>
+      <div><h2>Kolekcje</h2><ul><li><a href="#">OLMO</a></li><li><a href="#">TALVE</a></li><li><a href="#">NOKTA</a></li><li><a href="#">SOLMA</a></li><li><a href="#">LIRAN</a></li><li><a href="#">MELVA</a></li><li><a href="#">BRISO</a></li><li><a href="#">VERNO</a></li></ul></div>
+      <div><h2>Meble</h2><ul><li><a href="#">Szafki RTV</a></li><li><a href="#">Komody</a></li><li><a href="#">Witryny i regały</a></li><li><a href="#">Stoły i ławy</a></li><li><a href="#">Łóżka</a></li><li><a href="#">Szafy</a></li><li><a href="#">Biurka</a></li></ul></div>
+      <div><h2>Pomoc</h2><ul><li><a href="#gdzie-kupic" data-open-finder>Gdzie kupić</a></li><li><a href="#">Doradca wnętrz</a></li><li><a href="#">Instrukcje montażu</a></li><li><a href="#">Kontakt</a></li></ul></div>
+      <div><h2>Liveo</h2><ul><li><a href="#">O firmie</a></li><li><a href="#dla-sklepow">Dla sklepów</a></li><li><a href="#">Strefa partnera</a></li><li><a href="#">Polityka prywatności</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <p>LIVEO Meble sp. z o.o. · ul. Borki 5, Raniżów</p>
+      <p>Ceny brutto. Zdjęcia w szkicu to poglądowe rendery.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Panel „Gdzie kupić” -->
+<div class="scrim-bg" data-close></div>
+<aside class="drawer" id="finder" role="dialog" aria-modal="true" aria-labelledby="finder-title" inert>
+  <div class="drawer-head">
+    <h2 id="finder-title">Gdzie kupić</h2>
+    <button class="x" type="button" data-close aria-label="Zamknij panel"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="drawer-body">
+    <p>Wpisz kod pocztowy. Pokażemy 3 najbliższe salony partnerskie i kolekcje, które mają na ekspozycji.</p>
+    <form class="pc-form" data-finder-form novalidate>
+      <label for="pc-drawer">Kod pocztowy</label>
+      <div class="pc-row">
+        <input class="pc-input" id="pc-drawer" name="kod" inputmode="numeric" autocomplete="postal-code" placeholder="00-000" maxlength="6">
+        <button class="btn btn--primary" type="submit">Szukaj</button>
+      </div>
+      <div class="results" aria-live="polite"></div>
+    </form>
+  </div>
+  <div class="drawer-foot">
+    <a class="link-arrow" href="#">Pełna lista salonów i mapa<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <p>Adresy salonów w szkicu są przykładowe.</p>
+  </div>
+</aside>
+
+<!-- Menu mobilne -->
+<aside class="drawer mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Menu" inert>
+  <div class="drawer-head">
+    <svg class="logo" role="img" aria-label="Liveo Meble" style="width:96px;height:36px"><use href="#liveo"/></svg>
+    <button class="x" type="button" data-close aria-label="Zamknij menu"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="drawer-body">
+    <ul>
+      <li><a href="#kolekcje" data-close>Kolekcje</a></li>
+      <li><a href="#meble" data-close>Meble</a></li>
+      <li><a href="#">Pomieszczenia</a></li>
+      <li><a href="#">Promocje</a></li>
+      <li><a href="#">Inspiracje</a></li>
+      <li><a href="#">Doradca wnętrz</a></li>
+      <li><a href="#">Ulubione</a></li>
+    </ul>
+    <nav class="audience-m" aria-label="Wersja strony (menu)"><a href="#" aria-current="page">Dla domu</a><a href="#dla-sklepow" data-close>Dla sklepów</a></nav>
+  </div>
+</aside>
+
+<script>
+const SALONY=[["Rzeszów, Słocina","ul. Przykładowa 16","35-326",50.053,22.053,"OLMO,NOKTA,SOLMA,BRISO,VERNO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Rzeszów, Zachód","ul. Przykładowa 79","35-060",50.039,21.977,"OLMO,TALVE,NOKTA,SOLMA,MELVA,BRISO,VERNO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Kolbuszowa","ul. Przykładowa 66","36-100",50.252,21.769,"OLMO,TALVE,SOLMA,LIRAN,MELVA","pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00"],["Mielec","ul. Przykładowa 6","39-300",50.285,21.434,"OLMO,SOLMA,LIRAN,MELVA,VERNO","pon.–pt. 10:00–19:00, sob. 10:00–15:00"],["Dębica","ul. Przykładowa 32","39-200",50.042,21.415,"NOKTA,SOLMA,LIRAN,MELVA,BRISO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Krosno","ul. Przykładowa 81","38-400",49.682,21.783,"OLMO,NOKTA,SOLMA,BRISO,VERNO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Jasło","ul. Przykładowa 56","38-200",49.753,21.474,"OLMO,TALVE,NOKTA,MELVA,VERNO","pon.–pt. 10:00–18:00, sob. 9:00–14:00"],["Sanok","ul. Przykładowa 62","38-500",49.554,22.203,"NOKTA,LIRAN,MELVA,BRISO,VERNO","pon.–pt. 10:00–19:00, sob. 10:00–15:00"],["Przemyśl","ul. Przykładowa 85","37-700",49.786,22.777,"OLMO,TALVE,SOLMA,LIRAN,MELVA,BRISO,VERNO","pon.–pt. 10:00–19:00, sob. 10:00–15:00"],["Jarosław","ul. Przykładowa 99","37-500",50.009,22.669,"TALVE,NOKTA,SOLMA,LIRAN,MELVA,VERNO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Stalowa Wola","ul. Przykładowa 118","37-450",50.586,22.056,"OLMO,TALVE,NOKTA,SOLMA,MELVA,BRISO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Tarnobrzeg","ul. Przykładowa 14","39-400",50.583,21.672,"OLMO,TALVE,NOKTA,SOLMA,LIRAN,MELVA,BRISO,VERNO","pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00"],["Łańcut","ul. Przykładowa 113","37-100",50.076,22.215,"OLMO,TALVE,NOKTA,SOLMA,LIRAN,MELVA,BRISO,VERNO","pon.–pt. 10:00–19:00, sob. 10:00–15:00"],["Warszawa, Bemowo","ul. Przykładowa 67","01-494",52.256,20.907,"TALVE,SOLMA,LIRAN,MELVA,BRISO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Warszawa, Białołęka","ul. Przykładowa 63","03-289",52.309,21.0,"OLMO,TALVE,NOKTA,LIRAN,BRISO,VERNO","pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00"],["Warszawa, Mokotów","ul. Przykładowa 32","02-675",52.187,21.012,"OLMO,TALVE,NOKTA,SOLMA,LIRAN,MELVA,BRISO,VERNO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Kraków, Bronowice","ul. Przykładowa 74","30-394",50.077,19.897,"OLMO,TALVE,NOKTA,SOLMA,LIRAN,MELVA,VERNO","pon.–pt. 10:00–18:00, sob. 9:00–14:00"],["Kraków, Czyżyny","ul. Przykładowa 66","31-564",50.066,19.989,"OLMO,TALVE,NOKTA,SOLMA,LIRAN,MELVA,BRISO,VERNO","pon.–pt. 10:00–19:00, sob. 10:00–15:00"],["Wrocław, Fabryczna","ul. Przykładowa 76","54-204",51.112,16.948,"TALVE,NOKTA,LIRAN,MELVA,BRISO,VERNO","pon.–pt. 10:00–18:00, sob. 9:00–14:00"],["Wrocław, Krzyki","ul. Przykładowa 70","50-541",51.079,17.017,"OLMO,TALVE,NOKTA,SOLMA,LIRAN,MELVA","pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00"],["Poznań, Grunwald","ul. Przykładowa 25","60-185",52.403,16.872,"OLMO,TALVE,NOKTA,SOLMA,MELVA,BRISO,VERNO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Poznań, Nowe Miasto","ul. Przykładowa 92","61-315",52.394,17.001,"OLMO,TALVE,NOKTA,SOLMA,LIRAN,MELVA,BRISO,VERNO","pon.–pt. 10:00–19:00, sob. 10:00–15:00"],["Łódź","ul. Przykładowa 60","93-457",51.743,19.444,"OLMO,TALVE,NOKTA,SOLMA,LIRAN,MELVA,BRISO,VERNO","pon.–pt. 10:00–18:00, sob. 9:00–14:00"],["Gdańsk","ul. Przykładowa 90","80-298",54.369,18.573,"OLMO,TALVE,NOKTA,SOLMA,LIRAN,BRISO,VERNO","pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00"],["Gdynia","ul. Przykładowa 30","81-537",54.476,18.518,"OLMO,TALVE,NOKTA,SOLMA,LIRAN,BRISO","pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00"],["Szczecin","ul. Przykładowa 61","70-814",53.388,14.632,"OLMO,NOKTA,SOLMA,LIRAN,MELVA,VERNO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Katowice","ul. Przykładowa 63","40-750",50.22,18.985,"OLMO,TALVE,NOKTA,SOLMA,LIRAN,MELVA,BRISO,VERNO","pon.–pt. 10:00–18:00, sob. 9:00–14:00"],["Lublin","ul. Przykładowa 30","20-468",51.234,22.55,"OLMO,TALVE,NOKTA,SOLMA,MELVA,BRISO,VERNO","pon.–pt. 10:00–18:00, sob. 9:00–14:00"],["Bydgoszcz","ul. Przykładowa 61","85-791",53.151,18.083,"OLMO,TALVE,NOKTA,SOLMA,LIRAN,MELVA,BRISO,VERNO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Białystok","ul. Przykładowa 120","15-660",53.117,23.206,"OLMO,TALVE,NOKTA,MELVA,BRISO,VERNO","pon.–pt. 10:00–18:00, sob. 9:00–14:00"],["Kielce","ul. Przykładowa 69","25-116",50.875,20.676,"OLMO,TALVE,MELVA,BRISO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Tarnów","ul. Przykładowa 69","33-100",50.011,20.987,"LIRAN,MELVA,BRISO","pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00"],["Nowy Sącz","ul. Przykładowa 113","33-300",49.631,20.687,"TALVE,NOKTA,BRISO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Opole","ul. Przykładowa 3","45-325",50.66,17.939,"OLMO,SOLMA,LIRAN","pon.–pt. 10:00–18:00, sob. 9:00–14:00"],["Częstochowa","ul. Przykładowa 113","42-200",50.817,19.111,"OLMO,TALVE,SOLMA,LIRAN,MELVA,BRISO","pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00"],["Toruń","ul. Przykładowa 65","87-100",53.011,18.593,"OLMO,SOLMA,MELVA","pon.–pt. 10:00–18:00, sob. 9:00–14:00"],["Olsztyn","ul. Przykładowa 37","10-685",53.754,20.491,"NOKTA,SOLMA,LIRAN,MELVA,BRISO,VERNO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Zielona Góra","ul. Przykładowa 104","65-120",51.928,15.498,"OLMO,SOLMA,LIRAN,MELVA","pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00"],["Koszalin","ul. Przykładowa 14","75-136",54.19,16.163,"TALVE,SOLMA,MELVA,BRISO,VERNO","pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00"],["Radom","ul. Przykładowa 97","26-600",51.394,21.146,"OLMO,TALVE,SOLMA,LIRAN","pon.–pt. 10:00–19:00, sob. 10:00–15:00"],["Zamość","ul. Przykładowa 44","22-400",50.718,23.262,"SOLMA,LIRAN,VERNO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Bielsko-Biała","ul. Przykładowa 33","43-300",49.822,19.053,"TALVE,NOKTA,VERNO","pon.–pt. 10:00–19:00, sob. 10:00–15:00"],["Płock","ul. Przykładowa 2","09-400",52.555,19.714,"TALVE,LIRAN,MELVA,VERNO","pon.–pt. 9:00–17:00, sob. 9:00–13:00"],["Kalisz","ul. Przykładowa 12","62-800",51.764,18.093,"NOKTA,SOLMA,MELVA,VERNO","pon.–pt. 10:00–19:00, sob. 10:00–15:00"],["Siedlce","ul. Przykładowa 100","08-110",52.172,22.294,"OLMO,TALVE,NOKTA,SOLMA,BRISO,VERNO","pon.–pt. 10:00–19:00, sob. 10:00–15:00"]];
+const KODY={"10":[53.78,20.48],"11":[54,21.1],"12":[53.6,21.4],"13":[53.3,20.1],"14":[53.85,19.8],"15":[53.13,23.16],"16":[53.7,23.1],"17":[52.7,23.3],"18":[53.15,22.1],"19":[53.85,22.4],"20":[51.25,22.57],"21":[51.65,22.8],"22":[50.95,23.3],"23":[50.75,22.45],"24":[51.3,22],"25":[50.87,20.63],"26":[51.25,20.85],"27":[50.9,21.45],"28":[50.5,20.75],"29":[50.85,19.95],"30":[50.05,19.92],"31":[50.08,20.01],"32":[50.1,19.8],"33":[49.85,20.85],"34":[49.65,19.8],"35":[50.04,22.0],"36":[50,21.9],"37":[50.2,22.5],"38":[49.6,21.9],"39":[50.25,21.5],"40":[50.26,19.02],"41":[50.3,18.95],"42":[50.65,19],"43":[49.95,19],"44":[50.1,18.6],"45":[50.67,17.92],"46":[50.95,18.1],"47":[50.3,18.2],"48":[50.4,17.5],"49":[50.75,17.4],"50":[51.11,17.04],"51":[51.13,17.08],"52":[51.08,17.01],"53":[51.09,16.98],"54":[51.13,16.93],"55":[51.1,17],"56":[51.4,17.3],"57":[50.55,16.8],"58":[50.8,16.1],"59":[51.2,15.9],"60":[52.4,16.88],"61":[52.41,16.95],"62":[52.25,17.95],"63":[51.7,17.6],"64":[52.4,16.6],"65":[51.94,15.51],"66":[52.4,15.3],"67":[51.7,15.9],"68":[51.6,15.1],"69":[52.4,14.8],"70":[53.42,14.56],"71":[53.45,14.53],"72":[53.7,14.8],"73":[53.35,15.3],"74":[53,14.7],"75":[54.19,16.17],"76":[54.4,16.8],"77":[53.85,17.1],"78":[53.7,16],"80":[54.35,18.65],"81":[54.5,18.54],"82":[54,19.2],"83":[54.1,18.3],"84":[54.6,18],"85":[53.12,18.01],"86":[53.35,18.5],"87":[52.95,18.95],"88":[52.75,18],"89":[53.4,17.6],"90":[51.77,19.46],"91":[51.8,19.45],"92":[51.76,19.53],"93":[51.73,19.46],"94":[51.77,19.39],"95":[51.8,19.45],"96":[52,20.2],"97":[51.3,19.7],"98":[51.5,18.8],"99":[52.15,19.4],"00":[52.23,21.01],"01":[52.26,20.95],"02":[52.18,20.99],"03":[52.28,21.05],"04":[52.23,21.12],"05":[52.2,21.05],"06":[52.85,20.8],"07":[52.85,21.6],"08":[52.05,22.1],"09":[52.55,19.9]};
+(function(){
+  'use strict';
+  var root=document.documentElement;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Nagłówek: przezroczysty nad hero, jasny po przewinięciu (IntersectionObserver, bez czytania layoutu) */
+  var hdr=document.getElementById('hdr');
+  var sentinel=document.querySelector('.hdr-sentinel');
+  if('IntersectionObserver' in window && sentinel){
+    new IntersectionObserver(function(e){hdr.classList.toggle('is-solid',!e[0].isIntersecting)},{rootMargin:'-'+(innerWidth<768?56:76)+'px 0px 0px 0px'}).observe(sentinel);
+  } else hdr.classList.add('is-solid');
+
+  /* Pasek promocji: co 6 s, pauza po najechaniu i przyciskiem */
+  var items=[].slice.call(document.querySelectorAll('#promo-list li'));
+  var pauseBtn=document.querySelector('.promo-pause');
+  var idx=0,hover=false,paused=false;
+  if(reduce){paused=true;pauseBtn.hidden=true}
+  setInterval(function(){
+    if(paused||hover||document.hidden) return;
+    items[idx].classList.remove('is-active');
+    idx=(idx+1)%items.length;
+    items[idx].classList.add('is-active');
+  },6000);
+  var msgs=document.querySelector('.promo-msgs');
+  msgs.addEventListener('mouseenter',function(){hover=true});
+  msgs.addEventListener('mouseleave',function(){hover=false});
+  msgs.addEventListener('focusin',function(){hover=true});
+  msgs.addEventListener('focusout',function(){hover=false});
+  pauseBtn.addEventListener('click',function(){
+    paused=!paused;
+    pauseBtn.setAttribute('aria-pressed',paused);
+    pauseBtn.setAttribute('aria-label',paused?'Wznów zmianę komunikatów':'Wstrzymaj zmianę komunikatów');
+  });
+
+  /* Panele: „Gdzie kupić” i menu mobilne */
+  var scrim=document.querySelector('.scrim-bg');
+  var openPanel=null,opener=null;
+  function open(panel,from){
+    if(openPanel) close();
+    opener=from||null;openPanel=panel;
+    panel.inert=false;panel.classList.add('is-open');scrim.classList.add('is-open');root.classList.add('lock');
+    if(from&&from.hasAttribute('aria-expanded')) from.setAttribute('aria-expanded','true');
+    var f=panel.querySelector('input')||panel.querySelector('a,button');
+    setTimeout(function(){f&&f.focus()},reduce?0:60);
+  }
+  function close(){
+    if(!openPanel) return;
+    openPanel.classList.remove('is-open');openPanel.inert=true;scrim.classList.remove('is-open');root.classList.remove('lock');
+    if(opener){if(opener.hasAttribute('aria-expanded')) opener.setAttribute('aria-expanded','false');opener.focus()}
+    openPanel=null;
+  }
+  var finder=document.getElementById('finder'),mnav=document.getElementById('mnav');
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-open-finder]');
+    if(t){e.preventDefault();open(finder,t);return}
+    t=e.target.closest('[data-open-menu]');
+    if(t){open(mnav,t);return}
+    if(e.target.closest('[data-close]')) close();
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') close();
+    if(e.key==='Tab'&&openPanel){
+      var f=[].slice.call(openPanel.querySelectorAll('a[href],button,input')).filter(function(x){return !x.disabled});
+      if(!f.length) return;
+      if(e.shiftKey&&document.activeElement===f[0]){e.preventDefault();f[f.length-1].focus()}
+      else if(!e.shiftKey&&document.activeElement===f[f.length-1]){e.preventDefault();f[0].focus()}
+    }
+  });
+
+  /* Kod pocztowy → 3 najbliższe salony (dane przykładowe z resellers.json + postcodes.json) */
+  function km(a,b,c,d){var r=Math.PI/180,x=Math.sin((c-a)*r/2),y=Math.sin((d-b)*r/2);return 12742*Math.asin(Math.sqrt(x*x+Math.cos(a*r)*Math.cos(c*r)*y*y))}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  [].forEach.call(document.querySelectorAll('[data-finder-form]'),function(form){
+    var input=form.querySelector('input'),out=form.querySelector('.results');
+    input.addEventListener('input',function(){
+      var d=input.value.replace(/\D/g,'').slice(0,5);
+      input.value=d.length>2?d.slice(0,2)+'-'+d.slice(2):d;
+    });
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var d=input.value.replace(/\D/g,'');
+      if(d.length!==5){out.innerHTML='<p class="res"><b>Wpisz kod w formacie 00-000.</b></p>';input.setAttribute('aria-invalid','true');input.focus();return}
+      input.removeAttribute('aria-invalid');
+      var c=KODY[d.slice(0,2)];
+      if(!c){out.innerHTML='<p class="res"><b>Nie znamy tego kodu. Sprawdź, czy jest poprawny.</b></p>';return}
+      var list=SALONY.map(function(s){return{s:s,k:km(c[0],c[1],s[3],s[4])}}).sort(function(a,b){return a.k-b.k}).slice(0,3);
+      out.innerHTML=list.map(function(x){var s=x.s;return '<div class="res"><b>Salon partnerski, '+esc(s[0])+'</b><small>'+esc(s[1])+', '+esc(s[2])+' · ok. '+Math.max(1,Math.round(x.k))+' km</small><small class="exp">Na ekspozycji: '+esc(s[5].split(',').join(', '))+'</small></div>'}).join('');
+    });
+  });
+
+  /* Karty: wykończenia i ulubione */
+  document.addEventListener('click',function(e){
+    var sw=e.target.closest('.sw');
+    if(sw){
+      var card=sw.closest('.card');
+      [].forEach.call(card.querySelectorAll('.sw'),function(b){b.setAttribute('aria-pressed',b===sw)});
+      card.querySelector('[data-finish]').textContent=sw.dataset.label;
+      if(sw.dataset.img) card.querySelector('.pack').src=sw.dataset.img;
+      return;
+    }
+    var fav=e.target.closest('.fav');
+    if(fav){var on=fav.getAttribute('aria-pressed')!=='true';fav.setAttribute('aria-pressed',on)}
+  });
+})();
+</script>
+</body>
+</html>

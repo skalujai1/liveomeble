@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liveo Meble — meble w kolekcjach</title>
+<meta name="description" content="Szkic kierunku B: Pełny kadr. Meble skrzyniowe Liveo w kolekcjach, z wyszukiwarką salonów partnerskich.">
+<link rel="icon" href="data:,">
+<link rel="preload" href="fonts/albert-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/albert-sans-latin-ext-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="../../../src/assets/renders/rooms/salon-szalwia-wide.jpg" media="(min-width: 761px)" fetchpriority="high">
+<link rel="preload" as="image" href="../../../src/assets/renders/rooms/salon-szalwia-tall.jpg" media="(max-width: 760px)" fetchpriority="high">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* ===== Tokeny ===== */
+:root{
+  --white:#FFFFFF;
+  --sand:#F2EEE7;      /* pasek ogłoszeń, packshoty, Jak / Gdzie kupić */
+  --ink:#161514;       /* tekst, przyciski, stopka */
+  --grey:#5F5A54;      /* tekst pomocniczy, Omnibus */
+  --stone:#D9D2C7;     /* linie 1 px, placeholdery zdjęć */
+  --field:#8A8279;     /* obrys pól */
+  --poppy:#C21F32;     /* cena promocyjna, rabat */
+  --olive:#55602E;     /* Nowość, wyróżnienie w pasku */
+  --logo:#2B2A29;
+
+  --sans:"Albert Sans","Helvetica Neue",Helvetica,sans-serif;
+  --serif:"Brygada 1918",Georgia,"Times New Roman",serif;
+
+  --max:1440px;
+  --pad:clamp(16px, 5vw, 72px);
+  --gap:8px;
+  --section:112px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --shadow-mega:0 16px 40px rgba(22,21,20,.10);
+
+  /* wykończenia */
+  --f-dab:#C9A47A; --f-dab-miod:#B6824A; --f-orzech:#6E4A33; --f-kaszmir:#D8CAB6;
+  --f-bialy:#F5F3EF; --f-szalwia:#9AA68C; --f-grafit:#4A4A4C; --f-czarny:#1F1E1E; --f-zloty:#B9975B;
+}
+
+/* ===== Fonty (self-hosted, latin + latin-ext) ===== */
+@font-face{font-family:"Albert Sans";font-style:normal;font-weight:100 900;font-display:swap;
+  src:url(fonts/albert-sans-latin-ext-wght-normal.woff2) format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Albert Sans";font-style:normal;font-weight:100 900;font-display:swap;
+  src:url(fonts/albert-sans-latin-wght-normal.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Brygada 1918";font-style:italic;font-weight:400 700;font-display:swap;
+  src:url(fonts/brygada-1918-latin-ext-wght-italic.woff2) format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Brygada 1918";font-style:italic;font-weight:400 700;font-display:swap;
+  src:url(fonts/brygada-1918-latin-wght-italic.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+/* ===== Podstawy ===== */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:88px}
+body{margin:0;background:var(--white);color:var(--ink);font:400 17px/27px var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+button,input{font:inherit;color:inherit}
+h1,h2,h3,h4,p,ul,ol,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+svg.i{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter}
+.sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.on-dark :focus-visible,.hero :focus-visible{outline-color:#fff}
+
+.skip{position:absolute;left:16px;top:-80px;z-index:100;background:var(--ink);color:#fff;padding:12px 20px;font-weight:500;text-decoration:none}
+.skip:focus{top:12px}
+
+/* Typografia */
+.h2{font:500 44px/48px var(--sans);letter-spacing:-.02em}
+.lead{font:italic 400 22px/32px var(--serif);letter-spacing:0}
+.link{font-weight:500;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.link:hover{text-decoration-thickness:2px}
+
+/* Przyciski */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 28px;border:1px solid transparent;border-radius:0;font:500 16px/1 var(--sans);text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
+.btn--dark{background:var(--ink);color:#fff}
+.btn--dark:hover{background:#3b3936}
+.btn--line{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn--line:hover{background:var(--ink);color:#fff}
+.btn--light{background:#fff;color:var(--ink)}
+.btn--light:hover{background:var(--sand)}
+.btn--line-light{border-color:#fff;color:#fff;background:transparent}
+.btn--line-light:hover{background:#fff;color:var(--ink)}
+.link-btn{display:inline-flex;align-items:center;gap:8px;padding:0;border:0;background:none;cursor:pointer;font:500 15px/22px var(--sans);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.icon-btn{display:inline-grid;place-items:center;width:44px;height:44px;padding:0;border:0;background:none;color:var(--ink);cursor:pointer;text-decoration:none}
+
+/* Pola */
+.field{height:48px;padding:0 2px;border:0;border-bottom:1px solid var(--field);border-radius:0;background:transparent;font:500 19px/1 var(--sans);letter-spacing:.02em}
+.field::placeholder{color:var(--grey);opacity:1}
+.field:focus{outline:none;border-bottom-color:var(--ink);box-shadow:0 1px 0 var(--ink)}
+
+/* Plakietki */
+.badges{position:absolute;left:12px;top:12px;z-index:2;display:flex;gap:4px}
+.badge{display:inline-block;padding:4px 8px;font:600 12px/16px var(--sans);color:#fff;border-radius:0}
+.badge--sale{background:var(--poppy)}
+.badge--new{background:var(--olive)}
+
+/* ===== Pasek ogłoszeń ===== */
+.announce{background:var(--sand);font-size:14px;line-height:20px}
+.announce-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:40px}
+.announce-msg strong{color:var(--olive);font-weight:600}
+.announce-msg a{font-weight:500}
+.announce-links{display:flex;gap:24px}
+.announce-links a{text-decoration:none}
+.announce-links a:hover{text-decoration:underline}
+
+/* ===== Nagłówek ===== */
+.site-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--stone);transition:transform .32s var(--ease)}
+.site-header.is-hidden{transform:translateY(-100%)}
+.header-in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:72px;gap:24px}
+.logo{display:block;justify-self:start;padding:6px 0}
+.logo img{height:42px;width:auto}
+.main-nav>ul{display:flex;gap:30px}
+.main-nav>ul>li>a{display:block;padding:24px 0;font:500 16px/24px var(--sans);text-decoration:none;white-space:nowrap}
+.main-nav>ul>li>a:hover,.main-nav>ul>li:focus-within>a{text-decoration:underline;text-underline-offset:6px}
+.tools{justify-self:end;display:flex;align-items:center;gap:20px}
+.search{position:relative;display:flex;align-items:center;width:200px;border-bottom:1px solid var(--field)}
+.search:focus-within{border-bottom-color:var(--ink);box-shadow:0 1px 0 var(--ink)}
+.search svg{position:absolute;left:0;width:20px;height:20px}
+.search input{width:100%;height:36px;padding:0 0 0 30px;border:0;background:transparent;font:400 15px/1 var(--sans);outline:none}
+.search input::placeholder{color:var(--grey);opacity:1}
+.where{display:inline-flex;align-items:center;gap:6px;font:500 16px/24px var(--sans);text-decoration:none;white-space:nowrap;min-height:44px}
+.where:hover span{text-decoration:underline;text-underline-offset:4px}
+.menu-btn,.search-btn{display:none}
+
+/* Mega-menu */
+.mega{position:absolute;left:0;right:0;top:100%;background:#fff;border-top:1px solid var(--stone);box-shadow:var(--shadow-mega);visibility:hidden;opacity:0;transition:opacity .18s,visibility .18s}
+.has-mega:hover .mega,.has-mega:focus-within .mega{visibility:visible;opacity:1}
+.mega-in{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,1.25fr) minmax(0,1.25fr);gap:32px 24px;padding-block:40px 48px}
+.mega-h{font:600 15px/22px var(--sans);margin-bottom:12px}
+.mega li a{display:block;padding:4px 0;font:400 15px/22px var(--sans);text-decoration:none;color:var(--ink)}
+.mega li a:hover{text-decoration:underline}
+.mega-tile{text-decoration:none}
+.mega-tile img{aspect-ratio:4/5;width:100%;height:auto;object-fit:cover;background:var(--stone)}
+.mega-tile p{margin-top:10px;font:500 16px/22px var(--sans)}
+.mega-tile span{display:block;font:400 14px/20px var(--sans);color:var(--grey)}
+
+/* Szuflada menu (telefon) */
+.drawer{position:fixed;inset:0;z-index:80;background:#fff;padding:12px 16px 32px;overflow:auto}
+.drawer[hidden]{display:none}
+.drawer-top{display:flex;justify-content:space-between;align-items:center;height:48px;margin-bottom:16px}
+.drawer-top img{height:34px;width:auto}
+.drawer nav a{display:block;padding:14px 0;border-bottom:1px solid var(--stone);font:500 22px/28px var(--sans);text-decoration:none}
+.drawer .drawer-sub a{font-size:17px;border:0;padding:8px 0}
+.drawer-sub{margin-top:24px}
+
+/* ===== Hero ===== */
+.hero{position:relative;height:clamp(520px, calc(100vh - 192px), 820px);overflow:hidden;background:var(--stone);color:#fff}
+@supports (height:100svh){.hero{height:clamp(520px, calc(100svh - 192px), 820px)}}
+.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;animation:heroIn .9s var(--ease) both}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:62%;background:linear-gradient(to top,rgba(0,0,0,.58) 0%,rgba(0,0,0,.5) 38%,rgba(0,0,0,.4) 62%,rgba(0,0,0,.16) 84%,rgba(0,0,0,0) 100%);pointer-events:none}
+.hero-in{position:absolute;left:0;right:0;bottom:0;z-index:1;display:flex;align-items:flex-end;justify-content:space-between;gap:40px;padding-bottom:56px}
+.hero h1{max-width:960px;text-shadow:0 2px 28px rgba(0,0,0,.18);font:500 76px/74px var(--sans);letter-spacing:-.035em;text-wrap:balance;animation:rise .5s .15s var(--ease) both}
+.hero .lead{margin-top:18px;animation:rise .5s .25s var(--ease) both}
+.hero .btn{flex:none}
+@keyframes heroIn{from{transform:scale(1.04)}to{transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* Pas z kodem pocztowym */
+.strip{background:var(--sand)}
+.strip-in{display:flex;align-items:center;gap:16px 32px;flex-wrap:wrap;padding-block:16px}
+.strip-text{display:flex;align-items:center;gap:10px;font:500 17px/24px var(--sans)}
+.zip-form{display:flex;align-items:center;gap:16px}
+.zip-form .field{width:132px}
+.strip .link-btn{margin-left:auto}
+.t-s{display:none}
+
+/* ===== Sekcje ===== */
+.section{padding-top:var(--section)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px 48px;margin-bottom:48px}
+.sec-head .lead{margin-top:14px;max-width:34em}
+.sec-head .link{white-space:nowrap;margin-bottom:6px}
+
+/* Plakaty kolekcji */
+.poster+.poster{margin-top:104px}
+.poster-media{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);height:clamp(420px, 42vw, 640px)}
+.pm{position:relative;overflow:hidden;background:var(--stone)}
+.pm-room picture,.pm-room img{width:100%;height:100%}
+.pm-room img{object-fit:cover}
+.poster--rev .pm-room{order:2}
+.pm-detail{display:block;background:var(--sand);color:var(--ink);text-decoration:none}
+.pm-detail img{position:absolute;left:12%;top:6%;width:76%;height:auto;aspect-ratio:4/3;object-fit:contain;transition:transform .6s var(--ease)}
+.fade{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 7%,#000 92%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 5%,#000 89%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0,#000 7%,#000 92%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 5%,#000 89%,transparent 100%);mask-composite:intersect;-webkit-mask-origin:content-box;mask-origin:content-box}
+.pm-detail:hover img{transform:scale(1.03)}
+.pm-cap{position:absolute;left:32px;right:32px;bottom:28px;display:grid;gap:4px}
+.pm-cap .nm{font:500 16px/22px var(--sans)}
+.pm-detail:hover .nm{text-decoration:underline;text-underline-offset:4px}
+.poster-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,520px);gap:24px 64px;padding-top:32px;align-items:start}
+.poster-name{font:500 120px/.86 var(--sans);letter-spacing:-.04em;padding-top:4px}
+.poster-info .lead{margin-bottom:12px}
+.poster-meta{font:500 17px/27px var(--sans)}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.js .poster-name{opacity:0;transform:translateX(-24px);transition:opacity .7s var(--ease),transform .9s var(--ease)}
+.js .poster-name.is-in{opacity:1;transform:none}
+
+/* Ceny */
+.price{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px}
+.price .now{font:600 19px/26px var(--sans)}
+.price .now.sale{color:var(--poppy)}
+.price s{font:400 15px/22px var(--sans);color:var(--grey)}
+.omnibus{font:400 13px/18px var(--sans);color:var(--grey)}
+
+/* Karuzela */
+.car-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:104px;margin-bottom:24px}
+.car-title{font:500 28px/34px var(--sans);letter-spacing:-.015em}
+.car-sub{margin-top:4px;color:var(--grey);font-size:16px;line-height:24px}
+.arrows{display:flex;gap:4px;margin-right:-10px}
+.arrows button:disabled{opacity:.3;cursor:default}
+.track{display:flex;gap:var(--gap);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+  --edge:max(var(--pad), calc((100vw - var(--max)) / 2 + var(--pad)));
+  padding-inline:var(--edge);scroll-padding-inline:var(--edge);overscroll-behavior-x:contain}
+.track::-webkit-scrollbar{display:none}
+.tile{flex:0 0 320px;scroll-snap-align:start}
+.tile a{display:block;text-decoration:none}
+.tile-img{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--stone)}
+.tile-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.tile-img.is-pack{background:var(--sand)}
+.tile-img.is-pack img{object-fit:cover;padding:12% 0 10%}
+.tile a:hover .tile-img img{transform:scale(1.03)}
+.tile-cap{margin-top:12px}
+.tile-name{font:500 20px/26px var(--sans)}
+.tile a:hover .tile-name{text-decoration:underline;text-underline-offset:4px}
+.tile-price{margin-top:2px;font:400 15px/22px var(--sans);color:var(--grey)}
+.tile--all .tile-img{display:flex;flex-direction:column;justify-content:flex-end;gap:12px;padding:28px;background:var(--ink);color:#fff}
+.tile--all .tile-img p{font:500 30px/34px var(--sans);letter-spacing:-.02em}
+.tile--all svg.i{width:32px;height:32px}
+
+/* Karty produktów */
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px var(--gap)}
+.card{position:relative}
+.card-media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--sand)}
+.card-media .pk{position:absolute;left:5%;top:50%;width:90%;height:auto;aspect-ratio:4/3;object-fit:contain;transform:translateY(-54%);transition:opacity .25s}
+.card-media .alt{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s}
+.card:hover .alt,.card:focus-within .alt{opacity:1}
+.card:hover .pk,.card:focus-within .pk{opacity:0}
+.fav-btn{position:absolute;top:4px;right:4px;z-index:3}
+.fav-btn[aria-pressed="true"] svg{fill:var(--ink)}
+.card-name{margin-top:12px;font:500 16px/22px var(--sans)}
+.card-name a{text-decoration:none}
+.card-name a::after{content:"";position:absolute;inset:0;z-index:1}
+.card:hover .card-name a{text-decoration:underline;text-underline-offset:4px}
+.card-meta{margin-top:4px;font:400 14px/20px var(--sans);color:var(--grey)}
+.swatches{position:relative;z-index:2;display:flex;gap:8px;margin-top:12px;width:max-content}
+.sw{position:relative;width:18px;height:18px;padding:0;border:0;border-radius:0;background:var(--c);box-shadow:inset 0 0 0 1px rgba(22,21,20,.14);cursor:pointer}
+.sw[aria-pressed="true"]::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:2px;background:var(--ink)}
+.sw .tip{display:none;position:absolute;left:-6px;bottom:calc(100% + 8px);padding:4px 8px;background:#fff;border:1px solid var(--stone);font:500 13px/18px var(--sans);white-space:nowrap;pointer-events:none}
+.sw:hover .tip,.sw:focus-visible .tip{display:block}
+.card .price{margin-top:14px}
+.card .omnibus{margin-top:4px}
+
+/* Doradca 50/50 */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);min-height:clamp(480px, 44vw, 640px)}
+.split-media{position:relative;overflow:hidden;background:var(--stone)}
+.split-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%}
+.split-body{display:flex;flex-direction:column;justify-content:center;padding:64px clamp(24px, 7vw, 112px)}
+.split-body .lead{margin-top:14px;max-width:24em}
+.split-text{margin-top:20px;max-width:30em;color:var(--grey)}
+.split-body .btn-row{margin-top:32px}
+
+/* Znajdź salon */
+.finder{background:var(--sand);margin-top:var(--section)}
+.finder-in{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px 96px;padding-block:96px}
+.finder .lead{margin-top:14px;max-width:30em}
+.finder-form{margin-top:36px}
+.finder-form label{display:block;font:500 15px/22px var(--sans);color:var(--grey);margin-bottom:2px}
+.finder-row{display:flex;align-items:flex-end;gap:16px}
+.finder-row .field{width:220px;font-size:24px;height:56px}
+.finder-row .btn{height:56px}
+.finder-geo{margin-top:20px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px}
+.note{font:400 14px/20px var(--sans);color:var(--grey)}
+.status{margin-top:12px;font:500 15px/22px var(--sans);min-height:22px}
+.how{align-self:center}
+.how h3.how-title{font:500 28px/34px var(--sans);letter-spacing:-.015em;margin-bottom:12px}
+.how li{display:grid;grid-template-columns:32px 1fr;gap:16px;padding:20px 0;border-top:1px solid var(--stone)}
+.how li:last-child{border-bottom:1px solid var(--stone)}
+.how h4{font:500 18px/26px var(--sans)}
+.how p{color:var(--grey);font-size:16px;line-height:24px;margin-top:2px}
+.how svg.i{width:28px;height:28px;margin-top:-1px}
+
+/* B2B + stopka */
+.on-dark{background:var(--ink);color:#fff}
+.b2b-in{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:32px 64px;padding-block:88px}
+.b2b .lead{margin-top:14px;max-width:32em;color:#E9E5DE}
+.b2b .btn-row{margin-top:0}
+.foot{border-top:1px solid rgba(255,255,255,.16)}
+.foot-in{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:40px 32px;padding-block:64px 40px}
+.foot-logo img{height:40px;width:auto;filter:brightness(0) invert(1)}
+.foot-about{margin-top:20px;color:#CFCAC2;font-size:15px;line-height:23px;max-width:24em}
+.foot h3{font:600 15px/22px var(--sans);margin-bottom:12px}
+.foot li a{display:inline-block;padding:4px 0;color:#CFCAC2;font-size:15px;line-height:22px;text-decoration:none}
+.foot li a:hover{color:#fff;text-decoration:underline}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;padding-block:24px 32px;border-top:1px solid rgba(255,255,255,.16);font-size:14px;line-height:20px;color:#B9B3AA}
+.foot-bottom a{color:inherit}
+
+/* ===== Tablet: kompaktowy nagłówek ===== */
+@media (max-width:1180px){
+  .header-in{grid-template-columns:auto auto 1fr auto;gap:8px;height:64px}
+  .main-nav,.search{display:none}
+  .menu-btn,.search-btn{display:inline-grid}
+  .menu-btn{margin-left:-10px}
+  .logo{margin-left:4px}
+  .tools{grid-column:4;gap:4px}
+  .where{padding:0 8px}
+  .mega{display:none}
+  .poster-name{font-size:96px}
+  .poster-body{grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:24px 40px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .finder-in{gap:48px 56px}
+  .foot-in{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .foot-brand{grid-column:1/-1}
+}
+
+/* ===== Telefon ===== */
+@media (max-width:760px){
+  :root{--section:72px}
+  body{font-size:16px;line-height:25px}
+  .h2{font-size:30px;line-height:34px;letter-spacing:-.02em}
+  .lead{font-size:19px;line-height:28px}
+
+  .announce{font-size:13px;line-height:18px}
+  .announce-in{height:36px;justify-content:center}
+  .announce-links{display:none}
+
+  .header-in{height:60px;grid-template-columns:auto auto 1fr auto}
+  .logo img{height:34px}
+  .where span,.fav{display:none}
+  .where{padding:0;width:44px;justify-content:center}
+  .tools{margin-right:-10px}
+
+  .hero{height:calc(100vh - 176px);min-height:480px;max-height:none}
+  @supports (height:100svh){.hero{height:calc(100svh - 176px)}}
+  .hero-media img{object-position:62% 50%}
+  .hero::after{height:68%;background:linear-gradient(to top,rgba(0,0,0,.62) 0%,rgba(0,0,0,.52) 40%,rgba(0,0,0,.42) 66%,rgba(0,0,0,.16) 86%,rgba(0,0,0,0) 100%)}
+  .hero-in{flex-direction:column;align-items:stretch;gap:20px;padding-bottom:20px}
+  .hero h1{font-size:44px;line-height:44px}
+  .hero .lead{margin-top:12px}
+  .hero .btn{width:100%}
+  @media (max-width:374px){.hero h1{font-size:40px;line-height:41px}}
+
+  .strip-in{gap:4px;padding-block:14px 18px}
+  .strip-text{font-size:16px;line-height:22px}
+  .t-l{display:none}.t-s{display:inline}
+  .zip-form{width:100%}
+  .zip-form .field{flex:1;min-width:0;width:auto}
+  .strip .link-btn{margin-left:0;margin-top:10px}
+
+  .sec-head{flex-direction:column;align-items:flex-start;margin-bottom:28px}
+  .sec-head .lead{margin-top:10px}
+
+  .poster+.poster{margin-top:64px}
+  .poster-media{grid-template-columns:1fr;height:auto}
+  .pm-room{aspect-ratio:4/5}
+  .pm-detail{display:none}
+  .poster-body{grid-template-columns:minmax(0,1fr);gap:12px;padding-top:20px}
+  .poster-name{font-size:56px;line-height:.9}
+  .btn-row{flex-direction:column;gap:8px;margin-top:20px}
+  .btn-row .btn{width:100%}
+
+  .car-head{margin-top:72px;margin-bottom:20px}
+  .car-title{font-size:24px;line-height:30px}
+  .arrows{display:none}
+  .tile{flex-basis:78%}
+  .tile--all .tile-img p{font-size:26px;line-height:30px}
+
+  .grid{gap:32px var(--gap)}
+  .card-name{font-size:15px;line-height:21px}
+  .card-meta{font-size:13px;line-height:19px}
+  .price .now{font-size:17px;line-height:24px}
+  .price s{font-size:14px}
+  .omnibus{font-size:12px;line-height:17px}
+
+  .finder-in{grid-template-columns:minmax(0,1fr);padding-block:64px;gap:48px}
+  .finder-row{gap:12px}
+  .finder-row .field{flex:1;min-width:0;width:auto}
+  .finder-row .btn{padding:0 20px}
+  .how h3.how-title{font-size:24px;line-height:30px}
+
+  .b2b-in{grid-template-columns:minmax(0,1fr);padding-block:64px}
+  .split{grid-template-columns:minmax(0,1fr);min-height:0}
+  .split-media{aspect-ratio:4/3}
+  .split-body{padding:28px 16px 0}
+  .foot-in{grid-template-columns:repeat(2,minmax(0,1fr));padding-block:48px 32px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js .poster-name{opacity:1;transform:none}
+}
+</style>
+</head>
+<body id="top">
+<a class="skip" href="#tresc">Przejdź do treści</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6.5h18M3 12h18M3 17.5h18"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3L20.5 20.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21.2s-6.6-6.1-6.6-11.3a6.6 6.6 0 1 1 13.2 0c0 5.2-6.6 11.3-6.6 11.3z"/><circle cx="12" cy="9.9" r="2.4"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 19.8s-7.6-4.5-7.6-10.2a4.3 4.3 0 0 1 7.6-2.7 4.3 4.3 0 0 1 7.6 2.7c0 5.7-7.6 10.2-7.6 10.2z"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M20 12H4.5M10 6l-6 6 6 6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M4 12h15.5M14 6l6 6-6 6"/></symbol>
+  <symbol id="i-locate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="1.8"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="M3.5 9.5L5 4.5h14l1.5 5M3.5 9.5h17M4.5 9.5v10h15v-10M9.5 19.5v-5h5v5"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2.5 6.5h11v10h-11zM13.5 10h4.2l3 3.2v3.3h-7.2"/><circle cx="6.5" cy="17.8" r="1.7"/><circle cx="17" cy="17.8" r="1.7"/></symbol>
+</svg>
+
+<!-- Pasek ogłoszeń -->
+<div class="announce" role="region" aria-label="Ogłoszenia">
+  <div class="wrap announce-in">
+    <p class="announce-msg"><strong>−15% na kolekcję OLMO</strong> do 31 października · <a href="#olmo">Zobacz</a></p>
+    <ul class="announce-links">
+      <li><a href="#b2b">Dla sklepów</a></li>
+      <li><a href="#b2b">Strefa partnera</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Nagłówek -->
+<header class="site-header">
+  <div class="wrap header-in">
+    <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="drawer"><svg class="i" aria-hidden="true"><use href="#i-menu"/></svg><span class="sr-only">Menu</span></button>
+    <a class="logo" href="#top"><img src="../../brand/liveo-logo-oryginal.svg" alt="Liveo Meble" width="300" height="112"></a>
+    <nav class="main-nav" aria-label="Główna">
+      <ul>
+        <li><a href="#">Nowości</a></li>
+        <li class="has-mega">
+          <a href="#meble" aria-haspopup="true">Meble</a>
+          <div class="mega">
+            <div class="wrap mega-in">
+              <div><p class="mega-h">Salon</p><ul><li><a href="#">Szafki RTV</a></li><li><a href="#">Komody</a></li><li><a href="#">Witryny</a></li><li><a href="#">Regały</a></li><li><a href="#">Ławy</a></li><li><a href="#">Półki wiszące</a></li></ul></div>
+              <div><p class="mega-h">Sypialnia</p><ul><li><a href="#">Łóżka</a></li><li><a href="#">Szafy</a></li><li><a href="#">Szafki nocne</a></li><li><a href="#">Toaletki</a></li><li><a href="#">Lustra</a></li></ul></div>
+              <div><p class="mega-h">Jadalnia</p><ul><li><a href="#">Stoły</a></li><li><a href="#">Kredensy</a></li><li><a href="#">Witryny</a></li><li><a href="#">Komody</a></li></ul></div>
+              <div><p class="mega-h">Przedpokój i&nbsp;pokój dziecka</p><ul><li><a href="#">Szafki na buty</a></li><li><a href="#">Wieszaki</a></li><li><a href="#">Biurka</a></li><li><a href="#">Regały</a></li></ul></div>
+              <a class="mega-tile" href="#olmo"><img src="../../../src/assets/renders/rooms/salon-jasny-tall.jpg" width="1200" height="1500" alt="" loading="lazy" decoding="async"><p>Kolekcja OLMO<span>12 mebli w&nbsp;3 kolorach</span></p></a>
+              <a class="mega-tile" href="#"><img src="../../../src/assets/renders/rooms/jadalnia-tall.jpg" width="1200" height="1500" alt="" loading="lazy" decoding="async"><p>Promocje<span>do −15% do 31 października</span></p></a>
+            </div>
+          </div>
+        </li>
+        <li><a href="#kolekcje">Kolekcje</a></li>
+        <li><a href="#">Pomieszczenia</a></li>
+        <li><a href="#">Promocje</a></li>
+        <li><a href="#">Doradca wnętrz</a></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <form class="search" role="search" action="#">
+        <svg class="i" aria-hidden="true"><use href="#i-search"/></svg>
+        <label class="sr-only" for="q">Szukaj mebli</label>
+        <input id="q" type="search" placeholder="Szukaj" autocomplete="off">
+      </form>
+      <a class="where" href="#gdzie-kupic"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg><span>Gdzie kupić</span><span class="sr-only"> – znajdź salon</span></a>
+      <a class="icon-btn fav" href="#"><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg><span class="sr-only">Ulubione</span></a>
+      <button class="icon-btn search-btn" type="button"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg><span class="sr-only">Szukaj</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer-top">
+    <img src="../../brand/liveo-logo-oryginal.svg" alt="Liveo Meble" width="300" height="112">
+    <button class="icon-btn drawer-close" type="button"><svg class="i" aria-hidden="true"><use href="#i-close"/></svg><span class="sr-only">Zamknij menu</span></button>
+  </div>
+  <nav aria-label="Menu na telefonie">
+    <a href="#">Nowości</a><a href="#meble">Meble</a><a href="#kolekcje">Kolekcje</a><a href="#">Pomieszczenia</a><a href="#">Promocje</a><a href="#">Doradca wnętrz</a><a href="#gdzie-kupic">Gdzie kupić</a>
+    <div class="drawer-sub"><a href="#">Ulubione</a><a href="#b2b">Dla sklepów</a><a href="#b2b">Strefa partnera</a><a href="#kontakt">Kontakt</a></div>
+  </nav>
+</div>
+
+<main id="tresc">
+
+<!-- Hero -->
+<section class="hero" aria-labelledby="hero-title">
+  <picture class="hero-media">
+    <source media="(max-width: 760px)" srcset="../../../src/assets/renders/rooms/salon-szalwia-tall.jpg" width="1200" height="1500">
+    <img src="../../../src/assets/renders/rooms/salon-szalwia-wide.jpg" width="2400" height="1350" fetchpriority="high" decoding="async"
+      alt="Salon ze ścianą w&nbsp;kolorze szałwii: biała komoda z&nbsp;dębowymi nóżkami, wysoka grafitowa witryna i&nbsp;lustro w&nbsp;drewnianej ramie">
+  </picture>
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <h1 id="hero-title">Meble, które pasują do siebie w&nbsp;każdym pokoju</h1>
+      <p class="lead">Komplet TALVE: matowe fronty, dębowe blaty i&nbsp;drewniane nóżki</p>
+    </div>
+    <a class="btn btn--light" href="#talve">Zobacz kolekcję</a>
+  </div>
+</section>
+
+<!-- Kod pocztowy -->
+<section class="strip" aria-label="Znajdź salon w&nbsp;pobliżu">
+  <div class="wrap strip-in">
+    <p class="strip-text"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg><span class="t-l">Zobacz meble na żywo, wpisz kod pocztowy</span><span class="t-s">Wpisz kod i&nbsp;zobacz meble na żywo</span></p>
+    <form class="zip-form" action="#gdzie-kupic" data-zip-form>
+      <label class="sr-only" for="zip-top">Kod pocztowy</label>
+      <input class="field zip" id="zip-top" name="kod" inputmode="numeric" autocomplete="postal-code" placeholder="__-___" pattern="[0-9]{2}-[0-9]{3}" maxlength="6">
+      <button class="btn btn--dark" type="submit">Pokaż sklepy</button>
+    </form>
+    <button class="link-btn" type="button" data-geo><svg class="i" aria-hidden="true"><use href="#i-locate"/></svg>Użyj mojej lokalizacji</button>
+  </div>
+</section>
+
+<!-- Kolekcje -->
+<section class="section" id="kolekcje" aria-labelledby="kolekcje-title">
+  <div class="wrap sec-head">
+    <div>
+      <h2 class="h2" id="kolekcje-title">Kolekcje, z&nbsp;których urządzisz cały dom</h2>
+      <p class="lead">W&nbsp;każdej kolekcji szafki, komody, regały i&nbsp;stoły mają te same kolory, uchwyty i&nbsp;nóżki.</p>
+    </div>
+    <a class="link" href="#wiecej-kolekcji">Wszystkie kolekcje (8)</a>
+  </div>
+
+  <article class="poster" id="olmo" aria-labelledby="olmo-name">
+    <div class="poster-media">
+      <figure class="pm pm-room">
+        <picture>
+          <source media="(max-width: 760px)" srcset="../../../src/assets/renders/rooms/salon-jasny-tall.jpg" width="1200" height="1500">
+          <img src="../../../src/assets/renders/rooms/salon-jasny-wide.jpg" width="2400" height="1350" loading="lazy" decoding="async"
+            alt="Jasny salon z&nbsp;szafką RTV OLMO w&nbsp;dekorze dębu naturalnego, ceramiką i&nbsp;suchymi gałązkami w&nbsp;wazonie">
+        </picture>
+        <div class="badges"><span class="badge badge--sale">−15%</span></div>
+      </figure>
+      <a class="pm pm-detail" href="#">
+        <img class="fade" src="../../../src/assets/renders/sample/szafka-rtv-dab-naturalny.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Szafka RTV 160 OLMO w&nbsp;dekorze dębu naturalnego, na czarnych nóżkach">
+        <span class="pm-cap">
+          <span class="nm">Szafka RTV 160 OLMO</span>
+          <span class="price"><span class="now sale">721,00 zł</span><s>849,00 zł</s></span>
+          <span class="omnibus">Najniższa cena z&nbsp;30 dni przed obniżką: 849,00 zł</span>
+        </span>
+      </a>
+    </div>
+    <div class="wrap poster-body">
+      <h3 class="poster-name" id="olmo-name">OLMO</h3>
+      <div class="poster-info">
+        <p class="lead">Dekor jasnego dębu, spokojne proporcje i&nbsp;drewniane nóżki.</p>
+        <p class="poster-meta">12 mebli w&nbsp;3 kolorach · od 211 zł</p>
+        <div class="btn-row">
+          <a class="btn btn--dark" href="#">Zobacz kolekcję</a>
+          <a class="btn btn--line" href="#gdzie-kupic">Gdzie ją kupić</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="poster poster--rev" id="talve" aria-labelledby="talve-name">
+    <div class="poster-media">
+      <figure class="pm pm-room">
+        <picture>
+          <source media="(max-width: 760px)" srcset="../../../src/assets/renders/rooms/biuro-tall.jpg" width="1200" height="1500">
+          <img src="../../../src/assets/renders/rooms/biuro-wide.jpg" width="2400" height="1350" loading="lazy" decoding="async"
+            alt="Kącik do nauki: biurko TALVE w&nbsp;kolorze szałwii z&nbsp;dębowym blatem, drewniane krzesło i&nbsp;regał pełen książek">
+        </picture>
+      </figure>
+      <a class="pm pm-detail" href="#">
+        <img class="fade" src="../../../src/assets/renders/sample/biurko-szalwia.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Biurko 110 TALVE w&nbsp;kolorze szałwii z&nbsp;blatem w&nbsp;dekorze dębu naturalnego">
+        <span class="pm-cap">
+          <span class="nm">Biurko 110 TALVE</span>
+          <span class="price"><span class="now">499,00 zł</span></span>
+        </span>
+      </a>
+    </div>
+    <div class="wrap poster-body">
+      <h3 class="poster-name" id="talve-name">TALVE</h3>
+      <div class="poster-info">
+        <p class="lead">Matowe fronty, dębowe blaty i&nbsp;małe okrągłe gałki.</p>
+        <p class="poster-meta">11 mebli w&nbsp;3 kolorach · od 209 zł</p>
+        <div class="btn-row">
+          <a class="btn btn--dark" href="#">Zobacz kolekcję</a>
+          <a class="btn btn--line" href="#gdzie-kupic">Gdzie ją kupić</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="poster" id="solma" aria-labelledby="solma-name">
+    <div class="poster-media">
+      <figure class="pm pm-room">
+        <picture>
+          <source media="(max-width: 760px)" srcset="../../../src/assets/renders/rooms/przedpokoj-tall.jpg" width="1200" height="1500">
+          <img src="../../../src/assets/renders/rooms/przedpokoj-wide.jpg" width="2400" height="1350" loading="lazy" decoding="async"
+            alt="Przedpokój: jasna szafka na buty ze złotymi uchwytami, lustro w&nbsp;łuku i&nbsp;drewniany wieszak z&nbsp;torbą">
+        </picture>
+      </figure>
+      <a class="pm pm-detail" href="#">
+        <img class="fade" src="../../../src/assets/renders/sample/komoda-bialy-mat.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Komoda 120 SOLMA, biały front ze złotymi uchwytami">
+        <span class="pm-cap">
+          <span class="nm">Komoda 120 SOLMA</span>
+          <span class="price"><span class="now">1 199,00 zł</span></span>
+        </span>
+      </a>
+    </div>
+    <div class="wrap poster-body">
+      <h3 class="poster-name" id="solma-name">SOLMA</h3>
+      <div class="poster-info">
+        <p class="lead">Gładkie fronty i&nbsp;akcenty w&nbsp;kolorze szczotkowanego mosiądzu.</p>
+        <p class="poster-meta">11 mebli w&nbsp;3 kolorach · od 399 zł</p>
+        <div class="btn-row">
+          <a class="btn btn--dark" href="#">Zobacz kolekcję</a>
+          <a class="btn btn--line" href="#gdzie-kupic">Gdzie ją kupić</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Karuzela pozostałych kolekcji -->
+  <div data-carousel id="wiecej-kolekcji">
+    <div class="wrap car-head">
+      <div>
+        <h3 class="car-title" id="car-title">Więcej kolekcji</h3>
+        <p class="car-sub">Do jadalni, sypialni, przedpokoju i&nbsp;pokoju nastolatka</p>
+      </div>
+      <div class="arrows">
+        <button class="icon-btn prev" type="button" disabled><svg class="i" aria-hidden="true"><use href="#i-left"/></svg><span class="sr-only">Poprzednie kolekcje</span></button>
+        <button class="icon-btn next" type="button"><svg class="i" aria-hidden="true"><use href="#i-right"/></svg><span class="sr-only">Następne kolekcje</span></button>
+      </div>
+    </div>
+    <ul class="track" aria-labelledby="car-title">
+      <li class="tile"><a href="#">
+        <div class="tile-img"><img src="../../../src/assets/renders/rooms/jadalnia-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async" alt="Jadalnia z&nbsp;dębowym stołem, krzesłami z&nbsp;tapicerowanym siedziskiem i&nbsp;komodą w&nbsp;kolorze orzecha"></div>
+        <div class="tile-cap"><p class="tile-name">NOKTA</p><p class="tile-price">10 mebli · od 259 zł</p></div>
+      </a></li>
+      <li class="tile"><a href="#">
+        <div class="tile-img"><img src="../../../src/assets/renders/rooms/salon-szalwia-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async" alt="Grafitowa witryna z&nbsp;przeszklonymi drzwiami obok białej komody przy ścianie w&nbsp;kolorze szałwii"></div>
+        <div class="tile-cap"><p class="tile-name">LIRAN</p><p class="tile-price">10 mebli · od 189 zł</p></div>
+      </a></li>
+      <li class="tile"><a href="#">
+        <div class="tile-img"><img src="../../../src/assets/renders/rooms/sypialnia-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async" alt="Sypialnia z&nbsp;tapicerowanym łóżkiem w&nbsp;kolorze kaszmiru, beżowym pledem i&nbsp;szafkami nocnymi"></div>
+        <div class="tile-cap"><p class="tile-name">MELVA</p><p class="tile-price">11 mebli · od 449 zł</p></div>
+      </a></li>
+      <li class="tile"><a href="#">
+        <div class="tile-img is-pack"><img class="fade" src="../../../src/assets/renders/sample/regal-dab-miodowy.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Wysoki regał BRISO w&nbsp;dekorze dębu miodowego"><div class="badges"><span class="badge badge--new">Nowość</span></div></div>
+        <div class="tile-cap"><p class="tile-name">BRISO</p><p class="tile-price">11 mebli · od 199 zł</p></div>
+      </a></li>
+      <li class="tile"><a href="#">
+        <div class="tile-img is-pack"><img class="fade" src="../../../src/assets/renders/sample/szafa-bialy-mat.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Dwudrzwiowa szafa VERNO w&nbsp;białym macie z&nbsp;szufladami i&nbsp;dębowym korpusem"><div class="badges"><span class="badge badge--new">Nowość</span></div></div>
+        <div class="tile-cap"><p class="tile-name">VERNO</p><p class="tile-price">11 mebli · od 209 zł</p></div>
+      </a></li>
+      <li class="tile tile--all"><a href="#">
+        <div class="tile-img"><svg class="i" aria-hidden="true"><use href="#i-right"/></svg><p>Zobacz wszystkie 8 kolekcji</p></div>
+        <div class="tile-cap"><p class="tile-name">Wszystkie kolekcje</p><p class="tile-price">87 mebli do każdego pokoju</p></div>
+      </a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Polecane meble -->
+<section class="section" id="meble" aria-labelledby="meble-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h2" id="meble-title">Polecane meble</h2>
+        <p class="lead">Z&nbsp;różnych kolekcji, a&nbsp;dobrze wyglądają razem.</p>
+      </div>
+      <a class="link" href="#">Wszystkie meble</a>
+    </div>
+    <ul class="grid">
+      <li class="card">
+        <div class="card-media">
+          <img class="pk fade" src="../../../src/assets/renders/sample/stol-dab-naturalny.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Stół 160 OLMO w&nbsp;dekorze dębu naturalnego na drewnianych nogach">
+          <img class="alt" src="../../../src/assets/renders/rooms/jadalnia-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async" alt="">
+          <div class="badges"><span class="badge badge--sale">−15%</span><span class="badge badge--new">Nowość</span></div>
+          <button class="icon-btn fav-btn" type="button" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg><span class="sr-only">Dodaj do ulubionych: Stół 160 OLMO</span></button>
+        </div>
+        <h3 class="card-name"><a href="#">Stół 160 OLMO</a></h3>
+        <p class="card-meta">Dąb naturalny · 160 × 76 × 90 cm</p>
+        <div class="swatches" role="group" aria-label="Wykończenie">
+          <button class="sw" type="button" aria-pressed="true" style="--c:var(--f-dab)"><span class="sr-only">Dąb naturalny</span><span class="tip" aria-hidden="true">Dąb naturalny</span></button>
+          <button class="sw" type="button" aria-pressed="false" style="--c:linear-gradient(135deg,var(--f-kaszmir) 50%,var(--f-dab) 50%)"><span class="sr-only">Kaszmir / dąb naturalny</span><span class="tip" aria-hidden="true">Kaszmir / dąb naturalny</span></button>
+          <button class="sw" type="button" aria-pressed="false" style="--c:linear-gradient(135deg,var(--f-bialy) 50%,var(--f-dab) 50%)"><span class="sr-only">Biały mat / dąb naturalny</span><span class="tip" aria-hidden="true">Biały mat / dąb naturalny</span></button>
+        </div>
+        <p class="price"><span class="now sale">1 189,00 zł</span><s><span class="sr-only">Cena przed obniżką: </span>1 399,00 zł</s></p>
+        <p class="omnibus">Najniższa cena z&nbsp;30 dni przed obniżką: 1 399,00 zł</p>
+      </li>
+      <li class="card">
+        <div class="card-media">
+          <img class="pk fade" src="../../../src/assets/renders/sample/szafka-nocna-czarny-mat.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Szafka nocna 45 TALVE, grafitowy korpus i&nbsp;szuflada w&nbsp;dekorze dębu naturalnego">
+          <img class="alt" src="../../../src/assets/renders/rooms/sypialnia-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async" alt="">
+          <button class="icon-btn fav-btn" type="button" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg><span class="sr-only">Dodaj do ulubionych: Szafka nocna 45 TALVE</span></button>
+        </div>
+        <h3 class="card-name"><a href="#">Szafka nocna 45 TALVE</a></h3>
+        <p class="card-meta">Grafit / dąb naturalny · 45 × 52 × 38 cm</p>
+        <div class="swatches" role="group" aria-label="Wykończenie">
+          <button class="sw" type="button" aria-pressed="false" style="--c:linear-gradient(135deg,var(--f-bialy) 50%,var(--f-dab) 50%)"><span class="sr-only">Biały mat / dąb naturalny</span><span class="tip" aria-hidden="true">Biały mat / dąb naturalny</span></button>
+          <button class="sw" type="button" aria-pressed="false" style="--c:linear-gradient(135deg,var(--f-szalwia) 50%,var(--f-dab) 50%)"><span class="sr-only">Szałwia / dąb naturalny</span><span class="tip" aria-hidden="true">Szałwia / dąb naturalny</span></button>
+          <button class="sw" type="button" aria-pressed="true" style="--c:linear-gradient(135deg,var(--f-grafit) 50%,var(--f-dab) 50%)"><span class="sr-only">Grafit / dąb naturalny</span><span class="tip" aria-hidden="true">Grafit / dąb naturalny</span></button>
+        </div>
+        <p class="price"><span class="now">349,00 zł</span></p>
+      </li>
+      <li class="card">
+        <div class="card-media">
+          <img class="pk fade" src="../../../src/assets/renders/sample/lawa-orzech.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Ława 120 NOKTA w&nbsp;kolorze orzecha z&nbsp;półką pod blatem">
+          <img class="alt" src="../../../src/assets/renders/rooms/salon-jasny-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async" alt="">
+          <button class="icon-btn fav-btn" type="button" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg><span class="sr-only">Dodaj do ulubionych: Ława 120 NOKTA</span></button>
+        </div>
+        <h3 class="card-name"><a href="#">Ława 120 NOKTA</a></h3>
+        <p class="card-meta">Orzech / grafit · 120 × 42 × 60 cm</p>
+        <div class="swatches" role="group" aria-label="Wykończenie">
+          <button class="sw" type="button" aria-pressed="false" style="--c:linear-gradient(135deg,var(--f-dab-miod) 50%,var(--f-czarny) 50%)"><span class="sr-only">Dąb miodowy / czarny mat</span><span class="tip" aria-hidden="true">Dąb miodowy / czarny mat</span></button>
+          <button class="sw" type="button" aria-pressed="true" style="--c:linear-gradient(135deg,var(--f-orzech) 50%,var(--f-grafit) 50%)"><span class="sr-only">Orzech / grafit</span><span class="tip" aria-hidden="true">Orzech / grafit</span></button>
+        </div>
+        <p class="price"><span class="now">749,00 zł</span></p>
+      </li>
+      <li class="card">
+        <div class="card-media">
+          <img class="pk fade" src="../../../src/assets/renders/sample/lozko-kaszmir.webp" width="1600" height="1200" loading="lazy" decoding="async" alt="Łóżko 160 MELVA z&nbsp;tapicerowanym zagłówkiem w&nbsp;kolorze kaszmiru">
+          <img class="alt" src="../../../src/assets/renders/rooms/sypialnia-tall.jpg" width="1200" height="1500" loading="lazy" decoding="async" alt="">
+          <button class="icon-btn fav-btn" type="button" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg><span class="sr-only">Dodaj do ulubionych: Łóżko 160 MELVA</span></button>
+        </div>
+        <h3 class="card-name"><a href="#">Łóżko 160 MELVA</a></h3>
+        <p class="card-meta">Kaszmir / dąb miodowy · 166 × 105 × 208 cm</p>
+        <div class="swatches" role="group" aria-label="Wykończenie">
+          <button class="sw" type="button" aria-pressed="true" style="--c:linear-gradient(135deg,var(--f-kaszmir) 50%,var(--f-dab-miod) 50%)"><span class="sr-only">Kaszmir / dąb miodowy</span><span class="tip" aria-hidden="true">Kaszmir / dąb miodowy</span></button>
+          <button class="sw" type="button" aria-pressed="false" style="--c:linear-gradient(135deg,var(--f-szalwia) 50%,var(--f-dab-miod) 50%)"><span class="sr-only">Szałwia / dąb miodowy</span><span class="tip" aria-hidden="true">Szałwia / dąb miodowy</span></button>
+          <button class="sw" type="button" aria-pressed="false" style="--c:var(--f-orzech)"><span class="sr-only">Orzech</span><span class="tip" aria-hidden="true">Orzech</span></button>
+        </div>
+        <p class="price"><span class="now">2 499,00 zł</span></p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Doradca wnętrz 50/50 -->
+<section class="section split-sec" aria-labelledby="doradca-title">
+  <div class="split">
+    <figure class="split-media">
+      <img src="../../../src/assets/renders/rooms/jadalnia-wide.jpg" width="2400" height="1350" loading="lazy" decoding="async"
+        alt="Jadalnia w&nbsp;dziennym świetle: dębowy stół na sześć osób, czarna lampa nad stołem i&nbsp;niska komoda pod ścianą">
+    </figure>
+    <div class="split-body">
+      <h2 class="h2" id="doradca-title">Doradca wnętrz</h2>
+      <p class="lead">Opisz swój pokój, a&nbsp;podpowiemy meble z&nbsp;jednej kolekcji.</p>
+      <p class="split-text">Podaj szerokość ściany, kolor podłogi i&nbsp;to, co ma się zmieścić: telewizor, książki, ubrania dzieci. Doradca zaproponuje zestaw w&nbsp;Twoich wymiarach i&nbsp;podpowie, gdzie go zobaczyć.</p>
+      <div class="btn-row"><a class="btn btn--dark" href="#">Zaplanuj pokój z&nbsp;doradcą</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- Znajdź salon partnerski -->
+<section class="finder" id="gdzie-kupic" aria-labelledby="finder-title">
+  <div class="wrap finder-in">
+    <div>
+      <h2 class="h2" id="finder-title">Znajdź salon partnerski</h2>
+      <p class="lead">Liveo nie ma własnych sklepów. Nasze meble sprzedają salony partnerskie: tam zobaczysz kolory na żywo, otworzysz szuflady i&nbsp;zamówisz cały komplet.</p>
+      <form class="finder-form" action="#" data-zip-form>
+        <label for="zip-finder">Kod pocztowy</label>
+        <div class="finder-row">
+          <input class="field zip" id="zip-finder" name="kod" inputmode="numeric" autocomplete="postal-code" placeholder="__-___" pattern="[0-9]{2}-[0-9]{3}" maxlength="6">
+          <button class="btn btn--dark" type="submit">Pokaż sklepy</button>
+        </div>
+      </form>
+      <div class="finder-geo">
+        <button class="link-btn" type="button" data-geo><svg class="i" aria-hidden="true"><use href="#i-locate"/></svg>Użyj mojej lokalizacji</button>
+        <span class="note">Pytamy o&nbsp;nią dopiero po kliknięciu.</span>
+      </div>
+      <p class="status" role="status" aria-live="polite"></p>
+    </div>
+    <div class="how">
+      <h3 class="how-title">Jak kupić meble Liveo</h3>
+      <ul>
+        <li><svg class="i" aria-hidden="true"><use href="#i-eye"/></svg><div><h4>Obejrzyj na żywo</h4><p>W&nbsp;salonie sprawdzisz kolory frontów, dekor dębu i&nbsp;to, jak chodzą szuflady.</p></div></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-store"/></svg><div><h4>Zamów u&nbsp;sprzedawcy</h4><p>Salon przyjmie zamówienie i&nbsp;pomoże dobrać meble z&nbsp;jednej kolekcji.</p></div></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-truck"/></svg><div><h4>Odbierz albo zamów dostawę</h4><p>Termin i&nbsp;koszt dostawy ustalisz bezpośrednio z&nbsp;salonem.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- B2B -->
+<section class="b2b on-dark" id="b2b" aria-labelledby="b2b-title">
+  <div class="wrap b2b-in">
+    <div>
+      <h2 class="h2" id="b2b-title">Prowadzisz sklep meblowy?</h2>
+      <p class="lead">Dołącz do salonów partnerskich Liveo. Napisz do nas, a&nbsp;opowiemy, jak wygląda współpraca z&nbsp;producentem z&nbsp;Raniżowa.</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn--light" href="#">Zostań partnerem</a>
+      <a class="btn btn--line-light" href="#">Strefa partnera</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot on-dark" id="kontakt">
+  <h2 class="sr-only">Stopka</h2>
+  <div class="wrap foot-in">
+    <div class="foot-brand">
+      <a class="foot-logo" href="#top"><img src="../../brand/liveo-logo-oryginal.svg" alt="Liveo Meble" width="300" height="112" loading="lazy"></a>
+      <p class="foot-about">Meble projektowane w&nbsp;kolekcjach. Producent z&nbsp;Raniżowa na Podkarpaciu.<br>LIVEO Meble sp. z&nbsp;o.o., ul. Borki 5, Raniżów</p>
+    </div>
+    <div><p class="mega-h">Meble</p><ul><li><a href="#">Nowości</a></li><li><a href="#kolekcje">Kolekcje</a></li><li><a href="#">Pomieszczenia</a></li><li><a href="#">Promocje</a></li></ul></div>
+    <div><p class="mega-h">Zakupy</p><ul><li><a href="#gdzie-kupic">Gdzie kupić</a></li><li><a href="#">Doradca wnętrz</a></li><li><a href="#">Ulubione</a></li><li><a href="#">Pielęgnacja mebli</a></li></ul></div>
+    <div><p class="mega-h">Firma</p><ul><li><a href="#">O&nbsp;nas</a></li><li><a href="#b2b">Dla sklepów</a></li><li><a href="#b2b">Strefa partnera</a></li><li><a href="#kontakt">Kontakt</a></li></ul></div>
+  </div>
+  <div class="wrap">
+    <div class="foot-bottom">
+      <span>© 2026 LIVEO Meble sp. z&nbsp;o.o.</span>
+      <span><a href="#">Polityka prywatności</a> · <a href="#">Cookies</a> · <a href="#">Regulamin</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Nagłówek: chowa się przy przewijaniu w dół, wraca przy przewijaniu w górę */
+  const header = document.querySelector('.site-header');
+  let lastY = 0, ticking = false;
+  addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = scrollY;
+      const open = header.matches(':focus-within');
+      header.classList.toggle('is-hidden', !open && y > lastY && y > 240);
+      lastY = y; ticking = false;
+    });
+  }, { passive: true });
+
+  /* Wielkie nazwy kolekcji: wjazd o 24 px przy wejściu w widok */
+  const names = document.querySelectorAll('.poster-name');
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    names.forEach((n) => io.observe(n));
+  } else {
+    names.forEach((n) => n.classList.add('is-in'));
+  }
+
+  /* Karuzele: strzałki przesuwają o jeden kafel */
+  document.querySelectorAll('[data-carousel]').forEach((c) => {
+    const track = c.querySelector('.track');
+    const prev = c.querySelector('.prev'), next = c.querySelector('.next');
+    const step = () => track.querySelector('.tile').getBoundingClientRect().width + 8;
+    const go = (dir) => track.scrollBy({ left: dir * step(), behavior: reduce ? 'auto' : 'smooth' });
+    prev.addEventListener('click', () => go(-1));
+    next.addEventListener('click', () => go(1));
+    let raf = 0;
+    track.addEventListener('scroll', () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        prev.disabled = track.scrollLeft < 4;
+        next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      });
+    }, { passive: true });
+  });
+
+  /* Kwadraty wykończeń i serca */
+  document.querySelectorAll('.swatches').forEach((g) => g.addEventListener('click', (e) => {
+    const b = e.target.closest('.sw'); if (!b) return;
+    g.querySelectorAll('.sw').forEach((s) => s.setAttribute('aria-pressed', String(s === b)));
+  }));
+  document.querySelectorAll('.fav-btn').forEach((b) => b.addEventListener('click', () => {
+    b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+  }));
+
+  /* Kod pocztowy: maska 00-000 */
+  const status = document.querySelector('.status');
+  document.querySelectorAll('.zip').forEach((i) => i.addEventListener('input', () => {
+    const d = i.value.replace(/\D/g, '').slice(0, 5);
+    i.value = d.length > 2 ? d.slice(0, 2) + '-' + d.slice(2) : d;
+  }));
+  document.querySelectorAll('[data-zip-form]').forEach((f) => f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const v = f.querySelector('.zip').value;
+    const target = document.getElementById('zip-finder');
+    if (target !== f.querySelector('.zip')) target.value = v;
+    status.textContent = /^\d{2}-\d{3}$/.test(v)
+      ? 'Szukamy salonów partnerskich w pobliżu ' + v + '.'
+      : 'Wpisz kod pocztowy w formacie 00-000, np. 35-001.';
+    document.getElementById('gdzie-kupic').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  }));
+
+  /* Lokalizacja: tylko po kliknięciu, przeglądarka pyta o zgodę */
+  document.querySelectorAll('[data-geo]').forEach((b) => b.addEventListener('click', () => {
+    if (!('geolocation' in navigator)) { status.textContent = 'Ta przeglądarka nie udostępnia lokalizacji. Wpisz kod pocztowy.'; return; }
+    status.textContent = 'Czekamy na Twoją zgodę na lokalizację…';
+    navigator.geolocation.getCurrentPosition(
+      () => { status.textContent = 'Mamy lokalizację. Pokażemy najbliższe salony partnerskie.'; },
+      () => { status.textContent = 'Bez zgody na lokalizację wpisz kod pocztowy.'; },
+      { maximumAge: 600000, timeout: 10000 }
+    );
+  }));
+
+  /* Menu na telefonie */
+  const drawer = document.getElementById('drawer');
+  const menuBtn = document.querySelector('.menu-btn');
+  const closeBtn = drawer.querySelector('.drawer-close');
+  const setDrawer = (open) => {
+    drawer.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+    (open ? closeBtn : menuBtn).focus();
+  };
+  menuBtn.addEventListener('click', () => setDrawer(true));
+  closeBtn.addEventListener('click', () => setDrawer(false));
+  drawer.addEventListener('click', (e) => { if (e.target.closest('nav a')) setDrawer(false); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && !drawer.hidden) setDrawer(false); });
+})();
+</script>
+</body>
+</html>
