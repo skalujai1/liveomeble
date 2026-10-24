@@ -1,33 +1,51 @@
 ---
-// Doradca wnętrz — docs/ia.md 3.12, treść: src/content/pages/doradca-wnetrz.json, widżet: liveo-assistant/
+// Doradca wnętrz — docs/ia.md 3.12, treść: src/content/pages/doradca-wnetrz.json.
+// Pełne narzędzie (4 kroki) jest na tej stronie: src/components/AdvisorTool.astro. Mały czat z liveo-assistant/
+// działa na pozostałych stronach i przenosi tu zdjęcie oraz wynik — tutaj go nie ładujemy.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHeader from '../components/PageHeader.astro';
+import AdvisorTool from '../components/AdvisorTool.astro';
 import ContentSection from '../components/ContentSection.astro';
 import Faq from '../components/Faq.astro';
+import Rich from '../components/Rich.astro';
 import { faqPage, webPage } from '../lib/jsonld';
-import { roomImage } from '../lib/images';
 import { pages, section, url } from '../lib/site';
 
 const page = pages.doradca;
 const path = url.advisor;
 const hero = section(page, 'hero');
-// Obraz nagłówka: aranżacja (atrapa 3D do czasu zdjęć od Liveo).
-const heroImg = roomImage('sypialnia', 'wide');
-const heroAlt = heroImg?.title ? `Aranżacja: ${heroImg.title}` : '';
+const tool = section(page, 'narzedzie');
+const rest = page.sections.filter((s: any) => !['hero', 'narzedzie', 'dalej'].includes(s.id));
+const close = section(page, 'dalej');
 ---
 <BaseLayout
   title={page.seo.title}
   description={page.seo.description}
   {path}
   pageClass="page-advisor"
+  assistant={false}
   breadcrumbs={[{ name: page.h1, url: path }]}
   jsonLd={[webPage('WebPage', { path, title: page.seo.title, description: page.seo.description, hasBreadcrumb: true }), faqPage(path, page.faq.items)]}
 >
-  <PageHeader image={heroImg} imageAlt={heroAlt} placeholderLabel="Aranżacja" h1={page.h1} lead={hero.lead} ctas={hero.cta} note={hero.aiNote}>
-    <noscript><p class="page-header__note">Doradca wnętrz działa w przeglądarce i wymaga włączonego JavaScriptu. Bez niego przejrzyj <a href="/kolekcje/">kolekcje</a>.</p></noscript>
-  </PageHeader>
+  <header class="advisor-head container">
+    <div class="advisor-head__text">
+      <h1 class="advisor-head__title">{page.h1}</h1>
+      <p class="advisor-head__lead"><Rich text={hero.lead} /></p>
+      <p class="advisor-head__how"><a class="link" href={hero.howLink.href}>{hero.howLink.label}</a></p>
+    </div>
+    <div class="advisor-head__notes">
+      <p class="advisor-head__privacy">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>
+        <span>{hero.privacy}</span>
+      </p>
+      <p class="advisor-head__ai">{hero.aiNote}</p>
+    </div>
+    <noscript><p class="advisor-head__noscript">Doradca wnętrz działa w przeglądarce i wymaga włączonego JavaScriptu. Bez niego przejrzyj <a href="/kolekcje/">kolekcje</a> albo wybierz pomieszczenie poniżej.</p></noscript>
+  </header>
 
-  {page.sections.slice(1).map((s: any) => <ContentSection s={s} />)}
+  <AdvisorTool {tool} />
+
+  {rest.map((s: any) => <ContentSection s={s} />)}
 
   <Faq title={page.faq.title} items={page.faq.items} />
+  <ContentSection s={close} />
 </BaseLayout>

@@ -247,10 +247,10 @@ Długości tytułów i opisów są sprawdzone dla wszystkich stron statycznych; 
 ### 3.12 Doradca wnętrz `/doradca-wnetrz/`
 
 - **Plik treści:** `src/content/pages/doradca-wnetrz.json`; widżet: `liveo-assistant/`.
-- **Cel:** wyjaśnić, co robi doradca, uczciwie opisać ograniczenia i prywatność, i otworzyć widżet.
-- **Sekcje:** `hero` (przyciski otwierające widżet; informacja „odpowiada asystent AI”) → `jak-dziala` (4 kroki) → `co-potrafi` (potrafi / nie potrafi) →
-  `prywatnosc` (zdjęcie w przeglądarce, tekst do modelu AI, oznaczenie AI) → `wskazowki` (jak zrobić zdjęcie) → `dalej` → FAQ (7).
-- **Wydajność:** skrypt widżetu ładowany dopiero po kliknięciu albo w czasie bezczynności przeglądarki; model analizy obrazu pobierany dopiero przy pierwszym zdjęciu.
+- **Cel:** pełny doradca na stronie w czterech krokach: zdjęcie → pokój i kolory (do poprawienia) → komplety (najlepszy i kolejne kolekcje; filtry: pokój, ton, budżet na mebel, rodzaj mebla, polecenie tekstowe) → gdzie kupić (wyszukiwarka sklepów z wybraną kolekcją). Mały czat na pozostałych stronach to szybki podgląd: przenosi tu zdjęcie i wynik (`sessionStorage` `lv-advisor`, `?pokoj=`).
+- **Sekcje:** `hero` (H1, lead, link „Jak korzystać”, prywatność, informacja „odpowiada asystent AI”) → `narzedzie` (`AdvisorTool.astro` + `src/scripts/advisor.ts`) → `jak-korzystac` (4 kroki, te same co w narzędziu) →
+  `wskazowki` (jak zrobić zdjęcie) → `co-potrafi` (potrafi / nie potrafi) → `prywatnosc` → FAQ (8) → `dalej`.
+- **Wydajność:** na tej stronie nie ładujemy małego czatu; katalog doradcy pobierany w czasie bezczynności, model analizy obrazu dopiero przy pierwszym zdjęciu.
 - **H1:** „Doradca wnętrz”
 - **Title:** „Doradca wnętrz — dobierz meble ze zdjęcia pokoju | Liveo” (56)
 - **Description:** „Wyślij zdjęcie pokoju, a doradca wnętrz Liveo zaproponuje komplet mebli z jednej kolekcji dopasowany do kolorów wnętrza. Zdjęcie zostaje na urządzeniu.” (151)

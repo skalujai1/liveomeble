@@ -1,0 +1,218 @@
+---
+// Pełny doradca wnętrz w czterech krokach: zdjęcie → pokój i kolory → komplety → gdzie kupić.
+// Logikę doboru i analizy zdjęć dzieli z małym czatem (liveo-assistant/widget: engine.js, recommender.js).
+// Zachowanie: src/scripts/advisor.ts. Bez JS widać krok 1, a kafle pomieszczeń prowadzą do /pomieszczenia/<slug>/.
+import Media from './Media.astro';
+import StoreFinder from './StoreFinder.astro';
+import { ASSISTANT, CHAT_URL } from '../config';
+import { roomImage } from '../lib/images';
+import { boardFinishes, rooms } from '../lib/site';
+
+interface Props { tool: any }
+const { tool } = Astro.props;
+const steps: { label: string; title: string; text: string }[] = tool.steps;
+
+const base = ASSISTANT.scriptUrl.replace(/[^/]+$/, '');
+const boot = {
+  engineUrl: `${base}engine.js`,
+  catalogUrl: `${base}../data/catalog.json`,
+  embeddingsUrl: `${base}../data/text-embeddings.json`,
+  chatUrl: CHAT_URL,
+  rooms: Object.fromEntries(rooms.map(r => [r.assistantKey, { slug: r.slug, name: r.name, accusative: r.accusative, genitive: r.genitive }])),
+  finishHex: Object.fromEntries(boardFinishes.map(f => [f.label.toLocaleLowerCase('pl'), f.hex])),
+  ask: tool.ask,
+};
+const budgets = [500, 800, 1000, 1500, 2000];
+const tones = [{ v: '1', label: 'Jaśniejsze' }, { v: '0', label: 'Jak wnętrze' }, { v: '-1', label: 'Ciemniejsze' }];
+const check = '<path d="M20 6 9 17l-5-5"/>';
+---
+<section class="advisor" id="doradca" aria-labelledby="doradca-tytul" data-advisor>
+  <div class="container">
+    <h2 class="visually-hidden" id="doradca-tytul">Doradca wnętrz w czterech krokach</h2>
+    <nav class="advisor-steps" aria-label="Kroki doradcy" style="--i: 0">
+      <ol class="advisor-steps__list">
+        {steps.map((s, i) => (
+          <li class="advisor-steps__item">
+            <button class="advisor-steps__btn" type="button" data-step-tab={i} aria-current={i === 0 ? 'step' : undefined} disabled={i > 0}>
+              <span class="advisor-steps__n" aria-hidden="true">
+                <span class="advisor-steps__num">{i + 1}</span>
+                <svg class="ico advisor-steps__check" viewBox="0 0 24 24" set:html={check} />
+              </span>
+              <span class="advisor-steps__label"><span class="visually-hidden">Krok {i + 1}: </span>{s.label}</span>
+            </button>
+          </li>
+        ))}
+      </ol>
+      <span class="advisor-steps__marker" aria-hidden="true"></span>
+      <p class="advisor-steps__now" aria-hidden="true">Krok <b data-step-n>1</b> z {steps.length} · <span data-step-label>{steps[0].label}</span></p>
+    </nav>
+
+    <!-- Krok 1: zdjęcie albo pomieszczenie -->
+    <div class="advisor-panel" data-panel="0" aria-labelledby="krok-1">
+      <header class="advisor-panel__head">
+        <h2 class="advisor-panel__title" id="krok-1" tabindex="-1">{steps[0].title}</h2>
+        <p class="advisor-panel__text">{steps[0].text}</p>
+      </header>
+      <div class="advisor-start">
+        <div class="advisor-drop" data-drop>
+          <svg class="ico advisor-drop__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z" /><circle cx="12" cy="13" r="3.2" /></svg>
+          <p class="advisor-drop__title">{tool.drop.title}</p>
+          <p class="advisor-drop__hint" data-desktop-only>{tool.drop.hint}</p>
+          <div class="advisor-drop__actions">
+            <button class="btn btn--primary" type="button" data-pick="camera" hidden>{tool.drop.camera}</button>
+            <button class="btn btn--primary" type="button" data-pick="file" data-label-touch={tool.drop.gallery}>{tool.drop.pick}</button>
+          </div>
+          <p class="advisor-drop__formats">{tool.drop.formats}</p>
+          <p class="advisor-drop__error" role="alert" data-drop-error hidden></p>
+          <input type="file" accept="image/*" hidden aria-label={tool.drop.pick} data-file />
+          <input type="file" accept="image/*" capture="environment" hidden aria-label={tool.drop.camera} data-camera />
+          <div class="advisor-drop__over" aria-hidden="true">Upuść zdjęcie</div>
+        </div>
+        <div class="advisor-rooms">
+          <h3 class="advisor-rooms__title">{tool.rooms.title}</h3>
+          <ul class="advisor-rooms__list">
+            {rooms.map(r => (
+              <li>
+                <a class="advisor-room" href={`/pomieszczenia/${r.slug}/`} data-room={r.assistantKey}>
+                  <Media image={roomImage(r.slug, 'wide')} alt="" widths={[320, 480, 640]} sizes="(min-width: 64rem) 13rem, 45vw" ratio="3 / 2" placeholderLabel={r.name} />
+                  <span class="advisor-room__name">{r.name}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p class="advisor-rooms__note">{tool.rooms.note}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Krok 2: co widzi doradca -->
+    <div class="advisor-panel" data-panel="1" aria-labelledby="krok-2" hidden>
+      <header class="advisor-panel__head">
+        <h2 class="advisor-panel__title" id="krok-2" tabindex="-1">{steps[1].title}</h2>
+        <p class="advisor-panel__text">{steps[1].text}</p>
+        <button class="advisor-panel__restart link-button" type="button" data-restart>Zacznij od nowa</button>
+      </header>
+      <div class="advisor-seen">
+        <figure class="advisor-photo">
+          <div class="advisor-photo__frame" data-photo-frame>
+            <div class="advisor-photo__empty" data-photo-empty>
+              <p>Bez zdjęcia</p>
+              <button class="btn btn--secondary" type="button" data-go="0">Dodaj zdjęcie</button>
+            </div>
+          </div>
+          <div class="advisor-palette" data-palette hidden></div>
+          <figcaption class="advisor-photo__caption" data-palette-caption hidden>Kolory z Twojego zdjęcia</figcaption>
+        </figure>
+        <div class="advisor-seen__body" aria-live="polite">
+          <ul class="advisor-progress" data-progress hidden>
+            {['Wczytuję zdjęcie', 'Sprawdzam, co jest na zdjęciu', 'Rozpoznaję styl i kolory'].map(l => (
+              <li><span class="advisor-progress__ic" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" set:html={check} /></span><span>{l}</span><span class="advisor-progress__note"></span></li>
+            ))}
+          </ul>
+          <p class="advisor-seen__lead" data-seen-lead></p>
+          <div class="advisor-seen__form" data-seen-form hidden>
+            <fieldset class="chip-filter advisor-choice">
+              <legend class="chip-filter__legend">Pomieszczenie</legend>
+              {rooms.map(r => <label class="check"><input type="radio" name="pokoj-2" value={r.assistantKey} data-room-radio />{r.name}</label>)}
+            </fieldset>
+            <fieldset class="chip-filter advisor-choice">
+              <legend class="chip-filter__legend">Meble względem wnętrza</legend>
+              {tones.map(t => <label class="check"><input type="radio" name="ton-2" value={t.v} checked={t.v === '0'} data-tone-radio />{t.label}</label>)}
+            </fieldset>
+            <p class="cta-row">
+              <button class="btn btn--primary" type="button" data-show-sets disabled>Pokaż komplety</button>
+              <button class="btn btn--secondary" type="button" data-go="0">Inne zdjęcie</button>
+            </p>
+          </div>
+          <p class="cta-row" data-problem hidden>
+            <button class="btn btn--primary" type="button" data-go="0">Dodaj inne zdjęcie</button>
+            <button class="btn btn--secondary" type="button" data-force-room>To jest pomieszczenie</button>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Krok 3: komplety -->
+    <div class="advisor-panel" data-panel="2" aria-labelledby="krok-3" hidden>
+      <header class="advisor-panel__head">
+        <h2 class="advisor-panel__title" id="krok-3" tabindex="-1">{steps[2].title}</h2>
+        <p class="advisor-panel__text">{steps[2].text}</p>
+        <button class="advisor-panel__restart link-button" type="button" data-restart>Zacznij od nowa</button>
+      </header>
+      <div class="advisor-work">
+        <aside class="advisor-filters" aria-label="Ustawienia propozycji">
+          <div class="advisor-summary" data-summary>
+            <span class="advisor-summary__thumb" data-summary-thumb hidden></span>
+            <div>
+              <p class="advisor-summary__room" data-summary-room></p>
+              <div class="advisor-palette advisor-palette--small" data-summary-palette></div>
+            </div>
+            <button class="link-button" type="button" data-go="1">Zmień</button>
+          </div>
+
+          <form class="advisor-ask" data-ask novalidate>
+            <label class="field__label" for="doradca-pytanie">{tool.ask.label}</label>
+            <div class="advisor-ask__row">
+              <input class="field__control" id="doradca-pytanie" name="q" type="text" autocomplete="off" enterkeyhint="search" placeholder={tool.ask.placeholder} maxlength="200" />
+              <button class="btn btn--dark" type="submit">{tool.ask.submit}</button>
+            </div>
+            <p class="advisor-ask__examples">
+              Na przykład: {tool.ask.examples.map((e: string, i: number) => <>{i > 0 && ', '}<button class="link-button" type="button" data-example>{e}</button></>)}
+            </p>
+            <p class="advisor-ask__reply" role="status" data-ask-reply hidden></p>
+          </form>
+
+          <details class="advisor-settings" data-settings open>
+            <summary class="advisor-settings__summary">Pomieszczenie, ton, budżet i rodzaj mebla</summary>
+            <div class="advisor-settings__body">
+              <div class="field">
+                <label class="field__label" for="doradca-pokoj">Pomieszczenie</label>
+                <select class="field__control" id="doradca-pokoj" data-f-room>
+                  {rooms.map(r => <option value={r.assistantKey}>{r.name}</option>)}
+                </select>
+              </div>
+              <fieldset class="chip-filter advisor-choice">
+                <legend class="chip-filter__legend">Meble względem wnętrza</legend>
+                {tones.map(t => <label class="check"><input type="radio" name="ton-3" value={t.v} checked={t.v === '0'} data-tone-radio />{t.label}</label>)}
+              </fieldset>
+              <div class="field">
+                <label class="field__label" for="doradca-budzet">Budżet na jeden mebel</label>
+                <select class="field__control" id="doradca-budzet" data-f-budget>
+                  <option value="">Bez limitu</option>
+                  {budgets.map(b => <option value={b}>do {b.toLocaleString('pl-PL')} zł</option>)}
+                </select>
+              </div>
+              <div class="field">
+                <label class="field__label" for="doradca-rodzaj">Rodzaj mebla</label>
+                <select class="field__control" id="doradca-rodzaj" data-f-type>
+                  <option value="">Cały komplet</option>
+                </select>
+              </div>
+              <label class="check advisor-cheaper"><input type="checkbox" data-f-cheaper />Najpierw tańsze komplety</label>
+            </div>
+          </details>
+        </aside>
+        <div class="advisor-results" data-results aria-live="polite"></div>
+      </div>
+    </div>
+
+    <!-- Krok 4: gdzie kupić -->
+    <div class="advisor-panel" data-panel="3" aria-labelledby="krok-4" hidden>
+      <header class="advisor-panel__head">
+        <h2 class="advisor-panel__title" id="krok-4" tabindex="-1">{steps[3].title}</h2>
+        <p class="advisor-panel__text">{steps[3].text}</p>
+        <button class="advisor-panel__restart link-button" type="button" data-restart>Zacznij od nowa</button>
+      </header>
+      <div class="advisor-shops">
+        <div class="advisor-chosen" data-chosen></div>
+        <StoreFinder id="doradca-sklepy" headingLevel={3} limit={4} more={{ label: 'Wszystkie sklepy i mapa', href: '/gdzie-kupic/' }} />
+      </div>
+    </div>
+  </div>
+  <script type="application/json" is:inline data-advisor-boot set:html={JSON.stringify(boot).replace(/</g, '\\u003c')} />
+</section>
+
+<script>
+  import { initAdvisor } from '../scripts/advisor';
+  initAdvisor();
+</script>

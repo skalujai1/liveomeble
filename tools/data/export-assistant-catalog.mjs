@@ -84,6 +84,7 @@ for (const p of products) {
       rooms: assistantRooms(p),
       price: price.price,
       regular: price.regular,
+      lowest30: price.lowest30, // Omnibus: przekreślona cena tylko razem z tą linią (site.json price.rules)
       url: `/produkt/${p.slug}/`,
       img: `/media/produkty/${p.sku}--${v.code}.webp`,
       color: colorProfile(v.finish, p.model3d, v.colorLabel),

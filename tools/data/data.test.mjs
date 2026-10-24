@@ -2,6 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { validateData } from './validate.mjs';
 import { priceFor } from '../../src/lib/pricing.js';
 
@@ -71,7 +72,7 @@ test('eksport katalogu doradcy: format widżetu, jeden rekord na wariant, ceny z
   const dir = mkdtempSync(join(tmpdir(), 'liveo-catalog-'));
   try {
     const out = join(dir, 'catalog.json');
-    const script = new URL('./export-assistant-catalog.mjs', import.meta.url).pathname;
+    const script = fileURLToPath(new URL('./export-assistant-catalog.mjs', import.meta.url)); // .pathname psuje ścieżkę na Windows (/D:/…)
     execFileSync(process.execPath, [script, `--now=${NOON}`, `--out=${out}`], { stdio: 'pipe' });
     const cat = JSON.parse(readFileSync(out, 'utf8'));
     const keys = new Set(['salon', 'jadalnia', 'kuchnia', 'sypialnia', 'mlodziezowy', 'biuro', 'przedpokoj']);

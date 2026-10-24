@@ -151,7 +151,7 @@ class LiveoAssistant {
   }
 
   buildPanel() {
-    this.status = h('p', { class: 'status' }, 'Komplet mebli do zdjęcia pokoju');
+    this.status = h('p', { class: 'status' });
     this.messages = h('div', { class: 'messages', role: 'log', 'aria-live': 'polite', 'aria-label': 'Rozmowa' });
     this.fileInput = h('input', { type: 'file', accept: 'image/*', hidden: true, onchange: e => this.onFiles(e.target.files) });
     this.cameraInput = h('input', { type: 'file', accept: 'image/*', capture: 'environment', hidden: true, onchange: e => this.onFiles(e.target.files) });
@@ -232,8 +232,7 @@ class LiveoAssistant {
   }
 
   setStatus(text) {
-    this.status.classList.toggle('loading', !!text);
-    this.status.textContent = text || 'Komplet mebli do zdjęcia pokoju';
+    this.status.textContent = text || '';
   }
 
   // ----- przejście na podstronę ----------------------------------------------------
@@ -613,7 +612,9 @@ class LiveoAssistant {
         off >= 5 && h('span', { class: 'badge' }, `−${off}%`)),
       h('span', { class: 'name' }, name),
       p.color && h('span', { class: 'color' }, p.color.label),
-      h('span', { class: 'price' + (p.regular ? ' on-sale' : '') }, h('b', null, formatPrice(p.price)), p.regular && h('s', null, formatPrice(p.regular))));
+      h('span', { class: 'price' + (p.regular ? ' on-sale' : '') }, h('b', null, formatPrice(p.price)), p.regular && h('s', null, formatPrice(p.regular))),
+      // Omnibus: przekreślona cena zawsze razem z najniższą ceną z 30 dni przed obniżką
+      p.regular && h('span', { class: 'lowest' }, `Najniższa z 30 dni: ${formatPrice(p.lowest30 ?? p.regular)}`));
   }
 
   buildSetSummary(set) {
