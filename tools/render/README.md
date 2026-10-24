@@ -38,6 +38,18 @@ Definicje pokoi (meble, dekor, kamery, słońce, miejsce na tekst): `web/js/room
 (`--samples N`). Czas na 4 rdzeniach CPU (SwiftShader): ~4,5 min kadr wide + ~2,5 min kadr tall, czyli ~7 min na pokój
 i ~45–55 min cały zestaw; packshot 1600×1200 przy 128–160 próbkach: ~3–5 min.
 
+## Aranżacje kolekcji (każda kolekcja we własnym wnętrzu)
+
+```bash
+RENDER_PORT=8802 node tools/render/collections.mjs                 # wszystkie → src/assets/renders/collections/<slug>-wide|tall.jpg
+node tools/render/collections.mjs --only nokta --preview --frame wide --scale 0.3 --samples 16 --out /tmp/podglad
+```
+
+Scena = pokój z `web/js/rooms.js` zgodny z `heroRoom` kolekcji, w którym meble bazowe zastępują meble kolekcji
+(`model3d` z `src/data/products.json` w kolorze wybranego wariantu); mapa SKU → klucz modelu w `SCENES` w `collections.mjs`.
+Pozycje dekoracji liczone są z wymiarów mebla. `src/lib/images.ts` bierze `collections/<slug>` przed poglądowym zdjęciem
+pomieszczenia. Czas: ~6–8 min na kadr wide i ~3–4 min tall (4 rdzenie, przy równoległych packshotach).
+
 ## Budowa
 
 - `web/js/furniture.js` — meble z `model3d` (korpus z płyt 1,8 cm, fronty ze szczelinami 3 mm, uchwyty, podstawy, łóżko z pościelą, stoły, lustra, wieszak),

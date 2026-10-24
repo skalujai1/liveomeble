@@ -356,11 +356,13 @@ export async function renderRoom(engine, job) {
   const r = engine.renderer;
   const t0 = performance.now();
   const scene = new THREE.Scene();
-  const R = def.room;
+  // job.roomPatch: zmiana kolorów ścian/podłogi (aranżacje kolekcji), job.models: meble kolekcji zamiast domyślnych
+  const P = job.roomPatch || {};
+  const R = { ...def.room, ...P, walls: { ...(def.room.walls || {}), ...(P.walls || {}) }, floor: { ...def.room.floor, ...(P.floor || {}) } };
   const shell = buildShell(scene, R);
   const content = new THREE.Group();
   scene.add(content);
-  def.populate(content, { frame: job.frame });
+  def.populate(content, { frame: job.frame, models: job.models });
   // warstwy: zawartość rzuca cienie odbite i dzienne
   content.traverse((o) => {
     if ((o.isMesh || o.isInstancedMesh) && !o.userData.layersSet) {

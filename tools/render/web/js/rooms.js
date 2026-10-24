@@ -30,6 +30,13 @@ function cellFloors(spec) {
   return out;
 }
 
+/** Wysokość haczyków wieszaka (jak w furniture.js buildCoatRack) — do wieszania kapelusza i torby. */
+function hookY(spec) {
+  const H = spec.h / 100;
+  const y0 = (spec.mountH ?? (spec.legH > 0 ? spec.legH : 100)) / 100;
+  return H > 0.45 ? y0 + H - 0.2 : y0 + H * 0.62;
+}
+
 // ---------------------------------------------------------------------------------------------
 // Modele mebli użyte w aranżacjach (format model3d)
 // ---------------------------------------------------------------------------------------------
@@ -100,15 +107,17 @@ export const ROOMS = {
     light: { sunIntensity: 4.2, skyIntensity: 2.8, bounce: 2.2, exposure: 1 },
     post: { warmth: 0.0 },
     capture: [0.3, 1.3, 2.4],
-    populate(g) {
+    populate(g, o = {}) {
+      const m = { ...M, ...(o.models || {}) };
       const x = 0.55;
-      atBack(g, M.rtv180, x);
-      const top = 0.5;
+      atBack(g, m.rtv180, x);
+      const top = m.rtv180.h / 100;
+      const half = m.rtv180.w / 200;
       put(g, D.framedArt({ w: 0.62, h: 0.84, style: 'arches', frame: 'oak', palette: { bg: '#efe9df', a: '#c26e4b', b: '#dcc29b', c: '#7a8467', d: '#2e2b28' } }), x - 0.33, 1.46, 0);
       put(g, D.framedArt({ w: 0.42, h: 0.54, style: 'lines', frame: 'black', palette: { bg: '#f2eee7', a: '#c9a27a', d: '#3a3633' } }), x + 0.42, 1.33, 0);
-      put(g, D.vaseWithBranches({ h: 0.3, color: '#e6e0d4', seed: 5 }), x + 0.68, top, 0.2);
-      const books = put(g, D.bookStack({ count: 3, seed: 4, colors: ['#e3dccd', '#b8a58a', '#7d8a72'] }), x - 0.63, top, 0.22, 8);
-      put(g, D.smallVase({ h: 0.14, color: '#2e2b29' }), x - 0.63, top + books.userData.height, 0.22);
+      put(g, D.vaseWithBranches({ h: 0.3, color: '#e6e0d4', seed: 5 }), x + half - 0.22, top, 0.2);
+      const books = put(g, D.bookStack({ count: 3, seed: 4, colors: ['#e3dccd', '#b8a58a', '#7d8a72'] }), x - half + 0.27, top, 0.22, 8);
+      put(g, D.smallVase({ h: 0.14, color: '#2e2b29' }), x - half + 0.27, top + books.userData.height, 0.22);
       put(g, D.bowl({ d: 0.24, h: 0.07, color: '#cbbfae' }), x - 0.2, top, 0.24);
       put(g, D.oliveTree({ h: 1.75, seed: 11 }), 2.1, 0, 0.5);
       put(g, D.armchair({ color: '#e3dccf', kind: 'boucle', seed: 4 }), 1.0, 0, 2.45, -32);
@@ -134,16 +143,17 @@ export const ROOMS = {
     light: { sunIntensity: 3.9, skyIntensity: 2.8, bounce: 2.2, exposure: 1 },
     post: { warmth: 0.005 },
     capture: [-0.3, 1.3, 2.4],
-    populate(g) {
+    populate(g, o = {}) {
+      const m = { ...M, ...(o.models || {}) };
       const kx = -0.7;
-      atBack(g, M.komoda120, kx);
-      const top = 0.86;
-      put(g, D.wallMounted(buildModel(M.lustroLuk)), kx, 0, 0.03);
-      put(g, D.tableLamp({ baseColor: '#e9e4da', shadeColor: '#efe8dc', h: 0.52 }), kx - 0.4, top, 0.22);
+      atBack(g, m.komoda120, kx);
+      const top = m.komoda120.h / 100;
+      put(g, D.wallMounted(buildModel({ ...m.lustroLuk, legH: Math.max(m.lustroLuk.legH, m.komoda120.h + 22) })), kx, 0, 0.03);
+      put(g, D.tableLamp({ baseColor: '#e9e4da', shadeColor: '#efe8dc', h: 0.52 }), kx - Math.min(0.4, m.komoda120.w / 200 - 0.18), top, 0.22);
       const books = put(g, D.bookStack({ count: 2, seed: 9, colors: ['#e7e0d2', '#c4a98a'] }), kx + 0.4, top, 0.22, -6);
       put(g, D.vaseWithBranches({ h: 0.24, color: '#3a3532', seed: 21, shape: 'round', branchH: 0.9 }), kx + 0.4, top + books.userData.height, 0.22);
       put(g, D.candle({ h: 0.1 }), kx + 0.12, top, 0.26);
-      atBack(g, M.witryna, 0.45);
+      atBack(g, m.witryna, 0.45);
       put(g, D.rug({ w: 2.4, d: 1.7, base: '#e2dbcf', line: '#c9bca7', pattern: 'stripes' }), -0.4, 0, 1.55);
       put(g, D.basket({ r: 0.19, h: 0.3, color: '#b89c78' }), -1.65, 0, 0.35);
       put(g, D.armchair({ color: '#d8cdbd', kind: 'linen', seed: 8 }), -1.15, 0, 2.5, 30);
@@ -168,15 +178,18 @@ export const ROOMS = {
     light: { sunIntensity: 3.4, skyIntensity: 3.0, bounce: 2.2, exposure: 1 },
     post: { warmth: 0.005 },
     capture: [0.6, 1.3, 2.8],
-    populate(g) {
+    populate(g, o = {}) {
+      const m = { ...M, ...(o.models || {}) };
       const bx = 0.95;
-      put(g, buildModel(M.lozko160), bx, 0, 1.07 + 0.02);
+      put(g, buildModel(m.lozko160), bx, 0, m.lozko160.d / 200 + 0.02);
+      const nOff = m.lozko160.w / 200 + 0.06 + m.nocna.w / 200;
+      const nTop = m.nocna.h / 100;
       for (const sx of [-1, 1]) {
-        const nx = bx + sx * (0.88 + 0.06 + 0.25);
-        atBack(g, M.nocna, nx);
-        put(g, D.tableLamp({ baseColor: '#d8d0c3', shadeColor: '#efe8dc', h: 0.46 }), nx + sx * 0.05, 0.56, 0.2);
+        const nx = bx + sx * nOff;
+        atBack(g, m.nocna, nx);
+        put(g, D.tableLamp({ baseColor: '#d8d0c3', shadeColor: '#efe8dc', h: 0.46 }), nx + sx * 0.05, nTop, 0.2);
       }
-      put(g, D.bookStack({ count: 2, seed: 12, colors: ['#e6dfd1', '#7d8a72'] }), bx - 1.19 + 0.1, 0.56, 0.26, 12);
+      put(g, D.bookStack({ count: 2, seed: 12, colors: ['#e6dfd1', '#7d8a72'] }), bx - nOff + 0.1, nTop, 0.26, 12);
       put(g, D.framedArt({ w: 1.0, h: 0.7, style: 'landscape', frame: 'oak', palette: { bg: '#efe9df', a: '#c9875f', b: '#dccbb0', c: '#a7ae97', d: '#5e6a58' } }), bx, 1.62, 0);
       put(g, D.rug({ w: 2.6, d: 2.0, base: '#e5ded2', line: '#cdbfaa', pattern: 'diamond' }), bx, 0, 1.75);
       put(g, D.vaseWithBranches({ h: 0.36, color: '#cfc6b8', seed: 33, shape: 'round', branchH: 1.0, spread: 1.2 }), -0.75, 0, 0.35);
@@ -201,23 +214,27 @@ export const ROOMS = {
     light: { sunIntensity: 3.9, skyIntensity: 2.8, bounce: 2.2, exposure: 1 },
     post: { warmth: 0.0 },
     capture: [0.6, 1.3, 2.6],
-    populate(g) {
+    populate(g, o = {}) {
+      const m = { ...M, ...(o.models || {}) };
       const tx = 0.9, tz = 2.2;
-      put(g, buildModel(M.stol160), tx, 0, tz);
+      put(g, buildModel(m.stol160), tx, 0, tz);
       const ch = { finish: 'dab-naturalny', seatColor: '#d6ccbc' };
       put(g, D.chair(ch), tx - 0.4, 0, tz - 0.62, 3);
       put(g, D.chair(ch), tx + 0.42, 0, tz - 0.6, -4);
-      put(g, D.chair(ch), tx + 1.06, 0, tz + 0.02, -90 + 3);
+      put(g, D.chair(ch), tx + m.stol160.w / 200 + 0.26, 0, tz + 0.02, -90 + 3);
       put(g, D.chair(ch), tx + 0.38, 0, tz + 0.7, 180 + 6);
       put(g, D.pendantLamp({ drop: 1.0, r: 0.22 }), tx, 2.8, tz);
       put(g, D.bowl({ d: 0.32, h: 0.09, color: '#d4c8b6' }), tx + 0.25, 0.76, tz + 0.05);
       put(g, D.vaseWithBranches({ h: 0.26, color: '#ece6dc', seed: 41, branchH: 0.85 }), tx - 0.3, 0.76, tz - 0.05);
-      atBack(g, M.sideboardOrzech, 1.1);
-      put(g, D.framedArt({ w: 0.5, h: 0.7, style: 'blobs', frame: 'black', palette: { bg: '#efe9df', a: '#b8613f', b: '#d8c3a0', c: '#88907a', d: '#2b2927' } }), 0.82, 1.38, 0);
-      put(g, D.framedArt({ w: 0.5, h: 0.7, style: 'blocks', frame: 'black', palette: { bg: '#efe9df', a: '#c47a54', b: '#e0cfb1', c: '#7f8a76', d: '#2b2927' } }), 1.42, 1.38, 0);
-      put(g, D.smallVase({ h: 0.22, color: '#c9bba6', shape: 1 }), 0.5, 0.78, 0.22);
-      put(g, D.smallVase({ h: 0.14, color: '#2e2b29' }), 0.62, 0.78, 0.25);
-      put(g, D.bookStack({ count: 2, seed: 8, colors: ['#e3dccd', '#b4654a'] }), 1.7, 0.78, 0.23, 5);
+      atBack(g, m.sideboardOrzech, 1.1);
+      const sTop = m.sideboardOrzech.h / 100;
+      const sHalf = m.sideboardOrzech.w / 200;
+      const artY = Math.max(1.38, sTop + 0.6);
+      put(g, D.framedArt({ w: 0.5, h: 0.7, style: 'blobs', frame: 'black', palette: { bg: '#efe9df', a: '#b8613f', b: '#d8c3a0', c: '#88907a', d: '#2b2927' } }), 0.82, artY, 0);
+      put(g, D.framedArt({ w: 0.5, h: 0.7, style: 'blocks', frame: 'black', palette: { bg: '#efe9df', a: '#c47a54', b: '#e0cfb1', c: '#7f8a76', d: '#2b2927' } }), 1.42, artY, 0);
+      put(g, D.smallVase({ h: 0.22, color: '#c9bba6', shape: 1 }), 1.1 - sHalf + 0.2, sTop, 0.22);
+      put(g, D.smallVase({ h: 0.14, color: '#2e2b29' }), 1.1 - sHalf + 0.32, sTop, 0.25);
+      put(g, D.bookStack({ count: 2, seed: 8, colors: ['#e3dccd', '#b4654a'] }), 1.1 + sHalf - 0.2, sTop, 0.23, 5);
     },
     cameras: {
       wide: { pos: [-0.6, 1.2, 5.9], yaw: 8, fov: 36, shiftY: 0.05 },
@@ -239,16 +256,29 @@ export const ROOMS = {
     light: { sunIntensity: 3.9, skyIntensity: 3.0, bounce: 2.3, exposure: 1 },
     post: { warmth: 0.005 },
     capture: [0.2, 1.3, 2.4],
-    populate(g) {
-      atBack(g, M.szafkaNaButy, 0.45);
-      put(g, D.wallMounted(buildModel(M.lustroLuk)), 0.2, 0, 0.03);
-      put(g, D.wallMounted(buildModel(M.wieszak)), 1.25, 0, 0.05);
-      const h = put(g, D.hat({ color: '#c8b28a' }), 1.25 - 0.36, 1.55, 0.13);
+    populate(g, o = {}) {
+      const m = { ...M, ...(o.models || {}) };
+      atBack(g, m.szafkaNaButy, 0.45);
+      const bTop = m.szafkaNaButy.h / 100;
+      const bHalf = m.szafkaNaButy.w / 200;
+      // lustro niskie — nad szafką; wysokie (od ~70 cm nad podłogą) — obok szafki, po lewej
+      const mirror = { ...m.lustroLuk };
+      const tallMirror = mirror.h >= 120;
+      if (!tallMirror) {
+        if (mirror.base === 'hanging') mirror.mountH = Math.max(mirror.mountH ?? 0, m.szafkaNaButy.h + 15);
+        else mirror.legH = Math.max(mirror.legH ?? 0, m.szafkaNaButy.h + 15);
+      }
+      const mirrorX = tallMirror ? 0.45 - bHalf - 0.12 - mirror.w / 200 : 0.2;
+      put(g, D.wallMounted(buildModel(mirror)), mirrorX, 0, 0.03);
+      put(g, D.wallMounted(buildModel(m.wieszak)), 1.25, 0, 0.05);
+      const dy = hookY(m.wieszak) - hookY(M.wieszak);
+      const rackHalf = m.wieszak.w / 200;
+      const h = put(g, D.hat({ color: '#c8b28a' }), 1.25 - rackHalf * 0.78, 1.55 + dy, 0.13);
       h.rotation.set(-0.25, 0, 0);
-      put(g, D.toteBag({ color: '#cbb894' }), 1.25 + 0.18, 1.58, 0.12).rotation.z = 0.05;
-      put(g, D.vaseWithBranches({ h: 0.22, color: '#e9e3d8', seed: 14, branchH: 0.9 }), 0.78, 0.92, 0.18);
-      put(g, D.bowl({ d: 0.18, h: 0.05, color: '#2e2b29' }), 0.48, 0.92, 0.2);
-      put(g, D.basket({ r: 0.17, h: 0.36, color: '#b99d77' }), -0.55, 0, 0.3);
+      put(g, D.toteBag({ color: '#cbb894' }), 1.25 + rackHalf * 0.39, 1.58 + dy, 0.12).rotation.z = 0.05;
+      put(g, D.vaseWithBranches({ h: 0.22, color: '#e9e3d8', seed: 14, branchH: 0.9 }), 0.45 + bHalf - 0.22, bTop, 0.18);
+      put(g, D.bowl({ d: 0.18, h: 0.05, color: '#2e2b29' }), 0.45 + bHalf - 0.52, bTop, 0.2);
+      put(g, D.basket({ r: 0.17, h: 0.36, color: '#b99d77' }), tallMirror ? mirrorX - mirror.w / 200 - 0.35 : -0.55, 0, 0.3);
       put(g, D.rug({ w: 0.9, d: 1.8, base: '#e2dacb', line: '#b9a98f', pattern: 'stripes' }), 0.45, 0, 1.45);
     },
     cameras: {
@@ -271,9 +301,10 @@ export const ROOMS = {
     light: { sunIntensity: 3.9, skyIntensity: 2.8, bounce: 2.2, exposure: 1 },
     post: { warmth: 0.0 },
     capture: [0.5, 1.3, 2.4],
-    populate(g) {
+    populate(g, o = {}) {
+      const m = { ...M, ...(o.models || {}) };
       const dx = 0.55;
-      atBack(g, M.biurko120, dx, 0.03);
+      atBack(g, m.biurko120, dx, 0.03);
       put(g, D.chair({ finish: 'dab-naturalny', seatColor: '#cfc3b1' }), dx - 0.18, 0, 0.92, 180 + 14);
       put(g, D.deskLamp({ metal: 'czarny' }), dx - 0.45, 0.76, 0.2, 20);
       put(g, D.bookStack({ count: 3, seed: 17, colors: ['#e3dccd', '#7d8a72', '#c9b79c'] }), dx + 0.28, 0.76, 0.2, -8);
@@ -281,17 +312,19 @@ export const ROOMS = {
       put(g, D.framedArt({ w: 0.5, h: 0.65, style: 'blobs', frame: 'oak', palette: { bg: '#f0ebe2', a: '#c0714d', b: '#d9c5a2', c: '#8e9a80', d: '#2f2c29' } }), dx - 0.15, 1.42, 0);
       put(g, D.framedArt({ w: 0.32, h: 0.42, style: 'lines', frame: 'black', palette: { bg: '#f2eee7', a: '#9aa58f', d: '#3a3633' } }), dx + 0.36, 1.32, 0);
       const rx = 1.78;
-      atBack(g, M.regal80, rx);
-      const cells = cellFloors(M.regal80);
+      atBack(g, m.regal80, rx);
+      const cells = cellFloors(m.regal80);
       const zS = 0.2;
-      put(g, D.bookRow({ length: 0.42, maxH: 0.27, seed: 3 }), rx - 0.12, cells[0].y0, zS);
-      put(g, D.smallVase({ h: 0.16, color: '#2e2b29' }), rx + 0.22, cells[0].y0, zS);
-      put(g, D.bowl({ d: 0.2, h: 0.06, color: '#d4c8b6' }), rx - 0.16, cells[1].y0, zS);
-      put(g, D.bookStack({ count: 3, seed: 5 }), rx + 0.16, cells[1].y0, zS, 4);
-      put(g, D.bookRow({ length: 0.6, maxH: 0.28, seed: 7 }), rx, cells[2].y0, zS);
-      put(g, D.smallVase({ h: 0.2, color: '#cfc6b8', shape: 1 }), rx - 0.18, cells[3].y0, zS);
-      put(g, D.bookRow({ length: 0.3, maxH: 0.26, seed: 9 }), rx + 0.14, cells[3].y0, zS);
-      put(g, D.basket({ r: 0.15, h: 0.24, color: '#bba07c' }), rx, cells[4].y0, zS - 0.01);
+      const k = m.regal80.w / 80;
+      const open = (i) => m.regal80.columns[0].cells[i]?.t === 'open';
+      if (open(0)) put(g, D.bookRow({ length: 0.42 * k, maxH: 0.27, seed: 3 }), rx - 0.12 * k, cells[0].y0, zS);
+      if (open(0)) put(g, D.smallVase({ h: 0.16, color: '#2e2b29' }), rx + 0.22 * k, cells[0].y0, zS);
+      if (open(1)) put(g, D.bowl({ d: Math.min(0.2, 0.16 * k + 0.04), h: 0.06, color: '#d4c8b6' }), rx - 0.16 * k, cells[1].y0, zS);
+      if (open(1)) put(g, D.bookStack({ count: 3, seed: 5 }), rx + 0.16 * k, cells[1].y0, zS, 4);
+      if (open(2)) put(g, D.bookRow({ length: 0.6 * k, maxH: 0.28, seed: 7 }), rx, cells[2].y0, zS);
+      if (open(3)) put(g, D.smallVase({ h: 0.2, color: '#cfc6b8', shape: 1 }), rx - 0.18 * k, cells[3].y0, zS);
+      if (open(3)) put(g, D.bookRow({ length: 0.3 * k, maxH: 0.26, seed: 9 }), rx + 0.14 * k, cells[3].y0, zS);
+      if (open(4)) put(g, D.basket({ r: Math.min(0.15, 0.12 * k + 0.03), h: 0.24, color: '#bba07c' }), rx, cells[4].y0, zS - 0.01);
       put(g, D.oliveTree({ h: 1.55, seed: 23, potR: 0.18, potH: 0.36 }), 2.55, 0, 0.5);
       put(g, D.rug({ w: 2.0, d: 1.5, base: '#e3dccf', line: '#b8ab95', pattern: 'stripes' }), dx, 0, 1.15);
     },
