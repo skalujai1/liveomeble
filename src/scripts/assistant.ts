@@ -15,9 +15,7 @@ let loading: Promise<void> | null = null;
 function load(boot: Boot): Promise<void> {
   if (loading) return loading;
   loading = new Promise<void>((resolve, reject) => {
-    // Dymek z podpowiedzią tylko na szerszych ekranach — na telefonie zasłaniał treść strony.
-    const teaser = window.matchMedia('(min-width: 48rem)').matches;
-    window.LiveoAssistantConfig = { teaser, ...boot.config, ...(window.LiveoAssistantConfig || {}) };
+    window.LiveoAssistantConfig = { ...boot.config, ...(window.LiveoAssistantConfig || {}) };
     // Widżet dołącza Google Fonts, jeśli nie znajdzie link[data-liveo-fonts] — dajemy mu lokalny arkusz.
     if (!document.querySelector('link[data-liveo-fonts]')) {
       const link = document.createElement('link');

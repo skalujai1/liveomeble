@@ -5,19 +5,19 @@
 // dobranym do stylu i barw zdjęcia. Kolejne propozycje to kolejne kolekcje.
 
 export const ROOMS = {
-  salon:       { label: 'Salon', name: 'salon', acc: 'salon', gen: 'salonu', emoji: '🛋️',
+  salon:       { label: 'Salon', name: 'salon', acc: 'salon', gen: 'salonu',
                  types: ['rtv', 'komoda', 'witryna', 'regal', 'lawa', 'polka'] },
-  jadalnia:    { label: 'Jadalnia', name: 'jadalnia', acc: 'jadalnię', gen: 'jadalni', emoji: '🍽️',
+  jadalnia:    { label: 'Jadalnia', name: 'jadalnia', acc: 'jadalnię', gen: 'jadalni',
                  types: ['stol', 'kredens', 'witryna', 'komoda', 'regal', 'polka'] },
-  kuchnia:     { label: 'Kuchnia', name: 'kuchnia', acc: 'kuchnię', gen: 'kuchni', emoji: '🍳',
+  kuchnia:     { label: 'Kuchnia', name: 'kuchnia', acc: 'kuchnię', gen: 'kuchni',
                  types: ['zestaw_kuchenny', 'szafka_kuchenna', 'stol', 'kredens'] },
-  sypialnia:   { label: 'Sypialnia', name: 'sypialnia', acc: 'sypialnię', gen: 'sypialni', emoji: '🛏️',
+  sypialnia:   { label: 'Sypialnia', name: 'sypialnia', acc: 'sypialnię', gen: 'sypialni',
                  types: ['lozko', 'szafka_nocna', 'szafa', 'komoda', 'toaletka', 'lustro'] },
-  mlodziezowy: { label: 'Pokój młodzieżowy', name: 'pokój młodzieżowy', acc: 'pokój młodzieżowy', gen: 'pokoju młodzieżowego', emoji: '🎒',
+  mlodziezowy: { label: 'Pokój młodzieżowy', name: 'pokój młodzieżowy', acc: 'pokój młodzieżowy', gen: 'pokoju młodzieżowego',
                  types: ['biurko', 'lozko', 'szafa', 'regal', 'polka', 'komoda'] },
-  biuro:       { label: 'Biuro', name: 'domowe biuro', acc: 'domowe biuro', gen: 'domowego biura', emoji: '💻',
+  biuro:       { label: 'Biuro', name: 'domowe biuro', acc: 'domowe biuro', gen: 'domowego biura',
                  types: ['biurko', 'regal', 'komoda', 'szafa', 'polka', 'szafka'] },
-  przedpokoj:  { label: 'Przedpokój', name: 'przedpokój', acc: 'przedpokój', gen: 'przedpokoju', emoji: '🚪',
+  przedpokoj:  { label: 'Przedpokój', name: 'przedpokój', acc: 'przedpokój', gen: 'przedpokoju',
                  types: ['szafa', 'szafka_na_buty', 'komoda', 'lustro', 'wieszak', 'szafka'] },
 };
 
@@ -172,6 +172,63 @@ export function explainSet(set, prefs, hasPhoto) {
   return hasPhoto
     ? `${list[0].toUpperCase() + list.slice(1)} – ${why.length > 1 ? 'pasują' : 'pasuje'} do tego, co widzę na zdjęciu.`
     : `${list[0].toUpperCase() + list.slice(1)}.`;
+}
+
+// ---------------------------------------------------------------------------
+// Krótkie polecenia tekstowe bez modelu językowego (czat i podstrona doradcy)
+// ---------------------------------------------------------------------------
+export const plain = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l');
+
+const ROOM_WORDS = [
+  [/salon|pokoj dzienn|pokoju dzienn|living/, 'salon'], [/sypial/, 'sypialnia'], [/kuchn|kuchen/, 'kuchnia'],
+  [/jadal/, 'jadalnia'], [/biur|gabinet|do pracy|home office/, 'biuro'],
+  [/przedpok|korytarz|\bhol\b|holu|wiatrol|wejsci/, 'przedpokoj'],
+  [/mlodziez|dziec|dziecie|nastolat|syna|corki/, 'mlodziezowy'],
+];
+const TYPE_WORDS = [
+  [/rtv|telewiz|\btv\b|pod tv/, 'rtv'], [/komod/, 'komoda'], [/witryn|gablot/, 'witryna'], [/regal/, 'regal'],
+  [/\blaw[ay]?\b|stolik kawow/, 'lawa'], [/polk|polec/, 'polka'], [/\bst[oó]l\b|stoly|stolu|stoł/, 'stol'],
+  [/kredens/, 'kredens'], [/lozk|loze|lozek/, 'lozko'], [/nocn/, 'szafka_nocna'], [/toaletk/, 'toaletka'],
+  [/lustr/, 'lustro'], [/biurk/, 'biurko'], [/but/, 'szafka_na_buty'], [/wieszak|garderob/, 'wieszak'],
+  [/zabudow|zestaw kuchen|meble kuchen|szafki kuchen/, 'zestaw_kuchenny'], [/\bszaf[aey]?\b|\bszafe\b/, 'szafa'],
+];
+
+/** „biała komoda do sypialni do 1000 zł” → { room: 'sypialnia', type: 'komoda', maxPrice: 1000, lighter: true, … } */
+export function parseQuery(text) {
+  const t = plain(text);
+  const find = list => list.find(([rx]) => rx.test(t))?.[1];
+  const price = t.match(/(?:do|max|maks|ponizej|nie wiecej niz|budzet)\s*(\d[\d\s]{1,6})/);
+  return {
+    room: find(ROOM_WORDS),
+    type: find(TYPE_WORDS),
+    maxPrice: price ? parseInt(price[1].replace(/\s/g, ''), 10) : null,
+    budget: /tansz|taniej|tanio|budzet|oszczed|promocj/.test(t),
+    lighter: /jasn|bial|bialy|biel/.test(t),
+    darker: /ciemn|czarn|grafit|antracyt/.test(t),
+    next: /inn[aey]? koleke|inna|kolejn|nastepn|wiecej propozyc|cos innego/.test(t),
+    nofurn: /lazienk|garaz/.test(t) ? (/garaz/.test(t) ? 'garaz' : 'lazienka') : null,
+    outdoor: /ogrod|taras|balkon|podjazd|ogrodow/.test(t),
+    greet: /^(czesc|hej|hejka|dzien dobry|witam|siema|dobry wieczor|hello|hi)\b/.test(t),
+    thanks: /dzieki|dziekuj|super|swietnie|ok dzieki/.test(t),
+    info: /kontakt|telefon|dostaw|zamow|montaz|gwarancj|zwrot|reklamac|platnos|raty|sklep stacjonar|salon meblow|czas realizacji/.test(t),
+    help: /co potrafisz|jak (to )?dziala|pomoc|help|jak uzywac/.test(t),
+  };
+}
+
+/** Skrót oferty dla modelu językowego (Worker): kolekcja → rodzaje, pomieszczenia, kolory, cena „od”. */
+export function catalogSummary(products) {
+  const cols = new Map();
+  for (const p of products) {
+    const c = cols.get(p.collection) || { types: new Set(), colors: new Set(), rooms: new Set(), min: Infinity, promo: false };
+    c.types.add(TYPES[p.type]?.[0] || p.type);
+    if (p.color?.label) c.colors.add(p.color.label);
+    (p.rooms || []).forEach(r => c.rooms.add(ROOMS[r]?.name || r));
+    c.min = Math.min(c.min, p.price);
+    c.promo ||= !!p.regular;
+    cols.set(p.collection, c);
+  }
+  return [...cols].map(([name, c]) => `${name}: ${[...c.types].join(', ')}; pomieszczenia: ${[...c.rooms].join(', ')}; kolory: ${[...c.colors].slice(0, 4).join(', ')}; ceny od ${formatPrice(c.min)}${c.promo ? '; trwa promocja' : ''}`)
+    .join('\n').slice(0, 4000);
 }
 
 /** 1379 → "1 379 zł", 1379.5 → "1 379,50 zł" (jak w sklepie Liveo) */

@@ -499,15 +499,21 @@ select.field__control { appearance: none; background: var(--color-bg) url("data:
 .poland-map__store.is-result { fill: var(--color-promo); stroke: var(--color-bg); }
 .poland-map__me { fill: var(--color-accent); stroke: var(--color-text); }
 
-/* ---------- Przycisk doradcy przed załadowaniem widżetu (ten sam kształt co w widżecie) ---------- */
+/* ---------- Przycisk doradcy przed załadowaniem widżetu (ten sam kształt co w widżecie: liveo-assistant.css .launcher) ---------- */
 .assistant-launcher {
-  right: 1.5rem; bottom: 1.5rem; width: 62px; height: 62px; min-height: 0; padding: 0; border-radius: 50%;
-  display: grid; place-items: center; background: var(--color-dark); color: #fff; box-shadow: 0 10px 30px -6px rgb(43 42 41 / 0.45);
+  --h: 52px;
+  right: 24px; bottom: 24px; height: var(--h); padding: 0 22px 0 calc(var(--h) * var(--cut) + 14px); gap: 10px;
+  background: none; color: #fff; isolation: isolate; font: var(--weight-medium) 15px/1 var(--font-sans); white-space: nowrap;
+  filter: drop-shadow(0 10px 18px rgb(43 42 41 / 0.28));
 }
-.assistant-launcher__icon { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.assistant-launcher__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.assistant-launcher::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--color-dark);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, calc(var(--h) * var(--cut)) 100%);
+}
+.assistant-launcher:hover::before { background: #45433f; }
+.assistant-launcher__icon { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .assistant-launcher:focus-visible { outline-color: var(--color-accent); outline-offset: 3px; }
-@media (max-width: 32.5rem) { .assistant-launcher { right: 1rem; bottom: 1rem; } }
+@media (max-width: 32.5rem) { .assistant-launcher { --h: 48px; right: 16px; bottom: 16px; font-size: 14.5px; } }
 
 /* ---------- Lista mebli: filtry w bocznej kolumnie na desktopie ---------- */
 @media (min-width: 64rem) {

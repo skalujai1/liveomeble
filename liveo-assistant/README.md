@@ -1,6 +1,9 @@
 # Doradca wnętrz Liveo
 
-Widżet czatu na stronę Liveo. Klient wysyła zdjęcie pokoju albo pisze, czego szuka, a doradca pokazuje komplet mebli z jednej kolekcji, dopasowany kolorystycznie.
+Doradca ma dwie formy:
+
+- **Mały czat** (`widget/`) na każdej stronie. To szybki podgląd: klient wysyła zdjęcie pokoju albo wybiera pomieszczenie i dostaje jeden komplet mebli z jednej kolekcji, dopasowany kolorystycznie. Przycisk „Otwórz pełnego doradcę” przenosi zdjęcie, analizę i ostatni komplet na podstronę (`sessionStorage` `lv-advisor` + `?pokoj=`).
+- **Pełny doradca** na stronie `/doradca-wnetrz/` (`src/components/AdvisorTool.astro`, `src/scripts/advisor.ts`). Działa w czterech krokach: zdjęcie, pokój i kolory, porównanie kilku kolekcji z filtrami (ton, budżet, rodzaj mebla, polecenie tekstowe), gdzie kupić. Korzysta z tych samych modułów `engine.js` i `recommender.js`.
 
 - **Zdjęcia** analizuje przeglądarka klienta (model MobileCLIP + paleta barw). Zdjęcie nie wychodzi z urządzenia.
 - **Rozmowa tekstowa** idzie przez Cloudflare Worker do OpenRouter (model językowy). Klucz OpenRouter jest tylko w Workerze.
@@ -29,8 +32,8 @@ Widżet czatu na stronę Liveo. Klient wysyła zdjęcie pokoju albo pisze, czego
     chatUrl: 'https://liveo-doradca.<subdomena-konta>.workers.dev/chat', // adres Workera
     contactUrl: '/kontakt/',
     storesUrl: '/gdzie-kupic/',
+    advisorUrl: '/doradca-wnetrz/', // podstrona pełnego doradcy; pusty = bez przycisku przejścia
     demoSamples: false,
-    teaser: true,        // dymek z podpowiedzią obok przycisku (strona Liveo wyłącza go poniżej 48rem)
   };
 </script>
 <script type="module" src="/liveo-assistant/widget/liveo-assistant.js"></script>

@@ -50,6 +50,8 @@ export const ASSISTANT = {
   /** Arkusz fontów widżetu — lokalny, żeby widżet nie pobierał Google Fonts. */
   fontsCssUrl: '/liveo-assistant/fonts.css',
   logoUrl: '/brand/liveo-logo.svg',
+  /** Podstrona pełnego doradcy — czat przenosi tam zdjęcie i wynik (przycisk „Otwórz pełnego doradcę”). */
+  advisorUrl: '/doradca-wnetrz/',
   contactUrl: '/kontakt/',
   storesUrl: '/gdzie-kupic/',
   demoSamples: false,
