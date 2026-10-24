@@ -5,7 +5,7 @@
 import PolandMap from './PolandMap.astro';
 import { DEMO } from '../config';
 import { collections, pages, resellers, site } from '../lib/site';
-import { fill } from '../lib/text';
+import { fill, plural } from '../lib/text';
 
 interface Props {
   id: string;
@@ -39,8 +39,19 @@ const texts = {
   collectionNames: Object.fromEntries(collections.map(c => [c.slug, c.name])),
   headingLevel: headingLevel + 1,
 };
+// Szybki wybór (tylko pełna wyszukiwarka z mapą): miasta z największą liczbą sklepów, link z kodem pocztowym
+// pierwszego sklepu w mieście — działa też bez JavaScriptu (strona czyta ?kod= z adresu).
+const byCity = new Map<string, { city: string; postcode: string; n: number }>();
+for (const r of resellers) {
+  const e = byCity.get(r.city) ?? { city: r.city, postcode: r.postcode, n: 0 };
+  e.n++;
+  byCity.set(r.city, e);
+}
+const quickCities = [...byCity.values()].sort((a, b) => b.n - a.n || a.city.localeCompare(b.city, 'pl')).slice(0, 8);
+const voivodeships = new Set(resellers.map(r => r.voivodeship)).size;
 ---
-<div class="store-finder" id={id} data-store-finder data-limit={limit} data-sync-url={syncUrl ? '1' : undefined}>
+<div class:list={['store-finder', { 'store-finder--map': showMap }]} id={id} data-store-finder data-limit={limit} data-sync-url={syncUrl ? '1' : undefined}>
+  <div class="store-finder__main">
   <form class="store-finder__form" action="/gdzie-kupic/" method="get" novalidate data-sf-form>
     <div class="field store-finder__postcode">
       <label class="field__label" for={`${id}-kod`}>{form.postcodeLabel}</label>
@@ -86,6 +97,16 @@ const texts = {
     {DEMO && <p class="store-finder__demo">{results.demoNote}</p>}
   </div>
   {note && <p class="store-finder__tip">{note}</p>}
+  {showMap && (
+    <nav class="store-finder__quick" aria-labelledby={`${id}-szybko`}>
+      <p class="store-finder__quick-title" id={`${id}-szybko`}>Sklepy w największych miastach</p>
+      <ul>
+        {quickCities.map(c => <li><a href={`/gdzie-kupic/?kod=${c.postcode}`}>{c.city}</a></li>)}
+      </ul>
+      <p class="store-finder__count">{plural(site.plural.stores, resellers.length)} partnerskich w {voivodeships} {voivodeships === 1 ? 'województwie' : 'województwach'}.</p>
+    </nav>
+  )}
+  </div>
   {showMap && <PolandMap stores={resellers} note={results.mapNote} />}
   <script type="application/json" is:inline data-sf-texts set:html={JSON.stringify(texts).replace(/</g, '\\u003c')} />
 </div>

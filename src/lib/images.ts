@@ -12,7 +12,7 @@ import type { Collection, Product, Variant } from './site';
 const FILES = import.meta.glob<{ default: ImageMetadata }>('/src/assets/renders/**/*.{webp,jpg,jpeg,png,avif}', { eager: true });
 const MANIFESTS = import.meta.glob<{ items?: ManifestItem[] }>('/src/assets/renders/manifest.json', { eager: true, import: 'default' });
 
-type ManifestItem = { file: string; type?: string; title?: string; description?: string; room?: string };
+type ManifestItem = { file: string; type?: string; title?: string; description?: string; room?: string; frame?: string; collection?: string };
 const manifest = new Map<string, ManifestItem>(
   (Object.values(MANIFESTS)[0]?.items ?? []).map(i => [i.file, i]),
 );
@@ -72,7 +72,9 @@ export function roomImage(roomSlug: string, frame: 'wide' | 'tall' = 'wide', ind
     const hit = get(`rooms/${n}-${frame}.jpg`) ?? get(`rooms/${n}-${frame === 'wide' ? 'tall' : 'wide'}.jpg`);
     if (hit) return hit;
   }
-  return null;
+  // Pomieszczenie bez własnej aranżacji (np. pokój młodzieżowy) → aranżacja kolekcji, której to główne pomieszczenie.
+  const col = [...manifest.values()].find(i => i.collection && i.room === roomSlug && i.frame === frame && FILES[`/src/assets/renders/${i.file}`]);
+  return col ? get(col.file) : null;
 }
 
 /** Aranżacja kolekcji: własna (collections/<slug>) albo aranżacja jej pomieszczenia `heroRoom` (poglądowo). */

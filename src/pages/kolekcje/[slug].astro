@@ -48,18 +48,18 @@ for (const p of list) {
 }
 const typeLinks = types.filter(t => list.some(p => p.type === t.id));
 
-// Podobne: wspólne pomieszczenia (+1 za każde) i ten sam styl (+2), maks. 3.
+// Podobne: wspólne pomieszczenia (+1 za każde) i ten sam styl (+2) — 4, czyli pełny rząd siatki kart.
 const similar = collections
   .filter(x => x.slug !== c.slug)
   .map(x => ({ x, score: x.rooms.filter(r => c.rooms.includes(r)).length + (x.style === c.style ? 2 : 0) }))
-  .filter(o => o.score > 0)
   .sort((a, b) => b.score - a.score || a.x.order - b.x.order)
-  .slice(0, 3)
+  .slice(0, 4)
   .map(o => o.x);
 
 const faq = tpl.faq.items.map(it => ({ q: fill(it.q, vars), a: fill(it.a, vars) }));
 const img = collectionImage(c);
-const heroAlt = img?.approximate && img.title ? `Aranżacja poglądowa: ${img.title}` : fill(sec('hero').image.alt, vars);
+// Własna aranżacja kolekcji ma w manifeście dokładny opis (meble i kolory wariantów) — lepszy niż szablon z pierwszym kolorem.
+const heroAlt = img?.title ? (img.approximate ? `Aranżacja poglądowa: ${img.title}` : img.title) : fill(sec('hero').image.alt, vars);
 const swatch = (id?: string) => (id ? finishById.get(id)?.hex : undefined);
 ---
 <BaseLayout

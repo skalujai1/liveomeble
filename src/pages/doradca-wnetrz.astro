@@ -5,11 +5,15 @@ import PageHeader from '../components/PageHeader.astro';
 import ContentSection from '../components/ContentSection.astro';
 import Faq from '../components/Faq.astro';
 import { faqPage, webPage } from '../lib/jsonld';
+import { roomImage } from '../lib/images';
 import { pages, section, url } from '../lib/site';
 
 const page = pages.doradca;
 const path = url.advisor;
 const hero = section(page, 'hero');
+// Obraz nagłówka: aranżacja (atrapa 3D do czasu zdjęć od Liveo).
+const heroImg = roomImage('sypialnia', 'wide');
+const heroAlt = heroImg?.title ? `Aranżacja: ${heroImg.title}` : '';
 ---
 <BaseLayout
   title={page.seo.title}
@@ -19,7 +23,7 @@ const hero = section(page, 'hero');
   breadcrumbs={[{ name: page.h1, url: path }]}
   jsonLd={[webPage('WebPage', { path, title: page.seo.title, description: page.seo.description, hasBreadcrumb: true }), faqPage(path, page.faq.items)]}
 >
-  <PageHeader h1={page.h1} lead={hero.lead} ctas={hero.cta} note={hero.aiNote}>
+  <PageHeader image={heroImg} imageAlt={heroAlt} placeholderLabel="Aranżacja" h1={page.h1} lead={hero.lead} ctas={hero.cta} note={hero.aiNote}>
     <noscript><p class="page-header__note">Doradca wnętrz działa w przeglądarce i wymaga włączonego JavaScriptu. Bez niego przejrzyj <a href="/kolekcje/">kolekcje</a>.</p></noscript>
   </PageHeader>
 

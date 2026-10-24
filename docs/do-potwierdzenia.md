@@ -59,7 +59,8 @@ Lista otwartych pytań i założeń przyjętych na czas prac na danych demonstra
 
 ## Fakty o firmie (strona „O nas”, stopka, dane strukturalne)
 
-25. **Dane rejestrowe** — adres siedziby, NIP, KRS, REGON; czy podawać kapitał zakładowy.
+25. **Dane rejestrowe** — NIP, KRS, REGON; czy podawać kapitał zakładowy. Adres (ul. Borki 5, 36-130 Raniżów), telefon i e-mail
+    wzięte ze starej strony liveomeble.pl — potwierdzić, że są aktualne.
 26. **Historia i liczby** — rok założenia (w wyszukiwarce: „od lat 90.” [niezweryfikowane]), zatrudnienie (w wyszukiwarce: „ok. 400 pracowników”
     [niezweryfikowane]). Potwierdzić ze źródłem albo nie publikujemy.
 27. **Produkcja** — czy cała produkcja jest w Raniżowie; materiały (rodzaj i grubość płyt, klasa emisji formaldehydu), okucia (np. ciche domyki —

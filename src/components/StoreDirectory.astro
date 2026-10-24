@@ -1,5 +1,6 @@
 ---
 // Pełna lista sklepów według województw — w HTML (bez JS, dla czytników i wyszukiwarek).
+// Kafel na województwo (liczba sklepów i miasta widoczne od razu), szczegóły sklepów po rozwinięciu.
 import { collectionBySlug, pages, resellers, site, url } from '../lib/site';
 import { plural } from '../lib/text';
 
@@ -10,27 +11,26 @@ const groups = [...new Set(resellers.map(r => r.voivodeship))]
   .sort((a, b) => a.localeCompare(b, 'pl'))
   .map(v => ({ name: v, stores: resellers.filter(r => r.voivodeship === v).sort((a, b) => a.city.localeCompare(b.city, 'pl') || a.name.localeCompare(b.name, 'pl')) }));
 const H = `h${headingLevel}` as 'h2' | 'h3';
-const H2 = `h${headingLevel + 1}` as 'h3' | 'h4';
 ---
-<details class="store-directory">
-  <summary class="store-directory__summary">Wszystkie sklepy według województw ({plural(site.plural.stores, resellers.length)})</summary>
-  <div class="store-directory__groups">
-    {groups.map(g => (
-      <section class="store-directory__group" aria-label={`Województwo ${g.name}`}>
-        <H class="store-directory__title">Województwo {g.name}</H>
-        <ul class="store-directory__list">
-          {g.stores.map(s => (
-            <li class="store store--compact">
-              <H2 class="store__name">{s.name}</H2>
-              <p class="store__address">{s.address}, {s.postcode} {s.city}</p>
-              <p class="store__collections">
-                {item.collections}:{' '}
-                {s.collections.map((c, i) => <>{i > 0 && ', '}<a href={url.collection(c)}>{collectionBySlug.get(c)?.name ?? c}</a></>)}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))}
-  </div>
-</details>
+<div class="store-directory">
+  {groups.map(g => (
+    <details class="store-directory__group">
+      <summary class="store-directory__summary">
+        <span class="store-directory__title">{g.name.charAt(0).toLocaleUpperCase('pl') + g.name.slice(1)}</span>
+        <span class="store-directory__meta">{plural(site.plural.stores, g.stores.length)} · {[...new Set(g.stores.map(s => s.city))].join(', ')}</span>
+      </summary>
+      <ul class="store-directory__list">
+        {g.stores.map(s => (
+          <li class="store store--compact">
+            <H class="store__name">{s.name}</H>
+            <p class="store__address">{s.address}, {s.postcode} {s.city}</p>
+            <p class="store__collections">
+              {item.collections}:{' '}
+              {s.collections.map((c, i) => <>{i > 0 && ', '}<a href={url.collection(c)}>{collectionBySlug.get(c)?.name ?? c}</a></>)}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </details>
+  ))}
+</div>

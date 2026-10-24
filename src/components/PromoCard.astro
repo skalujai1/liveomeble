@@ -17,6 +17,7 @@ const href = `${url.products}?${params.toString().replace(/%2C/g, ',')}`;
 const H = `h${headingLevel}` as 'h2' | 'h3';
 ---
 <li class="promo-card" data-promo-window data-start={p.startsAt ?? ''} data-end={p.endsAt ?? ''} hidden={!isActive(p, BUILD_NOW)}>
+  {p.kind === 'percent' && <p class="promo-card__value" aria-hidden="true">−{p.value}%</p>}
   <H class="promo-card__title">{p.label}</H>
   <p class="promo-card__text">{p.description}</p>
   {lastDay && <p class="promo-card__until">{fill(item.until, { lastDay: dateLong(lastDay) })}</p>}

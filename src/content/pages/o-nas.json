@@ -71,7 +71,7 @@
       "title": "Dane firmy",
       "items": [
         { "label": "Nazwa", "value": "Liveo Meble sp. z o.o." },
-        { "label": "Adres", "value": "[do potwierdzenia: ulica i numer], [do potwierdzenia: kod pocztowy] Raniżów" },
+        { "label": "Adres", "value": "ul. Borki 5, 36-130 Raniżów (woj. podkarpackie)" },
         { "label": "NIP", "value": "[do potwierdzenia]" },
         { "label": "KRS", "value": "[do potwierdzenia]" },
         { "label": "REGON", "value": "[do potwierdzenia]" },

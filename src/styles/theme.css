@@ -215,6 +215,10 @@ main { padding-bottom: 0; }
 .page-header__title { font-size: var(--text-3xl); line-height: 1.08; }
 .page-header__lead { font-size: var(--text-base); line-height: 1.6; color: var(--color-text-muted); }
 .page-header__media.media { border-radius: var(--radius-xl); }
+@media (min-width: 64rem) {
+  .page-header--media .page-header__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: var(--space-7); }
+  .page-header--media .page-header__title { font-size: clamp(2.25rem, 1.5rem + 1.9vw, 3.25rem); }
+}
 .page-intro { padding-top: var(--space-5); }
 
 /* ---------- Hero strony głównej ---------- */
@@ -544,3 +548,89 @@ select.field__control { appearance: none; background: var(--color-bg) url("data:
 .summary__title { font-size: clamp(2rem, 1.6rem + 1.6vw, 2.75rem); line-height: 1.1; }
 .gallery .media { border-radius: var(--radius-lg); }
 .data-table th, .data-table td { border-color: var(--color-line); }
+
+/* ---------- Siatki kart: liczba kolumn wg liczby elementów (bez osamotnionych kafli) ---------- */
+@media (min-width: 40rem) {
+  :is(.feature-list, .steps)[data-count="2"], :is(.feature-list, .steps)[data-count="4"], :is(.feature-list, .steps)[data-count="8"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  :is(.feature-list, .steps):is([data-count="3"], [data-count="5"], [data-count="6"], [data-count="9"]) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 64rem) {
+  :is(.feature-list, .steps):is([data-count="4"], [data-count="8"]) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  :is(.feature-list, .steps)[data-count="5"] { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+/* ---------- Gdzie kupić: wyszukiwarka i wyniki obok mapy ---------- */
+.store-finder__main { display: grid; gap: var(--space-4); align-content: start; min-width: 0; }
+.store-finder__quick { display: grid; gap: var(--space-3); padding-top: var(--space-2); }
+.store-finder__quick-title { font-weight: var(--weight-bold); }
+.store-finder__quick ul { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; }
+.store-finder__quick a {
+  display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 1rem; border-radius: var(--radius-field);
+  background: var(--color-surface); color: var(--color-text); text-decoration: none; font-weight: var(--weight-medium); font-size: 0.9375rem;
+}
+.store-finder__quick a:hover { background: var(--color-line); }
+.store-finder__count { font-size: var(--text-sm); color: var(--color-text-muted); }
+.store-finder--map .poland-map { max-width: 34rem; width: 100%; justify-self: center; }
+@media (min-width: 64rem) {
+  .store-finder--map { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: var(--space-7); align-items: start; }
+  .store-finder--map .poland-map { position: sticky; top: 7rem; }
+  .store-finder--map .store-list { grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
+}
+
+/* ---------- Formularz w karcie + kontakt obok (Dla partnerów) ---------- */
+.form-layout { display: grid; gap: var(--space-6); align-items: start; }
+.form-card { padding: clamp(1.25rem, 0.75rem + 2vw, 2.25rem); border-radius: var(--radius-xl); background: var(--color-surface); }
+.form-card .form { max-width: none; }
+.form-card .field__control { background-color: var(--color-bg); }
+.form-aside { display: grid; gap: var(--space-3); padding: var(--space-5); border-radius: var(--radius-lg); box-shadow: inset 0 0 0 1px var(--color-line); }
+.form-aside h3 { font-family: var(--font-display); font-weight: var(--weight-display); font-size: 1.5rem; }
+.form-aside p { color: var(--color-text-muted); }
+.form-aside__contact { display: grid; gap: 0.25rem; }
+.form-aside__contact a { color: var(--color-text); font-weight: var(--weight-medium); font-size: 1.0625rem; }
+.form-aside__note { font-size: var(--text-sm); }
+@media (min-width: 48rem) {
+  .form-card .form { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-5); }
+  .form-card .form > * { grid-column: 1 / -1; }
+  .form-card .form > div.field:not(:has(textarea)):not(.form__consent) { grid-column: auto; align-content: end; }
+  .form-card .field__options:has(input[type="checkbox"]) { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--space-4); }
+}
+@media (min-width: 64rem) {
+  .form-layout { grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr); gap: var(--space-7); }
+  .form-aside { position: sticky; top: 7rem; }
+}
+
+/* ---------- Sklepy: karty wyników i katalog województw ---------- */
+.section:not(.section--alt):not(.section--band) .store:not(.store--compact) { background: var(--color-surface); }
+.store-directory { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); align-items: start; margin-top: 0; }
+.store-directory__group { border-radius: var(--radius-lg); background: var(--color-surface); }
+.store-directory__summary {
+  display: grid; gap: 0.25rem; padding: var(--space-4) 3rem var(--space-4) var(--space-5); position: relative; list-style: none; cursor: pointer; border-radius: inherit;
+}
+.store-directory__summary::-webkit-details-marker { display: none; }
+.store-directory__summary::after {
+  content: ""; position: absolute; right: 1.25rem; top: 1.35rem; width: 0.625rem; height: 0.625rem;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform .2s;
+}
+.store-directory__group[open] > .store-directory__summary::after { transform: translateY(0.25rem) rotate(-135deg); }
+.store-directory__title { font-weight: var(--weight-bold); font-size: 1.0625rem; margin: 0; }
+.store-directory__meta { font-size: var(--text-sm); color: var(--color-text-muted); }
+.store-directory__list { list-style: none; padding: 0 var(--space-5) var(--space-3); }
+.store-directory .store--compact { border-bottom-color: var(--color-line); }
+.store-directory .store--compact:last-child { border-bottom: 0; }
+@media (prefers-reduced-motion: reduce) { .store-directory__summary::after { transition: none; } }
+
+/* ---------- Promocje: karty z plakietką rabatu ---------- */
+.card-grid--promos { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--space-5); }
+.page-promotions .card-grid--promos { margin-bottom: var(--space-8); }
+.promo-card { grid-template-columns: 1fr; padding: var(--space-6); gap: var(--space-2); }
+.promo-card__value {
+  justify-self: start; padding: 0.375rem 1.5rem 0.375rem 0.875rem; margin-bottom: var(--space-2);
+  font: var(--weight-display) 2.25rem/1 var(--font-display); color: #fff; background: var(--color-promo);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 0.75rem) 100%, 0 100%);
+}
+.promo-card__link { margin-top: var(--space-2); font-weight: var(--weight-medium); }
+@media (min-width: 40rem) {
+  .promo-card:has(.promo-card__value) { grid-template-columns: auto minmax(0, 1fr); column-gap: var(--space-5); }
+  .promo-card:has(.promo-card__value) > * { grid-column: 2; }
+  .promo-card:has(.promo-card__value) > .promo-card__value { grid-column: 1; grid-row: 1 / span 5; margin-bottom: 0; align-self: start; }
+}

@@ -6,12 +6,17 @@ import Section from '../components/Section.astro';
 import ContentSection from '../components/ContentSection.astro';
 import Form from '../components/Form.astro';
 import Faq from '../components/Faq.astro';
+import { roomImage } from '../lib/images';
 import { faqPage, webPage } from '../lib/jsonld';
-import { pages, section, url } from '../lib/site';
+import { pages, section, site, url } from '../lib/site';
 
 const page = pages.dlaPartnerow;
 const path = url.partners;
 const hero = section(page, 'hero');
+// Obraz nagłówka: aranżacja salonu (atrapa 3D do czasu zdjęć od Liveo).
+const heroImg = roomImage('salon', 'wide', 1);
+const heroAlt = heroImg?.title ? `Aranżacja: ${heroImg.title}` : '';
+const tel = site.brand.telephone;
 ---
 <BaseLayout
   title={page.seo.title}
@@ -21,12 +26,25 @@ const hero = section(page, 'hero');
   breadcrumbs={[{ name: 'Dla partnerów', url: path }]}
   jsonLd={[webPage('WebPage', { path, title: page.seo.title, description: page.seo.description, hasBreadcrumb: true }), faqPage(path, page.faq.items)]}
 >
-  <PageHeader h1={page.h1} lead={hero.lead} ctas={hero.cta} />
+  <PageHeader h1={page.h1} lead={hero.lead} ctas={hero.cta} image={heroImg} imageAlt={heroAlt} placeholderLabel="Aranżacja" />
 
   {page.sections.slice(1).map((s: any) =>
     s.type === 'form' ? (
-      <Section id={s.id} title={s.title} lead={s.lead} width="narrow">
-        <Form id="formularz-partnera" formId="partner" fields={s.fields} consent={s.consent} submit={s.submit} success={s.success} error={s.error} />
+      <Section id={s.id} title={s.title} lead={s.lead} class="section--form">
+        <div class="form-layout">
+          <div class="form-card">
+            <Form id="formularz-partnera" formId="partner" fields={s.fields} consent={s.consent} submit={s.submit} success={s.success} error={s.error} />
+          </div>
+          <div class="form-aside">
+            <h3 id="partner-kontakt">Wolisz porozmawiać?</h3>
+            <p>Zadzwoń do biura Liveo albo napisz — przekażemy zgłoszenie do działu handlowego.</p>
+            <p class="form-aside__contact">
+              <a href={`tel:${tel.replace(/\s/g, '')}`}>{tel}</a>
+              <a href={`mailto:${site.brand.email}`}>{site.brand.email}</a>
+            </p>
+            <p class="form-aside__note">{site.brand.legalName}, {site.brand.streetAddress}, {site.brand.postalCode} {site.brand.locality}</p>
+          </div>
+        </div>
       </Section>
     ) : <ContentSection s={s} />,
   )}

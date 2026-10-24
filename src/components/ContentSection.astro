@@ -31,7 +31,7 @@ const isBand = s.type === 'band' || s.type === 'feature';
     )}
 
     {(s.type === 'features' || s.type === 'routing') && (
-      <ul class:list={['feature-list', { 'feature-list--routing': s.type === 'routing' }]}>
+      <ul class:list={['feature-list', { 'feature-list--routing': s.type === 'routing' }]} data-count={s.items.length}>
         {s.items.map((it: any) => (
           <li class="feature-list__item">
             <h3 class="feature-list__title"><Rich text={it.title} /></h3>
@@ -44,7 +44,7 @@ const isBand = s.type === 'band' || s.type === 'feature';
     )}
 
     {s.type === 'steps' && (
-      <ol class="steps">
+      <ol class="steps" data-count={s.items.length}>
         {s.items.map((it: any) => (
           <li class="steps__item">
             <h3 class="steps__title"><Rich text={it.title} /></h3>

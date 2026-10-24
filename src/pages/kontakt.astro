@@ -28,7 +28,9 @@ const path = url.contact;
   {page.sections.slice(1).map((s: any) =>
     s.type === 'form' ? (
       <Section id={s.id} title={s.title} lead={s.lead} width="narrow">
-        <Form id="formularz-kontaktowy" formId="contact" fields={s.fields} consent={s.consent} submit={s.submit} success={s.success} error={s.error} />
+        <div class="form-card">
+          <Form id="formularz-kontaktowy" formId="contact" fields={s.fields} consent={s.consent} submit={s.submit} success={s.success} error={s.error} />
+        </div>
       </Section>
     ) : <ContentSection s={s} />,
   )}
