@@ -87,6 +87,10 @@ for (const path of PAGES) {
   await page.keyboard.press('Enter');
   if ((await btn.getAttribute('aria-expanded')) !== 'true') fail('mega-menu', 'Enter nie otwiera „Meble”');
   if (!(await page.locator('#mega-meble').isVisible())) fail('mega-menu', 'panel „Meble” niewidoczny po otwarciu');
+  // panel na szerokość nagłówka (nie przycisku) i z tłem — regresja: wąski, przezroczysty panel nad treścią
+  const panel = await page.locator('#mega-meble .mega__panel').evaluate(el => ({ w: el.getBoundingClientRect().width, bg: getComputedStyle(el).backgroundColor }));
+  if (panel.w < 900) fail('mega-menu', `panel „Meble” ma tylko ${Math.round(panel.w)} px szerokości`);
+  if (/rgba\(0, 0, 0, 0\)|transparent/.test(panel.bg)) fail('mega-menu', 'panel „Meble” bez tła');
   await page.keyboard.press('Tab');
   const inside = await page.evaluate(() => !!document.activeElement?.closest('#mega-meble'));
   if (!inside) fail('mega-menu', 'Tab po otwarciu nie przechodzi do linków panelu');
