@@ -3,6 +3,7 @@
 // zgody cookies i leniwy doradca wnętrz.
 import '../styles/tokens.css';
 import '../styles/base.css';
+import '../styles/theme.css';
 import SeoHead from '../components/SeoHead.astro';
 import DemoBar from '../components/DemoBar.astro';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -46,7 +47,16 @@ const ld: Node[] = [website(), organization(), ...jsonLd, ...(crumbs ? [breadcru
     <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
     <SeoHead {title} {description} {path} {robots} {ogType} {ogImage} {ogImageAlt} {canonical} jsonLd={ld} />
     <meta name="color-scheme" content="light" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#efe9e1" />
+    <link rel="preload" href="/fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <style is:inline>
+      /* Fonty self-hosted: podzbiór latin + osobny plik z polskimi znakami (ą ć ę ł ń ó ś ź ż). Licencja OFL: /fonts/OFL-*.txt */
+      @font-face{font-family:"Jost";font-style:normal;font-weight:400 600;font-display:swap;src:url(/fonts/jost-latin.woff2) format("woff2");unicode-range:U+0020-007E,U+00A0-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2010-2027,U+2030-203A,U+20AC,U+2122,U+2190-2193,U+2212,U+2215}
+      @font-face{font-family:"Jost";font-style:normal;font-weight:400 600;font-display:swap;src:url(/fonts/jost-pl.woff2) format("woff2");unicode-range:U+0104-0107,U+0118-0119,U+0141-0144,U+015A-015B,U+0179-017C}
+      @font-face{font-family:"Newsreader";font-style:normal;font-weight:300 400;font-display:swap;src:url(/fonts/newsreader-latin.woff2) format("woff2");unicode-range:U+0020-007E,U+00A0-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2010-2027,U+2030-203A,U+20AC,U+2122,U+2190-2193,U+2212,U+2215}
+      @font-face{font-family:"Newsreader";font-style:normal;font-weight:300 400;font-display:swap;src:url(/fonts/newsreader-pl.woff2) format("woff2");unicode-range:U+0104-0107,U+0118-0119,U+0141-0144,U+015A-015B,U+0179-017C}
+    </style>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <slot name="head" />
   </head>

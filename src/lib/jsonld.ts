@@ -22,13 +22,19 @@ export function organization(extra: Node = {}): Node {
     name: brand.name,
     legalName: brand.legalName,
     url: abs('/'),
+    logo: abs(brand.logo),
+    email: brand.email,
+    telephone: brand.telephone,
     address: {
       '@type': 'PostalAddress',
+      streetAddress: brand.streetAddress,
+      postalCode: brand.postalCode,
       addressLocality: brand.locality,
       addressRegion: brand.region,
       addressCountry: brand.country,
     },
-    // logo, sameAs, contactPoint — po potwierdzeniu przez klienta (docs/do-potwierdzenia.md)
+    // Adres, telefon i e-mail biura: oficjalna strona liveomeble.pl (21.10.2026).
+    // sameAs (profile społecznościowe) — po potwierdzeniu przez klienta (docs/do-potwierdzenia.md).
     ...extra,
   };
 }

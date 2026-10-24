@@ -4,7 +4,7 @@
 import Media from './Media.astro';
 import PriceBlock from './PriceBlock.astro';
 import { packshotFor } from '../lib/images';
-import { collectionOf, colorCount, defaultVariant, dims, pages, priceAt, site, typeOf, url, variantBoardColors, type Product } from '../lib/site';
+import { collectionOf, colorCount, defaultVariant, dims, finishById, pages, priceAt, site, typeOf, url, variantBoardColors, type Product } from '../lib/site';
 import { fill } from '../lib/text';
 
 interface Props {
@@ -26,6 +26,8 @@ const alt = img?.approximate && img.title
 const price = priceAt(p, v.code);
 const colors = [...new Set(p.variants.flatMap(variantBoardColors))];
 const H = `h${headingLevel}` as 'h3' | 'h4';
+// Kropki wariantów: kolor frontu każdego wariantu (maks. 4), nazwy w tekście dla czytników ekranu.
+const variantDots = p.variants.slice(0, 4).map(x => ({ hex: finishById.get((x.finish as Record<string, string>).front)?.hex ?? '#ccc', label: x.colorLabel }));
 const href = url.product(p.slug, v.code === defaultVariant(p).code ? undefined : v.code);
 ---
 <li
@@ -59,9 +61,12 @@ const href = url.product(p.slug, v.code === defaultVariant(p).code ? undefined :
     <span class="product-card__collection">{site.labels.collection} {collectionOf(p).name}</span>
     <span>{colorCount(p)} · {dims(p)}</span>
   </p>
+  <p class="product-card__dots" role="img" aria-label={`Kolory: ${p.variants.map(x => x.colorLabel).join(', ')}`}>
+    {variantDots.map(d => <i style={`--c: ${d.hex}`}></i>)}
+  </p>
   <PriceBlock product={p} code={v.code} />
   <p class="product-card__badges">
-    <span class="badge badge--promo" data-promo-badge hidden={!price.promo}>{price.promo?.label ?? ''}</span>
+    <span class="badge badge--promo" data-promo-badge hidden={!price.promo}>{price.promo && price.regular ? `−${Math.round((1 - price.price / price.regular) * 100)}%` : ''}</span>
     {p.isNew && <span class="badge">{site.labels.new}</span>}
   </p>
 </li>

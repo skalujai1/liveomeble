@@ -1,0 +1,32 @@
+---
+// Obraz LCP z kadrowaniem pod urządzenie: pionowy kadr (4:5) na telefonie, poziomy na desktopie.
+// AVIF + WebP, eager + fetchpriority=high, width/height (bez przesunięć układu).
+import { getImage } from 'astro:assets';
+import type { ImageRef } from '../lib/images';
+
+interface Props { wide: ImageRef; tall?: ImageRef | null; alt: string; class?: string }
+const { wide, tall, alt, class: cls } = Astro.props;
+const MOBILE = '(max-width: 59.99rem)';
+const build = async (src: ImageRef['src'], widths: number[], format: 'avif' | 'webp' | 'jpg') => {
+  const ok = widths.filter(w => w <= src.width);
+  const imgs = await Promise.all((ok.length ? ok : [src.width]).map(w => getImage({ src, width: w, format })));
+  return imgs.map((i, k) => `${i.src} ${(ok.length ? ok : [src.width])[k]}w`).join(', ');
+};
+const wideW = [960, 1440, 1920, 2400];
+const tallW = [480, 720, 960, 1200];
+const sources = [
+  ...(tall ? [
+    { media: MOBILE, type: 'image/avif', srcset: await build(tall.src, tallW, 'avif'), sizes: '100vw' },
+    { media: MOBILE, type: 'image/webp', srcset: await build(tall.src, tallW, 'webp'), sizes: '100vw' },
+  ] : []),
+  { type: 'image/avif', srcset: await build(wide.src, wideW, 'avif'), sizes: '(min-width: 80rem) 76rem, 100vw' },
+  { type: 'image/webp', srcset: await build(wide.src, wideW, 'webp'), sizes: '(min-width: 80rem) 76rem, 100vw' },
+];
+const fallback = await getImage({ src: wide.src, width: 1440, format: 'jpg' });
+---
+<div class:list={['media', cls]}>
+  <picture>
+    {sources.map(s => <source media={s.media} type={s.type} srcset={s.srcset} sizes={s.sizes} />)}
+    <img class="media__img" src={fallback.src} width={wide.src.width} height={wide.src.height} alt={alt} loading="eager" decoding="async" fetchpriority="high" />
+  </picture>
+</div>

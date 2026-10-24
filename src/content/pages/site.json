@@ -13,8 +13,12 @@
     "locality": "Raniżów",
     "region": "podkarpackie",
     "country": "PL",
-    "logo": "[do potwierdzenia: logo SVG od klienta]",
-    "logoAlt": "Liveo Meble — strona główna"
+    "logo": "/brand/liveo-logo.svg",
+    "logoAlt": "Liveo Meble — strona główna",
+    "streetAddress": "ul. Borki 5",
+    "postalCode": "36-130",
+    "telephone": "+48 17 58 18 000",
+    "email": "biuro@liveomeble.pl"
   },
   "skipLink": "Przejdź do treści",
   "nav": {
@@ -22,29 +26,71 @@
     "openLabel": "Menu",
     "closeLabel": "Zamknij menu",
     "items": [
-      { "label": "Kolekcje", "href": "/kolekcje/" },
+      {
+        "label": "Kolekcje",
+        "href": "/kolekcje/"
+      },
       {
         "label": "Meble",
         "href": "/meble/",
         "submenuLabel": "Meble według pomieszczenia",
         "children": [
-          { "label": "Salon", "href": "/pomieszczenia/salon/" },
-          { "label": "Jadalnia", "href": "/pomieszczenia/jadalnia/" },
-          { "label": "Sypialnia", "href": "/pomieszczenia/sypialnia/" },
-          { "label": "Pokój młodzieżowy", "href": "/pomieszczenia/pokoj-mlodziezowy/" },
-          { "label": "Przedpokój", "href": "/pomieszczenia/przedpokoj/" },
-          { "label": "Domowe biuro", "href": "/pomieszczenia/biuro/" },
-          { "label": "Wszystkie meble", "href": "/meble/" }
+          {
+            "label": "Salon",
+            "href": "/pomieszczenia/salon/"
+          },
+          {
+            "label": "Jadalnia",
+            "href": "/pomieszczenia/jadalnia/"
+          },
+          {
+            "label": "Sypialnia",
+            "href": "/pomieszczenia/sypialnia/"
+          },
+          {
+            "label": "Pokój młodzieżowy",
+            "href": "/pomieszczenia/pokoj-mlodziezowy/"
+          },
+          {
+            "label": "Przedpokój",
+            "href": "/pomieszczenia/przedpokoj/"
+          },
+          {
+            "label": "Domowe biuro",
+            "href": "/pomieszczenia/biuro/"
+          },
+          {
+            "label": "Wszystkie meble",
+            "href": "/meble/"
+          }
         ]
       },
-      { "label": "Promocje", "href": "/promocje/" },
-      { "label": "Doradca wnętrz", "href": "/doradca-wnetrz/" },
-      { "label": "Poradnik", "href": "/poradnik/" }
+      {
+        "label": "Promocje",
+        "href": "/promocje/"
+      },
+      {
+        "label": "Doradca wnętrz",
+        "href": "/doradca-wnetrz/"
+      },
+      {
+        "label": "Poradnik",
+        "href": "/poradnik/"
+      }
     ],
-    "cta": { "label": "Gdzie kupić", "href": "/gdzie-kupic/" },
+    "cta": {
+      "label": "Gdzie kupić",
+      "href": "/gdzie-kupic/"
+    },
     "secondary": [
-      { "label": "Dla partnerów", "href": "/dla-partnerow/" },
-      { "label": "Strefa partnera", "href": "/strefa-partnera/" }
+      {
+        "label": "Dla partnerów",
+        "href": "/dla-partnerow/"
+      },
+      {
+        "label": "Strefa partnera",
+        "href": "/strefa-partnera/"
+      }
     ]
   },
   "breadcrumbs": {
@@ -58,45 +104,103 @@
         "title": "Kolekcje",
         "source": "collections.json",
         "items": [],
-        "more": { "label": "Wszystkie kolekcje", "href": "/kolekcje/" }
+        "more": {
+          "label": "Wszystkie kolekcje",
+          "href": "/kolekcje/"
+        }
       },
       {
         "title": "Meble",
         "items": [
-          { "label": "Salon", "href": "/pomieszczenia/salon/" },
-          { "label": "Jadalnia", "href": "/pomieszczenia/jadalnia/" },
-          { "label": "Sypialnia", "href": "/pomieszczenia/sypialnia/" },
-          { "label": "Pokój młodzieżowy", "href": "/pomieszczenia/pokoj-mlodziezowy/" },
-          { "label": "Przedpokój", "href": "/pomieszczenia/przedpokoj/" },
-          { "label": "Domowe biuro", "href": "/pomieszczenia/biuro/" }
+          {
+            "label": "Salon",
+            "href": "/pomieszczenia/salon/"
+          },
+          {
+            "label": "Jadalnia",
+            "href": "/pomieszczenia/jadalnia/"
+          },
+          {
+            "label": "Sypialnia",
+            "href": "/pomieszczenia/sypialnia/"
+          },
+          {
+            "label": "Pokój młodzieżowy",
+            "href": "/pomieszczenia/pokoj-mlodziezowy/"
+          },
+          {
+            "label": "Przedpokój",
+            "href": "/pomieszczenia/przedpokoj/"
+          },
+          {
+            "label": "Domowe biuro",
+            "href": "/pomieszczenia/biuro/"
+          }
         ],
-        "more": { "label": "Wszystkie meble", "href": "/meble/" }
+        "more": {
+          "label": "Wszystkie meble",
+          "href": "/meble/"
+        }
       },
       {
         "title": "Pomoc w wyborze",
         "items": [
-          { "label": "Gdzie kupić", "href": "/gdzie-kupic/" },
-          { "label": "Doradca wnętrz", "href": "/doradca-wnetrz/" },
-          { "label": "Poradnik", "href": "/poradnik/" },
-          { "label": "Promocje", "href": "/promocje/" }
+          {
+            "label": "Gdzie kupić",
+            "href": "/gdzie-kupic/"
+          },
+          {
+            "label": "Doradca wnętrz",
+            "href": "/doradca-wnetrz/"
+          },
+          {
+            "label": "Poradnik",
+            "href": "/poradnik/"
+          },
+          {
+            "label": "Promocje",
+            "href": "/promocje/"
+          }
         ]
       },
       {
         "title": "Liveo",
         "items": [
-          { "label": "O nas", "href": "/o-nas/" },
-          { "label": "Kontakt", "href": "/kontakt/" },
-          { "label": "Dla partnerów", "href": "/dla-partnerow/" },
-          { "label": "Strefa partnera", "href": "/strefa-partnera/" }
+          {
+            "label": "O nas",
+            "href": "/o-nas/"
+          },
+          {
+            "label": "Kontakt",
+            "href": "/kontakt/"
+          },
+          {
+            "label": "Dla partnerów",
+            "href": "/dla-partnerow/"
+          },
+          {
+            "label": "Strefa partnera",
+            "href": "/strefa-partnera/"
+          }
         ]
       }
     ],
     "legal": [
-      { "label": "Polityka prywatności", "href": "/polityka-prywatnosci/" },
-      { "label": "Regulamin", "href": "/regulamin/" },
-      { "label": "Ustawienia plików cookie", "action": "open-consent", "_note": "Pokazać tylko, jeśli strona używa cookies wymagających zgody." }
+      {
+        "label": "Polityka prywatności",
+        "href": "/polityka-prywatnosci/"
+      },
+      {
+        "label": "Regulamin",
+        "href": "/regulamin/"
+      },
+      {
+        "label": "Ustawienia plików cookie",
+        "action": "open-consent",
+        "_note": "Pokazać tylko, jeśli strona używa cookies wymagających zgody."
+      }
     ],
-    "company": "Liveo Meble sp. z o.o. · Raniżów [do potwierdzenia: ulica, kod pocztowy] · NIP [do potwierdzenia] · KRS [do potwierdzenia]",
+    "company": "LIVEO Meble sp. z o.o. · ul. Borki 5, 36-130 Raniżów · tel. +48 17 58 18 000 · biuro@liveomeble.pl",
     "copyright": "© {year} Liveo Meble sp. z o.o.",
     "demoNotice": "Wersja demonstracyjna: kolekcje, meble, ceny, promocje i sklepy na tej stronie są przykładowe."
   },
@@ -155,13 +259,41 @@
     "weightFormat": "ok. {kg} kg"
   },
   "plural": {
-    "products": { "one": "{n} mebel", "few": "{n} meble", "many": "{n} mebli" },
-    "colors": { "one": "{n} kolor", "few": "{n} kolory", "many": "{n} kolorów" },
-    "stores": { "one": "{n} sklep", "few": "{n} sklepy", "many": "{n} sklepów" },
-    "collections": { "one": "{n} kolekcja", "few": "{n} kolekcje", "many": "{n} kolekcji" },
-    "days": { "one": "{n} dzień", "few": "{n} dni", "many": "{n} dni" },
-    "minutes": { "one": "{n} minuta", "few": "{n} minuty", "many": "{n} minut" },
-    "items": { "one": "{n} pozycja", "few": "{n} pozycje", "many": "{n} pozycji" }
+    "products": {
+      "one": "{n} mebel",
+      "few": "{n} meble",
+      "many": "{n} mebli"
+    },
+    "colors": {
+      "one": "{n} kolor",
+      "few": "{n} kolory",
+      "many": "{n} kolorów"
+    },
+    "stores": {
+      "one": "{n} sklep",
+      "few": "{n} sklepy",
+      "many": "{n} sklepów"
+    },
+    "collections": {
+      "one": "{n} kolekcja",
+      "few": "{n} kolekcje",
+      "many": "{n} kolekcji"
+    },
+    "days": {
+      "one": "{n} dzień",
+      "few": "{n} dni",
+      "many": "{n} dni"
+    },
+    "minutes": {
+      "one": "{n} minuta",
+      "few": "{n} minuty",
+      "many": "{n} minut"
+    },
+    "items": {
+      "one": "{n} pozycja",
+      "few": "{n} pozycje",
+      "many": "{n} pozycji"
+    }
   },
   "labels": {
     "collection": "Kolekcja",
@@ -191,13 +323,34 @@
     "plinth": "niski, cofnięty cokół"
   },
   "styles": {
-    "naturalny": { "label": "naturalny", "in": "w stylu naturalnym" },
-    "skandynawski": { "label": "skandynawski", "in": "w stylu skandynawskim" },
-    "loft": { "label": "loftowy", "in": "w stylu loftowym" },
-    "glamour-lekki": { "label": "lekki glamour", "in": "z nutą glamour" },
-    "nowoczesny": { "label": "nowoczesny", "in": "w stylu nowoczesnym" },
-    "klasyczny-nowoczesny": { "label": "klasyka w nowoczesnym wydaniu", "in": "w stylu nowoczesnej klasyki" },
-    "minimalistyczny": { "label": "minimalistyczny", "in": "w stylu minimalistycznym" }
+    "naturalny": {
+      "label": "naturalny",
+      "in": "w stylu naturalnym"
+    },
+    "skandynawski": {
+      "label": "skandynawski",
+      "in": "w stylu skandynawskim"
+    },
+    "loft": {
+      "label": "loftowy",
+      "in": "w stylu loftowym"
+    },
+    "glamour-lekki": {
+      "label": "lekki glamour",
+      "in": "z nutą glamour"
+    },
+    "nowoczesny": {
+      "label": "nowoczesny",
+      "in": "w stylu nowoczesnym"
+    },
+    "klasyczny-nowoczesny": {
+      "label": "klasyka w nowoczesnym wydaniu",
+      "in": "w stylu nowoczesnej klasyki"
+    },
+    "minimalistyczny": {
+      "label": "minimalistyczny",
+      "in": "w stylu minimalistycznym"
+    }
   },
   "forms": {
     "required": "To pole jest wymagane.",
@@ -230,10 +383,22 @@
     "h1": "Tej strony nie ma",
     "lead": "Adres mógł się zmienić po przebudowie strony albo zawiera literówkę. Oto miejsca, od których warto zacząć:",
     "links": [
-      { "label": "Kolekcje mebli", "href": "/kolekcje/" },
-      { "label": "Wszystkie meble", "href": "/meble/" },
-      { "label": "Gdzie kupić", "href": "/gdzie-kupic/" },
-      { "label": "Strona główna", "href": "/" }
+      {
+        "label": "Kolekcje mebli",
+        "href": "/kolekcje/"
+      },
+      {
+        "label": "Wszystkie meble",
+        "href": "/meble/"
+      },
+      {
+        "label": "Gdzie kupić",
+        "href": "/gdzie-kupic/"
+      },
+      {
+        "label": "Strona główna",
+        "href": "/"
+      }
     ],
     "oldSiteNote": "Szukasz czegoś ze starej strony Liveo? Napisz do nas przez [formularz kontaktowy](/kontakt/) — pomożemy."
   }

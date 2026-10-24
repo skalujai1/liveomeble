@@ -1,5 +1,6 @@
 ---
-// Stopka: kolekcje (z danych), pomieszczenia, pomoc w wyborze, firma i partnerzy, linki prawne, dane spółki, notka DEMO.
+// Stopka (kierunek A): znak i opis firmy, kolumny linków (kolekcje z danych, pomieszczenia, rodzaje mebli,
+// pomoc w wyborze, firma), linki prawne, dane spółki, notka DEMO.
 import Rich from './Rich.astro';
 import { CONSENT_SCRIPTS, DEMO } from '../config';
 import { collections, products, site, types, url, year } from '../lib/site';
@@ -12,15 +13,19 @@ const columns: Col[] = f.columns.flatMap((col: any): Col[] =>
     ? [{ ...col, items: collections.map(c => ({ label: c.name, href: url.collection(c.slug) })) }]
     : col.title === 'Meble'
       // Po kolumnie pomieszczeń: rodzaje mebli (strony kategorii) — tylko te, które mają meble.
-      ? [col, { title: 'Rodzaje mebli', items: types.filter(t => products.some(p => p.type === t.id)).map(t => ({ label: t.plural, href: url.category(t.slug) })) }]
+      ? [{ ...col, title: 'Pomieszczenia' }, { title: 'Rodzaje mebli', items: types.filter(t => products.some(p => p.type === t.id)).map(t => ({ label: t.plural, href: url.category(t.slug) })) }]
       : [col],
 );
 const legal = f.legal.filter(l => !('action' in l) || CONSENT_SCRIPTS.length > 0);
 ---
 <footer class="site-footer">
-  <div class="container site-footer__inner">
-    <p class="site-footer__lead">{f.lead}</p>
-    <div class="site-footer__columns">
+  <div class="container">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <img src="/brand/liveo-logo.svg" alt="Liveo Meble" width="96" height="36" loading="lazy" />
+        <p class="site-footer__lead">{f.lead}</p>
+        <p class="site-footer__company"><Rich text={f.company} /></p>
+      </div>
       {columns.map((col, i) => (
         <nav class="site-footer__col" aria-labelledby={`stopka-${i}`}>
           <h2 class="site-footer__title" id={`stopka-${i}`}>{col.title}</h2>
@@ -32,6 +37,7 @@ const legal = f.legal.filter(l => !('action' in l) || CONSENT_SCRIPTS.length > 0
       ))}
     </div>
     <div class="site-footer__bottom">
+      <p class="site-footer__copy">{fill(f.copyright, { year })}</p>
       <ul class="site-footer__legal">
         {legal.map(l => (
           <li>
@@ -41,8 +47,6 @@ const legal = f.legal.filter(l => !('action' in l) || CONSENT_SCRIPTS.length > 0
           </li>
         ))}
       </ul>
-      <p class="site-footer__company"><Rich text={f.company} /></p>
-      <p class="site-footer__copy">{fill(f.copyright, { year })}</p>
       {DEMO && <p class="site-footer__demo"><strong>DEMO.</strong> {f.demoNotice}</p>}
     </div>
   </div>

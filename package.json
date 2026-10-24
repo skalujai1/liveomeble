@@ -19,7 +19,8 @@
     "postbuild": "node tools/check/run-all.mjs",
     "preview": "astro preview --port 8803",
     "test": "node --test tools/data/",
-    "check:dist": "node tools/check/run-all.mjs"
+    "check:dist": "node tools/check/run-all.mjs",
+    "check:browser": "node tools/check/browser.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.4",
@@ -28,6 +29,8 @@
     "sharp": "^0.35.5"
   },
   "devDependencies": {
-    "node-html-parser": "^9.0.5"
+    "axe-core": "^4.11.0",
+    "node-html-parser": "^9.0.5",
+    "playwright-core": "^1.56.1"
   }
 }

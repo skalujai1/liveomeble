@@ -92,62 +92,7 @@ main { display: block; padding-bottom: var(--space-8); }
 .demo-bar__text { max-width: var(--container); margin-inline: auto; padding: var(--space-2) var(--gutter); }
 .demo-bar__more { opacity: 0.85; }
 
-/* ---------- Nagłówek i menu ---------- */
-.site-header { border-bottom: var(--border); background: var(--color-bg); position: relative; z-index: var(--z-header); }
-.site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: var(--header-h); flex-wrap: wrap; }
-.site-header__logo { display: inline-flex; padding-block: var(--space-2); }
-.site-header__toggle {
-  display: inline-flex; align-items: center; gap: var(--space-2); min-height: 2.75rem; padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-line-strong); border-radius: var(--radius); background: var(--color-bg);
-}
-.site-header__toggle-icon, .site-header__toggle-icon::before, .site-header__toggle-icon::after {
-  display: block; width: 1.125rem; height: 2px; background: currentColor; position: relative;
-  transition: transform var(--dur) var(--ease-out), opacity var(--dur) var(--ease-out);
-}
-.site-header__toggle-icon::before, .site-header__toggle-icon::after { content: ""; position: absolute; left: 0; }
-.site-header__toggle-icon::before { transform: translateY(-6px); }
-.site-header__toggle-icon::after { transform: translateY(6px); }
-.menu-open .site-header__toggle-icon { background: transparent; }
-.menu-open .site-header__toggle-icon::before { transform: rotate(45deg); background: currentColor; }
-.menu-open .site-header__toggle-icon::after { transform: rotate(-45deg); background: currentColor; }
-
-.site-nav { width: 100%; display: grid; gap: var(--space-4); padding-bottom: var(--space-5); }
-.js .site-nav { display: none; }
-.js.menu-open .site-nav { display: grid; }
-.site-nav__list { display: grid; }
-.site-nav__item { position: relative; display: flex; flex-wrap: wrap; align-items: center; border-bottom: var(--border); }
-.site-nav__link { flex: 1; padding: var(--space-3) 0; text-decoration: none; font-weight: var(--weight-medium); }
-.site-nav__link[aria-current="page"], .site-nav__item.is-active > .site-nav__link { text-decoration: underline; text-decoration-thickness: 2px; }
-.site-nav__sub-toggle { display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 0; background: none; }
-.site-nav__sub-toggle[aria-expanded="true"] .site-nav__chevron { transform: rotate(180deg); }
-.site-nav__chevron { transition: transform var(--dur) var(--ease-out); }
-.site-nav__sub { width: 100%; display: none; padding: 0 0 var(--space-3) var(--space-4); }
-.no-js .site-nav__sub { display: block; }
-.no-js .site-nav__sub-toggle { display: none; }
-.site-nav__sub-toggle[aria-expanded="true"] + .site-nav__sub { display: block; }
-.site-nav__sub-link { display: block; padding: var(--space-2) 0; text-decoration: none; }
-.site-nav__sub-link:hover, .site-nav__sub-link[aria-current="page"] { text-decoration: underline; }
-.site-nav__cta { justify-self: start; }
-.site-nav__secondary { display: flex; flex-wrap: wrap; gap: var(--space-4); font-size: var(--text-sm); }
-.site-nav__secondary-link { color: var(--color-text-muted); }
-
-@media (min-width: 64rem) {
-  .site-header__inner { flex-wrap: nowrap; }
-  .site-header__toggle { display: none !important; }
-  .site-nav, .js .site-nav { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-5); width: auto; padding: 0; flex-wrap: wrap; }
-  .site-nav__list { display: flex; gap: var(--space-5); }
-  .site-nav__item { border: 0; flex-wrap: nowrap; }
-  .site-nav__link { padding: var(--space-2) 0; }
-  .site-nav__sub-toggle { width: 2rem; height: 2rem; }
-  .site-nav__sub {
-    position: absolute; top: 100%; left: calc(-1 * var(--space-4)); min-width: 15rem; padding: var(--space-3) var(--space-4);
-    background: var(--color-bg); border: var(--border); box-shadow: var(--shadow-overlay); z-index: var(--z-overlay);
-  }
-  .no-js .site-nav__sub { display: none; }
-  .site-header__inner { position: relative; }
-  .site-nav__secondary { order: -1; position: absolute; top: calc(var(--space-1) - var(--space-4)); right: var(--gutter); gap: var(--space-4); }
-  .site-header { padding-top: var(--space-4); }
-}
+/* ---------- Nagłówek i menu: src/styles/theme.css (kierunek A) ---------- */
 
 /* ---------- Okruszki ---------- */
 .breadcrumbs { padding-top: var(--space-4); font-size: var(--text-sm); color: var(--color-text-muted); }

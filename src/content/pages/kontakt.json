@@ -3,7 +3,7 @@
   "url": "/kontakt/",
   "status": "draft",
   "_notes": [
-    "Wszystkie dane kontaktowe są [do potwierdzenia] — nie wpisywać żadnych numerów ani adresów ze starej strony bez potwierdzenia klienta.",
+    "Adres, telefon i e-mail biura pochodzą z oficjalnej strony liveomeble.pl (odczyt 21.10.2026). Dane przedstawicieli handlowych i godziny pracy — [do potwierdzenia].",
     "Strona najpierw kieruje sprawy tam, gdzie zostaną załatwione (sklep, dział handlowy), a dopiero potem pokazuje formularz."
   ],
   "seo": {
@@ -51,9 +51,9 @@
       "type": "contact-details",
       "title": "Liveo Meble sp. z o.o.",
       "items": [
-        { "label": "Adres", "value": "[do potwierdzenia: ulica i numer], [do potwierdzenia: kod pocztowy] Raniżów", "type": "address" },
-        { "label": "Telefon", "value": "[do potwierdzenia]", "type": "tel" },
-        { "label": "E-mail", "value": "[do potwierdzenia]", "type": "email" },
+        { "label": "Adres", "value": "ul. Borki 5, 36-130 Raniżów (woj. podkarpackie)", "type": "address" },
+        { "label": "Telefon", "value": "+48 17 58 18 000", "type": "tel" },
+        { "label": "E-mail", "value": "biuro@liveomeble.pl", "type": "email" },
         { "label": "Dział handlowy (partnerzy)", "value": "[do potwierdzenia: telefon i e-mail]", "type": "text" },
         { "label": "Godziny pracy biura", "value": "[do potwierdzenia: np. pon.–pt.]", "type": "hours" }
       ],

@@ -1,72 +1,152 @@
 ---
-// Nagłówek: logo, menu główne (podmenu pomieszczeń), przycisk „Gdzie kupić”, linki dla partnerów.
-// Menu mobilne: przycisk z aria-expanded/aria-controls, Esc zamyka i oddaje fokus na przycisk.
-import { site } from '../lib/site';
+// Nagłówek (kierunek A): pasek pomocniczy, logo, menu z mega-menu „Meble” i „Kolekcje”, szybkie
+// „Znajdź salon” po kodzie pocztowym i link „Gdzie kupić”. Pasek pomocniczy przewija się, rząd
+// menu zostaje przyklejony (sticky z ujemnym top — bez JS i bez czytania układu).
+// Bez JS: „Meble” i „Kolekcje” są zwykłymi linkami, menu mobilne jest listą pod nagłówkiem.
+import { Image } from 'astro:assets';
+import { typeImage, collectionImage } from '../lib/images';
+import { activePromosAtBuild, collections, priceRangeOf, products, productsByCollection, rooms, site, types, url } from '../lib/site';
 
 interface Props { path: string }
 const { path } = Astro.props;
 
-type NavItem = { label: string; href: string; children?: { label: string; href: string }[]; submenuLabel?: string };
-const meble = site.nav.items.find(i => 'children' in i) as { children: { label: string; href: string }[]; submenuLabel: string };
-const roomLinks = meble.children.filter(c => c.href.startsWith('/pomieszczenia/'));
-const label = (href: string) => site.nav.items.find(i => i.href === href)?.label;
-
-const primary: NavItem[] = [
-  { label: label('/kolekcje/') ?? 'Kolekcje', href: '/kolekcje/' },
-  { label: label('/meble/') ?? 'Meble', href: '/meble/' },
-  { label: 'Pomieszczenia', href: '/pomieszczenia/', children: roomLinks, submenuLabel: meble.submenuLabel },
-  { label: label('/promocje/') ?? 'Promocje', href: '/promocje/' },
-  { label: label('/doradca-wnetrz/') ?? 'Doradca wnętrz', href: '/doradca-wnetrz/' },
-  { label: label('/poradnik/') ?? 'Poradnik', href: '/poradnik/' },
+const nav = site.nav;
+const current = (href: string) => (path === href ? 'page' : undefined);
+const inSection = (href: string) => href !== '/' && path.startsWith(href);
+const withProducts = types.filter(t => products.some(p => p.type === t.id));
+const megaTypes = withProducts.slice(0, 8).map(t => ({ t, img: typeImage(t.id, products) }));
+const restTypes = withProducts.slice(8);
+const megaCollections = collections.map(c => ({ c, img: collectionImage(c), from: priceRangeOf(productsByCollection(c.slug)).minText }));
+const promoOn = activePromosAtBuild.length > 0;
+const secondary = [
+  { label: 'Dla sklepów (B2B)', href: url.partners },
+  { label: 'Strefa partnera', href: url.partnerZone },
+  { label: 'Poradnik', href: url.guides },
+  { label: 'Kontakt', href: url.contact },
 ];
-const secondary = site.nav.secondary;
-const cta = site.nav.cta;
-
-const isCurrent = (href: string) => path === href;
-const inSection = (href: string) => href !== '/' && path.startsWith(href) && path !== href;
-const current = (href: string) => (isCurrent(href) ? 'page' : undefined);
 ---
-<header class="site-header">
-  <div class="site-header__inner container">
-    <a class="site-header__logo" href="/" aria-label={site.brand.logoAlt} aria-current={current('/')}>
-      <img src="/brand/liveo-logo.svg" alt="" width="112" height="28" />
-    </a>
-    <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="menu-glowne" data-menu-toggle hidden>
-      <span class="site-header__toggle-icon" aria-hidden="true"></span>
-      <span data-menu-label data-open={site.nav.openLabel} data-close={site.nav.closeLabel}>{site.nav.openLabel}</span>
-    </button>
-    <nav id="menu-glowne" class="site-nav" aria-label={site.nav.ariaLabel} data-menu>
-      <ul class="site-nav__list">
-        {primary.map(item => (
-          <li class:list={['site-nav__item', { 'site-nav__item--has-sub': item.children, 'is-active': inSection(item.href) }]}>
-            <a class="site-nav__link" href={item.href} aria-current={current(item.href)}>{item.label}</a>
-            {item.children && (
-              <>
-                <button class="site-nav__sub-toggle" type="button" aria-expanded="false" aria-controls="podmenu-pomieszczenia" data-submenu-toggle>
-                  <span class="visually-hidden">{item.submenuLabel}</span>
-                  <svg class="site-nav__chevron" aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
-                </button>
-                <ul id="podmenu-pomieszczenia" class="site-nav__sub" data-submenu>
-                  {item.children.map(c => (
-                    <li><a class="site-nav__sub-link" href={c.href} aria-current={current(c.href)}>{c.label}</a></li>
+<header class="site-header" data-header>
+  <div class="site-header__util">
+    <div class="container site-header__util-inner">
+      <p class="site-header__claim">Producent mebli z Raniżowa na Podkarpaciu</p>
+      <nav aria-label="Dodatkowe">
+        <ul class="site-header__util-list">
+          {secondary.map(s => <li><a href={s.href} aria-current={current(s.href)}>{s.label}</a></li>)}
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <div class="site-header__bar">
+    <div class="container site-header__row">
+      <a class="site-header__logo" href="/" aria-current={current('/')}>
+        <img src="/brand/liveo-logo.svg" alt={site.brand.logoAlt} width="107" height="40" />
+      </a>
+
+      <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="menu-glowne" data-menu-toggle hidden>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+        <span data-menu-label data-open={nav.openLabel} data-close={nav.closeLabel}>{nav.openLabel}</span>
+      </button>
+
+      <nav id="menu-glowne" class="site-nav" aria-label={nav.ariaLabel} data-menu>
+        <ul class="site-nav__list">
+          <li class:list={['site-nav__item site-nav__item--mega', { 'is-active': inSection('/meble/') }]} data-mega-item>
+            <a class="site-nav__link" href={url.products} aria-current={current(url.products)}>Meble</a>
+            <button class="site-nav__mega-toggle" type="button" aria-expanded="false" aria-controls="mega-meble" data-mega-toggle>
+              <span class="visually-hidden">Rodzaje mebli</span>
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div class="mega" id="mega-meble" data-mega>
+              <div class="container"><div class="mega__panel mega__panel--types">
+                <ul class="mega__types">
+                  {megaTypes.map(({ t, img }) => (
+                    <li><a href={url.category(t.slug)}>
+                      <span class="mega__thumb">{img && <Image src={img.src} alt="" widths={[160, 240]} sizes="120px" loading="lazy" />}</span>
+                      {t.plural}
+                    </a></li>
                   ))}
                 </ul>
-              </>
-            )}
+                <div class="mega__side">
+                  <p class="mega__heading">Pozostałe</p>
+                  <ul class="mega__list">
+                    {restTypes.map(t => <li><a href={url.category(t.slug)}>{t.plural}</a></li>)}
+                  </ul>
+                  <p class="mega__heading">Według pomieszczenia</p>
+                  <ul class="mega__list">
+                    {rooms.map(r => <li><a href={url.room(r.slug)}>{r.name}</a></li>)}
+                  </ul>
+                  <p><a class="link" href={url.products}>Wszystkie meble</a></p>
+                </div>
+              </div></div>
+            </div>
           </li>
-        ))}
-      </ul>
-      <a class="btn btn--primary site-nav__cta" href={cta.href} aria-current={current(cta.href)}>{cta.label}</a>
-      <ul class="site-nav__secondary">
-        {secondary.map(s => (
-          <li><a class="site-nav__secondary-link" href={s.href} aria-current={current(s.href)}>{s.label}</a></li>
-        ))}
-      </ul>
-    </nav>
+          <li class:list={['site-nav__item site-nav__item--mega', { 'is-active': inSection('/kolekcje/') }]} data-mega-item>
+            <a class="site-nav__link" href={url.collections} aria-current={current(url.collections)}>Kolekcje</a>
+            <button class="site-nav__mega-toggle" type="button" aria-expanded="false" aria-controls="mega-kolekcje" data-mega-toggle>
+              <span class="visually-hidden">Lista kolekcji</span>
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div class="mega" id="mega-kolekcje" data-mega>
+              <div class="container"><div class="mega__panel mega__panel--collections">
+                {megaCollections.map(({ c, img, from }) => (
+                  <a class="mega__collection" href={url.collection(c.slug)}>
+                    {img && <Image src={img.src} alt="" widths={[160, 240]} sizes="112px" loading="lazy" />}
+                    <span><b>{c.name}</b>od {from}</span>
+                  </a>
+                ))}
+                <p class="mega__all"><a class="link" href={url.collections}>Wszystkie kolekcje</a></p>
+              </div></div>
+            </div>
+          </li>
+          <li class:list={['site-nav__item', { 'is-active': inSection('/pomieszczenia/') }]}>
+            <a class="site-nav__link" href={url.rooms} aria-current={current(url.rooms)}>Pomieszczenia</a>
+          </li>
+          <li class:list={['site-nav__item', { 'is-active': inSection('/promocje/') }]}>
+            <a class="site-nav__link" href={url.promotions} aria-current={current(url.promotions)}>
+              Promocje{promoOn && <><span class="site-nav__dot" aria-hidden="true"></span><span class="visually-hidden"> (trwa promocja)</span></>}
+            </a>
+          </li>
+          <li class:list={['site-nav__item', { 'is-active': inSection('/doradca-wnetrz/') }]}>
+            <a class="site-nav__link" href={url.advisor} aria-current={current(url.advisor)}>Doradca wnętrz</a>
+          </li>
+        </ul>
+
+        <div class="site-nav__mobile-extra">
+          <p class="site-nav__mobile-title">Kolekcje</p>
+          <ul class="site-nav__mobile-collections">
+            {megaCollections.map(({ c, img, from }) => (
+              <li><a href={url.collection(c.slug)}>
+                {img && <Image src={img.src} alt="" widths={[240, 360]} sizes="45vw" loading="lazy" />}
+                <b>{c.name}</b> <span>od {from}</span>
+              </a></li>
+            ))}
+          </ul>
+          <ul class="site-nav__mobile-secondary">
+            <li><a href={url.guides}>Poradnik</a></li>
+            {secondary.filter(s => s.href !== url.guides).map(s => <li><a href={s.href}>{s.label}</a></li>)}
+          </ul>
+        </div>
+      </nav>
+
+      <form class="site-header__finder" action={url.stores()} method="get" role="search" aria-label="Znajdź salon partnerski">
+        <label class="visually-hidden" for="naglowek-kod">Kod pocztowy — znajdź najbliższy salon partnerski</label>
+        <input id="naglowek-kod" name="kod" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="6" placeholder="Kod pocztowy, np. 35-060" />
+        <button class="site-header__finder-btn" type="submit">
+          <span class="visually-hidden">Pokaż salony</span>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" /><path d="m20 20-4.2-4.2" /></svg>
+        </button>
+      </form>
+
+      <a class="site-header__where" href={url.stores()} aria-current={current('/gdzie-kupic/')}>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.4" /></svg>
+        <span><b>Gdzie kupić</b><small>Salony partnerskie</small></span>
+      </a>
+    </div>
   </div>
 </header>
 
 <script>
-  import { initMenu } from '../scripts/menu';
+  import { initMenu, initMega } from '../scripts/menu';
   initMenu();
+  initMega();
 </script>

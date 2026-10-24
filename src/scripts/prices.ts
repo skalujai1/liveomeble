@@ -89,7 +89,8 @@ export function renderPrice(el: HTMLElement, now = new Date()) {
     item.dataset.price = String(info.price);
     item.dataset.promo = promo ? '1' : '0';
     const badge = item.querySelector<HTMLElement>('[data-promo-badge]');
-    if (badge) { setText(badge, promo ? info.promoLabel ?? '' : ''); setHidden(badge, !promo); }
+    // Plakietka na karcie: krótki rabat („−15%”), pełna nazwa promocji jest w bloku ceny i na stronie mebla.
+    if (badge) { setText(badge, promo ? `−${Math.round((1 - info.price / info.regular!) * 100)}%` : ''); setHidden(badge, !promo); }
   }
 }
 

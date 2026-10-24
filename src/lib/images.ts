@@ -85,3 +85,15 @@ export function collectionImage(c: Collection, frame: 'wide' | 'tall' = 'wide'):
 
 /** Wszystkie dostępne pliki (do raportu w kontroli buildu). */
 export const availableRenders = files;
+
+/** Packshot reprezentujący rodzaj mebla (mega-menu, kafle kategorii): własny render pierwszego mebla albo próbka. */
+export function typeImage(typeId: string, list: { type: string; variants: Variant[] }[]): ImageRef | null {
+  const p = list.find(x => x.type === typeId);
+  if (p) {
+    const hit = packshotFor(p as Product, p.variants[0]);
+    if (hit) return hit;
+  }
+  const prefix = SAMPLE_PREFIX[typeId];
+  const f = prefix && files.find(x => x.startsWith(`sample/${prefix}-`));
+  return f ? { ...get(f)!, approximate: true } : null;
+}
