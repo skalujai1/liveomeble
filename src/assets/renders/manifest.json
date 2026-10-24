@@ -2,6 +2,132 @@
   "note": "Atrapy zdjęć (rendery 3D z tools/render) — do podmiany na zdjęcia klienta.",
   "items": [
     {
+      "file": "collections/briso-tall.jpg",
+      "type": "aranzacja",
+      "room": "pokoj-mlodziezowy",
+      "frame": "tall",
+      "title": "Kolekcja BRISO w pokoju młodzieżowym — biurko 120 (biały mat / dąb naturalny), regał 50 (biały mat / dąb naturalny)",
+      "description": "Kolekcja BRISO w pokoju młodzieżowym — biurko 120 (biały mat / dąb naturalny), regał 50 (biały mat / dąb naturalny). Render 3D (atrapa zdjęcia) — meble z kolekcji BRISO w aranżacji.",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#b5ada4",
+        "#a49789",
+        "#ebeae6",
+        "#cbc8c4"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "briso"
+    },
+    {
+      "file": "collections/briso-wide.jpg",
+      "type": "aranzacja",
+      "room": "pokoj-mlodziezowy",
+      "frame": "wide",
+      "title": "Kolekcja BRISO w pokoju młodzieżowym — biurko 120 (biały mat / dąb naturalny), regał 50 (biały mat / dąb naturalny)",
+      "description": "Kolekcja BRISO w pokoju młodzieżowym — biurko 120 (biały mat / dąb naturalny), regał 50 (biały mat / dąb naturalny). Render 3D (atrapa zdjęcia) — meble z kolekcji BRISO w aranżacji.",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#bbb8b5",
+        "#ebeae7",
+        "#9d9387",
+        "#d7d2cc"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "briso"
+    },
+    {
+      "file": "collections/liran-tall.jpg",
+      "type": "aranzacja",
+      "room": "salon",
+      "frame": "tall",
+      "title": "Kolekcja LIRAN w salonie — komoda 140 (czarny mat / dąb naturalny), witryna 50 (czarny mat / dąb naturalny)",
+      "description": "Kolekcja LIRAN w salonie — komoda 140 (czarny mat / dąb naturalny), witryna 50 (czarny mat / dąb naturalny). Render 3D (atrapa zdjęcia) — meble z kolekcji LIRAN w aranżacji.",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#797a67",
+        "#373736",
+        "#1a1918",
+        "#e1ddd7"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "liran"
+    },
+    {
+      "file": "collections/liran-wide.jpg",
+      "type": "aranzacja",
+      "room": "salon",
+      "frame": "wide",
+      "title": "Kolekcja LIRAN w salonie — komoda 140 (czarny mat / dąb naturalny), witryna 50 (czarny mat / dąb naturalny)",
+      "description": "Kolekcja LIRAN w salonie — komoda 140 (czarny mat / dąb naturalny), witryna 50 (czarny mat / dąb naturalny). Render 3D (atrapa zdjęcia) — meble z kolekcji LIRAN w aranżacji.",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#777a66",
+        "#383735",
+        "#1a1817",
+        "#e5e2dd"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "liran"
+    },
+    {
+      "file": "collections/melva-tall.jpg",
+      "type": "aranzacja",
+      "room": "jadalnia",
+      "frame": "tall",
+      "title": "Kolekcja MELVA w jadalni — stół rozkładany 160 (kaszmir / dąb miodowy), kredens 120 (kaszmir / dąb miodowy)",
+      "description": "Kolekcja MELVA w jadalni — stół rozkładany 160 (kaszmir / dąb miodowy), kredens 120 (kaszmir / dąb miodowy). Render 3D (atrapa zdjęcia) — meble z kolekcji MELVA w aranżacji.",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#888976",
+        "#bbb3aa",
+        "#865a3a",
+        "#9ea294"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "melva"
+    },
+    {
+      "file": "collections/melva-wide.jpg",
+      "type": "aranzacja",
+      "room": "jadalnia",
+      "frame": "wide",
+      "title": "Kolekcja MELVA w jadalni — stół rozkładany 160 (kaszmir / dąb miodowy), kredens 120 (kaszmir / dąb miodowy)",
+      "description": "Kolekcja MELVA w jadalni — stół rozkładany 160 (kaszmir / dąb miodowy), kredens 120 (kaszmir / dąb miodowy). Render 3D (atrapa zdjęcia) — meble z kolekcji MELVA w aranżacji.",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#95988a",
+        "#7b7a66",
+        "#eaebe5",
+        "#bbb7b3"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "melva"
+    },
+    {
       "file": "collections/nokta-tall.jpg",
       "type": "aranzacja",
       "room": "jadalnia",
@@ -86,6 +212,48 @@
       "collection": "olmo"
     },
     {
+      "file": "collections/solma-tall.jpg",
+      "type": "aranzacja",
+      "room": "sypialnia",
+      "frame": "tall",
+      "title": "Kolekcja SOLMA w sypialni — łóżko 160 (kaszmir / złoty), szafka nocna 50 (kaszmir / złoty)",
+      "description": "Kolekcja SOLMA w sypialni — łóżko 160 (kaszmir / złoty), szafka nocna 50 (kaszmir / złoty). Render 3D (atrapa zdjęcia) — meble z kolekcji SOLMA w aranżacji.",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#a99b8b",
+        "#bab3aa",
+        "#cdc9c4",
+        "#ece9e5"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "solma"
+    },
+    {
+      "file": "collections/solma-wide.jpg",
+      "type": "aranzacja",
+      "room": "sypialnia",
+      "frame": "wide",
+      "title": "Kolekcja SOLMA w sypialni — łóżko 160 (kaszmir / złoty), szafka nocna 50 (kaszmir / złoty)",
+      "description": "Kolekcja SOLMA w sypialni — łóżko 160 (kaszmir / złoty), szafka nocna 50 (kaszmir / złoty). Render 3D (atrapa zdjęcia) — meble z kolekcji SOLMA w aranżacji.",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#a6998a",
+        "#bab2a8",
+        "#ebe8e4",
+        "#96836b"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "solma"
+    },
+    {
       "file": "collections/talve-tall.jpg",
       "type": "aranzacja",
       "room": "sypialnia",
@@ -126,6 +294,48 @@
       "textSpace": "",
       "placeholder": true,
       "collection": "talve"
+    },
+    {
+      "file": "collections/verno-tall.jpg",
+      "type": "aranzacja",
+      "room": "przedpokoj",
+      "frame": "tall",
+      "title": "Kolekcja VERNO w przedpokoju — szafka na buty 100 (biały mat / dąb naturalny), wieszak 80 (biały mat / dąb naturalny), lustro 50 (biały mat / dąb naturalny)",
+      "description": "Kolekcja VERNO w przedpokoju — szafka na buty 100 (biały mat / dąb naturalny), wieszak 80 (biały mat / dąb naturalny), lustro 50 (biały mat / dąb naturalny). Render 3D (atrapa zdjęcia) — meble z kolekcji VERNO w aranżacji.",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#b4ada3",
+        "#8a6646",
+        "#e6e2db",
+        "#9b968c"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "verno"
+    },
+    {
+      "file": "collections/verno-wide.jpg",
+      "type": "aranzacja",
+      "room": "przedpokoj",
+      "frame": "wide",
+      "title": "Kolekcja VERNO w przedpokoju — szafka na buty 100 (biały mat / dąb naturalny), wieszak 80 (biały mat / dąb naturalny), lustro 50 (biały mat / dąb naturalny)",
+      "description": "Kolekcja VERNO w przedpokoju — szafka na buty 100 (biały mat / dąb naturalny), wieszak 80 (biały mat / dąb naturalny), lustro 50 (biały mat / dąb naturalny). Render 3D (atrapa zdjęcia) — meble z kolekcji VERNO w aranżacji.",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#aaa49b",
+        "#896646",
+        "#938d84",
+        "#ecd3a9"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "verno"
     },
     {
       "file": "rooms/biuro-tall.jpg",
