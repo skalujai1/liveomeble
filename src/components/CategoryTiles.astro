@@ -1,16 +1,21 @@
 ---
-// Kafle rodzajów mebli (16 kategorii) z liczbą mebli — linki do /meble/<kategoria>/.
-import { productCount, productsByType, types, url, type FurnitureType } from '../lib/site';
+// Kafle rodzajów mebli z miniaturą (packshot pierwszego mebla danego rodzaju) i liczbą mebli — linki do /meble/<kategoria>/.
+// Siatka 4 kolumn na telefonie i 8 na desktopie (jak „Wybierz rodzaj mebla” na stronie głównej).
+import { Image } from 'astro:assets';
+import { typeImage } from '../lib/images';
+import { productCount, products, productsByType, types, url, type FurnitureType } from '../lib/site';
 
 interface Props { list?: FurnitureType[]; headingLevel?: 3 | 4; current?: string }
 const { list = types, current } = Astro.props;
+const tiles = list.map(t => ({ t, img: typeImage(t.id, products), count: productsByType(t.id).length })).filter(x => x.count > 0);
 ---
-<ul class="category-tiles">
-  {list.map(t => (
-    <li class="category-tile">
-      <a class="category-tile__link" href={url.category(t.slug)} aria-current={current === t.slug ? 'page' : undefined}>
-        <span class="category-tile__name">{t.plural}</span>
-        <span class="category-tile__count">{productCount(productsByType(t.id).length)}</span>
+<ul class="type-tiles">
+  {tiles.map(({ t, img, count }) => (
+    <li class="type-tile">
+      <a href={url.category(t.slug)} aria-current={current === t.slug ? 'page' : undefined}>
+        <span class="type-tile__thumb">{img && <Image src={img.src} alt="" widths={[160, 240, 320]} sizes="(min-width: 60rem) 9rem, 22vw" loading="lazy" />}</span>
+        <span class="type-tile__name">{t.plural}</span>
+        <span class="type-tile__count">{productCount(count)}</span>
       </a>
     </li>
   ))}

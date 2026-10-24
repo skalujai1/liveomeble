@@ -25,6 +25,7 @@ const CFG = {
   chatUrl: '',          // Worker z modelem językowym; pusty = tylko tryb lokalny
   chatTimeout: 30000,
   demoSamples: true, // przykładowe zdjęcia do testów (prototyp)
+  teaser: true,      // dymek „Dobierz meble do wnętrza” obok przycisku (strona wyłącza go na telefonach)
   teaserDelay: 1800,
   ...(window.LiveoAssistantConfig || {}),
 };
@@ -175,7 +176,7 @@ class LiveoAssistant {
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && this.isOpen) this.close(); });
     document.addEventListener('paste', e => this.isOpen && this.onPaste(e));
 
-    if (!store.get('lv-teaser-seen')) setTimeout(() => !this.isOpen && this.showTeaser(), CFG.teaserDelay);
+    if (CFG.teaser && !store.get('lv-teaser-seen')) setTimeout(() => !this.isOpen && this.showTeaser(), CFG.teaserDelay);
     window.LiveoAssistant = { open: () => this.open(), close: () => this.close(), instance: this };
   }
 

@@ -171,13 +171,6 @@ main { display: block; padding-bottom: var(--space-8); }
 .product-card__meta { display: grid; font-size: var(--text-sm); color: var(--color-text-muted); }
 .product-card__badges { display: flex; flex-wrap: wrap; gap: var(--space-2); min-height: 1.5rem; }
 
-.category-tiles { display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr)); }
-.category-tile__link {
-  display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3);
-  padding: var(--space-3) var(--space-4); border: var(--border); text-decoration: none; height: 100%;
-}
-.category-tile__link:hover, .category-tile__link[aria-current="page"] { border-color: var(--color-text); }
-.category-tile__count { font-size: var(--text-sm); color: var(--color-text-muted); white-space: nowrap; }
 
 /* ---------- Cena i dostępność ---------- */
 .price { display: grid; gap: var(--space-1); }

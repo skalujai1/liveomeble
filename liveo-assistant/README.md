@@ -30,6 +30,7 @@ Widżet czatu na stronę Liveo. Klient wysyła zdjęcie pokoju albo pisze, czego
     contactUrl: '/kontakt/',
     storesUrl: '/gdzie-kupic/',
     demoSamples: false,
+    teaser: true,        // dymek z podpowiedzią obok przycisku (strona Liveo wyłącza go poniżej 48rem)
   };
 </script>
 <script type="module" src="/liveo-assistant/widget/liveo-assistant.js"></script>
