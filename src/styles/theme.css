@@ -648,3 +648,22 @@ select.field__control { appearance: none; background: var(--color-bg) url("data:
     max-height: calc(100vh - 9rem); overflow-y: auto; overscroll-behavior: contain;
   }
 }
+
+/* ---------- Strefa partnera: odstęp nagłówka jak w .page-header ---------- */
+.partner-zone { padding-top: var(--space-5); }
+.demo-banner { border-radius: var(--radius); }
+
+/* ---------- Strefa partnera: gęstsza tabela cennika, stany z kropką ---------- */
+.partner-table { font-size: 0.875rem; border-collapse: collapse; }
+.partner-table thead th { font-weight: var(--weight-bold); font-size: 0.8125rem; color: var(--color-text-muted); border-bottom: 2px solid var(--color-text); vertical-align: bottom; }
+.partner-table th, .partner-table td { padding: 0.5rem 0.625rem; border-bottom-color: var(--color-line); }
+.partner-table tbody tr:hover { background: var(--color-surface); }
+.partner-table code { white-space: nowrap; font-size: 0.75rem; letter-spacing: 0.01em; }
+.partner-table td.is-promo { color: var(--color-promo); font-weight: var(--weight-medium); }
+.partner-table .btn { min-height: 2.25rem; padding-inline: 0.875rem; }
+.stock { display: inline-flex; align-items: baseline; gap: 0.4rem; }
+.stock::before { content: ""; flex: none; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--color-line-strong); transform: translateY(-0.05em); }
+.stock--dostepny::before { background: var(--color-new); }
+.stock--na-zamowienie::before { background: var(--color-accent-hover); }
+.stock--wyprzedany { color: var(--color-text-muted); }
+.partner-tabs button { font-size: 0.9375rem; }

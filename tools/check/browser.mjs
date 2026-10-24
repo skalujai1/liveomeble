@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Kontrola w przeglądarce na zbudowanym dist/: dostępność (axe-core, WCAG 2.2 AA) na wszystkich szablonach
 // stron przy 1280 i 360 px, poziomy scroll, błędy JS oraz obsługa klawiaturą nagłówka (mega-menu, menu mobilne)
-// i szybkiego „Znajdź salon”.
+// i szybkiego „Znajdź salon”; na koniec axe na panelu strefy partnera (wersja demo).
 //
 //   npm run build && npm run check:browser
 //   CHROME_PATH=/ścieżka/do/chrome npm run check:browser
@@ -125,6 +125,23 @@ for (const path of PAGES) {
   await ctx.close();
 }
 
+// 5. Panel strefy partnera po wejściu do wersji demo: axe na tabeli cennika i zakładkach.
+{
+  const { ctx, page, errors } = await open('/strefa-partnera/', 1280);
+  await page.locator('[data-demo-login]').click();
+  await page.locator('[data-view="panel"]').waitFor({ state: 'visible' });
+  await page.addScriptTag({ content: AXE });
+  const result = await page.evaluate(async () => {
+    // eslint-disable-next-line no-undef
+    const r = await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'] } });
+    return r.violations.map(v => `${v.id} (${v.impact}): ${v.nodes.length}× — ${v.nodes.slice(0, 2).map(n => n.target.join(' ')).join(' | ')}`);
+  });
+  axeRuns++;
+  result.forEach(v => fail('strefa partnera (panel demo)', `axe ${v}`));
+  errors.forEach(e => fail('strefa partnera (panel demo)', `błąd JS: ${e}`));
+  await ctx.close();
+}
+
 await browser.close();
 server.close();
 
@@ -132,4 +149,4 @@ if (failures.length) {
   console.error(`\nKontrola w przeglądarce — ${failures.length} problemów:\n  - ${failures.join('\n  - ')}`);
   process.exit(1);
 }
-console.log(`Kontrola w przeglądarce OK — axe-core (WCAG 2.2 AA + dobre praktyki): ${axeRuns} uruchomień na ${PAGES.length} szablonach × ${WIDTHS.join(' i ')} px, 0 naruszeń; mega-menu, menu mobilne i „Znajdź salon” działają z klawiatury.`);
+console.log(`Kontrola w przeglądarce OK — axe-core (WCAG 2.2 AA + dobre praktyki): ${axeRuns} uruchomień (${PAGES.length} szablonów × ${WIDTHS.join(' i ')} px + panel strefy partnera), 0 naruszeń; mega-menu, menu mobilne i „Znajdź salon” działają z klawiatury.`);

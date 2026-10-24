@@ -136,7 +136,8 @@ export function initPartnerZone() {
       return h('tr', {},
         h('td', {}, h('code', {}, r.sku)), h('td', {}, r.name), h('td', {}, r.color),
         h('td', { class: 'num' }, money(r.retail)), h('td', { class: 'num' }, money(r.net)),
-        h('td', {}, r.promo ?? '—'), h('td', {}, stockText(r)), h('td', {}, qty), h('td', {}, add));
+        h('td', r.promo ? { class: 'is-promo' } : {}, r.promo ?? '—'), h('td', {}, h('span', { class: `stock stock--${r.stock}` }, stockText(r))),
+        h('td', {}, qty), h('td', {}, add));
     }));
     $('[data-pricelist-status]').textContent = `Pozycji w cenniku: ${list.length}`;
   }
