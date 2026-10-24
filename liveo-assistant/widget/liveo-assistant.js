@@ -204,7 +204,6 @@ class LiveoAssistant {
     if (!this.started) {
       this.started = true;
       this.catalogReady = this.loadCatalog();
-      this.engine.load().catch(() => this.setStatus(null)); // model pobiera się w tle
       this.greet();
     }
     if (!isTouch) setTimeout(() => this.input.focus({ preventScroll: true }), 300);
@@ -627,7 +626,7 @@ class LiveoAssistant {
   buildHandoff() {
     return h('div', { class: 'msg wide' },
       h('a', { class: 'handoff', href: CFG.advisorUrl, onclick: e => { e.preventDefault(); this.handoff(); } },
-        h('span', null, h('b', null, 'Otwórz pełnego doradcę'), h('small', null, 'Porównasz kolekcje i ustawisz budżet, ton i rodzaj mebla')),
+        h('span', null, h('b', null, 'Otwórz pełnego doradcę'), h('small', null, 'Porównanie kolekcji, budżet i ton')),
         h('span', { html: I.arrow, style: 'display:contents' })));
   }
 

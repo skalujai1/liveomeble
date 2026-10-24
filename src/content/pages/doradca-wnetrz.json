@@ -55,10 +55,19 @@
         "gallery": "Z galerii",
         "formats": "JPG, PNG albo WEBP. Zdjęcie z iPhone’a w formacie HEIC zapisz jako JPG."
       },
+      "tips": {
+        "title": "Jak zrobić zdjęcie, które zadziała",
+        "items": [
+          { "title": "Światło dzienne", "text": "przy żółtym świetle ściany i podłoga wychodzą cieplejsze, niż są." },
+          { "title": "Szeroki kadr", "text": "pokaż podłogę, ścianę i okno, a nie jeden przedmiot." },
+          { "title": "Bez filtrów", "text": "filtry i tryb portretowy zmieniają kolory." },
+          { "title": "Pusty pokój też jest dobry", "text": "doradca dobiera meble do podłogi i ścian." }
+        ]
+      },
       "rooms": { "title": "Nie masz zdjęcia? Wybierz pomieszczenie", "note": "Bez zdjęcia doradca dobierze meble w uniwersalnej, jasnej kolorystyce." },
       "ask": {
         "label": "Napisz, czego szukasz",
-        "placeholder": "np. biała komoda do 1000 zł",
+        "placeholder": "np. biała komoda",
         "submit": "Pokaż",
         "examples": ["jaśniejsze", "coś tańszego", "szafa do przedpokoju"]
       }
@@ -85,17 +94,6 @@
           "title": "Gdzie kupić",
           "text": "Liveo sprzedaje meble przez sklepy partnerskie. Wpisz kod pocztowy, a pokażemy najbliższe sklepy z wybraną kolekcją. Kod pocztowy sprawdzamy w Twojej przeglądarce."
         }
-      ]
-    },
-    {
-      "id": "wskazowki",
-      "type": "features",
-      "title": "Jak zrobić zdjęcie, które zadziała",
-      "items": [
-        { "title": "Światło dzienne", "text": "Przy sztucznym, żółtym świetle kolory ścian i podłogi wychodzą cieplejsze, niż są." },
-        { "title": "Szeroki kadr", "text": "Pokaż jak najwięcej pokoju — podłogę, ścianę i okno. Zbliżenie na jeden przedmiot niewiele powie." },
-        { "title": "Bez filtrów", "text": "Filtry i tryb portretowy zmieniają kolory. Zrób zwykłe zdjęcie aparatem telefonu." },
-        { "title": "Pusty pokój też jest dobry", "text": "Doradca dobiera meble do podłogi i ścian, więc nie musisz mieć już mebli." }
       ]
     },
     {

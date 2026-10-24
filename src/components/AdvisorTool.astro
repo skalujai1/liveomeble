@@ -68,6 +68,12 @@ const check = '<path d="M20 6 9 17l-5-5"/>';
           <input type="file" accept="image/*" capture="environment" hidden aria-label={tool.drop.camera} data-camera />
           <div class="advisor-drop__over" aria-hidden="true">Upuść zdjęcie</div>
         </div>
+        <div class="advisor-tips">
+          <h3 class="advisor-tips__title">{tool.tips.title}</h3>
+          <ul class="advisor-tips__list">
+            {tool.tips.items.map((it: any) => <li><b>{it.title}</b> — {it.text}</li>)}
+          </ul>
+        </div>
         <div class="advisor-rooms">
           <h3 class="advisor-rooms__title">{tool.rooms.title}</h3>
           <ul class="advisor-rooms__list">
