@@ -1,6 +1,7 @@
 # Doradca wnętrz Liveo – testy i wdrożenie Cloudflare Workera (widżet → Worker → OpenRouter).
 # Sekrety repozytorium (Settings → Secrets and variables → Actions):
-#   CLOUDFLARE_API_TOKEN   – token z uprawnieniem „Edit Cloudflare Workers”
+#   CLOUDFLARE_API_TOKEN   – token z uprawnieniami „Workers Scripts: Edit” i „Cloudflare Pages: Edit”
+#                            (ten sam token wdraża podgląd strony — .github/workflows/podglad.yml)
 #   CLOUDFLARE_ACCOUNT_ID  – ID konta Cloudflare
 #   OPENROUTER_API_KEY     – klucz OpenRouter (najlepiej z limitem wydatków)
 # Bez sekretów testy i tak się wykonają, a wdrożenie zostanie pominięte z ostrzeżeniem.

@@ -1,0 +1,105 @@
+# Podgląd strony dla klienta — pełny build wystawiony na Cloudflare Pages pod stałym adresem
+# https://liveo-podglad.pages.dev (otwiera się bez logowania, także w trybie incognito).
+# Podgląd nie jest indeksowany: nagłówek X-Robots-Tag: noindex i robots.txt z Disallow: /.
+#
+# Sekrety repozytorium (Settings → Secrets and variables → Actions) — te same co dla doradcy:
+#   CLOUDFLARE_API_TOKEN   – token z uprawnieniem „Cloudflare Pages: Edit” (konto)
+#   CLOUDFLARE_ACCOUNT_ID  – ID konta Cloudflare
+# Bez sekretów build i kontrole i tak się wykonają, a wdrożenie zostanie pominięte z ostrzeżeniem.
+name: Podgląd strony – Cloudflare Pages
+
+on:
+  push:
+    branches: ['claude/**', main]
+    paths-ignore:
+      - 'docs/**'
+      - 'design/**'
+      - 'liveo-assistant/worker/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: podglad
+  cancel-in-progress: true
+
+env:
+  PROJECT: liveo-podglad
+  PAGES_BRANCH: podglad
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalacja
+        run: npm ci
+
+      # Przetworzone obrazy (AVIF/WebP) z poprzedniego buildu — kolejne buildy trwają krócej.
+      - name: Pamięć podręczna obrazów
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.astro
+          key: astro-assets-${{ hashFiles('src/assets/**') }}
+          restore-keys: astro-assets-
+
+      - name: Build + kontrola dist/
+        run: npm run build
+
+      - name: Blokada indeksowania podglądu
+        run: |
+          printf '/*\n  X-Robots-Tag: noindex, nofollow\n' > dist/_headers
+          printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
+
+      - name: Sprawdzenie sekretów
+        id: secrets
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CF_TOKEN" ] || [ -z "$CF_ACCOUNT" ]; then
+            echo "::warning::Brak sekretów CLOUDFLARE_API_TOKEN lub CLOUDFLARE_ACCOUNT_ID – wdrożenie podglądu pominięte."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Przy pierwszym uruchomieniu tworzy projekt; kiedy już istnieje, wrangler zgłasza błąd, który pomijamy.
+      - name: Projekt Cloudflare Pages
+        if: steps.secrets.outputs.ready == 'true'
+        continue-on-error: true
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: '4.151.3'
+          command: pages project create ${{ env.PROJECT }} --production-branch=${{ env.PAGES_BRANCH }}
+
+      - name: Wdrożenie podglądu
+        id: deploy
+        if: steps.secrets.outputs.ready == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: '4.151.3'
+          command: pages deploy dist --project-name=${{ env.PROJECT }} --branch=${{ env.PAGES_BRANCH }} --commit-dirty=true
+
+      # Stały adres to <projekt>.pages.dev (gdy nazwa była zajęta, Cloudflare dokleja końcówkę — widać ją w adresie wdrożenia).
+      - name: Adres podglądu
+        if: steps.secrets.outputs.ready == 'true'
+        env:
+          DEPLOY_URL: ${{ steps.deploy.outputs.deployment-url }}
+        run: |
+          {
+            echo "### Podgląd strony Liveo"
+            echo "- stały adres: https://${PROJECT}.pages.dev"
+            echo "- to wdrożenie: ${DEPLOY_URL}"
+          } >> "$GITHUB_STEP_SUMMARY"
