@@ -228,8 +228,7 @@ main { padding-bottom: 0; }
 .home-hero__media .media__img { object-position: 50% 60%; }
 .home-hero__card {
   position: relative; margin-top: 0.5rem; padding: 1.375rem 1.25rem 1.5rem; color: #fff; background: var(--color-dark);
-  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 0;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 1.375rem 100%, 0 calc(100% - 2.8rem));
+  border-radius: var(--radius-lg);
 }
 .home-hero__title { font-size: clamp(2.125rem, 1.5rem + 2.6vw, 3.375rem); line-height: 1.08; color: #fff; text-wrap: balance; }
 .home-hero__lead { margin-top: 0.75rem; font-size: 1rem; line-height: 1.5; color: #fff; }
