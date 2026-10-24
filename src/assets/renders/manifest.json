@@ -2,6 +2,132 @@
   "note": "Atrapy zdjęć (rendery 3D z tools/render) — do podmiany na zdjęcia klienta.",
   "items": [
     {
+      "file": "collections/nokta-tall.jpg",
+      "type": "aranzacja",
+      "room": "jadalnia",
+      "frame": "tall",
+      "title": "Kolekcja NOKTA w jadalni — stół 180 (dąb miodowy / czarny mat), kredens 160 (dąb miodowy / czarny mat)",
+      "description": "Kolekcja NOKTA w jadalni — stół 180 (dąb miodowy / czarny mat), kredens 160 (dąb miodowy / czarny mat). Render 3D (atrapa zdjęcia) — meble z kolekcji NOKTA w aranżacji.",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#bbb2aa",
+        "#855738",
+        "#a79a8b",
+        "#89735b"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "nokta"
+    },
+    {
+      "file": "collections/nokta-wide.jpg",
+      "type": "aranzacja",
+      "room": "jadalnia",
+      "frame": "wide",
+      "title": "Kolekcja NOKTA w jadalni — stół 180 (dąb miodowy / czarny mat), kredens 160 (dąb miodowy / czarny mat)",
+      "description": "Kolekcja NOKTA w jadalni — stół 180 (dąb miodowy / czarny mat), kredens 160 (dąb miodowy / czarny mat). Render 3D (atrapa zdjęcia) — meble z kolekcji NOKTA w aranżacji.",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#cac7c6",
+        "#aca39a",
+        "#f5f4f2",
+        "#855636"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "nokta"
+    },
+    {
+      "file": "collections/olmo-tall.jpg",
+      "type": "aranzacja",
+      "room": "salon",
+      "frame": "tall",
+      "title": "Kolekcja OLMO w salonie — szafka rtv 160 (dąb naturalny)",
+      "description": "Kolekcja OLMO w salonie — szafka rtv 160 (dąb naturalny). Render 3D (atrapa zdjęcia) — meble z kolekcji OLMO w aranżacji.",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#b9b2ab",
+        "#eae8e5",
+        "#d9b686",
+        "#d4cdc4"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "olmo"
+    },
+    {
+      "file": "collections/olmo-wide.jpg",
+      "type": "aranzacja",
+      "room": "salon",
+      "frame": "wide",
+      "title": "Kolekcja OLMO w salonie — szafka rtv 160 (dąb naturalny)",
+      "description": "Kolekcja OLMO w salonie — szafka rtv 160 (dąb naturalny). Render 3D (atrapa zdjęcia) — meble z kolekcji OLMO w aranżacji.",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#bcb8b4",
+        "#a59d94",
+        "#eae8e5",
+        "#d9b685"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "olmo"
+    },
+    {
+      "file": "collections/talve-tall.jpg",
+      "type": "aranzacja",
+      "room": "sypialnia",
+      "frame": "tall",
+      "title": "Kolekcja TALVE w sypialni — łóżko 140 (grafit / dąb naturalny), szafka nocna 45 (grafit / dąb naturalny)",
+      "description": "Kolekcja TALVE w sypialni — łóżko 140 (grafit / dąb naturalny), szafka nocna 45 (grafit / dąb naturalny). Render 3D (atrapa zdjęcia) — meble z kolekcji TALVE w aranżacji.",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#bab3aa",
+        "#a5998b",
+        "#cdc8c3",
+        "#2b2a2a"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "talve"
+    },
+    {
+      "file": "collections/talve-wide.jpg",
+      "type": "aranzacja",
+      "room": "sypialnia",
+      "frame": "wide",
+      "title": "Kolekcja TALVE w sypialni — łóżko 140 (grafit / dąb naturalny), szafka nocna 45 (grafit / dąb naturalny)",
+      "description": "Kolekcja TALVE w sypialni — łóżko 140 (grafit / dąb naturalny), szafka nocna 45 (grafit / dąb naturalny). Render 3D (atrapa zdjęcia) — meble z kolekcji TALVE w aranżacji.",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#b4aca4",
+        "#9d9489",
+        "#d8c5a8",
+        "#eae8e4"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true,
+      "collection": "talve"
+    },
+    {
       "file": "rooms/biuro-tall.jpg",
       "type": "aranzacja",
       "room": "biuro",
@@ -736,5 +862,5 @@
       "placeholder": true
     }
   ],
-  "generated": "2026-10-21"
+  "generated": "2026-10-24"
 }
