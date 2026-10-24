@@ -35,7 +35,10 @@ export interface Props {
   canonical?: boolean;
 }
 
-const { title, description, path, robots, ogType, ogImage, ogImageAlt, jsonLd = [], breadcrumbs, pageClass, assistant = true, canonical = true } = Astro.props;
+const { title, description, path, robots, ogType, ogImage: ogImageProp, ogImageAlt: ogAltProp, jsonLd = [], breadcrumbs, pageClass, assistant = true, canonical = true } = Astro.props;
+// Brak własnego obrazu OG → obraz domyślny (aranżacja z logo, generowany: src/pages/og/[...slug].jpg.ts).
+const ogImage = ogImageProp ?? '/og/liveo.jpg';
+const ogImageAlt = ogImageProp ? ogAltProp : 'Liveo Meble — kolekcje mebli do całego domu';
 const crumbs: Crumb[] | null = breadcrumbs?.length ? [{ name: site.breadcrumbs.home, url: '/' }, ...breadcrumbs] : null;
 const ld: Node[] = [website(), organization(), ...jsonLd, ...(crumbs ? [breadcrumbList(path, crumbs)] : [])];
 ---

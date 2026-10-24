@@ -40,6 +40,8 @@ const img = roomImage(r.slug, 'wide');
   description={item.seo.description}
   {path}
   pageClass="page-room"
+  ogImage={roomImage(r.slug, 'wide') ? `/og/pomieszczenia/${r.slug}.jpg` : undefined}
+  ogImageAlt={`${r.name} — meble Liveo`}
   breadcrumbs={[{ name: 'Pomieszczenia', url: url.rooms }, { name: r.name, url: path }]}
   jsonLd={[
     webPage('CollectionPage', { path, title: item.seo.title, description: item.seo.description, hasBreadcrumb: true }),

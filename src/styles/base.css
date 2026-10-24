@@ -163,7 +163,7 @@ main { display: block; padding-bottom: var(--space-8); }
 @media (min-width: 48rem) { .product-grid { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: var(--space-7) var(--space-5); } }
 .product-card { display: grid; gap: var(--space-2); align-content: start; }
 /* Długie listy (87 mebli): karty poza ekranem nie są układane ani malowane, dopóki nie są potrzebne. */
-.product-grid > .product-card { content-visibility: auto; contain-intrinsic-block-size: auto 28rem; }
+.listing .product-grid > .product-card { content-visibility: auto; contain-intrinsic-block-size: auto 28rem; }
 .product-card__link { display: grid; gap: var(--space-3); text-decoration: none; }
 .product-card__link:hover .product-card__title { text-decoration: underline; }
 .product-card .media { background: var(--color-surface); }

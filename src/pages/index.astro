@@ -74,7 +74,8 @@ const articles = (await getArticles()).slice(0, 4).map(articleCard);
   description={page.seo.description}
   {path}
   pageClass="page-home"
-  ogImage={null}
+  ogImage="/og/liveo.jpg"
+  ogImageAlt={heroAlt}
   jsonLd={[faqPage(path, page.faq.items)]}
 >
   <section class="home-hero" aria-labelledby="h1">

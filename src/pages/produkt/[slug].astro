@@ -73,7 +73,8 @@ const variants = await Promise.all(
     return { v, img, alt, ldImage, c1: finishById.get(f.front ?? f.body ?? '')?.hex ?? '#ccc', c2: finishById.get(f.top ?? f.body ?? '')?.hex ?? '#ccc' };
   }),
 );
-const ogImage = variants.find(x => x.v.code === dv.code)?.ldImage ?? null;
+// Obraz OG: packshot wariantu domyślnego na lnianym tle 1200×630 (src/pages/og) — gdy jest własny render.
+const ogImage = variants.find(x => x.v.code === dv.code)?.ldImage ? `/og/produkty/${p.slug}.jpg` : null;
 
 const ld: VariantLd[] = variants.map(({ v, ldImage }) => {
   const pr = priceAt(p, v.code);
@@ -187,7 +188,7 @@ const kompletSec = sec('komplet');
     <ul class="feature-bullets">{p.features.map(f => <li>{f}</li>)}</ul>
   </Section>
 
-  <Section id="gdzie-kupic" title={fill(shop.title, vars)} lead={fill(shop.lead, vars)}>
+  <Section id="gdzie-kupic" title={fill(shop.title, vars)} lead={fill(shop.lead, vars)} class="section--alt">
     <StoreFinder id="sklepy-mebel" presetCollection={c.slug} limit={shop.limit} more={{ label: shop.more.label, href: fill(shop.more.href, vars) }} note={shop.note} />
   </Section>
 

@@ -67,6 +67,8 @@ const swatch = (id?: string) => (id ? finishById.get(id)?.hex : undefined);
   {description}
   {path}
   pageClass="page-collection"
+  ogImage={collectionImage(c, 'wide') ? `/og/kolekcje/${c.slug}.jpg` : undefined}
+  ogImageAlt={`Kolekcja ${c.name} — aranżacja`}
   breadcrumbs={[{ name: 'Kolekcje', url: url.collections }, { name: c.name, url: path }]}
   jsonLd={[
     webPage('CollectionPage', { path, title, description, hasBreadcrumb: true }),
