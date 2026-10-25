@@ -88,3 +88,15 @@ jobs:
           done
           echo "::error::$HEALTH_URL nie zwraca configured:true"
           exit 1
+
+      # Jedna krótka rozmowa z adresu podglądu: sprawdza CORS, klucz OpenRouter i środki na koncie (koszt ułamka grosza).
+      - name: Test rozmowy po wdrożeniu
+        if: steps.secrets.outputs.ready == 'true'
+        env:
+          CHAT_URL: ${{ vars.DORADCA_URL || 'https://liveo-doradca.sergiuszserafin26.workers.dev' }}/chat
+        run: |
+          code=$(curl -sS -m 40 -o reply.json -w '%{http_code}' -X POST "$CHAT_URL" \
+            -H 'Origin: https://liveo-podglad.pages.dev' -H 'Content-Type: application/json' \
+            -d '{"messages":[{"role":"user","content":"Szukam jasnej komody do sypialni"}],"context":{"catalog":"","state":{}}}')
+          echo "HTTP $code"; head -c 400 reply.json; echo
+          if [ "$code" != "200" ]; then echo "::error::/chat zwraca $code (no_credits = brak środków na OpenRouter)"; exit 1; fi
