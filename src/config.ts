@@ -42,7 +42,7 @@ export const FORM_ENDPOINT = '';
  * Czat doradcy wnętrz — adres Cloudflare Workera z „/chat” na końcu
  * (liveo-assistant/README.md, „Uruchomienie Workera”). Pusty = tryb lokalny widżetu.
  */
-export const CHAT_URL = '';
+export const CHAT_URL = 'https://liveo-doradca.sergiuszserafin26.workers.dev/chat';
 
 /** Konfiguracja widżetu doradcy (trafia do window.LiveoAssistantConfig). */
 export const ASSISTANT = {

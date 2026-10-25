@@ -92,6 +92,15 @@ jobs:
           wranglerVersion: '4.151.3'
           command: pages deploy dist --project-name=${{ env.PROJECT }} --branch=${{ env.PAGES_BRANCH }} --commit-dirty=true
 
+      # Strona główna podglądu odpowiada 200 i ma nagłówek noindex.
+      - name: Test podglądu
+        if: steps.secrets.outputs.ready == 'true'
+        env:
+          DEPLOY_URL: ${{ steps.deploy.outputs.deployment-url }}
+        run: |
+          curl -fsS -m 20 -o /dev/null -w "%{http_code} %{size_download} B\n" "$DEPLOY_URL/"
+          curl -fsSI -m 20 "$DEPLOY_URL/" | grep -i '^x-robots-tag: noindex'
+
       # Stały adres to <projekt>.pages.dev (gdy nazwa była zajęta, Cloudflare dokleja końcówkę — widać ją w adresie wdrożenia).
       - name: Adres podglądu
         if: steps.secrets.outputs.ready == 'true'
