@@ -34,9 +34,9 @@
   /* „Popołudniowy” grading aranżacji (ciepłe światło); packshotów nie dotyczy */
   --photo-grade: sepia(0.18) saturate(1.25) contrast(1.06) brightness(0.93);
 
-  /* Typografia — Gloock (nagłówki, jeden krój 400) + Onest (tekst i interfejs), self-hosted w /fonts */
-  --font-sans: "Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Gloock", Georgia, "Times New Roman", serif;
+  /* Typografia — EB Garamond (nagłówki, 400–500) + Hanken Grotesk (tekst i interfejs, 400–600), self-hosted w /fonts */
+  --font-sans: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "EB Garamond", Georgia, "Times New Roman", serif;
   --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   --text-xs: 0.8125rem;   /* 13 px — plakietki, Omnibus */
