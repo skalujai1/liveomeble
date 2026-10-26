@@ -34,11 +34,11 @@
   /* „Popołudniowy” grading aranżacji (ciepłe światło); packshotów nie dotyczy */
   --photo-grade: sepia(0.18) saturate(1.25) contrast(1.06) brightness(0.93);
 
-  /* Typografia — Inter Tight (nagłówki 300) + Inter (tekst i interfejs 400–600, normalna szerokość) + Bodoni Moda (tylko nazwy kolekcji), self-hosted w /fonts */
+  /* Typografia — Gilda Display (nagłówki) + Inter (tekst i interfejs) + Italiana (nazwy kolekcji; bez polskich znaków, nazwy są ASCII), self-hosted w /fonts */
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Gilda Display", Didot, "Bodoni 72", Georgia, serif;
   /* Nazwy kolekcji (OLMO, TALVE…) — Didone w duchu Zary; tylko tam */
-  --font-name: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --font-name: "Italiana", Didot, "Bodoni 72", Georgia, serif;
   --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   --text-xs: 0.8125rem;   /* 13 px — plakietki, Omnibus */
@@ -60,7 +60,7 @@
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-bold: 600;
-  --weight-display: 300;
+  --weight-display: 400;
   --measure: 68ch;
 
   /* Odstępy */

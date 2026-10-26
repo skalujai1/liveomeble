@@ -127,7 +127,7 @@ class LiveoAssistant {
   mount() {
     if (!document.querySelector('link[data-liveo-fonts]')) {
       document.head.append(h('link', { rel: 'stylesheet', 'data-liveo-fonts': true,
-        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@300;400;500&display=swap' }));
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Gilda+Display&display=swap' }));
     }
     this.host = h('div', { id: 'liveo-assistant', style: 'visibility:hidden' });
     const root = this.host.attachShadow({ mode: 'open' });

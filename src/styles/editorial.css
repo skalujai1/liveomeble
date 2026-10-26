@@ -386,8 +386,8 @@
 .manifest__promo a { text-underline-offset: 4px; }
 .manifest__promo em { font-style: normal; font-weight: var(--weight-bold); color: var(--color-promo); }
 
-/* ---------- Czcionki w duchu Zary: Inter Tight wszędzie, Bodoni Moda tylko w nazwach kolekcji ---------- */
-h1, h2, .section__title { letter-spacing: -0.03em; }
+/* ---------- Czcionki w duchu Zara Home: Gilda Display w nagłówkach, Italiana w nazwach kolekcji, Inter w tekście ---------- */
+h1, h2, .section__title { letter-spacing: -0.01em; }
 .collection-hero__title:not(.collection-hero__title--room) { font-family: var(--font-name); font-weight: 400; letter-spacing: -0.02em; }
 .mega__collection b, .site-nav__mobile-collections b { font-family: var(--font-name); font-weight: 400; letter-spacing: 0; }
 /* Przyciski i menu: małe wersaliki z rozstrzeleniem */

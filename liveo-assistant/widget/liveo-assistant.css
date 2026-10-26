@@ -19,7 +19,7 @@
   --sale: #9e2a35;
   --ok: #2f4637;
   --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-head: "Inter Tight", system-ui, sans-serif;
+  --font-head: "Gilda Display", Georgia, serif;
   --ease: cubic-bezier(.2, .7, .2, 1);
   font-family: var(--font);
   color: var(--ink);
