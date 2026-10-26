@@ -1,5 +1,5 @@
 ---
-// Karta pomieszczenia: aranżacja, nazwa, opis, link do mebli dla tego pokoju.
+// Karta pomieszczenia (kierunek C): kafel 4:5 ze zdjęciem i nazwą na zdjęciu, pod nim opis i link do mebli dla tego pokoju.
 import Media from './Media.astro';
 import { roomImage } from '../lib/images';
 import { pages, url, type Room } from '../lib/site';
@@ -12,16 +12,18 @@ const img = roomImage(r.slug, 'tall');
 const H = `h${headingLevel}` as 'h2' | 'h3';
 ---
 <li class="room-card">
-  <Media
-    image={img}
-    alt={img?.title ? `Aranżacja: ${img.title}` : fill(card.imageAlt, { name: r.name })}
-    widths={[320, 480, 640, 960]}
-    sizes="(min-width: 75rem) 16rem, (min-width: 48rem) 30vw, 46vw"
-    ratio="4 / 5"
-    placeholderLabel={r.name}
-  />
-  <div class="room-card__body">
+  <div class="room-card__tile">
+    <Media
+      image={img}
+      alt={img?.title ? `Aranżacja: ${img.title}` : fill(card.imageAlt, { name: r.name })}
+      widths={[320, 480, 640, 960]}
+      sizes="(min-width: 75rem) 24rem, (min-width: 48rem) 32vw, 92vw"
+      ratio="4 / 5"
+      placeholderLabel={r.name}
+    />
     <H class="room-card__title">{r.name}</H>
+  </div>
+  <div class="room-card__body">
     <p class="room-card__text">{r.description}</p>
     <a class="room-card__link stretched-link" href={url.room(r.slug)}>{fill(card.link, { name: r.name })}</a>
   </div>
