@@ -275,9 +275,9 @@
   .showcase__link { padding: 1.5rem 0; }
   .showcase__item:not(.is-active) .showcase__name { color: var(--color-text-muted); }
   .showcase__item.is-active .showcase__name { translate: 0.5rem 0; }
-  .showcase__stage { display: block; position: sticky; top: 7rem; aspect-ratio: 4 / 3; overflow: hidden; background: var(--color-surface-2); }
+  .showcase__stage { display: block; position: sticky; top: 7rem; aspect-ratio: 4 / 3; overflow: hidden; background: var(--color-bg); }
   .showcase__pic { position: absolute; inset: 0; opacity: 0; transition: opacity 700ms ease; }
-  .showcase__pic .media { height: 100%; aspect-ratio: auto; border-radius: 0; }
+  .showcase__pic .media { height: 100%; aspect-ratio: auto; border-radius: 0; background: transparent; }
   .showcase__pic.is-active { opacity: 1; z-index: 1; }
 }
 @media (min-width: 64rem) and (prefers-reduced-motion: no-preference) {
