@@ -335,11 +335,14 @@ class LiveoAssistant {
 
   buildUpload() {
     const card = h('div', { class: 'upload' },
+      h('span', { class: 'upload-ic', html: I.camera, 'aria-hidden': 'true' }),
+      h('p', { class: 'upload-title' }, 'Dodaj zdjęcie pokoju'),
+      h('p', { class: 'upload-lead' }, isTouch ? 'Zrób zdjęcie całego pomieszczenia albo wybierz je z galerii.' : 'Przeciągnij plik tutaj albo wklej go skrótem Ctrl+V.'),
       h('div', { class: 'actions' },
         isTouch && h('button', { class: 'btn', type: 'button', html: `${I.camera}<span>Zrób zdjęcie</span>`, onclick: () => this.cameraInput.click() }),
-        h('button', { class: 'btn' + (isTouch ? ' ghost' : ''), type: 'button', html: `${isTouch ? I.image : I.camera}<span>${isTouch ? 'Z galerii' : 'Dodaj zdjęcie pokoju'}</span>`,
+        h('button', { class: 'btn' + (isTouch ? ' ghost' : ''), type: 'button', html: `<span>${isTouch ? 'Z galerii' : 'Wybierz zdjęcie'}</span>`,
                       onclick: () => this.fileInput.click() })),
-      !isTouch && h('p', { class: 'hint' }, 'albo przeciągnij plik tutaj, albo wklej go (Ctrl+V)'),
+      h('p', { class: 'hint' }, 'JPG, PNG albo WEBP. Zdjęcie z iPhone’a w formacie HEIC zapisz jako JPG.'),
       CFG.demoSamples && h('div', { class: 'samples' },
         h('span', null, 'Albo sprawdź, jak to działa, na przykładzie:'),
         h('div', { class: 'row' }, SAMPLES.map(s => h('button', { class: 'sample', type: 'button', 'aria-label': `Przykład: ${s.label}`,

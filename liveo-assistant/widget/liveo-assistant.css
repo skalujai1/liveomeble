@@ -121,8 +121,13 @@ header.head { display: flex; align-items: center; gap: 4px; padding: 12px 8px 12
 .steps li .pct { font-weight: 400; color: var(--muted); font-size: 13px; }
 
 /* ---------- dodawanie zdjęcia ---------- */
-.upload { width: 100%; padding: 16px; border-radius: 0; background: var(--surface); }
-.upload .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.upload { width: 100%; padding: 28px 20px 18px; border-radius: 0; background: var(--surface); text-align: center; }
+.upload-ic { display: inline-grid; color: var(--ink); }
+.upload-ic svg { width: 30px; height: 30px; stroke-width: 1.5; }
+.upload-title { margin: 10px 0 0; font: 400 27px/1.15 var(--font-head); color: var(--ink); }
+.upload-lead { margin: 8px auto 0; max-width: 30ch; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+.upload .actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 18px; }
+.upload .actions .btn { flex: 0 1 auto; min-height: 48px; padding: 0 26px; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 .btn {
   flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   min-height: 46px; padding: 0 18px; border: 0; border-radius: 0;
@@ -134,7 +139,8 @@ header.head { display: flex; align-items: center; gap: 4px; padding: 12px 8px 12
 .btn.ghost { background: var(--bg); box-shadow: inset 0 0 0 1.5px var(--ink); }
 .btn.ghost:hover { background: var(--bg); box-shadow: inset 0 0 0 2px var(--ink); }
 .btn svg { width: 19px; height: 19px; }
-.upload .hint { margin-top: 8px; text-align: center; font-size: 13px; color: var(--muted); }
+.upload .hint { margin: 14px auto 0; max-width: 34ch; font-size: 12.5px; line-height: 1.5; color: var(--muted); }
+.upload .samples, .upload .privacy { text-align: left; }
 
 .samples { margin-top: 14px; }
 .samples > span { display: block; font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
