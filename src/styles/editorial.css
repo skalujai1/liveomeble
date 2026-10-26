@@ -121,7 +121,7 @@
 .no-js .hero-curtain__pause { display: none; }
 
 @media (prefers-reduced-motion: no-preference) {
-  /* wejście slajdu: szczelina od prawej + oddech skali, tekst wjeżdża po kolei */
+  /* wejście slajdu: odsłona ze szczeliny w połowie wysokości + oddech skali, tekst wjeżdża po kolei */
   .is-live .hero-curtain__slide.is-active { animation: odslona 1300ms var(--ease-expo) both; }
   .is-live .hero-curtain__slide.is-active .media__img { animation: curtain-breathe 9s var(--ease-expo) both; }
   .is-live .hero-curtain__slide.is-active .hero-curtain__copy > * { animation: copy-in 1000ms var(--ease-expo) both; }
