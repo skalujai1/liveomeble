@@ -79,7 +79,7 @@
 }
 .hero-curtain__copy { position: absolute; z-index: 1; left: 0; right: 0; bottom: 6.5rem; }
 .hero-curtain__name {
-  font: var(--weight-display) clamp(4.25rem, 1.5rem + 11vw, 11rem)/0.86 var(--font-display);
+  font: var(--weight-display) var(--text-poster)/0.86 var(--font-display);
   letter-spacing: -0.025em; color: #fff; margin-left: -0.04em;
 }
 .hero-curtain__meta {
@@ -145,7 +145,7 @@
 /* ---------- Manifest pod hero (H1) ---------- */
 .manifest { padding-block: var(--space-9) var(--space-8); }
 .manifest__inner { display: grid; gap: var(--space-6); }
-.manifest__title { font-size: clamp(2.5rem, 1.4rem + 4.4vw, 5.75rem); line-height: 1; letter-spacing: -0.025em; text-wrap: balance; }
+.manifest__title { font-size: var(--text-5xl); line-height: 1; letter-spacing: -0.025em; text-wrap: balance; }
 .manifest__lead { max-width: 34rem; font-size: var(--text-lg); line-height: 1.6; color: var(--color-text-muted); }
 .manifest__cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: var(--space-5); }
 .manifest__services {
@@ -168,7 +168,7 @@
 .spreads { padding-block: var(--space-6) var(--space-9); }
 .spreads__head { display: grid; gap: var(--space-4); margin-bottom: var(--space-8); }
 .spreads__head > * { max-width: 46rem; }
-.spreads__title { font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4.25rem); line-height: 1.02; letter-spacing: -0.02em; }
+.spreads__title { font-size: var(--text-4xl); line-height: 1.02; letter-spacing: -0.02em; }
 .spreads__lead { font-size: var(--text-lg); line-height: 1.6; color: var(--color-text-muted); }
 .spreads__list { display: grid; gap: clamp(5rem, 3rem + 8vw, 11rem); }
 
@@ -183,7 +183,7 @@
 .spread__fig--tall { grid-area: tall; }
 .spread__fig--detail { grid-area: detail; }
 .spread__text { grid-area: text; position: relative; }
-.spread__name { font-family: var(--font-display); font-weight: var(--weight-display); font-size: clamp(3.25rem, 1.6rem + 5.6vw, 7rem); line-height: 0.9; letter-spacing: -0.025em; margin-left: -0.04em; }
+.spread__name { font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-6xl); line-height: 0.9; letter-spacing: -0.025em; margin-left: -0.04em; }
 .spread__badge { position: absolute; top: 0.25rem; right: 0; }
 .spread__tagline { max-width: 30rem; margin-top: var(--space-4); font-size: var(--text-lg); line-height: 1.55; }
 .spread__facts { display: grid; gap: 0.625rem; margin-top: var(--space-5); padding-top: var(--space-4); box-shadow: inset 0 1px 0 var(--color-line); font-size: var(--text-sm); }
@@ -215,7 +215,7 @@
 /* ---------- Pas wszystkich kolekcji ---------- */
 .rail-section { padding-block: var(--space-8); }
 .rail-section__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: var(--space-6); }
-.rail-section__title { font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4.25rem); line-height: 1.02; letter-spacing: -0.02em; }
+.rail-section__title { font-size: var(--text-4xl); line-height: 1.02; letter-spacing: -0.02em; }
 .rail .rail__track {
   display: flex; gap: clamp(0.75rem, 1.5vw, 1.5rem); margin: 0; padding: 0 var(--rail-pad); list-style: none;
   overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--rail-pad); scrollbar-width: none; overscroll-behavior-x: contain;
@@ -252,7 +252,7 @@
 /* ---------- Pomieszczenia: lista nazw + duże zdjęcie ---------- */
 .rooms-section { padding-block: var(--space-8) var(--space-9); }
 .rooms-section__head { display: grid; gap: var(--space-4); max-width: 44rem; margin-bottom: var(--space-7); }
-.rooms-section__head h2 { font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4.25rem); line-height: 1.02; letter-spacing: -0.02em; }
+.rooms-section__head h2 { font-size: var(--text-4xl); line-height: 1.02; letter-spacing: -0.02em; }
 .showcase { display: grid; gap: var(--space-6); }
 .showcase .showcase__list { margin: 0; padding: 0; list-style: none; box-shadow: inset 0 1px 0 var(--color-line); }
 .showcase__item { box-shadow: inset 0 -1px 0 var(--color-line); }
@@ -292,7 +292,7 @@
 .feature-band__media .media { border-radius: 0; }
 .feature-band__media .media__img { filter: var(--photo-grade); }
 .feature-band__text { display: grid; align-content: center; gap: var(--space-4); padding: var(--space-8) var(--gutter); }
-.feature-band__text h2 { color: #fff; font-size: clamp(2.25rem, 1.4rem + 3.2vw, 4.25rem); line-height: 1.02; letter-spacing: -0.02em; max-width: 14ch; }
+.feature-band__text h2 { color: #fff; font-size: var(--text-4xl); line-height: 1.02; letter-spacing: -0.02em; max-width: 14ch; }
 .feature-band__text p { max-width: 32rem; color: rgb(255 255 255 / 0.86); font-size: var(--text-lg); line-height: 1.6; }
 .feature-band__text .cta-row { align-items: center; gap: 0.75rem 1.75rem; }
 .feature-band__text .link { color: #fff; text-underline-offset: 5px; }
@@ -317,7 +317,7 @@
     linear-gradient(to top, rgb(var(--scrim) / 0.74), rgb(var(--scrim) / 0.2) 38%, rgb(var(--scrim) / 0) 60%);
 }
 .collection-hero__copy { position: absolute; left: 0; right: 0; bottom: clamp(2.5rem, 6vh, 4.5rem); }
-.collection-hero__title { color: #fff; font-size: clamp(4.25rem, 1.5rem + 11vw, 11rem); line-height: 0.86; letter-spacing: -0.025em; }
+.collection-hero__title { color: #fff; font-size: var(--text-poster); line-height: 0.86; letter-spacing: -0.025em; }
 .collection-hero__prefix { display: block; margin: 0 0 0.75rem; font: var(--weight-medium) var(--text-sm)/1.2 var(--font-sans); letter-spacing: 0.02em; }
 .collection-hero__lead { max-width: 34rem; margin-top: 1.25rem; font-size: var(--text-lg); line-height: 1.5; color: rgb(255 255 255 / 0.92); }
 .collection-hero__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.625rem; margin-top: 1rem; font-size: var(--text-sm); color: rgb(255 255 255 / 0.88); }
@@ -337,7 +337,7 @@
 /* ---------- Opis kolekcji i szczegóły ---------- */
 .collection-intro { padding-block: var(--space-8) var(--space-7); }
 .collection-intro__inner { display: grid; gap: var(--space-7); }
-.collection-intro__title { font-size: clamp(2rem, 1.4rem + 2.4vw, 3.25rem); line-height: 1.05; letter-spacing: -0.02em; }
+.collection-intro__title { font-size: var(--text-2xl); line-height: 1.05; letter-spacing: -0.02em; }
 .collection-intro__text { max-width: 38rem; margin-top: var(--space-4); font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem); line-height: 1.6; }
 .collection-intro__facts-title { font-size: var(--text-base); margin-bottom: var(--space-3); }
 @media (min-width: 64rem) { .collection-intro__inner { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: var(--space-8); align-items: end; } }
@@ -374,6 +374,6 @@
 .product-scene__fig .media__img { filter: var(--photo-grade); }
 .product-scene__caption { position: absolute; left: 0; right: 0; bottom: clamp(1.5rem, 4vw, 3rem); z-index: 1; }
 .product-scene::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, rgb(var(--scrim) / 0.6), rgb(var(--scrim) / 0) 45%); }
-.product-scene__title { color: #fff; font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4.5rem); line-height: 1; letter-spacing: -0.02em; }
+.product-scene__title { color: #fff; font-size: var(--text-4xl); line-height: 1; letter-spacing: -0.02em; }
 .product-scene__caption .link { margin-top: 0.75rem; color: #fff; text-underline-offset: 5px; }
 @media (max-width: 47.9rem) { .product-scene__fig .media { aspect-ratio: 4 / 5 !important; } }
