@@ -2,10 +2,18 @@
 // Pomieszczenia jako lista nazw w Gloocku; najechanie albo fokus podmienia duże zdjęcie obok (desktop, [data-showcase]
 // w src/scripts/motion.ts). Na telefonie każda pozycja ma własne zdjęcie. Bez JS: pierwsze zdjęcie i zwykłe linki.
 import Media from './Media.astro';
-import { roomImage } from '../lib/images';
-import { productCount, productsByRoom, rooms, url } from '../lib/site';
+import { collectionImage, roomImage } from '../lib/images';
+import { collections, productCount, productsByRoom, rooms, url } from '../lib/site';
 
-const list = rooms.map(r => ({ r, img: roomImage(r.slug, 'wide'), n: productsByRoom(r.slug).length }));
+// Zdjęcie pokoju: ujęcie pod kątem ostatniej kolekcji z tym pomieszczeniem jako głównym (inne niż w hero i rozkładówkach),
+// a bez takiej kolekcji — aranżacja pomieszczenia.
+// Pokój młodzieżowy: TALVE (ma meble do pokoju nastolatka) — BRISO jest już w rozkładówce, a biuro to też biurko.
+const OVERRIDE: Record<string, string> = { 'pokoj-mlodziezowy': 'talve' };
+const pick = (slug: string) => {
+  const own = collections.find(c => c.slug === OVERRIDE[slug]) ?? collections.filter(c => c.heroRoom === slug).at(-1);
+  return (own && collectionImage(own, 'angle')) ?? roomImage(slug, 'wide');
+};
+const list = rooms.map(r => ({ r, img: pick(r.slug), n: productsByRoom(r.slug).length }));
 ---
 <div class="showcase" data-showcase>
   <ul class="showcase__list">

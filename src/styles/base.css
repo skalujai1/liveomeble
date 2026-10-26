@@ -328,7 +328,7 @@ fieldset.field { border: 0; padding: 0; }
 .store-finder__geo .field__hint { flex-basis: 100%; }
 .store-finder__status:empty { display: none; }
 .store-finder__results { display: grid; gap: var(--space-4); }
-.store-finder__note { padding: var(--space-3) var(--space-4); border-left: 3px solid var(--color-text); background: var(--color-surface); }
+.store-finder__note { padding: var(--space-3) var(--space-4); background: var(--color-surface); }
 .store-finder__accuracy, .store-finder__demo, .store-finder__tip { font-size: var(--text-sm); color: var(--color-text-muted); }
 .store-list { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); }
 .store { display: grid; gap: var(--space-1); padding: var(--space-4); border: var(--border); align-content: start; }
@@ -358,13 +358,13 @@ fieldset.field { border: 0; padding: 0; }
 .article-body h2 { margin-top: var(--space-6); font-size: var(--text-xl); }
 .article-body h3 { margin-top: var(--space-3); font-size: var(--text-lg); }
 .article-body ul, .article-body ol { padding-left: var(--space-5); display: grid; gap: var(--space-2); }
-.article-body blockquote { padding: var(--space-4) var(--space-5); border-left: 3px solid var(--color-text); background: var(--color-surface); }
+.article-body blockquote { padding: var(--space-5); background: var(--color-surface); font: var(--weight-display) var(--text-xl)/1.4 var(--font-display); }
 .article-body table { width: 100%; font-size: var(--text-sm); font-variant-numeric: tabular-nums; }
 .article-body th, .article-body td { text-align: left; padding: var(--space-2) var(--space-3); border-bottom: var(--border); vertical-align: top; }
 .article-body thead th { border-bottom: 2px solid var(--color-text); }
 .table-scroll { overflow-x: auto; max-width: 100%; }
 .table-scroll table { min-width: 34rem; }
-.key-takeaway { padding: var(--space-4) var(--space-5); background: var(--color-surface); border-left: 3px solid var(--color-text); }
+.key-takeaway { padding: var(--space-4) var(--space-5); background: var(--color-surface); }
 .toc { padding: var(--space-4) var(--space-5); border: var(--border); max-width: var(--measure); }
 .toc__title { font-size: var(--text-base); margin-bottom: var(--space-2); }
 .toc ol { padding-left: var(--space-5); display: grid; gap: var(--space-1); }

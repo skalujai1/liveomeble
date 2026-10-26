@@ -1,9 +1,8 @@
 ---
 // Strona główna — styl C na poziomie „premium” (surface brief: .impeccable/surfaces/src-pages-index-astro.md):
 // kurtyna kolekcji na cały ekran → manifest (H1) → rozkładówki trzech kolekcji → pas wszystkich kolekcji →
-// pomieszczenia → polecane meble → doradca → gdzie kupić → B2B → rodzaje mebli → poradnik → FAQ.
+// pomieszczenia → polecane meble → doradca → gdzie kupić → FAQ (B2B, rodzaje mebli i poradnik są w nagłówku i stopce).
 // Treść: src/content/pages/home.json, dane: src/data. Docs: docs/ia.md 3.1.
-import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/Section.astro';
 import HomeHero from '../components/HomeHero.astro';
@@ -11,16 +10,14 @@ import CollectionSpread from '../components/CollectionSpread.astro';
 import CollectionRail from '../components/CollectionRail.astro';
 import RoomShowcase from '../components/RoomShowcase.astro';
 import ProductCard from '../components/ProductCard.astro';
-import ArticleCard from '../components/ArticleCard.astro';
 import StoreFinder from '../components/StoreFinder.astro';
 import PriceData from '../components/PriceData.astro';
 import Faq from '../components/Faq.astro';
 import Media from '../components/Media.astro';
 import Rich from '../components/Rich.astro';
-import { articleCard, getArticles } from '../lib/articles';
-import { collectionImage, roomImage, typeImage } from '../lib/images';
+import { collectionImage } from '../lib/images';
 import { faqPage } from '../lib/jsonld';
-import { activePromosAtBuild, collections, pages, priceAt, products, productsSorted, section, types, url } from '../lib/site';
+import { activePromosAtBuild, collections, pages, priceAt, productsSorted, section, url } from '../lib/site';
 import { promoLastDay } from '../lib/text';
 
 const page = pages.home;
@@ -28,8 +25,6 @@ const hero = section(page, 'hero');
 const kol = section(page, 'kolekcje');
 const pom = section(page, 'pomieszczenia');
 const steps = section(page, 'jak-kupic');
-const b2b = section(page, 'partnerzy');
-const guides = section(page, 'poradnik');
 const path = '/';
 
 // Rozkładówki: pierwsza kolekcja, najnowsza i kolejna z innego pomieszczenia — trzy różne nastroje.
@@ -52,13 +47,8 @@ const featured = [...productsSorted]
   })
   .slice(0, 4);
 
-const tileTypes = types.filter(t => products.some(p => p.type === t.id)).map(t => ({ t, img: typeImage(t.id, products) })).filter(x => x.img).slice(0, 8);
-const typeCount = types.filter(t => products.some(p => p.type === t.id)).length;
-
 const advisorCol = collections.find(c => c.slug === 'nokta') ?? collections[1];
 const advisorImg = collectionImage(advisorCol, 'detail');
-const b2bImg = roomImage('przedpokoj', 'wide');
-const articles = (await getArticles()).slice(0, 4).map(articleCard);
 ---
 <BaseLayout
   title={page.seo.title}
@@ -80,19 +70,13 @@ const articles = (await getArticles()).slice(0, 4).map(articleCard);
         <p class="manifest__cta">
           {hero.cta.map((c: any, i: number) => <a class:list={['btn', i ? 'btn--secondary' : 'btn--dark']} href={c.href}>{c.label}</a>)}
         </p>
+        {mainPromo && (
+          <p class="manifest__promo" data-promo-window data-start={mainPromo.startsAt ?? ''} data-end={mainPromo.endsAt ?? ''}>
+            <a href={url.promotions}><em>{mainPromo.label}</em>{promoLastDay(mainPromo.endsAt) && ` do ${dayMonth(promoLastDay(mainPromo.endsAt))}`}</a>
+          </p>
+        )}
       </div>
     </div>
-    <nav class="container manifest__services" aria-label="Na skróty" data-reveal style="--d: 200ms">
-      <a href={url.advisor}><b>Doradca wnętrz</b><span>Dobierz meble do zdjęcia pokoju</span></a>
-      <a href={url.promotions}>
-        <b>Promocje</b>
-        <span>{mainPromo
-          ? <span data-promo-window data-start={mainPromo.startsAt ?? ''} data-end={mainPromo.endsAt ?? ''}><em>{mainPromo.label}</em>{promoLastDay(mainPromo.endsAt) && ` do ${dayMonth(promoLastDay(mainPromo.endsAt))}`}</span>
-          : 'Aktualne obniżki cen'}</span>
-      </a>
-      <a href={url.stores()}><b>Gdzie kupić</b><span>Salony partnerskie w całej Polsce</span></a>
-      <a href={url.partners}><b>Dla sklepów</b><span>Zostań partnerem Liveo</span></a>
-    </nav>
   </section>
 
   <section class="spreads" id={kol.id} aria-labelledby="kolekcje-tytul">
@@ -151,46 +135,6 @@ const articles = (await getArticles()).slice(0, 4).map(articleCard);
         <li><h3><Rich text={it.title} /></h3><p><Rich text={it.text} /></p></li>
       ))}
     </ol>
-  </Section>
-
-  <section class="band-dark on-dark" id={b2b.id} aria-labelledby="b2b-tytul">
-    <div class="container band-dark__inner">
-      <div data-reveal>
-        <h2 id="b2b-tytul"><Rich text={b2b.title} /></h2>
-        <p><Rich text={b2b.text} /></p>
-        <ul>
-          {['Twój salon w wyszukiwarce „Gdzie kupić”', 'Cennik partnerski i stany magazynowe online', 'Zamówienia przez strefę partnera'].map(t => (
-            <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7" /></svg>{t}</li>
-          ))}
-        </ul>
-        <p class="cta-row">
-          <a class="btn btn--white" href={url.partners}>{b2b.cta.label}</a>
-          <a class="btn btn--light" href={url.partnerZone}>Strefa partnera</a>
-        </p>
-      </div>
-      <div data-reveal style="--d: 120ms">
-        <Media image={b2bImg} alt="" widths={[480, 768, 1024]} sizes="(min-width: 60rem) 38rem, 100vw" ratio="16 / 10" placeholderLabel="Aranżacja" />
-      </div>
-    </div>
-  </section>
-
-  <Section id="rodzaje" title="Wybierz rodzaj mebla" class="section--center">
-    <ul class="type-tiles">
-      {tileTypes.map(({ t, img }) => (
-        <li class="type-tile"><a href={url.category(t.slug)}>
-          <span class="type-tile__thumb">{img && <Image src={img.src} alt="" widths={[160, 240, 320]} sizes="(min-width: 60rem) 9rem, 22vw" loading="lazy" />}</span>
-          <span class="type-tile__name">{t.plural}</span>
-        </a></li>
-      ))}
-    </ul>
-    <p class="section__more"><a href={url.products}>Wszystkie {typeCount} rodzajów mebli</a></p>
-  </Section>
-
-  <Section id={guides.id} title={guides.title} lead={guides.lead} class="section--center">
-    <ul class="card-grid card-grid--articles">
-      {articles.map(a => <ArticleCard article={a} />)}
-    </ul>
-    <p class="section__more"><a href={guides.cta.href}>{guides.cta.label}</a></p>
   </Section>
 
   <Faq title={page.faq.title} items={page.faq.items} />

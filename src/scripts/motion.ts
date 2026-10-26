@@ -74,6 +74,9 @@ function initHero() {
         s.setAttribute('aria-hidden', String(k !== i));
       });
       dots.forEach((d, k) => d.setAttribute('aria-current', k === i ? 'true' : 'false'));
+      // aktywna nazwa zawsze widoczna w przewijanym indeksie (telefon)
+      const list = dots[i]?.closest('ol');
+      if (list && list.scrollWidth > list.clientWidth) list.scrollTo({ left: dots[i].offsetLeft - 16, behavior: reduce() ? 'auto' : 'smooth' });
       hero.style.setProperty('--slide', String(i));
       if (focusSlide) slides[i].querySelector<HTMLElement>('a')?.focus({ preventScroll: true });
       schedule();

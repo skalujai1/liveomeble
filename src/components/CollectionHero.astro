@@ -22,7 +22,7 @@ const dots = c.finishes.map(f => ({ label: f.label, a: finishById.get(f.front)?.
     <HeroPicture wide={wide} tall={tall} {alt} class="collection-hero__pic" sizes="100vw" />
   </div>
   <div class="container collection-hero__copy">
-    <h1 class="collection-hero__title" id="h1">{prefix && <span class="collection-hero__prefix">{prefix} </span>}<Rich text={name} /></h1>
+    <h1 class="collection-hero__title" id="h1">{prefix && <span class="visually-hidden">{prefix} </span>}<Rich text={name} /></h1>
     <p class="collection-hero__lead">{c.tagline}</p>
     <p class="collection-hero__meta">
       <span class="collection-hero__dots" aria-hidden="true">{dots.map(d => <i style={`--c: ${d.a}; --c2: ${d.b}`}></i>)}</span>
