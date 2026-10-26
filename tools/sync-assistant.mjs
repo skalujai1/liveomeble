@@ -47,7 +47,7 @@ if (!existsSync(join(OUT, 'data', 'catalog.json'))) throw new Error('Brak liveo-
 
 writeFileSync(
   join(OUT, 'fonts.css'),
-  `/* Fonty widżetu doradcy: lokalnie (bez Google Fonts). Widżet używa fontów strony (Jost, Newsreader),
+  `/* Fonty widżetu doradcy: lokalnie (bez Google Fonts). Widżet używa fontów strony (Onest, Gloock),
    zadeklarowanych przez @font-face w <head> (src/layouts/BaseLayout.astro, pliki w public/fonts). */\n`,
 );
 

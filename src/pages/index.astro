@@ -1,6 +1,6 @@
 ---
-// Strona główna — układ kierunku A (design/directions-v2/a): hero ze ściętą plakietką hasła, pas usług,
-// kolekcje, polecane meble, rodzaje mebli, gdzie kupić, pas B2B, poradnik, FAQ.
+// Strona główna — układ kierunku C (design/directions-v2/c): hero na pełną szerokość (kampania 2/3 + nowość 1/3),
+// pas usług, kolekcje jako kafle ze zdjęciem, polecane meble, rodzaje mebli, gdzie kupić, pas B2B, poradnik, FAQ.
 // Treść: src/content/pages/home.json, dane: src/data. Docs: docs/ia.md 3.1.
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -17,8 +17,7 @@ import Rich from '../components/Rich.astro';
 import { articleCard, getArticles } from '../lib/articles';
 import { collectionImage, roomImage, typeImage } from '../lib/images';
 import { faqPage } from '../lib/jsonld';
-import { formatPrice } from '../lib/pricing.js';
-import { activePromosAtBuild, collections, pages, priceAt, products, productsByCollection, productsSorted, section, types, url } from '../lib/site';
+import { activePromosAtBuild, collections, pages, priceAt, priceRangeOf, products, productsByCollection, productsSorted, section, types, url } from '../lib/site';
 import { fill, promoLastDay } from '../lib/text';
 
 const page = pages.home;
@@ -37,18 +36,23 @@ const firstColor = first.finishes[0].label.toLocaleLowerCase('pl');
 const heroAlt = heroWide?.approximate && heroWide.title
   ? `Aranżacja poglądowa: ${heroWide.title}`
   : fill(hero.image.alt, { name: first.name, color: firstColor });
-const heroProduct = productsByCollection(first.slug).find(p => p.type === 'rtv') ?? productsByCollection(first.slug)[0];
-const heroPrice = priceAt(heroProduct);
 const heroPromo = activePromosAtBuild.find(p => (p.scope as { collections?: string[] }).collections?.includes(first.slug));
 const heroLastDay = promoLastDay(heroPromo?.endsAt);
 // promoLastDay zwraca „RRRR-MM-DD” (dzień w czasie polskim) → „30.10”.
 const dayMonth = (d: string | null) => (d ? `${Number(d.slice(8, 10))}.${d.slice(5, 7)}` : '');
 
+// Bok hero (desktop): najnowsza kolekcja, pionowy kadr.
+const side = collections.find(c => c.isNew && c.slug !== first.slug) ?? collections[1];
+const sideImg = side ? collectionImage(side, 'tall') : null;
+const sideAlt = sideImg?.title ? `Aranżacja poglądowa: ${sideImg.title}` : `Meble z kolekcji ${side?.name}`;
+const sideItems = side ? productsByCollection(side.slug) : [];
+const sideRange = sideItems.length ? priceRangeOf(sideItems) : null;
+
 // Pas usług: aktywna promocja z najwcześniejszym końcem.
 const mainPromo = activePromosAtBuild[0];
 
-// Kolekcje: 4 pierwsze (wszystkie na /kolekcje/).
-const homeCollections = collections.slice(0, 4);
+// Kolekcje: wszystkie jako kafle 3:4 (na telefonie przewijany pas).
+const homeCollections = collections;
 
 // Polecane: bestsellery, potem promocje i nowości — każdy mebel z innej kolekcji i innego rodzaju.
 const seenCol = new Set<string>();
@@ -79,14 +83,10 @@ const articles = (await getArticles()).slice(0, 4).map(articleCard);
   jsonLd={[faqPage(path, page.faq.items)]}
 >
   <section class="home-hero" aria-labelledby="h1">
-    <div class="container">
-      <div class="home-hero__box">
-        <HeroPicture wide={heroWide} tall={heroTall} alt={heroAlt} class="home-hero__media" />
-        <a class="home-hero__tag" href={url.product(heroProduct.slug)}>
-          <i aria-hidden="true"></i>
-          <span><b>{heroProduct.name}</b><em class:list={{ 'is-promo': !!heroPrice.promo }}>{formatPrice(heroPrice.price)}</em></span>
-        </a>
-        <div class="home-hero__card on-dark">
+    <div class="home-hero__grid">
+      <div class="home-hero__cell home-hero__main on-dark">
+        <HeroPicture wide={heroWide} tall={heroTall} alt={heroAlt} class="home-hero__media" sizes="(min-width: 60rem) 67vw, 100vw" />
+        <div class="home-hero__copy">
           <h1 class="home-hero__title" id="h1"><Rich text={page.h1} /></h1>
           <p class="home-hero__lead">
             Kolekcja {first.name} w kolorze {firstColor}{heroPromo && (
@@ -94,7 +94,7 @@ const articles = (await getArticles()).slice(0, 4).map(articleCard);
             )}.
           </p>
           <p class="home-hero__cta">
-            <a class="btn btn--primary" href={url.collection(first.slug)}>Zobacz kolekcję {first.name}</a>
+            <a class="btn btn--light" href={url.collection(first.slug)}>Zobacz kolekcję {first.name}</a>
             <a class="link" href={url.stores()}>
               <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.4" /></svg>
               Gdzie kupić
@@ -102,7 +102,20 @@ const articles = (await getArticles()).slice(0, 4).map(articleCard);
           </p>
         </div>
       </div>
+      {side && (
+        <div class="home-hero__cell home-hero__side on-dark">
+          <Media image={sideImg} alt={sideAlt} widths={[480, 720, 960]} sizes="33vw" ratio="4 / 5" placeholderLabel={`Kolekcja ${side.name}`} />
+          <div class="home-hero__copy">
+            <span class="badge">Nowość</span>
+            <h2 class="home-hero__side-title">Kolekcja {side.name}</h2>
+            <p>{side.tagline}{sideRange && ` Od ${sideRange.minText}.`}</p>
+            <a class="link" href={url.collection(side.slug)}>Poznaj kolekcję {side.name}</a>
+          </div>
+        </div>
+      )}
+    </div>
 
+    <div class="container">
       <div class="services">
         <form class="service" action={url.stores()} method="get">
           <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.4" /></svg>
@@ -131,11 +144,11 @@ const articles = (await getArticles()).slice(0, 4).map(articleCard);
     </div>
   </section>
 
-  <Section id={kol.id} title="Nasze kolekcje" lead={kol.lead} class="section--alt section--center">
-    <ul class="card-grid card-grid--collections">
-      {homeCollections.map(c => <CollectionCard collection={c} showFoot />)}
+  <Section id={kol.id} title="Nasze kolekcje" lead={kol.lead} class="section--center section--tiles">
+    <ul class="card-grid card-grid--collections card-grid--rail">
+      {homeCollections.map(c => <CollectionCard collection={c} showFoot sizes="(min-width: 66rem) 25vw, (min-width: 40rem) 50vw, 80vw" />)}
     </ul>
-    <p class="section__more"><a href={kol.more.href}>Zobacz wszystkie {collections.length} kolekcji</a></p>
+    <p class="section__more"><a href={kol.more.href}>{kol.more.label}</a></p>
   </Section>
 
   <Section id="polecane" title="Polecane meble" lead="Ceny sugerowane przez producenta. Meble kupisz w salonach partnerskich." class="section--center">
@@ -177,7 +190,7 @@ const articles = (await getArticles()).slice(0, 4).map(articleCard);
           ))}
         </ul>
         <p class="cta-row">
-          <a class="btn btn--primary" href={url.partners}>{b2b.cta.label}</a>
+          <a class="btn btn--white" href={url.partners}>{b2b.cta.label}</a>
           <a class="btn btn--light" href={url.partnerZone}>Strefa partnera</a>
         </p>
       </div>

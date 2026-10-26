@@ -1,6 +1,6 @@
 ---
-// Karta kolekcji (kierunek A): aranżacja, nazwa (szeryf), charakter, cena „od”, kolory wykończeń,
-// link „Zobacz kolekcję …” rozciągnięty na całą kartę.
+// Karta kolekcji (kierunek C): kafel 3:4 ze zdjęciem aranżacji, nazwą (szeryf) u góry i ceną „od” u dołu,
+// pod kaflem charakter kolekcji i link „Zobacz kolekcję …” rozciągnięty na całą kartę.
 import Media from './Media.astro';
 import { collectionImage } from '../lib/images';
 import { finishById, finishLabels, pages, priceRangeOf, productsByCollection, roomBySlug, roomsList, url, type Collection } from '../lib/site';
@@ -15,9 +15,9 @@ interface Props {
   priority?: boolean;
   sizes?: string;
 }
-const { collection: c, headingLevel = 3, showMeta = false, showFoot = false, priority = false, sizes = '(min-width: 66rem) 18rem, (min-width: 40rem) 45vw, 92vw' } = Astro.props;
+const { collection: c, headingLevel = 3, showMeta = false, showFoot = false, priority = false, sizes = '(min-width: 66rem) 25vw, (min-width: 40rem) 50vw, 92vw' } = Astro.props;
 const card = (pages.kolekcje.sections.find(s => s.id === 'lista') as any).card;
-const img = collectionImage(c);
+const img = collectionImage(c, 'tall') ?? collectionImage(c);
 const heroRoom = roomBySlug.get(c.heroRoom)!;
 const alt = img?.approximate && img.title
   ? `Aranżacja poglądowa: ${img.title}`
@@ -30,21 +30,24 @@ const dots = [...new Set(c.finishes.flatMap(f => [f.front, f.body]))]
 const countText = `${items.length} ${items.length === 1 ? 'mebel' : items.length % 10 >= 2 && items.length % 10 <= 4 && (items.length % 100 < 10 || items.length % 100 >= 20) ? 'meble' : 'mebli'}`;
 ---
 <li class="collection-card" data-rooms={c.rooms.join(' ')}>
-  <Media image={img} alt={alt} widths={[400, 640, 960, 1280]} sizes={sizes} ratio="4 / 3" placeholderLabel={`Kolekcja ${c.name}`} priority={priority} />
+  <div class="collection-card__tile">
+    <Media image={img} alt={alt} widths={[360, 540, 720, 960]} sizes={sizes} ratio="3 / 4" placeholderLabel={`Kolekcja ${c.name}`} priority={priority} />
+    <H class="collection-card__title"><span class="collection-card__kicker">Kolekcja</span> {c.name}</H>
+    {c.isNew && <span class="badge collection-card__badge">{card.badgeNew}</span>}
+    {showFoot && range && (
+      <p class="collection-card__foot">
+        <span>od {range.minText} · {countText}</span>
+        <span class="dots" role="img" aria-label={`Kolory: ${finishLabels(c)}`}>{dots.map(f => <i style={`--c: ${f!.hex}`}></i>)}</span>
+      </p>
+    )}
+  </div>
   <div class="collection-card__body">
-    <H class="collection-card__title">Kolekcja {c.name}{c.isNew && <span class="badge collection-card__badge">{card.badgeNew}</span>}</H>
     <p class="collection-card__text">{c.tagline}</p>
     {showMeta && (
       <ul class="collection-card__meta">
         <li>{fill(card.meta[0], { roomsList: roomsList(c.rooms) })}</li>
         <li>{fill(card.meta[1], { finishLabels: finishLabels(c) })}</li>
       </ul>
-    )}
-    {showFoot && range && (
-      <p class="collection-card__foot">
-        <span>{countText} · od <b>{range.minText}</b></span>
-        <span class="dots" role="img" aria-label={`Kolory: ${finishLabels(c)}`}>{dots.map(f => <i style={`--c: ${f!.hex}`}></i>)}</span>
-      </p>
     )}
     <a class="collection-card__link" href={url.collection(c.slug)}>{fill(card.link, { name: c.name })}</a>
   </div>

@@ -4,8 +4,8 @@
 import { getImage } from 'astro:assets';
 import type { ImageRef } from '../lib/images';
 
-interface Props { wide: ImageRef; tall?: ImageRef | null; alt: string; class?: string }
-const { wide, tall, alt, class: cls } = Astro.props;
+interface Props { wide: ImageRef; tall?: ImageRef | null; alt: string; class?: string; sizes?: string }
+const { wide, tall, alt, class: cls, sizes = '(min-width: 80rem) 76rem, 100vw' } = Astro.props;
 const MOBILE = '(max-width: 59.99rem)';
 const build = async (src: ImageRef['src'], widths: number[], format: 'avif' | 'webp' | 'jpg') => {
   const ok = widths.filter(w => w <= src.width);
@@ -19,8 +19,8 @@ const sources = [
     { media: MOBILE, type: 'image/avif', srcset: await build(tall.src, tallW, 'avif'), sizes: '100vw' },
     { media: MOBILE, type: 'image/webp', srcset: await build(tall.src, tallW, 'webp'), sizes: '100vw' },
   ] : []),
-  { type: 'image/avif', srcset: await build(wide.src, wideW, 'avif'), sizes: '(min-width: 80rem) 76rem, 100vw' },
-  { type: 'image/webp', srcset: await build(wide.src, wideW, 'webp'), sizes: '(min-width: 80rem) 76rem, 100vw' },
+  { type: 'image/avif', srcset: await build(wide.src, wideW, 'avif'), sizes },
+  { type: 'image/webp', srcset: await build(wide.src, wideW, 'webp'), sizes },
 ];
 const fallback = await getImage({ src: wide.src, width: 1440, format: 'jpg' });
 ---
