@@ -408,7 +408,8 @@ h1, h2, .section__title { letter-spacing: -0.01em; }
 .poland-map__sub { color: var(--color-text-muted); font-size: var(--text-sm); }
 .poland-map__grid { fill: #d8cebf; }
 .poland-map__store { fill: var(--color-walnut); transform-box: fill-box; transform-origin: center; transition: fill var(--dur) var(--ease-out), opacity var(--dur) var(--ease-out); }
-.poland-map__hq rect { fill: var(--color-dark); stroke: var(--color-bg); stroke-width: 2; }
+.poland-map__hq circle { fill: var(--color-dark); stroke: var(--color-bg); stroke-width: 2; }
+.poland-map__hq .poland-map__hq-pulse { stroke: none; opacity: 0; }
 .poland-map__hq text { font: var(--weight-medium) 13px/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; fill: var(--color-dark); paint-order: stroke; stroke: var(--color-bg); stroke-width: 4px; stroke-linejoin: round; }
 .poland-map__me { fill: var(--color-forest); stroke: #fff; stroke-width: 3; visibility: hidden; }
 .poland-map__me.is-visible { visibility: visible; }
@@ -420,5 +421,7 @@ h1, h2, .section__title { letter-spacing: -0.01em; }
   .js .poland-map .poland-map__store { scale: 0; transition: scale 900ms var(--ease-expo) var(--d, 0ms), fill var(--dur) var(--ease-out), opacity var(--dur) var(--ease-out); }
   .js .poland-map.is-in .poland-map__store { scale: 1; }
   .poland-map__me.is-visible { animation: pm-ping 2.4s var(--ease-out) infinite; transform-box: fill-box; transform-origin: center; }
+  .poland-map__hq-pulse { transform-box: fill-box; transform-origin: center; animation: pm-hq 2.8s var(--ease-out) infinite; }
+  @keyframes pm-hq { 0% { scale: 1; opacity: 0.35; } 100% { scale: 2.6; opacity: 0; } }
   @keyframes pm-ping { 0%, 100% { stroke-width: 3; } 50% { stroke-width: 9; stroke: rgb(47 70 55 / 0.25); } }
 }

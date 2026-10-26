@@ -40,8 +40,9 @@ const dots = [...cells.values()].map(c => ({
       {dots.map(c => <circle class="poland-map__store" cx={c.x} cy={c.y} r={c.r} style={`--d:${c.d}ms`} data-store-ids={c.ids.join(' ')} />)}
     </g>
     <g class="poland-map__hq" transform={`translate(${HQ.x} ${HQ.y})`}>
-      <rect x="-5" y="-5" width="10" height="10" transform="rotate(45)" />
-      <text x="11" y="4">Raniżów</text>
+      <circle class="poland-map__hq-pulse" r="7" />
+      <circle r="7" />
+      <text x="14" y="4">Raniżów</text>
     </g>
     <circle class="poland-map__me" r="7" cx="-100" cy="-100" data-map-me />
   </svg>
