@@ -922,6 +922,46 @@
       "placeholder": true
     },
     {
+      "file": "rooms/pokoj-mlodziezowy-tall.jpg",
+      "type": "aranzacja",
+      "room": "pokoj-mlodziezowy",
+      "frame": "tall",
+      "title": "Pokój młodzieżowy — łóżko 90 i szafka nocna BRISO, ściana w kolorze szałwii",
+      "description": "Pokój młodzieżowy — łóżko 90 i szafka nocna BRISO, ściana w kolorze szałwii. Render 3D (atrapa zdjęcia).",
+      "width": 1200,
+      "height": 1500,
+      "format": "jpg",
+      "dominantColors": [
+        "#979986",
+        "#bab3aa",
+        "#e5e3dd",
+        "#83836c"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true
+    },
+    {
+      "file": "rooms/pokoj-mlodziezowy-wide.jpg",
+      "type": "aranzacja",
+      "room": "pokoj-mlodziezowy",
+      "frame": "wide",
+      "title": "Pokój młodzieżowy — łóżko 90 i szafka nocna BRISO, ściana w kolorze szałwii",
+      "description": "Pokój młodzieżowy — łóżko 90 i szafka nocna BRISO, ściana w kolorze szałwii. Render 3D (atrapa zdjęcia).",
+      "width": 2400,
+      "height": 1350,
+      "format": "jpg",
+      "dominantColors": [
+        "#979988",
+        "#b3aca3",
+        "#d8c6a9",
+        "#82826d"
+      ],
+      "palette": "",
+      "textSpace": "",
+      "placeholder": true
+    },
+    {
       "file": "rooms/przedpokoj-tall.jpg",
       "type": "aranzacja",
       "room": "przedpokoj",

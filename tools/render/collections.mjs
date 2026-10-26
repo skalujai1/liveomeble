@@ -101,6 +101,31 @@ try {
       }
     }
   }
+  // Pokój młodzieżowy nie ma własnej aranżacji (roomImage brał kadr kolekcji BRISO): sypialnia z łóżkiem 90
+  // i szafką nocną BRISO na ścianie w kolorze szałwii → rooms/pokoj-mlodziezowy-wide|tall.jpg.
+  if (args.includes('--teen')) {
+    const teen = { room: 'sypialnia', models: { lozko160: ['LV-BRISO-LOZ90', 'GR-DM'], nocna: ['LV-BRISO-SZN40', 'GR-DM'] }, roomPatch: { walls: { back: '#b9c2ad' } } };
+    const models = {};
+    for (const [key, [sku, code]] of Object.entries(teen.models)) {
+      const p = products.find((x) => x.sku === sku);
+      const v = p.variants.find((x) => x.code === code);
+      models[key] = { ...p.model3d, finish: v.finish || p.model3d.finish };
+    }
+    const title = 'Pokój młodzieżowy — łóżko 90 i szafka nocna BRISO, ściana w kolorze szałwii';
+    const roomsDir = path.join(RENDERS, 'rooms');
+    for (const frame of ['wide', 'tall']) {
+      const [w, h] = SIZES[frame];
+      const file = path.join(preview ? outDir : roomsDir, `pokoj-mlodziezowy-${frame}.jpg`);
+      process.stdout.write(`→ pokój młodzieżowy (${frame}) … `);
+      const res = await R.render({ kind: 'room', room: teen.room, models, roomPatch: teen.roomPatch, frame, width: w, height: h, samples, preview });
+      await saveJpeg(res.png, file, 88);
+      console.log(fmtMs(res.ms));
+      if (!preview) {
+        const e = await describeRoom(file, { name: 'pokoj-mlodziezowy', title, description: `${title}. Render 3D (atrapa zdjęcia).`, palette: '', notes: {} }, frame, [w, h]);
+        updateManifest([{ ...e, room: 'pokoj-mlodziezowy' }]);
+      }
+    }
+  }
 } finally {
   await R.close();
 }
