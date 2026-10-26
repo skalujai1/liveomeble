@@ -104,7 +104,7 @@ strong, b { font-weight: var(--weight-bold); }
 @media (max-width: 23.4rem) { .site-header__where span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } }
 
 @media (min-width: 60rem) {
-  .site-header__util { display: block; background: var(--color-walnut); color: #fff; }
+  .site-header__util { display: block; background: var(--color-dark); color: #fff; }
   .site-header__util-inner { min-height: 2.25rem; display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); font-size: 0.875rem; line-height: 1.4; }
   .site-header__claim { color: rgb(255 255 255 / 0.85); }
   .site-header__util :focus-visible { outline-color: #fff; }
@@ -392,7 +392,7 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
 .faq__q { font: var(--weight-medium) 1.0625rem/1.4 var(--font-sans); }
 
 /* ---------- Stopka ---------- */
-.site-footer { background: var(--color-walnut); color: #fff; border-top: 0; padding-block: var(--space-8) var(--space-6); margin-top: 0; }
+.site-footer { background: var(--color-dark); color: #fff; border-top: 0; padding-block: var(--space-8) var(--space-6); margin-top: 0; }
 .site-footer :focus-visible { outline-color: #fff; }
 .site-footer__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem 1rem; padding: 0; }
 .site-footer__brand { grid-column: 1 / -1; display: grid; gap: var(--space-3); align-content: start; }
@@ -481,7 +481,7 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
   filter: drop-shadow(0 10px 18px rgb(42 36 32 / 0.28));
 }
 .assistant-launcher::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--color-dark);
+  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--color-accent);
 }
 .assistant-launcher:hover::before { background: var(--color-accent-hover); }
 .assistant-launcher__icon { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }

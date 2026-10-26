@@ -287,8 +287,8 @@
   .showcase__pic.is-active .media__img { scale: 1; }
 }
 
-/* ---------- Pas z doradcą (zdjęcie + tekst na orzechu) ---------- */
-.feature-band { display: grid; background: var(--color-walnut); color: #fff; }
+/* ---------- Pas z doradcą (zdjęcie + tekst na ciemnym tle) ---------- */
+.feature-band { display: grid; background: var(--color-dark); color: #fff; }
 .feature-band__media { overflow: hidden; }
 .feature-band__media .media { border-radius: 0; }
 .feature-band__media .media__img { filter: var(--photo-grade); }

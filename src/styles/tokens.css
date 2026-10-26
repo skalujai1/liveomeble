@@ -12,12 +12,12 @@
   --color-text-muted: #6e655c;      /* szary orzechowy: 5.7:1 na bieli, 4.6:1 na lnie */
   --color-line: rgb(42 36 32 / 0.12);
   --color-line-strong: #8b8278;     /* obrys pól: 3.6:1 na bieli */
-  --color-accent: #4a3427;          /* orzech: główny przycisk, pasek górny, stopka (biały 11.4:1) */
+  --color-accent: #4a3427;          /* orzech: tylko elementy akcji — przyciski, lupa, doradca (biały 11.4:1) */
   --color-accent-hover: #3a291f;
   --color-accent-contrast: #ffffff;
   --color-walnut: #4a3427;
   --color-forest: #2f4637;          /* las: Gdzie kupić, Dla sklepów, „Nowość” (biały 10.4:1) */
-  --color-dark: #2a2420;
+  --color-dark: #2a2420;               /* ciemny brąz: duże płaszczyzny — stopka, pasek górny, pas z doradcą */
   --color-link: #2a2420;
   --color-promo: #9e2a35;           /* wino: cena promocyjna, plakietka rabatu (biały 7.4:1, na bieli 7.3:1) */
   --color-new: #2f4637;
