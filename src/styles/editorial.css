@@ -361,3 +361,19 @@
 .spreads__list--page { margin: 0; padding: 0; list-style: none; }
 .spreads__list--page > li[hidden] { display: none; }
 .page-collections .chip-filter { margin-bottom: var(--space-8); }
+
+/* ---------- Pomieszczenie: hero i wstęp ---------- */
+.collection-hero__title--room { font-size: clamp(3rem, 1.4rem + 6.4vw, 8rem); line-height: 0.94; text-wrap: balance; max-width: 14ch; }
+.room-intro { max-width: 52rem; margin-top: 0; font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem); line-height: 1.5; }
+.page-room .collection-intro { padding-block: var(--space-7) 0; }
+
+/* ---------- Karta mebla: kolekcja w aranżacji na pełną szerokość ---------- */
+.product-scene { position: relative; margin-top: var(--space-8); color: #fff; }
+.product-scene__fig { margin: 0; overflow: hidden; }
+.product-scene__fig .media { border-radius: 0; }
+.product-scene__fig .media__img { filter: var(--photo-grade); }
+.product-scene__caption { position: absolute; left: 0; right: 0; bottom: clamp(1.5rem, 4vw, 3rem); z-index: 1; }
+.product-scene::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, rgb(var(--scrim) / 0.6), rgb(var(--scrim) / 0) 45%); }
+.product-scene__title { color: #fff; font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4.5rem); line-height: 1; letter-spacing: -0.02em; }
+.product-scene__caption .link { margin-top: 0.75rem; color: #fff; text-underline-offset: 5px; }
+@media (max-width: 47.9rem) { .product-scene__fig .media { aspect-ratio: 4 / 5 !important; } }

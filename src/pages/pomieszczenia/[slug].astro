@@ -1,16 +1,16 @@
 ---
 // Pomieszczenie — docs/ia.md 3.6, treść: src/content/pages/pomieszczenia.json (items + template)
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHeader from '../../components/PageHeader.astro';
+import HeroPicture from '../../components/HeroPicture.astro';
+import CollectionRail from '../../components/CollectionRail.astro';
 import Section from '../../components/Section.astro';
-import CollectionCard from '../../components/CollectionCard.astro';
 import ProductGrid from '../../components/ProductGrid.astro';
 import AssistantButton from '../../components/AssistantButton.astro';
 import Faq from '../../components/Faq.astro';
 import { getArticles } from '../../lib/articles';
 import { roomImage } from '../../lib/images';
 import { faqPage, itemList, webPage } from '../../lib/jsonld';
-import { collectionNames, collections, pages, productsByRoom, rooms, types, url, type Room } from '../../lib/site';
+import { collectionNames, collections, pages, productCount, productsByRoom, rooms, types, url, type Room } from '../../lib/site';
 import { fill } from '../../lib/text';
 
 export function getStaticPaths() {
@@ -40,6 +40,7 @@ const img = roomImage(r.slug, 'wide');
   description={item.seo.description}
   {path}
   pageClass="page-room"
+  overlay
   ogImage={roomImage(r.slug, 'wide') ? `/og/pomieszczenia/${r.slug}.jpg` : undefined}
   ogImageAlt={`${r.name} — meble Liveo`}
   breadcrumbs={[{ name: 'Pomieszczenia', url: url.rooms }, { name: r.name, url: path }]}
@@ -49,13 +50,33 @@ const img = roomImage(r.slug, 'wide');
     faqPage(path, faq),
   ]}
 >
-  <PageHeader {h1} lead={item.intro} image={img} imageAlt={img?.title ? `Aranżacja: ${img.title}` : `Aranżacja: ${r.name}`} placeholderLabel={r.name} />
+  {img ? (
+    <section slot="hero" class="collection-hero on-dark" aria-labelledby="h1" data-overlay-hero>
+      <div class="collection-hero__media">
+        <HeroPicture wide={img} tall={roomImage(r.slug, 'tall')} alt={img.title ? `Aranżacja: ${img.title}` : `Aranżacja: ${r.name}`} class="collection-hero__pic" sizes="100vw" />
+      </div>
+      <div class="container collection-hero__copy">
+        <h1 class="collection-hero__title collection-hero__title--room" id="h1">{h1}</h1>
+        <p class="collection-hero__meta"><span>{productCount(list.length)} z {colls.length} kolekcji</span></p>
+        <p class="collection-hero__cta">
+          <a class="btn btn--white" href="#meble">Zobacz meble</a>
+          <a class="link" href="#kolekcje">Kolekcje</a>
+        </p>
+      </div>
+    </section>
+  ) : <h1 class="container page-header__title" id="h1">{h1}</h1>}
 
-  <Section id="kolekcje" title={fill(tpl.collectionsTitle, vars)}>
-    <ul class="card-grid card-grid--collections">
-      {colls.map(c => <CollectionCard collection={c} />)}
-    </ul>
-  </Section>
+  <section class="section collection-intro" aria-label="Wstęp">
+    <div class="container"><p class="collection-intro__text room-intro" data-reveal>{item.intro}</p></div>
+  </section>
+
+  <section class="section rail-section" id="kolekcje" aria-labelledby="kolekcje-tytul">
+    <header class="container rail-section__head" data-reveal>
+      <h2 class="rail-section__title" id="kolekcje-tytul">{fill(tpl.collectionsTitle, vars)}</h2>
+      <a class="link" href={url.collections}>Wszystkie kolekcje</a>
+    </header>
+    <CollectionRail collections={colls} label={fill(tpl.collectionsTitle, vars)} />
+  </section>
 
   <Section id="meble" title={fill(tpl.productsTitle, vars)}>
     {byType.map(g => (

@@ -12,7 +12,7 @@ import FurnitureDrawing from '../../components/FurnitureDrawing.astro';
 import ContentSection from '../../components/ContentSection.astro';
 import Faq from '../../components/Faq.astro';
 import Rich from '../../components/Rich.astro';
-import { packshotFor } from '../../lib/images';
+import { collectionImage, packshotFor } from '../../lib/images';
 import { abs, faqPage, productLd, webPage, type VariantLd } from '../../lib/jsonld';
 import {
   collectionOf, defaultVariant, dimsLong, finishById, pages, priceAt, products, productsSorted, site, stockText, typeOf, url,
@@ -28,6 +28,8 @@ const { p } = Astro.props;
 const tpl = pages.produkt;
 const sec = (id: string) => tpl.sections.find(s => s.id === id) as any;
 const c = collectionOf(p);
+// Kolekcja w aranżacji (panorama 2:1): pas na pełną szerokość między szczegółami a sekcją gdzie kupić.
+const scene = collectionImage(c, 'cinema');
 const t = typeOf(p);
 const path = url.product(p.slug);
 const dv = defaultVariant(p);
@@ -187,6 +189,18 @@ const kompletSec = sec('komplet');
   <Section id="szczegoly" title={sec('szczegoly').title} width="narrow">
     <ul class="feature-bullets">{p.features.map(f => <li>{f}</li>)}</ul>
   </Section>
+
+  {scene && (
+    <section class="product-scene on-dark" aria-labelledby="w-aranzacji">
+      <figure class="product-scene__fig" data-reveal>
+        <Media image={scene} alt={scene.title ? (scene.approximate ? `Aranżacja poglądowa: ${scene.title}` : scene.title) : `Kolekcja ${c.name} w aranżacji`} widths={[640, 960, 1440, 1920, 2560, 3200]} sizes="100vw" ratio="2 / 1" placeholderLabel={`Kolekcja ${c.name}`} />
+      </figure>
+      <div class="container product-scene__caption">
+        <h2 class="product-scene__title" id="w-aranzacji">Kolekcja {c.name} w aranżacji</h2>
+        <a class="link" href={url.collection(c.slug)}>Zobacz całą kolekcję {c.name}</a>
+      </div>
+    </section>
+  )}
 
   <Section id="gdzie-kupic" title={fill(shop.title, vars)} lead={fill(shop.lead, vars)} class="section--alt">
     <StoreFinder id="sklepy-mebel" presetCollection={c.slug} limit={shop.limit} more={{ label: shop.more.label, href: fill(shop.more.href, vars) }} note={shop.note} />
