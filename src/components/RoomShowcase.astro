@@ -7,11 +7,12 @@ import { collections, productCount, productsByRoom, rooms, url } from '../lib/si
 
 // Zdjęcie pokoju: ujęcie pod kątem ostatniej kolekcji z tym pomieszczeniem jako głównym (inne niż w hero i rozkładówkach),
 // a bez takiej kolekcji — aranżacja pomieszczenia.
-// Pokój młodzieżowy: TALVE (ma meble do pokoju nastolatka) — BRISO jest już w rozkładówce, a biuro to też biurko.
-const OVERRIDE: Record<string, string> = { 'pokoj-mlodziezowy': 'talve' };
+// Pokój młodzieżowy: panorama BRISO (slajd hero, nie ma jej w rozkładówkach). Docelowo osobny render pokoju.
+const OVERRIDE: Record<string, [string, 'cinema' | 'angle']> = { 'pokoj-mlodziezowy': ['briso', 'cinema'] };
 const pick = (slug: string) => {
-  const own = collections.find(c => c.slug === OVERRIDE[slug]) ?? collections.filter(c => c.heroRoom === slug).at(-1);
-  return (own && collectionImage(own, 'angle')) ?? roomImage(slug, 'wide');
+  const [force, frame] = OVERRIDE[slug] ?? [];
+  const own = collections.find(c => c.slug === force) ?? collections.filter(c => c.heroRoom === slug).at(-1);
+  return (own && collectionImage(own, frame ?? 'angle')) ?? roomImage(slug, 'wide');
 };
 const list = rooms.map(r => ({ r, img: pick(r.slug), n: productsByRoom(r.slug).length }));
 ---
