@@ -468,10 +468,6 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
 .chip-filter .check:hover { box-shadow: inset 0 0 0 1px var(--color-text); }
 
 /* ---------- Mapa sklepów ---------- */
-.poland-map__outline { fill: var(--color-surface); stroke: var(--color-line-strong); }
-.poland-map__store { fill: var(--color-bg); stroke: var(--color-text); stroke-width: 1.5; }
-.poland-map__store.is-result { fill: var(--color-promo); stroke: var(--color-bg); }
-.poland-map__me { fill: var(--color-forest); stroke: #fff; }
 
 /* ---------- Przycisk doradcy przed załadowaniem widżetu (ten sam kształt co w widżecie: liveo-assistant.css .launcher) ---------- */
 .assistant-launcher {

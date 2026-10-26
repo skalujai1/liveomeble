@@ -36,7 +36,8 @@ const rows = productsSorted.flatMap(p =>
     };
   }),
 );
-const store = resellers[0];
+// Konto demo: zmyślony salon (lista sklepów to prawdziwe firmy — nie podpinamy żadnej pod konto przykładowe)
+const store = { name: 'Salon Meblowy Przykład (DEMO)', address: 'ul. Przykładowa 1', postcode: '00-000', city: 'Przykładowo' };
 const boot = {
   rows,
   vat,

@@ -1,12 +1,11 @@
 ---
 // Pełna lista sklepów według województw — w HTML (bez JS, dla czytników i wyszukiwarek).
 // Kafel na województwo (liczba sklepów i miasta widoczne od razu), szczegóły sklepów po rozwinięciu.
-import { collectionBySlug, pages, resellers, site, url } from '../lib/site';
+import { resellers, site } from '../lib/site';
 import { plural } from '../lib/text';
 
 interface Props { headingLevel?: 2 | 3 }
 const { headingLevel = 3 } = Astro.props;
-const item = (pages.gdzieKupic.sections.find(s => s.id === 'wyniki') as any).item;
 const groups = [...new Set(resellers.map(r => r.voivodeship))]
   .sort((a, b) => a.localeCompare(b, 'pl'))
   .map(v => ({ name: v, stores: resellers.filter(r => r.voivodeship === v).sort((a, b) => a.city.localeCompare(b.city, 'pl') || a.name.localeCompare(b.name, 'pl')) }));
@@ -24,10 +23,6 @@ const H = `h${headingLevel}` as 'h2' | 'h3';
           <li class="store store--compact">
             <H class="store__name">{s.name}</H>
             <p class="store__address">{s.address}, {s.postcode} {s.city}</p>
-            <p class="store__collections">
-              {item.collections}:{' '}
-              {s.collections.map((c, i) => <>{i > 0 && ', '}<a href={url.collection(c)}>{collectionBySlug.get(c)?.name ?? c}</a></>)}
-            </p>
           </li>
         ))}
       </ul>

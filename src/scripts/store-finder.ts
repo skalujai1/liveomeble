@@ -8,7 +8,7 @@ import { lookupPostcode, nearestResellers, normalizePostcode } from '../lib/loca
 type Store = {
   id: string; name: string; address: string; city: string; district?: string; postcode: string; voivodeship: string;
   lat: number; lng: number; phone: string | null; email: string | null; collections: string[];
-  services: Record<string, boolean>; openingHours: string; distanceKm?: number;
+  services: Record<string, boolean>; openingHours: string | null; distanceKm?: number;
 };
 type Texts = {
   errors: Record<string, string>;
@@ -93,9 +93,9 @@ function setupFinder(root: HTMLElement) {
       s.distanceKm != null ? el('p', { class: 'store__distance' }, fill(it.distance, { km: km(s.distanceKm) })) : null,
       collection ? el('p', { class: 'store__highlight' }, fill(it.highlight, { collection: t.collectionNames[collection] ?? collection })) : null,
       el('p', { class: 'store__address' }, addr),
-      el('p', { class: 'store__collections' }, `${it.collections}: `, collLinks),
+      s.collections.length < Object.keys(t.collectionNames).length ? el('p', { class: 'store__collections' }, `${it.collections}: `, collLinks) : null,
       services.length ? el('p', { class: 'store__services' }, services.join(' · ')) : null,
-      el('p', { class: 'store__hours' }, `${it.hours}: ${s.openingHours}`),
+      s.openingHours ? el('p', { class: 'store__hours' }, `${it.hours}: ${s.openingHours}`) : null,
       el('p', { class: 'store__actions' },
         el('a', { href: route, target: '_blank', rel: 'noopener', 'aria-label': fill(it.routeAria, { name: s.name }) }, it.route),
         s.phone ? el('a', { href: `tel:${s.phone.replace(/\s/g, '')}` }, `${it.phone}: ${s.phone}`) : null,
@@ -111,7 +111,8 @@ function setupFinder(root: HTMLElement) {
     moreBtn.hidden = !!moreLink || shown >= all.length;
     if (map) {
       const ids = new Set(all.slice(0, shown).map(s => s.id));
-      map.querySelectorAll<SVGCircleElement>('[data-store-id]').forEach(c => c.classList.toggle('is-result', ids.has(c.dataset.storeId!)));
+      map.querySelectorAll<SVGCircleElement>('[data-store-ids]').forEach(c => c.classList.toggle('is-result', c.dataset.storeIds!.split(' ').some(id => ids.has(id))));
+      map.classList.add('has-results');
     }
   };
 

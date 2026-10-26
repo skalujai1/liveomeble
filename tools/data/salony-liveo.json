@@ -1,0 +1,4439 @@
+{
+ "source": "https://liveomeble.pl/salony-partnerskie",
+ "fetched": "2026-10-26",
+ "note": "Lista salonów partnerskich z oficjalnej strony Liveo (bez 5 salonów w Słowenii). approx = współrzędne na liveomeble.pl wskazywały inne miejsce niż kod pocztowy — użyty środek okręgu pocztowego. Województwo jak na liveomeble.pl, poza: Tomice (tam błędnie dolnośląskie) i Grudziądz (tam „pozostałe”).",
+ "stores": [
+  {
+   "id": "234",
+   "name": "Hagart Wiktor Plust",
+   "street": "Jesionowa 23",
+   "postcode": "55-010",
+   "city": "Żerniki Wrocławskie",
+   "voivodeship": "dolnośląskie",
+   "lat": 51.02402,
+   "lng": 17.05689
+  },
+  {
+   "id": "384",
+   "name": "Salon Meblowy Gest",
+   "street": "Brzeska 15",
+   "postcode": "67-200",
+   "city": "Głogów",
+   "voivodeship": "dolnośląskie",
+   "lat": 51.6424,
+   "lng": 16.07447
+  },
+  {
+   "id": "389",
+   "name": "Sklep Meblowy Irma-Bis Ireneusz Mazurkiewicz.",
+   "street": "Brzeska 11",
+   "postcode": "67-200",
+   "city": "Głogów",
+   "voivodeship": "dolnośląskie",
+   "lat": 51.64314,
+   "lng": 16.07523
+  },
+  {
+   "id": "340",
+   "name": "ANDRZEJ SOWA. FIRMA HANDLOWO USŁUGOWA MEBLES DESIGN",
+   "street": "Podlesie 115",
+   "postcode": "34-100",
+   "city": "Tomice",
+   "voivodeship": "małopolskie",
+   "lat": 49.90754,
+   "lng": 19.46411
+  },
+  {
+   "id": "330",
+   "name": "Fusion Meble D. Małecki D. Sułek Spółka Cywilna",
+   "street": "Eugeniusza Horbaczewskiego 4-6/stoisko 1",
+   "postcode": "54-130",
+   "city": "Wrocław",
+   "voivodeship": "dolnośląskie",
+   "lat": 51.12661,
+   "lng": 16.97622
+  },
+  {
+   "id": "332",
+   "name": "Sklep Meblowy S.C. Urszula & Ryszard Szykowni",
+   "street": "1 Maja 34 B/C",
+   "postcode": "58-260",
+   "city": "Bielawa",
+   "voivodeship": "dolnośląskie",
+   "lat": 50.7647,
+   "lng": 16.27497
+  },
+  {
+   "id": "336",
+   "name": "Home Decor Dorota Rosiak",
+   "street": "Bielarska 4",
+   "postcode": "58-530",
+   "city": "Kowary",
+   "voivodeship": "dolnośląskie",
+   "lat": 50.79461,
+   "lng": 15.82834
+  },
+  {
+   "id": "370",
+   "name": "Meblarz Polska Spółka z Ograniczoną Odpowiedzialnością",
+   "street": "Towarowa 1",
+   "postcode": "59-300",
+   "city": "Lubin",
+   "voivodeship": "dolnośląskie",
+   "lat": 51.39835,
+   "lng": 16.19332
+  },
+  {
+   "id": "100",
+   "name": "\"Team Meble\" - Salon Meblowy Danuta Klaczyk-Milerczyk",
+   "street": "Przedwojów 95",
+   "postcode": "58-400",
+   "city": "Kamienna Góra",
+   "voivodeship": "dolnośląskie",
+   "lat": 50.75398,
+   "lng": 16.01785
+  },
+  {
+   "id": "25",
+   "name": "Meblo Styl Mazurkiewicz Łukasz Mazurkiewicz",
+   "street": "Adama Mickiewicza 59E",
+   "postcode": "67-200",
+   "city": "Głogów",
+   "voivodeship": "dolnośląskie",
+   "lat": 51.66852,
+   "lng": 16.06672
+  },
+  {
+   "id": "15",
+   "name": "Salon Meblowy \"Tomuś\" Nowakowski Tomasz",
+   "street": "Generała Leopolda Okulickiego 2",
+   "postcode": "57-100",
+   "city": "Strzelin",
+   "voivodeship": "dolnośląskie",
+   "lat": 50.78749,
+   "lng": 17.07308
+  },
+  {
+   "id": "13",
+   "name": "\"Kłodzka Róża I\" S.C. Irena Banaś Radosław Banaś",
+   "street": "Ignacego Daszyńskiego 3",
+   "postcode": "57-300",
+   "city": "Kłodzko",
+   "voivodeship": "dolnośląskie",
+   "lat": 50.4351,
+   "lng": 16.65461
+  },
+  {
+   "id": "4",
+   "name": "FIRMA HANDLOWO - USŁUGOWA \"AREX\" KAZIMIERZ CHMIEL",
+   "street": "Targowa 1D",
+   "postcode": "55-300",
+   "city": "Środa Śląska",
+   "voivodeship": "dolnośląskie",
+   "lat": 51.16505,
+   "lng": 16.58422
+  },
+  {
+   "id": "27",
+   "name": "Przedsiębiorstwo Handlowe \"Domar\" Halina Skibińska-Pigla",
+   "street": "Macieja Rataja 4",
+   "postcode": "59-800",
+   "city": "Lubań",
+   "voivodeship": "dolnośląskie",
+   "lat": 51.11848,
+   "lng": 15.29415
+  },
+  {
+   "id": "32",
+   "name": "MIGAŁA TERESA P.P.H.U. \"ORLIK\"",
+   "street": "Wojska Polskiego 17",
+   "postcode": "57-530",
+   "city": "Międzylesie",
+   "voivodeship": "dolnośląskie",
+   "lat": 50.14366,
+   "lng": 16.66323
+  },
+  {
+   "id": "118",
+   "name": "Bartłomiej Stasiaczyk Meble 88",
+   "street": "Kolejowa 18",
+   "postcode": "56-500",
+   "city": "Syców",
+   "voivodeship": "dolnośląskie",
+   "lat": 51.29056,
+   "lng": 17.71249
+  },
+  {
+   "id": "137",
+   "name": "Elimar Meble",
+   "street": "Jaworzyńska 252",
+   "postcode": "59-220",
+   "city": "Legnica",
+   "voivodeship": "dolnośląskie",
+   "lat": 51.17783,
+   "lng": 16.16078
+  },
+  {
+   "id": "493",
+   "name": "Dorota Pienio-Musielak Przedsiębiorstwo",
+   "street": "Milicka 28 A",
+   "postcode": "55-100",
+   "city": "Trzebnica",
+   "voivodeship": "dolnośląskie",
+   "lat": 51.31791,
+   "lng": 17.06819
+  },
+  {
+   "id": "285",
+   "name": "\"HEBAN\" J.I. WOŁOWICZ SPÓŁKA JAWNA",
+   "street": "Zieliny Rynek 21",
+   "postcode": "87-800",
+   "city": "Włocławek",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 52.65457,
+   "lng": 19.07254
+  },
+  {
+   "id": "319",
+   "name": "VIWA MEBEL",
+   "street": "Philipsa Fritsa 8",
+   "postcode": "64-920",
+   "city": "Piła",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.15374,
+   "lng": 16.73277
+  },
+  {
+   "id": "302",
+   "name": "BĄK DANUTA\"GALERIA PAŁUCKA RTV-AGD\"",
+   "street": "Gnieżnieńska 1F",
+   "postcode": "88-400",
+   "city": "Żnin",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 52.84658,
+   "lng": 17.74091
+  },
+  {
+   "id": "273",
+   "name": "FIRMA WIELOBRANŻOWA ZIELIŃSKI RADOSŁAW",
+   "street": "Paderewskiego 27",
+   "postcode": "86-010",
+   "city": "Koronowo",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.31167,
+   "lng": 17.93913
+  },
+  {
+   "id": "233",
+   "name": "P.U. Usługi Transportowe Kredyty \"JOAN\" Kozaczkiewicz Joanna",
+   "street": "Tczewska 10",
+   "postcode": "86-170",
+   "city": "Nowe",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.64859,
+   "lng": 18.7274
+  },
+  {
+   "id": "228",
+   "name": "\"Synak Meble\" Sp. z o.o.",
+   "street": "Wojska Polskiego 72",
+   "postcode": "86-100",
+   "city": "Świecie",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.40348,
+   "lng": 18.43306
+  },
+  {
+   "id": "246",
+   "name": "GEMINI S.C. RADOSŁAW I BOGUMIŁ OLEJNIK",
+   "street": "Przemysłowa 2",
+   "postcode": "88-200",
+   "city": "Radziejów",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 52.6282,
+   "lng": 18.53972
+  },
+  {
+   "id": "254",
+   "name": "SYNAK GRUDZIĄDZ",
+   "street": "Włodka 16",
+   "postcode": "86-300",
+   "city": "Grudziądz",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.48288,
+   "lng": 18.751
+  },
+  {
+   "id": "405",
+   "name": "Firma Handlowa \"LORENS\" Janusz Lorens",
+   "street": "Magnuszewska 8",
+   "postcode": "85-861",
+   "city": "Bydgoszcz",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.10502,
+   "lng": 18.02871
+  },
+  {
+   "id": "406",
+   "name": "MANIA MEBLE JOLANTA DERESZEWSKA, 87-140 CHEŁMŻA ul. IGNACEGO PADEREWSKIEGO 3",
+   "street": "Ignacego Paderewskiego 3",
+   "postcode": "87-140",
+   "city": "Chełmża",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.18522,
+   "lng": 18.6077
+  },
+  {
+   "id": "411",
+   "name": "VIWA MEBEL SALON WŁOCŁAWEK",
+   "street": "Stodólna 13B",
+   "postcode": "87-800",
+   "city": "Włocławek",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 52.65194,
+   "lng": 19.08264
+  },
+  {
+   "id": "431",
+   "name": "SYNAK INOWROCŁAW",
+   "street": "Andrzeja 15",
+   "postcode": "88-100",
+   "city": "Inowrocław",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 52.79483,
+   "lng": 18.26637
+  },
+  {
+   "id": "434",
+   "name": "JACEK ŚWIĄTKOWSKI SALON MEBLOWY JACEK ŚWIĄTKOWSKI",
+   "street": "Juliusza Słowackiego 28",
+   "postcode": "87-700",
+   "city": "Aleksandrów Kujawski",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 52.87195,
+   "lng": 18.69941
+  },
+  {
+   "id": "436",
+   "name": "KAMBARA DARIA SŁOMIŃSKA",
+   "street": "Świecka 68/A",
+   "postcode": "89-500",
+   "city": "Tuchola",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.58238,
+   "lng": 17.8688
+  },
+  {
+   "id": "421",
+   "name": "Synak Meble Sp. z o.o.",
+   "street": "Wojska Polskiego 72",
+   "postcode": "86-100",
+   "city": "Świecie",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.40348,
+   "lng": 18.43306
+  },
+  {
+   "id": "99",
+   "name": "P.P.H.U. \"VIWA MEBEL\" Piotr Przespolewski",
+   "street": "Kleczewska 23",
+   "postcode": "62-541",
+   "city": "Budzisław Kościelny",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 52.43137,
+   "lng": 18.09166
+  },
+  {
+   "id": "108",
+   "name": "Firma Handlowa - Tadeusz Krupa",
+   "street": "Curie-Skłodowskiej 4",
+   "postcode": "86-320",
+   "city": "Łasin",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.51666,
+   "lng": 19.08301
+  },
+  {
+   "id": "95",
+   "name": "\"WEGA FIRMA MEBLOWA\" Lucyna Kotuniak",
+   "street": "Kościuszki 28",
+   "postcode": "89-400",
+   "city": "Sępólno Kr.",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.45878,
+   "lng": 17.54768
+  },
+  {
+   "id": "90",
+   "name": "F.P.H.U. Stol-Tap Marek Balcerowicz",
+   "street": "Szosa Rypińska 34 G",
+   "postcode": "87-400",
+   "city": "Golub Dobrzyń",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.1083,
+   "lng": 19.07073
+  },
+  {
+   "id": "91",
+   "name": "Centrum Meblowe Suchodolski Zbigniew",
+   "street": "Bielawki 12",
+   "postcode": "87-500",
+   "city": "Rypin",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.06665,
+   "lng": 19.43727
+  },
+  {
+   "id": "92",
+   "name": "F.H.U. \"Feniks\" Stefan Rumianowski",
+   "street": "Starowiejska 3",
+   "postcode": "87-603",
+   "city": "Wielgie",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 52.73858,
+   "lng": 19.27303
+  },
+  {
+   "id": "184",
+   "name": "SKLEP PRZEMYSŁOWY WIELOBRANŻOWY WOŹNIAK WIESŁAW",
+   "street": "Ogrodowa 6",
+   "postcode": "86-010",
+   "city": "Koronowo",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.31418,
+   "lng": 17.94089
+  },
+  {
+   "id": "162",
+   "name": "VIWA MEBEL SALON INOWROCŁAW",
+   "street": "Metalowców 2",
+   "postcode": "88-100",
+   "city": "Inowrocław",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 52.80753,
+   "lng": 18.25242
+  },
+  {
+   "id": "151",
+   "name": "VIWA MEBEL SALON TORUN",
+   "street": "Szosa Lubicka 173",
+   "postcode": "87-100",
+   "city": "Toruń",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.0339,
+   "lng": 18.71341
+  },
+  {
+   "id": "442",
+   "name": "SALON MEBLOWY \"KOPERNIK\" MARIA PRZYSTALSKA",
+   "street": "Szosa Rypińska 28A",
+   "postcode": "87-400",
+   "city": "Golub-Dobrzyń",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.10815,
+   "lng": 19.06817
+  },
+  {
+   "id": "439",
+   "name": "Salon Meblowy Cztery Kąty Aleksandra Gościńska",
+   "street": "Borek 17A",
+   "postcode": "87-600",
+   "city": "Lipno",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 52.83139,
+   "lng": 19.16301
+  },
+  {
+   "id": "463",
+   "name": "Usługi Handlowe \"Artech\" S.C. Łukowski Patryk",
+   "street": "3 Maja 12",
+   "postcode": "87-605",
+   "city": "Tłuchowo",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 52.74782,
+   "lng": 19.46541
+  },
+  {
+   "id": "462",
+   "name": "P.P.U.H. DORMET",
+   "street": "Przemysłowa 1",
+   "postcode": "87-840",
+   "city": "Lubień Kujawski",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 52.39738,
+   "lng": 19.17031
+  },
+  {
+   "id": "293",
+   "name": "MEBLOPOL PLUS SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
+   "street": "Chocimska 22",
+   "postcode": "22-600",
+   "city": "Tomaszów Lubelski",
+   "voivodeship": "lubelskie",
+   "lat": 50.45385,
+   "lng": 23.40774
+  },
+  {
+   "id": "278",
+   "name": "JAWOR A.NOWICKI A.SZCZYGIELSKI SPÓŁKA JAWNA",
+   "street": "Żelechowska 26",
+   "postcode": "21-400",
+   "city": "Łuków",
+   "voivodeship": "lubelskie",
+   "lat": 51.92186,
+   "lng": 22.35733
+  },
+  {
+   "id": "284",
+   "name": "LEGO MEBLE SKLEP MEBLOWY BARTOSZ KUCHTA",
+   "street": "pl. Kościuszki 23",
+   "postcode": "21-010",
+   "city": "Łęczna",
+   "voivodeship": "lubelskie",
+   "lat": 51.30552,
+   "lng": 22.88136
+  },
+  {
+   "id": "321",
+   "name": "MEBLOPOL",
+   "street": "Robotnicza 2",
+   "postcode": "22-600",
+   "city": "Tomaszów Lubelski",
+   "voivodeship": "lubelskie",
+   "lat": 50.46444,
+   "lng": 23.42345
+  },
+  {
+   "id": "324",
+   "name": "HEBO SALON",
+   "street": "Smoluchowskiego 1",
+   "postcode": "20-474",
+   "city": "Lublin",
+   "voivodeship": "lubelskie",
+   "lat": 51.2212,
+   "lng": 22.55807
+  },
+  {
+   "id": "261",
+   "name": "MEBLOTAK BOŻENA KRAJEWSKA",
+   "street": "Góra Puławska Kozienicka 1",
+   "postcode": "24-100",
+   "city": "Puławy",
+   "voivodeship": "lubelskie",
+   "lat": 51.41082,
+   "lng": 21.9337
+  },
+  {
+   "id": "400",
+   "name": "PRZEDSIĘBIORSTWO HANDLOWO USŁUGOWE \"OPAL\" KULANICA ARTUR",
+   "street": "Partyzantów 10 A",
+   "postcode": "23-400",
+   "city": "Biłgoraj",
+   "voivodeship": "lubelskie",
+   "lat": 50.53305,
+   "lng": 22.71814
+  },
+  {
+   "id": "410",
+   "name": "MEBLE HEBAN SP. Z O.O. SP.K.",
+   "street": "Dworcowa 10",
+   "postcode": "22-500",
+   "city": "Hrubieszów",
+   "voivodeship": "lubelskie",
+   "lat": 50.79565,
+   "lng": 23.90604
+  },
+  {
+   "id": "432",
+   "name": "JAWOR BIS SALON RYKI",
+   "street": "Przemysłowa 1",
+   "postcode": "08-500",
+   "city": "Ryki",
+   "voivodeship": "lubelskie",
+   "lat": 51.60747,
+   "lng": 21.95527
+  },
+  {
+   "id": "355",
+   "name": "Pphu Konrad Brzeziński",
+   "street": "Sądecka 5",
+   "postcode": "20-869",
+   "city": "Lublin",
+   "voivodeship": "lubelskie",
+   "lat": 51.27797,
+   "lng": 22.55241
+  },
+  {
+   "id": "64",
+   "name": "BIM SP.Z O.O.",
+   "street": "Nadstawna 12A",
+   "postcode": "23-400",
+   "city": "Biłgoraj",
+   "voivodeship": "lubelskie",
+   "lat": 50.54076,
+   "lng": 22.71883
+  },
+  {
+   "id": "65",
+   "name": "PAWILONY MEBLOWE RAMED JAN GAŁAN",
+   "street": "Fabryczna 40",
+   "postcode": "24-300",
+   "city": "Opole Lubelskie",
+   "voivodeship": "lubelskie",
+   "lat": 51.14483,
+   "lng": 21.98052
+  },
+  {
+   "id": "66",
+   "name": "RAMED-BIS MARCIN PATRZYLAS",
+   "street": "Ogrodowa 5",
+   "postcode": "23-200",
+   "city": "Kraśnik",
+   "voivodeship": "lubelskie",
+   "lat": 50.92047,
+   "lng": 22.22069
+  },
+  {
+   "id": "67",
+   "name": "FIRMA HANDLOWO-USŁUGOWA SKOREK PISKORSKI JERZY",
+   "street": "Podgórze 36",
+   "postcode": "22-100",
+   "city": "Chełm",
+   "voivodeship": "lubelskie",
+   "lat": 51.14933,
+   "lng": 23.43055
+  },
+  {
+   "id": "104",
+   "name": "PUMAR-1 PUDŁO SPÓŁKA JAWNA",
+   "street": "Warszawska 3A",
+   "postcode": "08-500",
+   "city": "Ryki",
+   "voivodeship": "lubelskie",
+   "lat": 51.62256,
+   "lng": 21.93642
+  },
+  {
+   "id": "18",
+   "name": "FIRMA HANDLOWA WIBO WITOLD BORKOWSKI",
+   "street": "Borki Paduchy 53",
+   "postcode": "08-112",
+   "city": "Wiśniew",
+   "voivodeship": "lubelskie",
+   "lat": 52.08767,
+   "lng": 22.34544
+  },
+  {
+   "id": "3",
+   "name": "FHUP \"MEBLOSTYL\"",
+   "street": "Kolejowa 16",
+   "postcode": "22-500",
+   "city": "Hrubieszów",
+   "voivodeship": "lubelskie",
+   "lat": 50.7931,
+   "lng": 23.90276
+  },
+  {
+   "id": "9",
+   "name": "SALON MEBLOWY \"JAWOR\" TADEUSZ KUŹNICKI",
+   "street": "Boh. Porytowego Wzgórza 38",
+   "postcode": "23-300",
+   "city": "Janów Lub.",
+   "voivodeship": "lubelskie",
+   "lat": 50.69526,
+   "lng": 22.41975
+  },
+  {
+   "id": "43",
+   "name": "PW \"OSKAR\" CZAPSKA WIESŁAWA",
+   "street": "Północna 23",
+   "postcode": "21-500",
+   "city": "Biała Podlaska",
+   "voivodeship": "lubelskie",
+   "lat": 52.04443,
+   "lng": 23.1528
+  },
+  {
+   "id": "42",
+   "name": "PRZEDSIĘBIORSTWO WIELOBRANŻOWE KOMPLEKS WIESŁAW KOPIEL",
+   "street": "Partyzantów 37",
+   "postcode": "21-050",
+   "city": "Piaski",
+   "voivodeship": "lubelskie",
+   "lat": 51.13365,
+   "lng": 22.84595
+  },
+  {
+   "id": "35",
+   "name": "PRZEDSIĘBIORSTWO WIELOBRANŻOWE \"DYWAN-MIX\" WALDEMAR PRUCNAL",
+   "street": "Mostowa 35",
+   "postcode": "22-300",
+   "city": "Krasnystaw",
+   "voivodeship": "lubelskie",
+   "lat": 50.98577,
+   "lng": 23.17729
+  },
+  {
+   "id": "183",
+   "name": "RUBIN PUŁAWY",
+   "street": "Północna 4",
+   "postcode": "24-100",
+   "city": "Puławy",
+   "voivodeship": "lubelskie",
+   "lat": 51.41432,
+   "lng": 22.00721
+  },
+  {
+   "id": "173",
+   "name": "WIBO SALON",
+   "street": "Przemysłowa 4",
+   "postcode": "21-400",
+   "city": "Łuków",
+   "voivodeship": "lubelskie",
+   "lat": 51.9381,
+   "lng": 22.38472
+  },
+  {
+   "id": "216",
+   "name": "MT MEBLE SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
+   "street": "Zagrody Ul.Curkowa 8",
+   "postcode": "21-080",
+   "city": "Garbów",
+   "voivodeship": "lubelskie",
+   "lat": 51.36442,
+   "lng": 22.29595
+  },
+  {
+   "id": "125",
+   "name": "SALON MEBLOWY M4 PUCHACZ MARCIN",
+   "street": "Sidorska 2D",
+   "postcode": "21-500",
+   "city": "Biała Podlaska",
+   "voivodeship": "lubelskie",
+   "lat": 52.02597,
+   "lng": 23.12183
+  },
+  {
+   "id": "134",
+   "name": "P.H.U.\"OPAL\" KULANICA ARTUR",
+   "street": "Łąkowa 13",
+   "postcode": "23-400",
+   "city": "Biłgoraj",
+   "voivodeship": "lubelskie",
+   "lat": 50.54778,
+   "lng": 22.72638
+  },
+  {
+   "id": "115",
+   "name": "MEBLE BONDYRZ SP Z O .O.",
+   "street": "Bondyrz 183B",
+   "postcode": "22-442",
+   "city": "Adamów",
+   "voivodeship": "lubelskie",
+   "lat": 50.56742,
+   "lng": 23.13484
+  },
+  {
+   "id": "152",
+   "name": "Przedsiębiorstwo Handlowo Usługowe DOM Anna Wiewiórowska",
+   "street": "Chomiczewskiego 29",
+   "postcode": "21-300",
+   "city": "Radzyń Podlaski",
+   "voivodeship": "lubelskie",
+   "lat": 51.77881,
+   "lng": 22.61536
+  },
+  {
+   "id": "154",
+   "name": "Przedsiębiorstwo Handlowo-Usługowe DOMINO Wojciech Lubka",
+   "street": "Międzyrzecka 78",
+   "postcode": "21-300",
+   "city": "Radzyń Podlaski",
+   "voivodeship": "lubelskie",
+   "lat": 51.79158,
+   "lng": 22.62652
+  },
+  {
+   "id": "138",
+   "name": "WRM LUBLIN",
+   "street": "Diamentowa 13",
+   "postcode": "20-471",
+   "city": "Lublin",
+   "voivodeship": "lubelskie",
+   "lat": 51.21046,
+   "lng": 22.54916
+  },
+  {
+   "id": "139",
+   "name": "SALON MEBLOWY WRM",
+   "street": "Przemysłowa 8",
+   "postcode": "21-010",
+   "city": "Łęczna",
+   "voivodeship": "lubelskie",
+   "lat": 51.29778,
+   "lng": 22.872
+  },
+  {
+   "id": "141",
+   "name": "MEBLE HEBAN KRASNYSTAW",
+   "street": "Graniczna 3",
+   "postcode": "22-300",
+   "city": "Krasnystaw",
+   "voivodeship": "lubelskie",
+   "lat": 50.97958,
+   "lng": 23.15629
+  },
+  {
+   "id": "487",
+   "name": "PUMAR DĘBLIN",
+   "street": "Okólna 36",
+   "postcode": "08-530",
+   "city": "Dęblin",
+   "voivodeship": "lubelskie",
+   "lat": 51.56367,
+   "lng": 21.86615
+  },
+  {
+   "id": "449",
+   "name": "Piotr Jaroszkiewicz \"Meblox\"",
+   "street": "Rynek 12",
+   "postcode": "21-580",
+   "city": "Wisznice",
+   "voivodeship": "lubelskie",
+   "lat": 51.78843,
+   "lng": 23.20873
+  },
+  {
+   "id": "444",
+   "name": "Puchacz Marcin Salon Meblowy M4",
+   "street": "Lubelska 42",
+   "postcode": "21-560",
+   "city": "Międzyrzec Podlaski",
+   "voivodeship": "lubelskie",
+   "lat": 51.98346,
+   "lng": 22.7814
+  },
+  {
+   "id": "292",
+   "name": "MEBLE KOMFORT IMPORT-EKSPORT JOANNA SAMELA",
+   "street": "Bolesława Chrobrego 1A",
+   "postcode": "69-200",
+   "city": "Sulęcin",
+   "voivodeship": "lubuskie",
+   "lat": 52.43911,
+   "lng": 15.10996
+  },
+  {
+   "id": "403",
+   "name": "SALON MEBLOWY \"SAGA\" WOJCIECHOWSKA EWA",
+   "street": "Waryńskiego 38",
+   "postcode": "67-410",
+   "city": "Sława",
+   "voivodeship": "lubuskie",
+   "lat": 51.88211,
+   "lng": 16.07221
+  },
+  {
+   "id": "427",
+   "name": "Meble A-Z Maciej Karwacki",
+   "street": "Moniuszki 4A",
+   "postcode": "67-400",
+   "city": "Wschowa",
+   "voivodeship": "lubuskie",
+   "lat": 51.80144,
+   "lng": 16.31739
+  },
+  {
+   "id": "17",
+   "name": "DOM MEBLOWY BURZYNSCY",
+   "street": "Osadnicza 31",
+   "postcode": "65-785",
+   "city": "Zielona Góra",
+   "voivodeship": "lubuskie",
+   "lat": 51.94857,
+   "lng": 15.48329
+  },
+  {
+   "id": "12",
+   "name": "\"KAMUS\"",
+   "street": "Herberta 3",
+   "postcode": "66-400",
+   "city": "Gorzów Wlkp.",
+   "voivodeship": "lubuskie",
+   "lat": 52.73106,
+   "lng": 15.244
+  },
+  {
+   "id": "28",
+   "name": "P.H. \"MEBLOMAX\" PIOTR ŻÓŁKIEWICZ",
+   "street": "Zielonogórska 8",
+   "postcode": "67-120",
+   "city": "Kożuchów",
+   "voivodeship": "lubuskie",
+   "lat": 51.7472,
+   "lng": 15.59373
+  },
+  {
+   "id": "49",
+   "name": "Sklep Meblowy \"Gama\" Łuczyk Paweł",
+   "street": "Henryka Pobożnego 4B",
+   "postcode": "67-410",
+   "city": "Sława",
+   "voivodeship": "lubuskie",
+   "lat": 51.88024,
+   "lng": 16.07743
+  },
+  {
+   "id": "51",
+   "name": "Grażyna Femlak Sklep Meblowy",
+   "street": "Ludowa 57",
+   "postcode": "68-200",
+   "city": "Żary",
+   "voivodeship": "lubuskie",
+   "lat": 51.65445,
+   "lng": 15.14096
+  },
+  {
+   "id": "52",
+   "name": "Salon Meblowy \"Robert\" Ragus Robert",
+   "street": "Urszuli 6A",
+   "postcode": "65-001",
+   "city": "Zielona Góra",
+   "voivodeship": "lubuskie",
+   "lat": 51.95236,
+   "lng": 15.52172
+  },
+  {
+   "id": "29",
+   "name": "P.H. \"MEBLOSTYL\" EWA RUCIŃSKA-LABISZ",
+   "street": "Górna 7",
+   "postcode": "68-100",
+   "city": "Żagań",
+   "voivodeship": "lubuskie",
+   "lat": 51.61999,
+   "lng": 15.32503
+  },
+  {
+   "id": "37",
+   "name": "Przedsiębiorstwo Handlowo-Usługowe \"Natalia\" Traczyk Zbigniew",
+   "street": "Młyńska 8B",
+   "postcode": "66-200",
+   "city": "Świebodzin",
+   "voivodeship": "lubuskie",
+   "lat": 52.25294,
+   "lng": 15.53687
+  },
+  {
+   "id": "215",
+   "name": "\"EWAR\" S.C. EWA PIÓRCZYŃSKA LESZEK PIÓRCZYŃSKI",
+   "street": "Wyzwolenia 4",
+   "postcode": "66-500",
+   "city": "Strzelce Krajeńskie",
+   "voivodeship": "lubuskie",
+   "lat": 52.87828,
+   "lng": 15.52687
+  },
+  {
+   "id": "218",
+   "name": "\"SALEX\" Sklep Meblowy",
+   "street": "Pl.Inwalidów 9a",
+   "postcode": "68-200",
+   "city": "Żary",
+   "voivodeship": "lubuskie",
+   "lat": 51.64171,
+   "lng": 15.1349
+  },
+  {
+   "id": "120",
+   "name": "Salon Meblowy Kubuś'' Piotr Madziak",
+   "street": "Rzemieślnicza 6",
+   "postcode": "66-470",
+   "city": "Kostrzyn nad Odrą",
+   "voivodeship": "lubuskie",
+   "lat": 52.60788,
+   "lng": 14.63328
+  },
+  {
+   "id": "467",
+   "name": "Salon Meblowy Quadrus",
+   "street": "Lipowa 27d",
+   "postcode": "69-200",
+   "city": "Sulęcin",
+   "voivodeship": "lubuskie",
+   "lat": 52.46026,
+   "lng": 15.12088
+  },
+  {
+   "id": "286",
+   "name": "Kora Inwest Spółka z Ograniczoną Odpowiedzialnością",
+   "street": "Wólczyńska 133",
+   "postcode": "01-919",
+   "city": "Warszawa",
+   "voivodeship": "mazowieckie",
+   "lat": 52.28257,
+   "lng": 20.91673
+  },
+  {
+   "id": "326",
+   "name": "MRS HOME Radosław Szymański",
+   "street": "Nadbużańska 23",
+   "postcode": "05-140",
+   "city": "Kania Polska",
+   "voivodeship": "mazowieckie",
+   "lat": 52.52155,
+   "lng": 21.13177
+  },
+  {
+   "id": "327",
+   "name": "MRS HOME Radosław Szymański",
+   "street": "Kania Polska Nadbużańska 35",
+   "postcode": "05-140",
+   "city": "Serock",
+   "voivodeship": "mazowieckie",
+   "lat": 52.52244,
+   "lng": 21.12816
+  },
+  {
+   "id": "219",
+   "name": "AMAR MEBLE MAREK POPŁAWSKI",
+   "street": "Orbity 5A",
+   "postcode": "04-452",
+   "city": "Warszawa",
+   "voivodeship": "mazowieckie",
+   "lat": 52.26186,
+   "lng": 21.15756
+  },
+  {
+   "id": "237",
+   "name": "SKLEP MEBLOWY \"EDIT\" PIZZERNIA ROMMA EDYTA OBŁUSKA-PIETRZAK",
+   "street": "Kard.Stefana Wyszyńskiego 13",
+   "postcode": "05-530",
+   "city": "Góra Kalwaria",
+   "voivodeship": "mazowieckie",
+   "lat": 51.99244,
+   "lng": 21.21049
+  },
+  {
+   "id": "240",
+   "name": "WARPOL SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
+   "street": "Warszawska 6/A",
+   "postcode": "07-415",
+   "city": "Olszewo-Borki",
+   "voivodeship": "mazowieckie",
+   "lat": 53.06767,
+   "lng": 21.53678
+  },
+  {
+   "id": "265",
+   "name": "SPRZDAŻ MEBLI PATRYK MIROSŁAW BRZEZIŃSKI",
+   "street": "Kolejowa 122",
+   "postcode": "05-092",
+   "city": "Łomianki",
+   "voivodeship": "mazowieckie",
+   "lat": 52.33798,
+   "lng": 20.87586
+  },
+  {
+   "id": "391",
+   "name": "P. H. U. MEBLOLAND ADRIAN KLIMAS",
+   "street": "Skarbowa 6",
+   "postcode": "26-400",
+   "city": "Przysucha",
+   "voivodeship": "mazowieckie",
+   "lat": 51.35709,
+   "lng": 20.63762
+  },
+  {
+   "id": "392",
+   "name": "SKLEP MEBLOWY *MEBLAND*S.C Z. KACZMAREK M. SZPARADOWSKI",
+   "street": "Widna 8",
+   "postcode": "09-402",
+   "city": "Płock",
+   "voivodeship": "mazowieckie",
+   "lat": 52.53234,
+   "lng": 19.77002
+  },
+  {
+   "id": "426",
+   "name": "MEBLOTAK BOŻENA KRAJEWSKA",
+   "street": "Lubelska 76A",
+   "postcode": "26-900",
+   "city": "Kozienice",
+   "voivodeship": "mazowieckie",
+   "lat": 51.57698,
+   "lng": 21.56419
+  },
+  {
+   "id": "349",
+   "name": "Meble Ardej Marcin Ardej",
+   "street": "Kard. S. Wyszyńskiego 3",
+   "postcode": "07-100",
+   "city": "Węgrów",
+   "voivodeship": "mazowieckie",
+   "lat": 52.39623,
+   "lng": 22.01887
+  },
+  {
+   "id": "350",
+   "name": "Meble Ardej Marcin Ardej",
+   "street": "Powstańców 1",
+   "postcode": "07-100",
+   "city": "Węgrów",
+   "voivodeship": "mazowieckie",
+   "lat": 52.39285,
+   "lng": 22.01727
+  },
+  {
+   "id": "353",
+   "name": "Waldi Spółka z Ograniczoną Odpowiedzialnością",
+   "street": "Świeradowska 47",
+   "postcode": "02-662",
+   "city": "Warszawa",
+   "voivodeship": "mazowieckie",
+   "lat": 52.17822,
+   "lng": 21.01823
+  },
+  {
+   "id": "333",
+   "name": "Cichocki Krzysztof PPHU Cichocki",
+   "street": "Wyzwolenia 52",
+   "postcode": "06-445",
+   "city": "Strzegowo",
+   "voivodeship": "mazowieckie",
+   "lat": 52.85,
+   "lng": 20.8,
+   "approx": true
+  },
+  {
+   "id": "334",
+   "name": "ART DECO MEBLE Agnieszka Baluk",
+   "street": "Różańska 37",
+   "postcode": "07-300",
+   "city": "Ostrów Mazowiecka",
+   "voivodeship": "mazowieckie",
+   "lat": 52.7973,
+   "lng": 21.87595
+  },
+  {
+   "id": "338",
+   "name": "P.P.H.U \"MIDAS\" MARZANNA HOROSZKIEWICZ MARIOLA WRONA SPÓŁKA JAWNA",
+   "street": "1905 Roku 3",
+   "postcode": "26-600",
+   "city": "Radom",
+   "voivodeship": "mazowieckie",
+   "lat": 51.3915,
+   "lng": 21.14817
+  },
+  {
+   "id": "354",
+   "name": "Kora Inwest Spółka z Ograniczoną Odpowiedzialnością",
+   "street": "Modlińska 129/U10",
+   "postcode": "03-186",
+   "city": "Warszawa",
+   "voivodeship": "mazowieckie",
+   "lat": 52.31414,
+   "lng": 20.97579
+  },
+  {
+   "id": "369",
+   "name": "Sklep Meblowy \"Gees\" Wiesław Smoliński",
+   "street": "Warszawska 15/17",
+   "postcode": "05-190",
+   "city": "Nasielsk",
+   "voivodeship": "mazowieckie",
+   "lat": 52.58951,
+   "lng": 20.80958
+  },
+  {
+   "id": "364",
+   "name": "Ufo Spółka z Ograniczoną Odpowiedzialnością",
+   "street": "Grochowska 129",
+   "postcode": "04-148",
+   "city": "Warszawa",
+   "voivodeship": "mazowieckie",
+   "lat": 52.24204,
+   "lng": 21.10226
+  },
+  {
+   "id": "63",
+   "name": "SALON MEBLOWY AGNIESZKA GODZIŃSKA",
+   "street": "Młodzieżowa 35",
+   "postcode": "09-100",
+   "city": "Płońsk",
+   "voivodeship": "mazowieckie",
+   "lat": 52.63428,
+   "lng": 20.36011
+  },
+  {
+   "id": "109",
+   "name": "\"MICHAŁ\" Sklep Art. Przemysłowych-Meble Bogumiła Rybak",
+   "street": "Gdańska 93",
+   "postcode": "07-100",
+   "city": "Węgrów",
+   "voivodeship": "mazowieckie",
+   "lat": 52.41577,
+   "lng": 22.00726
+  },
+  {
+   "id": "19",
+   "name": "Firma Handlowo-Usługowa Iwona Wójcik",
+   "street": "Płońska 134b",
+   "postcode": "06-400",
+   "city": "Ciechanów",
+   "voivodeship": "mazowieckie",
+   "lat": 52.86344,
+   "lng": 20.6283
+  },
+  {
+   "id": "20",
+   "name": "FIRMA USŁUGOWO-HANDLOWA \"EURO-ZURT\" RYSZARD ŻYCHOWSKI",
+   "street": "Duńskiego Czerwonego Krzyża 6",
+   "postcode": "06-200",
+   "city": "Maków Mazowiecki",
+   "voivodeship": "mazowieckie",
+   "lat": 52.86445,
+   "lng": 21.08822
+  },
+  {
+   "id": "22",
+   "name": "HANDEL HURTOWY I DETALICZNY ARTYKUŁAMI PRZEMYSŁOWYMI KRASUSKI WIESŁAW",
+   "street": "Brzeska 149",
+   "postcode": "08-110",
+   "city": "Siedlce",
+   "voivodeship": "mazowieckie",
+   "lat": 52.15318,
+   "lng": 22.3003
+  },
+  {
+   "id": "14",
+   "name": "\"MEBLODAN\" DANIEL GOS",
+   "street": "Ul.Batalionów Chłopskich 15",
+   "postcode": "26-900",
+   "city": "Kozienice",
+   "voivodeship": "mazowieckie",
+   "lat": 51.58523,
+   "lng": 21.55246
+  },
+  {
+   "id": "6",
+   "name": "P.H.U.P. \"SAPI\"",
+   "street": "Cichockiego 4/30",
+   "postcode": "24-100",
+   "city": "Puławy",
+   "voivodeship": "mazowieckie",
+   "lat": 51.41457,
+   "lng": 21.96634
+  },
+  {
+   "id": "53",
+   "name": "SKLEP MEBLOWY *MEBLAND*S.C Z. KACZMAREK M. SZPARADOWSKI",
+   "street": "Bielska 80",
+   "postcode": "09-400",
+   "city": "Płock",
+   "voivodeship": "mazowieckie",
+   "lat": 52.57543,
+   "lng": 19.736
+  },
+  {
+   "id": "41",
+   "name": "PRZEDSIĘBIORSTWO PRODUKCYJNO-HANDLOWO USŁUGOWE *IGLO*",
+   "street": "Płocka 4A",
+   "postcode": "09-500",
+   "city": "Gostynin",
+   "voivodeship": "mazowieckie",
+   "lat": 52.43397,
+   "lng": 19.46435
+  },
+  {
+   "id": "30",
+   "name": "PRZEDSIĘBIORSTWO HANDLOWO-USŁUGOWE \"MEBPOL\" DARIUSZ SIOK LESZEK WŁADYSŁAWSKI SPÓŁKA JAWNA",
+   "street": "Aleja Wojska Polskiego 2",
+   "postcode": "07-410",
+   "city": "Ostrołęka",
+   "voivodeship": "mazowieckie",
+   "lat": 53.09421,
+   "lng": 21.59613
+  },
+  {
+   "id": "31",
+   "name": "P.H.U. \"PARMEX\" SULICH PIOTR",
+   "street": "Al. Łochowska 4",
+   "postcode": "07-130",
+   "city": "Łochów",
+   "voivodeship": "mazowieckie",
+   "lat": 52.53472,
+   "lng": 21.69123
+  },
+  {
+   "id": "36",
+   "name": "PARTNER S.C. HANDEL MEBLAMI I ART.PRZEM. GRZEGRZÓŁKA ADAM I KAZIMIERA",
+   "street": "Kobylin Piaseczyńska 26",
+   "postcode": "05-600",
+   "city": "Grójec",
+   "voivodeship": "mazowieckie",
+   "lat": 51.86551,
+   "lng": 20.8666
+  },
+  {
+   "id": "54",
+   "name": "SKLEP MEBLOWY KRZYSZTOF BETA",
+   "street": "Ul. Sochaczewska 146 Paprotnia",
+   "postcode": "96-515",
+   "city": "Teresin",
+   "voivodeship": "mazowieckie",
+   "lat": 52.21505,
+   "lng": 20.40133
+  },
+  {
+   "id": "180",
+   "name": "ARTGREGOR MAGAZYN",
+   "street": "Radomska 15",
+   "postcode": "27-100",
+   "city": "Iłża",
+   "voivodeship": "mazowieckie",
+   "lat": 51.16277,
+   "lng": 21.23543
+  },
+  {
+   "id": "181",
+   "name": "\"MEBLODAN\" DANIEL GOS",
+   "street": "Aleksandrówka Królewska 72",
+   "postcode": "26-900",
+   "city": "Kozienice",
+   "voivodeship": "mazowieckie",
+   "lat": 51.56726,
+   "lng": 21.52702
+  },
+  {
+   "id": "186",
+   "name": "MEBLE WIŚNIEWSKI WIŚNIEWSKI ROBERT",
+   "street": "Rolnicza 7",
+   "postcode": "96-320",
+   "city": "Mszczonów",
+   "voivodeship": "mazowieckie",
+   "lat": 51.97242,
+   "lng": 20.53818
+  },
+  {
+   "id": "169",
+   "name": "ARTGREGOR S.C.ARTUR LASOTA I GRZEGORZ CHMIELNICKI",
+   "street": "Wólka 17",
+   "postcode": "27-300",
+   "city": "Lipsko",
+   "voivodeship": "mazowieckie",
+   "lat": 51.19884,
+   "lng": 21.69011
+  },
+  {
+   "id": "174",
+   "name": "ZEFIR Jarosław Bronowski",
+   "street": "Piaskowa 6",
+   "postcode": "96-300",
+   "city": "Żyrardów",
+   "voivodeship": "mazowieckie",
+   "lat": 52.05749,
+   "lng": 20.45522
+  },
+  {
+   "id": "209",
+   "name": "ZEFIR Jarosław Bronowski",
+   "street": "Olimpijska 1",
+   "postcode": "05-600",
+   "city": "Grójec",
+   "voivodeship": "mazowieckie",
+   "lat": 51.86673,
+   "lng": 20.87749
+  },
+  {
+   "id": "212",
+   "name": "MEBLE NA KRASZEWSKIEGO AGNIESZKA RADZIKOWSKA",
+   "street": "Józefa Ignacego Kraszewskiego 1A",
+   "postcode": "08-110",
+   "city": "Siedlce",
+   "voivodeship": "mazowieckie",
+   "lat": 52.16101,
+   "lng": 22.26004
+  },
+  {
+   "id": "213",
+   "name": "SKLEP MEBLOWY ARKADIUSZ MUCZYŃSKI",
+   "street": "Tęczowa 28",
+   "postcode": "05-200",
+   "city": "Wołomin",
+   "voivodeship": "mazowieckie",
+   "lat": 52.3537,
+   "lng": 21.24436
+  },
+  {
+   "id": "196",
+   "name": "NGJ-GALERIA MEBLI NIESIOBĘDZKI GRZEGORZ",
+   "street": "Stanisława Staszica 7",
+   "postcode": "06-100",
+   "city": "Pułtusk",
+   "voivodeship": "mazowieckie",
+   "lat": 52.70426,
+   "lng": 21.08879
+  },
+  {
+   "id": "200",
+   "name": "TSS \"SPÓŁKA JAWNA\" JOANNA PIĘTA",
+   "street": "Pl.Nowy Rynek 5",
+   "postcode": "09-400",
+   "city": "Płock",
+   "voivodeship": "mazowieckie",
+   "lat": 52.5476,
+   "lng": 19.69203
+  },
+  {
+   "id": "129",
+   "name": "MAREK PSZCZÓŁKOWSKI CENTRUM MEBLOWE FENIX",
+   "street": "Makowska 148 A",
+   "postcode": "06-300",
+   "city": "Przasnysz",
+   "voivodeship": "mazowieckie",
+   "lat": 53.01,
+   "lng": 20.90502
+  },
+  {
+   "id": "122",
+   "name": "Sklep Meblowy MAT-MAR Oryl Mariusz",
+   "street": "Szpitalna 14",
+   "postcode": "09-300",
+   "city": "Żuromin",
+   "voivodeship": "mazowieckie",
+   "lat": 53.06565,
+   "lng": 19.91331
+  },
+  {
+   "id": "114",
+   "name": "P. H. U. MEBLOLAND ADRIAN KLIMAS",
+   "street": "Jastrzębska 13/A",
+   "postcode": "26-500",
+   "city": "Szydłowiec",
+   "voivodeship": "mazowieckie",
+   "lat": 51.23045,
+   "lng": 20.86347
+  },
+  {
+   "id": "136",
+   "name": "F.H. BLUMER REMIGIUSZ BOCZKOWSKI",
+   "street": "Płocka 70A",
+   "postcode": "96-500",
+   "city": "Sochaczew",
+   "voivodeship": "mazowieckie",
+   "lat": 52.23169,
+   "lng": 20.22177
+  },
+  {
+   "id": "157",
+   "name": "CARO Anna Krawczyk",
+   "street": "Przemysłowa 24",
+   "postcode": "05-240",
+   "city": "Tłuszcz",
+   "voivodeship": "mazowieckie",
+   "lat": 52.43318,
+   "lng": 21.44584
+  },
+  {
+   "id": "159",
+   "name": "BONIO PIOTR\" TRUST\"",
+   "street": "Piastowska /37",
+   "postcode": "09-200",
+   "city": "Sierpc",
+   "voivodeship": "mazowieckie",
+   "lat": 52.84944,
+   "lng": 19.66367
+  },
+  {
+   "id": "160",
+   "name": "FIRMA HANDLOWO-USŁUGOWA \"DORHEN\" HENRYK WIESŁAW ZIEMEK",
+   "street": "Ostrołęcka Dylewo /4",
+   "postcode": "07-420",
+   "city": "Kadzidło",
+   "voivodeship": "mazowieckie",
+   "lat": 53.23759,
+   "lng": 21.4662
+  },
+  {
+   "id": "468",
+   "name": "Centrum Handlowe Komfe",
+   "street": "Zamkowa Wola 31a",
+   "postcode": "96-200",
+   "city": "Rawa Mazowiecka",
+   "voivodeship": "mazowieckie",
+   "lat": 51.76822,
+   "lng": 20.26735
+  },
+  {
+   "id": "490",
+   "name": "Meble Sylwex Katarzyna Jarema",
+   "street": "Lubiejewska 79",
+   "postcode": "07-300",
+   "city": "Ostrów Mazowiecka",
+   "voivodeship": "mazowieckie",
+   "lat": 52.81996,
+   "lng": 21.88668
+  },
+  {
+   "id": "489",
+   "name": "MEBLE \"SIADACZKA\" CZESŁAW SIADACZKA",
+   "street": "Kutnowska 14",
+   "postcode": "09-500",
+   "city": "Gostynin",
+   "voivodeship": "mazowieckie",
+   "lat": 52.4198,
+   "lng": 19.45902
+  },
+  {
+   "id": "483",
+   "name": "Salon Meblowy Marlena Dziewit",
+   "street": "Zwoleńska 1",
+   "postcode": "26-670",
+   "city": "Pionki",
+   "voivodeship": "mazowieckie",
+   "lat": 51.47845,
+   "lng": 21.46127
+  },
+  {
+   "id": "465",
+   "name": "Pałaszewski Przemysław Handel i Usł. Transp. 'Mpj'",
+   "street": "Srebrna 10",
+   "postcode": "06-500",
+   "city": "Mława",
+   "voivodeship": "mazowieckie",
+   "lat": 53.12405,
+   "lng": 20.35422
+  },
+  {
+   "id": "450",
+   "name": "MILANT-BIS",
+   "street": "gen. L. Okulickiego 13",
+   "postcode": "05-825",
+   "city": "Grodzisk Mazowiecki",
+   "voivodeship": "mazowieckie",
+   "lat": 52.10831,
+   "lng": 20.63125
+  },
+  {
+   "id": "451",
+   "name": "Nomex Spółka z Ograniczoną Odpowiedzialnością",
+   "street": "Grójecka 32",
+   "postcode": "05-660",
+   "city": "Warka",
+   "voivodeship": "mazowieckie",
+   "lat": 51.79223,
+   "lng": 21.16832
+  },
+  {
+   "id": "458",
+   "name": "Sklep Meblowy i Artykuły Przemysłowe Marek Adamkowski",
+   "street": "Zągoty 9",
+   "postcode": "09-230",
+   "city": "Bielsk",
+   "voivodeship": "mazowieckie",
+   "lat": 52.66239,
+   "lng": 19.74104
+  },
+  {
+   "id": "453",
+   "name": "Vix Meble Adam Kwiatkowski",
+   "street": "Świętojańska 174",
+   "postcode": "07-202",
+   "city": "Wyszków",
+   "voivodeship": "mazowieckie",
+   "lat": 52.61453,
+   "lng": 21.45404
+  },
+  {
+   "id": "295",
+   "name": "Salon Meblowy Comfort Czesław Sławek",
+   "street": "Kanina 121",
+   "postcode": "34-600",
+   "city": "Limanowa",
+   "voivodeship": "małopolskie",
+   "lat": 49.67559,
+   "lng": 20.47889
+  },
+  {
+   "id": "301",
+   "name": "FILIA SALON MEBLOWY COMFORT",
+   "street": "Tadeusza Kościuszki 108A",
+   "postcode": "38-300",
+   "city": "Gorlice",
+   "voivodeship": "małopolskie",
+   "lat": 49.64534,
+   "lng": 21.14793
+  },
+  {
+   "id": "312",
+   "name": "PHU U JELENIA Spółka Cywilna E. Jeleń B. Jeleń",
+   "street": "Przemysłowa 4",
+   "postcode": "33-100",
+   "city": "Tarnów",
+   "voivodeship": "małopolskie",
+   "lat": 50.00404,
+   "lng": 20.96778
+  },
+  {
+   "id": "226",
+   "name": "Salon Meblowy Marex Jadwiga Korzeniowska-Stanik",
+   "street": "Ks.Pr.Słonki 24",
+   "postcode": "34-300",
+   "city": "Żywiec",
+   "voivodeship": "małopolskie",
+   "lat": 49.68714,
+   "lng": 19.1894
+  },
+  {
+   "id": "251",
+   "name": "Sławek Janusz Salon Meblowy \"Sławek\"",
+   "street": "Krakowska 5",
+   "postcode": "34-730",
+   "city": "Mszana Dolna",
+   "voivodeship": "małopolskie",
+   "lat": 49.67663,
+   "lng": 20.0627
+  },
+  {
+   "id": "253",
+   "name": "Alina Brożek - MEBLE BROŻEK",
+   "street": "marsz. Józefa Piłsudskiego 11D",
+   "postcode": "32-800",
+   "city": "Brzesko",
+   "voivodeship": "małopolskie",
+   "lat": 49.967,
+   "lng": 20.60466
+  },
+  {
+   "id": "383",
+   "name": "FHU GRAFIT SALON MEBLOWY S.C BARBARA I JANUSZ BOŻEK",
+   "street": "Żegocina 10",
+   "postcode": "32-731",
+   "city": "Żegocina",
+   "voivodeship": "małopolskie",
+   "lat": 49.80241,
+   "lng": 20.41936
+  },
+  {
+   "id": "388",
+   "name": "\"DOMART\" P.P.H.U.S.C.",
+   "street": "Zarabie 33G",
+   "postcode": "32-410",
+   "city": "Dobczyce",
+   "voivodeship": "małopolskie",
+   "lat": 49.88903,
+   "lng": 20.08307
+  },
+  {
+   "id": "347",
+   "name": "Ryszard Kuszyński Firma Handlowo-Usługowa",
+   "street": "Ropica Polska 326",
+   "postcode": "38-300",
+   "city": "Gorlice",
+   "voivodeship": "małopolskie",
+   "lat": 49.64199,
+   "lng": 21.14552
+  },
+  {
+   "id": "335",
+   "name": "Salon Meblowy Wierch Kamil Sławek",
+   "street": "gen. Władysława Sikorskiego 28",
+   "postcode": "34-400",
+   "city": "Nowy Targ",
+   "voivodeship": "małopolskie",
+   "lat": 49.47602,
+   "lng": 20.03726
+  },
+  {
+   "id": "337",
+   "name": "FILIA SALON MEBLOWY COMFORT",
+   "street": "Biała Niżna 577",
+   "postcode": "33-330",
+   "city": "Grybów",
+   "voivodeship": "małopolskie",
+   "lat": 49.6482,
+   "lng": 20.97496
+  },
+  {
+   "id": "375",
+   "name": "Czart S. i J. Zachura Spółka Jawna",
+   "street": "Jaroszowice 225B",
+   "postcode": "34-100",
+   "city": "Wadowice",
+   "voivodeship": "małopolskie",
+   "lat": 49.84798,
+   "lng": 19.51028
+  },
+  {
+   "id": "379",
+   "name": "MIGAS SPÓŁKA JAWNA",
+   "street": "Racławicka 58",
+   "postcode": "32-200",
+   "city": "Miechów",
+   "voivodeship": "małopolskie",
+   "lat": 50.35705,
+   "lng": 20.05025
+  },
+  {
+   "id": "361",
+   "name": "Meble Tuchowska Mirosław Chabros",
+   "street": "Tuchowska 80",
+   "postcode": "33-100",
+   "city": "Tarnów",
+   "voivodeship": "małopolskie",
+   "lat": 49.99745,
+   "lng": 20.98706
+  },
+  {
+   "id": "71",
+   "name": "Salon meblowy Ajron Sławek Grzegorz",
+   "street": "Józefa Piłsudskiego 6",
+   "postcode": "34-600",
+   "city": "Limanowa",
+   "voivodeship": "małopolskie",
+   "lat": 49.71049,
+   "lng": 20.42379
+  },
+  {
+   "id": "75",
+   "name": "\"DOMART\" P.P.H.U.S.C.",
+   "street": "Gdów 990",
+   "postcode": "32-420",
+   "city": "Gdów",
+   "voivodeship": "małopolskie",
+   "lat": 49.88903,
+   "lng": 20.08307
+  },
+  {
+   "id": "76",
+   "name": "FIRMA HANDLOWA ''A-K'' KATARZYNA SZELIGA-MIĘTUS",
+   "street": "Mościckiego 9",
+   "postcode": "34-470",
+   "city": "Czarny Dunajec",
+   "voivodeship": "małopolskie",
+   "lat": 49.44282,
+   "lng": 19.84781
+  },
+  {
+   "id": "77",
+   "name": "MEBLE \"JĘDRUŚ\" S.C. R.BEZŁADA P.KRAWCZYCKI",
+   "street": "Szaflarska 168",
+   "postcode": "34-400",
+   "city": "Nowy Targ",
+   "voivodeship": "małopolskie",
+   "lat": 49.4659,
+   "lng": 20.02476
+  },
+  {
+   "id": "78",
+   "name": "Roman Madej Firma Handlowo-Usługowa Wam",
+   "street": "Kasprowicza 5A",
+   "postcode": "34-700",
+   "city": "Rabka-Zdrój",
+   "voivodeship": "małopolskie",
+   "lat": 49.61497,
+   "lng": 19.95446
+  },
+  {
+   "id": "80",
+   "name": "Halina Sala Przedsiębiorstwo Produkcyjno-Handlowo-Usługowe \"Lotus\"",
+   "street": "Gdów 799",
+   "postcode": "32-420",
+   "city": "Gdów",
+   "voivodeship": "małopolskie",
+   "lat": 49.90804,
+   "lng": 20.19849
+  },
+  {
+   "id": "81",
+   "name": "Przedsiębiorstwo Produkcyjno-Usługowo-Handlowe \"Molo\" Mól Henryk",
+   "street": "Długa 150",
+   "postcode": "32-310",
+   "city": "Kwaśniów Górny",
+   "voivodeship": "małopolskie",
+   "lat": 50.39241,
+   "lng": 19.59591
+  },
+  {
+   "id": "70",
+   "name": "\"MEBLORAW\" SARNIAK JÓZEF",
+   "street": "Ks.Boguckiego 4",
+   "postcode": "34-480",
+   "city": "Jabłonka",
+   "voivodeship": "małopolskie",
+   "lat": 49.44978,
+   "lng": 19.68457
+  },
+  {
+   "id": "69",
+   "name": "Jaros Marta \"Sułtan 2\"",
+   "street": "Gazowa 6",
+   "postcode": "32-700",
+   "city": "Bochnia",
+   "voivodeship": "małopolskie",
+   "lat": 49.98191,
+   "lng": 20.41412
+  },
+  {
+   "id": "82",
+   "name": "Salon Meblowy \"Hermes\" \"Świat Mebli\" Tadeusz Kerth",
+   "street": "Rabsztyńska 19",
+   "postcode": "32-300",
+   "city": "Olkusz",
+   "voivodeship": "małopolskie",
+   "lat": 50.28259,
+   "lng": 19.56638
+  },
+  {
+   "id": "97",
+   "name": "Przedsiębiorstwo Produkcyjno-Zaopatrzeniowe \"Elmar\" Elżbieta Florczyk",
+   "street": "Kolejowa 20",
+   "postcode": "33-300",
+   "city": "Nowy Sącz",
+   "voivodeship": "małopolskie",
+   "lat": 49.60746,
+   "lng": 20.703
+  },
+  {
+   "id": "177",
+   "name": "MIGAS SPÓŁKA JAWNA",
+   "street": "Zakopiańska 18",
+   "postcode": "34-424",
+   "city": "Szaflary",
+   "voivodeship": "małopolskie",
+   "lat": 49.43973,
+   "lng": 20.02017
+  },
+  {
+   "id": "123",
+   "name": "Pawilon Meblowy S.C. Kazimierz Nowak Sławomir Cebula",
+   "street": "Wielicka 16",
+   "postcode": "32-005",
+   "city": "Niepołomice",
+   "voivodeship": "małopolskie",
+   "lat": 50.02683,
+   "lng": 20.20185
+  },
+  {
+   "id": "116",
+   "name": "Firma Stolarsko-Usługowo-Handlowa. Salon Meblowy \"Wersal\" Krawczyk Jan",
+   "street": "Bytomsko 28",
+   "postcode": "32-731",
+   "city": "Żegocina",
+   "voivodeship": "małopolskie",
+   "lat": 49.81352,
+   "lng": 20.44039
+  },
+  {
+   "id": "117",
+   "name": "SALON MEBLOWY \"WERSAL\"",
+   "street": "Łososina Dolna 334",
+   "postcode": "33-314",
+   "city": "Łososina Dolna",
+   "voivodeship": "małopolskie",
+   "lat": 49.74938,
+   "lng": 20.63074
+  },
+  {
+   "id": "156",
+   "name": "Elżbieta Obrał Sklep Meblowy \"Elmer\"",
+   "street": "Czernichowska 18",
+   "postcode": "32-060",
+   "city": "Liszki",
+   "voivodeship": "małopolskie",
+   "lat": 50.03195,
+   "lng": 19.75095
+  },
+  {
+   "id": "472",
+   "name": "Zakład Produkcyjno-Handlowo-Usługowy \"Dorex\" Władysław Cnota",
+   "street": "Oleśnicka 12",
+   "postcode": "33-200",
+   "city": "Dąbrowa Tarnowska",
+   "voivodeship": "małopolskie",
+   "lat": 50.17127,
+   "lng": 20.97304
+  },
+  {
+   "id": "455",
+   "name": "MEBEL LUX STYLOWE WNĘTRZA \" S.C",
+   "street": "Maksymiliana Marii Kolbego 13",
+   "postcode": "32-600",
+   "city": "Oświęcim",
+   "voivodeship": "małopolskie",
+   "lat": 50.02883,
+   "lng": 19.19495
+  },
+  {
+   "id": "300",
+   "name": "Meble MAX Wojciech Dzięcioł",
+   "street": "Piastowska 18c/1",
+   "postcode": "47-303",
+   "city": "Krapkowice",
+   "voivodeship": "opolskie",
+   "lat": 50.48387,
+   "lng": 17.97304
+  },
+  {
+   "id": "249",
+   "name": "\"Agmar\" Mariusz Przybyła",
+   "street": "Kościuszki 23",
+   "postcode": "46-060",
+   "city": "Prószków",
+   "voivodeship": "opolskie",
+   "lat": 50.57771,
+   "lng": 17.87931
+  },
+  {
+   "id": "419",
+   "name": "Firma Handlowa \"Wiolan\" Wioletta Owczarek",
+   "street": "Hallera 2",
+   "postcode": "49-340",
+   "city": "Lewin Brzeski",
+   "voivodeship": "opolskie",
+   "lat": 50.74905,
+   "lng": 17.61733
+  },
+  {
+   "id": "380",
+   "name": "SALON MEBLOWY MAXIMA",
+   "street": "Niepodległości 13",
+   "postcode": "48-100",
+   "city": "Głubczyce",
+   "voivodeship": "opolskie",
+   "lat": 50.20181,
+   "lng": 17.82421
+  },
+  {
+   "id": "147",
+   "name": "JANUSZ BABIAK SALON MEBLOWY''BABIAK''",
+   "street": "Harcerska 1",
+   "postcode": "47-330",
+   "city": "Zdzieszowice",
+   "voivodeship": "opolskie",
+   "lat": 50.42199,
+   "lng": 18.11983
+  },
+  {
+   "id": "291",
+   "name": "MEBLE SMART KRZYSZTOF TUREK",
+   "street": "Bakończycka 7",
+   "postcode": "37-700",
+   "city": "Przemyśl",
+   "voivodeship": "podkarpackie",
+   "lat": 49.77151,
+   "lng": 22.78753
+  },
+  {
+   "id": "279",
+   "name": "MEBLEX PELC IWONA",
+   "street": "Grunwaldzka 82",
+   "postcode": "37-100",
+   "city": "Łańcut",
+   "voivodeship": "podkarpackie",
+   "lat": 50.07994,
+   "lng": 22.23295
+  },
+  {
+   "id": "282",
+   "name": "LU Design Karolina Grendysa",
+   "street": "Strażów 316",
+   "postcode": "36-073",
+   "city": "Strażów",
+   "voivodeship": "podkarpackie",
+   "lat": 50.06763,
+   "lng": 22.11841
+  },
+  {
+   "id": "304",
+   "name": "Meblex A.Zimoląg Spółka Komandytowa",
+   "street": "al. Tadeusza Rejtana 49A",
+   "postcode": "35-326",
+   "city": "Rzeszów",
+   "voivodeship": "podkarpackie",
+   "lat": 50.02532,
+   "lng": 22.01755
+  },
+  {
+   "id": "235",
+   "name": "EXPORT-IMPORT P.H.U \"BRATPOL\" SP. J K.Z.W. GRZYB SALON W ZAMOŚCIU",
+   "street": "Partyzantów 41",
+   "postcode": "22-400",
+   "city": "Zamość",
+   "voivodeship": "podkarpackie",
+   "lat": 50.7118,
+   "lng": 23.26996
+  },
+  {
+   "id": "236",
+   "name": "PRZEMYŚL \"HEBAN\"",
+   "street": "Zyblikiewicza 9",
+   "postcode": "37-700",
+   "city": "Przemyśl",
+   "voivodeship": "podkarpackie",
+   "lat": 49.78567,
+   "lng": 22.79414
+  },
+  {
+   "id": "247",
+   "name": "ZPUH \"AMAK-MEBLE\" SC KRUPA ANDRZEJ SALON RZESZÓW",
+   "street": "Zajęcza 14 B",
+   "postcode": "35-232",
+   "city": "Rzeszów",
+   "voivodeship": "podkarpackie",
+   "lat": 50.05504,
+   "lng": 21.97296
+  },
+  {
+   "id": "248",
+   "name": "ZPUH \"AMAK-MEBLE\" SC KRUPA ANDRZEJ SALON PRZEWORSK",
+   "street": "Głęboka 4",
+   "postcode": "37-200",
+   "city": "Przeworsk",
+   "voivodeship": "podkarpackie",
+   "lat": 50.06399,
+   "lng": 22.50152
+  },
+  {
+   "id": "399",
+   "name": "FHU RELAX BOBULA SPÓŁKA JAWNA",
+   "street": "Lwowska 49B",
+   "postcode": "38-200",
+   "city": "Jasło",
+   "voivodeship": "podkarpackie",
+   "lat": 50.26561,
+   "lng": 21.97215
+  },
+  {
+   "id": "397",
+   "name": "F.P.U.H. \"MEBLOBOL\"",
+   "street": "Rynek 19",
+   "postcode": "36-060",
+   "city": "Głogów Małopolski",
+   "voivodeship": "podkarpackie",
+   "lat": 50.15119,
+   "lng": 21.96372
+  },
+  {
+   "id": "394",
+   "name": "ZPHU \"LIMBA\" ALEKSANDER SAS",
+   "street": "Witosa 83",
+   "postcode": "39-220",
+   "city": "Pilzno",
+   "voivodeship": "podkarpackie",
+   "lat": 49.98046,
+   "lng": 21.26317
+  },
+  {
+   "id": "435",
+   "name": "FIRMA HANDLOWA \"ADA\" ANDRZEJ TYRA",
+   "street": "Sienkiewicza 145",
+   "postcode": "39-400",
+   "city": "Tarnobrzeg",
+   "voivodeship": "podkarpackie",
+   "lat": 49.9113,
+   "lng": 22.34505
+  },
+  {
+   "id": "423",
+   "name": "ZPUH \"AMAK-MEBLE\" S.C. PAWEŁ KRUPA, ŁUKASZ KRUPA SALON RZESZÓW",
+   "street": "Zajęcza 14 B",
+   "postcode": "35-232",
+   "city": "Rzeszów",
+   "voivodeship": "podkarpackie",
+   "lat": 50.05504,
+   "lng": 21.97296
+  },
+  {
+   "id": "417",
+   "name": "P.H.U \"BRATPOL\" SP. J K.Z.W. GRZYB",
+   "street": "Mickiewicza 103",
+   "postcode": "37-600",
+   "city": "Lubaczów",
+   "voivodeship": "podkarpackie",
+   "lat": 50.16424,
+   "lng": 23.12107
+  },
+  {
+   "id": "382",
+   "name": "LIVEO Meble Spólka z ograniczoną odpowiedzialnością",
+   "street": "Borki 5",
+   "postcode": "36-130",
+   "city": "Raniżów",
+   "voivodeship": "podkarpackie",
+   "lat": 50.27084,
+   "lng": 21.99064
+  },
+  {
+   "id": "328",
+   "name": "FIRMA HANDLOWA \"ADA\" ANDRZEJ TYRA",
+   "street": "Polna 14",
+   "postcode": "37-300",
+   "city": "Leżajsk",
+   "voivodeship": "podkarpackie",
+   "lat": 50.26605,
+   "lng": 22.42643
+  },
+  {
+   "id": "343",
+   "name": "GALERIA MEBLI ALFA Salon Sandomierz",
+   "street": "Przemysłowa 10",
+   "postcode": "27-600",
+   "city": "Sandomierz",
+   "voivodeship": "podkarpackie",
+   "lat": 50.67907,
+   "lng": 21.7601
+  },
+  {
+   "id": "348",
+   "name": "FIRMA HANDLOWA \"ADA\" ANDRZEJ TYRA",
+   "street": "M.C.Skłodowskiej 5",
+   "postcode": "37-200",
+   "city": "Przeworsk",
+   "voivodeship": "podkarpackie",
+   "lat": 50.0587,
+   "lng": 22.49377
+  },
+  {
+   "id": "342",
+   "name": "GALERIA MEBLI ALFA Salon Mielec",
+   "street": "Targowa 3",
+   "postcode": "39-300",
+   "city": "Mielec",
+   "voivodeship": "podkarpackie",
+   "lat": 50.28568,
+   "lng": 21.43188
+  },
+  {
+   "id": "329",
+   "name": "SALON MEBLOWY \" AKROPOL\"",
+   "street": "Krakowska 95",
+   "postcode": "38-400",
+   "city": "Krosno",
+   "voivodeship": "podkarpackie",
+   "lat": 49.70265,
+   "lng": 21.74303
+  },
+  {
+   "id": "371",
+   "name": "Meble Ada Robert Tyra",
+   "street": "Rzeszowska 42",
+   "postcode": "37-400",
+   "city": "Nisko",
+   "voivodeship": "podkarpackie",
+   "lat": 50.51145,
+   "lng": 22.14438
+  },
+  {
+   "id": "362",
+   "name": "Salon Meblowy Pionier 2 Wioletta Hap",
+   "street": "Produkcyjna 4",
+   "postcode": "38-200",
+   "city": "Jasło",
+   "voivodeship": "podkarpackie",
+   "lat": 49.75912,
+   "lng": 21.53063
+  },
+  {
+   "id": "366",
+   "name": "Meblujdom.Pl Spółka z Ograniczoną Odpowiedzialnością",
+   "street": "Księdza Stanisława Skorodeckiego 71",
+   "postcode": "39-100",
+   "city": "Ropczyce",
+   "voivodeship": "podkarpackie",
+   "lat": 50.06727,
+   "lng": 21.60199
+  },
+  {
+   "id": "1",
+   "name": "F.H.P.U. DREWMAK",
+   "street": "Poręby Kupieńskie 120",
+   "postcode": "36-100",
+   "city": "Kolbuszowa",
+   "voivodeship": "podkarpackie",
+   "lat": 50.17959,
+   "lng": 21.86415
+  },
+  {
+   "id": "2",
+   "name": "F.P.U.H. \"MEBLOBOL\"BARAN BOGDAN",
+   "street": "Kościuszki 5A",
+   "postcode": "36-060",
+   "city": "Głogów Małopolski",
+   "voivodeship": "podkarpackie",
+   "lat": 50.14486,
+   "lng": 21.9766
+  },
+  {
+   "id": "5",
+   "name": "MEBLO-DOM II Gabriela Piwońska i wspólnicy SP.J.",
+   "street": "Armii Krajowej 28",
+   "postcode": "35-307",
+   "city": "Rzeszów",
+   "voivodeship": "podkarpackie",
+   "lat": 50.01823,
+   "lng": 22.02787
+  },
+  {
+   "id": "7",
+   "name": "P.P.U.H. ELEKTROMIX Stanisław Sołtys",
+   "street": "ul.Jasielska 49",
+   "postcode": "38-120",
+   "city": "Czudec",
+   "voivodeship": "podkarpackie",
+   "lat": 49.9453,
+   "lng": 21.83034
+  },
+  {
+   "id": "8",
+   "name": "Przedsiębiorstwo Handlowo - Usługowe \"Dukat\" Paweł Jaworski",
+   "street": "Sandomierska 53",
+   "postcode": "37-420",
+   "city": "Rudnik nad Sanem",
+   "voivodeship": "podkarpackie",
+   "lat": 50.44657,
+   "lng": 22.24231
+  },
+  {
+   "id": "167",
+   "name": "RESMAR MIELEC SALON MEBLOWY",
+   "street": "Wolności 1",
+   "postcode": "39-300",
+   "city": "Mielec",
+   "voivodeship": "podkarpackie",
+   "lat": 50.28807,
+   "lng": 21.4303
+  },
+  {
+   "id": "168",
+   "name": "RESMAR NISKO SALON MEBLOWY",
+   "street": "Sandomierska 4",
+   "postcode": "37-400",
+   "city": "Nisko",
+   "voivodeship": "podkarpackie",
+   "lat": 50.52042,
+   "lng": 22.13889
+  },
+  {
+   "id": "205",
+   "name": "TOP MEBLE JARACZ SPÓŁKA JAWNA SALON MEBLOWY",
+   "street": "Kasprowicza 7",
+   "postcode": "38-200",
+   "city": "Jasło",
+   "voivodeship": "podkarpackie",
+   "lat": 49.74338,
+   "lng": 21.48394
+  },
+  {
+   "id": "201",
+   "name": "F.H.U. ART-MEBEL MARIUSZ ŁOPATA",
+   "street": "Studziańska 1",
+   "postcode": "37-200",
+   "city": "Przeworsk",
+   "voivodeship": "podkarpackie",
+   "lat": 50.05788,
+   "lng": 22.47759
+  },
+  {
+   "id": "202",
+   "name": "\"MIRAF\" TERESA OSETKOWSKA",
+   "street": "Al. 1000-Lecia 37",
+   "postcode": "39-120",
+   "city": "Sędziszów Młp.",
+   "voivodeship": "podkarpackie",
+   "lat": 50.06505,
+   "lng": 21.70921
+  },
+  {
+   "id": "110",
+   "name": "FRANPOL BIS SKLEP NR 1",
+   "street": "Wilsona 8",
+   "postcode": "37-700",
+   "city": "Przemyśl",
+   "voivodeship": "podkarpackie",
+   "lat": 49.78231,
+   "lng": 22.77443
+  },
+  {
+   "id": "132",
+   "name": "MEBLE OK KRZYSZTOF NOWAK",
+   "street": "Handlowa 2",
+   "postcode": "37-450",
+   "city": "Stalowa Wola",
+   "voivodeship": "podkarpackie",
+   "lat": 50.57261,
+   "lng": 22.04992
+  },
+  {
+   "id": "111",
+   "name": "JP \"CARINEX\" Piotr Barcikowski",
+   "street": "Królowej Jadwigi 36",
+   "postcode": "37-500",
+   "city": "Jarosław",
+   "voivodeship": "podkarpackie",
+   "lat": 50.01325,
+   "lng": 22.68254
+  },
+  {
+   "id": "119",
+   "name": "F.H.U. WIKTOR MEBLE WIKTOR OLEJARZ",
+   "street": "Adama Mickiewicza 56",
+   "postcode": "39-400",
+   "city": "Tarnobrzeg",
+   "voivodeship": "podkarpackie",
+   "lat": 50.56333,
+   "lng": 21.66615
+  },
+  {
+   "id": "158",
+   "name": "F.P.H.U. VIP BARBARA BOŻEK",
+   "street": "MASARSKA 6 a",
+   "postcode": "39-100",
+   "city": "Ropczyce",
+   "voivodeship": "podkarpackie",
+   "lat": 50.05783,
+   "lng": 21.62496
+  },
+  {
+   "id": "150",
+   "name": "PRZEDSIĘBIORSTWO HANDLOWO USŁUGOWE TEMAR MARIAN RZESZUT",
+   "street": "Juliusza Słowackiego 4",
+   "postcode": "39-460",
+   "city": "Nowa Dęba",
+   "voivodeship": "podkarpackie",
+   "lat": 50.41264,
+   "lng": 21.75573
+  },
+  {
+   "id": "146",
+   "name": "JAROSŁAW\"FAMILY HEBAN\"",
+   "street": "Reymonta 2",
+   "postcode": "37-500",
+   "city": "Jarosław",
+   "voivodeship": "podkarpackie",
+   "lat": 50.01005,
+   "lng": 22.6853
+  },
+  {
+   "id": "482",
+   "name": "Mirosław Serwatka Max-Meble",
+   "street": "Handlowa 2/2/1p",
+   "postcode": "36-065",
+   "city": "Dynów",
+   "voivodeship": "podkarpackie",
+   "lat": 49.81418,
+   "lng": 22.23288
+  },
+  {
+   "id": "447",
+   "name": "FIRMA HANDLOWA \"ADA\" ANDRZEJ TYRA",
+   "street": "Niezłomnych 88",
+   "postcode": "37-450",
+   "city": "Stalowa Wola",
+   "voivodeship": "podkarpackie",
+   "lat": 50.57414,
+   "lng": 22.04358
+  },
+  {
+   "id": "299",
+   "name": "MEBLESTYLO BOŻENNA WINCKIEWICZ",
+   "street": "Północna 42",
+   "postcode": "16-400",
+   "city": "Suwałki",
+   "voivodeship": "podlaskie",
+   "lat": 54.11362,
+   "lng": 22.96386
+  },
+  {
+   "id": "231",
+   "name": "DOM HANDLOWY ŚCIANA WSCHODNIA SPÓŁKA JAWNA JOLANTA I STANISŁAW GIERCZAK",
+   "street": "Senatorska 22",
+   "postcode": "18-500",
+   "city": "Kolno",
+   "voivodeship": "podlaskie",
+   "lat": 53.41073,
+   "lng": 21.93207
+  },
+  {
+   "id": "223",
+   "name": "PRZEDSIĘBIORSTWO WENUS BOŻENA KSIĄŻEK",
+   "street": "Podhorskiego 10",
+   "postcode": "16-400",
+   "city": "Suwałki",
+   "voivodeship": "podlaskie",
+   "lat": 54.1102,
+   "lng": 22.93443
+  },
+  {
+   "id": "230",
+   "name": "CENTRUM HANDLOWE BEATA MAGNUSZEWSKA",
+   "street": "Szkolna 4D",
+   "postcode": "19-120",
+   "city": "Knyszyn",
+   "voivodeship": "podlaskie",
+   "lat": 53.31015,
+   "lng": 22.91967
+  },
+  {
+   "id": "256",
+   "name": "WEXPOL MEBLE WIESŁAW JURCZUK",
+   "street": "S.Batorego 4/2",
+   "postcode": "17-200",
+   "city": "Hajnówka",
+   "voivodeship": "podlaskie",
+   "lat": 52.7391,
+   "lng": 23.5889
+  },
+  {
+   "id": "401",
+   "name": "Iwo Janusz Adamczuk",
+   "street": "Piłsudskiego 5",
+   "postcode": "17-120",
+   "city": "Brańsk",
+   "voivodeship": "podlaskie",
+   "lat": 52.74355,
+   "lng": 22.84256
+  },
+  {
+   "id": "407",
+   "name": "SALON MEBLOWY \"PAWLOO\"",
+   "street": "Wojska Polskiego 1",
+   "postcode": "18-500",
+   "city": "Kolno",
+   "voivodeship": "podlaskie",
+   "lat": 53.4073,
+   "lng": 21.9331
+  },
+  {
+   "id": "408",
+   "name": "P.H.PIOTRPOL KRYSTYNA PIOTROWSKA",
+   "street": "Białowieska 119",
+   "postcode": "17-100",
+   "city": "Bielsk Podlaski",
+   "voivodeship": "podlaskie",
+   "lat": 52.75786,
+   "lng": 23.2185
+  },
+  {
+   "id": "359",
+   "name": "Iglomar Sklep Wielobranżowy Mariusz Wieliczko",
+   "street": "Gródecka 11",
+   "postcode": "16-050",
+   "city": "Michałowo",
+   "voivodeship": "podlaskie",
+   "lat": 53.03782,
+   "lng": 23.60613
+  },
+  {
+   "id": "74",
+   "name": "P.P.U.H ''LUDWIK''JAN SZYMCZYK",
+   "street": "Różana 30",
+   "postcode": "16-400",
+   "city": "Suwałki",
+   "voivodeship": "podlaskie",
+   "lat": 54.11448,
+   "lng": 22.94723
+  },
+  {
+   "id": "61",
+   "name": "KAMLOT SPÓŁKA JAWNA JAN GRYGORUK I WSPÓLNICY",
+   "street": "Gen.Kleeberga 36",
+   "postcode": "15-691",
+   "city": "Białystok",
+   "voivodeship": "podlaskie",
+   "lat": 53.15655,
+   "lng": 23.08832
+  },
+  {
+   "id": "11",
+   "name": "\"IWO\" JANUSZ ADAMCZUK",
+   "street": "Jagiellońska 42",
+   "postcode": "17-120",
+   "city": "Brańsk",
+   "voivodeship": "podlaskie",
+   "lat": 52.74522,
+   "lng": 22.84796
+  },
+  {
+   "id": "44",
+   "name": "SALON MEBLOWY BEATA BORAWSKA",
+   "street": "Obrońców Zambrowa 3",
+   "postcode": "18-300",
+   "city": "Zambrów",
+   "voivodeship": "podlaskie",
+   "lat": 52.97696,
+   "lng": 22.244
+  },
+  {
+   "id": "48",
+   "name": "SKLEP MEBLOWY RYSZARD WALCZUK",
+   "street": "Kopernika 55",
+   "postcode": "15-396",
+   "city": "Białystok",
+   "voivodeship": "podlaskie",
+   "lat": 53.12539,
+   "lng": 23.13119
+  },
+  {
+   "id": "39",
+   "name": "PIEER S.C.JACEK PIÓRKOWSKI GRAŻYNA PIÓRKOWSKA SALON MEBLOWY",
+   "street": "Targowa 17",
+   "postcode": "18-300",
+   "city": "Zambrów",
+   "voivodeship": "podlaskie",
+   "lat": 52.95727,
+   "lng": 22.23927
+  },
+  {
+   "id": "170",
+   "name": "ANIA",
+   "street": "Kasztanowa 4",
+   "postcode": "16-300",
+   "city": "Augustów",
+   "voivodeship": "podlaskie",
+   "lat": 53.84798,
+   "lng": 22.98758
+  },
+  {
+   "id": "172",
+   "name": "SM LACHOWSKI",
+   "street": "Konopnickiej 2A",
+   "postcode": "19-100",
+   "city": "Mońki",
+   "voivodeship": "podlaskie",
+   "lat": 53.40312,
+   "lng": 22.8021
+  },
+  {
+   "id": "175",
+   "name": "PRZEDSIĘBIORSTWO WENUS BOŻENA KSIĄŻEK",
+   "street": "Kard.St.Wyszyńskiego 4",
+   "postcode": "18-400",
+   "city": "Łomża",
+   "voivodeship": "podlaskie",
+   "lat": 53.17013,
+   "lng": 22.07264
+  },
+  {
+   "id": "445",
+   "name": "Wexpol Bis Krystian Jurczuk",
+   "street": "Kazimierzowska 8a",
+   "postcode": "17-100",
+   "city": "Bielsk Podlaski",
+   "voivodeship": "podlaskie",
+   "lat": 52.7702,
+   "lng": 23.19448
+  },
+  {
+   "id": "456",
+   "name": "FASTER ORŁOWSKI ANDRZEJ",
+   "street": "Przędzalniana 60",
+   "postcode": "15-688",
+   "city": "Białystok",
+   "voivodeship": "podlaskie",
+   "lat": 53.15898,
+   "lng": 23.0757
+  },
+  {
+   "id": "318",
+   "name": "Przedsiębiorstwo Handlowo-Usługowe \"BMS\" Spółka Jawna Z. Bielecki",
+   "street": "Malborska 125",
+   "postcode": "82-500",
+   "city": "Kwidzyn",
+   "voivodeship": "pomorskie",
+   "lat": 53.74796,
+   "lng": 18.93501
+  },
+  {
+   "id": "239",
+   "name": "SKLEP \"HERMES\" MIROSŁAW KOSTUCH",
+   "street": "Dworcowa 8",
+   "postcode": "77-100",
+   "city": "Bytów",
+   "voivodeship": "pomorskie",
+   "lat": 54.16493,
+   "lng": 17.48787
+  },
+  {
+   "id": "227",
+   "name": "Salon Meblowy \"Kopernik\" Maria Przysalska",
+   "street": "Szkolna 24",
+   "postcode": "87-400",
+   "city": "Golub-Dobrzyń",
+   "voivodeship": "pomorskie",
+   "lat": 53.10703,
+   "lng": 19.05372
+  },
+  {
+   "id": "229",
+   "name": "SKLEP \"ARTEKS\" WOJCIECH ARENDT",
+   "street": "Zwycięstwa 35",
+   "postcode": "84-300",
+   "city": "Lębork",
+   "voivodeship": "pomorskie",
+   "lat": 54.53762,
+   "lng": 17.75004
+  },
+  {
+   "id": "422",
+   "name": "SKLEP \"ARTEKS\" WOJCIECH ARENDT",
+   "street": "Bolesława Krzywoustego 4",
+   "postcode": "84-300",
+   "city": "Lębork",
+   "voivodeship": "pomorskie",
+   "lat": 54.53405,
+   "lng": 17.75806
+  },
+  {
+   "id": "344",
+   "name": "LUK-DOM Łukasz Człapski",
+   "street": "Stanisława Staszica 13",
+   "postcode": "83-400",
+   "city": "Kościerzyna",
+   "voivodeship": "pomorskie",
+   "lat": 54.12208,
+   "lng": 17.96987
+  },
+  {
+   "id": "341",
+   "name": "MEBLO-STYL Mateusz Maciejewski",
+   "street": "Bukowa 11",
+   "postcode": "83-200",
+   "city": "Starogard Gdański",
+   "voivodeship": "pomorskie",
+   "lat": 53.93477,
+   "lng": 18.50606
+  },
+  {
+   "id": "339",
+   "name": "\"DOERING-MEBLE\" S.C. MICHAŁ DOERING WOJCIECH DOERING",
+   "street": "Ogrodowa 2",
+   "postcode": "80-209",
+   "city": "Karczemki",
+   "voivodeship": "pomorskie",
+   "lat": 54.44451,
+   "lng": 18.42854
+  },
+  {
+   "id": "368",
+   "name": "Salon Meblowy \"Jerzyk\" Jakub Gulgowski",
+   "street": "Główna 6",
+   "postcode": "83-210",
+   "city": "Zblewo",
+   "voivodeship": "pomorskie",
+   "lat": 53.934,
+   "lng": 18.32637
+  },
+  {
+   "id": "360",
+   "name": "Ted. Spółka z Ograniczoną Odpowiedzialnością",
+   "street": "Dworcowa 4",
+   "postcode": "83-340",
+   "city": "Sierakowice",
+   "voivodeship": "pomorskie",
+   "lat": 54.34958,
+   "lng": 17.89253
+  },
+  {
+   "id": "102",
+   "name": "Przedsiębiorstwo Produkcyjno Handlowo Usługowe \"MEBLE WIWA\" Witold Wasiniewski",
+   "street": "Jana III Sobieskiego 328/A",
+   "postcode": "84-200",
+   "city": "Wejherowo",
+   "voivodeship": "pomorskie",
+   "lat": 54.60328,
+   "lng": 18.22714
+  },
+  {
+   "id": "89",
+   "name": "Firma Handlowo-Usługowa \"Malaxis-Bis\" Sp.J. Maria Sawicka i Marcin Sawicki",
+   "street": "Przemysłowa 9/A",
+   "postcode": "82-440",
+   "city": "Dzierzgoń",
+   "voivodeship": "pomorskie",
+   "lat": 53.92268,
+   "lng": 19.34422
+  },
+  {
+   "id": "93",
+   "name": "P.P.H.U. \"MEBLEX\" s.c. Michał Wojtuszkiewicz Jarosław Daszek",
+   "street": "Jagiellońska 55",
+   "postcode": "83-110",
+   "city": "Tczew",
+   "voivodeship": "pomorskie",
+   "lat": 54.09095,
+   "lng": 18.76248
+  },
+  {
+   "id": "190",
+   "name": "Kambara Daria Słomińska",
+   "street": "Marszałka Józefa Piłsudskiego 5",
+   "postcode": "89-650",
+   "city": "Czersk",
+   "voivodeship": "pomorskie",
+   "lat": 53.79931,
+   "lng": 17.97518
+  },
+  {
+   "id": "166",
+   "name": "Natzke Jarosław Piotr \"NATZKE-MEBLE\"",
+   "street": "Oliwska 60",
+   "postcode": "84-208",
+   "city": "Kielno",
+   "voivodeship": "pomorskie",
+   "lat": 54.45552,
+   "lng": 18.3303
+  },
+  {
+   "id": "176",
+   "name": "MALAXIS-BIS - DOSTAWA",
+   "street": "Słowackiego 30",
+   "postcode": "82-440",
+   "city": "Dzierzgoń",
+   "voivodeship": "pomorskie",
+   "lat": 53.92239,
+   "lng": 19.34148
+  },
+  {
+   "id": "191",
+   "name": "P.T.H.U. Cezary Mazur",
+   "street": "Grunwaldzka 12",
+   "postcode": "84-230",
+   "city": "Rumia",
+   "voivodeship": "pomorskie",
+   "lat": 54.57513,
+   "lng": 18.38072
+  },
+  {
+   "id": "192",
+   "name": "\"MIŁOSZ\" MIROSŁAW MIŁOSZ",
+   "street": "Kościerska 13",
+   "postcode": "83-300",
+   "city": "Kartuzy",
+   "voivodeship": "pomorskie",
+   "lat": 54.3234,
+   "lng": 18.20372
+  },
+  {
+   "id": "193",
+   "name": "Przedsiębiorstwo Handlowe \"Sibuk\" Spółka Jawna Gerard Kubis i Krzysztof Kubis",
+   "street": "Morskiego Dywizjonu Lotniczego 11/A",
+   "postcode": "84-100",
+   "city": "Puck",
+   "voivodeship": "pomorskie",
+   "lat": 54.71896,
+   "lng": 18.40967
+  },
+  {
+   "id": "194",
+   "name": "Przedsiębiorstwo Handlowe \"Sibuk\" Spółka Jawna Gerard Kubis i Krzysztof Kubis",
+   "street": "Gen. J. Hallera 1",
+   "postcode": "84-100",
+   "city": "Puck",
+   "voivodeship": "pomorskie",
+   "lat": 54.71777,
+   "lng": 18.40809
+  },
+  {
+   "id": "195",
+   "name": "Dorota Półczyńska Sklep Meblowo-Przemysłowy",
+   "street": "Gdańska 3/A",
+   "postcode": "89-632",
+   "city": "Brusy",
+   "voivodeship": "pomorskie",
+   "lat": 53.88702,
+   "lng": 17.71899
+  },
+  {
+   "id": "126",
+   "name": "Przedsiębiorstwo Handlowo-Usługowe \"BMS\" Spółka Jawna Z. Bielecki",
+   "street": "Staszica 22",
+   "postcode": "82-500",
+   "city": "Kwidzyn",
+   "voivodeship": "pomorskie",
+   "lat": 53.73384,
+   "lng": 18.94111
+  },
+  {
+   "id": "128",
+   "name": "Maciejewska Lucyna Zakład Produkcyjno-Usługowo-Handlowy \"MEBLO-STYL\"",
+   "street": "Ogrodowa 41",
+   "postcode": "83-132",
+   "city": "Morzeszczyn",
+   "voivodeship": "pomorskie",
+   "lat": 53.83357,
+   "lng": 18.69491
+  },
+  {
+   "id": "130",
+   "name": "Salon Meblowy \"Paula\" - Transport Krzysztof Rudnik",
+   "street": "Henryka Sienkiewicza 29",
+   "postcode": "77-100",
+   "city": "Bytów",
+   "voivodeship": "pomorskie",
+   "lat": 54.18204,
+   "lng": 17.5038
+  },
+  {
+   "id": "163",
+   "name": "JAREXMEBEL SALON GDAŃSK HALLERA",
+   "street": "Hallera 132",
+   "postcode": "80-415",
+   "city": "Gdańsk",
+   "voivodeship": "pomorskie",
+   "lat": 54.39326,
+   "lng": 18.61931
+  },
+  {
+   "id": "474",
+   "name": "PRZEDSIĘBIORSTWO ELMARK MAREK FIŁONOWICZ",
+   "street": "Warszawska 42",
+   "postcode": "82-100",
+   "city": "Nowy Dwór Gdański",
+   "voivodeship": "pomorskie",
+   "lat": 54.20855,
+   "lng": 19.12682
+  },
+  {
+   "id": "280",
+   "name": "PPUH \"MEBLE JOANNA\"JOANNA KOWALSKA",
+   "street": "Filice 32A",
+   "postcode": "13-200",
+   "city": "Działdowo",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.2837,
+   "lng": 20.14753
+  },
+  {
+   "id": "283",
+   "name": "MEBLE JOANNA",
+   "street": "Przemysłowa 15",
+   "postcode": "13-230",
+   "city": "Lidzbark",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.2597,
+   "lng": 19.83034
+  },
+  {
+   "id": "244",
+   "name": "PRZEDSIĘBIORSTWO WENUS BOŻENA KSIĄŻEK",
+   "street": "Armii Krajowej 1",
+   "postcode": "19-400",
+   "city": "Olecko",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 54.03962,
+   "lng": 22.5039
+  },
+  {
+   "id": "262",
+   "name": "NOWY MEBLOWY",
+   "street": "Towarowa 2",
+   "postcode": "10-417",
+   "city": "Olsztyn",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.78106,
+   "lng": 20.50121
+  },
+  {
+   "id": "264",
+   "name": "ROBERT OLSZEWSKI PHU ROBEX SKLEP MEBLOWY",
+   "street": "B.Prusa 1",
+   "postcode": "11-600",
+   "city": "Węgorzewo",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 54.21552,
+   "lng": 21.74058
+  },
+  {
+   "id": "271",
+   "name": "SKLEP MEBLOWY JUSTYNA PANKIEWICZ",
+   "street": "Papieża Jana Pawła Ii 1",
+   "postcode": "14-260",
+   "city": "Lubawa",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.50076,
+   "lng": 19.74615
+  },
+  {
+   "id": "272",
+   "name": "\"J.D. Duda\" Spółka Cywilna Jolanta Duda Dawid Duda",
+   "street": "Długa 7",
+   "postcode": "06-500",
+   "city": "Mława",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.11084,
+   "lng": 20.37999
+  },
+  {
+   "id": "402",
+   "name": "S.M.\"MEBDAR\"",
+   "street": "Wojska Polskiego 16",
+   "postcode": "19-400",
+   "city": "Olecko",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 54.03463,
+   "lng": 22.49503
+  },
+  {
+   "id": "409",
+   "name": "SKLEP PRZEMYSŁOWY LESZEK GROCHOWSKI",
+   "street": "1 Maja 6A",
+   "postcode": "11-320",
+   "city": "Jeziorany",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.97761,
+   "lng": 20.74649
+  },
+  {
+   "id": "429",
+   "name": "SKLEP PRZEMYSŁOWY LESZEK GROCHOWSKI",
+   "street": "Fabryczna 6",
+   "postcode": "11-040",
+   "city": "Dobre Miasto",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.98988,
+   "lng": 20.39105
+  },
+  {
+   "id": "433",
+   "name": "J.D. Duda Spółka Cywilna",
+   "street": "Hallera 28",
+   "postcode": "13-200",
+   "city": "Działdowo",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.23599,
+   "lng": 20.17734
+  },
+  {
+   "id": "412",
+   "name": "Salony \"ELŻBIETA\" E.Jakubiak i D Jakubiak sp.j.",
+   "street": "Sikorskiego 23B",
+   "postcode": "10-686",
+   "city": "Olsztyn",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.7571,
+   "lng": 20.48736
+  },
+  {
+   "id": "413",
+   "name": "SKLEP PRZEMYSŁOWY LESZEK GROCHOWSKI",
+   "street": "Kolejowa 6A",
+   "postcode": "11-320",
+   "city": "Jeziorany",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.97715,
+   "lng": 20.76074
+  },
+  {
+   "id": "414",
+   "name": "Salony \"ELŻBIETA\" E.Jakubiak i D Jakubiak sp.j.",
+   "street": "Pstrowskiego 21",
+   "postcode": "10-601",
+   "city": "Olsztyn",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.76433,
+   "lng": 20.49721
+  },
+  {
+   "id": "345",
+   "name": "SŁAWOMIR BORKOWSKI P.P.H.U. \"MEBLE BORKOWSKI\"",
+   "street": "Armii Krajowej 15",
+   "postcode": "11-300",
+   "city": "Biskupiec",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.86684,
+   "lng": 20.96024
+  },
+  {
+   "id": "346",
+   "name": "SKLEP MEBLOWY BASIA",
+   "street": "Generalska 20",
+   "postcode": "14-520",
+   "city": "Pieniężno",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 54.24026,
+   "lng": 20.127
+  },
+  {
+   "id": "87",
+   "name": "Salon Meblowy Barbara Pańczak",
+   "street": "Hurtowa 5",
+   "postcode": "14-100",
+   "city": "Ostróda",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.69134,
+   "lng": 19.98233
+  },
+  {
+   "id": "88",
+   "name": "F.H.U. \"WIRO\" Radosław Michał Lewandowski",
+   "street": "Męczenników 14",
+   "postcode": "13-200",
+   "city": "Działdowo",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.23966,
+   "lng": 20.17324
+  },
+  {
+   "id": "94",
+   "name": "Salony \"ELŻBIETA\" E.Jakubiak i D Jakubiak sp.j.",
+   "street": "Burskiego 1",
+   "postcode": "10-686",
+   "city": "Olsztyn",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.74198,
+   "lng": 20.50335
+  },
+  {
+   "id": "38",
+   "name": "PHU\"MEBEL-MARK\" MAREK GOTOWICZ",
+   "street": "Giżycka 19",
+   "postcode": "12-250",
+   "city": "Orzysz",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.81431,
+   "lng": 21.94339
+  },
+  {
+   "id": "189",
+   "name": "STUDIO MEBLOWO-PROJEKTOWE \"DEKORATORNIA\"ALICJA MYŚLIWIEC",
+   "street": "Wojska Polskiego 16",
+   "postcode": "11-040",
+   "city": "Dobre Miasto",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.98937,
+   "lng": 20.3956
+  },
+  {
+   "id": "153",
+   "name": "Salon Meblowy Mebdar",
+   "street": "Jagiellońska 2",
+   "postcode": "19-400",
+   "city": "Olecko",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 54.03635,
+   "lng": 22.50897
+  },
+  {
+   "id": "155",
+   "name": "PHU W ZAKRESIE MEBLARSTWA TERESA SEKUŁA",
+   "street": "Armii Krajowej 2",
+   "postcode": "14-500",
+   "city": "Braniewo",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 54.38356,
+   "lng": 19.83202
+  },
+  {
+   "id": "161",
+   "name": "FPHU DAMEX BOGUSŁAW STEFANOWSKI",
+   "street": "Polna 2C",
+   "postcode": "14-400",
+   "city": "Pasłęk",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 54.05706,
+   "lng": 19.66197
+  },
+  {
+   "id": "478",
+   "name": "Im Meble Salon Meblowy Iwona Szynaka",
+   "street": "Słoneczna 1",
+   "postcode": "14-200",
+   "city": "Iława",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.57872,
+   "lng": 19.58912
+  },
+  {
+   "id": "475",
+   "name": "PRZEDSIĘBIORSTWO ELMARK MAREK FIŁONOWICZ",
+   "street": "1 Maja 8",
+   "postcode": "11-130",
+   "city": "Orneta",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 54.11683,
+   "lng": 20.13299
+  },
+  {
+   "id": "473",
+   "name": "PRZEDSIĘBIORSTWO ELMARK MAREK FIŁONOWICZ",
+   "street": "Mickiewicza 16",
+   "postcode": "14-300",
+   "city": "Morąg",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.91388,
+   "lng": 19.92739
+  },
+  {
+   "id": "491",
+   "name": "Tomex Handel - Produkcja Jan Tomaszewski",
+   "street": "Wojska Polskiego 30A",
+   "postcode": "19-300",
+   "city": "Ełk",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.82118,
+   "lng": 22.34907
+  },
+  {
+   "id": "488",
+   "name": "Salon Meblowy Roman Malinowski",
+   "street": "Warmińska 16/A",
+   "postcode": "14-300",
+   "city": "Morąg",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.91666,
+   "lng": 19.92818
+  },
+  {
+   "id": "461",
+   "name": "SONIK",
+   "street": "Grunwaldzka 60-66",
+   "postcode": "82-300",
+   "city": "Elbląg",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 54.14544,
+   "lng": 19.43542
+  },
+  {
+   "id": "457",
+   "name": "Salon Meblowy Krzysztof Medźwiedzki",
+   "street": "Pasymska 22",
+   "postcode": "12-100",
+   "city": "Szczytno",
+   "voivodeship": "warmińsko-mazurskie",
+   "lat": 53.56561,
+   "lng": 20.98199
+  },
+  {
+   "id": "320",
+   "name": "Przedsiębiorstwo Produkcyjno- Usługowo- Handlowe MIREKS Karolina Duma-Guemise",
+   "street": "Ogrodowa 6",
+   "postcode": "62-065",
+   "city": "Grodzisk Wielkopolski",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.22464,
+   "lng": 16.36196
+  },
+  {
+   "id": "307",
+   "name": "MEBLOLUX",
+   "street": "Krotoszyńska 29",
+   "postcode": "63-400",
+   "city": "Zacharzew",
+   "voivodeship": "wielkopolskie",
+   "lat": 51.65791,
+   "lng": 17.76659
+  },
+  {
+   "id": "242",
+   "name": "LTG MEBLE S. C.",
+   "street": "Kłeckoska 71",
+   "postcode": "62-200",
+   "city": "Gniezno",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.54302,
+   "lng": 17.56991
+  },
+  {
+   "id": "220",
+   "name": "Jędrzejewski Marek MARMEX MEBLE''",
+   "street": "Leśna 7",
+   "postcode": "63-648",
+   "city": "Słupia pod Kępnem",
+   "voivodeship": "wielkopolskie",
+   "lat": 51.23512,
+   "lng": 18.0419
+  },
+  {
+   "id": "263",
+   "name": "MODNE MEBLE Krzysztof Bielka",
+   "street": "Kasztanowa 18",
+   "postcode": "63-200",
+   "city": "Jarocin",
+   "voivodeship": "wielkopolskie",
+   "lat": 51.97569,
+   "lng": 17.49931
+  },
+  {
+   "id": "267",
+   "name": "ZEFIR Jarosław Bronowski",
+   "street": "Kiszkowska 8",
+   "postcode": "62-200",
+   "city": "Gniezno",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.53364,
+   "lng": 17.54572
+  },
+  {
+   "id": "259",
+   "name": "KAM-ZBIG",
+   "street": "Spółdzielcza 2",
+   "postcode": "64-100",
+   "city": "Leszno",
+   "voivodeship": "wielkopolskie",
+   "lat": 51.84983,
+   "lng": 16.56375
+  },
+  {
+   "id": "404",
+   "name": "MABOR SPÓŁKA JAWNA",
+   "street": "Wrzesińska 28",
+   "postcode": "62-020",
+   "city": "Swarzędz",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.4094,
+   "lng": 17.08289
+  },
+  {
+   "id": "395",
+   "name": "MONIKA JANKOWIAK MONA-MEBLE",
+   "street": "Gen.Józefa Hallera 13",
+   "postcode": "63-900",
+   "city": "Rawicz",
+   "voivodeship": "wielkopolskie",
+   "lat": 51.60969,
+   "lng": 16.84443
+  },
+  {
+   "id": "385",
+   "name": "Studio Meblowe Asseri",
+   "street": "Swarzędzka 29",
+   "postcode": "62-006",
+   "city": "Gruszczyn",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.44076,
+   "lng": 17.07564
+  },
+  {
+   "id": "386",
+   "name": "\"MSC-MEBLE\"-ZAKŁAD PRODUKCJI MEBLI TAPICEROWANYCH",
+   "street": "Ignacego Paderewskiego 50",
+   "postcode": "62-020",
+   "city": "Swarzędz",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.40603,
+   "lng": 17.06108
+  },
+  {
+   "id": "393",
+   "name": "Jar Dom Świat Mebli Jarosław Jarożek",
+   "street": "Królowej Jadwigi 13",
+   "postcode": "63-900",
+   "city": "Rawicz",
+   "voivodeship": "wielkopolskie",
+   "lat": 51.61096,
+   "lng": 16.85863
+  },
+  {
+   "id": "428",
+   "name": "PRZEDSIĘBIORSTWO HANDLOWE Arkadiusz Krzyżostaniak",
+   "street": "Jana Dekana 6B",
+   "postcode": "64-100",
+   "city": "Leszno",
+   "voivodeship": "wielkopolskie",
+   "lat": 51.8401,
+   "lng": 16.59584
+  },
+  {
+   "id": "425",
+   "name": "DOMAR S.A. W.S.H.U.",
+   "street": "Szczawnicka 4",
+   "postcode": "60-471",
+   "city": "Poznań",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.44015,
+   "lng": 16.88935
+  },
+  {
+   "id": "418",
+   "name": "MAT-BUD KAROL PIETRZAK",
+   "street": "Borecka 39",
+   "postcode": "63-720",
+   "city": "Koźmin Wielkopolski",
+   "voivodeship": "wielkopolskie",
+   "lat": 51.82996,
+   "lng": 17.44092
+  },
+  {
+   "id": "420",
+   "name": "HURTOWNIA ART.DO PRODUKCJI STOLARSKIEJ \"EWRO\"ROBERT OSTROWSKI",
+   "street": "Jana Dekana 10",
+   "postcode": "64-100",
+   "city": "Leszno",
+   "voivodeship": "wielkopolskie",
+   "lat": 51.83888,
+   "lng": 16.59555
+  },
+  {
+   "id": "372",
+   "name": "Tk Studio Tomasz Kaczmarek",
+   "street": "Jana Długosza 39",
+   "postcode": "62-300",
+   "city": "Września",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.33387,
+   "lng": 17.58671
+  },
+  {
+   "id": "376",
+   "name": "Supermeble24 Franciszek Błoch",
+   "street": "Sportowa 11",
+   "postcode": "63-500",
+   "city": "Ostrzeszów",
+   "voivodeship": "wielkopolskie",
+   "lat": 51.42381,
+   "lng": 17.93676
+  },
+  {
+   "id": "381",
+   "name": "Partner. Sklep meblowy",
+   "street": "Moniuszki 17",
+   "postcode": "77-400",
+   "city": "Złotów",
+   "voivodeship": "wielkopolskie",
+   "lat": 53.36007,
+   "lng": 17.05104
+  },
+  {
+   "id": "59",
+   "name": "TAPICERSTWO-TRANSPORT LESZEK OBRZUT",
+   "street": "Ul.Warszawska 5",
+   "postcode": "62-025",
+   "city": "Kostrzyn",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.39348,
+   "lng": 17.22799
+  },
+  {
+   "id": "21",
+   "name": "HANDEL MEBLAMI MARCIN BŁOCH",
+   "street": "Sportowa 11",
+   "postcode": "63-500",
+   "city": "Ostrzeszów",
+   "voivodeship": "wielkopolskie",
+   "lat": 51.42381,
+   "lng": 17.93676
+  },
+  {
+   "id": "10",
+   "name": "'HAŁY EUGENIA \"SKLEP MEBLOWY\" '",
+   "street": "Sierakowska 35",
+   "postcode": "64-510",
+   "city": "Wronki",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.70757,
+   "lng": 16.37056
+  },
+  {
+   "id": "45",
+   "name": "Salon Meblowy \"ALAN\" ALICJA KOBUS",
+   "street": "ul.Bydgoska 9",
+   "postcode": "89-300",
+   "city": "Wyrzysk",
+   "voivodeship": "wielkopolskie",
+   "lat": 53.15668,
+   "lng": 17.27188
+  },
+  {
+   "id": "33",
+   "name": "MEBLO-STYL WIESŁAW DUSZCZAK&ANDRZEJ DUSZCZAK SPÓŁKA JAWNA",
+   "street": "Średzka 17A",
+   "postcode": "62-035",
+   "city": "Kórnik",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.24694,
+   "lng": 17.10003
+  },
+  {
+   "id": "182",
+   "name": "\"MEB-TRANS\"- IRENEUSZ SOBCZAK",
+   "street": "Słodowa 24",
+   "postcode": "63-700",
+   "city": "Krotoszyn",
+   "voivodeship": "wielkopolskie",
+   "lat": 51.69773,
+   "lng": 17.43669
+  },
+  {
+   "id": "188",
+   "name": "ZEFIR Jarosław Bronowski",
+   "street": "Konińska 24",
+   "postcode": "62-700",
+   "city": "Turek",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.01662,
+   "lng": 18.46888
+  },
+  {
+   "id": "178",
+   "name": "\"HENKO D.B.\" DOROTA BARTCZAK",
+   "street": "Gnieźnieńska 47",
+   "postcode": "62-100",
+   "city": "Wągrowiec",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.79927,
+   "lng": 17.21394
+  },
+  {
+   "id": "207",
+   "name": "Sklep Meblowy",
+   "street": "Przemysłowa 3",
+   "postcode": "62-300",
+   "city": "Września",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.32176,
+   "lng": 17.55692
+  },
+  {
+   "id": "211",
+   "name": "SKLEP WIELOBRANŻOWY MARIA SZWEDEK",
+   "street": "Lwówek Rynek 36",
+   "postcode": "64-310",
+   "city": "Lwówek",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.44941,
+   "lng": 16.18059
+  },
+  {
+   "id": "198",
+   "name": "PRZEDSIĘBIORSTWO PRODUKCYJNO-HANDLOWO-USŁUGOWE \"MARKO\" MAREK IZYDOR",
+   "street": "Przemysłowa 6",
+   "postcode": "64-730",
+   "city": "Wieleń",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.88124,
+   "lng": 16.17346
+  },
+  {
+   "id": "203",
+   "name": "SKLEP MEBLOWY SZYMON ŚRONKOWSKI",
+   "street": "Dworcowa 6",
+   "postcode": "62-230",
+   "city": "Witkowo",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.44461,
+   "lng": 17.76951
+  },
+  {
+   "id": "149",
+   "name": "ZEFIR Jarosław Bronowski",
+   "street": "Marii Konopnickiej 44",
+   "postcode": "62-600",
+   "city": "Koło",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.2014,
+   "lng": 18.64782
+  },
+  {
+   "id": "148",
+   "name": "ZEFIR Jarosław Bronowski",
+   "street": "Wał Tarejwy 6",
+   "postcode": "62-500",
+   "city": "Konin",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.23657,
+   "lng": 18.26674
+  },
+  {
+   "id": "492",
+   "name": "Uni-Mebel Łukasz Szymon Skarbińscy Spółka Komandytowa",
+   "street": "Mikołaja Kopernika 7",
+   "postcode": "62-400",
+   "city": "Słupca",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.29027,
+   "lng": 17.86684
+  },
+  {
+   "id": "464",
+   "name": "Meble A-Z Maciej Karwacki",
+   "street": "Chłapowskiego 9",
+   "postcode": "64-000",
+   "city": "Koscian",
+   "voivodeship": "wielkopolskie",
+   "lat": 52.4,
+   "lng": 16.6,
+   "approx": true
+  },
+  {
+   "id": "443",
+   "name": "Andrzej Janik And.Nova Andrzej Janik",
+   "street": "Fabryczna 15",
+   "postcode": "64-100",
+   "city": "Leszno",
+   "voivodeship": "wielkopolskie",
+   "lat": 51.85402,
+   "lng": 16.56979
+  },
+  {
+   "id": "305",
+   "name": "\"MARCIN MEBLE\" MARCIN DRUCIAREK",
+   "street": "WOJCIESZYN 4 a",
+   "postcode": "72-200",
+   "city": "Nowogard",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.69752,
+   "lng": 15.14795
+  },
+  {
+   "id": "309",
+   "name": "DOMI-SALON OKIEN I DRZWI DOMINIK TOBISZEWSKI",
+   "street": "Królewiecka 1",
+   "postcode": "78-500",
+   "city": "Drawsko Pomorskie",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.53334,
+   "lng": 15.80849
+  },
+  {
+   "id": "225",
+   "name": "Przedsiębiorstwo Handlowe M. Szymanik M. Wasyluk Terminex Spółka Jawna",
+   "street": "1 Maja 7/a",
+   "postcode": "74-200",
+   "city": "Pyrzyce",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.14204,
+   "lng": 14.8927
+  },
+  {
+   "id": "260",
+   "name": "Sylwia Śliwicka",
+   "street": "Bogusława X 28",
+   "postcode": "76-150",
+   "city": "Darłowo",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 54.41738,
+   "lng": 16.40435
+  },
+  {
+   "id": "252",
+   "name": "FIRMA HANDLOWO-USŁUGOWO-PRODUKCYJNA \"KOL-POL\" ZENON MUSIAŁ",
+   "street": "Zygmunta Noskowskiego 5",
+   "postcode": "78-100",
+   "city": "Kołobrzeg",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 54.15556,
+   "lng": 15.54151
+  },
+  {
+   "id": "424",
+   "name": "FIRMA HANDLOWO-USŁUGOWO-PRODUKCYJNA \"KOL-POL\" ZENON MUSIAŁ",
+   "street": "Mazowiecka 5",
+   "postcode": "78-100",
+   "city": "Kołobrzeg",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 54.16429,
+   "lng": 15.55432
+  },
+  {
+   "id": "415",
+   "name": "TARA Sklep Meblowy Monika Pomorska",
+   "street": "Szeroka 63/A",
+   "postcode": "71-211",
+   "city": "Szczecin",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.4502,
+   "lng": 14.48426
+  },
+  {
+   "id": "378",
+   "name": "MEBLE KRUSZYNA",
+   "street": "Gryfitów 34",
+   "postcode": "72-510",
+   "city": "Wolin",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.8497,
+   "lng": 14.5952
+  },
+  {
+   "id": "101",
+   "name": "Przedsiębiorstwo Handlowe M. Szymanik M. Wasyluk Terminex Spółka Jawna",
+   "street": "Tadeusza Zawadzkiego 52/414",
+   "postcode": "71-246",
+   "city": "Szczecin",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.45316,
+   "lng": 14.5017
+  },
+  {
+   "id": "107",
+   "name": "Sklep Meblowy \"JANTAR\" Robert Łyp",
+   "street": "Kościelna 14",
+   "postcode": "78-611",
+   "city": "Szwecja",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.35038,
+   "lng": 16.57261
+  },
+  {
+   "id": "96",
+   "name": "Tapicerstwo Meblowe-Piotr Janik",
+   "street": "Pocztowa 22/H",
+   "postcode": "73-150",
+   "city": "Łobez",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.63743,
+   "lng": 15.62375
+  },
+  {
+   "id": "85",
+   "name": "KUBA MEBLE S.Ostaszewski",
+   "street": "Mickiewicza 1",
+   "postcode": "72-300",
+   "city": "Gryfice",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.91409,
+   "lng": 15.19268
+  },
+  {
+   "id": "187",
+   "name": "Salon Meblowy Świat Mebli Tomasz Szatewicz",
+   "street": "Mariana Rapackiego 1/B",
+   "postcode": "71-467",
+   "city": "Szczecin",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.44993,
+   "lng": 14.54817
+  },
+  {
+   "id": "179",
+   "name": "JANTAR SALON",
+   "street": "Bydgoska 73",
+   "postcode": "78-600",
+   "city": "Wałcz",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.26624,
+   "lng": 16.48751
+  },
+  {
+   "id": "210",
+   "name": "Firma Handlowa TiM Tomasz Reut",
+   "street": "Monte Cassino 37",
+   "postcode": "72-600",
+   "city": "Świnoujście",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.90983,
+   "lng": 14.25229
+  },
+  {
+   "id": "206",
+   "name": "BONUS 33 MIROSŁAW SŁOBODA",
+   "street": "Andrzeja Struga 9",
+   "postcode": "70-784",
+   "city": "Szczecin",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.38487,
+   "lng": 14.65367
+  },
+  {
+   "id": "204",
+   "name": "BONUS 33 MIROSŁAW SŁOBODA",
+   "street": "Stanisława Noakowskiego 3/4",
+   "postcode": "70-380",
+   "city": "Szczecin",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.43499,
+   "lng": 14.52692
+  },
+  {
+   "id": "199",
+   "name": "Firma Handlowo-Usługowa \"Lew\" Renata Paszczuk-Szacka",
+   "street": "Ratuszowa 6",
+   "postcode": "74-300",
+   "city": "Myślibórz",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 52.92306,
+   "lng": 14.86688
+  },
+  {
+   "id": "133",
+   "name": "\"TARA\" Sklep Meblowy Monika Pomorska",
+   "street": "Jagiellońska 67/68",
+   "postcode": "71-211",
+   "city": "Szczecin",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.4328,
+   "lng": 14.53119
+  },
+  {
+   "id": "124",
+   "name": "\"KAMA\" MEBLE Krzysztof Jagodziński Kamil Kochanowski S.C.",
+   "street": "Koszalińska 12",
+   "postcode": "78-320",
+   "city": "Połczyn-Zdrój",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.77031,
+   "lng": 16.09123
+  },
+  {
+   "id": "121",
+   "name": "Przedsiębiorstwo Produkcyjno-Usługowo-Handlowe \"ADEK\" Michał Mróz",
+   "street": "Kościuszki 17",
+   "postcode": "74-505",
+   "city": "Mieszkowice",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 52.78296,
+   "lng": 14.49298
+  },
+  {
+   "id": "470",
+   "name": "SKLEP MEBLOWY WŁADYSŁAW CZERNICHOWSKI",
+   "street": "Jagiełły 5",
+   "postcode": "73-200",
+   "city": "Choszczno",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.16996,
+   "lng": 15.42054
+  },
+  {
+   "id": "469",
+   "name": "MEBLE BONAL JANUSZ BONALSKI",
+   "street": "Połczyńska 10 I",
+   "postcode": "78-200",
+   "city": "Białogard",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 54.00057,
+   "lng": 15.99493
+  },
+  {
+   "id": "481",
+   "name": "Marcin Meble Marcin Druciarek",
+   "street": "Warszawska 9",
+   "postcode": "72-200",
+   "city": "Nowogard",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.67189,
+   "lng": 15.11874
+  },
+  {
+   "id": "448",
+   "name": "MEBLE DLA CIEBIE",
+   "street": "Wiśniowa 10",
+   "postcode": "78-400",
+   "city": "Szczecinek",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 53.69729,
+   "lng": 16.70576
+  },
+  {
+   "id": "454",
+   "name": "Firma Handlowo Usługowa \"Victor\" Rafał Mazur",
+   "street": "Piastowska 7/5",
+   "postcode": "78-100",
+   "city": "Kołobrzeg",
+   "voivodeship": "zachodniopomorskie",
+   "lat": 54.1862,
+   "lng": 16.16218
+  },
+  {
+   "id": "274",
+   "name": "MEBLE \"SIADACZKA\" CZESŁAW SIADACZKA",
+   "street": "Józefów 7",
+   "postcode": "99-300",
+   "city": "Kutno",
+   "voivodeship": "łódzkie",
+   "lat": 52.2226,
+   "lng": 19.38613
+  },
+  {
+   "id": "294",
+   "name": "JOLMIR SKLEP PRZEMYSŁOWY RTV AGD JOLANTA I MIROSŁAW SZUBERT SPÓŁKA JAWNA",
+   "street": "Łowicka 50",
+   "postcode": "95-015",
+   "city": "Głowno",
+   "voivodeship": "łódzkie",
+   "lat": 51.96494,
+   "lng": 19.72493
+  },
+  {
+   "id": "316",
+   "name": "TADEUSZ OLEJNIKOWSKI MEBLE OLEJNIKOWSKI",
+   "street": "11-Go Listopada 2/B",
+   "postcode": "97-500",
+   "city": "Radomsko",
+   "voivodeship": "łódzkie",
+   "lat": 51.06685,
+   "lng": 19.44494
+  },
+  {
+   "id": "322",
+   "name": "Janina Telenga PPHU Meble Telenga",
+   "street": "Oleska 386",
+   "postcode": "42-161",
+   "city": "Starokrzepice",
+   "voivodeship": "łódzkie",
+   "lat": 50.94323,
+   "lng": 18.63543
+  },
+  {
+   "id": "323",
+   "name": "Janina Telenga PPHU Meble Telenga",
+   "street": "Częstochowska 20",
+   "postcode": "98-300",
+   "city": "Wieluń",
+   "voivodeship": "łódzkie",
+   "lat": 51.21551,
+   "lng": 18.57577
+  },
+  {
+   "id": "314",
+   "name": "TADEUSZ OLEJNIKOWSKI MEBLE OLEJNIKOWSKI",
+   "street": "Kochanowskiego 4",
+   "postcode": "97-500",
+   "city": "Strzałków",
+   "voivodeship": "łódzkie",
+   "lat": 51.04797,
+   "lng": 19.485
+  },
+  {
+   "id": "306",
+   "name": "SALON MEBLOWY \"DEKORATOR\" ŁUKASZ KOZIOŁ",
+   "street": "Juliusza Słowackiego 221",
+   "postcode": "97-300",
+   "city": "Piotrków Trybunalski",
+   "voivodeship": "łódzkie",
+   "lat": 51.41155,
+   "lng": 19.64718
+  },
+  {
+   "id": "311",
+   "name": "RW DESIGN SP.Z.O.O",
+   "street": "Łaska 3/5",
+   "postcode": "95-200",
+   "city": "Pabianice",
+   "voivodeship": "łódzkie",
+   "lat": 51.66508,
+   "lng": 19.33575
+  },
+  {
+   "id": "241",
+   "name": "MEBLE \"SIADACZKA\" CZESŁAW SIADACZKA",
+   "street": "Blich 32/C",
+   "postcode": "99-400",
+   "city": "Łowicz",
+   "voivodeship": "łódzkie",
+   "lat": 52.11769,
+   "lng": 19.93277
+  },
+  {
+   "id": "266",
+   "name": "DOMEX TOM EDYTA ZASIADCZYK",
+   "street": "Rzeczna 9A",
+   "postcode": "99-210",
+   "city": "Uniejów",
+   "voivodeship": "łódzkie",
+   "lat": 51.97298,
+   "lng": 18.79861
+  },
+  {
+   "id": "358",
+   "name": "MEBLE \"SIADACZKA\" CZESŁAW SIADACZKA",
+   "street": "Graniczna 28",
+   "postcode": "96-100",
+   "city": "Skierniewice",
+   "voivodeship": "łódzkie",
+   "lat": 51.94457,
+   "lng": 20.15679
+  },
+  {
+   "id": "56",
+   "name": "SKLEP MEBLOWY ZBIGNIEW KOWALCZYK",
+   "street": "Rydzowa 12",
+   "postcode": "91-211",
+   "city": "Łódź",
+   "voivodeship": "łódzkie",
+   "lat": 51.79735,
+   "lng": 19.37694
+  },
+  {
+   "id": "57",
+   "name": "SKLEP MEBLOWY-ART WYPOSAŻENIA MIESZKAŃM. KAŹMIERCZAK",
+   "street": "Sieradzka 18",
+   "postcode": "98-235",
+   "city": "Błaszki",
+   "voivodeship": "łódzkie",
+   "lat": 51.65084,
+   "lng": 18.43754
+  },
+  {
+   "id": "58",
+   "name": "Sprzedaż mebli dywanów sprzętu Agd Robert Kowalski",
+   "street": "Zduńska 35",
+   "postcode": "99-400",
+   "city": "Łowicz",
+   "voivodeship": "łódzkie",
+   "lat": 52.10671,
+   "lng": 19.94001
+  },
+  {
+   "id": "60",
+   "name": "K.B.F BEJMERT SPÓŁKA JAWNA",
+   "street": "Osmolińska 2A",
+   "postcode": "98-220",
+   "city": "Zduńska Wola",
+   "voivodeship": "łódzkie",
+   "lat": 51.59613,
+   "lng": 18.94599
+  },
+  {
+   "id": "103",
+   "name": "\"TADEX\" FIRMA HANDLOWO USŁUGOWA HURT- DETAL TADEUSZ WIŚNIK",
+   "street": "Roszkowa Wola 54A",
+   "postcode": "97-220",
+   "city": "Rzeczyca",
+   "voivodeship": "łódzkie",
+   "lat": 51.61255,
+   "lng": 20.40369
+  },
+  {
+   "id": "55",
+   "name": "Sklep Meblowy Sławomir Molenda",
+   "street": "Marii Konopnickiej 4",
+   "postcode": "98-100",
+   "city": "Łask",
+   "voivodeship": "łódzkie",
+   "lat": 51.59476,
+   "lng": 19.13266
+  },
+  {
+   "id": "16",
+   "name": "\"ORDOM\" R.KARASIŃSKI I WSPÓLNICY SPÓŁKA JAWNA",
+   "street": "Milionowa 55",
+   "postcode": "93-113",
+   "city": "Łódź",
+   "voivodeship": "łódzkie",
+   "lat": 51.75138,
+   "lng": 19.48837
+  },
+  {
+   "id": "26",
+   "name": "MEBLODON DOROTA GOŃDA",
+   "street": "Rybickiego 8",
+   "postcode": "96-100",
+   "city": "Skierniewice",
+   "voivodeship": "łódzkie",
+   "lat": 51.96206,
+   "lng": 20.15367
+  },
+  {
+   "id": "47",
+   "name": "SALON MEBLOWY ITAKA PLUS Piotr Loba",
+   "street": "Modrzewskiego 4",
+   "postcode": "95-060",
+   "city": "Brzeziny",
+   "voivodeship": "łódzkie",
+   "lat": 51.80135,
+   "lng": 19.75663
+  },
+  {
+   "id": "50",
+   "name": "SKLEP MEBLOWY \"IMAR\" S.C. Mariusz Mikołaj Marciniak",
+   "street": "Ul. Konstytucji 3 Maja 7",
+   "postcode": "97-200",
+   "city": "Tomaszów Maz.",
+   "voivodeship": "łódzkie",
+   "lat": 51.53406,
+   "lng": 20.01142
+  },
+  {
+   "id": "40",
+   "name": "PRZEDSIĘBIORSTWO HANDLOWE DANPOL",
+   "street": "Kurkowa 8",
+   "postcode": "99-400",
+   "city": "Łowicz",
+   "voivodeship": "łódzkie",
+   "lat": 52.10307,
+   "lng": 19.93681
+  },
+  {
+   "id": "34",
+   "name": "PPHU PYTON AGNIESZKA MRZYGŁÓD",
+   "street": "im. Stefana \"Grota\" Roweckiego 8A",
+   "postcode": "95-200",
+   "city": "Pabianice",
+   "voivodeship": "łódzkie",
+   "lat": 51.65892,
+   "lng": 19.35945
+  },
+  {
+   "id": "214",
+   "name": "PRZEDSIĘBIORSTWO HANDLOWO-USŁUGOWE \"ANNA\" S.C.",
+   "street": "Piotrkowska 61/L",
+   "postcode": "26-300",
+   "city": "Opoczno",
+   "voivodeship": "łódzkie",
+   "lat": 51.37343,
+   "lng": 20.27415
+  },
+  {
+   "id": "135",
+   "name": "M-3 SALON MEBLOWY ARLETA STEFANIAK",
+   "street": "Przemysłowa 11/13",
+   "postcode": "99-300",
+   "city": "Kutno",
+   "voivodeship": "łódzkie",
+   "lat": 52.22924,
+   "lng": 19.33693
+  },
+  {
+   "id": "479",
+   "name": "JOLMIR SKLEP PRZEMYSŁOWY RTV, AGD JOLANTA I MIROSŁAW SZUBERT SPÓŁKA JAWNA",
+   "street": "Dworska 5/A",
+   "postcode": "95-015",
+   "city": "Głowno",
+   "voivodeship": "łódzkie",
+   "lat": 51.9665,
+   "lng": 19.72685
+  },
+  {
+   "id": "485",
+   "name": "Leszek Stefański Zpuh Meblostef",
+   "street": "Dworcowa 12",
+   "postcode": "26-300",
+   "city": "Opoczno",
+   "voivodeship": "łódzkie",
+   "lat": 51.38086,
+   "lng": 20.28493
+  },
+  {
+   "id": "484",
+   "name": "MEBLODON DOROTA GOŃDA",
+   "street": "Mszczonowska 30/32",
+   "postcode": "96-100",
+   "city": "Skierniewice",
+   "voivodeship": "łódzkie",
+   "lat": 51.95529,
+   "lng": 20.15255
+  },
+  {
+   "id": "296",
+   "name": "Studio Meblowe Renée Renata Mirowska",
+   "street": "pl. Kazimierza Kruczkowskiego 1",
+   "postcode": "41-902",
+   "city": "Bytom",
+   "voivodeship": "śląskie",
+   "lat": 50.34772,
+   "lng": 18.91477
+  },
+  {
+   "id": "275",
+   "name": "PPHU KARBOWNIK KAROL KARBOWNIK",
+   "street": "Jastrzębska 192",
+   "postcode": "44-304",
+   "city": "Wodzisław Śląski",
+   "voivodeship": "śląskie",
+   "lat": 49.98769,
+   "lng": 18.50094
+  },
+  {
+   "id": "277",
+   "name": "COMFORT LESZEK HWIAŁEK",
+   "street": "Henryka Sienkiewicza 4",
+   "postcode": "41-710",
+   "city": "Ruda Śląska",
+   "voivodeship": "śląskie",
+   "lat": 50.27257,
+   "lng": 18.86918
+  },
+  {
+   "id": "303",
+   "name": "DOM SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
+   "street": "Koszykowa 23",
+   "postcode": "47-224",
+   "city": "Kędzierzyn-Koźle",
+   "voivodeship": "śląskie",
+   "lat": 50.34351,
+   "lng": 18.20121
+  },
+  {
+   "id": "308",
+   "name": "Meble Izabela Czogała Dariusz",
+   "street": "Pszowska 411",
+   "postcode": "44-370",
+   "city": "Pszów",
+   "voivodeship": "śląskie",
+   "lat": 50.02759,
+   "lng": 18.40142
+  },
+  {
+   "id": "243",
+   "name": "Firma Produkcyjno-Handlowo-Usługowa \"Meble Wójcik\" Witold Wójcik",
+   "street": "Zawadka 26A/-",
+   "postcode": "42-446",
+   "city": "Irządze",
+   "voivodeship": "śląskie",
+   "lat": 50.62994,
+   "lng": 19.733
+  },
+  {
+   "id": "268",
+   "name": "Trans-For Fortuna Spółka Jawna",
+   "street": "Krzywa 1/1",
+   "postcode": "43-190",
+   "city": "Mikołów",
+   "voivodeship": "śląskie",
+   "lat": 50.17169,
+   "lng": 18.88931
+  },
+  {
+   "id": "269",
+   "name": "Mach Meble Piotr Mach",
+   "street": "Jana Pawła II 17",
+   "postcode": "42-300",
+   "city": "Myszków",
+   "voivodeship": "śląskie",
+   "lat": 50.58188,
+   "lng": 19.33315
+  },
+  {
+   "id": "270",
+   "name": "ARTOmeb Artur Żywot STUDIO KUCHENNE SALON MEBLOWY",
+   "street": "Działkowców 2",
+   "postcode": "43-143",
+   "city": "Lędziny",
+   "voivodeship": "śląskie",
+   "lat": 50.14296,
+   "lng": 19.12928
+  },
+  {
+   "id": "250",
+   "name": "\"KARBOWNIK\" S.C. KRYSTYNA I WIESŁAW KARBOWNIK",
+   "street": "Jastrzębska 192",
+   "postcode": "44-300",
+   "city": "Wodzisław Śląski",
+   "voivodeship": "śląskie",
+   "lat": 49.98769,
+   "lng": 18.50094
+  },
+  {
+   "id": "255",
+   "name": "Przedsiębiorstwo Handlowe\"Mebel-Mach\"S.C.Małgorzata & Zbigniew Mach",
+   "street": "Prymasa Wyszyńskiego 35",
+   "postcode": "42-300",
+   "city": "Myszków",
+   "voivodeship": "śląskie",
+   "lat": 50.5747,
+   "lng": 19.34012
+  },
+  {
+   "id": "257",
+   "name": "FIRMA USŁUGOWO-HANDLOWA mgr Izabela Gabryel",
+   "street": "Romańska 29a",
+   "postcode": "43-300",
+   "city": "Bielsko-Biała",
+   "voivodeship": "śląskie",
+   "lat": 49.85482,
+   "lng": 19.06286
+  },
+  {
+   "id": "352",
+   "name": "Sklep Meblowy Jan Kasprowski",
+   "street": "Krakowska 105",
+   "postcode": "43-150",
+   "city": "Bieruń",
+   "voivodeship": "śląskie",
+   "lat": 50.08497,
+   "lng": 19.11005
+  },
+  {
+   "id": "373",
+   "name": "Firma Produkcyjno-Handlowa EUROMEBEL STYL- FENIKS TARTAK Grzegorz Strzoda",
+   "street": "3 Maja 47",
+   "postcode": "42-622",
+   "city": "Świerklaniec",
+   "voivodeship": "śląskie",
+   "lat": 50.44938,
+   "lng": 18.93504
+  },
+  {
+   "id": "374",
+   "name": "Firma Produkcyjno-Handlowa EUROMEBEL STYL- FENIKS",
+   "street": "Podmiejska 41",
+   "postcode": "41-940",
+   "city": "Piekary Śląskie",
+   "voivodeship": "śląskie",
+   "lat": 50.37187,
+   "lng": 18.92422
+  },
+  {
+   "id": "98",
+   "name": "P.P.H.U. \"FIEDOR\" ALAIN FIEDOR",
+   "street": "Ul. Wiśniowa 26",
+   "postcode": "32-626",
+   "city": "Jawiszowice",
+   "voivodeship": "śląskie",
+   "lat": 49.94696,
+   "lng": 19.11452
+  },
+  {
+   "id": "84",
+   "name": "FIRMA HANDLOWO-USŁUGOWA \"TIM\" CENTRUM MEBLOWE IZABELA MIESZCZAK",
+   "street": "Ks.A.Koziełka 12",
+   "postcode": "44-190",
+   "city": "Knurów",
+   "voivodeship": "śląskie",
+   "lat": 50.22284,
+   "lng": 18.67508
+  },
+  {
+   "id": "127",
+   "name": "Sklep Przemysłowy \"Jarmark Bis\" Biegun Lucyna",
+   "street": "Kościuszki 32",
+   "postcode": "34-350",
+   "city": "Węgierska Górka",
+   "voivodeship": "śląskie",
+   "lat": 49.60782,
+   "lng": 19.12209
+  },
+  {
+   "id": "131",
+   "name": "Pro-Style Grzegorz Kajtoch",
+   "street": "Armii Krajowej 2C",
+   "postcode": "44-238",
+   "city": "Czerwionka-Leszczyny",
+   "voivodeship": "śląskie",
+   "lat": 50.1419,
+   "lng": 18.64638
+  },
+  {
+   "id": "140",
+   "name": "MEBLE BOLEX 2 BOLESŁAW KŁOSEK",
+   "street": "Ul.Raciborska 50 A",
+   "postcode": "44-295",
+   "city": "Bogunice",
+   "voivodeship": "śląskie",
+   "lat": 50.13632,
+   "lng": 18.36107
+  },
+  {
+   "id": "145",
+   "name": "GALERIA MEBLI STOLLIDO L i S KULEJEWSCY SP.J.",
+   "street": "Powstańców Śl. 50",
+   "postcode": "42-140",
+   "city": "Panki",
+   "voivodeship": "śląskie",
+   "lat": 50.89838,
+   "lng": 18.74436
+  },
+  {
+   "id": "477",
+   "name": "Mf Meble Fiedor Magdalena Fiedor",
+   "street": "Romualda Traugutta 33",
+   "postcode": "43-502",
+   "city": "Czechowice-Dziedzice",
+   "voivodeship": "śląskie",
+   "lat": 49.92511,
+   "lng": 19.00717
+  },
+  {
+   "id": "486",
+   "name": "Firma Handlowa Pik Spółka Jawna Hubert i Krystyna Piksa",
+   "street": "Rybnicka 18",
+   "postcode": "44-266",
+   "city": "Świerklany",
+   "voivodeship": "śląskie",
+   "lat": 50.02994,
+   "lng": 18.58852
+  },
+  {
+   "id": "460",
+   "name": "PIK PAWILON HANDLOWY",
+   "street": "Leśna 16",
+   "postcode": "43-250",
+   "city": "Pawłowice",
+   "voivodeship": "śląskie",
+   "lat": 49.93299,
+   "lng": 18.73108
+  },
+  {
+   "id": "276",
+   "name": "Firma Produkcyjno-Handlowa EUROMEBEL STYL- FENIKS TARTAK Grzegorz Strzoda",
+   "street": "Powstańców Śląskich 110A",
+   "postcode": "42-700",
+   "city": "Sadów",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.67235,
+   "lng": 18.73853
+  },
+  {
+   "id": "281",
+   "name": "MEBLOTAP SPÓŁKA CYWILNA",
+   "street": "Józefa Radoszewskiego 29",
+   "postcode": "27-200",
+   "city": "Starachowice",
+   "voivodeship": "świętokrzyskie",
+   "lat": 51.03551,
+   "lng": 21.08502
+  },
+  {
+   "id": "315",
+   "name": "Jadwiga Zielińska - Sklep Meblowy",
+   "street": "Partyzantów 24",
+   "postcode": "28-100",
+   "city": "Busko-Zdrój",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.47024,
+   "lng": 20.72321
+  },
+  {
+   "id": "232",
+   "name": "FAMILY HEBAN SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ SPÓŁKA KOMANDYTOWA",
+   "street": "Bialska 46",
+   "postcode": "23-300",
+   "city": "Janów Lubelski",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.70886,
+   "lng": 22.41444
+  },
+  {
+   "id": "222",
+   "name": "Firma Produkcyjno-Handlowa EUROMEBEL STYL- FENIKS TARTAK Grzegorz Strzoda",
+   "street": "Al.25-Lecia Wolności 31",
+   "postcode": "27-400",
+   "city": "Ostrowiec Świetokrzyski",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.92698,
+   "lng": 21.3993
+  },
+  {
+   "id": "224",
+   "name": "KOMFOPOL MEBLE SPÓŁKA JAWNA A.MROCZKOWSKA T.MROCZKOWSKI",
+   "street": "Henryka Sienkiewicza 145",
+   "postcode": "39-400",
+   "city": "Tarnobrzeg",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.57164,
+   "lng": 21.69824
+  },
+  {
+   "id": "416",
+   "name": "LIMAR SZYMCZAK MAREK",
+   "street": "Koszarowa 3",
+   "postcode": "28-200",
+   "city": "Staszów",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.55971,
+   "lng": 21.16281
+  },
+  {
+   "id": "367",
+   "name": "Przedsiębiorstwo Produkcyjno-Handlowo-Usługowe Uno-Speed\" Adrian Nowak",
+   "street": "Celiny 1A",
+   "postcode": "26-020",
+   "city": "Chmielnik",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.65453,
+   "lng": 20.69586
+  },
+  {
+   "id": "356",
+   "name": "Firma Produkcyjno-Handlowa EUROMEBEL STYL- FENIKS TARTAK Grzegorz Strzoda",
+   "street": "Cynkowa 47",
+   "postcode": "42-610",
+   "city": "Miasteczko Śląskie",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.50026,
+   "lng": 18.92063
+  },
+  {
+   "id": "357",
+   "name": "SKLEP MEBLOWY GRZESIK STEFAN",
+   "street": "Żabia 11",
+   "postcode": "27-400",
+   "city": "Ostrowiec Świętokrzyski",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.93289,
+   "lng": 21.38361
+  },
+  {
+   "id": "73",
+   "name": "SALON MEBLOWY MACIEJEWSKA WIOLETTA",
+   "street": "Starowarszawska 6",
+   "postcode": "26-200",
+   "city": "Końskie",
+   "voivodeship": "świętokrzyskie",
+   "lat": 51.19362,
+   "lng": 20.40702
+  },
+  {
+   "id": "106",
+   "name": "SKLEP MEBLOWY GRZESIK STEFAN",
+   "street": "Słowackiego 46",
+   "postcode": "27-400",
+   "city": "Ostrowiec Świętokrzyski",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.93337,
+   "lng": 21.3913
+  },
+  {
+   "id": "185",
+   "name": "FRANCISZEK KOWALIK-1.\"FIRMA HANDLOWO-MEBLOWA KOWALIK\" 2.SANGROSS",
+   "street": "Romana Dmowskiego 78",
+   "postcode": "28-100",
+   "city": "Busko-Zdrój",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.47195,
+   "lng": 20.70368
+  },
+  {
+   "id": "197",
+   "name": "SALON MEBLOWY SIGNAL",
+   "street": "Furmańska 40",
+   "postcode": "27-400",
+   "city": "Ostrowiec Świętokrzyski",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.93724,
+   "lng": 21.39538
+  },
+  {
+   "id": "164",
+   "name": "\"Domar 2\" S.C. Przebieracz Dorota Przebieracz Jerzy",
+   "street": "Kolejowa 27D",
+   "postcode": "28-500",
+   "city": "Kazimierza Wielka",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.26611,
+   "lng": 21.98077
+  },
+  {
+   "id": "476",
+   "name": "Europlus Bąk Spółka Komandytowa",
+   "street": "Kilińskiego 8",
+   "postcode": "29-100",
+   "city": "Włoszczowa",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.85399,
+   "lng": 19.95626
+  },
+  {
+   "id": "440",
+   "name": "Home Heban Spółka z Ograniczoną Odpowiedzialnością Spółka Komandytowa",
+   "street": "Kościuszki 14/D",
+   "postcode": "28-200",
+   "city": "Staszów",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.556,
+   "lng": 21.16374
+  },
+  {
+   "id": "438",
+   "name": "KOMFOPOL MEBLE SPÓŁKA JAWNA A.MROCZKOWSKA, T.MROCZKOWSKI",
+   "street": "Zawada 2",
+   "postcode": "28-230",
+   "city": "Połaniec",
+   "voivodeship": "świętokrzyskie",
+   "lat": 50.43478,
+   "lng": 21.32719
+  },
+  {
+   "id": "459",
+   "name": "\"Doering-Meble\" S.C. Michał Doering Wojciech Doeri",
+   "street": "Podgórna 25",
+   "postcode": "86-302",
+   "city": "Grudziądz",
+   "voivodeship": "kujawsko-pomorskie",
+   "lat": 53.49565,
+   "lng": 18.75165
+  }
+ ]
+}

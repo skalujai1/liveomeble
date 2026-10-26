@@ -171,7 +171,6 @@ export function validateData(data, today) {
   // sklepy
   for (const r of resellers) {
     const w = `sklep ${r.id}`;
-    if (r.demo !== true || !r.name.includes('(dane przykładowe)')) e.push(`${w}: brak oznaczenia demo`);
     if (!/^\d{2}-\d{3}$/.test(r.postcode)) e.push(`${w}: kod ${r.postcode}`);
     const c = pref[r.postcode.slice(0, 2)];
     if (!c) e.push(`${w}: prefiks ${r.postcode} nie istnieje`);

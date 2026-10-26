@@ -113,10 +113,10 @@ describe('nearestResellers', () => {
     assert.deepEqual(nearestResellers(null, KRK), []);
   });
 
-  test('prawdziwe dane: kod z Krakowa → najbliższe sklepy w Krakowie, każdy z wybraną kolekcją', () => {
+  test('prawdziwe dane: kod z Krakowa → najbliższy sklep do 15 km, każdy z wybraną kolekcją', () => {
     const point = lookupPostcode('30-001', postcodes);
     const all = nearestResellers(resellers, point, { limit: 3 });
-    assert.equal(all[0].city, 'Kraków');
+    assert.ok(all[0].distanceKm < 15, all[0].city);
     for (const slug of ['olmo', 'briso', 'verno']) {
       const list = nearestResellers(resellers, point, { collection: slug, limit: 5 });
       assert.ok(list.length > 0, slug);
@@ -128,6 +128,6 @@ describe('nearestResellers', () => {
     const point = lookupPostcode('36-130', postcodes); // okolice Rzeszowa
     const near = nearestResellers(resellers, point, { maxKm: 50, limit: 20 });
     assert.ok(near.length >= 3);
-    assert.ok(near.every(s => s.voivodeship === 'podkarpackie'));
+    assert.ok(near.every(s => s.distanceKm <= 50));
   });
 });

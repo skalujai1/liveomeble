@@ -68,9 +68,9 @@
         "highlight": "Ma kolekcję {collection}"
       },
       "accuracyNote": "Odległość liczymy w linii prostej od środka okręgu pocztowego (pierwsze dwie cyfry kodu), więc jest przybliżona.",
-      "demoNote": "Sklepy na liście są przykładowe (dane demo).",
+      "demoNote": "Lista salonów pochodzi z liveomeble.pl. Kolekcje w tej wersji strony są przykładowe — ofertę potwierdź w salonie.",
       "more": "Pokaż kolejne sklepy",
-      "mapNote": "Mapa jest poglądowa. Dokładny adres sprawdzisz w trasie.",
+      "mapNote": "Im większa kropka, tym więcej salonów w okolicy. Dokładny adres sprawdzisz w trasie.",
       "_notes": [
         "Domyślnie 5 wyników (nearestResellers, limit 5), przycisk „Pokaż kolejne” +5.",
         "Mapa: uproszczony kontur Polski w SVG z punktami sklepów — bez zewnętrznych kafelków (wydajność, prywatność). Link „Wyznacz trasę” otwiera zewnętrzną mapę z adresem.",

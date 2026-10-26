@@ -202,11 +202,11 @@
     ],
     "company": "LIVEO Meble sp. z o.o. · ul. Borki 5, 36-130 Raniżów · tel. +48 17 58 18 000 · biuro@liveomeble.pl",
     "copyright": "© {year} Liveo Meble sp. z o.o.",
-    "demoNotice": "Wersja demonstracyjna: kolekcje, meble, ceny, promocje i sklepy na tej stronie są przykładowe."
+    "demoNotice": "Wersja demonstracyjna: kolekcje, meble, ceny i promocje na tej stronie są przykładowe. Lista salonów partnerskich pochodzi z liveomeble.pl."
   },
   "demo": {
     "badge": "DEMO",
-    "banner": "To wersja demonstracyjna strony. Kolekcje, meble, ceny, promocje i sklepy są przykładowe.",
+    "banner": "To wersja demonstracyjna strony. Kolekcje, meble, ceny i promocje są przykładowe.",
     "storesNote": "Sklepy na liście są przykładowe (dane demo)."
   },
   "buttons": {

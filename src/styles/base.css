@@ -343,11 +343,6 @@ fieldset.field { border: 0; padding: 0; }
 .store-directory__title { font-size: var(--text-lg); margin-bottom: var(--space-2); }
 .poland-map { display: grid; gap: var(--space-2); max-width: 36rem; }
 .poland-map svg { width: 100%; height: auto; }
-.poland-map__outline { fill: var(--color-surface); stroke: var(--color-line-strong); stroke-width: 1.5; }
-.poland-map__store { fill: var(--color-bg); stroke: var(--color-text-muted); stroke-width: 1.5; }
-.poland-map__store.is-result { fill: var(--color-text); stroke: var(--color-text); }
-.poland-map__me { fill: var(--color-focus); stroke: var(--color-bg); stroke-width: 3; visibility: hidden; }
-.poland-map__me.is-visible { visibility: visible; }
 .poland-map__note { font-size: var(--text-sm); color: var(--color-text-muted); }
 .finder-layout { display: grid; gap: var(--space-6); }
 @media (min-width: 64rem) { .finder-layout { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: start; } }

@@ -3,13 +3,13 @@
 //
 //   node tools/data/generate.mjs [--today=2026-10-20] [--seed=liveo-demo-2026] [--out=src/data]
 //
-// Wszystkie kolekcje, meble, ceny, promocje i sklepy są FIKCYJNE (demo: true).
+// Kolekcje, meble, ceny i promocje są FIKCYJNE (demo: true); sklepy to prawdziwe salony partnerskie z liveomeble.pl.
 // Docelowo produkty, ceny, promocje i stany przyjdą z ERP Navireo (API) i arkusza
 // Excel klienta — struktura plików jest do tego przygotowana (patrz src/data/README.md).
 // Generator jest deterministyczny: ten sam --seed i --today dają identyczne pliki.
 // Bez zależności — tylko Node (ESM).
 
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { priceFor, warsawISO } from '../../src/lib/pricing.js';
@@ -907,100 +907,28 @@ const postcodes = {
 };
 
 // ---------------------------------------------------------------------------
-// Sklepy partnerskie (fikcyjne; więcej na Podkarpaciu i w dużych miastach)
+// Sklepy partnerskie: prawdziwa lista z liveomeble.pl/salony-partnerskie (tools/data/salony-liveo.json).
+// Oficjalna strona nie podaje, które kolekcje ma salon, a kolekcje są tu fikcyjne — każdy salon dostaje wszystkie.
 // ---------------------------------------------------------------------------
-const RS = [
-  // Podkarpacie
-  ['Rzeszów', 'Słocina', '35-326', 50.052, 22.055, 'podkarpackie', 'P'],
-  ['Rzeszów', 'Zachód', '35-060', 50.033, 21.968, 'podkarpackie', 'P'],
-  ['Kolbuszowa', null, '36-100', 50.244, 21.776, 'podkarpackie', 'P'],
-  ['Mielec', null, '39-300', 50.287, 21.424, 'podkarpackie', 'P'],
-  ['Dębica', null, '39-200', 50.051, 21.411, 'podkarpackie', 'P'],
-  ['Krosno', null, '38-400', 49.689, 21.770, 'podkarpackie', 'P'],
-  ['Jasło', null, '38-200', 49.745, 21.472, 'podkarpackie', 'P'],
-  ['Sanok', null, '38-500', 49.557, 22.205, 'podkarpackie', 'P'],
-  ['Przemyśl', null, '37-700', 49.784, 22.768, 'podkarpackie', 'P'],
-  ['Jarosław', null, '37-500', 50.016, 22.678, 'podkarpackie', 'P'],
-  ['Stalowa Wola', null, '37-450', 50.583, 22.054, 'podkarpackie', 'P'],
-  ['Tarnobrzeg', null, '39-400', 50.573, 21.679, 'podkarpackie', 'P'],
-  ['Łańcut', null, '37-100', 50.069, 22.230, 'podkarpackie', 'P'],
-  // duże miasta
-  ['Warszawa', 'Bemowo', '01-494', 52.247, 20.912, 'mazowieckie', 'B'],
-  ['Warszawa', 'Białołęka', '03-289', 52.318, 21.003, 'mazowieckie', 'B'],
-  ['Warszawa', 'Mokotów', '02-675', 52.180, 21.003, 'mazowieckie', 'B'],
-  ['Kraków', 'Bronowice', '30-394', 50.081, 19.885, 'małopolskie', 'B'],
-  ['Kraków', 'Czyżyny', '31-564', 50.071, 20.001, 'małopolskie', 'B'],
-  ['Wrocław', 'Fabryczna', '54-204', 51.121, 16.950, 'dolnośląskie', 'B'],
-  ['Wrocław', 'Krzyki', '50-541', 51.081, 17.026, 'dolnośląskie', 'B'],
-  ['Poznań', 'Grunwald', '60-185', 52.393, 16.866, 'wielkopolskie', 'B'],
-  ['Poznań', 'Nowe Miasto', '61-315', 52.401, 16.990, 'wielkopolskie', 'B'],
-  ['Łódź', null, '93-457', 51.735, 19.452, 'łódzkie', 'B'],
-  ['Gdańsk', null, '80-298', 54.378, 18.567, 'pomorskie', 'B'],
-  ['Gdynia', null, '81-537', 54.475, 18.520, 'pomorskie', 'B'],
-  ['Szczecin', null, '70-814', 53.393, 14.636, 'zachodniopomorskie', 'B'],
-  ['Katowice', null, '40-750', 50.226, 18.995, 'śląskie', 'B'],
-  ['Lublin', null, '20-468', 51.224, 22.553, 'lubelskie', 'B'],
-  ['Bydgoszcz', null, '85-791', 53.146, 18.071, 'kujawsko-pomorskie', 'B'],
-  ['Białystok', null, '15-660', 53.115, 23.198, 'podlaskie', 'B'],
-  // pozostałe
-  ['Kielce', null, '25-116', 50.867, 20.664, 'świętokrzyskie', 'O'],
-  ['Tarnów', null, '33-100', 50.012, 20.986, 'małopolskie', 'O'],
-  ['Nowy Sącz', null, '33-300', 49.622, 20.697, 'małopolskie', 'O'],
-  ['Opole', null, '45-325', 50.669, 17.952, 'opolskie', 'O'],
-  ['Częstochowa', null, '42-200', 50.812, 19.120, 'śląskie', 'O'],
-  ['Toruń', null, '87-100', 53.014, 18.598, 'kujawsko-pomorskie', 'O'],
-  ['Olsztyn', null, '10-685', 53.759, 20.497, 'warmińsko-mazurskie', 'O'],
-  ['Zielona Góra', null, '65-120', 51.936, 15.506, 'lubuskie', 'O'],
-  ['Koszalin', null, '75-136', 54.194, 16.172, 'zachodniopomorskie', 'O'],
-  ['Radom', null, '26-600', 51.403, 21.147, 'mazowieckie', 'O'],
-  ['Zamość', null, '22-400', 50.723, 23.252, 'lubelskie', 'O'],
-  ['Bielsko-Biała', null, '43-300', 49.822, 19.058, 'śląskie', 'O'],
-  ['Płock', null, '09-400', 52.547, 19.706, 'mazowieckie', 'O'],
-  ['Kalisz', null, '62-800', 51.761, 18.091, 'wielkopolskie', 'O'],
-  ['Siedlce', null, '08-110', 52.168, 22.290, 'mazowieckie', 'O'],
-];
-const HOURS = [
-  'pon.–pt. 10:00–18:00, sob. 9:00–14:00',
-  'pon.–pt. 9:00–17:00, sob. 9:00–13:00',
-  'pon.–sob. 10:00–20:00, niedziele handlowe 10:00–18:00',
-  'pon.–pt. 10:00–19:00, sob. 10:00–15:00',
-];
+const SALONY = JSON.parse(readFileSync(join(ROOT, 'tools/data/salony-liveo.json'), 'utf8')).stores;
 const collSlugs = COLLECTIONS.map(c => c.slug);
-const resellers = RS.map(([city, district, postcode, lat, lng, voivodeship, kind], i) => {
-  const r = rng(`reseller|${city}|${district}`);
-  const [kMin, kMax] = kind === 'O' ? [3, 6] : [5, 8];
-  const k = kMin + Math.floor(r() * (kMax - kMin + 1));
-  const shuffled = collSlugs.map(s => [r(), s]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
-  const collections = shuffled.slice(0, k).sort((a, b) => collSlugs.indexOf(a) - collSlugs.indexOf(b));
-  const where = district ? `${city}, ${district}` : city;
-  return {
-    id: `rs-${slugify(where)}`,
-    name: `Salon partnerski Liveo — ${where} (dane przykładowe)`,
-    address: `ul. Przykładowa ${1 + Math.floor(r() * 120)}`,
-    city,
-    district,
-    postcode,
-    voivodeship,
-    lat: round(lat + (r() - 0.5) * 0.02, 4),
-    lng: round(lng + (r() - 0.5) * 0.03, 4),
-    phone: null,
-    email: null,
-    collections,
-    services: { montaz: r() < 0.6, dostawa: r() < 0.8, ekspozycja: kind === 'P' || r() < 0.75 },
-    openingHours: HOURS[(i + Math.floor(r() * HOURS.length)) % HOURS.length],
-    demo: true,
-  };
-});
-// każda kolekcja w co najmniej 10 sklepach (dokładamy w kolejności listy)
-for (const slug of collSlugs) {
-  for (const r of resellers) {
-    if (resellers.filter(x => x.collections.includes(slug)).length >= 10) break;
-    if (!r.collections.includes(slug)) {
-      r.collections.push(slug);
-      r.collections.sort((a, b) => collSlugs.indexOf(a) - collSlugs.indexOf(b));
-    }
-  }
-}
+const resellers = SALONY.map(s => ({
+  id: `rs-${s.id}`,
+  name: s.name,
+  address: s.street,
+  city: s.city,
+  district: null,
+  postcode: s.postcode,
+  voivodeship: s.voivodeship,
+  lat: s.lat,
+  lng: s.lng,
+  phone: null,
+  email: null,
+  collections: collSlugs,
+  services: {},
+  openingHours: null,
+  demo: false,
+}));
 
 // ---------------------------------------------------------------------------
 // Zapis

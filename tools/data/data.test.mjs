@@ -16,11 +16,11 @@ test('dane przechodzą kontrolę spójności', () => {
   assert.deepEqual(validateData(data, TODAY), []);
 });
 
-test('80–100 produktów, 8 kolekcji, ~45 sklepów, wszystko oznaczone jako demo', () => {
+test('80–100 produktów, 8 kolekcji, 400+ prawdziwych salonów, katalog oznaczony jako demo', () => {
   assert.ok(data.products.length >= 80 && data.products.length <= 100, String(data.products.length));
   assert.equal(data.collections.length, 8);
-  assert.ok(data.resellers.length >= 40 && data.resellers.length <= 50);
-  for (const list of [data.products, data.collections, data.resellers, data.promotions]) {
+  assert.ok(data.resellers.length >= 400);
+  for (const list of [data.products, data.collections, data.promotions]) {
     assert.ok(list.every(x => x.demo === true));
   }
 });

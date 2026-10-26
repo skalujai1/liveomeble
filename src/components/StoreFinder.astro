@@ -48,7 +48,6 @@ for (const r of resellers) {
   byCity.set(r.city, e);
 }
 const quickCities = [...byCity.values()].sort((a, b) => b.n - a.n || a.city.localeCompare(b.city, 'pl')).slice(0, 8);
-const voivodeships = new Set(resellers.map(r => r.voivodeship)).size;
 ---
 <div class:list={['store-finder', { 'store-finder--map': showMap }]} id={id} data-store-finder data-limit={limit} data-sync-url={syncUrl ? '1' : undefined}>
   <div class="store-finder__main">
@@ -103,7 +102,6 @@ const voivodeships = new Set(resellers.map(r => r.voivodeship)).size;
       <ul>
         {quickCities.map(c => <li><a href={`/gdzie-kupic/?kod=${c.postcode}`}>{c.city}</a></li>)}
       </ul>
-      <p class="store-finder__count">{plural(site.plural.stores, resellers.length)} partnerskich w {voivodeships} {voivodeships === 1 ? 'województwie' : 'województwach'}.</p>
     </nav>
   )}
   </div>
