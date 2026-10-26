@@ -4,6 +4,7 @@
 import '../styles/tokens.css';
 import '../styles/base.css';
 import '../styles/theme.css';
+import '../styles/editorial.css';
 import SeoHead from '../components/SeoHead.astro';
 import DemoBar from '../components/DemoBar.astro';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -33,9 +34,11 @@ export interface Props {
   assistant?: boolean;
   /** false = bez canonical (404). */
   canonical?: boolean;
+  /** Hero na pełną szerokość pod przezroczystym nagłówkiem (slot "hero", przed okruszkami). */
+  overlay?: boolean;
 }
 
-const { title, description, path, robots, ogType, ogImage: ogImageProp, ogImageAlt: ogAltProp, jsonLd = [], breadcrumbs, pageClass, assistant = true, canonical = true } = Astro.props;
+const { title, description, path, robots, ogType, ogImage: ogImageProp, ogImageAlt: ogAltProp, jsonLd = [], breadcrumbs, pageClass, assistant = true, canonical = true, overlay = false } = Astro.props;
 // Brak własnego obrazu OG → obraz domyślny (aranżacja z logo, generowany: src/pages/og/[...slug].jpg.ts).
 const ogImage = ogImageProp ?? '/og/liveo.jpg';
 const ogImageAlt = ogImageProp ? ogAltProp : 'Liveo Meble — kolekcje mebli do całego domu';
@@ -63,16 +66,21 @@ const ld: Node[] = [website(), organization(), ...jsonLd, ...(crumbs ? [breadcru
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <slot name="head" />
   </head>
-  <body class={pageClass}>
+  <body class:list={[pageClass, { 'has-overlay': overlay }]}>
     <a class="skip-link" href="#tresc">{site.skipLink}</a>
     {DEMO && <DemoBar />}
     <SiteHeader {path} />
     <main id="tresc" tabindex="-1">
+      <slot name="hero" />
       {crumbs && <Breadcrumbs items={crumbs} />}
       <slot />
     </main>
     <SiteFooter />
     <ConsentBanner />
     {assistant && <AssistantLoader />}
+    <script>
+      import { initMotion } from '../scripts/motion';
+      initMotion();
+    </script>
   </body>
 </html>

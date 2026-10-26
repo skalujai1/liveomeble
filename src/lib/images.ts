@@ -77,10 +77,15 @@ export function roomImage(roomSlug: string, frame: 'wide' | 'tall' = 'wide', ind
   return col ? get(col.file) : null;
 }
 
-/** Aranżacja kolekcji: własna (collections/<slug>) albo aranżacja jej pomieszczenia `heroRoom` (poglądowo). */
-export function collectionImage(c: Collection, frame: 'wide' | 'tall' = 'wide'): ImageRef | null {
+/**
+ * Aranżacja kolekcji: własna (collections/<slug>) albo aranżacja jej pomieszczenia `heroRoom` (poglądowo).
+ * Kadry: wide 16:9, tall 4:5, cinema 2:1 (hero na pełną szerokość), angle 3:2 (pod kątem), detail 4:5 (zbliżenie).
+ */
+export type Frame = 'wide' | 'tall' | 'cinema' | 'angle' | 'detail';
+export function collectionImage(c: Collection, frame: Frame = 'wide'): ImageRef | null {
   const own = get(`collections/${c.slug}-${frame}.jpg`) ?? get(`collections/${c.slug}-${frame}.webp`);
   if (own) return own;
+  if (frame !== 'wide' && frame !== 'tall') return collectionImage(c, frame === 'detail' ? 'tall' : 'wide');
   const room = roomImage(c.heroRoom, frame, c.order - 1);
   return room ? { ...room, approximate: true } : null;
 }

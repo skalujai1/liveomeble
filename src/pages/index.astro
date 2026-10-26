@@ -1,12 +1,15 @@
 ---
-// Strona główna — układ kierunku C (design/directions-v2/c): hero na pełną szerokość (kampania 2/3 + nowość 1/3),
-// pas usług, kolekcje jako kafle ze zdjęciem, polecane meble, rodzaje mebli, gdzie kupić, pas B2B, poradnik, FAQ.
+// Strona główna — styl C na poziomie „premium” (surface brief: .impeccable/surfaces/src-pages-index-astro.md):
+// kurtyna kolekcji na cały ekran → manifest (H1) → rozkładówki trzech kolekcji → pas wszystkich kolekcji →
+// pomieszczenia → polecane meble → doradca → gdzie kupić → B2B → rodzaje mebli → poradnik → FAQ.
 // Treść: src/content/pages/home.json, dane: src/data. Docs: docs/ia.md 3.1.
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/Section.astro';
-import HeroPicture from '../components/HeroPicture.astro';
-import CollectionCard from '../components/CollectionCard.astro';
+import HomeHero from '../components/HomeHero.astro';
+import CollectionSpread from '../components/CollectionSpread.astro';
+import CollectionRail from '../components/CollectionRail.astro';
+import RoomShowcase from '../components/RoomShowcase.astro';
 import ProductCard from '../components/ProductCard.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import StoreFinder from '../components/StoreFinder.astro';
@@ -17,42 +20,26 @@ import Rich from '../components/Rich.astro';
 import { articleCard, getArticles } from '../lib/articles';
 import { collectionImage, roomImage, typeImage } from '../lib/images';
 import { faqPage } from '../lib/jsonld';
-import { activePromosAtBuild, collections, pages, priceAt, priceRangeOf, products, productsByCollection, productsSorted, section, types, url } from '../lib/site';
-import { fill, promoLastDay } from '../lib/text';
+import { activePromosAtBuild, collections, pages, priceAt, products, productsSorted, section, types, url } from '../lib/site';
+import { promoLastDay } from '../lib/text';
 
 const page = pages.home;
 const hero = section(page, 'hero');
 const kol = section(page, 'kolekcje');
+const pom = section(page, 'pomieszczenia');
 const steps = section(page, 'jak-kupic');
 const b2b = section(page, 'partnerzy');
 const guides = section(page, 'poradnik');
 const path = '/';
 
-// Hero: pierwsza kolekcja, jej aranżacja i mebel na zdjęciu.
+// Rozkładówki: pierwsza kolekcja, najnowsza i kolejna z innego pomieszczenia — trzy różne nastroje.
 const first = collections[0];
-const heroWide = collectionImage(first, 'wide')!;
-const heroTall = collectionImage(first, 'tall');
-const firstColor = first.finishes[0].label.toLocaleLowerCase('pl');
-const heroAlt = heroWide?.approximate && heroWide.title
-  ? `Aranżacja poglądowa: ${heroWide.title}`
-  : fill(hero.image.alt, { name: first.name, color: firstColor });
-const heroPromo = activePromosAtBuild.find(p => (p.scope as { collections?: string[] }).collections?.includes(first.slug));
-const heroLastDay = promoLastDay(heroPromo?.endsAt);
-// promoLastDay zwraca „RRRR-MM-DD” (dzień w czasie polskim) → „30.10”.
-const dayMonth = (d: string | null) => (d ? `${Number(d.slice(8, 10))}.${d.slice(5, 7)}` : '');
+const fresh = collections.find(c => c.isNew && c.slug !== first.slug);
+const third = collections.find(c => c.slug !== first.slug && c.slug !== fresh?.slug && c.heroRoom !== first.heroRoom && c.heroRoom !== fresh?.heroRoom);
+const spreads = [first, fresh, third].filter((c): c is NonNullable<typeof c> => !!c);
 
-// Bok hero (desktop): najnowsza kolekcja, pionowy kadr.
-const side = collections.find(c => c.isNew && c.slug !== first.slug) ?? collections[1];
-const sideImg = side ? collectionImage(side, 'tall') : null;
-const sideAlt = sideImg?.title ? `Aranżacja poglądowa: ${sideImg.title}` : `Meble z kolekcji ${side?.name}`;
-const sideItems = side ? productsByCollection(side.slug) : [];
-const sideRange = sideItems.length ? priceRangeOf(sideItems) : null;
-
-// Pas usług: aktywna promocja z najwcześniejszym końcem.
 const mainPromo = activePromosAtBuild[0];
-
-// Kolekcje: wszystkie jako kafle 3:4 (na telefonie przewijany pas).
-const homeCollections = collections;
+const dayMonth = (d: string | null) => (d ? `${Number(d.slice(8, 10))}.${d.slice(5, 7)}` : '');
 
 // Polecane: bestsellery, potem promocje i nowości — każdy mebel z innej kolekcji i innego rodzaju.
 const seenCol = new Set<string>();
@@ -65,11 +52,11 @@ const featured = [...productsSorted]
   })
   .slice(0, 4);
 
-// Rodzaje mebli: 8 z packshotem.
-// Rodzaje mebli: najpierw te ze zdjęciem (bez pustych kafli), maks. 8.
 const tileTypes = types.filter(t => products.some(p => p.type === t.id)).map(t => ({ t, img: typeImage(t.id, products) })).filter(x => x.img).slice(0, 8);
 const typeCount = types.filter(t => products.some(p => p.type === t.id)).length;
 
+const advisorCol = collections.find(c => c.slug === 'nokta') ?? collections[1];
+const advisorImg = collectionImage(advisorCol, 'detail');
 const b2bImg = roomImage('przedpokoj', 'wide');
 const articles = (await getArticles()).slice(0, 4).map(articleCard);
 ---
@@ -78,97 +65,84 @@ const articles = (await getArticles()).slice(0, 4).map(articleCard);
   description={page.seo.description}
   {path}
   pageClass="page-home"
+  overlay
   ogImage="/og/liveo.jpg"
-  ogImageAlt={heroAlt}
+  ogImageAlt={`Meble z kolekcji ${first.name}`}
   jsonLd={[faqPage(path, page.faq.items)]}
 >
-  <section class="home-hero" aria-labelledby="h1">
-    <div class="home-hero__grid">
-      <div class="home-hero__cell home-hero__main on-dark">
-        <HeroPicture wide={heroWide} tall={heroTall} alt={heroAlt} class="home-hero__media" sizes="(min-width: 60rem) 67vw, 100vw" />
-        <div class="home-hero__copy">
-          <h1 class="home-hero__title" id="h1"><Rich text={page.h1} /></h1>
-          <p class="home-hero__lead">
-            Kolekcja {first.name} w kolorze {firstColor}{heroPromo && (
-              <span data-promo-window data-start={heroPromo.startsAt ?? ''} data-end={heroPromo.endsAt ?? ''}>, teraz {heroPromo.value}% taniej{heroLastDay && ` do ${dayMonth(heroLastDay)}`}</span>
-            )}.
-          </p>
-          <p class="home-hero__cta">
-            <a class="btn btn--light" href={url.collection(first.slug)}>Zobacz kolekcję {first.name}</a>
-            <a class="link" href={url.stores()}>
-              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.4" /></svg>
-              Gdzie kupić
-            </a>
-          </p>
-        </div>
-      </div>
-      {side && (
-        <div class="home-hero__cell home-hero__side on-dark">
-          <Media image={sideImg} alt={sideAlt} widths={[480, 720, 960]} sizes="33vw" ratio="4 / 5" placeholderLabel={`Kolekcja ${side.name}`} />
-          <div class="home-hero__copy">
-            <span class="badge">Nowość</span>
-            <h2 class="home-hero__side-title">Kolekcja {side.name}</h2>
-            <p>{side.tagline}{sideRange && ` Od ${sideRange.minText}.`}</p>
-            <a class="link" href={url.collection(side.slug)}>Poznaj kolekcję {side.name}</a>
-          </div>
-        </div>
-      )}
-    </div>
+  <HomeHero slot="hero" {collections} />
 
-    <div class="container">
-      <div class="services">
-        <form class="service" action={url.stores()} method="get">
-          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.4" /></svg>
-          <label for="usluga-kod"><b>Gdzie kupić</b><span class="visually-hidden"> — wpisz kod pocztowy</span></label>
-          <div class="service__code">
-            <input id="usluga-kod" name="kod" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="__-___" maxlength="6" />
-            <button type="submit">Szukaj</button>
-          </div>
-        </form>
-        <a class="service" href={url.advisor}>
-          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z" /><circle cx="12" cy="13" r="3.2" /></svg>
-          <b>Doradca wnętrz</b><span>Dobierz meble do zdjęcia pokoju</span>
-        </a>
-        <a class="service" href={url.promotions}>
-          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V4h8l9 9-8 8z" /><circle cx="7.5" cy="8.5" r="1.4" /></svg>
-          <b>Promocje</b>
-          <span>{mainPromo
-            ? <span data-promo-window data-start={mainPromo.startsAt ?? ''} data-end={mainPromo.endsAt ?? ''}><em>{mainPromo.label}</em>{promoLastDay(mainPromo.endsAt) && ` do ${dayMonth(promoLastDay(mainPromo.endsAt))}`}</span>
-            : 'Aktualne obniżki cen'}</span>
-        </a>
-        <a class="service" href={url.partners}>
-          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10 5 5h14l2 5M4 10v9h16v-9M3 10h18M9 19v-5h6v5" /></svg>
-          <b>Dla sklepów</b><span>Zostań partnerem Liveo</span>
-        </a>
+  <section class="manifest" aria-labelledby="h1">
+    <div class="container manifest__inner">
+      <h1 class="manifest__title" id="h1" data-reveal><Rich text={page.h1} /></h1>
+      <div class="manifest__side" data-reveal style="--d: 120ms">
+        <p class="manifest__lead"><Rich text={hero.lead} /></p>
+        <p class="manifest__cta">
+          {hero.cta.map((c: any, i: number) => <a class:list={['btn', i ? 'btn--secondary' : 'btn--dark']} href={c.href}>{c.label}</a>)}
+        </p>
       </div>
+    </div>
+    <nav class="container manifest__services" aria-label="Na skróty" data-reveal style="--d: 200ms">
+      <a href={url.advisor}><b>Doradca wnętrz</b><span>Dobierz meble do zdjęcia pokoju</span></a>
+      <a href={url.promotions}>
+        <b>Promocje</b>
+        <span>{mainPromo
+          ? <span data-promo-window data-start={mainPromo.startsAt ?? ''} data-end={mainPromo.endsAt ?? ''}><em>{mainPromo.label}</em>{promoLastDay(mainPromo.endsAt) && ` do ${dayMonth(promoLastDay(mainPromo.endsAt))}`}</span>
+          : 'Aktualne obniżki cen'}</span>
+      </a>
+      <a href={url.stores()}><b>Gdzie kupić</b><span>Salony partnerskie w całej Polsce</span></a>
+      <a href={url.partners}><b>Dla sklepów</b><span>Zostań partnerem Liveo</span></a>
+    </nav>
+  </section>
+
+  <section class="spreads" id={kol.id} aria-labelledby="kolekcje-tytul">
+    <header class="container spreads__head" data-reveal>
+      <h2 class="spreads__title" id="kolekcje-tytul">{kol.title}</h2>
+      <p class="spreads__lead">{kol.lead}</p>
+    </header>
+    <div class="container spreads__list">
+      {spreads.map((c, i) => <CollectionSpread collection={c} flip={i % 2 === 1} headingLevel={3} />)}
     </div>
   </section>
 
-  <Section id={kol.id} title="Nasze kolekcje" lead={kol.lead} class="section--center section--tiles">
-    <ul class="card-grid card-grid--collections card-grid--rail">
-      {homeCollections.map(c => <CollectionCard collection={c} showFoot sizes="(min-width: 66rem) 25vw, (min-width: 40rem) 50vw, 80vw" />)}
-    </ul>
-    <p class="section__more"><a href={kol.more.href}>{kol.more.label}</a></p>
-  </Section>
+  <section class="section rail-section" aria-labelledby="wszystkie-tytul">
+    <header class="container rail-section__head" data-reveal>
+      <h2 class="rail-section__title" id="wszystkie-tytul">Wszystkie kolekcje</h2>
+      <a class="link" href={kol.more.href}>{kol.more.label}</a>
+    </header>
+    <CollectionRail {collections} named={spreads.map(c => c.slug)} label="Kolekcje Liveo" />
+  </section>
 
-  <Section id="polecane" title="Polecane meble" lead="Ceny sugerowane przez producenta. Meble kupisz w salonach partnerskich." class="section--center">
+  <section class="section rooms-section" aria-labelledby="pomieszczenia-tytul">
+    <div class="container">
+      <header class="rooms-section__head" data-reveal>
+        <h2 id="pomieszczenia-tytul"><Rich text={pom.title} /></h2>
+        <p class="section__lead">{pom.lead}</p>
+      </header>
+      <RoomShowcase />
+    </div>
+  </section>
+
+  <Section id="polecane" title="Polecane meble" lead="Ceny sugerowane przez producenta. Meble kupisz w salonach partnerskich." class="section--center section--products">
     <ul class="product-grid product-grid--4">
       {featured.map((p, i) => <ProductCard product={p} order={i} sizes="(min-width: 60rem) 18rem, 46vw" />)}
     </ul>
     <p class="section__more"><a href={url.products}>Wszystkie meble</a></p>
   </Section>
 
-  <Section id="rodzaje" title="Wybierz rodzaj mebla" class="section--center">
-    <ul class="type-tiles">
-      {tileTypes.map(({ t, img }) => (
-        <li class="type-tile"><a href={url.category(t.slug)}>
-          <span class="type-tile__thumb">{img && <Image src={img.src} alt="" widths={[160, 240, 320]} sizes="(min-width: 60rem) 9rem, 22vw" loading="lazy" />}</span>
-          <span class="type-tile__name">{t.plural}</span>
-        </a></li>
-      ))}
-    </ul>
-    <p class="section__more"><a href={url.products}>Wszystkie {typeCount} rodzajów mebli</a></p>
-  </Section>
+  <section class="feature-band on-dark" aria-labelledby="doradca-tytul">
+    <div class="feature-band__media" data-reveal>
+      <Media image={advisorImg} alt="" widths={[720, 1080, 1440, 1920]} sizes="(min-width: 60rem) 50vw, 100vw" ratio="4 / 5" placeholderLabel="Doradca wnętrz" />
+    </div>
+    <div class="feature-band__text" data-reveal style="--d: 120ms">
+      <h2 id="doradca-tytul">Pokaż pokój, a dobierzemy komplet</h2>
+      <p>Doradca wnętrz rozpozna pomieszczenie i jego kolory, a potem zaproponuje meble z jednej kolekcji, które do nich pasują. Zdjęcie zostaje na Twoim urządzeniu.</p>
+      <p class="cta-row">
+        <a class="btn btn--white" href={url.advisor}>Otwórz doradcę wnętrz</a>
+        <a class="link" href={`${url.advisor}#jak-korzystac`}>Jak to działa</a>
+      </p>
+    </div>
+  </section>
 
   <Section id="gdzie-kupic" title="Znajdź salon partnerski" lead={steps.lead} class="section--alt section--center">
     <StoreFinder id="salony-home" limit={3} headingLevel={3} more={{ label: 'Wszystkie salony na mapie', href: url.stores() }} />
@@ -181,7 +155,7 @@ const articles = (await getArticles()).slice(0, 4).map(articleCard);
 
   <section class="band-dark on-dark" id={b2b.id} aria-labelledby="b2b-tytul">
     <div class="container band-dark__inner">
-      <div>
+      <div data-reveal>
         <h2 id="b2b-tytul"><Rich text={b2b.title} /></h2>
         <p><Rich text={b2b.text} /></p>
         <ul>
@@ -194,9 +168,23 @@ const articles = (await getArticles()).slice(0, 4).map(articleCard);
           <a class="btn btn--light" href={url.partnerZone}>Strefa partnera</a>
         </p>
       </div>
-      <Media image={b2bImg} alt="" widths={[480, 768, 1024]} sizes="(min-width: 60rem) 38rem, 100vw" ratio="16 / 10" placeholderLabel="Aranżacja" />
+      <div data-reveal style="--d: 120ms">
+        <Media image={b2bImg} alt="" widths={[480, 768, 1024]} sizes="(min-width: 60rem) 38rem, 100vw" ratio="16 / 10" placeholderLabel="Aranżacja" />
+      </div>
     </div>
   </section>
+
+  <Section id="rodzaje" title="Wybierz rodzaj mebla" class="section--center">
+    <ul class="type-tiles">
+      {tileTypes.map(({ t, img }) => (
+        <li class="type-tile"><a href={url.category(t.slug)}>
+          <span class="type-tile__thumb">{img && <Image src={img.src} alt="" widths={[160, 240, 320]} sizes="(min-width: 60rem) 9rem, 22vw" loading="lazy" />}</span>
+          <span class="type-tile__name">{t.plural}</span>
+        </a></li>
+      ))}
+    </ul>
+    <p class="section__more"><a href={url.products}>Wszystkie {typeCount} rodzajów mebli</a></p>
+  </Section>
 
   <Section id={guides.id} title={guides.title} lead={guides.lead} class="section--center">
     <ul class="card-grid card-grid--articles">

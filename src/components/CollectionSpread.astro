@@ -1,0 +1,57 @@
+---
+// Rozkładówka kolekcji (jak w drukowanym katalogu): ujęcie pod kątem, pion i zbliżenie detalu, obok nazwa
+// w skali plakatu, charakter, kolory, cena „od” i dwa działania. Obrazy wchodzą „odsłoną” (data-reveal, motion.ts).
+// Ujęcie główne nosi view-transition-name kolekcji — przy przejściu do kolekcji płynnie zamienia się w jej hero.
+import Media from './Media.astro';
+import { collectionImage } from '../lib/images';
+import { finishById, finishLabels, priceRangeOf, productsByCollection, roomsList, url, type Collection } from '../lib/site';
+
+interface Props {
+  collection: Collection;
+  /** Lustrzane odbicie układu (co druga rozkładówka). */
+  flip?: boolean;
+  headingLevel?: 2 | 3;
+}
+const { collection: c, flip = false, headingLevel = 2 } = Astro.props;
+const H = `h${headingLevel}` as 'h2' | 'h3';
+const items = productsByCollection(c.slug);
+const range = items.length ? priceRangeOf(items) : null;
+const pieces = (n: number) => `${n} ${n === 1 ? 'mebel' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 'meble' : 'mebli'}`;
+const altOf = (img: ReturnType<typeof collectionImage>, what: string) =>
+  img?.title ? (img.approximate ? `Aranżacja poglądowa: ${img.title}` : `${what}: ${img.title}`) : `Kolekcja ${c.name} — ${what.toLocaleLowerCase('pl')}`;
+const angle = collectionImage(c, 'angle');
+const tall = collectionImage(c, 'tall');
+const detail = collectionImage(c, 'detail');
+const dots = c.finishes.map(f => ({ label: f.label, a: finishById.get(f.front)?.hex ?? '#ccc', b: finishById.get(f.body)?.hex ?? '#ccc' }));
+---
+<article class:list={['spread', { 'spread--flip': flip }]} aria-labelledby={`rozkladowka-${c.slug}`}>
+  <a class="spread__fig spread__fig--angle" href={url.collection(c.slug)} tabindex="-1" data-reveal style={`view-transition-name: kolekcja-${c.slug}`}>
+    <Media image={angle} alt={altOf(angle, 'Aranżacja')} widths={[640, 960, 1280, 1600, 2000, 2400]} sizes="(min-width: 64rem) 62vw, 100vw" ratio="3 / 2" placeholderLabel={`Kolekcja ${c.name}`} />
+  </a>
+  <figure class="spread__fig spread__fig--tall" data-reveal style="--d: 120ms">
+    <Media image={tall} alt={altOf(tall, 'Aranżacja')} widths={[480, 720, 960, 1200]} sizes="(min-width: 64rem) 30vw, 50vw" ratio="4 / 5" placeholderLabel={`Kolekcja ${c.name}`} />
+  </figure>
+  <div class="spread__text" data-reveal style="--d: 60ms">
+    <H class="spread__name" id={`rozkladowka-${c.slug}`}><span class="visually-hidden">Kolekcja </span>{c.name}</H>
+    {c.isNew && <span class="badge spread__badge">Nowość</span>}
+    <p class="spread__tagline">{c.tagline}</p>
+    <dl class="spread__facts">
+      <div><dt>Pomieszczenia</dt><dd>{roomsList(c.rooms)}</dd></div>
+      <div>
+        <dt>Kolory</dt>
+        <dd class="spread__dots" aria-label={finishLabels(c)}>
+          {dots.map(d => <i style={`--c: ${d.a}; --c2: ${d.b}`} title={d.label}></i>)}
+          <span>{dots.length === 1 ? dots[0].label : `${dots.length} warianty`}</span>
+        </dd>
+      </div>
+      {range && <div><dt>Ceny</dt><dd>od {range.minText} · {pieces(items.length)}</dd></div>}
+    </dl>
+    <p class="spread__cta">
+      <a class="btn btn--dark" href={url.collection(c.slug)}>Zobacz kolekcję {c.name}</a>
+      <a class="link" href={url.stores(c.slug)}>Gdzie kupić</a>
+    </p>
+  </div>
+  <figure class="spread__fig spread__fig--detail" data-reveal style="--d: 200ms">
+    <Media image={detail} alt={altOf(detail, 'Zbliżenie')} widths={[360, 540, 720, 960]} sizes="(min-width: 64rem) 20vw, 50vw" ratio="4 / 5" placeholderLabel={`Detal ${c.name}`} />
+  </figure>
+</article>

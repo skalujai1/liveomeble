@@ -1,0 +1,44 @@
+---
+// Przeciągany pas wszystkich kolekcji (pionowe kadry 4:5): przewijanie natywne ze snap, strzałki i pasek postępu.
+// Zachowanie: [data-rail] w src/scripts/motion.ts. Bez JS to zwykła lista przewijana w poziomie.
+import Media from './Media.astro';
+import { collectionImage } from '../lib/images';
+import { priceRangeOf, productsByCollection, url, type Collection } from '../lib/site';
+
+interface Props {
+  collections: Collection[];
+  /** Kolekcje, które mają już view-transition-name na tej stronie (rozkładówki) — nazwa musi być unikalna. */
+  named?: string[];
+  label: string;
+}
+const { collections, named = [], label } = Astro.props;
+---
+<div class="rail" data-rail>
+  <ul class="rail__track" data-rail-track aria-label={label}>
+    {collections.map(c => {
+      const img = collectionImage(c, 'tall');
+      const items = productsByCollection(c.slug);
+      return (
+        <li class="rail__item">
+          <a class="rail__link" href={url.collection(c.slug)}>
+            <span class="rail__pic" style={named.includes(c.slug) ? undefined : `view-transition-name: kolekcja-${c.slug}`}>
+              <Media image={img} alt="" widths={[360, 540, 720, 960]} sizes="(min-width: 64rem) 26vw, (min-width: 40rem) 42vw, 76vw" ratio="4 / 5" placeholderLabel={`Kolekcja ${c.name}`} />
+              {c.isNew && <span class="badge rail__badge">Nowość</span>}
+            </span>
+            <span class="rail__name">{c.name}</span>
+            <span class="rail__meta">{c.tagline}{items.length ? ` Od ${priceRangeOf(items).minText}.` : ''}</span>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+  <div class="rail__nav container">
+    <span class="rail__progress" aria-hidden="true"><i></i></span>
+    <button class="rail__btn" type="button" data-rail-prev aria-label="Poprzednie kolekcje">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+    </button>
+    <button class="rail__btn" type="button" data-rail-next aria-label="Następne kolekcje">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+    </button>
+  </div>
+</div>

@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import Section from '../../components/Section.astro';
 import ContentSection from '../../components/ContentSection.astro';
-import CollectionCard from '../../components/CollectionCard.astro';
+import CollectionSpread from '../../components/CollectionSpread.astro';
 import Faq from '../../components/Faq.astro';
 import { faqPage, itemList, webPage } from '../../lib/jsonld';
 import { collections, pages, rooms, section, url } from '../../lib/site';
@@ -37,8 +37,8 @@ const lista = section(page, 'lista');
           {rooms.map(r => <label class="check"><input type="radio" name="kolekcje-pokoj" value={r.slug} /> <span>{r.name}</span></label>)}
         </fieldset>
         <p class="visually-hidden" role="status" aria-live="polite" data-collection-filter-status></p>
-        <ul class="card-grid card-grid--collections" data-collection-list>
-          {collections.map(c => <CollectionCard collection={c} showMeta />)}
+        <ul class="spreads__list spreads__list--page" data-collection-list>
+          {collections.map((c, i) => <li data-rooms={c.rooms.join(' ')}><CollectionSpread collection={c} flip={i % 2 === 1} headingLevel={s.title ? 3 : 2} /></li>)}
         </ul>
       </Section>
     ) : <ContentSection s={s} />,

@@ -1,0 +1,37 @@
+---
+// Hero kolekcji na cały ekran (kadr cinema 2:1, na telefonie pion 4:5) pod przezroczystym nagłówkiem.
+// H1 w skali plakatu, charakter, cena „od”, dwa działania. view-transition-name = ta sama nazwa co ujęcie kolekcji
+// na liście i na stronie głównej, więc przejście płynnie powiększa kliknięte zdjęcie do hero.
+import HeroPicture from './HeroPicture.astro';
+import Rich from './Rich.astro';
+import { collectionImage } from '../lib/images';
+import { finishById, priceRangeOf, productCount, productsByCollection, type Collection } from '../lib/site';
+
+interface Props { collection: Collection; h1: string; alt: string }
+const { collection: c, h1, alt } = Astro.props;
+const wide = collectionImage(c, 'cinema')!;
+const tall = collectionImage(c, 'tall');
+const items = productsByCollection(c.slug);
+const range = items.length ? priceRangeOf(items) : null;
+// "Kolekcja OLMO" → małe "Kolekcja" nad nazwą w skali plakatu (jedno H1)
+const [, prefix, name] = h1.match(/^(Kolekcja)\s+(.+)$/) ?? [null, null, h1];
+const dots = c.finishes.map(f => ({ label: f.label, a: finishById.get(f.front)?.hex ?? '#ccc', b: finishById.get(f.body)?.hex ?? '#ccc' }));
+---
+<section class="collection-hero on-dark" aria-labelledby="h1" data-overlay-hero>
+  <div class="collection-hero__media" style={`view-transition-name: kolekcja-${c.slug}`}>
+    <HeroPicture wide={wide} tall={tall} {alt} class="collection-hero__pic" sizes="100vw" />
+  </div>
+  <div class="container collection-hero__copy">
+    <h1 class="collection-hero__title" id="h1">{prefix && <span class="collection-hero__prefix">{prefix} </span>}<Rich text={name} /></h1>
+    <p class="collection-hero__lead">{c.tagline}</p>
+    <p class="collection-hero__meta">
+      <span class="collection-hero__dots" aria-hidden="true">{dots.map(d => <i style={`--c: ${d.a}; --c2: ${d.b}`}></i>)}</span>
+      <span>{dots.length === 1 ? dots[0].label : `${dots.length} warianty kolorów`}</span>
+      {range && <><span aria-hidden="true">·</span><span>od {range.minText} · {productCount(items.length)}</span></>}
+    </p>
+    <p class="collection-hero__cta">
+      <a class="btn btn--white" href="#meble">Meble w kolekcji</a>
+      <a class="link" href="#gdzie-kupic">Gdzie kupić</a>
+    </p>
+  </div>
+</section>

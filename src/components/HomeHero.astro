@@ -1,0 +1,60 @@
+---
+// Hero strony głównej — „kurtyna kolekcji”: każda kolekcja na cały ekran (kadr cinema 2:1, na telefonie pion 4:5),
+// nazwa w Gloocku w skali plakatu, cena „od”, dwa działania; indeks nazw na dole steruje slajdami (src/scripts/motion.ts).
+// Bez JS widać pierwszą kolekcję, a indeks to zwykłe linki do kolekcji.
+import HeroPicture from './HeroPicture.astro';
+import { collectionImage } from '../lib/images';
+import { finishById, priceRangeOf, productsByCollection, url, type Collection } from '../lib/site';
+
+interface Props { collections: Collection[] }
+const { collections } = Astro.props;
+const pieces = (n: number) => `${n} ${n === 1 ? 'mebel' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 'meble' : 'mebli'}`;
+const slides = collections.map(c => {
+  const items = productsByCollection(c.slug);
+  const wide = collectionImage(c, 'cinema')!;
+  const tall = collectionImage(c, 'tall');
+  return {
+    c, wide, tall,
+    alt: wide.title ? (wide.approximate ? `Aranżacja poglądowa: ${wide.title}` : wide.title) : `Meble z kolekcji ${c.name}`,
+    color: c.finishes[0].label,
+    hex: finishById.get(c.finishes[0].front)?.hex,
+    meta: `${items.length ? `od ${priceRangeOf(items).minText} · ` : ''}${pieces(items.length)}`,
+  };
+});
+---
+<section class="hero-curtain on-dark" aria-roledescription="karuzela" aria-label="Kolekcje Liveo" data-hero data-overlay-hero style={`--count: ${slides.length}`}>
+  <div class="hero-curtain__slides">
+    {slides.map((s, i) => (
+      <div class:list={['hero-curtain__slide', { 'is-active': i === 0 }]} data-slide role="group" aria-roledescription="slajd" aria-label={`${i + 1} z ${slides.length}: kolekcja ${s.c.name}`} aria-hidden={i === 0 ? undefined : 'true'} inert={i !== 0}>
+        <HeroPicture wide={s.wide} tall={s.tall} alt={s.alt} class="hero-curtain__media" sizes="100vw" priority={i === 0} />
+        <div class="hero-curtain__copy container">
+          <p class="hero-curtain__name"><span class="visually-hidden">Kolekcja </span>{s.c.name}</p>
+          <p class="hero-curtain__meta">
+            {s.hex && <i style={`--c: ${s.hex}`} aria-hidden="true"></i>}
+            <span>{s.color}</span><span aria-hidden="true">·</span><span>{s.meta}</span>
+          </p>
+          <p class="hero-curtain__cta">
+            <a class="btn btn--white" href={url.collection(s.c.slug)}>Zobacz kolekcję {s.c.name}</a>
+            <a class="link" href={url.stores(s.c.slug)}>Gdzie kupić</a>
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+  <div class="hero-curtain__bar container">
+    <ol class="hero-curtain__index" aria-label="Wybierz kolekcję">
+      {slides.map((s, i) => (
+        <li>
+          <a class="hero-curtain__dot" href={url.collection(s.c.slug)} data-slide-to={i} aria-current={i === 0 ? 'true' : 'false'}>
+            {s.c.name}<span class="hero-curtain__tick" aria-hidden="true"></span>
+          </a>
+        </li>
+      ))}
+    </ol>
+    <button class="hero-curtain__pause" type="button" aria-pressed="false" data-hero-pause>
+      <svg class="ico hero-curtain__ico-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12" /></svg>
+      <svg class="ico hero-curtain__ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" /></svg>
+      <span class="visually-hidden" data-label>Wstrzymaj</span>
+    </button>
+  </div>
+</section>
