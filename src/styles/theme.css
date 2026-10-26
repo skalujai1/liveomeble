@@ -1,7 +1,7 @@
 /*
  * Warstwa wizualna — kierunek C „Ciepłe popołudnie” (wybrany przez klienta 26.10.2026 w miejsce kierunku A).
  * Wzorzec: design/directions-v2/c, opis w docs/research-stylow.md (styl C). Ostre narożniki, orzech, len, las,
- * pełne kadry zdjęć z ciepłym gradingiem, nagłówki EB Garamond, tekst Hanken Grotesk.
+ * pełne kadry zdjęć z ciepłym gradingiem, Inter Tight wszędzie, Bodoni Moda w nazwach kolekcji.
  * Kolory i fonty tylko z tokens.css. Ruch: tylko transform/opacity, wyłączany przez prefers-reduced-motion.
  */
 

@@ -18,8 +18,8 @@
   --accent-hover: #3a291f;
   --sale: #9e2a35;
   --ok: #2f4637;
-  --font: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-head: "EB Garamond", Georgia, serif;
+  --font: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-head: "Inter Tight", system-ui, sans-serif;
   --ease: cubic-bezier(.2, .7, .2, 1);
   font-family: var(--font);
   color: var(--ink);

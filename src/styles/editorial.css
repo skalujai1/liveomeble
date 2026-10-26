@@ -80,7 +80,7 @@
 }
 .hero-curtain__copy { position: absolute; z-index: 1; left: 0; right: 0; bottom: 6.5rem; }
 .hero-curtain__name {
-  font: var(--weight-display) var(--text-poster)/0.86 var(--font-display);
+  font: 400 var(--text-poster)/0.86 var(--font-name);
   letter-spacing: -0.025em; color: #fff; margin-left: -0.04em;
 }
 .hero-curtain__meta {
@@ -184,7 +184,7 @@
 .spread__fig--tall { grid-area: tall; }
 .spread__fig--detail { grid-area: detail; }
 .spread__text { grid-area: text; position: relative; }
-.spread__name { font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-6xl); line-height: 0.9; letter-spacing: -0.025em; margin-left: -0.04em; }
+.spread__name { font-family: var(--font-name); font-weight: 400; font-size: var(--text-6xl); line-height: 0.9; letter-spacing: -0.025em; margin-left: -0.04em; }
 .spread__badge { position: absolute; top: 0.25rem; right: 0; }
 .spread__tagline { max-width: 30rem; margin-top: var(--space-4); font-size: var(--text-lg); line-height: 1.55; }
 .spread__facts { display: grid; gap: 0.625rem; margin-top: var(--space-5); padding-top: var(--space-4); box-shadow: inset 0 1px 0 var(--color-line); font-size: var(--text-sm); }
@@ -234,7 +234,7 @@
 .rail__pic .media { border-radius: 0; }
 .rail__pic .media__img { filter: var(--photo-grade); }
 .rail__badge { position: absolute; top: 0.75rem; left: 0.75rem; }
-.rail__name { display: block; margin-top: 1rem; font: var(--weight-display) clamp(1.625rem, 1.2rem + 1vw, 2rem)/1.05 var(--font-display); }
+.rail__name { display: block; margin-top: 1rem; font: 400 clamp(1.625rem, 1.2rem + 1vw, 2rem)/1.05 var(--font-name); }
 .rail__meta { display: block; margin-top: 0.375rem; font-size: var(--text-sm); line-height: 1.45; color: var(--color-text-muted); }
 .rail__link:hover .rail__name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
 @media (prefers-reduced-motion: no-preference) { .rail__link:hover .media__img { transform: scale(1.04); } }
@@ -385,3 +385,14 @@
 .manifest__promo { margin-top: var(--space-4); font-size: var(--text-sm); }
 .manifest__promo a { text-underline-offset: 4px; }
 .manifest__promo em { font-style: normal; font-weight: var(--weight-bold); color: var(--color-promo); }
+
+/* ---------- Czcionki w duchu Zary: Inter Tight wszędzie, Bodoni Moda tylko w nazwach kolekcji ---------- */
+h1, h2, .section__title { letter-spacing: -0.03em; }
+.collection-hero__title:not(.collection-hero__title--room) { font-family: var(--font-name); font-weight: 400; letter-spacing: -0.02em; }
+.mega__collection b, .site-nav__mobile-collections b { font-family: var(--font-name); font-weight: 400; letter-spacing: 0; }
+/* Przyciski i menu: małe wersaliki z rozstrzeleniem */
+.btn { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8125rem; font-weight: var(--weight-medium); }
+@media (min-width: 60rem) {
+  .site-nav__link { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8125rem; }
+  .site-header__util-list a, .site-header__claim { letter-spacing: 0.02em; }
+}

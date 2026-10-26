@@ -34,9 +34,11 @@
   /* „Popołudniowy” grading aranżacji (ciepłe światło); packshotów nie dotyczy */
   --photo-grade: sepia(0.18) saturate(1.25) contrast(1.06) brightness(0.93);
 
-  /* Typografia — EB Garamond (nagłówki, 400–500) + Hanken Grotesk (tekst i interfejs, 400–600), self-hosted w /fonts */
-  --font-sans: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "EB Garamond", Georgia, "Times New Roman", serif;
+  /* Typografia — Inter Tight (nagłówki 300, tekst i interfejs 400–600) + Bodoni Moda (tylko nazwy kolekcji), self-hosted w /fonts */
+  --font-sans: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Nazwy kolekcji (OLMO, TALVE…) — Didone w duchu Zary; tylko tam */
+  --font-name: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
   --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   --text-xs: 0.8125rem;   /* 13 px — plakietki, Omnibus */
@@ -58,7 +60,7 @@
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-bold: 600;
-  --weight-display: 400;
+  --weight-display: 300;
   --measure: 68ch;
 
   /* Odstępy */
