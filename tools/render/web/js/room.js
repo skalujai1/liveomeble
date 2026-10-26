@@ -373,11 +373,14 @@ export async function renderRoom(engine, job) {
   scene.updateMatrixWorld(true);
 
   // kamera (poziomo, bez zbieżności pionów; kadr przez przesunięcie obiektywu)
-  const cd = def.cameras[job.frame];
+  const base = def.cameras[job.frame];
+  // cinema: kamera kadru wide o 0,35 m bliżej; szerszy format sam dokłada boki (stały pion. kąt widzenia)
+  const cd = job.camera || (job.cinema ? { ...base, pos: [base.pos[0], base.pos[1], base.pos[2] - 0.35] } : base);
   const camera = new THREE.PerspectiveCamera(cd.fov, W / H, 0.05, 60);
   camera.position.fromArray(cd.pos);
   const yaw = THREE.MathUtils.degToRad(cd.yaw || 0);
-  camera.lookAt(camera.position.x + Math.sin(yaw), camera.position.y + Math.tan(THREE.MathUtils.degToRad(cd.pitch || 0)), camera.position.z - Math.cos(yaw));
+  if (cd.target) camera.lookAt(...cd.target); // kadr wycelowany w punkt (detal, ujęcie pod kątem)
+  else camera.lookAt(camera.position.x + Math.sin(yaw), camera.position.y + Math.tan(THREE.MathUtils.degToRad(cd.pitch || 0)), camera.position.z - Math.cos(yaw));
   camera.updateMatrixWorld();
   const shift = { x: cd.shiftX || 0, y: cd.shiftY || 0 };
 

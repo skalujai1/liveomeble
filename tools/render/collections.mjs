@@ -5,10 +5,11 @@
 // Bez tego karty kolekcji pokazywały wspólne, poglądowe zdjęcie pomieszczenia (kilka kolekcji z tym samym obrazem).
 import path from 'node:path';
 import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { openRenderer, saveJpeg, fmtMs } from './lib/driver.mjs';
 import { updateManifest, describeRoom, RENDERS } from './lib/manifest.mjs';
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const load = (f) => { const j = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data', f), 'utf8')); return j.products ?? j.collections ?? j; };
 const products = load('products.json');
 const collections = load('collections.json');
@@ -31,8 +32,28 @@ const flag = (name, def) => { const i = args.indexOf(name); return i >= 0 ? args
 const preview = args.includes('--preview');
 const outDir = path.resolve(flag('--out', path.join(RENDERS, 'collections')));
 const only = flag('--only');
-const frames = flag('--frame') ? [flag('--frame')] : ['wide', 'tall'];
-const SIZES = { wide: [2400, 1350], tall: [1200, 1500] };
+const frames = flag('--frame') ? flag('--frame').split(',') : ['wide', 'tall'];
+// cinema = panorama do hero na pełną szerokość; angle = ujęcie pod kątem; detail = zbliżenie (galeria kolekcji)
+const SIZES = { wide: [2400, 1350], tall: [1200, 1500], cinema: [3200, 1600], angle: [2400, 1600], detail: [1600, 2000] };
+// Punkt, w który celują kadry angle i detail: środek głównego mebla w pokoju bazowym (x, y, z w metrach; ściana tylna z = 0).
+const FOCUS = {
+  'salon-jasny': [0.55, 0.42, 0.25], 'salon-szalwia': [-0.7, 0.45, 0.25], sypialnia: [1.25, 0.45, 0.7],
+  jadalnia: [1.1, 0.5, 0.25], przedpokoj: [0.45, 0.5, 0.2], biuro: [0.55, 0.6, 0.35],
+};
+const CAMERA = {
+  angle: ([x, y, z]) => ({ pos: [x + 2.3, 1.3, z + 3.1], target: [x, y + 0.12, z], fov: 40 }),
+  detail: ([x, y, z]) => ({ pos: [x + 0.45, y + 0.22, z + 1.3], target: [x, y, z], fov: 34 }),
+};
+// Pokoje, w których kamera z CAMERA wypada za ścianą albo celuje w mało ciekawy fragment
+const CAMERA_FIX = {
+  sypialnia: {
+    angle: { pos: [2.75, 1.3, 3.4], target: [1.0, 0.55, 0.9], fov: 42 },
+    detail: { pos: [2.45, 0.62, 1.25], target: [2.0, 0.42, 0.22], fov: 34 }, // szafka nocna i róg łóżka
+  },
+  przedpokoj: { angle: { pos: [1.55, 1.3, 3.0], target: [0.45, 0.62, 0.2], fov: 44 } },
+  'salon-szalwia': { detail: { pos: [0.05, 1.05, 1.35], target: [-0.4, 0.86, 0.2], fov: 34 } }, // blat komody z lampą
+  biuro: { detail: { pos: [1.05, 1.05, 1.45], target: [0.5, 0.78, 0.3], fov: 34 } }, // blat biurka z lampką
+};
 const samples = Number(flag('--samples', preview ? 48 : 64));
 const sc = Number(flag('--scale', preview ? 0.4 : 1));
 const ROOM_LOC = { salon: 'w salonie', sypialnia: 'w sypialni', jadalnia: 'w jadalni', przedpokoj: 'w przedpokoju', 'pokoj-mlodziezowy': 'w pokoju młodzieżowym', biuro: 'w domowym biurze' };
@@ -67,7 +88,11 @@ try {
       if (sc !== 1) { w = Math.round(w * sc); h = Math.round(h * sc); }
       const file = path.join(outDir, `${c.slug}-${frame}.jpg`);
       process.stdout.write(`→ ${c.slug} (${scene.room}, ${frame}, ${w}×${h}, ${samples} próbek) … `);
-      const res = await R.render({ kind: 'room', room: scene.room, models: scene.models, roomPatch: scene.roomPatch, frame, width: w, height: h, samples, preview });
+      const focus = FOCUS[scene.room];
+      const camera = frame === 'cinema' ? 'cinema' : CAMERA_FIX[scene.room]?.[frame] ?? CAMERA[frame]?.(focus);
+      const job = { kind: 'room', room: scene.room, models: scene.models, roomPatch: scene.roomPatch, frame: SIZES[frame] && !['wide', 'tall'].includes(frame) ? 'wide' : frame, width: w, height: h, samples, preview };
+      if (camera === 'cinema') job.cinema = true; else if (camera) job.camera = camera;
+      const res = await R.render(job);
       await saveJpeg(res.png, file, 88);
       console.log(`${fmtMs(res.ms)} (${Math.round(fs.statSync(file).size / 1024)} kB)`);
       if (!preview) {

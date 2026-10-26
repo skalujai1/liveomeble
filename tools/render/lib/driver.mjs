@@ -39,7 +39,9 @@ export async function openRenderer({ log = true } = {}) {
   const browser = await chromium.launch({
     executablePath: CHROME,
     args: [
-      '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist',
+      // RENDER_GPU=1: karta graficzna przez ANGLE (Windows d3d11) — wielokrotnie szybciej niż SwiftShader na CPU.
+      ...(process.env.RENDER_GPU ? ['--use-angle=' + (process.platform === 'win32' ? 'd3d11' : 'default'), '--enable-gpu'] : ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader']),
+      '--ignore-gpu-blocklist',
       '--disable-gpu-watchdog', '--disable-renderer-backgrounding', '--disable-background-timer-throttling',
       '--js-flags=--max-old-space-size=8192',
     ],
