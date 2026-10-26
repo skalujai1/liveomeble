@@ -74,6 +74,29 @@ jobs:
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
 
+      # /health musi odpowiedzieć {"ok":true,"configured":true} — inaczej Worker nie ma klucza OpenRouter.
       - name: Test zdrowia po wdrożeniu
         if: steps.secrets.outputs.ready == 'true'
-        run: echo "Sprawdź /health pod adresem Workera (workers.dev) – powinno zwrócić {\"ok\":true,\"configured\":true}."
+        env:
+          HEALTH_URL: ${{ vars.DORADCA_URL || 'https://liveo-doradca.sergiuszserafin26.workers.dev' }}/health
+        run: |
+          for i in 1 2 3 4 5; do
+            body=$(curl -fsS -m 15 "$HEALTH_URL" || true)
+            echo "$body"
+            echo "$body" | grep -q '"configured":true' && exit 0
+            sleep 5
+          done
+          echo "::error::$HEALTH_URL nie zwraca configured:true"
+          exit 1
+
+      # Jedna krótka rozmowa z adresu podglądu: sprawdza CORS, klucz OpenRouter i środki na koncie (koszt ułamka grosza).
+      - name: Test rozmowy po wdrożeniu
+        if: steps.secrets.outputs.ready == 'true'
+        env:
+          CHAT_URL: ${{ vars.DORADCA_URL || 'https://liveo-doradca.sergiuszserafin26.workers.dev' }}/chat
+        run: |
+          code=$(curl -sS -m 40 -o reply.json -w '%{http_code}' -X POST "$CHAT_URL" \
+            -H 'Origin: https://liveo-podglad.pages.dev' -H 'Content-Type: application/json' \
+            -d '{"messages":[{"role":"user","content":"Szukam jasnej komody do sypialni"}],"context":{"catalog":"","state":{}}}')
+          echo "HTTP $code"; head -c 400 reply.json; echo
+          if [ "$code" != "200" ]; then echo "::error::/chat zwraca $code (no_credits = brak środków na OpenRouter)"; exit 1; fi
