@@ -1,70 +1,59 @@
-// Spójność wygenerowanych danych demo (src/data). Po zmianach: node tools/data/generate.mjs
+// Spójność danych strony (src/data) z kart produktu Liveo. Po zmianach: node tools/data/generate.mjs
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { validateData } from './validate.mjs';
-import { priceFor } from '../../src/lib/pricing.js';
 
 const load = name => JSON.parse(readFileSync(new URL(`../../src/data/${name}.json`, import.meta.url), 'utf8'));
 const names = ['finishes', 'types', 'rooms', 'collections', 'products', 'promotions', 'postcodes', 'resellers', 'meta'];
 const data = Object.fromEntries(names.map(n => [n, load(n)]));
-const TODAY = data.meta.generatedFor;
-const NOON = `${TODAY}T12:00:00+02:00`;
+const karty = JSON.parse(readFileSync(new URL('./karty-liveo.json', import.meta.url), 'utf8'));
 
 test('dane przechodzą kontrolę spójności', () => {
-  assert.deepEqual(validateData(data, TODAY), []);
+  assert.deepEqual(validateData(data), []);
 });
 
-test('80–100 produktów, 8 kolekcji, 400+ prawdziwych salonów, katalog oznaczony jako demo', () => {
-  assert.ok(data.products.length >= 80 && data.products.length <= 100, String(data.products.length));
-  assert.equal(data.collections.length, 8);
+test('prawdziwy katalog: 30+ kolekcji z kart, 400+ mebli, 400+ salonów, bez cen i promocji', () => {
+  assert.ok(data.collections.length >= 30, String(data.collections.length));
+  assert.ok(data.products.length >= 400, String(data.products.length));
   assert.ok(data.resellers.length >= 400);
-  for (const list of [data.products, data.collections, data.promotions]) {
-    assert.ok(list.every(x => x.demo === true));
+  assert.equal(data.promotions.length, 0);
+  for (const p of data.products) assert.ok(!('basePrice' in p), p.slug);
+  for (const name of ['ARIS', 'DANTE', 'IRMA', 'MILTON', 'REMI']) assert.ok(data.collections.some(c => c.name === name), name);
+});
+
+test('każdy mebel z karty trafił na stronę (bez akcesoriów i modułów kuchennych)', () => {
+  assert.equal(data.products.length, karty.products.length);
+  const variants = data.products.reduce((a, p) => a + p.variants.length, 0);
+  assert.equal(variants, karty.products.reduce((a, p) => a + p.variants.length, 0));
+  // akcesoria nie są meblami na stronie
+  assert.ok(!data.products.some(p => /UCHWYT|PROFIL LED|ZESTAW ZASILAJ/i.test(p.name)));
+});
+
+test('kolory wariantów: DANTE ma 5 wersji frontów na tym samym korpusie', () => {
+  const dante = data.collections.find(c => c.slug === 'dante');
+  const labels = dante.finishes.map(f => f.label);
+  for (const front of ['antracyt mat', 'biały mat', 'kaszmir mat', 'szary mat', 'zielony mat']) {
+    assert.ok(labels.includes(`Dąb cremona torro / ${front}`), front);
   }
+  const dt03 = data.products.find(p => p.collection === 'dante' && p.sku === 'DT03');
+  assert.equal(dt03.variants.length, 5);
 });
 
-test('nazwy kolekcji nie pokrywają się z prawdziwymi kolekcjami Liveo', () => {
-  const banned = ['ARIS', 'DANTE', 'IRMA', 'ELIZA', 'MODENA'];
-  for (const c of data.collections) assert.ok(!banned.includes(c.name), c.name);
+test('łóżka: osobny mebel na rozmiar i wersję z pojemnikiem', () => {
+  const beds = data.products.filter(p => p.collection === 'ate' && p.type === 'lozko');
+  assert.ok(beds.some(p => p.name === 'Łóżko 160 z pojemnikiem ATE AT15'));
+  assert.ok(beds.some(p => p.name === 'Łóżko 160 bez stelaża ATE AT15'));
 });
 
-test('każda kolekcja ma meble do każdego swojego pomieszczenia', () => {
-  for (const c of data.collections) {
-    for (const room of c.rooms) {
-      const n = data.products.filter(p => p.collection === c.slug && p.rooms.includes(room)).length;
-      assert.ok(n >= 2, `${c.slug} / ${room}: ${n}`);
-    }
-  }
+test('zdjęcia: każdy mebel ma zdjęcie (własne albo aranżację z karty)', () => {
+  const missing = data.products.filter(p => !p.images.packshot).map(p => p.slug);
+  assert.deepEqual(missing, []);
+  for (const c of data.collections) assert.ok(c.arrangements.length > 0, c.slug);
 });
 
-test('promocje działają na danych: OLMO −15%, komody −10%, Omnibus', () => {
-  const byId = Object.fromEntries(data.products.map(p => [p.sku, p]));
-  const rtv = byId['LV-OLMO-RTV160'];
-  const r = priceFor(rtv, null, data.promotions, NOON);
-  assert.equal(r.promo.id, 'promo-olmo-jesien');
-  assert.equal(r.price, Math.floor(rtv.basePrice * 0.85));
-
-  const komoda = data.products.find(p => p.type === 'komoda' && p.collection !== 'olmo');
-  assert.equal(priceFor(komoda, null, data.promotions, NOON).promo.id, 'promo-komody');
-
-  // łóżko OLMO było we wrześniu −20% → lowest30 niższa niż obecna cena promocyjna (−15%)
-  const bed = data.products.find(p => p.collection === 'olmo' && p.type === 'lozko');
-  const b = priceFor(bed, null, data.promotions, NOON);
-  assert.ok(b.lowest30 < b.price, `${b.lowest30} < ${b.price}`);
-  assert.ok(b.lowest30 <= Math.floor(bed.basePrice * 0.8));
-
-  // przyszła „cena tygodnia” jeszcze nie działa, a po starcie pokazuje cenę sprzed podwyżki jako lowest30
-  const week = data.promotions.find(p => p.kind === 'fixedPrice');
-  const target = byId[week.scope.skus[0]];
-  assert.equal(priceFor(target, null, data.promotions, NOON).promo, null);
-  const later = priceFor(target, null, data.promotions, week.startsAt);
-  assert.equal(later.price, week.value);
-  assert.ok(later.lowest30 < target.basePrice);
-});
-
-test('eksport katalogu doradcy: format widżetu, jeden rekord na wariant, ceny z pricing.js', async () => {
+test('eksport katalogu doradcy: format widżetu, jeden rekord na wariant, bez cen', async () => {
   const { execFileSync } = await import('node:child_process');
   const { mkdtempSync, rmSync } = await import('node:fs');
   const { tmpdir } = await import('node:os');
@@ -73,30 +62,23 @@ test('eksport katalogu doradcy: format widżetu, jeden rekord na wariant, ceny z
   try {
     const out = join(dir, 'catalog.json');
     const script = fileURLToPath(new URL('./export-assistant-catalog.mjs', import.meta.url)); // .pathname psuje ścieżkę na Windows (/D:/…)
-    execFileSync(process.execPath, [script, `--now=${NOON}`, `--out=${out}`], { stdio: 'pipe' });
+    execFileSync(process.execPath, [script, `--out=${out}`], { stdio: 'pipe' });
     const cat = JSON.parse(readFileSync(out, 'utf8'));
-    const keys = new Set(['salon', 'jadalnia', 'kuchnia', 'sypialnia', 'mlodziezowy', 'biuro', 'przedpokoj']);
-    const sellable = data.products.flatMap(p => p.variants.filter(v => v.stock !== 'wyprzedany').map(v => [p, v]));
-    assert.equal(cat.products.length, sellable.length);
-    assert.equal(Object.keys(cat.collections).length, 8);
-    const bySku = Object.fromEntries(data.products.map(p => [p.sku, p]));
+    const keys = new Set(data.rooms.map(r => r.assistantKey));
+    assert.equal(cat.products.length, data.products.reduce((a, p) => a + p.variants.length, 0));
+    assert.equal(Object.keys(cat.collections).length, data.collections.length);
     for (const x of cat.products) {
-      const [sku, code] = x.id.split('--');
-      const p = bySku[sku];
-      assert.ok(p, x.id);
       assert.equal(x.collection, x.collection.toUpperCase());
       assert.ok(cat.collections[x.collection], x.collection);
       assert.ok(x.rooms.length && x.rooms.every(r => keys.has(r)), `${x.id}: ${x.rooms}`);
-      assert.equal(x.url, `/produkt/${p.slug}/`);
-      assert.equal(x.img, `/media/produkty/${sku}--${code}.webp`);
-      const pr = priceFor(p, code, data.promotions, NOON);
-      assert.equal(x.price, pr.price);
-      assert.equal(x.regular, pr.regular);
+      assert.ok(x.url.startsWith('/produkt/'), x.url);
+      assert.ok(x.img?.startsWith('/katalog/'), `${x.id}: ${x.img}`);
+      assert.equal(x.price, null);
       for (const k of ['light', 'wood', 'black', 'gloss']) assert.ok(k in x.color, `${x.id}: color.${k}`);
       assert.ok(x.color.light >= 0 && x.color.light <= 1);
     }
-    // „Kuchnia” w doradcy: stoły i kredensy z jadalni
-    assert.ok(cat.products.some(x => x.rooms.includes('kuchnia') && x.type === 'stol'));
+    // „Kuchnia” w doradcy: zestawy kuchenne TIFFANY
+    assert.ok(cat.products.some(x => x.rooms.includes('kuchnia') && x.type === 'kuchnia'));
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }

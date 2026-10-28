@@ -66,10 +66,6 @@
         ]
       },
       {
-        "label": "Promocje",
-        "href": "/promocje/"
-      },
-      {
         "label": "Doradca wnętrz",
         "href": "/doradca-wnetrz/"
       },
@@ -156,10 +152,6 @@
           {
             "label": "Poradnik",
             "href": "/poradnik/"
-          },
-          {
-            "label": "Promocje",
-            "href": "/promocje/"
           }
         ]
       },
@@ -202,12 +194,11 @@
     ],
     "company": "LIVEO Meble sp. z o.o. · ul. Borki 5, 36-130 Raniżów · tel. +48 17 58 18 000 · biuro@liveomeble.pl",
     "copyright": "© {year} Liveo Meble sp. z o.o.",
-    "demoNotice": "Wersja demonstracyjna: kolekcje, meble, ceny i promocje na tej stronie są przykładowe. Lista salonów partnerskich pochodzi z liveomeble.pl."
+    "demoNotice": "Wersja robocza strony: katalog pochodzi z kart produktu Liveo, salony partnerskie z liveomeble.pl. Cen na stronie nie ma — podaje je salon."
   },
   "demo": {
     "badge": "DEMO",
-    "banner": "To wersja demonstracyjna strony. Kolekcje, meble, ceny i promocje są przykładowe.",
-    "storesNote": "Sklepy na liście są przykładowe (dane demo)."
+    "banner": "To wersja robocza strony. Katalog pochodzi z kart produktu Liveo, salony z liveomeble.pl."
   },
   "buttons": {
     "seeCollection": "Zobacz kolekcję {name}",
@@ -223,21 +214,10 @@
     "send": "Wyślij"
   },
   "price": {
-    "label": "Cena",
-    "regular": "Cena regularna",
-    "promo": "Cena promocyjna",
-    "before": "Cena przed obniżką: {price}",
-    "lowest30": "Najniższa cena z 30 dni przed obniżką: {price}",
-    "from": "od {price}",
-    "promoUntil": "Promocja trwa do {lastDay} włącznie",
-    "note": "Cena producenta [do potwierdzenia: „cena sugerowana”]. Ostateczną cenę podaje sklep partnerski.",
-    "srCurrent": "Aktualna cena",
-    "srOld": "Poprzednia cena",
-    "_notes": [
-      "Cenę liczy zawsze priceFor() z src/lib/pricing.js — w HTML statycznie z dnia budowy, w przeglądarce z API (z fallbackiem).",
-      "{lastDay} = dzień przed endsAt (endsAt to północ rozpoczynająca pierwszy dzień PO promocji), format: 30 października 2026.",
-      "Przekreślona cena regularna zawsze razem z linią lowest30 — nigdy sama."
-    ]
+    "inStore": "Cenę sprawdzisz w salonie partnerskim",
+    "inStoreNote": "Liveo sprzedaje meble przez salony partnerskie — tam poznasz cenę, termin dostawy i koszt montażu.",
+    "inStoreLink": "Znajdź salon z tą kolekcją",
+    "_note": "Karty produktu Liveo (eksport Navireo) nie zawierają cen detalicznych — strona ich nie pokazuje."
   },
   "stock": {
     "dostepny": "Dostępny",
@@ -256,6 +236,7 @@
     "weight": "Waga",
     "format": "{w} × {h} × {d} cm",
     "formatLong": "szer. {w} × wys. {h} × gł. {d} cm",
+    "formatLongNoDepth": "szer. {w} × wys. {h} cm",
     "weightFormat": "ok. {kg} kg"
   },
   "plural": {
@@ -303,12 +284,12 @@
     "type": "Rodzaj mebla",
     "new": "Nowość",
     "bestseller": "Często wybierany",
-    "promo": "Promocja",
     "assembly": "Montaż",
     "features": "Szczegóły",
     "readingTime": "{n} min czytania",
     "updated": "Aktualizacja: {date}",
-    "distance": "{km} km w linii prostej"
+    "distance": "{km} km w linii prostej",
+    "delivery72": "Dostawa w 72 h"
   },
   "handles": {
     "edge": "wyprofilowana krawędź frontu, bez uchwytów",
@@ -342,6 +323,10 @@
     "nowoczesny": {
       "label": "nowoczesny",
       "in": "w stylu nowoczesnym"
+    },
+    "glamour": {
+      "label": "glamour",
+      "in": "w stylu glamour"
     },
     "klasyczny-nowoczesny": {
       "label": "klasyka w nowoczesnym wydaniu",

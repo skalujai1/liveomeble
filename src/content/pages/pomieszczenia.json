@@ -11,13 +11,21 @@
   "seo": {
     "title": "Meble według pomieszczenia — od salonu po przedpokój | Liveo",
     "description": "Wybierz pokój, który urządzasz: salon, jadalnia, sypialnia, pokój młodzieżowy, przedpokój albo domowe biuro. Pokażemy pasujące meble i kolekcje.",
-    "jsonLd": ["CollectionPage", "BreadcrumbList"]
+    "jsonLd": [
+      "CollectionPage",
+      "BreadcrumbList"
+    ]
   },
   "h1": "Meble według pomieszczenia",
   "lead": "Wybierz pokój, który urządzasz. Pokażemy meble i kolekcje, które do niego pasują.",
   "template": {
     "h1": "Meble {roomGenitive}",
-    "jsonLd": ["CollectionPage", "ItemList", "BreadcrumbList", "FAQPage"],
+    "jsonLd": [
+      "CollectionPage",
+      "ItemList",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
     "collectionsTitle": "Kolekcje {roomGenitive}",
     "productsTitle": "Meble {roomLocative}",
     "tipsTitle": "Na co zwrócić uwagę",
@@ -47,13 +55,22 @@
       "h1": "Meble do salonu",
       "seo": {
         "title": "Meble do salonu — szafki RTV, komody, witryny | Liveo",
-        "description": "Meble do salonu z kolekcji Liveo: szafki RTV, komody, witryny, regały, ławy i półki w spójnych kolorach. Sprawdź wymiary, ceny i sklepy."
+        "description": "Meble do salonu z kolekcji Liveo: szafki RTV, komody, witryny, regały, ławy i półki w spójnych kolorach. Sprawdź wymiary, kolory i salony."
       },
-      "intro": "Salon urządza się wokół dwóch miejsc: kanapy i ściany z telewizorem. Meble z jednej kolekcji — szafka RTV, komoda, witryna i ława — mają te same kolory i uchwyty, więc pokój wygląda spokojnie.",
+      "intro": "Salon urządza się wokół dwóch miejsc: kanapy i ściany z telewizorem. Meble z jednej kolekcji — szafka RTV, komoda, witryna i ława — mają te same kolory, więc pokój wygląda spokojnie.",
       "tips": [
-        { "title": "Zacznij od szafki RTV", "text": "To najdłuższy mebel w salonie. Gdy ją wybierzesz, łatwiej dobrać resztę." },
-        { "title": "Zostaw przejścia", "text": "Między ławą a kanapą wystarczy ok. 40–50 cm, ale główne przejście przez pokój powinno być szersze." },
-        { "title": "Schowek i ekspozycja", "text": "Komoda chowa, witryna pokazuje. W małym salonie często wystarczy jedno z nich." }
+        {
+          "title": "Zacznij od szafki RTV",
+          "text": "To najdłuższy mebel w salonie. Gdy ją wybierzesz, łatwiej dobrać resztę."
+        },
+        {
+          "title": "Zostaw przejścia",
+          "text": "Między ławą a kanapą wystarczy ok. 40–50 cm, ale główne przejście przez pokój powinno być szersze."
+        },
+        {
+          "title": "Schowek i ekspozycja",
+          "text": "Komoda chowa, witryna pokazuje. W małym salonie często wystarczy jedno z nich."
+        }
       ],
       "faq": [
         {
@@ -66,7 +83,7 @@
         },
         {
           "q": "Która kolekcja Liveo pasuje do salonu?",
-          "a": "Meble do salonu mają kolekcje: {collectionsList}. Różnią się kolorami, uchwytami i podstawą — porównasz je wyżej na tej stronie."
+          "a": "Meble do salonu mają kolekcje: {collectionsList}. Różnią się kolorami i charakterem — porównasz je wyżej na tej stronie."
         }
       ],
       "guide": "jak-dobrac-szafke-rtv"
@@ -76,13 +93,22 @@
       "h1": "Meble do jadalni",
       "seo": {
         "title": "Meble do jadalni — stoły, kredensy, witryny | Liveo",
-        "description": "Meble do jadalni z kolekcji Liveo: stoły, także rozkładane, kredensy, witryny i komody na zastawę. Sprawdź wymiary, kolory i ceny."
+        "description": "Meble do jadalni z kolekcji Liveo: stoły, także rozkładane, kredensy, witryny i komody na zastawę. Sprawdź wymiary, kolory i salony."
       },
       "intro": "Jadalnia to stół i miejsce na zastawę. Kredens albo witryna z tej samej kolekcji co stół sprawią, że kącik jadalny wygląda na przemyślany, nawet jeśli jest częścią salonu.",
       "tips": [
-        { "title": "Stół do liczby osób", "text": "Na jedną osobę przyjmuje się zwykle ok. 60 cm długości blatu. Jeśli czasem przyjmujesz gości, wybierz stół rozkładany." },
-        { "title": "Miejsce na krzesła", "text": "Wokół stołu zostaw co najmniej ok. 80 cm, żeby swobodnie odsunąć krzesło." },
-        { "title": "Zastawa pod ręką", "text": "Kredens najlepiej postawić blisko stołu, żeby nakrywanie nie wymagało chodzenia przez cały pokój." }
+        {
+          "title": "Stół do liczby osób",
+          "text": "Na jedną osobę przyjmuje się zwykle ok. 60 cm długości blatu. Jeśli czasem przyjmujesz gości, wybierz stół rozkładany."
+        },
+        {
+          "title": "Miejsce na krzesła",
+          "text": "Wokół stołu zostaw co najmniej ok. 80 cm, żeby swobodnie odsunąć krzesło."
+        },
+        {
+          "title": "Zastawa pod ręką",
+          "text": "Kredens najlepiej postawić blisko stołu, żeby nakrywanie nie wymagało chodzenia przez cały pokój."
+        }
       ],
       "faq": [
         {
@@ -104,13 +130,22 @@
       "h1": "Meble do sypialni",
       "seo": {
         "title": "Meble do sypialni — łóżka, szafy, komody | Liveo",
-        "description": "Meble do sypialni z kolekcji Liveo: łóżka 140 i 160 cm, szafki nocne, szafy, komody, toaletki i lustra. Sprawdź wymiary, kolory i ceny."
+        "description": "Meble do sypialni z kolekcji Liveo: łóżka 140 i 160 cm, szafki nocne, szafy, komody, toaletki i lustra. Sprawdź wymiary, kolory i salony."
       },
       "intro": "Sypialnia potrzebuje spokoju, więc tu komplet z jednej kolekcji sprawdza się najlepiej. Łóżko, szafki nocne i szafa w tych samych kolorach nie męczą wzroku.",
       "tips": [
-        { "title": "Najpierw łóżko", "text": "Zmierz pokój i sprawdź, czy wokół łóżka zostanie przejście — wygodnie, gdy ma ok. 60 cm." },
-        { "title": "Szafa a drzwi", "text": "Przed szafą z drzwiami skrzydłowymi zostaw tyle miejsca, ile mają szerokości drzwi." },
-        { "title": "Pojemnik w łóżku", "text": "Łóżko z pojemnikiem mieści pościel i koce, więc w małej sypialni zastąpi komodę." }
+        {
+          "title": "Najpierw łóżko",
+          "text": "Zmierz pokój i sprawdź, czy wokół łóżka zostanie przejście — wygodnie, gdy ma ok. 60 cm."
+        },
+        {
+          "title": "Szafa a drzwi",
+          "text": "Przed szafą z drzwiami skrzydłowymi zostaw tyle miejsca, ile mają szerokości drzwi."
+        },
+        {
+          "title": "Pojemnik w łóżku",
+          "text": "Łóżko z pojemnikiem mieści pościel i koce, więc w małej sypialni zastąpi komodę."
+        }
       ],
       "faq": [
         {
@@ -133,13 +168,22 @@
       "h1": "Meble do pokoju młodzieżowego",
       "seo": {
         "title": "Meble do pokoju młodzieżowego — biurka, łóżka | Liveo",
-        "description": "Meble do pokoju nastolatka z kolekcji Liveo: biurka, łóżka 90 i 120 cm, regały, komody i szafy. Sprawdź wymiary, kolory i ceny."
+        "description": "Meble do pokoju nastolatka z kolekcji Liveo: biurka, łóżka 90 i 120 cm, regały, komody i szafy. Sprawdź wymiary, kolory i salony."
       },
       "intro": "Pokój nastolatka to sypialnia, miejsce do nauki i schowek w jednym. Biurko, łóżko i regał z jednej kolekcji porządkują te funkcje bez wrażenia tłoku.",
       "tips": [
-        { "title": "Biurko przy oknie", "text": "Ustaw biurko tak, żeby światło dzienne padało z boku — nie zza pleców i nie prosto na ekran." },
-        { "title": "Łóżko 90 czy 120 cm?", "text": "Łóżko 120 cm daje więcej miejsca do spania, 90 cm zostawia więcej podłogi. Zmierz pokój przed wyborem." },
-        { "title": "Regał przy ścianie", "text": "Wysoki regał zawsze przymocuj do ściany." }
+        {
+          "title": "Biurko przy oknie",
+          "text": "Ustaw biurko tak, żeby światło dzienne padało z boku — nie zza pleców i nie prosto na ekran."
+        },
+        {
+          "title": "Łóżko 90 czy 120 cm?",
+          "text": "Łóżko 120 cm daje więcej miejsca do spania, 90 cm zostawia więcej podłogi. Zmierz pokój przed wyborem."
+        },
+        {
+          "title": "Regał przy ścianie",
+          "text": "Wysoki regał zawsze przymocuj do ściany."
+        }
       ],
       "faq": [
         {
@@ -161,13 +205,22 @@
       "h1": "Meble do przedpokoju",
       "seo": {
         "title": "Meble do przedpokoju — szafy, szafki na buty | Liveo",
-        "description": "Meble do przedpokoju z kolekcji Liveo: szafy, szafki na buty, wieszaki, lustra i komody. Płytkie i pojemne. Sprawdź wymiary i ceny."
+        "description": "Meble do przedpokoju z kolekcji Liveo: szafy, szafki na buty, wieszaki, lustra i komody. Płytkie i pojemne. Sprawdź wymiary i kolory."
       },
       "intro": "Przedpokój bywa wąski, a musi pomieścić kurtki, buty i klucze. Płytkie szafki na buty, wieszak i lustro z jednej kolekcji porządkują wejście bez zabierania przejścia.",
       "tips": [
-        { "title": "Zmierz przejście", "text": "Po ustawieniu mebli zostaw tyle miejsca, żeby swobodnie otworzyć drzwi wejściowe i minąć się z drugą osobą." },
-        { "title": "Płytko i wysoko", "text": "Szafka na buty z uchylnymi komorami jest płytka, a wysoka szafa wykorzysta przestrzeń pod sufitem." },
-        { "title": "Lustro rozjaśnia", "text": "Lustro optycznie poszerza wąski przedpokój i przydaje się przed wyjściem." }
+        {
+          "title": "Zmierz przejście",
+          "text": "Po ustawieniu mebli zostaw tyle miejsca, żeby swobodnie otworzyć drzwi wejściowe i minąć się z drugą osobą."
+        },
+        {
+          "title": "Płytko i wysoko",
+          "text": "Szafka na buty z uchylnymi komorami jest płytka, a wysoka szafa wykorzysta przestrzeń pod sufitem."
+        },
+        {
+          "title": "Lustro rozjaśnia",
+          "text": "Lustro optycznie poszerza wąski przedpokój i przydaje się przed wyjściem."
+        }
       ],
       "faq": [
         {
@@ -190,13 +243,22 @@
       "h1": "Meble do domowego biura",
       "seo": {
         "title": "Meble do domowego biura — biurka, regały | Liveo",
-        "description": "Meble do pracy w domu z kolekcji Liveo: biurka z szufladami, regały, komody i półki. Sprawdź wymiary blatu, kolory i ceny."
+        "description": "Meble do pracy w domu z kolekcji Liveo: biurka z szufladami, regały, komody i półki. Sprawdź wymiary blatu, kolory i salony."
       },
       "intro": "Domowe biuro bywa osobnym pokojem albo kątem w salonie. Biurko i regał w kolorach reszty mieszkania sprawią, że miejsce pracy nie wygląda jak wypożyczone z biurowca.",
       "tips": [
-        { "title": "Blat do sprzętu", "text": "Do monitora wybierz blat o głębokości co najmniej ok. 60 cm, do samego laptopa wystarczy mniej." },
-        { "title": "Światło z boku", "text": "Biurko ustaw tak, żeby okno było z boku, a nie za ekranem ani za plecami." },
-        { "title": "Papiery z widoku", "text": "Komoda albo regał z drzwiami schowa dokumenty po pracy." }
+        {
+          "title": "Blat do sprzętu",
+          "text": "Do monitora wybierz blat o głębokości co najmniej ok. 60 cm, do samego laptopa wystarczy mniej."
+        },
+        {
+          "title": "Światło z boku",
+          "text": "Biurko ustaw tak, żeby okno było z boku, a nie za ekranem ani za plecami."
+        },
+        {
+          "title": "Papiery z widoku",
+          "text": "Komoda albo regał z drzwiami schowa dokumenty po pracy."
+        }
       ],
       "faq": [
         {
@@ -210,6 +272,39 @@
         {
           "q": "Która kolekcja Liveo ma meble do domowego biura?",
           "a": "Meble do domowego biura mają kolekcje: {collectionsList}."
+        }
+      ]
+    },
+    {
+      "slug": "kuchnia",
+      "h1": "Meble kuchenne",
+      "seo": {
+        "title": "Zestawy kuchenne Liveo 180–260 cm | Liveo",
+        "description": "Gotowe zestawy kuchenne Liveo o długości od 180 do 260 cm, w kilku wersjach kolorystycznych. Sprawdź wymiary i salony partnerskie."
+      },
+      "intro": "Gotowy zestaw kuchenny to szafki górne i dolne dobrane do jednej długości ściany. Wybierasz długość zabudowy i kolor frontów — resztę dobiera producent.",
+      "tips": [
+        {
+          "title": "Zmierz ścianę",
+          "text": "Wybierz zestaw o kilka centymetrów krótszy niż ściana, przy której stanie kuchnia."
+        },
+        {
+          "title": "Przyłącza",
+          "text": "Sprawdź, gdzie są woda, odpływ i gaz — od nich zależy miejsce szafki pod zlew."
+        },
+        {
+          "title": "Sprzęt AGD",
+          "text": "Zanim wybierzesz zestaw, sprawdź wymiary płyty, piekarnika i zmywarki."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Jakie długości mają zestawy kuchenne Liveo?",
+          "a": "Zestawy kuchenne Liveo mają od 180 do 260 cm długości. Dokładne wymiary podajemy przy każdym zestawie."
+        },
+        {
+          "q": "Która kolekcja Liveo ma meble kuchenne?",
+          "a": "Meble kuchenne ma kolekcja: {collectionsList}."
         }
       ]
     }

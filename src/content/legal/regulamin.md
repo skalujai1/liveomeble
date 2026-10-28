@@ -44,11 +44,11 @@ effectiveFrom: "[do uzupełnienia]"
 2. Doradca wnętrz przy pierwszej analizie zdjęcia pobiera do przeglądarki model analizy obrazu o rozmiarze kilkudziesięciu MB [do uzupełnienia: dokładny rozmiar]. Na starszych urządzeniach analiza może trwać dłużej lub nie być możliwa.
 3. Do Strefy partnera potrzebny jest adres e-mail i hasło nadane zgodnie z § 7.
 
-## § 5. Jak traktować informacje o meblach i cenach?
+## § 5. Jak traktować informacje o meblach?
 
 1. Strona ma charakter informacyjny. **Liveo nie sprzedaje mebli przez Stronę.** Meble można kupić w sklepach partnerskich; umowę sprzedaży zawierasz ze sklepem partnerskim, który odpowiada wobec Ciebie za zgodność mebla z umową.
-2. Ceny na Stronie to ceny brutto w złotych polskich podawane przez producenta [do uzupełnienia: „ceny sugerowane” lub inne określenie — do decyzji Liveo i prawnika]. Informacje o meblach i cenach nie stanowią oferty w rozumieniu Kodeksu cywilnego [do weryfikacji przez prawnika]. Ostateczną cenę i dostępność podaje sklep partnerski.
-3. Przy każdej obniżce ceny podajemy najniższą cenę z 30 dni przed obniżką, zgodnie z art. 6a ustawy z dnia 9 maja 2014 r. o informowaniu o cenach towarów i usług. Zasady promocji opisujemy na stronie Promocje.
+2. Strona nie podaje cen mebli. Cenę, dostępność, koszt dostawy i montażu podaje sklep partnerski. Informacje o meblach na Stronie nie stanowią oferty w rozumieniu Kodeksu cywilnego [do weryfikacji przez prawnika].
+3. Informacje o meblach (wymiary, materiały, kolory, zdjęcia) pochodzą z kart produktu Liveo.
 4. Kolory mebli na ekranie mogą się różnić od rzeczywistych — zależą od ustawień ekranu i oświetlenia. Wymiary podajemy w centymetrach jako wymiary zewnętrzne mebla [do uzupełnienia: dopuszczalne tolerancje wymiarów, jeśli Liveo chce je podawać].
 5. Lista sklepów partnerskich, ich adresy, godziny otwarcia i kolekcje mają charakter informacyjny. Odległość do sklepu jest liczona w przybliżeniu.
 6. Do czasu uruchomienia Strony w wersji docelowej dane oznaczone jako „DEMO” lub „dane przykładowe” są fikcyjne i służą wyłącznie do prezentacji działania Strony.
@@ -93,7 +93,7 @@ effectiveFrom: "[do uzupełnienia]"
 
 [do uzupełnienia przez prawnika — z zastrzeżeniem, że wobec Konsumentów nie można wyłączyć ani ograniczyć odpowiedzialności w zakresie, w jakim zakazują tego przepisy prawa.]
 
-1. Liveo dokłada starań, aby informacje na Stronie były aktualne i poprawne, w szczególności ceny, promocje i stany magazynowe pobierane z systemu Liveo.
+1. Liveo dokłada starań, aby informacje na Stronie były aktualne i poprawne, w szczególności wymiary, materiały i kolory pobierane z kart produktu Liveo.
 2. Liveo może czasowo ograniczyć dostęp do Strony lub jej funkcji w związku z pracami technicznymi lub awarią.
 
 ## § 12. Dane osobowe

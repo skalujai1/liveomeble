@@ -614,7 +614,9 @@ class LiveoAssistant {
         off >= 5 && h('span', { class: 'badge' }, `−${off}%`)),
       h('span', { class: 'name' }, name),
       p.color && h('span', { class: 'color' }, p.color.label),
-      h('span', { class: 'price' + (p.regular ? ' on-sale' : '') }, h('b', null, formatPrice(p.price)), p.regular && h('s', null, formatPrice(p.regular))),
+      p.price != null
+        ? h('span', { class: 'price' + (p.regular ? ' on-sale' : '') }, h('b', null, formatPrice(p.price)), p.regular && h('s', null, formatPrice(p.regular)))
+        : h('span', { class: 'price' }, 'Cena w salonie partnerskim'),
       // Omnibus: przekreślona cena zawsze razem z najniższą ceną z 30 dni przed obniżką
       p.regular && h('span', { class: 'lowest' }, `Najniższa z 30 dni: ${formatPrice(p.lowest30 ?? p.regular)}`));
   }
@@ -622,7 +624,9 @@ class LiveoAssistant {
   buildSetSummary(set) {
     const url = this.collections[set.collection] || ROOM_URLS[this.room];
     return h('div', { class: 'msg wide' }, h('div', { class: 'set-sum' },
-      h('span', null, `${set.items.length} ${set.items.length < 5 ? 'meble' : 'mebli'} razem `, h('b', null, formatPrice(set.total))),
+      set.total > 0
+        ? h('span', null, `${set.items.length} ${set.items.length < 5 ? 'meble' : 'mebli'} razem `, h('b', null, formatPrice(set.total)))
+        : h('span', null, `${set.items.length} ${set.items.length < 5 ? 'meble' : 'mebli'} z kolekcji `, h('b', null, set.collection)),
       url && h('a', { href: url }, `Kolekcja ${set.collection}`)));
   }
 
@@ -687,7 +691,7 @@ class LiveoAssistant {
       catalog: catalogSummary(this.products),
       state: {
         room: this.room,
-        lastSet: s ? `${s.collection}${s.color ? ` (${s.color.label})` : ''}: ${s.items.map(p => `${p.name} ${formatPrice(p.price)}`).join('; ')}`.slice(0, 600) : null,
+        lastSet: s ? `${s.collection}${s.color ? ` (${s.color.label})` : ''}: ${s.items.map(p => `${p.name}${p.price != null ? ` ${formatPrice(p.price)}` : ''}`).join('; ')}`.slice(0, 600) : null,
         hasPhoto: !!this.analysis,
         maxPrice: this.opts.maxPrice || null,
       },

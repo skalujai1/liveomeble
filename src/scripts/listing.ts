@@ -1,40 +1,33 @@
 // Filtry i sortowanie listy mebli w przeglądarce (dane w atrybutach data-* kart).
-// Parametry w adresie: pokoj, typ, kolekcja, kolor (wiele wartości po przecinku), cena, promocje=1, sort.
+// Parametry w adresie: pokoj, typ, kolekcja, kolor (wiele wartości po przecinku), dostawa=72h, sort.
 // Tylko atrybuty i kolejność węzłów — bez czytania układu.
 
 const MULTI = ['pokoj', 'typ', 'kolekcja', 'kolor'] as const;
-const FILTER_KEYS = [...MULTI, 'cena', 'promocje', 'sort'];
+const FILTER_KEYS = [...MULTI, 'dostawa', 'sort'];
 
-type Filters = { multi: Record<string, string[]>; cena: string; promocje: boolean; sort: string };
+type Filters = { multi: Record<string, string[]>; dostawa: boolean; sort: string };
 
 function readUrl(): Filters {
   const sp = new URLSearchParams(location.search);
   const multi: Record<string, string[]> = {};
   for (const k of MULTI) multi[k] = sp.getAll(k).flatMap(v => v.split(',')).map(s => s.trim()).filter(Boolean);
-  return { multi, cena: sp.get('cena') ?? '', promocje: sp.get('promocje') === '1', sort: sp.get('sort') ?? '' };
+  return { multi, dostawa: sp.get('dostawa') === '72h', sort: sp.get('sort') ?? '' };
 }
 
 function readForm(form: HTMLFormElement): Filters {
   const fd = new FormData(form);
   const multi: Record<string, string[]> = {};
   for (const k of MULTI) multi[k] = fd.getAll(k).map(String);
-  return { multi, cena: String(fd.get('cena') ?? ''), promocje: fd.get('promocje') === '1', sort: String(fd.get('sort') ?? '') };
+  return { multi, dostawa: fd.get('dostawa') === '72h', sort: String(fd.get('sort') ?? '') };
 }
 
 function writeForm(form: HTMLFormElement, f: Filters) {
   form.querySelectorAll<HTMLInputElement>('input[type=checkbox]').forEach(i => {
-    i.checked = i.name === 'promocje' ? f.promocje : (f.multi[i.name] ?? []).includes(i.value);
+    i.checked = i.name === 'dostawa' ? f.dostawa : (f.multi[i.name] ?? []).includes(i.value);
   });
-  form.querySelectorAll<HTMLInputElement>('input[type=radio][name=cena]').forEach(i => { i.checked = i.value === f.cena; });
   const sort = form.querySelector<HTMLSelectElement>('[data-listing-sort]');
   if (sort && f.sort && [...sort.options].some(o => o.value === f.sort)) sort.value = f.sort;
 }
-
-const inPrice = (price: number, range: string) => {
-  if (!range) return true;
-  const [a, b] = range.split('-');
-  return price >= Number(a || 0) && (b === '' || b === undefined ? true : price <= Number(b));
-};
 
 function matches(el: HTMLElement, f: Filters) {
   const d = el.dataset;
@@ -43,16 +36,13 @@ function matches(el: HTMLElement, f: Filters) {
     && any(d.type, f.multi.typ)
     && any(d.collection, f.multi.kolekcja)
     && any(d.colors, f.multi.kolor)
-    && inPrice(Number(d.price), f.cena)
-    && (!f.promocje || d.promo === '1');
+    && (!f.dostawa || d.delivery === '72h');
 }
 
 const SORTERS: Record<string, (a: HTMLElement, b: HTMLElement) => number> = {
   polecane: (a, b) => Number(a.dataset.order) - Number(b.dataset.order),
-  'cena-rosnaco': (a, b) => Number(a.dataset.price) - Number(b.dataset.price) || SORTERS.polecane(a, b),
-  'cena-malejaco': (a, b) => Number(b.dataset.price) - Number(a.dataset.price) || SORTERS.polecane(a, b),
-  nowosci: (a, b) => Number(b.dataset.new) - Number(a.dataset.new) || SORTERS.polecane(a, b),
   szerokosc: (a, b) => Number(a.dataset.width) - Number(b.dataset.width) || SORTERS.polecane(a, b),
+  'szerokosc-malejaco': (a, b) => Number(b.dataset.width) - Number(a.dataset.width) || SORTERS.polecane(a, b),
 };
 
 const PR = new Intl.PluralRules('pl');
@@ -97,8 +87,7 @@ function setupListing(root: HTMLElement) {
       const sp = new URLSearchParams(location.search);
       FILTER_KEYS.forEach(k => sp.delete(k));
       for (const k of MULTI) if (f.multi[k].length) sp.set(k, f.multi[k].join(','));
-      if (f.cena) sp.set('cena', f.cena);
-      if (f.promocje) sp.set('promocje', '1');
+      if (f.dostawa) sp.set('dostawa', '72h');
       if (f.sort && f.sort !== 'polecane') sp.set('sort', f.sort);
       const qs = sp.toString().replace(/%2C/g, ',');
       history.replaceState(history.state, '', `${location.pathname}${qs ? `?${qs}` : ''}${location.hash}`);
@@ -121,13 +110,11 @@ function setupListing(root: HTMLElement) {
   });
   const clear = () => {
     form.reset();
-    // reset() przywraca stan z HTML — jawnie zaznacz „Dowolna” i kolejność „Polecane”
-    writeForm(form, { multi: { pokoj: [], typ: [], kolekcja: [], kolor: [] }, cena: '', promocje: false, sort: 'polecane' });
+    // reset() przywraca stan z HTML — jawnie kolejność „Polecane”
+    writeForm(form, { multi: { pokoj: [], typ: [], kolekcja: [], kolor: [] }, dostawa: false, sort: 'polecane' });
     apply(readForm(form));
   };
   root.querySelectorAll('[data-listing-clear]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); clear(); }));
-  // Ceny przeliczone w przeglądarce (promocja mogła się zacząć/skończyć) → filtry ceny i promocji od nowa.
-  document.addEventListener('liveo:prices', () => apply(readForm(form), { updateUrl: false }));
 }
 
 /** Adres z parametrami filtrów nie powinien trafić do indeksu (canonical i tak wskazuje stronę bazową). */

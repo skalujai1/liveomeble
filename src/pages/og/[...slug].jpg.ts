@@ -5,7 +5,7 @@
 //   /og/liveo.jpg                     strona główna i domyślny
 //   /og/kolekcje/<slug>.jpg           kolekcja
 //   /og/pomieszczenia/<slug>.jpg      pomieszczenie
-//   /og/produkty/<slug>.jpg           mebel (tylko gdy jest własny render wariantu domyślnego)
+//   /og/produkty/<slug>.jpg           mebel (tylko gdy wariant domyślny ma własne zdjęcie)
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -16,20 +16,23 @@ import { collections, defaultVariant, products, rooms } from '../../lib/site';
 const W = 1200;
 const H = 630;
 const LINEN = { r: 239, g: 233, b: 225 };
-const RENDERS = join(process.cwd(), 'src/assets/renders');
 const LOGO = join(process.cwd(), 'public/brand/liveo-logo.svg');
 
 type Props = { kind: 'room' | 'packshot'; file: string };
 
+/** Ścieżka pliku na dysku: zdjęcie katalogu (największa szerokość z public/katalog) albo obraz z src/assets. */
+const fileOf = (img: ImageRef) =>
+  img.pub ? join(process.cwd(), 'public', `${img.pub.base}-${Math.max(...img.pub.widths)}.webp`) : join(process.cwd(), img.file);
+
 export const getStaticPaths = (() => {
   const paths: { params: { slug: string }; props: Props }[] = [];
-  const room = (slug: string, img: ImageRef | null) => img && paths.push({ params: { slug }, props: { kind: 'room', file: img.file } });
+  const room = (slug: string, img: ImageRef | null) => img && paths.push({ params: { slug }, props: { kind: 'room', file: fileOf(img) } });
   room('liveo', collectionImage(collections[0], 'wide'));
   for (const c of collections) room(`kolekcje/${c.slug}`, collectionImage(c, 'wide'));
   for (const r of rooms) room(`pomieszczenia/${r.slug}`, roomImage(r.slug, 'wide'));
   for (const p of products) {
     const img = packshotFor(p, defaultVariant(p));
-    if (img && !img.approximate) paths.push({ params: { slug: `produkty/${p.slug}` }, props: { kind: 'packshot', file: img.file } });
+    if (img && !img.approximate) paths.push({ params: { slug: `produkty/${p.slug}` }, props: { kind: 'packshot', file: fileOf(img) } });
   }
   return paths;
 }) satisfies GetStaticPaths;
@@ -45,7 +48,7 @@ async function logoPlate() {
 }
 
 export const GET: APIRoute<Props> = async ({ props }) => {
-  const src = join(RENDERS, props.file);
+  const src = props.file;
   const plate = await logoPlate();
   let base: sharp.Sharp;
   if (props.kind === 'room') {

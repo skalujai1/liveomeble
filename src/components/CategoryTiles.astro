@@ -1,7 +1,7 @@
 ---
 // Kafle rodzajów mebli z miniaturą (packshot pierwszego mebla danego rodzaju) i liczbą mebli — linki do /meble/<kategoria>/.
 // Siatka 4 kolumn na telefonie i 8 na desktopie (jak „Wybierz rodzaj mebla” na stronie głównej).
-import { Image } from 'astro:assets';
+import Thumb from './Thumb.astro';
 import { typeImage } from '../lib/images';
 import { productCount, products, productsByType, types, url, type FurnitureType } from '../lib/site';
 
@@ -13,7 +13,7 @@ const tiles = list.map(t => ({ t, img: typeImage(t.id, products), count: product
   {tiles.map(({ t, img, count }) => (
     <li class="type-tile">
       <a href={url.category(t.slug)} aria-current={current === t.slug ? 'page' : undefined}>
-        <span class="type-tile__thumb">{img && <Image src={img.src} alt="" widths={[160, 240, 320]} sizes="(min-width: 60rem) 9rem, 22vw" loading="lazy" />}</span>
+        <span class="type-tile__thumb"><Thumb image={img} sizes="(min-width: 60rem) 9rem, 22vw" /></span>
         <span class="type-tile__name">{t.plural}</span>
         <span class="type-tile__count">{productCount(count)}</span>
       </a>

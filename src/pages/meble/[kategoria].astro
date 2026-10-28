@@ -8,7 +8,7 @@ import CategoryTiles from '../../components/CategoryTiles.astro';
 import Faq from '../../components/Faq.astro';
 import { getArticles } from '../../lib/articles';
 import { faqPage, itemList, webPage } from '../../lib/jsonld';
-import { collectionNames, collections, pages, priceRangeOf, productsByType, rooms, types, url, type FurnitureType } from '../../lib/site';
+import { collectionNames, collections, num, pages, productsByType, rooms, types, url, type FurnitureType } from '../../lib/site';
 import { fill, lowerFirst } from '../../lib/text';
 
 export function getStaticPaths() {
@@ -22,12 +22,11 @@ if (!item) throw new Error(`Brak treści kategorii ${t.slug} w kategorie.json`);
 const tpl = cfg.template;
 const path = url.category(t.slug);
 const list = productsByType(t.id);
-const range = priceRangeOf(list);
-const widths = list.map(p => p.dims.w);
+const widths = list.map(p => p.dims.w).filter((w): w is number => !!w);
 const colls = collections.filter(c => list.some(p => p.collection === c.slug));
 const vars = {
-  plural: t.plural, pluralLower: lowerFirst(t.plural), minPrice: range.minText, maxPrice: range.maxText,
-  collectionsList: collectionNames(colls.map(c => c.slug)), minWidth: Math.min(...widths), maxWidth: Math.max(...widths),
+  plural: t.plural, pluralLower: lowerFirst(t.plural),
+  collectionsList: collectionNames(colls.map(c => c.slug)), minWidth: num(Math.min(...widths)), maxWidth: num(Math.max(...widths)),
 };
 const h1 = fill(tpl.h1, vars);
 const faq = tpl.faq.items.map(it => ({ q: fill(it.q, vars), a: fill(it.a, vars) }));

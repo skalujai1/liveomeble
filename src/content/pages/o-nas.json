@@ -10,7 +10,12 @@
   "seo": {
     "title": "O nas — producent mebli z Raniżowa | Liveo",
     "description": "Liveo Meble to polski producent mebli skrzyniowych i systemowych z Raniżowa. Projektujemy meble w kolekcjach i sprzedajemy je przez sklepy partnerskie.",
-    "jsonLd": ["AboutPage", "Organization", "BreadcrumbList", "FAQPage"],
+    "jsonLd": [
+      "AboutPage",
+      "Organization",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
     "_note": "Organization: name, legalName, url, logo, address (Raniżów — pełny adres po potwierdzeniu), sameAs (profile social media — po potwierdzeniu). Bez foundingDate i numberOfEmployees, dopóki klient ich nie potwierdzi."
   },
   "h1": "Meble z Raniżowa, <br>projektowane w kolekcjach",
@@ -24,8 +29,11 @@
       "id": "kolekcje",
       "type": "text",
       "title": "Dlaczego kolekcje",
-      "text": "Dom rzadko urządza się w jeden dzień. Najpierw salon, za rok sypialnia, potem przedpokój. Dlatego meble projektujemy w kolekcjach: szafka RTV, komoda, witryna, stół i szafa z jednej kolekcji mają te same kolory, uchwyty i podstawę. Możesz dokupić kolejny mebel po latach i nadal będzie pasował [do potwierdzenia: jak długo kolekcje pozostają w ofercie].",
-      "cta": { "label": "Zobacz kolekcje", "href": "/kolekcje/" }
+      "text": "Dom rzadko urządza się w jeden dzień. Najpierw salon, za rok sypialnia, potem przedpokój. Dlatego meble projektujemy w kolekcjach: szafka RTV, komoda, witryna, stół i szafa z jednej kolekcji mają te same kolory i wykończenie. Możesz dokupić kolejny mebel po latach i nadal będzie pasował [do potwierdzenia: jak długo kolekcje pozostają w ofercie].",
+      "cta": {
+        "label": "Zobacz kolekcje",
+        "href": "/kolekcje/"
+      }
     },
     {
       "id": "produkcja",
@@ -33,11 +41,26 @@
       "title": "Jak powstają meble Liveo",
       "lead": "[do potwierdzenia: cała sekcja — uzupełnić faktami od klienta albo usunąć]",
       "items": [
-        { "label": "Miejsce produkcji", "value": "Raniżów, Podkarpacie [do potwierdzenia: czy cała produkcja odbywa się w Raniżowie]" },
-        { "label": "Materiały", "value": "płyta laminowana w dekorach drewna i kolorach jednolitych [do potwierdzenia: rodzaj, grubości, dostawcy, klasa emisji]" },
-        { "label": "Okucia", "value": "[do potwierdzenia: np. prowadnice i zawiasy z cichym domykiem — w których meblach]" },
-        { "label": "Kontrola jakości", "value": "[do potwierdzenia: co sprawdzamy przed wysyłką]" },
-        { "label": "Pakowanie", "value": "meble w paczkach do samodzielnego montażu, z instrukcją i okuciami [do potwierdzenia]" }
+        {
+          "label": "Miejsce produkcji",
+          "value": "Raniżów, Podkarpacie [do potwierdzenia: czy cała produkcja odbywa się w Raniżowie]"
+        },
+        {
+          "label": "Materiały",
+          "value": "płyta laminowana w dekorach drewna i kolorach jednolitych [do potwierdzenia: rodzaj, grubości, dostawcy, klasa emisji]"
+        },
+        {
+          "label": "Okucia",
+          "value": "[do potwierdzenia: np. prowadnice i zawiasy z cichym domykiem — w których meblach]"
+        },
+        {
+          "label": "Kontrola jakości",
+          "value": "[do potwierdzenia: co sprawdzamy przed wysyłką]"
+        },
+        {
+          "label": "Pakowanie",
+          "value": "meble w paczkach do samodzielnego montażu, z instrukcją i okuciami [do potwierdzenia]"
+        }
       ],
       "image": {
         "alt": "[do potwierdzenia: zdjęcie z zakładu w Raniżowie, opis tego, co widać]",
@@ -56,28 +79,55 @@
       "type": "text",
       "title": "Kupujesz w sklepie blisko domu",
       "text": "Nie mamy własnych salonów. Meble Liveo sprzedają sklepy partnerskie — tam zobaczysz je na żywo, porównasz kolory i ustalisz dostawę. Na naszej stronie wybierasz meble i znajdujesz najbliższy sklep, który ma wybraną kolekcję.",
-      "cta": { "label": "Gdzie kupić", "href": "/gdzie-kupic/" }
+      "cta": {
+        "label": "Gdzie kupić",
+        "href": "/gdzie-kupic/"
+      }
     },
     {
       "id": "dla-sklepow",
       "type": "band",
       "title": "Współpracujemy ze sklepami meblowymi",
       "text": "Jeśli prowadzisz sklep i chcesz sprzedawać kolekcje Liveo, zobacz, jak wygląda współpraca.",
-      "cta": { "label": "Dla partnerów", "href": "/dla-partnerow/" }
+      "cta": {
+        "label": "Dla partnerów",
+        "href": "/dla-partnerow/"
+      }
     },
     {
       "id": "dane-firmy",
       "type": "company",
       "title": "Dane firmy",
       "items": [
-        { "label": "Nazwa", "value": "Liveo Meble sp. z o.o." },
-        { "label": "Adres", "value": "ul. Borki 5, 36-130 Raniżów (woj. podkarpackie)" },
-        { "label": "NIP", "value": "[do potwierdzenia]" },
-        { "label": "KRS", "value": "[do potwierdzenia]" },
-        { "label": "REGON", "value": "[do potwierdzenia]" },
-        { "label": "Kapitał zakładowy", "value": "[do potwierdzenia — jeśli spółka chce go podawać]" }
+        {
+          "label": "Nazwa",
+          "value": "Liveo Meble sp. z o.o."
+        },
+        {
+          "label": "Adres",
+          "value": "ul. Borki 5, 36-130 Raniżów (woj. podkarpackie)"
+        },
+        {
+          "label": "NIP",
+          "value": "[do potwierdzenia]"
+        },
+        {
+          "label": "KRS",
+          "value": "[do potwierdzenia]"
+        },
+        {
+          "label": "REGON",
+          "value": "[do potwierdzenia]"
+        },
+        {
+          "label": "Kapitał zakładowy",
+          "value": "[do potwierdzenia — jeśli spółka chce go podawać]"
+        }
       ],
-      "cta": { "label": "Kontakt", "href": "/kontakt/" }
+      "cta": {
+        "label": "Kontakt",
+        "href": "/kontakt/"
+      }
     }
   ],
   "faq": {

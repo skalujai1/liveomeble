@@ -9,7 +9,12 @@
   "seo": {
     "title": "Kontakt — Liveo Meble, Raniżów",
     "description": "Kontakt z Liveo Meble: adres, telefon i e-mail producenta. Pytania o zakup, reklamacje i współpracę — sprawdź, gdzie najszybciej załatwisz sprawę.",
-    "jsonLd": ["ContactPage", "Organization", "BreadcrumbList", "FAQPage"],
+    "jsonLd": [
+      "ContactPage",
+      "Organization",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
     "_note": "Organization.contactPoint (telephone, email, contactType: customer service / sales) — dopiero po potwierdzeniu danych."
   },
   "h1": "Kontakt",
@@ -27,22 +32,34 @@
         {
           "title": "Chcę kupić meble albo zobaczyć je na żywo",
           "text": "Meble sprzedają sklepy partnerskie. Wpisz kod pocztowy — pokażemy najbliższe.",
-          "cta": { "label": "Gdzie kupić", "href": "/gdzie-kupic/" }
+          "cta": {
+            "label": "Gdzie kupić",
+            "href": "/gdzie-kupic/"
+          }
         },
         {
           "title": "Mam pytanie o dostawę, montaż albo reklamację",
           "text": "Skontaktuj się ze sklepem, w którym kupiłeś mebel — to on ustala dostawę i przyjmuje reklamacje. Jeśli sprawa utknęła, napisz do nas.",
-          "cta": { "label": "Napisz do nas", "href": "#formularz" }
+          "cta": {
+            "label": "Napisz do nas",
+            "href": "#formularz"
+          }
         },
         {
           "title": "Brakuje części albo zgubiłem instrukcję",
           "text": "Napisz do nas: podaj nazwę mebla, kolor i numer z etykiety na paczce [do potwierdzenia: gdzie jest numer i jak wygląda proces].",
-          "cta": { "label": "Napisz do nas", "href": "#formularz" }
+          "cta": {
+            "label": "Napisz do nas",
+            "href": "#formularz"
+          }
         },
         {
           "title": "Prowadzę sklep i chcę współpracować",
           "text": "Zgłoś sklep przez formularz dla partnerów — odpowie dział handlowy.",
-          "cta": { "label": "Dla partnerów", "href": "/dla-partnerow/" }
+          "cta": {
+            "label": "Dla partnerów",
+            "href": "/dla-partnerow/"
+          }
         }
       ]
     },
@@ -51,11 +68,31 @@
       "type": "contact-details",
       "title": "Liveo Meble sp. z o.o.",
       "items": [
-        { "label": "Adres", "value": "ul. Borki 5, 36-130 Raniżów (woj. podkarpackie)", "type": "address" },
-        { "label": "Telefon", "value": "+48 17 58 18 000", "type": "tel" },
-        { "label": "E-mail", "value": "biuro@liveomeble.pl", "type": "email" },
-        { "label": "Dział handlowy (partnerzy)", "value": "[do potwierdzenia: telefon i e-mail]", "type": "text" },
-        { "label": "Godziny pracy biura", "value": "[do potwierdzenia: np. pon.–pt.]", "type": "hours" }
+        {
+          "label": "Adres",
+          "value": "ul. Borki 5, 36-130 Raniżów (woj. podkarpackie)",
+          "type": "address"
+        },
+        {
+          "label": "Telefon",
+          "value": "+48 17 58 18 000",
+          "type": "tel"
+        },
+        {
+          "label": "E-mail",
+          "value": "biuro@liveomeble.pl",
+          "type": "email"
+        },
+        {
+          "label": "Dział handlowy (partnerzy)",
+          "value": "[do potwierdzenia: telefon i e-mail]",
+          "type": "text"
+        },
+        {
+          "label": "Godziny pracy biura",
+          "value": "[do potwierdzenia: np. pon.–pt.]",
+          "type": "hours"
+        }
       ],
       "note": "To adres biura i zakładu — nie ma tu sklepu ani ekspozycji dla klientów [do potwierdzenia].",
       "map": {
@@ -84,11 +121,42 @@
             "Inna sprawa"
           ]
         },
-        { "name": "name", "label": "Imię", "type": "text", "required": true, "autocomplete": "given-name" },
-        { "name": "email", "label": "E-mail", "type": "email", "required": true, "autocomplete": "email" },
-        { "name": "phone", "label": "Telefon", "type": "tel", "required": false, "autocomplete": "tel", "hint": "Jeśli wolisz, żebyśmy oddzwonili." },
-        { "name": "product", "label": "Mebel, którego dotyczy wiadomość", "type": "text", "required": false, "hint": "Np. Komoda 120 OLMO, dąb naturalny." },
-        { "name": "message", "label": "Wiadomość", "type": "textarea", "required": true, "maxLength": 3000 }
+        {
+          "name": "name",
+          "label": "Imię",
+          "type": "text",
+          "required": true,
+          "autocomplete": "given-name"
+        },
+        {
+          "name": "email",
+          "label": "E-mail",
+          "type": "email",
+          "required": true,
+          "autocomplete": "email"
+        },
+        {
+          "name": "phone",
+          "label": "Telefon",
+          "type": "tel",
+          "required": false,
+          "autocomplete": "tel",
+          "hint": "Jeśli wolisz, żebyśmy oddzwonili."
+        },
+        {
+          "name": "product",
+          "label": "Mebel, którego dotyczy wiadomość",
+          "type": "text",
+          "required": false,
+          "hint": "Np. Komoda DANTE DT03, dąb cremona torro / zielony mat."
+        },
+        {
+          "name": "message",
+          "label": "Wiadomość",
+          "type": "textarea",
+          "required": true,
+          "maxLength": 3000
+        }
       ],
       "consent": "site.forms.consent",
       "submit": "Wyślij wiadomość",

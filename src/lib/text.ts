@@ -6,7 +6,7 @@ import { warsawDay } from './pricing.js';
 const ESC: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 export const escapeHtml = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, c => ESC[c]);
 
-/** "{name} — {color}" + { name: 'OLMO' } → "OLMO — {color}" (nieznane klucze zostają). */
+/** "{name} — {color}" + { name: 'DANTE' } → "DANTE — {color}" (nieznane klucze zostają). */
 export function fill(template: string | undefined | null, vars: Record<string, unknown> = {}): string {
   return String(template ?? '').replace(/\{(\w+)\}/g, (m, k) => (vars[k] === undefined || vars[k] === null ? m : String(vars[k])));
 }

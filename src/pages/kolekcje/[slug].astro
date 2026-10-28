@@ -1,7 +1,7 @@
 ---
 // Kolekcja — docs/ia.md 3.3, szablon: src/content/pages/kolekcje.json → template.
 // Układ premium (surface brief: .impeccable/surfaces/src-pages-index-astro.md): hero na cały ekran pod przezroczystym
-// nagłówkiem → opis i szczegóły → galeria (aranżacja, detal, ujęcie pod kątem) → meble → kolory → gdzie kupić →
+// nagłówkiem → opis i szczegóły → galeria aranżacji z kart Liveo → meble → kolory → gdzie kupić →
 // inne kolekcje w pasie → doradca → FAQ.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CollectionHero from '../../components/CollectionHero.astro';
@@ -12,10 +12,10 @@ import ProductGrid from '../../components/ProductGrid.astro';
 import StoreFinder from '../../components/StoreFinder.astro';
 import Faq from '../../components/Faq.astro';
 import Rich from '../../components/Rich.astro';
-import { collectionImage, type ImageRef } from '../../lib/images';
+import { collectionImage, collectionImages } from '../../lib/images';
 import { faqPage, itemList, webPage } from '../../lib/jsonld';
 import {
-  baseLabel, collections, finishById, finishLabelsSentence, handleLabel, pages, productCount,
+  collections, finishById, finishLabelsSentence, pages, productCount,
   productsByCollection, roomBySlug, rooms, roomsList, styleOf, typePluralList, types, url, type Collection, type Product,
 } from '../../lib/site';
 import { fill, truncateSentence } from '../../lib/text';
@@ -34,7 +34,8 @@ const list = productsByCollection(c.slug);
 const vars = {
   name: c.name, slug: c.slug, tagline: c.tagline, description: c.description, styleIn: style.in, styleLabel: style.label,
   roomsList: roomsList(c.rooms), finishLabels: finishLabelsSentence(c), heroRoomLocative: heroRoom.locative,
-  finishLabel: c.finishes[0].label.toLocaleLowerCase('pl'), handleLabel: handleLabel(c), baseLabel: baseLabel(c),
+  finishLabel: c.finishes[0].label.toLocaleLowerCase('pl'), productCountText: productCount(list.length),
+  delivery72Text: (() => { const n = list.filter(p => p.delivery72).length; return n === list.length ? 'wszystkie meble' : n ? `${productCount(n)} z ${list.length}` : 'nie'; })(),
   typePluralList: typePluralList([...new Set(list.map(p => p.type))]),
 };
 let title = fill(tpl.seo.title, vars);
@@ -60,12 +61,12 @@ const others = collections
   .map(o => o.x);
 
 const faq = tpl.faq.items.map(it => ({ q: fill(it.q, vars), a: fill(it.a, vars) }));
-const img = collectionImage(c);
-// Własna aranżacja kolekcji ma w manifeście dokładny opis (meble i kolory wariantów) — lepszy niż szablon z pierwszym kolorem.
-const altOf = (i: ImageRef | null, fallback: string) => (i?.title ? (i.approximate ? `Aranżacja poglądowa: ${i.title}` : i.title) : fallback);
-const heroAlt = altOf(collectionImage(c, 'cinema'), fill(sec('hero').image.alt, vars));
-const swatch = (id?: string) => (id ? finishById.get(id)?.hex : undefined);
-const gallery = { wide: img, detail: collectionImage(c, 'detail'), angle: collectionImage(c, 'angle') };
+const heroAlt = fill(sec('hero').image.alt, vars);
+const swatch = (id?: string | null) => (id ? finishById.get(id)?.hex : undefined);
+// Galeria: aranżacje z kart Liveo (bez pierwszej — jest w hero); układ wide / detal / pod kątem, reszta w rzędzie.
+const all = collectionImages(c);
+const rest = all.length > 1 ? all.slice(1) : all;
+const [gWide, gDetail, gAngle, ...gMore] = rest;
 ---
 <BaseLayout
   {title}
@@ -103,16 +104,27 @@ const gallery = { wide: img, detail: collectionImage(c, 'detail'), angle: collec
 
   <section class="collection-gallery" aria-label={`Kolekcja ${c.name} w aranżacji`}>
     <div class="container collection-gallery__grid">
-      <figure class="collection-gallery__item collection-gallery__item--wide" data-reveal>
-        <Media image={gallery.wide} alt={altOf(gallery.wide, heroAlt)} widths={[640, 960, 1440, 1920, 2400]} sizes="(min-width: 80rem) 76rem, 100vw" ratio="16 / 9" placeholderLabel={`Kolekcja ${c.name}`} />
-      </figure>
-      <figure class="collection-gallery__item collection-gallery__item--detail" data-reveal>
-        <Media image={gallery.detail} alt={altOf(gallery.detail, `Kolekcja ${c.name} — zbliżenie`)} widths={[480, 720, 960, 1280]} sizes="(min-width: 64rem) 31vw, 50vw" ratio="4 / 5" placeholderLabel={`Detal ${c.name}`} />
-      </figure>
-      <figure class="collection-gallery__item collection-gallery__item--angle" data-reveal style="--d: 120ms">
-        <Media image={gallery.angle} alt={altOf(gallery.angle, `Kolekcja ${c.name} — ujęcie pod kątem`)} widths={[640, 960, 1440, 1920]} sizes="(min-width: 64rem) 52vw, 100vw" ratio="3 / 2" placeholderLabel={`Kolekcja ${c.name}`} />
-        <figcaption>Meble z kolekcji {c.name} {heroRoom.locative}. Zdjęcia poglądowe — kolory na ekranie mogą różnić się od rzeczywistych.</figcaption>
-      </figure>
+      {gWide && (
+        <figure class="collection-gallery__item collection-gallery__item--wide" data-reveal>
+          <Media image={gWide} alt={`Kolekcja ${c.name} w aranżacji`} widths={[1280, 2400]} sizes="(min-width: 80rem) 76rem, 100vw" ratio="16 / 9" placeholderLabel={`Kolekcja ${c.name}`} />
+        </figure>
+      )}
+      {gDetail && (
+        <figure class="collection-gallery__item collection-gallery__item--detail" data-reveal>
+          <Media image={gDetail} alt={`Kolekcja ${c.name} — kolejna aranżacja`} widths={[1280]} sizes="(min-width: 64rem) 31vw, 50vw" ratio="4 / 5" placeholderLabel={`Kolekcja ${c.name}`} />
+        </figure>
+      )}
+      {gAngle && (
+        <figure class="collection-gallery__item collection-gallery__item--angle" data-reveal style="--d: 120ms">
+          <Media image={gAngle} alt={`Kolekcja ${c.name} — kolejna aranżacja`} widths={[1280, 2400]} sizes="(min-width: 64rem) 52vw, 100vw" ratio="3 / 2" placeholderLabel={`Kolekcja ${c.name}`} />
+        </figure>
+      )}
+      {gMore.map(g => (
+        <figure class="collection-gallery__item collection-gallery__item--more" data-reveal>
+          <Media image={g} alt={`Kolekcja ${c.name} — aranżacja`} widths={[1280]} sizes="(min-width: 64rem) 38vw, 100vw" ratio="3 / 2" placeholderLabel={`Kolekcja ${c.name}`} />
+        </figure>
+      ))}
+      <p class="collection-gallery__caption">Aranżacje z materiałów Liveo. Kolory na ekranie mogą nieco różnić się od rzeczywistych.</p>
     </div>
   </section>
 
@@ -132,7 +144,7 @@ const gallery = { wide: img, detail: collectionImage(c, 'detail'), angle: collec
     <ul class="swatches">
       {c.finishes.map(f => {
         const a = swatch(f.front) ?? '#ccc';
-        const b = swatch((f as { top?: string }).top ?? f.body) ?? a;
+        const b = swatch(f.body) ?? a;
         return (
           <li class="swatches__item">
             <span class="swatches__chip swatches__chip--split" style={`--swatch: ${a}; --swatch-2: ${b}`} aria-hidden="true"></span>

@@ -215,7 +215,7 @@ function setupFinder(root: HTMLElement) {
     );
   });
 
-  // Wejście z linku (np. z karty mebla): /gdzie-kupic/?kod=35-060&kolekcja=olmo
+  // Wejście z linku (np. z karty mebla): /gdzie-kupic/?kod=35-060&kolekcja=dante
   const sp = new URLSearchParams(location.search);
   const presetCollection = sp.get('kolekcja');
   if (presetCollection && [...select.options].some(o => o.value === presetCollection)) select.value = presetCollection;

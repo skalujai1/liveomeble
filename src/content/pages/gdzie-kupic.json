@@ -5,7 +5,11 @@
   "seo": {
     "title": "Gdzie kupić meble Liveo — sklepy partnerskie blisko Ciebie",
     "description": "Wpisz kod pocztowy i znajdź najbliższy sklep partnerski z meblami Liveo. Sprawdź, które kolekcje ma na ekspozycji i czy oferuje dostawę lub montaż.",
-    "jsonLd": ["WebPage", "BreadcrumbList", "FAQPage"],
+    "jsonLd": [
+      "WebPage",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
     "_note": "ItemList sklepów (FurnitureStore) w JSON-LD dopiero po zgodzie partnerów na publikację danych — patrz ia.md."
   },
   "h1": "Gdzie kupić meble Liveo",
@@ -68,7 +72,7 @@
         "highlight": "Ma kolekcję {collection}"
       },
       "accuracyNote": "Odległość liczymy w linii prostej od środka okręgu pocztowego (pierwsze dwie cyfry kodu), więc jest przybliżona.",
-      "demoNote": "Lista salonów pochodzi z liveomeble.pl. Kolekcje w tej wersji strony są przykładowe — ofertę potwierdź w salonie.",
+      "demoNote": "Lista salonów pochodzi z liveomeble.pl. Nie każdy salon ma wszystkie kolekcje na ekspozycji — ofertę potwierdź w salonie.",
       "more": "Pokaż kolejne sklepy",
       "mapNote": "Im większa kropka, tym więcej salonów w okolicy. Dokładny adres sprawdzisz w trasie.",
       "_notes": [
@@ -84,12 +88,15 @@
       "items": [
         {
           "title": "Zapisz nazwę kolekcji i koloru",
-          "text": "Na przykład „OLMO, dąb naturalny”. Sprzedawca szybciej znajdzie meble i sprawdzi dostępność."
+          "text": "Na przykład „DANTE DT03, dąb cremona torro / zielony mat”. Sprzedawca szybciej znajdzie meble i sprawdzi dostępność."
         },
         {
           "title": "Zmierz miejsce",
           "text": "Weź ze sobą wymiary pokoju albo wnęki. Jak mierzyć, opisujemy w poradniku.",
-          "link": { "label": "Jak zmierzyć wnękę pod szafę", "href": "/poradnik/jak-zmierzyc-wneke-pod-szafe/" }
+          "link": {
+            "label": "Jak zmierzyć wnękę pod szafę",
+            "href": "/poradnik/jak-zmierzyc-wneke-pod-szafe/"
+          }
         },
         {
           "title": "Zadzwoń przed wizytą",
@@ -106,7 +113,10 @@
       "type": "band",
       "title": "Masz sklep meblowy?",
       "text": "Dołącz do sieci partnerów Liveo — Twój sklep pojawi się w tej wyszukiwarce.",
-      "cta": { "label": "Współpraca dla sklepów", "href": "/dla-partnerow/" }
+      "cta": {
+        "label": "Współpraca dla sklepów",
+        "href": "/dla-partnerow/"
+      }
     }
   ],
   "faq": {
@@ -144,7 +154,7 @@
   },
   "urlRules": {
     "_notes": [
-      "Parametry: /gdzie-kupic/?kod=35-060&kolekcja=olmo — strona działa po wejściu z linku (np. z karty mebla). Canonical: /gdzie-kupic/, noindex dla wersji z parametrami.",
+      "Parametry: /gdzie-kupic/?kod=35-060&kolekcja=dante — strona działa po wejściu z linku (np. z karty mebla). Canonical: /gdzie-kupic/, noindex dla wersji z parametrami.",
       "Bez JS: formularz GET + statyczna lista wszystkich sklepów pogrupowana według województw (HTML), żeby treść była dostępna dla wyszukiwarek i czytników.",
       "Obliczenia (normalizePostcode, lookupPostcode, nearestResellers) w przeglądarce — kod pocztowy nie jest wysyłany na serwer."
     ]

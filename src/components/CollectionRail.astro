@@ -3,7 +3,7 @@
 // Zachowanie: [data-rail] w src/scripts/motion.ts. Bez JS to zwykła lista przewijana w poziomie.
 import Media from './Media.astro';
 import { collectionImage } from '../lib/images';
-import { priceRangeOf, productsByCollection, url, type Collection } from '../lib/site';
+import { url, type Collection } from '../lib/site';
 
 interface Props {
   collections: Collection[];
@@ -17,16 +17,15 @@ const { collections, named = [], label } = Astro.props;
   <ul class="rail__track" data-rail-track aria-label={label}>
     {collections.map(c => {
       const img = collectionImage(c, 'tall');
-      const items = productsByCollection(c.slug);
       return (
         <li class="rail__item">
           <a class="rail__link" href={url.collection(c.slug)}>
             <span class="rail__pic" style={named.includes(c.slug) ? undefined : `view-transition-name: kolekcja-${c.slug}`}>
-              <Media image={img} alt="" widths={[360, 540, 720, 960]} sizes="(min-width: 64rem) 26vw, (min-width: 40rem) 42vw, 76vw" ratio="4 / 5" placeholderLabel={`Kolekcja ${c.name}`} />
+              <Media image={img} alt="" widths={[1280]} sizes="(min-width: 64rem) 26vw, (min-width: 40rem) 42vw, 76vw" ratio="4 / 5" placeholderLabel={`Kolekcja ${c.name}`} />
               {c.isNew && <span class="badge rail__badge">Nowość</span>}
             </span>
             <span class="rail__name">{c.name}</span>
-            <span class="rail__meta">{c.tagline}{items.length ? ` Od ${priceRangeOf(items).minText}.` : ''}</span>
+            <span class="rail__meta">{c.tagline}</span>
           </a>
         </li>
       );

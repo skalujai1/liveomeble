@@ -1,24 +1,23 @@
-// Strefa partnera — DEMO w przeglądarce: logowanie dowolnymi danymi, cennik partnerski, zamówienie i historia.
+// Strefa partnera — DEMO w przeglądarce: logowanie dowolnymi danymi, katalog partnera, zamówienie i historia.
 // NIC nie jest wysyłane: sesja w sessionStorage, zamówienia w localStorage tej przeglądarki.
 // Docelowo: /api/b2b/* (docs/navireo-integracja.md, rozdz. 6.2) — ceny i wartości liczy serwer z cennika Navireo.
-
-import { formatPrice } from '../lib/pricing.js';
+// Katalog z kart produktu Liveo nie ma cen: zamówienie to lista pozycji, paczek i wagi; cenę potwierdza opiekun.
 
 type Row = {
-  sku: string; name: string; color: string; collection: string; collectionName: string; type: string;
-  retail: number; promo: string | null; net: number; stock: string; leadTimeDays: number | null;
+  sku: string; ean: string; name: string; color: string; collection: string; collectionName: string; type: string;
+  delivery72: boolean; packages: number; grossKg: number;
 };
 type Boot = {
   rows: Row[]; vat: number; builtAt: string; addresses: string[];
   company: { name: string; nip: string; manager: string };
   t: {
-    stock: Record<string, string>; statuses: Record<string, string>; plural: Record<string, string>;
+    delivery72: string; deliveryOther: string; statuses: Record<string, string>; plural: Record<string, string>;
     addedAnnounce: string; remove: string; confirm: string; success: { title: string; text: string; demo: string };
     loginError: string; greeting: string; accountMeta: string; vatLabel: string; updated: string;
   };
 };
 type Line = { sku: string; qty: number };
-type Order = { webOrderId: string; date: string; net: number; gross: number; items: Line[]; status: string; reference: string };
+type Order = { webOrderId: string; date: string; count: number; items: Line[]; status: string; reference: string };
 
 const SESSION = 'liveo-partner-demo';
 const CART = 'liveo-partner-cart';
@@ -30,7 +29,7 @@ const store = {
 };
 const fill = (tpl: string, v: Record<string, string | number>) => tpl.replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m));
 const PR = new Intl.PluralRules('pl');
-const money = (n: number) => formatPrice(Math.round(n * 100) / 100);
+const kg = (n: number) => `${(Math.round(n * 10) / 10).toLocaleString('pl-PL')} kg`;
 const DT = new Intl.DateTimeFormat('pl-PL', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Europe/Warsaw' });
 
 function h<K extends keyof HTMLElementTagNameMap>(tag: K, attrs: Record<string, string> = {}, ...kids: (Node | string | null)[]) {
@@ -112,10 +111,9 @@ export function initPartnerZone() {
     });
   });
 
-  // ---------- cennik ----------
+  // ---------- katalog ----------
   const filters = $<HTMLFormElement>('[data-pricelist-filters]');
-  const stockText = (r: Row) =>
-    r.stock === 'na-zamowienie' && r.leadTimeDays ? fill(B.t.stock['na-zamowienie'], { days: r.leadTimeDays }) : B.t.stock[r.stock] ?? r.stock;
+  const deliveryText = (r: Row) => (r.delivery72 ? B.t.delivery72 : B.t.deliveryOther);
   function renderPricelist() {
     const fd = new FormData(filters);
     const q = String(fd.get('q') || '').trim().toLocaleLowerCase('pl');
@@ -123,35 +121,33 @@ export function initPartnerZone() {
     const typ = String(fd.get('typ') || '');
     const onlyAvail = fd.has('dostepne');
     const list = B.rows.filter(r =>
-      (!q || `${r.sku} ${r.name} ${r.color}`.toLocaleLowerCase('pl').includes(q))
-      && (!coll || r.collection === coll) && (!typ || r.type === typ) && (!onlyAvail || r.stock === 'dostepny'));
+      (!q || `${r.sku} ${r.ean} ${r.name} ${r.color}`.toLocaleLowerCase('pl').includes(q))
+      && (!coll || r.collection === coll) && (!typ || r.type === typ) && (!onlyAvail || r.delivery72));
     const body = $('[data-pricelist-body]');
     body.replaceChildren(...list.map(r => {
       const qtyId = `qty-${r.sku}`;
       const qty = h('input', { type: 'number', min: '1', max: '999', value: '1', id: qtyId, 'aria-label': `Ilość: ${r.name}, ${r.color}` }) as HTMLInputElement;
       const add = h('button', { type: 'button', class: 'btn btn--secondary' }, 'Dodaj') as HTMLButtonElement;
       add.setAttribute('aria-label', `Dodaj do zamówienia: ${r.name}, ${r.color}`);
-      if (r.stock === 'wyprzedany') { add.disabled = true; qty.disabled = true; }
       add.addEventListener('click', () => addToCart(r.sku, Number(qty.value) || 1));
       return h('tr', {},
         h('td', {}, h('code', {}, r.sku)), h('td', {}, r.name), h('td', {}, r.color),
-        h('td', { class: 'num' }, money(r.retail)), h('td', { class: 'num' }, money(r.net)),
-        h('td', r.promo ? { class: 'is-promo' } : {}, r.promo ?? '—'), h('td', {}, h('span', { class: `stock stock--${r.stock}` }, stockText(r))),
+        h('td', {}, r.ean ? h('code', {}, r.ean) : '—'), h('td', { class: 'num' }, String(r.packages || '—')),
+        h('td', {}, deliveryText(r)),
         h('td', {}, qty), h('td', {}, add));
     }));
-    $('[data-pricelist-status]').textContent = `Pozycji w cenniku: ${list.length}`;
+    $('[data-pricelist-status]').textContent = `Pozycji w katalogu: ${list.length}`;
   }
   filters.addEventListener('input', renderPricelist);
   filters.addEventListener('change', renderPricelist);
   filters.addEventListener('submit', e => e.preventDefault());
 
   $('[data-export]').addEventListener('click', () => {
-    const head = ['Indeks', 'Mebel', 'Kolor', 'Kolekcja', 'Cena katalogowa brutto', 'Cena partnera netto (DEMO)', 'Promocja', 'Stan'];
+    const head = ['Symbol', 'Mebel', 'Kolor', 'Kolekcja', 'EAN', 'Paczki', 'Waga brutto (kg)', 'Dostawa w 72 h'];
     const esc = (v: string | number) => `"${String(v).replace(/"/g, '""')}"`;
-    const num = (n: number) => n.toFixed(2).replace('.', ',');
-    const lines = [head.map(esc).join(';'), ...B.rows.map(r => [r.sku, r.name, r.color, r.collectionName, num(r.retail), num(r.net), r.promo ?? '', stockText(r)].map(esc).join(';'))];
+    const lines = [head.map(esc).join(';'), ...B.rows.map(r => [r.sku, r.name, r.color, r.collectionName, r.ean, r.packages, String(r.grossKg).replace('.', ','), r.delivery72 ? 'tak' : 'nie'].map(esc).join(';'))];
     const blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
-    const a = h('a', { href: URL.createObjectURL(blob), download: 'cennik-partnera-DEMO.csv' });
+    const a = h('a', { href: URL.createObjectURL(blob), download: 'katalog-partnera-liveo.csv' });
     document.body.append(a);
     a.click();
     a.remove();
@@ -160,7 +156,7 @@ export function initPartnerZone() {
   // ---------- zamówienie ----------
   function addToCart(sku: string, qty: number) {
     const r = bySku.get(sku);
-    if (!r || r.stock === 'wyprzedany') return false;
+    if (!r) return false;
     const q = Math.max(1, Math.min(999, Math.round(qty)));
     const line = cart.find(l => l.sku === sku);
     if (line) line.qty = Math.min(999, line.qty + q);
@@ -174,19 +170,21 @@ export function initPartnerZone() {
   quick.addEventListener('submit', e => {
     e.preventDefault();
     const fd = new FormData(quick);
-    const sku = String(fd.get('sku') || '').trim().toUpperCase();
+    const typed = String(fd.get('sku') || '').trim().toUpperCase();
+    const sku = B.rows.find(r => r.sku.toUpperCase() === typed || r.ean === typed)?.sku ?? typed;
     const err = $('[data-quick-error]');
     const ok = addToCart(sku, Number(fd.get('qty')) || 1);
-    err.textContent = ok ? '' : 'Nie znamy tego indeksu albo mebel jest wyprzedany. Wybierz indeks z listy.';
+    err.textContent = ok ? '' : 'Nie znamy tego symbolu ani kodu EAN. Wybierz symbol z listy.';
     err.hidden = ok;
     if (ok) quick.reset();
   });
 
-  const totals = (lines: Line[]) => {
-    const net = lines.reduce((a, l) => a + (bySku.get(l.sku)?.net ?? 0) * l.qty, 0);
-    const vat = Math.round(net * B.vat) / 100;
-    return { net, vat, gross: net + vat, count: lines.reduce((a, l) => a + l.qty, 0) };
-  };
+  const totals = (lines: Line[]) => ({
+    count: lines.reduce((a, l) => a + l.qty, 0),
+    packages: lines.reduce((a, l) => a + (bySku.get(l.sku)?.packages ?? 0) * l.qty, 0),
+    kg: lines.reduce((a, l) => a + (bySku.get(l.sku)?.grossKg ?? 0) * l.qty, 0),
+  });
+  const itemsText = (n: number) => fill(B.t.plural[PR.select(n)] ?? B.t.plural.many, { n });
   function renderOrder() {
     const empty = cart.length === 0;
     $('[data-order-empty]').hidden = !empty;
@@ -202,16 +200,16 @@ export function initPartnerZone() {
       });
       const rm = h('button', { type: 'button', class: 'btn btn--text', 'aria-label': fill(B.t.remove, { name: `${r.name}, ${r.color}` }) }, 'Usuń');
       rm.addEventListener('click', () => { cart = cart.filter(x => x !== l); store.set(sessionStorage, CART, cart); renderOrder(); });
-      const lead = r.stock === 'na-zamowienie' ? h('span', { class: 'field__hint' }, ` · ${stockText(r)}`) : null;
+      const lead = r.delivery72 ? null : h('span', { class: 'field__hint' }, ` · dostawa ${deliveryText(r)}`);
       return h('tr', {}, h('td', {}, `${r.name} — ${r.color} `, h('code', {}, r.sku), lead), h('td', {}, qty),
-        h('td', { class: 'num' }, money(r.net)), h('td', { class: 'num' }, money(r.net * l.qty)), h('td', {}, rm));
+        h('td', { class: 'num' }, String(r.packages || '—')), h('td', { class: 'num' }, String(r.packages * l.qty || '—')), h('td', {}, rm));
     }));
     const t = totals(cart);
-    $('[data-sum-net]').textContent = money(t.net);
-    $('[data-sum-vat-label]').textContent = fill(B.t.vatLabel, { rate: B.vat });
-    $('[data-sum-vat]').textContent = money(t.vat);
-    $('[data-sum-gross]').textContent = money(t.gross);
-    $('[data-sum-items]').textContent = fill(B.t.plural[PR.select(t.count)] ?? B.t.plural.many, { n: t.count });
+    $('[data-sum-net]').textContent = itemsText(t.count);
+    $('[data-sum-vat-label]').textContent = B.t.vatLabel;
+    $('[data-sum-vat]').textContent = String(t.packages);
+    $('[data-sum-gross]').textContent = kg(t.kg);
+    $('[data-sum-items]').textContent = itemsText(cart.length);
   }
 
   const addrSel = $<HTMLSelectElement>('[data-addresses]');
@@ -229,12 +227,12 @@ export function initPartnerZone() {
   orderForm.addEventListener('submit', e => {
     e.preventDefault();
     if (!cart.length) {
-      orderErr.textContent = 'Dodaj co najmniej jedną pozycję z cennika.';
+      orderErr.textContent = 'Dodaj co najmniej jedną pozycję z katalogu.';
       orderErr.hidden = false;
       return;
     }
     orderErr.hidden = true;
-    confirmBtn.textContent = fill(B.t.confirm, { gross: money(totals(cart).gross) });
+    confirmBtn.textContent = fill(B.t.confirm, { gross: itemsText(totals(cart).count) });
     setConfirming(true);
     confirmBtn.focus();
   });
@@ -244,7 +242,7 @@ export function initPartnerZone() {
     const d = new Date();
     const id = `WWW-${d.toISOString().slice(0, 10).replace(/-/g, '')}-${String(Math.floor(Math.random() * 9000) + 1000)}`;
     const fd = new FormData(orderForm);
-    const order: Order = { webOrderId: id, date: d.toISOString(), net: t.net, gross: t.gross, items: cart, status: 'received', reference: String(fd.get('reference') || '') };
+    const order: Order = { webOrderId: id, date: d.toISOString(), count: t.count, items: cart, status: 'received', reference: String(fd.get('reference') || '') };
     const orders: Order[] = store.get(localStorage, ORDERS, []);
     orders.unshift(order);
     store.set(localStorage, ORDERS, orders.slice(0, 50));
@@ -272,7 +270,7 @@ export function initPartnerZone() {
     $('[data-history-wrap]').hidden = orders.length === 0;
     $('[data-history-body]').replaceChildren(...orders.map(o =>
       h('tr', {}, h('td', {}, DT.format(new Date(o.date))), h('td', {}, o.webOrderId), h('td', {}, '— (DEMO)'),
-        h('td', { class: 'num' }, money(o.net)), h('td', {}, B.t.statuses[o.status] ?? o.status))));
+        h('td', { class: 'num' }, String(o.count ?? '—')), h('td', {}, B.t.statuses[o.status] ?? o.status))));
   }
 
   if (store.get(sessionStorage, SESSION, null)) showPanel(false);

@@ -181,7 +181,8 @@ const check = '<path d="M20 6 9 17l-5-5"/>';
                 <legend class="chip-filter__legend">Meble względem wnętrza</legend>
                 {tones.map(t => <label class="check"><input type="radio" name="ton-3" value={t.v} checked={t.v === '0'} data-tone-radio />{t.label}</label>)}
               </fieldset>
-              <div class="field">
+              <!-- Budżet i „tańsze najpierw” wymagają cen — karty produktu Liveo ich nie mają, więc pola są ukryte. -->
+              <div class="field" hidden>
                 <label class="field__label" for="doradca-budzet">Budżet na jeden mebel</label>
                 <select class="field__control" id="doradca-budzet" data-f-budget>
                   <option value="">Bez limitu</option>
@@ -194,7 +195,7 @@ const check = '<path d="M20 6 9 17l-5-5"/>';
                   <option value="">Cały komplet</option>
                 </select>
               </div>
-              <label class="check advisor-cheaper"><input type="checkbox" data-f-cheaper />Najpierw tańsze komplety</label>
+              <label class="check advisor-cheaper" hidden><input type="checkbox" data-f-cheaper />Najpierw tańsze komplety</label>
             </div>
           </details>
         </aside>

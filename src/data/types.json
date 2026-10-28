@@ -5,17 +5,14 @@
     "plural": "Szafki RTV",
     "genitivePlural": "szafek RTV",
     "slug": "szafki-rtv",
-    "rooms": [
-      "salon"
-    ],
-    "priceRange": [
-      499,
-      1399
-    ],
-    "kind": "cabinet",
-    "skuCode": "RTV",
+    "gender": "f",
     "order": 1,
-    "priceRangeSource": "brief"
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "sypialnia",
+      "przedpokoj"
+    ]
   },
   {
     "id": "komoda",
@@ -23,22 +20,15 @@
     "plural": "Komody",
     "genitivePlural": "komód",
     "slug": "komody",
+    "gender": "f",
+    "order": 2,
     "rooms": [
       "salon",
-      "sypialnia",
-      "przedpokoj",
       "jadalnia",
+      "sypialnia",
       "pokoj-mlodziezowy",
-      "biuro"
-    ],
-    "priceRange": [
-      699,
-      1699
-    ],
-    "kind": "cabinet",
-    "skuCode": "KOM",
-    "order": 2,
-    "priceRangeSource": "brief"
+      "przedpokoj"
+    ]
   },
   {
     "id": "witryna",
@@ -46,96 +36,15 @@
     "plural": "Witryny",
     "genitivePlural": "witryn",
     "slug": "witryny",
-    "rooms": [
-      "salon",
-      "jadalnia"
-    ],
-    "priceRange": [
-      899,
-      1899
-    ],
-    "kind": "cabinet",
-    "skuCode": "WIT",
+    "gender": "f",
     "order": 3,
-    "priceRangeSource": "brief"
-  },
-  {
-    "id": "regal",
-    "name": "Regał",
-    "plural": "Regały",
-    "genitivePlural": "regałów",
-    "slug": "regaly",
     "rooms": [
       "salon",
+      "jadalnia",
+      "sypialnia",
       "pokoj-mlodziezowy",
-      "biuro"
-    ],
-    "priceRange": [
-      449,
-      1199
-    ],
-    "kind": "cabinet",
-    "skuCode": "REG",
-    "order": 4,
-    "priceRangeSource": "brief"
-  },
-  {
-    "id": "lawa",
-    "name": "Ława",
-    "plural": "Ławy",
-    "genitivePlural": "ław",
-    "slug": "lawy",
-    "rooms": [
-      "salon"
-    ],
-    "priceRange": [
-      399,
-      899
-    ],
-    "kind": "coffeeTable",
-    "skuCode": "LAW",
-    "order": 5,
-    "priceRangeSource": "brief"
-  },
-  {
-    "id": "polka",
-    "name": "Półka",
-    "plural": "Półki",
-    "genitivePlural": "półek",
-    "slug": "polki",
-    "rooms": [
-      "salon",
-      "pokoj-mlodziezowy",
-      "biuro",
-      "przedpokoj",
-      "sypialnia"
-    ],
-    "priceRange": [
-      149,
-      299
-    ],
-    "kind": "wallShelf",
-    "skuCode": "POL",
-    "order": 6,
-    "priceRangeSource": "brief"
-  },
-  {
-    "id": "stol",
-    "name": "Stół",
-    "plural": "Stoły",
-    "genitivePlural": "stołów",
-    "slug": "stoly",
-    "rooms": [
-      "jadalnia"
-    ],
-    "priceRange": [
-      799,
-      1899
-    ],
-    "kind": "table",
-    "skuCode": "STO",
-    "order": 7,
-    "priceRangeSource": "brief"
+      "przedpokoj"
+    ]
   },
   {
     "id": "kredens",
@@ -143,18 +52,95 @@
     "plural": "Kredensy",
     "genitivePlural": "kredensów",
     "slug": "kredensy",
+    "gender": "m",
+    "order": 4,
     "rooms": [
+      "salon",
       "jadalnia",
-      "salon"
-    ],
-    "priceRange": [
-      1099,
-      2199
-    ],
-    "kind": "cabinet",
-    "skuCode": "KRE",
+      "sypialnia",
+      "przedpokoj"
+    ]
+  },
+  {
+    "id": "regal",
+    "name": "Regał",
+    "plural": "Regały",
+    "genitivePlural": "regałów",
+    "slug": "regaly",
+    "gender": "m",
+    "order": 5,
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "sypialnia",
+      "pokoj-mlodziezowy",
+      "przedpokoj"
+    ]
+  },
+  {
+    "id": "szafka",
+    "name": "Szafka",
+    "plural": "Szafki",
+    "genitivePlural": "szafek",
+    "slug": "szafki",
+    "gender": "f",
+    "order": 6,
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "sypialnia",
+      "pokoj-mlodziezowy",
+      "przedpokoj",
+      "biuro"
+    ]
+  },
+  {
+    "id": "polka",
+    "name": "Półka",
+    "plural": "Półki",
+    "genitivePlural": "półek",
+    "slug": "polki",
+    "gender": "f",
+    "order": 7,
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "sypialnia",
+      "pokoj-mlodziezowy",
+      "przedpokoj"
+    ]
+  },
+  {
+    "id": "lawa",
+    "name": "Ława",
+    "plural": "Ławy",
+    "genitivePlural": "ław",
+    "slug": "lawy",
+    "gender": "f",
     "order": 8,
-    "priceRangeSource": "założenie"
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "sypialnia",
+      "pokoj-mlodziezowy",
+      "przedpokoj"
+    ]
+  },
+  {
+    "id": "stol",
+    "name": "Stół",
+    "plural": "Stoły",
+    "genitivePlural": "stołów",
+    "slug": "stoly",
+    "gender": "m",
+    "order": 9,
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "sypialnia",
+      "pokoj-mlodziezowy",
+      "przedpokoj"
+    ]
   },
   {
     "id": "lozko",
@@ -162,18 +148,14 @@
     "plural": "Łóżka",
     "genitivePlural": "łóżek",
     "slug": "lozka",
+    "gender": "n",
+    "order": 10,
     "rooms": [
+      "salon",
+      "jadalnia",
       "sypialnia",
       "pokoj-mlodziezowy"
-    ],
-    "priceRange": [
-      1199,
-      2799
-    ],
-    "kind": "bed",
-    "skuCode": "LOZ",
-    "order": 9,
-    "priceRangeSource": "brief"
+    ]
   },
   {
     "id": "szafka_nocna",
@@ -181,18 +163,14 @@
     "plural": "Szafki nocne",
     "genitivePlural": "szafek nocnych",
     "slug": "szafki-nocne",
+    "gender": "f",
+    "order": 11,
     "rooms": [
+      "salon",
+      "jadalnia",
       "sypialnia",
       "pokoj-mlodziezowy"
-    ],
-    "priceRange": [
-      249,
-      499
-    ],
-    "kind": "cabinet",
-    "skuCode": "SZN",
-    "order": 10,
-    "priceRangeSource": "brief"
+    ]
   },
   {
     "id": "szafa",
@@ -200,19 +178,15 @@
     "plural": "Szafy",
     "genitivePlural": "szaf",
     "slug": "szafy",
+    "gender": "f",
+    "order": 12,
     "rooms": [
+      "salon",
+      "jadalnia",
       "sypialnia",
-      "przedpokoj",
-      "pokoj-mlodziezowy"
-    ],
-    "priceRange": [
-      1199,
-      2999
-    ],
-    "kind": "cabinet",
-    "skuCode": "SZA",
-    "order": 11,
-    "priceRangeSource": "brief"
+      "pokoj-mlodziezowy",
+      "przedpokoj"
+    ]
   },
   {
     "id": "toaletka",
@@ -220,17 +194,12 @@
     "plural": "Toaletki",
     "genitivePlural": "toaletek",
     "slug": "toaletki",
+    "gender": "f",
+    "order": 13,
     "rooms": [
-      "sypialnia"
-    ],
-    "priceRange": [
-      599,
-      1199
-    ],
-    "kind": "desk",
-    "skuCode": "TOA",
-    "order": 12,
-    "priceRangeSource": "założenie"
+      "sypialnia",
+      "pokoj-mlodziezowy"
+    ]
   },
   {
     "id": "lustro",
@@ -238,18 +207,14 @@
     "plural": "Lustra",
     "genitivePlural": "luster",
     "slug": "lustra",
+    "gender": "n",
+    "order": 14,
     "rooms": [
-      "przedpokoj",
-      "sypialnia"
-    ],
-    "priceRange": [
-      199,
-      599
-    ],
-    "kind": "mirror",
-    "skuCode": "LUS",
-    "order": 13,
-    "priceRangeSource": "brief"
+      "salon",
+      "jadalnia",
+      "sypialnia",
+      "pokoj-mlodziezowy"
+    ]
   },
   {
     "id": "biurko",
@@ -257,18 +222,13 @@
     "plural": "Biurka",
     "genitivePlural": "biurek",
     "slug": "biurka",
+    "gender": "n",
+    "order": 15,
     "rooms": [
-      "biuro",
-      "pokoj-mlodziezowy"
-    ],
-    "priceRange": [
-      449,
-      1299
-    ],
-    "kind": "desk",
-    "skuCode": "BIU",
-    "order": 14,
-    "priceRangeSource": "brief"
+      "salon",
+      "pokoj-mlodziezowy",
+      "biuro"
+    ]
   },
   {
     "id": "szafka_na_buty",
@@ -276,17 +236,11 @@
     "plural": "Szafki na buty",
     "genitivePlural": "szafek na buty",
     "slug": "szafki-na-buty",
+    "gender": "f",
+    "order": 16,
     "rooms": [
       "przedpokoj"
-    ],
-    "priceRange": [
-      399,
-      999
-    ],
-    "kind": "cabinet",
-    "skuCode": "SZB",
-    "order": 15,
-    "priceRangeSource": "założenie"
+    ]
   },
   {
     "id": "wieszak",
@@ -294,16 +248,22 @@
     "plural": "Wieszaki",
     "genitivePlural": "wieszaków",
     "slug": "wieszaki",
+    "gender": "m",
+    "order": 17,
     "rooms": [
       "przedpokoj"
-    ],
-    "priceRange": [
-      199,
-      499
-    ],
-    "kind": "coatRack",
-    "skuCode": "WIE",
-    "order": 16,
-    "priceRangeSource": "założenie"
+    ]
+  },
+  {
+    "id": "kuchnia",
+    "name": "Zestaw kuchenny",
+    "plural": "Zestawy kuchenne",
+    "genitivePlural": "zestawów kuchennych",
+    "slug": "zestawy-kuchenne",
+    "gender": "m",
+    "order": 18,
+    "rooms": [
+      "kuchnia"
+    ]
   }
 ]

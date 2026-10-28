@@ -1,36 +1,13 @@
 ---
-// Cena mebla policzona przy budowie przez priceFor() (src/lib/pricing.js).
-// W przeglądarce scripts/prices.ts podmienia tylko teksty i atrybuty `hidden` (bez czytania układu):
-// z API (PRICES_API) albo przeliczając promocje z osadzonego JSON-a (PriceData.astro) na bieżącą chwilę.
-// Przy promocji zawsze razem: cena promocyjna, przekreślona cena regularna i najniższa cena z 30 dni.
-import { formatPrice } from '../lib/pricing.js';
-import { priceAt, site, type Product } from '../lib/site';
-import { dateLong, fill, promoLastDay } from '../lib/text';
+// Zamiast ceny: karty produktu Liveo nie mają cen detalicznych — cenę i dostępność podaje salon partnerski.
+// Link prowadzi do wyszukiwarki salonów z wybraną kolekcją.
+import { site, url, type Product } from '../lib/site';
 
-interface Props {
-  product: Product;
-  /** Kod wariantu; domyślnie pierwszy dostępny. */
-  code?: string;
-  size?: 'card' | 'full';
-}
-const { product, code, size = 'card' } = Astro.props;
-const variant = code ?? product.variants.find(v => v.stock !== 'wyprzedany')?.code ?? product.variants[0].code;
-const p = priceAt(product, variant);
-const promo = p.promo;
-const lastDay = promoLastDay(promo?.endsAt);
+interface Props { product: Product }
+const { product } = Astro.props;
 const t = site.price;
 ---
-<div class:list={['price', `price--${size}`, { 'price--promo': promo }]} data-price data-product={product.sku} data-variant={variant}>
-  <p class="price__main">
-    <span class="visually-hidden" data-price-sr data-label={t.label} data-label-promo={t.promo}>{promo ? t.promo : t.label}: </span>
-    <span class="price__current" data-price-current>{formatPrice(p.price)}</span>
-    <span class="price__regular" data-price-regular-wrap hidden={!promo}>
-      <span class="visually-hidden">{t.srOld}: </span><s data-price-regular>{p.regular ? formatPrice(p.regular) : ''}</s>
-    </span>
-  </p>
-  <p class="price__promo" data-price-promo hidden={!promo}>{promo?.label ?? ''}</p>
-  <p class="price__lowest" data-price-lowest hidden={!promo}>{promo ? fill(t.lowest30, { price: formatPrice(p.lowest30) }) : ''}</p>
-  {size === 'full' && (
-    <p class="price__until" data-price-until hidden={!lastDay}>{lastDay ? fill(t.promoUntil, { lastDay: dateLong(lastDay) }) : ''}</p>
-  )}
+<div class="price price--store">
+  <p class="price__main">{t.inStore}</p>
+  <p class="price__note">{t.inStoreNote} <a href={url.stores(product.collection)}>{t.inStoreLink}</a></p>
 </div>

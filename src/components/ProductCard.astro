@@ -1,15 +1,14 @@
 ---
 // Karta mebla na listach. Atrybuty data-* opisują mebel dla filtrów (scripts/listing.ts) —
-// bez JS karta jest zwykłym linkiem z ceną z dnia budowy.
+// bez JS karta jest zwykłym linkiem. Karty produktu Liveo nie mają cen: zamiast ceny kolory i dostawa w 72 h.
 import Media from './Media.astro';
-import PriceBlock from './PriceBlock.astro';
 import { packshotFor } from '../lib/images';
-import { collectionOf, colorCount, defaultVariant, dims, finishById, pages, priceAt, site, typeOf, url, variantBoardColors, type Product } from '../lib/site';
+import { collectionOf, colorCount, defaultVariant, dims, finishById, pages, site, typeOf, url, variantBoardColors, type Product } from '../lib/site';
 import { fill } from '../lib/text';
 
 interface Props {
   product: Product;
-  /** Kod koloru (np. komplet w tym samym kolorze); domyślnie pierwszy dostępny. */
+  /** Kod koloru (np. komplet w tym samym kolorze); domyślnie pierwszy. */
   code?: string;
   headingLevel?: 3 | 4;
   /** Pozycja w kolejności „polecane”. */
@@ -20,14 +19,14 @@ const { product: p, code, headingLevel = 3, order = 0, sizes = '(min-width: 75re
 const v = (code && p.variants.find(x => x.code === code)) || defaultVariant(p);
 const img = packshotFor(p, v);
 const card = pages.meble.sections.find(s => s.id === 'lista')!.card!;
-const alt = img?.approximate && img.title
-  ? `Zdjęcie poglądowe tego rodzaju mebla: ${img.title}`
+const alt = img?.approximate
+  ? `${p.name} — aranżacja kolekcji ${collectionOf(p).name}`
   : fill(card.imageAlt, { name: p.name, colorLabel: v.colorLabel.toLocaleLowerCase('pl') });
-const price = priceAt(p, v.code);
 const colors = [...new Set(p.variants.flatMap(variantBoardColors))];
 const H = `h${headingLevel}` as 'h3' | 'h4';
-// Kropki wariantów: kolor frontu każdego wariantu (maks. 4), nazwy w tekście dla czytników ekranu.
-const variantDots = p.variants.slice(0, 4).map(x => ({ hex: finishById.get((x.finish as Record<string, string>).front)?.hex ?? '#ccc', label: x.colorLabel }));
+// Kropki wariantów: kolor frontu (i korpusu) każdego wariantu (maks. 5), nazwy w tekście dla czytników ekranu.
+const hex = (id?: string | null) => (id && finishById.get(id)?.hex) || '#ccc';
+const variantDots = p.variants.slice(0, 5).map(x => ({ c1: hex(x.finish.front), c2: hex(x.finish.body ?? x.finish.front) }));
 const href = url.product(p.slug, v.code === defaultVariant(p).code ? undefined : v.code);
 ---
 <li
@@ -38,9 +37,7 @@ const href = url.product(p.slug, v.code === defaultVariant(p).code ? undefined :
   data-type={typeOf(p).slug}
   data-collection={p.collection}
   data-colors={colors.join(' ')}
-  data-price={price.price}
-  data-promo={price.promo ? '1' : '0'}
-  data-new={p.isNew ? '1' : '0'}
+  data-delivery={p.delivery72 ? '72h' : ''}
   data-width={p.dims.w}
   data-order={order}
 >
@@ -48,12 +45,11 @@ const href = url.product(p.slug, v.code === defaultVariant(p).code ? undefined :
     <Media
       image={img}
       alt={alt}
-      widths={[320, 480, 640, 960]}
+      widths={[480, 1000]}
       sizes={sizes}
       ratio="4 / 3"
-      fit="contain"
+      fit={img?.approximate ? 'cover' : 'contain'}
       placeholderLabel={typeOf(p).name}
-      model={{ ...p.model3d, finish: v.finish }}
     />
     <H class="product-card__title">{p.name}</H>
   </a>
@@ -62,11 +58,9 @@ const href = url.product(p.slug, v.code === defaultVariant(p).code ? undefined :
     <span>{colorCount(p)} · {dims(p)}</span>
   </p>
   <p class="product-card__dots" role="img" aria-label={`Kolory: ${p.variants.map(x => x.colorLabel).join(', ')}`}>
-    {variantDots.map(d => <i style={`--c: ${d.hex}`}></i>)}
+    {variantDots.map(d => <i style={`--c: ${d.c1}; --c2: ${d.c2}`}></i>)}
   </p>
-  <PriceBlock product={p} code={v.code} />
-  <p class="product-card__badges">
-    <span class="badge badge--promo" data-promo-badge hidden={!price.promo}>{price.promo && price.regular ? `−${Math.round((1 - price.price / price.regular) * 100)}%` : ''}</span>
-    {p.isNew && <span class="badge">{site.labels.new}</span>}
-  </p>
+  {p.delivery72 && (
+    <p class="product-card__badges"><span class="badge badge--delivery">{site.labels.delivery72}</span></p>
+  )}
 </li>

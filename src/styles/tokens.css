@@ -31,8 +31,8 @@
   --color-placeholder: #ece6dc;
   --color-placeholder-ink: #6e655c;
   --scrim: 28 20 14;                /* ciepły cień na zdjęciach pod białym tekstem */
-  /* „Popołudniowy” grading aranżacji (ciepłe światło); packshotów nie dotyczy */
-  --photo-grade: sepia(0.18) saturate(1.25) contrast(1.06) brightness(0.93);
+  /* Grading zdjęć wyłączony: aranżacje to fotografie producenta — kolory dekorów muszą zostać wierne */
+  --photo-grade: none;
 
   /* Typografia — Gilda Display (nagłówki) + Inter (tekst i interfejs) + Italiana (nazwy kolekcji; bez polskich znaków, nazwy są ASCII), self-hosted w /fonts */
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;

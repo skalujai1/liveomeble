@@ -3,9 +3,9 @@
 // „Znajdź salon” po kodzie pocztowym i link „Gdzie kupić”. Pasek pomocniczy przewija się, rząd
 // menu zostaje przyklejony (sticky z ujemnym top — bez JS i bez czytania układu).
 // Bez JS: „Meble” i „Kolekcje” są zwykłymi linkami, menu mobilne jest listą pod nagłówkiem.
-import { Image } from 'astro:assets';
+import Thumb from './Thumb.astro';
 import { typeImage, collectionImage } from '../lib/images';
-import { activePromosAtBuild, collections, priceRangeOf, products, productsByCollection, rooms, site, types, url } from '../lib/site';
+import { collections, productCount, products, productsByCollection, rooms, site, types, url } from '../lib/site';
 
 interface Props { path: string }
 const { path } = Astro.props;
@@ -16,8 +16,9 @@ const inSection = (href: string) => href !== '/' && path.startsWith(href);
 const withProducts = types.filter(t => products.some(p => p.type === t.id));
 const megaTypes = withProducts.slice(0, 8).map(t => ({ t, img: typeImage(t.id, products) }));
 const restTypes = withProducts.slice(8);
-const megaCollections = collections.map(c => ({ c, img: collectionImage(c), from: priceRangeOf(productsByCollection(c.slug)).minText }));
-const promoOn = activePromosAtBuild.length > 0;
+// mega-menu: 12 kolekcji z aranżacjami (kolejność z danych); pełna lista na /kolekcje/ i w menu mobilnym
+const megaCollections = collections.filter(c => c.arrangements.length).slice(0, 12).map(c => ({ c, img: collectionImage(c), count: productCount(productsByCollection(c.slug).length) }));
+const allCollections = collections.map(c => ({ c, count: productCount(productsByCollection(c.slug).length) }));
 const secondary = [
   { label: 'Dla sklepów (B2B)', href: url.partners },
   { label: 'Strefa partnera', href: url.partnerZone },
@@ -61,7 +62,7 @@ const secondary = [
                 <ul class="mega__types">
                   {megaTypes.map(({ t, img }) => (
                     <li><a href={url.category(t.slug)}>
-                      <span class="mega__thumb">{img && <Image src={img.src} alt="" widths={[160, 240]} sizes="120px" loading="lazy" />}</span>
+                      <span class="mega__thumb"><Thumb image={img} sizes="120px" /></span>
                       {t.plural}
                     </a></li>
                   ))}
@@ -88,10 +89,10 @@ const secondary = [
             </button>
             <div class="mega" id="mega-kolekcje" data-mega>
               <div class="container"><div class="mega__panel mega__panel--collections">
-                {megaCollections.map(({ c, img, from }) => (
+                {megaCollections.map(({ c, img, count }) => (
                   <a class="mega__collection" href={url.collection(c.slug)}>
-                    {img && <Image src={img.src} alt="" widths={[160, 240]} sizes="112px" loading="lazy" />}
-                    <span><b>{c.name}</b>od {from}</span>
+                    <Thumb image={img} sizes="112px" />
+                    <span><b>{c.name}</b>{count}</span>
                   </a>
                 ))}
                 <p class="mega__all"><a class="link" href={url.collections}>Wszystkie kolekcje</a></p>
@@ -101,11 +102,6 @@ const secondary = [
           <li class:list={['site-nav__item', { 'is-active': inSection('/pomieszczenia/') }]}>
             <a class="site-nav__link" href={url.rooms} aria-current={current(url.rooms)}>Pomieszczenia</a>
           </li>
-          <li class:list={['site-nav__item', { 'is-active': inSection('/promocje/') }]}>
-            <a class="site-nav__link" href={url.promotions} aria-current={current(url.promotions)}>
-              Promocje{promoOn && <><span class="site-nav__dot" aria-hidden="true"></span><span class="visually-hidden"> (trwa promocja)</span></>}
-            </a>
-          </li>
           <li class:list={['site-nav__item', { 'is-active': inSection('/doradca-wnetrz/') }]}>
             <a class="site-nav__link" href={url.advisor} aria-current={current(url.advisor)}>Doradca wnętrz</a>
           </li>
@@ -114,10 +110,10 @@ const secondary = [
         <div class="site-nav__mobile-extra">
           <p class="site-nav__mobile-title">Kolekcje</p>
           <ul class="site-nav__mobile-collections">
-            {megaCollections.map(({ c, img, from }) => (
+            {allCollections.map(({ c, count }) => (
               <li><a href={url.collection(c.slug)}>
-                {img && <Image src={img.src} alt="" widths={[240, 360]} sizes="45vw" loading="lazy" />}
-                <b>{c.name}</b> <span>od {from}</span>
+                <Thumb image={collectionImage(c)} sizes="45vw" />
+                <b>{c.name}</b> <span>{count}</span>
               </a></li>
             ))}
           </ul>

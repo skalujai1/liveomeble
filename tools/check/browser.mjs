@@ -19,8 +19,8 @@ const AXE = await readFile(join(ROOT, 'node_modules/axe-core/axe.min.js'), 'utf8
 const CHROME = process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
 
 const PAGES = [
-  '/', '/kolekcje/', '/kolekcje/olmo/', '/meble/', '/meble/komody/', '/pomieszczenia/', '/pomieszczenia/salon/',
-  '/produkt/szafka-rtv-160-olmo/', '/promocje/', '/gdzie-kupic/', '/dla-partnerow/', '/strefa-partnera/',
+  '/', '/kolekcje/', '/kolekcje/dante/', '/meble/', '/meble/komody/', '/pomieszczenia/', '/pomieszczenia/salon/',
+  '/produkt/komoda-dante-dt03/', '/produkt/lozko-160-z-pojemnikiem-ate-at15/', '/pomieszczenia/kuchnia/', '/gdzie-kupic/', '/dla-partnerow/', '/strefa-partnera/',
   '/doradca-wnetrz/', '/o-nas/', '/kontakt/', '/poradnik/', '/poradnik/jak-dobrac-szafke-rtv/',
   '/polityka-prywatnosci/', '/404.html',
 ];

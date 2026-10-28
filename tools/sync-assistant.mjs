@@ -3,7 +3,7 @@
 //
 //   liveo-assistant/widget/*.js|css   → public/liveo-assistant/widget/ (zminifikowane: oxc z rolldown, lightningcss)
 //   liveo-assistant/data/catalog.json → public/liveo-assistant/data/   (+ text-embeddings.json, wiedza.txt, jeśli są)
-//   src/assets/renders/products/*.webp → public/media/produkty/       (obrazy kart w widżecie: /media/produkty/<sku>--<wariant>.webp)
+//   (zdjęcia kart w widżecie: packshoty z public/katalog — tools/data/fetch-images.mjs)
 //   public/liveo-assistant/fonts.css  — lokalny arkusz fontów: widżet nie dociąga wtedy Google Fonts.
 //
 // Pliki w liveo-assistant/ są źródłem — tu tylko kopiujemy (katalogi docelowe są w .gitignore).
@@ -16,8 +16,6 @@ import { transform as transformCss } from 'lightningcss';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = join(ROOT, 'liveo-assistant');
 const OUT = join(ROOT, 'public', 'liveo-assistant');
-const RENDERS = join(ROOT, 'src', 'assets', 'renders', 'products');
-const MEDIA = join(ROOT, 'public', 'media', 'produkty');
 
 function copyDir(from, to, filter, minify = false) {
   if (!existsSync(from)) return 0;
@@ -51,7 +49,5 @@ writeFileSync(
    zadeklarowanych przez @font-face w <head> (src/layouts/BaseLayout.astro, pliki w public/fonts). */\n`,
 );
 
-rmSync(MEDIA, { recursive: true, force: true });
-const media = copyDir(RENDERS, MEDIA, f => /\.webp$/.test(f));
 
-console.log(`Doradca wnętrz → public/liveo-assistant: widżet ${widget} plików, dane ${data} plików; obrazy produktów → public/media/produkty: ${media}${media ? '' : ' (renderów produktów jeszcze nie ma)'}`);
+console.log(`Doradca wnętrz → public/liveo-assistant: widżet ${widget} plików, dane ${data} plików`);

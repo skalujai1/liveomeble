@@ -117,7 +117,7 @@ describe('nearestResellers', () => {
     const point = lookupPostcode('30-001', postcodes);
     const all = nearestResellers(resellers, point, { limit: 3 });
     assert.ok(all[0].distanceKm < 15, all[0].city);
-    for (const slug of ['olmo', 'briso', 'verno']) {
+    for (const slug of ['dante', 'aris', 'remi']) {
       const list = nearestResellers(resellers, point, { collection: slug, limit: 5 });
       assert.ok(list.length > 0, slug);
       assert.ok(list.every(s => s.collections.includes(slug)), slug);

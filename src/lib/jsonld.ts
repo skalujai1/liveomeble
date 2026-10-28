@@ -129,64 +129,26 @@ export function article(o: {
 const cm = (value: number) => ({ '@type': 'QuantitativeValue', value, unitCode: 'CMT' });
 const kg = (value: number) => ({ '@type': 'QuantitativeValue', value, unitCode: 'KGM' });
 
-export type OfferInput = {
-  price: number; regular: number | null; validUntil: string | null; stock: string; url: string;
-};
-
-export function offer(o: OfferInput): Node {
-  return {
-    '@type': 'Offer',
-    url: abs(o.url),
-    price: o.price.toFixed(2),
-    priceCurrency: 'PLN',
-    // Liveo nie sprzedaje online — meble kupuje się w sklepach partnerskich [do decyzji, docs/ia.md 3.7].
-    availability: o.stock === 'wyprzedany' ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStoreOnly',
-    itemCondition: 'https://schema.org/NewCondition',
-    ...(o.validUntil ? { priceValidUntil: o.validUntil } : {}),
-    ...(o.regular
-      ? {
-          priceSpecification: {
-            '@type': 'UnitPriceSpecification',
-            priceType: 'https://schema.org/StrikethroughPrice',
-            price: o.regular.toFixed(2),
-            priceCurrency: 'PLN',
-          },
-        }
-      : {}),
-  };
-}
-
-export function aggregateOffer(offers: OfferInput[]): Node {
-  const prices = offers.map(o => o.price);
-  return {
-    '@type': 'AggregateOffer',
-    priceCurrency: 'PLN',
-    lowPrice: Math.min(...prices).toFixed(2),
-    highPrice: Math.max(...prices).toFixed(2),
-    offerCount: offers.length,
-  };
-}
-
 export type VariantLd = {
-  code: string; sku: string; color: string; url: string; image?: string; offer: OfferInput;
+  code: string; sku: string; gtin13?: string | null; color: string; url: string; image?: string;
 };
 
 /**
- * Mebel: jeden kolor → Product z Offer; kilka kolorów → ProductGroup (variesBy: color)
- * z wariantami Product + Offer i podsumowaniem AggregateOffer.
+ * Mebel: jeden kolor → Product; kilka kolorów → ProductGroup (variesBy: color) z wariantami Product.
+ * Bez Offer: karty produktu Liveo nie mają cen, a Liveo sprzedaje przez salony partnerskie.
  */
 export function productLd(o: {
   path: string; name: string; description: string; sku: string; category: string;
-  dims: { w: number; h: number; d: number }; weightKg?: number; variants: VariantLd[];
+  dims: { w?: number; h?: number; d?: number }; weightKg?: number | null; variants: VariantLd[];
 }): Node {
   const url = abs(o.path);
   const common = {
     brand: { '@type': 'Brand', name: 'Liveo' },
     manufacturer: { '@id': ORG_ID },
     category: o.category,
-    width: cm(o.dims.w),
-    height: cm(o.dims.h),
-    depth: cm(o.dims.d),
+    ...(o.dims.w ? { width: cm(o.dims.w) } : {}),
+    ...(o.dims.h ? { height: cm(o.dims.h) } : {}),
+    ...(o.dims.d ? { depth: cm(o.dims.d) } : {}),
     ...(o.weightKg ? { weight: kg(o.weightKg) } : {}),
   };
   const variant = (v: VariantLd, standalone: boolean): Node => ({
@@ -195,11 +157,11 @@ export function productLd(o: {
     name: standalone ? o.name : `${o.name} — ${v.color}`,
     ...(standalone ? { description: o.description } : {}),
     sku: v.sku,
+    ...(v.gtin13 ? { gtin13: v.gtin13 } : {}),
     color: v.color,
     url: abs(v.url),
     ...(v.image ? { image: abs(v.image) } : {}),
     ...(standalone ? common : { isVariantOf: { '@id': `${url}#product` } }),
-    offers: offer(v.offer),
   });
   if (o.variants.length === 1) return variant(o.variants[0], true);
   return {
@@ -211,7 +173,6 @@ export function productLd(o: {
     productGroupID: o.sku,
     variesBy: ['https://schema.org/color'],
     ...common,
-    offers: aggregateOffer(o.variants.map(v => v.offer)),
     hasVariant: o.variants.map(v => variant(v, false)),
   };
 }

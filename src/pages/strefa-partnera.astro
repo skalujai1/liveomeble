@@ -1,13 +1,13 @@
 ---
 // Strefa partnera — WERSJA DEMONSTRACYJNA (docs/ia.md 3.11, treść: src/content/pages/strefa-partnera.json).
-// Logowanie dowolnymi danymi otwiera panel w przeglądarce. Cennik partnerski wyliczony przykładowo
-// (cena katalogowa netto − rabat z PARTNER_DEMO). Zamówienia zapisywane tylko w localStorage — nic nie jest wysyłane.
+// Logowanie dowolnymi danymi otwiera panel w przeglądarce. Katalog partnera z kart produktu Liveo (symbole, EAN,
+// paczki) — bez cen, których karty nie mają. Zamówienia zapisywane tylko w localStorage — nic nie jest wysyłane.
 // noindex, nofollow; poza sitemap.xml i llms.txt; bez FAQPage i cen w JSON-LD.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Faq from '../components/Faq.astro';
 import { PARTNER_DEMO } from '../config';
 import { webPage } from '../lib/jsonld';
-import { BUILD_NOW, collectionOf, collections, pages, priceAt, productsSorted, resellers, site, typeOf, types, url } from '../lib/site';
+import { BUILD_NOW, collectionOf, collections, pages, productsSorted, resellers, site, typeOf, types, url } from '../lib/site';
 import { fill } from '../lib/text';
 
 const page = pages.strefaPartnera;
@@ -15,26 +15,20 @@ const path = url.partnerZone;
 const L = page.login;
 const P = page.panel;
 const vat = PARTNER_DEMO.vatRate;
-const round2 = (n: number) => Math.round(n * 100) / 100;
 
 const rows = productsSorted.flatMap(p =>
-  p.variants.map(v => {
-    const pr = priceAt(p, v.code);
-    const retail = pr.regular ?? pr.price;
-    return {
-      sku: v.sku,
-      name: p.name,
-      color: v.colorLabel,
-      collection: p.collection,
-      collectionName: collectionOf(p).name,
-      type: typeOf(p).slug,
-      retail,
-      promo: pr.promo?.label ?? null,
-      net: round2((retail / (1 + vat / 100)) * (1 - PARTNER_DEMO.discountPercent / 100)),
-      stock: v.stock,
-      leadTimeDays: (v as { leadTimeDays?: number }).leadTimeDays ?? null,
-    };
-  }),
+  p.variants.map(v => ({
+    sku: v.sku,
+    ean: v.ean ?? '',
+    name: p.name,
+    color: v.colorLabel,
+    collection: p.collection,
+    collectionName: collectionOf(p).name,
+    type: typeOf(p).slug,
+    delivery72: p.delivery72,
+    packages: p.packages.length,
+    grossKg: p.grossKg ?? 0,
+  })),
 );
 // Konto demo: zmyślony salon (lista sklepów to prawdziwe firmy — nie podpinamy żadnej pod konto przykładowe)
 const store = { name: 'Salon Meblowy Przykład (DEMO)', address: 'ul. Przykładowa 1', postcode: '00-000', city: 'Przykładowo' };
@@ -45,7 +39,8 @@ const boot = {
   company: PARTNER_DEMO.company,
   addresses: [`${store.address}, ${store.postcode} ${store.city} (DEMO)`, 'ul. Magazynowa 2, 00-000 Przykładowo (DEMO)'],
   t: {
-    stock: site.stock,
+    delivery72: P.pricelist.delivery72,
+    deliveryOther: P.pricelist.deliveryOther,
     statuses: P.history.statuses,
     plural: site.plural.items,
     addedAnnounce: P.pricelist.addedAnnounce,
@@ -155,10 +150,9 @@ const tabs = P.nav.items;
                 <th scope="col">{P.pricelist.columns.sku}</th>
                 <th scope="col">{P.pricelist.columns.name}</th>
                 <th scope="col">{P.pricelist.columns.color}</th>
-                <th scope="col" class="num">{P.pricelist.columns.retail}</th>
-                <th scope="col" class="num">{P.pricelist.columns.partner}</th>
-                <th scope="col">{P.pricelist.columns.promo}</th>
-                <th scope="col">{P.pricelist.columns.stock}</th>
+                <th scope="col">{P.pricelist.columns.ean}</th>
+                <th scope="col" class="num">{P.pricelist.columns.packages}</th>
+                <th scope="col">{P.pricelist.columns.delivery}</th>
                 <th scope="col">{P.pricelist.columns.qty}</th>
                 <th scope="col"><span class="visually-hidden">{P.pricelist.columns.add}</span></th>
               </tr>
@@ -167,14 +161,14 @@ const tabs = P.nav.items;
           </table>
         </div>
         <p><button class="btn btn--secondary" type="button" data-export>{P.pricelist.export}</button></p>
-        <p class="form__demo-note">{P.pricelist.demoNote} Przykładowy rabat: {PARTNER_DEMO.discountPercent}%.</p>
+        <p class="form__demo-note">{P.pricelist.demoNote}</p>
         <p class="visually-hidden" role="status" aria-live="polite" data-added-status></p>
       </div>
 
       <div role="tabpanel" id="panel-zamowienie" aria-labelledby="tab-zamowienie" data-panel="zamowienie" class="partner-panel__body" hidden>
         <h3>{P.order.title}</h3>
         <form class="partner-filters" data-quick-add>
-          <label class="field field--inline"><span class="field__label">Indeks (SKU)</span>
+          <label class="field field--inline"><span class="field__label">Symbol (Navireo)</span>
             <input class="field__control" name="sku" list="pz-skus" autocomplete="off" required />
           </label>
           <label class="field field--inline"><span class="field__label">{P.order.columns.qty}</span>

@@ -13,7 +13,7 @@ type Boot = {
   rooms: Record<string, Room>; finishHex: Record<string, string>;
 };
 type Product = {
-  name: string; collection: string; model: string; type: string; rooms?: string[]; price: number; regular: number | null;
+  name: string; collection: string; model: string; type: string; rooms?: string[]; price: number | null; regular: number | null;
   lowest30?: number | null; url: string; img: string; color?: { label: string } | null;
 };
 type Catalog = { products: Product[]; collections: Record<string, string> };
@@ -413,7 +413,7 @@ export function initAdvisor() {
   }
 
   function card(p: Product) {
-    const off = p.regular ? Math.round((1 - p.price / p.regular) * 100) : 0;
+    const off = p.regular && p.price != null ? Math.round((1 - p.price / p.regular) * 100) : 0;
     const name = p.model !== p.collection ? p.model : p.name;
     return h('li', { class: 'product-card advisor-card' },
       h('a', { class: 'product-card__link', href: p.url },
@@ -421,7 +421,7 @@ export function initAdvisor() {
           h('img', { class: 'media__img', src: p.img, alt: '', loading: 'lazy', decoding: 'async', width: 480, height: 480 })),
         h('h4', { class: 'product-card__title' }, name)),
       p.color && h('p', { class: 'product-card__meta' }, p.color.label),
-      h('div', { class: 'price price--card' + (p.regular ? ' price--promo' : '') },
+      p.price == null ? h('p', { class: 'product-card__meta' }, 'Cena w salonie partnerskim') : h('div', { class: 'price price--card' + (p.regular ? ' price--promo' : '') },
         h('p', { class: 'price__main' },
           h('span', { class: 'price__current' }, formatPrice(p.price)),
           p.regular && h('s', { class: 'price__regular' }, h('span', { class: 'visually-hidden' }, 'Cena regularna: '), formatPrice(p.regular))),
@@ -490,7 +490,7 @@ export function initAdvisor() {
           finishChip(main.color))),
       h('ul', { class: 'product-grid advisor-grid' }, main.items.map(card)),
       h('footer', { class: 'advisor-set__foot' },
-        h('p', { class: 'advisor-set__total' }, `${pieces(main.items.length)} razem `, h('b', null, formatPrice(main.total))),
+        h('p', { class: 'advisor-set__total' }, main.total > 0 ? [`${pieces(main.items.length)} razem `, h('b', null, formatPrice(main.total))] : `${pieces(main.items.length)} z jednej kolekcji`),
         h('div', { class: 'advisor-set__actions' },
           href && h('a', { class: 'btn btn--secondary', href }, `Cała kolekcja ${main.collection}`),
           h('button', { class: 'btn btn--primary', type: 'button', onclick: () => { S.reached = 3; go(3); } }, `Gdzie kupić ${main.collection}`))));
@@ -504,7 +504,7 @@ export function initAdvisor() {
         h('div', { class: 'advisor-alt__thumbs', 'aria-hidden': 'true' }, s.items.slice(0, 4).map(it => h('img', { src: it.img, alt: '', loading: 'lazy', width: 160, height: 160 }))),
         h('div', { class: 'advisor-alt__body' },
           h('p', { class: 'advisor-alt__name' }, `Kolekcja ${s.collection}`),
-          h('p', { class: 'advisor-alt__meta' }, finishChip(s.color), h('span', null, `${pieces(s.items.length)} · ${formatPrice(s.total)}`))),
+          h('p', { class: 'advisor-alt__meta' }, finishChip(s.color), h('span', null, s.total > 0 ? `${pieces(s.items.length)} · ${formatPrice(s.total)}` : pieces(s.items.length)))),
         h('button', { class: 'btn btn--secondary', type: 'button', onclick: () => pickSet(s.collection) }, 'Pokaż ten komplet')))),
       alts.length > shown.length && h('button', { class: 'link-button advisor-alts__more', type: 'button', onclick: () => { S.alts += 2; renderResults(); } },
         `Pokaż kolejne kolekcje (${alts.length - shown.length})`)) : null;
@@ -653,7 +653,7 @@ export function initAdvisor() {
   function renderChosen(set: Set_) {
     $('[data-chosen]').replaceChildren(
       h('p', { class: 'advisor-chosen__title' }, `Twój komplet: kolekcja ${set.collection}`),
-      h('p', { class: 'advisor-chosen__meta' }, finishChip(set.color), h('span', null, `${pieces(set.items.length)} razem ${formatPrice(set.total)}`)),
+      h('p', { class: 'advisor-chosen__meta' }, finishChip(set.color), h('span', null, set.total > 0 ? `${pieces(set.items.length)} razem ${formatPrice(set.total)}` : pieces(set.items.length))),
       h('div', { class: 'advisor-chosen__thumbs', 'aria-hidden': 'true' }, set.items.slice(0, 6).map(it => h('img', { src: it.img, alt: '', loading: 'lazy', width: 160, height: 160 }))),
       h('button', { class: 'link-button', type: 'button', 'data-go': '2' }, 'Wróć do kompletów'));
     const select = root.querySelector<HTMLSelectElement>('#doradca-sklepy [data-sf-collection]');

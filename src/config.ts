@@ -13,19 +13,6 @@ export const SITE_URL = 'https://liveomeble.pl';
 export const DEMO = true;
 
 /**
- * API świeżych cen i stanów (Cloudflare Worker, patrz docs/navireo-integracja.md, rozdz. 6.1),
- * np. 'https://liveomeble.pl/api/prices'. Pusty = przeglądarka przelicza promocje
- * z osadzonego JSON-a względem bieżącej daty (promocja włącza się i wyłącza sama).
- */
-export const PRICES_API = '';
-
-/** Limit czasu zapytania o ceny (ms). Po nim zostają ceny z HTML. */
-export const PRICES_TIMEOUT_MS = 2000;
-
-/** Dane o stanach starsze niż tyle godzin → „Dostępność sprawdź w sklepie”. */
-export const STOCK_STALE_HOURS = 24;
-
-/**
  * Podpowiedź regionu z IP (GET /api/region → { country, region }). Tylko tekst, nigdy
  * automatyczne wypełnienie kodu. Pusty = brak podpowiedzi.
  */

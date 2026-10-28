@@ -4,22 +4,30 @@
   "status": "draft",
   "seo": {
     "title": "Meble do salonu, sypialni i przedpokoju — katalog | Liveo",
-    "description": "Wszystkie meble Liveo w jednym miejscu: szafki RTV, komody, witryny, stoły, łóżka, szafy i biurka. Filtruj według pokoju, koloru, ceny i promocji.",
-    "jsonLd": ["CollectionPage", "ItemList", "BreadcrumbList", "FAQPage"]
+    "description": "Wszystkie meble Liveo w jednym miejscu: szafki RTV, komody, witryny, stoły, łóżka, szafy i biurka. Filtruj według pokoju, koloru i kolekcji.",
+    "jsonLd": [
+      "CollectionPage",
+      "ItemList",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
   },
   "h1": "Wszystkie meble Liveo",
   "sections": [
     {
       "id": "wstep",
       "type": "intro",
-      "lead": "Meble ze wszystkich kolekcji w jednym miejscu. Zawęź listę według pokoju, rodzaju mebla, koloru albo ceny."
+      "lead": "Meble ze wszystkich kolekcji w jednym miejscu. Zawęź listę według pokoju, rodzaju mebla, kolekcji albo koloru."
     },
     {
       "id": "rodzaje",
       "type": "categories",
       "title": "Rodzaje mebli",
       "source": "types.json (sortowanie: order) → /meble/{slug}/",
-      "card": { "title": "{plural}", "meta": "plural.products" }
+      "card": {
+        "title": "{plural}",
+        "meta": "plural.products"
+      }
     },
     {
       "id": "lista",
@@ -36,9 +44,27 @@
         "activeLabel": "Wybrane filtry",
         "removeFilter": "Usuń filtr: {label}",
         "groups": [
-          { "id": "pokoj", "param": "pokoj", "label": "Pomieszczenie", "source": "rooms.json", "multi": true },
-          { "id": "typ", "param": "typ", "label": "Rodzaj mebla", "source": "types.json", "multi": true },
-          { "id": "kolekcja", "param": "kolekcja", "label": "Kolekcja", "source": "collections.json", "multi": true },
+          {
+            "id": "pokoj",
+            "param": "pokoj",
+            "label": "Pomieszczenie",
+            "source": "rooms.json",
+            "multi": true
+          },
+          {
+            "id": "typ",
+            "param": "typ",
+            "label": "Rodzaj mebla",
+            "source": "types.json",
+            "multi": true
+          },
+          {
+            "id": "kolekcja",
+            "param": "kolekcja",
+            "label": "Kolekcja",
+            "source": "collections.json",
+            "multi": true
+          },
           {
             "id": "kolor",
             "param": "kolor",
@@ -48,29 +74,30 @@
             "multi": true
           },
           {
-            "id": "cena",
-            "param": "cena",
-            "label": "Cena",
-            "multi": false,
-            "options": [
-              { "value": "0-499", "label": "do 499 zł" },
-              { "value": "500-999", "label": "500–999 zł" },
-              { "value": "1000-1499", "label": "1000–1499 zł" },
-              { "value": "1500-", "label": "od 1500 zł" }
-            ],
-            "_note": "Filtrujemy po aktualnej cenie (z promocją) liczonej przez priceFor()."
-          },
-          { "id": "promocje", "param": "promocje", "label": "Tylko promocje", "type": "toggle", "value": "1" }
+            "id": "dostawa",
+            "param": "dostawa",
+            "label": "Dostawa w 72 godziny",
+            "type": "toggle",
+            "value": "72h",
+            "_note": "Z karty produktu Liveo (kolumna „DOSTAWA W 72 GODZINY”)."
+          }
         ]
       },
       "sort": {
         "label": "Sortuj",
         "options": [
-          { "value": "polecane", "label": "Polecane" },
-          { "value": "cena-rosnaco", "label": "Cena: od najniższej" },
-          { "value": "cena-malejaco", "label": "Cena: od najwyższej" },
-          { "value": "nowosci", "label": "Najpierw nowości" },
-          { "value": "szerokosc", "label": "Szerokość: od najwęższego" }
+          {
+            "value": "polecane",
+            "label": "Polecane"
+          },
+          {
+            "value": "szerokosc",
+            "label": "Szerokość: od najwęższego"
+          },
+          {
+            "value": "szerokosc-malejaco",
+            "label": "Szerokość: od najszerszego"
+          }
         ]
       },
       "resultsCount": "plural.products",
@@ -82,8 +109,7 @@
       "card": {
         "title": "{name}",
         "meta": "{colorsCount} · {dims}",
-        "imageAlt": "{name} w kolorze {colorLabel}",
-        "promoBadge": "{promoLabel}"
+        "imageAlt": "{name} w kolorze {colorLabel}"
       },
       "pagination": {
         "more": "Pokaż kolejne meble",
@@ -95,7 +121,10 @@
       "type": "band",
       "title": "Nie wiesz, od czego zacząć?",
       "text": "Wyślij zdjęcie pokoju — doradca wnętrz zaproponuje komplet z jednej kolekcji.",
-      "cta": { "label": "Otwórz doradcę wnętrz", "href": "/doradca-wnetrz/" }
+      "cta": {
+        "label": "Otwórz doradcę wnętrz",
+        "href": "/doradca-wnetrz/"
+      }
     }
   ],
   "faq": {
@@ -103,23 +132,23 @@
     "items": [
       {
         "q": "Co oznacza liczba w nazwie mebla?",
-        "a": "Liczba w nazwie to szerokość mebla w centymetrach, a przy łóżkach — szerokość materaca. Na przykład „Komoda 120 OLMO” ma 120 cm szerokości, a „Łóżko 160 OLMO” jest na materac 160 × 200 cm."
+        "a": "Nazwa mebla to rodzaj, kolekcja i symbol producenta — na przykład „Komoda DANTE DT03”. Przy łóżkach liczba to szerokość materaca: „Łóżko 160 z pojemnikiem” jest na materac 160 cm."
       },
       {
         "q": "Co oznacza status „na zamówienie”?",
         "a": "„Na zamówienie” znaczy, że mebla nie ma teraz w magazynie producenta i zostanie wyprodukowany — przybliżony czas podajemy przy meblu. Sklep partnerski może mieć go na miejscu, więc warto zapytać."
       },
       {
-        "q": "Czy cena mebla obejmuje dostawę i montaż?",
-        "a": "Nie — cena dotyczy samego mebla [do potwierdzenia]. Koszt dostawy i montażu ustala sklep partnerski."
+        "q": "Gdzie sprawdzę cenę mebla?",
+        "a": "W salonie partnerskim — to on podaje cenę, koszt dostawy i montażu. Najbliższy salon znajdziesz na stronie [Gdzie kupić](/gdzie-kupic/)."
       },
       {
-        "q": "Jak znaleźć meble w promocji?",
-        "a": "Zaznacz filtr „Tylko promocje” — lista pokaże meble, które teraz mają obniżoną cenę. Wszystkie aktualne akcje są też na stronie [Promocje](/promocje/)."
+        "q": "Które meble są dostępne w 72 godziny?",
+        "a": "Zaznacz filtr „Dostawa w 72 godziny” — lista pokaże meble, które według kart produktu Liveo mają dostawę w 72 godziny."
       },
       {
         "q": "Jak dobrać meble w jednym kolorze?",
-        "a": "Wybierz kolor w filtrze „Kolor” — zobaczysz meble ze wszystkich kolekcji w tym wykończeniu. Najlepiej dopasowane są jednak meble z jednej kolekcji, bo mają też te same uchwyty i nogi."
+        "a": "Wybierz kolor w filtrze „Kolor” — zobaczysz meble ze wszystkich kolekcji w tym wykończeniu. Najlepiej dopasowane są jednak meble z jednej kolekcji, bo mają też to samo wykończenie."
       },
       {
         "q": "Jak sprawdzić, czy mebel zmieści się w moim pokoju?",
@@ -129,7 +158,7 @@
   },
   "urlRules": {
     "_notes": [
-      "Filtry jako parametry zapytania: /meble/?pokoj=salon&typ=komody&kolor=dab-naturalny&cena=500-999&promocje=1&sort=cena-rosnaco.",
+      "Filtry jako parametry zapytania: /meble/?pokoj=salon&typ=komody&kolor=dab-naturalny&dostawa=72h&sort=szerokosc.",
       "Wartości: slugi z rooms.json, types.json (slug), collections.json, finishes.json (id). Kilka wartości: pokoj=salon,jadalnia.",
       "Strona z parametrami: <link rel=canonical> do /meble/ i <meta name=robots content=noindex,follow>.",
       "Indeksowane są tylko /meble/, /meble/{kategoria}/ i /pomieszczenia/{slug}/ — to ich wersje bez parametrów odpowiadają na zapytania typu „komody”, „meble do salonu”.",

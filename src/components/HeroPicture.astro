@@ -1,33 +1,46 @@
 ---
-// Obraz LCP z kadrowaniem pod urządzenie: pionowy kadr (4:5) na telefonie, poziomy na desktopie.
-// AVIF + WebP, eager + fetchpriority=high, width/height (bez przesunięć układu).
+// Obraz LCP na pełną szerokość: zdjęcie aranżacji z katalogu (WebP 1280/2400 z public/katalog, srcset)
+// albo obraz z src/assets (AVIF + WebP przez astro:assets). Na telefonie kadr pionowy daje CSS (object-fit: cover).
+// eager + fetchpriority=high, width/height (bez przesunięć układu).
 import { getImage } from 'astro:assets';
-import type { ImageRef } from '../lib/images';
+import { srcOf, srcsetOf, type ImageRef } from '../lib/images';
 
 /** priority=false: kolejne slajdy hero — lazy, bez fetchpriority. */
 interface Props { wide: ImageRef; tall?: ImageRef | null; alt: string; class?: string; sizes?: string; priority?: boolean }
 const { wide, tall, alt, class: cls, sizes = '(min-width: 80rem) 76rem, 100vw', priority = true } = Astro.props;
 const MOBILE = '(max-width: 59.99rem)';
-const build = async (src: ImageRef['src'], widths: number[], format: 'avif' | 'webp' | 'jpg') => {
-  const ok = widths.filter(w => w <= src.width);
-  const imgs = await Promise.all((ok.length ? ok : [src.width]).map(w => getImage({ src, width: w, format })));
-  return imgs.map((i, k) => `${i.src} ${(ok.length ? ok : [src.width])[k]}w`).join(', ');
-};
-const wideW = [960, 1440, 1920, 2400, 2880, 3200];
-const tallW = [480, 720, 960, 1200];
-const sources = [
-  ...(tall ? [
-    { media: MOBILE, type: 'image/avif', srcset: await build(tall.src, tallW, 'avif'), sizes: '100vw' },
-    { media: MOBILE, type: 'image/webp', srcset: await build(tall.src, tallW, 'webp'), sizes: '100vw' },
-  ] : []),
-  { type: 'image/avif', srcset: await build(wide.src, wideW, 'avif'), sizes },
-  { type: 'image/webp', srcset: await build(wide.src, wideW, 'webp'), sizes },
-];
-const fallback = await getImage({ src: wide.src, width: 1440, format: 'jpg' });
+
+let sources: { media?: string; type: string; srcset: string; sizes: string }[] = [];
+let fallback = '';
+let width = 0, height = 0;
+if (wide.pub) {
+  if (tall?.pub && tall.pub !== wide.pub) sources.push({ media: MOBILE, type: 'image/webp', srcset: srcsetOf(tall.pub), sizes: '100vw' });
+  sources.push({ type: 'image/webp', srcset: srcsetOf(wide.pub), sizes });
+  fallback = srcOf(wide.pub, 1280);
+  ({ w: width, h: height } = wide.pub);
+} else if (wide.src) {
+  const build = async (src: NonNullable<ImageRef['src']>, widths: number[], format: 'avif' | 'webp' | 'jpg') => {
+    const ok = widths.filter(w => w <= src.width);
+    const imgs = await Promise.all((ok.length ? ok : [src.width]).map(w => getImage({ src, width: w, format })));
+    return imgs.map((i, k) => `${i.src} ${(ok.length ? ok : [src.width])[k]}w`).join(', ');
+  };
+  const wideW = [960, 1440, 1920, 2400, 2880, 3200];
+  const tallW = [480, 720, 960, 1200];
+  sources = [
+    ...(tall?.src ? [
+      { media: MOBILE, type: 'image/avif', srcset: await build(tall.src, tallW, 'avif'), sizes: '100vw' },
+      { media: MOBILE, type: 'image/webp', srcset: await build(tall.src, tallW, 'webp'), sizes: '100vw' },
+    ] : []),
+    { type: 'image/avif', srcset: await build(wide.src, wideW, 'avif'), sizes },
+    { type: 'image/webp', srcset: await build(wide.src, wideW, 'webp'), sizes },
+  ];
+  fallback = (await getImage({ src: wide.src, width: 1440, format: 'jpg' })).src;
+  ({ width, height } = wide.src);
+}
 ---
 <div class:list={['media', cls]}>
   <picture>
     {sources.map(s => <source media={s.media} type={s.type} srcset={s.srcset} sizes={s.sizes} />)}
-    <img class="media__img" src={fallback.src} width={wide.src.width} height={wide.src.height} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" fetchpriority={priority ? 'high' : 'auto'} />
+    <img class="media__img" src={fallback} {width} {height} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" fetchpriority={priority ? 'high' : 'auto'} />
   </picture>
 </div>

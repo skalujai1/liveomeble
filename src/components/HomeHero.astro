@@ -1,10 +1,10 @@
 ---
 // Hero strony głównej — „kurtyna kolekcji”: każda kolekcja na cały ekran (kadr cinema 2:1, na telefonie pion 4:5),
-// nazwa w Italianie w skali plakatu, cena „od”, dwa działania; indeks nazw na dole steruje slajdami (src/scripts/motion.ts).
+// nazwa w Italianie w skali plakatu, kolor i liczba mebli, dwa działania; indeks nazw na dole steruje slajdami (src/scripts/motion.ts).
 // Bez JS widać pierwszą kolekcję, a indeks to zwykłe linki do kolekcji.
 import HeroPicture from './HeroPicture.astro';
 import { collectionImage } from '../lib/images';
-import { finishById, priceRangeOf, productsByCollection, url, type Collection } from '../lib/site';
+import { finishById, productsByCollection, url, type Collection } from '../lib/site';
 
 interface Props { collections: Collection[] }
 const { collections } = Astro.props;
@@ -15,10 +15,10 @@ const slides = collections.map(c => {
   const tall = collectionImage(c, 'tall');
   return {
     c, wide, tall,
-    alt: wide.title ? (wide.approximate ? `Aranżacja poglądowa: ${wide.title}` : wide.title) : `Meble z kolekcji ${c.name}`,
+    alt: `Meble z kolekcji ${c.name} w aranżacji`,
     color: c.finishes[0].label,
     hex: finishById.get(c.finishes[0].front)?.hex,
-    meta: `${items.length ? `od ${priceRangeOf(items).minText} · ` : ''}${pieces(items.length)}`,
+    meta: pieces(items.length),
   };
 });
 ---

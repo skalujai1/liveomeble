@@ -1,9 +1,8 @@
 ---
-// Obraz przez astro:assets (<picture> AVIF + WebP, width/height, sizes, lazy/eager)
-// albo — gdy pliku jeszcze nie ma — placeholder z rysunkiem mebla i nazwą rodzaju. Brak pliku nie psuje budowy.
+// Obraz: zdjęcie katalogu (gotowe WebP z public/katalog, srcset) albo obraz z src/assets (astro:assets, AVIF + WebP);
+// gdy zdjęcia nie ma — placeholder z nazwą rodzaju mebla. Brak pliku nie psuje budowy.
 import { Picture } from 'astro:assets';
-import FurnitureDrawing from './FurnitureDrawing.astro';
-import type { ImageRef } from '../lib/images';
+import { srcOf, srcsetOf, type ImageRef } from '../lib/images';
 
 interface Props {
   image: ImageRef | null;
@@ -17,19 +16,32 @@ interface Props {
   fit?: 'cover' | 'contain';
   /** Podpis placeholdera (np. „Szafka RTV”). */
   placeholderLabel: string;
-  /** Model 3D do rysunku w placeholderze. */
-  model?: any;
   class?: string;
 }
-const { image, alt, widths, sizes, priority = false, ratio = '4 / 3', fit = 'cover', placeholderLabel, model, class: cls } = Astro.props;
-const format = image?.src.format;
-const fitted = image ? widths.filter(w => w <= image.src.width) : [];
-if (image && !fitted.length) fitted.push(image.src.width);
+const { image, alt, widths, sizes, priority = false, ratio = '4 / 3', fit = 'cover', placeholderLabel, class: cls } = Astro.props;
+const src = image?.src;
+const format = src?.format;
+const fitted = src ? widths.filter(w => w <= src.width) : [];
+if (src && !fitted.length) fitted.push(src.width);
+const pub = image?.pub;
 ---
 <div class:list={['media', `media--${fit}`, { 'media--placeholder': !image, 'media--approx': image?.approximate }, cls]} style={`--media-ratio: ${ratio}`}>
-  {image ? (
+  {pub ? (
+    <img
+      class="media__img"
+      src={srcOf(pub, Math.max(...widths.filter(w => w <= 1400)))}
+      srcset={srcsetOf(pub)}
+      {sizes}
+      width={pub.w}
+      height={pub.h}
+      {alt}
+      loading={priority ? 'eager' : 'lazy'}
+      decoding={priority ? 'sync' : 'async'}
+      fetchpriority={priority ? 'high' : 'auto'}
+    />
+  ) : src ? (
     <Picture
-      src={image.src}
+      src={src}
       alt={alt}
       formats={['avif', 'webp']}
       fallbackFormat={format === 'jpg' || format === 'jpeg' ? 'jpg' : 'webp'}
@@ -42,7 +54,6 @@ if (image && !fitted.length) fitted.push(image.src.width);
     />
   ) : (
     <div class="media__placeholder" role="img" aria-label={`${alt} — zdjęcie w przygotowaniu`}>
-      {model && <FurnitureDrawing model={model} class="media__drawing" />}
       <span class="media__placeholder-label" aria-hidden="true">{placeholderLabel}</span>
     </div>
   )}

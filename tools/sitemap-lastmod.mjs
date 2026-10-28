@@ -1,5 +1,5 @@
 // Daty `lastmod` do sitemap.xml (czytane przez astro.config.mjs przy budowie).
-// Meble: dzień ostatniej zmiany ceny (priceHistory) albo danych; poradniki i strony prawne: `updated`.
+// Meble: dzień importu kart produktu (meta.generatedFor); poradniki i strony prawne: `updated`.
 import { readFileSync, readdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -12,11 +12,7 @@ export function sitemapLastmod(today = new Date().toISOString().slice(0, 10)) {
   const meta = readJson('src/data/meta.json');
   const base = meta.generatedFor || today;
   const map = new Map();
-  for (const p of readJson('src/data/products.json')) {
-    const changes = (p.priceHistory || []).map(e => e.date).filter(d => d <= today).sort();
-    const last = changes.at(-1);
-    map.set(`/produkt/${p.slug}/`, last && last > base ? last : base);
-  }
+  for (const p of readJson('src/data/products.json')) map.set(`/produkt/${p.slug}/`, base);
   for (const dir of ['poradnik', 'legal']) {
     const abs = join(ROOT, 'src/content', dir);
     for (const f of readdirSync(abs).filter(f => f.endsWith('.md'))) {

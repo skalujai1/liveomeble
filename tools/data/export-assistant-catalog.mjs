@@ -4,22 +4,21 @@
 //   node tools/data/export-assistant-catalog.mjs [--now=2026-10-20T12:00:00+02:00] [--out=liveo-assistant/data/catalog.json]
 //
 // Format zgodny z liveo-assistant/widget/recommender.js i liveo-assistant.js:
-//   { products: [{ id, name, collection, model, type, rooms, price, regular, url, img, color, bestseller, stock }],
+//   { products: [{ id, name, collection, model, type, rooms, price, regular, url, img, color, bestseller }],
 //     collections: { NAZWA: "/kolekcje/<slug>/" } }
-// Jeden rekord na wariant kolorystyczny. Ceny liczone przez src/lib/pricing.js
-// w chwili --now (domyślnie: teraz), więc aktywne promocje są już uwzględnione.
-// Warianty „wyprzedany” pomijamy — doradca nie powinien polecać niedostępnych mebli.
+// Jeden rekord na wariant kolorystyczny. Katalog pochodzi z kart produktu Liveo, które nie mają cen —
+// price = null (widżet pokazuje wtedy „Cena w salonie partnerskim” i nie filtruje po budżecie).
 //
 // Uwagi do formatu widżetu:
 //   - name: WIELKIMI LITERAMI (jak w starym katalogu sklepu). recommender.fitsRoom()
 //     czyta szerokość łóżka z nazwy wzorcem /ŁÓŻKO (\d+)/ — bez tego łóżko 90 cm
 //     trafiłoby do propozycji do sypialni.
 //   - model: nazwa do wyświetlenia na karcie (widżet pokazuje model, gdy różni się od kolekcji).
+//   - img: packshot wariantu z public/katalog (tools/data/fetch-images.mjs).
 
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { priceFor } from '../../src/lib/pricing.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const args = Object.fromEntries(process.argv.slice(2).map(a => /^--([^=]+)=(.*)$/.exec(a)).filter(Boolean).map(m => [m[1], m[2]]));
@@ -33,71 +32,60 @@ const finishes = read('finishes');
 const rooms = read('rooms');
 const collections = read('collections');
 const products = read('products');
-const promotions = read('promotions');
 
 const F = Object.fromEntries(finishes.map(f => [f.id, f]));
 const C = Object.fromEntries(collections.map(c => [c.slug, c]));
 const ROOM_KEY = Object.fromEntries(rooms.map(r => [r.slug, r.assistantKey]));
 
-// Kuchni na razie nie modelujemy (docs/do-potwierdzenia.md), ale widżet ma przycisk „Kuchnia”.
-// Stoły i kredensy z jadalni pasują też do kuchni z częścią jadalną — dzięki temu ta ścieżka
-// doradcy nie kończy się pustą listą.
-const KITCHEN_TYPES = new Set(['stol', 'kredens']);
-const assistantRooms = p => {
-  const keys = p.rooms.map(r => ROOM_KEY[r]).filter(Boolean);
-  if (KITCHEN_TYPES.has(p.type) && p.rooms.includes('jadalnia')) keys.push('kuchnia');
-  return [...new Set(keys)];
-};
+const assistantRooms = p => [...new Set(p.rooms.map(r => ROOM_KEY[r]).filter(Boolean))];
 
 /** Cechy kolorystyczne wariantu dla recommender.colorScore(): jasność, drewno, czerń, połysk. */
-function colorProfile(finish, model, label) {
-  const boards = [
-    [finish.front, finish.top ? 0.5 : 0.6],
-    [finish.body, finish.top ? 0.3 : 0.4],
-    ...(finish.top ? [[finish.top, 0.2]] : []),
-  ].filter(([id]) => F[id]);
-  const wsum = boards.reduce((a, [, w]) => a + w, 0);
+function colorProfile(finish, label) {
+  const boards = [[finish.front, 0.55], [finish.body, 0.35], [finish.accent, 0.1]].filter(([id]) => F[id]);
+  const wsum = boards.reduce((a, [, w]) => a + w, 0) || 1;
   const light = boards.reduce((a, [id, w]) => a + F[id].light * w, 0) / wsum;
-  const visibleMetal = ['legsMetal', 'frame'].includes(model.base) || model.handle === 'bar' || model.kind === 'coatRack'
-    || (model.kind === 'mirror' && model.frameMaterial === 'metal');
   return {
     label,
     light: Math.round(light * 100) / 100,
-    wood: boards.some(([id]) => F[id].wood) || F[finish.legs]?.wood === true,
-    black: boards.some(([id]) => F[id].black) || (visibleMetal && finish.metal === 'czarny'),
+    wood: boards.some(([id]) => F[id].wood),
+    black: boards.some(([id]) => F[id].light < 0.3),
     gloss: boards.some(([id]) => F[id].gloss),
   };
 }
+
+const imgOf = v => {
+  const pk = v.images?.packshot;
+  if (!pk) return null;
+  const w = pk.widths.includes(480) ? 480 : Math.min(...pk.widths);
+  return `${pk.base}-${w}.webp`;
+};
 
 const out = [];
 for (const p of products) {
   const coll = C[p.collection];
   for (const v of p.variants) {
-    if (v.stock === 'wyprzedany') continue;
-    const price = priceFor(p, v.code, promotions, now);
     out.push({
-      id: `${p.sku}--${v.code}`,
+      id: `${p.slug}--${v.code}`,
       name: p.name.toLocaleUpperCase('pl'),
       collection: coll.name.toLocaleUpperCase('pl'),
       model: p.name,
       type: p.type,
       rooms: assistantRooms(p),
-      price: price.price,
-      regular: price.regular,
-      lowest30: price.lowest30, // Omnibus: przekreślona cena tylko razem z tą linią (site.json price.rules)
-      url: `/produkt/${p.slug}/`,
-      img: `/media/produkty/${p.sku}--${v.code}.webp`,
-      color: colorProfile(v.finish, p.model3d, v.colorLabel),
+      price: null,
+      regular: null,
+      url: `/produkt/${p.slug}/${v.code === p.variants[0].code ? '' : `?kolor=${v.code}`}`,
+      img: imgOf(v),
+      color: colorProfile(v.finish, v.colorLabel),
       bestseller: !!p.bestseller,
-      stock: v.stock,
+      delivery72: !!p.delivery72,
     });
   }
 }
 
 const catalog = {
-  source: 'demo',
-  demo: true,
-  note: 'Dane demonstracyjne — fikcyjne meble Liveo. Generowane z src/data przez tools/data/export-assistant-catalog.mjs.',
+  source: 'karty-produktu-liveo',
+  demo: false,
+  note: 'Katalog z kart produktu Liveo (bez cen). Generowany z src/data przez tools/data/export-assistant-catalog.mjs.',
   updated: now.toISOString(),
   count: out.length,
   collections: Object.fromEntries(collections.map(c => [c.name.toLocaleUpperCase('pl'), `/kolekcje/${c.slug}/`])),
@@ -113,7 +101,6 @@ const same = previous
   && JSON.stringify(previous.products) === JSON.stringify(catalog.products)
   && JSON.stringify(previous.collections) === JSON.stringify(catalog.collections);
 if (!same) writeFileSync(OUT, JSON.stringify(catalog) + '\n');
-const onSale = out.filter(x => x.regular).length;
 console.log(same
-  ? `Katalog bez zmian (${out.length} rekordów, ${onSale} w promocji) — plik nie nadpisany: ${OUT}`
-  : `Zapisano ${out.length} rekordów (warianty), w tym ${onSale} w promocji → ${OUT}`);
+  ? `Katalog bez zmian (${out.length} rekordów) — plik nie nadpisany: ${OUT}`
+  : `Zapisano ${out.length} rekordów (warianty) → ${OUT}`);

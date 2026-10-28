@@ -1,31 +1,246 @@
 [
   {
-    "id": "dab-naturalny",
-    "label": "Dąb naturalny",
+    "id": "antracyt-mat",
+    "label": "Antracyt mat",
     "group": "board",
-    "hex": "#c49a6c",
-    "wood": true,
-    "light": 0.66,
-    "black": false,
-    "gloss": false,
-    "roughness": 0.6,
-    "metalness": 0,
-    "grain": "wyraźne",
-    "note": "płyta laminowana w dekorze drewna"
+    "hex": "#3d4044",
+    "wood": false,
+    "light": 0.27,
+    "gloss": false
   },
   {
-    "id": "dab-miodowy",
-    "label": "Dąb miodowy",
+    "id": "beton",
+    "label": "Beton",
     "group": "board",
-    "hex": "#b07b45",
+    "hex": "#9c9a94",
+    "wood": false,
+    "light": 0.64,
+    "gloss": false
+  },
+  {
+    "id": "bialy",
+    "label": "Biały",
+    "group": "board",
+    "hex": "#f1f0ec",
+    "wood": false,
+    "light": 0.95,
+    "gloss": false
+  },
+  {
+    "id": "bialy-mat",
+    "label": "Biały mat",
+    "group": "board",
+    "hex": "#efede8",
+    "wood": false,
+    "light": 0.94,
+    "gloss": false
+  },
+  {
+    "id": "bialy-polysk",
+    "label": "Biały połysk",
+    "group": "board",
+    "hex": "#fafafa",
+    "wood": false,
+    "light": 0.98,
+    "gloss": true
+  },
+  {
+    "id": "biel-alpejska-polysk",
+    "label": "Biel alpejska połysk",
+    "group": "board",
+    "hex": "#f7f6f1",
+    "wood": false,
+    "light": 0.97,
+    "gloss": true
+  },
+  {
+    "id": "czarny",
+    "label": "Czarny",
+    "group": "board",
+    "hex": "#202020",
+    "wood": false,
+    "light": 0.12,
+    "gloss": false
+  },
+  {
+    "id": "czarny-polysk",
+    "label": "Czarny połysk",
+    "group": "board",
+    "hex": "#141414",
+    "wood": false,
+    "light": 0.06,
+    "gloss": true
+  },
+  {
+    "id": "dab",
+    "label": "Dąb",
+    "group": "board",
+    "hex": "#b58f62",
     "wood": true,
-    "light": 0.56,
-    "black": false,
-    "gloss": false,
-    "roughness": 0.55,
-    "metalness": 0,
-    "grain": "średnie",
-    "note": "płyta laminowana w dekorze drewna"
+    "light": 0.62,
+    "gloss": false
+  },
+  {
+    "id": "dab-april",
+    "label": "Dąb april",
+    "group": "board",
+    "hex": "#bc965f",
+    "wood": true,
+    "light": 0.64,
+    "gloss": false
+  },
+  {
+    "id": "dab-castello",
+    "label": "Dąb castello",
+    "group": "board",
+    "hex": "#8d6c4e",
+    "wood": true,
+    "light": 0.48,
+    "gloss": false
+  },
+  {
+    "id": "dab-craft-zloty",
+    "label": "Dąb craft złoty",
+    "group": "board",
+    "hex": "#c18f4f",
+    "wood": true,
+    "light": 0.63,
+    "gloss": false
+  },
+  {
+    "id": "dab-cremona",
+    "label": "Dąb cremona",
+    "group": "board",
+    "hex": "#b98f61",
+    "wood": true,
+    "light": 0.62,
+    "gloss": false
+  },
+  {
+    "id": "dab-cremona-cotta",
+    "label": "Dąb cremona cotta",
+    "group": "board",
+    "hex": "#c49c6c",
+    "wood": true,
+    "light": 0.67,
+    "gloss": false
+  },
+  {
+    "id": "dab-cremona-torro",
+    "label": "Dąb cremona torro",
+    "group": "board",
+    "hex": "#b4895c",
+    "wood": true,
+    "light": 0.6,
+    "gloss": false
+  },
+  {
+    "id": "dab-evoke",
+    "label": "Dąb evoke",
+    "group": "board",
+    "hex": "#c4a684",
+    "wood": true,
+    "light": 0.7,
+    "gloss": false
+  },
+  {
+    "id": "dab-grandson",
+    "label": "Dąb grandson",
+    "group": "board",
+    "hex": "#a8835a",
+    "wood": true,
+    "light": 0.57,
+    "gloss": false
+  },
+  {
+    "id": "dab-kamienny",
+    "label": "Dąb kamienny",
+    "group": "board",
+    "hex": "#a59584",
+    "wood": true,
+    "light": 0.63,
+    "gloss": false
+  },
+  {
+    "id": "dab-magia",
+    "label": "Dąb magia",
+    "group": "board",
+    "hex": "#b99b74",
+    "wood": true,
+    "light": 0.66,
+    "gloss": false
+  },
+  {
+    "id": "dab-milano",
+    "label": "Dąb milano",
+    "group": "board",
+    "hex": "#b79770",
+    "wood": true,
+    "light": 0.64,
+    "gloss": false
+  },
+  {
+    "id": "dab-nagano",
+    "label": "Dąb nagano",
+    "group": "board",
+    "hex": "#c49f72",
+    "wood": true,
+    "light": 0.68,
+    "gloss": false
+  },
+  {
+    "id": "dab-sonoma",
+    "label": "Dąb sonoma",
+    "group": "board",
+    "hex": "#c8a670",
+    "wood": true,
+    "light": 0.7,
+    "gloss": false
+  },
+  {
+    "id": "dab-sonoma-truflowy",
+    "label": "Dąb sonoma truflowy",
+    "group": "board",
+    "hex": "#7c6047",
+    "wood": true,
+    "light": 0.43,
+    "gloss": false
+  },
+  {
+    "id": "grafit",
+    "label": "Grafit",
+    "group": "board",
+    "hex": "#3b3d40",
+    "wood": false,
+    "light": 0.26,
+    "gloss": false
+  },
+  {
+    "id": "kaszmir",
+    "label": "Kaszmir",
+    "group": "board",
+    "hex": "#cdbfad",
+    "wood": false,
+    "light": 0.78,
+    "gloss": false
+  },
+  {
+    "id": "kaszmir-mat",
+    "label": "Kaszmir mat",
+    "group": "board",
+    "hex": "#cbbca8",
+    "wood": false,
+    "light": 0.77,
+    "gloss": false
+  },
+  {
+    "id": "listwa-drewno-sosnowe",
+    "label": "Listwa drewno sosnowe",
+    "group": "board",
+    "hex": "#d3b184",
+    "wood": true,
+    "light": 0.74,
+    "gloss": false
   },
   {
     "id": "orzech",
@@ -34,144 +249,69 @@
     "hex": "#6b4a32",
     "wood": true,
     "light": 0.35,
-    "black": false,
-    "gloss": false,
-    "roughness": 0.55,
-    "metalness": 0,
-    "grain": "średnie",
-    "note": "płyta laminowana w dekorze drewna"
+    "gloss": false
   },
   {
-    "id": "bialy-mat",
-    "label": "Biały mat",
+    "id": "orzech-ciemny",
+    "label": "Orzech ciemny",
     "group": "board",
-    "hex": "#eeece8",
-    "wood": false,
-    "light": 0.93,
-    "black": false,
-    "gloss": false,
-    "roughness": 0.75,
-    "metalness": 0,
-    "note": "płyta laminowana"
+    "hex": "#4f3527",
+    "wood": true,
+    "light": 0.25,
+    "gloss": false
   },
   {
-    "id": "bialy-polysk",
-    "label": "Biały połysk",
+    "id": "orzech-opera",
+    "label": "Orzech opera",
     "group": "board",
-    "hex": "#f3f2ef",
-    "wood": false,
-    "light": 0.95,
-    "black": false,
-    "gloss": true,
-    "roughness": 0.12,
-    "metalness": 0,
-    "clearcoat": 0.8,
-    "note": "płyta laminowana"
+    "hex": "#6c4c36",
+    "wood": true,
+    "light": 0.35,
+    "gloss": false
   },
   {
-    "id": "kaszmir",
-    "label": "Kaszmir",
+    "id": "orzech-opera-mat",
+    "label": "Orzech opera mat",
     "group": "board",
-    "hex": "#d6c8b8",
-    "wood": false,
-    "light": 0.81,
-    "black": false,
-    "gloss": false,
-    "roughness": 0.65,
-    "metalness": 0,
-    "note": "płyta laminowana"
+    "hex": "#6c4c36",
+    "wood": true,
+    "light": 0.35,
+    "gloss": false
   },
   {
-    "id": "szalwia",
-    "label": "Szałwia",
+    "id": "szary-mat",
+    "label": "Szary mat",
     "group": "board",
-    "hex": "#9aa58f",
-    "wood": false,
-    "light": 0.66,
-    "black": false,
-    "gloss": false,
-    "roughness": 0.7,
-    "metalness": 0,
-    "note": "płyta laminowana"
-  },
-  {
-    "id": "grafit",
-    "label": "Grafit",
-    "group": "board",
-    "hex": "#4a4b4d",
-    "wood": false,
-    "light": 0.32,
-    "black": true,
-    "gloss": false,
-    "roughness": 0.55,
-    "metalness": 0,
-    "note": "płyta laminowana"
-  },
-  {
-    "id": "czarny-mat",
-    "label": "Czarny mat",
-    "group": "board",
-    "hex": "#222223",
-    "wood": false,
-    "light": 0.13,
-    "black": true,
-    "gloss": false,
-    "roughness": 0.65,
-    "metalness": 0,
-    "note": "płyta laminowana"
-  },
-  {
-    "id": "czarny",
-    "label": "Czarny",
-    "group": "metal",
-    "hex": "#1a1a1a",
-    "wood": false,
-    "light": 0.09,
-    "black": true,
-    "gloss": false,
-    "roughness": 0.45,
-    "metalness": 0.6,
-    "note": "stal malowana proszkowo"
-  },
-  {
-    "id": "zloty",
-    "label": "Złoty",
-    "group": "metal",
-    "hex": "#b8935a",
-    "wood": false,
-    "light": 0.63,
-    "black": false,
-    "gloss": false,
-    "roughness": 0.35,
-    "metalness": 1,
-    "note": "szczotkowany mosiądz (kolor)"
-  },
-  {
-    "id": "stal",
-    "label": "Stal",
-    "group": "metal",
-    "hex": "#9a9ca0",
+    "hex": "#9b9b97",
     "wood": false,
     "light": 0.64,
-    "black": false,
-    "gloss": false,
-    "roughness": 0.3,
-    "metalness": 1,
-    "note": "stal szczotkowana"
+    "gloss": false
   },
   {
-    "id": "szklo",
-    "label": "Szkło lekko przydymione",
-    "group": "glass",
-    "hex": "#8f9592",
+    "id": "szary-polysk",
+    "label": "Szary połysk",
+    "group": "board",
+    "hex": "#a7a8a9",
     "wood": false,
-    "light": 0.6,
-    "black": false,
-    "gloss": true,
-    "roughness": 0.05,
-    "metalness": 0,
-    "opacity": 0.35,
-    "transmission": 0.85,
-    "note": "szkło hartowane 4 mm (witryny, kredensy)"
+    "light": 0.69,
+    "gloss": true
+  },
+  {
+    "id": "wenge",
+    "label": "Wenge",
+    "group": "board",
+    "hex": "#3d2b22",
+    "wood": true,
+    "light": 0.19,
+    "gloss": false
+  },
+  {
+    "id": "zielony-mat",
+    "label": "Zielony mat",
+    "group": "board",
+    "hex": "#5e6a54",
+    "wood": false,
+    "light": 0.43,
+    "gloss": false
   }
 ]

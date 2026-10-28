@@ -3,17 +3,22 @@
   "urlPattern": "/produkt/{slug}/",
   "status": "draft",
   "_notes": [
-    "Szablon strony mebla. Dane: products.json (+ collections, finishes, types, rooms, promotions, resellers).",
-    "Wariant koloru w adresie: /produkt/{slug}/?kolor={code} — canonical zawsze bez parametru. Domyślny wariant: pierwszy dostępny (nie „wyprzedany”).",
-    "Cena: priceFor(product, code, promotions, now). Linia Omnibus tylko, gdy promo != null.",
+    "Szablon strony mebla. Dane: products.json z kart produktu Liveo (+ collections, finishes, types, rooms, resellers).",
+    "Wariant koloru w adresie: /produkt/{slug}/?kolor={code} — canonical zawsze bez parametru. Domyślny wariant: pierwszy (z własnym zdjęciem).",
+    "Karty produktu nie mają cen ani stanów — zamiast ceny odsyłamy do salonu partnerskiego (site.price).",
     "FAQ jest generowany z danych — każda odpowiedź wynika z pól mebla, nic nie dopisujemy ręcznie."
   ],
   "seo": {
     "title": "{name} — {colorLabel} | Liveo",
-    "titleLong": "{name} — wymiary, kolory, cena | Liveo",
+    "titleLong": "{name} — wymiary i kolory | Liveo",
     "description": "{name}: {dimsLong}. {descriptionFirstSentence} Kolory: {colorLabels}.",
     "descriptionMax": 155,
-    "jsonLd": ["ProductGroup", "Product", "Offer", "BreadcrumbList", "FAQPage"],
+    "jsonLd": [
+      "ProductGroup",
+      "Product",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
     "_notes": [
       "title: gdy {name} + kolor > 60 znaków, użyj titleLong; gdy nadal za długi — sam „{name} | Liveo”.",
       "description: przycinamy na granicy zdania do 155 znaków; gdy opis jest za długi, pomijamy zdanie z kolorami."
@@ -34,7 +39,10 @@
       "prev": "Poprzednie zdjęcie",
       "next": "Następne zdjęcie",
       "counter": "Zdjęcie {i} z {n}",
-      "colorDisclaimer": "Kolor na ekranie może się nieco różnić od rzeczywistego."
+      "colorDisclaimer": "Kolor na ekranie może się nieco różnić od rzeczywistego.",
+      "more": "Więcej zdjęć: {name}",
+      "moreAlt": "{name} w kolorze {colorLabel} — zdjęcie {i}",
+      "original": "Zdjęcia i rysunki pochodzą z materiałów producenta."
     },
     {
       "id": "podsumowanie",
@@ -42,13 +50,19 @@
       "collectionLink": "Kolekcja {collectionName}",
       "colorTitle": "Kolor: {colorLabel}",
       "colorGroupLabel": "Wybierz kolor",
-      "colorUnavailable": "{colorLabel} — wyprzedany",
       "dims": "{dimsLong}",
-      "priceBlock": "site.price",
-      "stockBlock": "site.stock",
       "assembly": "Montaż: {assembly}",
-      "ctaPrimary": { "label": "Gdzie kupić", "href": "#gdzie-kupic" },
-      "ctaSecondary": { "label": "Zobacz komplet {collectionName}", "href": "#komplet" }
+      "ctaPrimary": {
+        "label": "Gdzie kupić",
+        "href": "#gdzie-kupic"
+      },
+      "ctaSecondary": {
+        "label": "Zobacz komplet {collectionName}",
+        "href": "#komplet"
+      },
+      "delivery": "Dostawa w 72 godziny",
+      "codes": "Symbol: {sku}",
+      "ean": "EAN: {ean}"
     },
     {
       "id": "opis",
@@ -62,28 +76,75 @@
       "title": "Wymiary",
       "lead": "Wymiary zewnętrzne w centymetrach. Przed zakupem porównaj je z miejscem, w którym mebel ma stanąć.",
       "rows": [
-        { "label": "Szerokość", "value": "{w} cm" },
-        { "label": "Wysokość", "value": "{h} cm" },
-        { "label": "Głębokość", "value": "{d} cm" },
-        { "label": "Waga", "value": "ok. {weightKg} kg" }
+        {
+          "label": "Szerokość",
+          "value": "{w} cm",
+          "key": "w"
+        },
+        {
+          "label": "Wysokość",
+          "value": "{h} cm",
+          "key": "h"
+        },
+        {
+          "label": "Głębokość",
+          "value": "{d} cm",
+          "key": "d"
+        },
+        {
+          "label": "Waga netto",
+          "value": "{weightKg} kg",
+          "key": "weightKg"
+        },
+        {
+          "label": "Paczki",
+          "value": "{packagesText}",
+          "key": "packagesText"
+        }
       ],
-      "drawingAlt": "Rysunek wymiarowy: {name}, szerokość {w} cm, wysokość {h} cm, głębokość {d} cm",
-      "guideLink": { "label": "Jak zmierzyć miejsce na mebel", "href": "/poradnik/jak-zmierzyc-wneke-pod-szafe/" }
+      "drawingAlt": "Rysunek wymiarowy producenta: {name}",
+      "guideLink": {
+        "label": "Jak zmierzyć miejsce na mebel",
+        "href": "/poradnik/jak-zmierzyc-wneke-pod-szafe/"
+      },
+      "packagesTitle": "Paczki",
+      "packagesCaption": "Wymiary i waga paczek (dla transportu)",
+      "packageCols": [
+        "Paczka",
+        "Wymiary (cm)",
+        "Waga brutto",
+        "EAN"
+      ]
     },
     {
-      "id": "szczegoly",
-      "type": "list",
-      "title": "Szczegóły",
-      "source": "product.features[]"
+      "id": "specyfikacja",
+      "type": "table",
+      "title": "Wykonanie i materiały",
+      "lead": "Dane z karty produktu Liveo.",
+      "source": "product.specs[]"
+    },
+    {
+      "id": "pliki",
+      "type": "links",
+      "title": "Do pobrania",
+      "items": {
+        "instruction": "Instrukcja montażu (PDF)",
+        "drawing": "Rysunek wymiarowy (PDF)",
+        "animation": "Animacja 360°"
+      },
+      "note": "Pliki otwierają się z serwera Liveo w nowej karcie."
     },
     {
       "id": "gdzie-kupic",
       "type": "store-finder",
       "title": "Gdzie kupić: {name}",
-      "lead": "Wpisz kod pocztowy — pokażemy najbliższe sklepy partnerskie z kolekcją {collectionName}.",
+      "lead": "Wpisz kod pocztowy — pokażemy najbliższe salony partnerskie Liveo. Cenę i termin dostawy poda salon.",
       "presetCollection": "{collection}",
       "limit": 3,
-      "more": { "label": "Więcej sklepów", "href": "/gdzie-kupic/?kolekcja={collection}" },
+      "more": {
+        "label": "Więcej sklepów",
+        "href": "/gdzie-kupic/?kolekcja={collection}"
+      },
       "note": "Zanim pojedziesz, zadzwoń i zapytaj, czy mebel jest na ekspozycji."
     },
     {
@@ -92,14 +153,20 @@
       "title": "Komplet z kolekcji {collectionName}",
       "lead": "Meble z tej samej kolekcji, w tym samym kolorze. Pasują do siebie wymiarami i wykończeniem.",
       "rule": "ta sama kolekcja, ten sam kod koloru, pokoje wspólne z bieżącym meblem; maks. 6, bez bieżącego",
-      "more": { "label": "Cała kolekcja {collectionName}", "href": "/kolekcje/{collection}/" }
+      "more": {
+        "label": "Cała kolekcja {collectionName}",
+        "href": "/kolekcje/{collection}/"
+      }
     },
     {
       "id": "doradca",
       "type": "band",
       "title": "Nie wiesz, czy pasuje do Twojego wnętrza?",
       "text": "Wyślij zdjęcie pokoju — doradca wnętrz podpowie kolekcję i kolor.",
-      "cta": { "label": "Otwórz doradcę", "href": "/doradca-wnetrz/" }
+      "cta": {
+        "label": "Otwórz doradcę",
+        "href": "/doradca-wnetrz/"
+      }
     }
   ],
   "faq": {
@@ -107,24 +174,29 @@
     "items": [
       {
         "q": "Jakie wymiary ma {name}?",
-        "a": "{name} ma {w} cm szerokości, {h} cm wysokości i {d} cm głębokości. Waży ok. {weightKg} kg."
+        "a": "{name} ma wymiary: {dimsLong}.{weightSentence}"
       },
       {
         "q": "W jakich kolorach jest {name}?",
-        "a": "{name} występuje w kolorach: {colorLabels}. Kolor wybierzesz na tej stronie, nad ceną."
+        "a": "{name} występuje w kolorach: {colorLabels}. Kolor wybierzesz na tej stronie."
+      },
+      {
+        "q": "Ile kosztuje {name}?",
+        "a": "Liveo sprzedaje meble przez salony partnerskie — to one podają cenę, termin dostawy i koszt montażu. Najbliższy salon znajdziesz w sekcji „Gdzie kupić” na tej stronie."
       },
       {
         "q": "Czy mebel trzeba złożyć samodzielnie?",
-        "a": "Tak, mebel jest {assembly}. W paczce jest instrukcja i okucia [do potwierdzenia]; część sklepów partnerskich oferuje montaż.",
+        "a": "Tak, mebel jest {assembly}. W zestawie: {equipment}. Instrukcję montażu możesz też pobrać z tej strony.",
         "showIf": "assembly == 'do samodzielnego montażu'"
       },
       {
-        "q": "Gdzie można zobaczyć ten mebel na żywo?",
-        "a": "W sklepach partnerskich, które mają kolekcję {collectionName}. Wpisz kod pocztowy w sekcji „Gdzie kupić” na tej stronie — pokażemy najbliższe."
+        "q": "Ile paczek ma {name}?",
+        "a": "{packagesSentence}",
+        "showIf": "packages"
       },
       {
         "q": "Jakie meble pasują do tego mebla?",
-        "a": "Najlepiej pasują meble z kolekcji {collectionName} w tym samym kolorze: {siblingTypesList}. Wszystkie mają te same uchwyty i wykończenie."
+        "a": "Najlepiej pasują meble z kolekcji {collectionName} w tym samym kolorze: {siblingTypesList}."
       }
     ]
   }

@@ -5,9 +5,11 @@
   "demo": true,
   "seo": {
     "title": "Strefa partnera — logowanie | Liveo",
-    "description": "Logowanie do strefy partnera Liveo: ceny partnerskie, stany magazynowe i zamówienia online dla sklepów współpracujących z Liveo.",
+    "description": "Logowanie do strefy partnera Liveo: katalog z symbolami i kodami EAN oraz zamówienia online dla sklepów współpracujących z Liveo.",
     "robots": "noindex, nofollow",
-    "jsonLd": ["WebPage"],
+    "jsonLd": [
+      "WebPage"
+    ],
     "_notes": [
       "Strona logowania jest publiczna, ale wyłączona z indeksu (noindex) i z sitemap.xml. Panel po zalogowaniu: noindex, Cache-Control: private, no-store.",
       "Nie umieszczać w llms.txt ani w JSON-LD żadnych cen partnerskich."
@@ -16,12 +18,12 @@
   "h1": "Strefa partnera",
   "demoBanner": {
     "title": "Wersja demonstracyjna",
-    "text": "To DEMO strefy partnera. Ceny, stany i zamówienia są przykładowe — zamówienia nie trafiają do systemu Navireo i nie są realizowane.",
+    "text": "To DEMO strefy partnera. Katalog pochodzi z kart produktu Liveo; zamówienia nie trafiają do systemu Navireo i nie są realizowane.",
     "_note": "Baner widoczny na każdym widoku strefy, dopóki demo = true. Nie da się go zamknąć."
   },
   "login": {
     "id": "logowanie",
-    "lead": "Strefa dla sklepów, które współpracują z Liveo. Zaloguj się, żeby zobaczyć ceny partnerskie i stany oraz złożyć zamówienie.",
+    "lead": "Strefa dla sklepów, które współpracują z Liveo. Zaloguj się, żeby zobaczyć katalog partnera (symbole, EAN, paczki) i złożyć zamówienie.",
     "form": {
       "emailLabel": "E-mail",
       "passwordLabel": "Hasło",
@@ -47,7 +49,10 @@
     "noAccount": {
       "title": "Nie masz konta?",
       "text": "Dostęp do strefy dostają sklepy po podpisaniu umowy partnerskiej.",
-      "cta": { "label": "Jak zostać partnerem", "href": "/dla-partnerow/" }
+      "cta": {
+        "label": "Jak zostać partnerem",
+        "href": "/dla-partnerow/"
+      }
     },
     "_notes": [
       "Docelowy sposób logowania (hasło + 2FA, link e-mail, konta per pracownik sklepu) — do ustalenia, patrz docs/navireo-integracja.md, rozdz. Logowanie partnera.",
@@ -61,57 +66,69 @@
     "nav": {
       "ariaLabel": "Strefa partnera",
       "items": [
-        { "id": "cennik", "label": "Cennik i stany" },
-        { "id": "zamowienie", "label": "Nowe zamówienie" },
-        { "id": "historia", "label": "Zamówienia" },
-        { "id": "materialy", "label": "Materiały" },
-        { "id": "konto", "label": "Konto" }
+        {
+          "id": "cennik",
+          "label": "Cennik i stany"
+        },
+        {
+          "id": "zamowienie",
+          "label": "Nowe zamówienie"
+        },
+        {
+          "id": "historia",
+          "label": "Zamówienia"
+        },
+        {
+          "id": "materialy",
+          "label": "Materiały"
+        },
+        {
+          "id": "konto",
+          "label": "Konto"
+        }
       ]
     },
     "pricelist": {
       "id": "cennik",
-      "title": "Cennik partnerski",
-      "lead": "Ceny netto dla Twojego sklepu. Stany pokazujemy z magazynu producenta.",
-      "updated": "Ceny i stany z: {datetime}",
-      "search": "Szukaj po nazwie albo indeksie",
+      "title": "Katalog partnera",
+      "lead": "Wszystkie meble z kart produktu Liveo: symbole Navireo, kody EAN i paczki. Ceny partnerskie podaje opiekun handlowy.",
+      "updated": "Katalog z dnia: {datetime}",
+      "search": "Szukaj po nazwie, symbolu albo EAN",
       "filterCollection": "Kolekcja",
       "filterType": "Rodzaj mebla",
-      "filterStock": "Tylko dostępne od ręki",
+      "filterStock": "Tylko z dostawą w 72 h",
       "columns": {
-        "sku": "Indeks",
+        "sku": "Symbol",
         "name": "Mebel",
         "color": "Kolor",
-        "retail": "Cena katalogowa brutto",
-        "partner": "Twoja cena netto",
-        "promo": "Promocja",
-        "stock": "Stan",
+        "ean": "EAN",
+        "packages": "Paczki",
+        "delivery": "Dostawa",
         "qty": "Ilość",
         "add": "Dodaj"
       },
       "addButton": "Dodaj do zamówienia",
       "addedAnnounce": "Dodano: {name}, {color}, {qty} szt.",
-      "export": "Pobierz cennik (CSV)",
-      "demoNote": "DEMO: cena partnerska jest wyliczona przykładowo (cena katalogowa netto minus rabat przykładowej grupy). Prawdziwe ceny przyjdą z cennika partnera w Navireo.",
-      "_notes": [
-        "Dane: GET /api/b2b/pricelist (sesja partnera). Pola: sku wariantu, cena netto z cennika kontrahenta w Navireo, stan, czas realizacji.",
-        "Kolumna „Promocja”: czy promocja producenta obejmuje też ceny partnerskie — [do potwierdzenia]."
-      ]
+      "export": "Pobierz katalog (CSV)",
+      "demoNote": "Dane z kart produktu Liveo (eksport Navireo). Karty nie zawierają cen — w wersji produkcyjnej cennik partnera przyjdzie z Navireo.",
+      "delivery72": "72 h",
+      "deliveryOther": "wg ustaleń"
     },
     "order": {
       "id": "zamowienie",
       "title": "Nowe zamówienie",
-      "empty": "Zamówienie jest puste. Dodaj meble z cennika.",
+      "empty": "Zamówienie jest puste. Dodaj meble z katalogu.",
       "columns": {
         "item": "Mebel",
         "qty": "Ilość",
-        "unit": "Cena netto",
-        "total": "Wartość netto"
+        "unit": "Paczki / szt.",
+        "total": "Paczki razem"
       },
       "remove": "Usuń {name} z zamówienia",
       "summary": {
-        "net": "Razem netto",
-        "vat": "VAT {rate}%",
-        "gross": "Razem brutto",
+        "net": "Pozycje",
+        "vat": "Paczki",
+        "gross": "Waga brutto (ok.)",
         "items": "plural.items"
       },
       "delivery": {
@@ -124,10 +141,10 @@
       "referenceLabel": "Twój numer zamówienia (opcjonalnie)",
       "referenceHint": "Np. numer zamówienia klienta sklepu — pojawi się na dokumentach.",
       "notesLabel": "Uwagi do zamówienia",
-      "leadTimeNote": "Pozycje „na zamówienie” wydłużają realizację — termin podajemy przy każdej pozycji.",
+      "leadTimeNote": "Ceny i termin realizacji potwierdzi opiekun handlowy po otrzymaniu zamówienia.",
       "submit": "Wyślij zamówienie",
       "submitDemo": "Wyślij zamówienie (DEMO)",
-      "confirm": "Wysłać zamówienie na {gross} brutto?",
+      "confirm": "Wysłać zamówienie: {gross}?",
       "success": {
         "title": "Zamówienie przyjęte",
         "text": "Numer zamówienia na stronie: {webOrderId}. Gdy trafi do systemu Liveo, zobaczysz tu jego numer w Navireo i status.",
@@ -146,7 +163,7 @@
         "date": "Data",
         "web": "Nr na stronie",
         "erp": "Nr w Navireo",
-        "value": "Wartość netto",
+        "value": "Pozycje",
         "status": "Status"
       },
       "statuses": {
@@ -166,9 +183,17 @@
       "title": "Materiały do sprzedaży",
       "lead": "Zdjęcia aranżacji i mebli, opisy i wymiary do Twojego sklepu i sklepu internetowego.",
       "items": [
-        { "label": "Zdjęcia mebli (paczki według kolekcji)", "_note": "[do potwierdzenia: format, rozdzielczość, licencja]" },
-        { "label": "Plik produktowy (CSV) z opisami, wymiarami i indeksami" },
-        { "label": "Karty kolekcji do druku (PDF)", "_note": "[do potwierdzenia]" }
+        {
+          "label": "Zdjęcia mebli (paczki według kolekcji)",
+          "_note": "[do potwierdzenia: format, rozdzielczość, licencja]"
+        },
+        {
+          "label": "Plik produktowy (CSV) z opisami, wymiarami i indeksami"
+        },
+        {
+          "label": "Karty kolekcji do druku (PDF)",
+          "_note": "[do potwierdzenia]"
+        }
       ],
       "license": "Materiały możesz używać do sprzedaży mebli Liveo zgodnie z umową partnerską [do potwierdzenia: zasady licencji]."
     },
@@ -193,8 +218,8 @@
         "a": "Dostęp dostają sklepy, które podpisały umowę partnerską z Liveo. Jeśli chcesz zacząć współpracę, wypełnij formularz na stronie [Dla partnerów](/dla-partnerow/)."
       },
       {
-        "q": "Czy ceny w strefie są cenami netto?",
-        "a": "Tak, ceny partnerskie pokazujemy netto, a podsumowanie zamówienia także brutto. Cena katalogowa brutto obok to cena producenta widoczna dla klientów na stronie."
+        "q": "Czy w strefie są ceny partnerskie?",
+        "a": "W tej wersji nie — katalog pochodzi z kart produktu Liveo, które nie zawierają cen. Ceny i termin realizacji potwierdza opiekun handlowy; docelowo cennik partnera przyjdzie z Navireo."
       },
       {
         "q": "Skąd są stany magazynowe?",

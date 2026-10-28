@@ -4,15 +4,20 @@
   "status": "draft",
   "seo": {
     "title": "Kolekcje mebli — komplety do salonu i sypialni | Liveo",
-    "description": "Kolekcje mebli Liveo: meble do salonu, jadalni, sypialni, przedpokoju i pokoju młodzieżowego w tych samych kolorach i z tymi samymi uchwytami.",
-    "jsonLd": ["CollectionPage", "ItemList", "BreadcrumbList", "FAQPage"]
+    "description": "Kolekcje mebli Liveo: meble do salonu, jadalni, sypialni, przedpokoju i pokoju młodzieżowego w tych samych kolorach.",
+    "jsonLd": [
+      "CollectionPage",
+      "ItemList",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
   },
   "h1": "Kolekcje mebli Liveo",
   "sections": [
     {
       "id": "wstep",
       "type": "intro",
-      "lead": "Każdą kolekcję projektujemy jako całość. Meble z jednej kolekcji mają te same kolory, uchwyty i podstawę, więc możesz urządzić nimi cały pokój — albo kilka pokoi w jednym stylu."
+      "lead": "Każdą kolekcję projektujemy jako całość. Meble z jednej kolekcji mają te same kolory i wykończenie, więc możesz urządzić nimi cały pokój — albo kilka pokoi w jednym stylu."
     },
     {
       "id": "lista",
@@ -51,13 +56,16 @@
           "text": "Przy każdej kolekcji podajemy, do jakich pomieszczeń ma meble. Jedne obejmują salon i jadalnię, inne sypialnię i przedpokój."
         },
         {
-          "title": "Spójrz na uchwyty i nogi",
-          "text": "To one najbardziej zmieniają charakter mebli. Drewniane nóżki ocieplają, metalowe nogi dodają lekkości, a cokół daje spokojną, zwartą bryłę."
+          "title": "Zacznij od koloru",
+          "text": "Dekor drewna ociepla wnętrze, biel w połysku je rozjaśnia, a czarne i grafitowe akcenty dodają kontrastu. Kolor wybierz pod podłogę i ściany."
         },
         {
           "title": "Nie wiesz? Wyślij zdjęcie",
           "text": "Doradca wnętrz zaproponuje kolekcję na podstawie zdjęcia Twojego pokoju.",
-          "link": { "label": "Otwórz doradcę wnętrz", "href": "/doradca-wnetrz/" }
+          "link": {
+            "label": "Otwórz doradcę wnętrz",
+            "href": "/doradca-wnetrz/"
+          }
         }
       ]
     },
@@ -66,7 +74,10 @@
       "type": "band",
       "title": "Zobacz kolekcję na żywo",
       "text": "Wpisz kod pocztowy — pokażemy najbliższe sklepy partnerskie z wybraną kolekcją.",
-      "cta": { "label": "Gdzie kupić", "href": "/gdzie-kupic/" }
+      "cta": {
+        "label": "Gdzie kupić",
+        "href": "/gdzie-kupic/"
+      }
     }
   ],
   "faq": {
@@ -74,11 +85,11 @@
     "items": [
       {
         "q": "Czym różnią się kolekcje Liveo?",
-        "a": "Kolekcje różnią się kolorami, rodzajem uchwytów i podstawą — drewnianymi nóżkami, metalowymi nogami albo cokołem. Każda ma też inny zestaw mebli: jedne obejmują salon i jadalnię, inne sypialnię, przedpokój albo pokój młodzieżowy."
+        "a": "Kolekcje różnią się kolorami i charakterem — od jasnego dębu po ciemny orzech i biel w połysku. Każda ma też inny zestaw mebli: jedne obejmują salon i jadalnię, inne sypialnię, przedpokój albo pokój młodzieżowy."
       },
       {
         "q": "Czy mogę łączyć meble z różnych kolekcji?",
-        "a": "Możesz, ale najspokojniej wygląda komplet z jednej kolekcji, bo meble mają te same kolory i uchwyty. Jeśli łączysz kolekcje, wybierz te w podobnym dekorze — na przykład dwie z dębem naturalnym."
+        "a": "Możesz, ale najspokojniej wygląda komplet z jednej kolekcji, bo meble mają te same kolory. Jeśli łączysz kolekcje, wybierz te w podobnym dekorze — na przykład dwie z dębem evoke."
       },
       {
         "q": "Czy każdy mebel z kolekcji jest dostępny we wszystkich kolorach?",
@@ -94,7 +105,7 @@
       },
       {
         "q": "Jaką kolekcję wybrać do małego pokoju?",
-        "a": "Do małego pokoju zwykle lepiej sprawdzają się kolekcje w jasnych kolorach — biel, kaszmir albo jasny dekor dębu — bo optycznie powiększają wnętrze. Pomagają też meble na nóżkach i wiszące, bo widać pod nimi podłogę."
+        "a": "Do małego pokoju zwykle lepiej sprawdzają się kolekcje w jasnych kolorach — biel, kaszmir albo jasny dekor dębu — bo optycznie powiększają wnętrze. Pomagają też meble wiszące, bo widać pod nimi podłogę."
       }
     ]
   },
@@ -106,8 +117,13 @@
     "seo": {
       "title": "Kolekcja {name} — meble {styleIn} | Liveo",
       "titleFallback": "Kolekcja mebli {name} | Liveo",
-      "description": "{tagline} Meble z kolekcji {name} do: {roomsList}. Sprawdź kolory, wymiary i ceny.",
-      "jsonLd": ["CollectionPage", "ItemList", "BreadcrumbList", "FAQPage"]
+      "description": "{tagline} Meble z kolekcji {name} do: {roomsList}. Sprawdź kolory, wymiary i salony partnerskie.",
+      "jsonLd": [
+        "CollectionPage",
+        "ItemList",
+        "BreadcrumbList",
+        "FAQPage"
+      ]
     },
     "h1": "Kolekcja {name}",
     "sections": [
@@ -115,7 +131,9 @@
         "id": "hero",
         "type": "hero",
         "lead": "{tagline}",
-        "image": { "alt": "Kolekcja {name} {heroRoomLocative}, kolor {finishLabel}" }
+        "image": {
+          "alt": "Kolekcja {name} {heroRoomLocative} — aranżacja"
+        }
       },
       {
         "id": "opis",
@@ -143,17 +161,33 @@
         "type": "facts",
         "title": "Rozpoznasz ją po szczegółach",
         "items": [
-          { "label": "Uchwyty", "value": "{handleLabel}" },
-          { "label": "Podstawa", "value": "{baseLabel}" },
-          { "label": "Styl", "value": "{styleLabel}" },
-          { "label": "Pomieszczenia", "value": "{roomsList}" }
+          {
+            "label": "Kolory",
+            "value": "{finishLabels}"
+          },
+          {
+            "label": "Styl",
+            "value": "{styleLabel}"
+          },
+          {
+            "label": "Pomieszczenia",
+            "value": "{roomsList}"
+          },
+          {
+            "label": "Meble",
+            "value": "{productCountText}"
+          },
+          {
+            "label": "Dostawa w 72 h",
+            "value": "{delivery72Text}"
+          }
         ]
       },
       {
         "id": "gdzie-kupic",
         "type": "store-finder",
         "title": "Gdzie zobaczyć kolekcję {name}",
-        "lead": "Wpisz kod pocztowy — pokażemy najbliższe sklepy z tą kolekcją.",
+        "lead": "Wpisz kod pocztowy — pokażemy najbliższe salony partnerskie Liveo.",
         "presetCollection": "{slug}"
       },
       {
@@ -168,7 +202,7 @@
       "items": [
         {
           "q": "Jakie meble są w kolekcji {name}?",
-          "a": "W kolekcji {name} są: {typePluralList}. Pełną listę z wymiarami i cenami znajdziesz wyżej na tej stronie."
+          "a": "W kolekcji {name} są: {typePluralList}. Pełną listę z wymiarami i kolorami znajdziesz wyżej na tej stronie."
         },
         {
           "q": "W jakich kolorach jest kolekcja {name}?",
@@ -180,7 +214,7 @@
         },
         {
           "q": "Gdzie kupić meble z kolekcji {name}?",
-          "a": "Meble z kolekcji {name} kupisz w sklepach partnerskich Liveo. Wpisz kod pocztowy w wyszukiwarce na tej stronie, a pokażemy najbliższe sklepy, które mają tę kolekcję."
+          "a": "Meble z kolekcji {name} kupisz w salonach partnerskich Liveo — tam poznasz cenę i termin dostawy. Wpisz kod pocztowy w wyszukiwarce na tej stronie, a pokażemy najbliższe salony."
         }
       ]
     }

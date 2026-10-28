@@ -2,19 +2,11 @@
 // Pomieszczenia jako lista nazw w Gilda Display; najechanie albo fokus podmienia duże zdjęcie obok (desktop, [data-showcase]
 // w src/scripts/motion.ts). Na telefonie każda pozycja ma własne zdjęcie. Bez JS: pierwsze zdjęcie i zwykłe linki.
 import Media from './Media.astro';
-import { collectionImage, roomImage } from '../lib/images';
-import { collections, productCount, productsByRoom, rooms, url } from '../lib/site';
+import { roomImage } from '../lib/images';
+import { productCount, productsByRoom, rooms, url } from '../lib/site';
 
-// Zdjęcie pokoju: ujęcie pod kątem ostatniej kolekcji z tym pomieszczeniem jako głównym (inne niż w hero i rozkładówkach),
-// a bez takiej kolekcji — aranżacja pomieszczenia.
-// Pokój młodzieżowy ma własny render (tools/render/collections.mjs --teen): BRISO jest już w rozkładówce.
-const OWN_RENDER = new Set(['pokoj-mlodziezowy']);
-const pick = (slug: string) => {
-  if (OWN_RENDER.has(slug)) return roomImage(slug, 'wide');
-  const own = collections.filter(c => c.heroRoom === slug).at(-1);
-  return (own && collectionImage(own, 'angle')) ?? roomImage(slug, 'wide');
-};
-const list = rooms.map(r => ({ r, img: pick(r.slug), n: productsByRoom(r.slug).length }));
+// Zdjęcie pokoju: aranżacja z kart produktu, na której jest to pomieszczenie — z dalszej kolekcji (inna niż w kurtynie).
+const list = rooms.map(r => ({ r, img: roomImage(r.slug, 'wide', 3), n: productsByRoom(r.slug).length })).filter(x => x.n > 0);
 ---
 <div class="showcase" data-showcase>
   <ul class="showcase__list">
@@ -22,7 +14,7 @@ const list = rooms.map(r => ({ r, img: pick(r.slug), n: productsByRoom(r.slug).l
       <li class:list={['showcase__item', { 'is-active': i === 0 }]} data-showcase-item>
         <a class="showcase__link" href={url.room(r.slug)}>
           <span class="showcase__thumb" aria-hidden="true">
-            <Media image={img} alt="" widths={[480, 720]} sizes="92vw" ratio="16 / 10" placeholderLabel={r.name} />
+            <Media image={img} alt="" widths={[1280]} sizes="92vw" ratio="16 / 10" placeholderLabel={r.name} />
           </span>
           <span class="showcase__name">{r.name}</span>
           <span class="showcase__count">{productCount(n)}</span>
@@ -34,7 +26,7 @@ const list = rooms.map(r => ({ r, img: pick(r.slug), n: productsByRoom(r.slug).l
   <div class="showcase__stage" aria-hidden="true">
     {list.map(({ r, img }, i) => (
       <div class:list={['showcase__pic', { 'is-active': i === 0 }]} data-showcase-pic>
-        <Media image={img} alt="" widths={[720, 1080, 1440, 1920]} sizes="(min-width: 64rem) 52vw, 0px" ratio="4 / 3" placeholderLabel={r.name} />
+        <Media image={img} alt="" widths={[1280, 2400]} sizes="(min-width: 64rem) 52vw, 0px" ratio="4 / 3" placeholderLabel={r.name} />
       </div>
     ))}
   </div>

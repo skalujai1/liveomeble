@@ -103,7 +103,8 @@ export function recommendSets(products, room, prefs, { skip = new Set(), maxPric
   for (const u of units.values()) {
     if (skip.has(u.collection)) continue;
     const picks = [];
-    const byPriority = (a, b) => (b.bestseller - a.bestseller) || (a.price - b.price);
+    // bez cen w katalogu (karty produktu Liveo) kolejność decyduje „polecany”, potem kolejność w danych
+    const byPriority = (a, b) => (b.bestseller - a.bestseller) || ((a.price ?? 0) - (b.price ?? 0));
     for (const t of types) {
       const c = u.items.filter(p => p.type === t).sort(byPriority)[0];
       if (c) picks.push(c);
@@ -120,7 +121,7 @@ export function recommendSets(products, room, prefs, { skip = new Set(), maxPric
 
     const covered = new Set(picks.map(p => p.type));
     const coverage = types.reduce((a, t, i) => a + (covered.has(t) ? weight[i] : 0), 0) / coreWeight;
-    const total = picks.reduce((a, p) => a + p.price, 0);
+    const total = picks.reduce((a, p) => a + (p.price ?? 0), 0);
     // bez najważniejszego mebla (łóżko w sypialni, stół w jadalni …) komplet jest mniej przydatny
     const anchor = covered.has(types[0]) ? 1 : 0.8;
     const score = colorScore(u.color, prefs) * (0.55 + 0.45 * clamp(coverage)) * anchor
@@ -151,8 +152,8 @@ export function recommendByType(products, type, prefs, { room, maxPrice, budget 
   }
   let list = [...best.values()];
   if (budget && list.length) {
-    const max = Math.max(...list.map(x => x.p.price));
-    list.forEach(x => { x.s = 0.5 * x.s + 0.5 * (1 - x.p.price / max); });
+    const max = Math.max(...list.map(x => x.p.price ?? 0));
+    if (max > 0) list.forEach(x => { x.s = 0.5 * x.s + 0.5 * (1 - (x.p.price ?? max) / max); });
   }
   return list.sort((a, b) => b.s - a.s).slice(0, limit).map(x => x.p);
 }
@@ -223,11 +224,11 @@ export function catalogSummary(products) {
     c.types.add(TYPES[p.type]?.[0] || p.type);
     if (p.color?.label) c.colors.add(p.color.label);
     (p.rooms || []).forEach(r => c.rooms.add(ROOMS[r]?.name || r));
-    c.min = Math.min(c.min, p.price);
+    if (p.price != null) c.min = Math.min(c.min, p.price);
     c.promo ||= !!p.regular;
     cols.set(p.collection, c);
   }
-  return [...cols].map(([name, c]) => `${name}: ${[...c.types].join(', ')}; pomieszczenia: ${[...c.rooms].join(', ')}; kolory: ${[...c.colors].slice(0, 4).join(', ')}; ceny od ${formatPrice(c.min)}${c.promo ? '; trwa promocja' : ''}`)
+  return [...cols].map(([name, c]) => `${name}: ${[...c.types].join(', ')}; pomieszczenia: ${[...c.rooms].join(', ')}; kolory: ${[...c.colors].slice(0, 4).join(', ')}${Number.isFinite(c.min) ? `; ceny od ${formatPrice(c.min)}` : '; cenę podaje salon partnerski'}${c.promo ? '; trwa promocja' : ''}`)
     .join('\n').slice(0, 4000);
 }
 

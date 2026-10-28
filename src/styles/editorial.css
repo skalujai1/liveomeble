@@ -425,3 +425,33 @@ h1, h2, .section__title { letter-spacing: -0.01em; }
   @keyframes pm-hq { 0% { scale: 1; opacity: 0.35; } 100% { scale: 2.6; opacity: 0; } }
   @keyframes pm-ping { 0%, 100% { stroke-width: 3; } 50% { stroke-width: 9; stroke: rgb(47 70 55 / 0.25); } }
 }
+
+/* ---------- Katalog z kart produktu Liveo ---------- */
+.collection-gallery__item--more { grid-column: 1 / -1; }
+.collection-gallery__caption { grid-column: 1 / -1; margin: 0; font-size: var(--text-xs); color: var(--color-text-muted); }
+@media (min-width: 64rem) {
+  .collection-gallery__item--more { grid-column: span 6; }
+}
+/* Zamiast ceny: odesłanie do salonu partnerskiego */
+.price--store { gap: var(--space-2); padding: var(--space-4) 0; border-block: 1px solid var(--color-line); }
+.price--store .price__main { font: var(--weight-display) var(--text-xl)/1.2 var(--font-display); }
+.price--store .price__note { margin: 0; font-size: var(--text-sm); color: var(--color-text-muted); max-width: 34rem; }
+.price--store .price__note a { color: var(--color-text); }
+.badge--delivery { background: var(--color-surface); color: var(--color-text); }
+.product-card__dots i { background: linear-gradient(135deg, var(--c) 50%, var(--c2, var(--c)) 50%); }
+.summary__codes { margin: 0; font-size: var(--text-xs); color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.summary__codes[hidden], .gallery__more[hidden], .prose[hidden] { display: none; }
+/* Dodatkowe zdjęcia z karty (serwer Liveo) pod zdjęciem głównym */
+.gallery__more { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 7.5rem), 1fr)); gap: var(--space-2); margin: var(--space-3) 0 0; padding: 0; list-style: none; }
+.gallery__more a { display: block; background: var(--color-surface); aspect-ratio: 4 / 3; overflow: hidden; }
+.gallery__more img { width: 100%; height: 100%; object-fit: contain; transition: transform 600ms var(--ease-expo); }
+.gallery__more a:hover img { transform: scale(1.04); }
+/* Rysunek wymiarowy producenta i paczki */
+.dims-drawing--photo { margin: 0; background: #fff; padding: var(--space-3); border: 1px solid var(--color-line); max-height: none; }
+.dims-drawing--photo img { width: 100%; height: auto; }
+.data-table--packages { margin-top: var(--space-5); font-size: var(--text-sm); }
+.data-table--packages caption { text-align: left; font-weight: var(--weight-medium); padding-bottom: var(--space-2); }
+.doc-links { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-6); margin: 0; padding: 0; list-style: none; }
+/* Packshoty z kart Liveo mają białe tło — ramka też biała, żeby zdjęcie nie wyglądało jak naklejka na lnie */
+.product-card .media--contain, .gallery__item .media--contain, .gallery__more a { background: #fff; box-shadow: inset 0 0 0 1px var(--color-line); }
+.dims-drawing--photo img { max-height: 34rem; object-fit: contain; }

@@ -50,6 +50,15 @@ jobs:
           key: astro-assets-${{ hashFiles('src/assets/**') }}
           restore-keys: astro-assets-
 
+      # Zdjęcia katalogu (public/katalog) pobierane z serwera Liveo przez tools/data/fetch-images.mjs —
+      # w cache, żeby nie pobierać ~2 tys. plików przy każdym buildzie. Klucz: karty produktu.
+      - name: Zdjęcia katalogu (cache)
+        uses: actions/cache@v4
+        with:
+          path: public/katalog
+          key: katalog-${{ hashFiles('tools/data/karty-liveo.json', 'tools/data/fetch-images.mjs') }}
+          restore-keys: katalog-
+
       - name: Build + kontrola dist/
         run: npm run build
 

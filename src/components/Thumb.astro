@@ -1,0 +1,14 @@
+---
+// Miniatura (mega-menu, kafle kategorii): zdjęcie katalogu z public/katalog (srcset) albo obraz z src/assets.
+import { Image } from 'astro:assets';
+import { srcOf, srcsetOf, type ImageRef } from '../lib/images';
+
+interface Props { image: ImageRef | null; sizes: string; widths?: number[]; alt?: string }
+const { image, sizes, widths = [160, 240], alt = '' } = Astro.props;
+const pub = image?.pub;
+---
+{pub ? (
+  <img src={srcOf(pub, 480)} srcset={srcsetOf(pub)} {sizes} width={pub.w} height={pub.h} {alt} loading="lazy" decoding="async" />
+) : image?.src ? (
+  <Image src={image.src} {alt} {widths} {sizes} loading="lazy" />
+) : null}

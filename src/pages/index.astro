@@ -11,14 +11,12 @@ import CollectionRail from '../components/CollectionRail.astro';
 import RoomShowcase from '../components/RoomShowcase.astro';
 import ProductCard from '../components/ProductCard.astro';
 import StoreFinder from '../components/StoreFinder.astro';
-import PriceData from '../components/PriceData.astro';
 import Faq from '../components/Faq.astro';
 import Media from '../components/Media.astro';
 import Rich from '../components/Rich.astro';
 import { collectionImage } from '../lib/images';
 import { faqPage } from '../lib/jsonld';
-import { activePromosAtBuild, collections, pages, priceAt, productsSorted, section, url } from '../lib/site';
-import { promoLastDay } from '../lib/text';
+import { collections, pages, productsSorted, section, url } from '../lib/site';
 
 const page = pages.home;
 const hero = section(page, 'hero');
@@ -27,27 +25,26 @@ const pom = section(page, 'pomieszczenia');
 const steps = section(page, 'jak-kupic');
 const path = '/';
 
-// Rozkładówki: pierwsza kolekcja, najnowsza i kolejna z innego pomieszczenia — trzy różne nastroje.
-const first = collections[0];
-const fresh = collections.find(c => c.isNew && c.slug !== first.slug);
-const third = collections.find(c => c.slug !== first.slug && c.slug !== fresh?.slug && c.heroRoom !== first.heroRoom && c.heroRoom !== fresh?.heroRoom);
-const spreads = [first, fresh, third].filter((c): c is NonNullable<typeof c> => !!c);
+// Kurtyna: 8 kolekcji z kolejności w danych (najszersze kolekcje z aranżacjami).
+const heroCollections = collections.filter(c => c.arrangements.length).slice(0, 8);
+// Rozkładówki: trzy kolekcje o różnym charakterze (różne kolory wiodące), z co najmniej 4 aranżacjami.
+const spreads = heroCollections.filter(c => c.arrangements.length >= 4)
+  .filter((c, i, all) => all.findIndex(x => x.finishes[0].front === c.finishes[0].front) === i)
+  .slice(0, 3);
+const first = heroCollections[0];
 
-const mainPromo = activePromosAtBuild[0];
-const dayMonth = (d: string | null) => (d ? `${Number(d.slice(8, 10))}.${d.slice(5, 7)}` : '');
-
-// Polecane: bestsellery, potem promocje i nowości — każdy mebel z innej kolekcji i innego rodzaju.
+// Polecane: po jednym meblu z innej kolekcji i innego rodzaju, z własnym zdjęciem.
 const seenCol = new Set<string>();
 const seenType = new Set<string>();
-const featured = [...productsSorted]
-  .sort((a, b) => (Number(b.bestseller) - Number(a.bestseller)) || (Number(!!priceAt(b).promo) - Number(!!priceAt(a).promo)) || (Number(b.isNew) - Number(a.isNew)))
+const featured = productsSorted
+  .filter(p => p.variants[0].images?.packshot && !p.variants[0].images.packshotIsScene)
   .filter(p => {
     if (seenCol.has(p.collection) || seenType.has(p.type)) return false;
     seenCol.add(p.collection); seenType.add(p.type); return true;
   })
   .slice(0, 4);
 
-const advisorCol = collections.find(c => c.slug === 'nokta') ?? collections[1];
+const advisorCol = heroCollections.find(c => c.heroRoom !== first.heroRoom) ?? heroCollections[1];
 const advisorImg = collectionImage(advisorCol, 'detail');
 ---
 <BaseLayout
@@ -60,7 +57,7 @@ const advisorImg = collectionImage(advisorCol, 'detail');
   ogImageAlt={`Meble z kolekcji ${first.name}`}
   jsonLd={[faqPage(path, page.faq.items)]}
 >
-  <HomeHero slot="hero" {collections} />
+  <HomeHero slot="hero" collections={heroCollections} />
 
   <section class="manifest" aria-labelledby="h1">
     <div class="container manifest__inner">
@@ -70,11 +67,6 @@ const advisorImg = collectionImage(advisorCol, 'detail');
         <p class="manifest__cta">
           {hero.cta.map((c: any, i: number) => <a class:list={['btn', i ? 'btn--secondary' : 'btn--dark']} href={c.href}>{c.label}</a>)}
         </p>
-        {mainPromo && (
-          <p class="manifest__promo" data-promo-window data-start={mainPromo.startsAt ?? ''} data-end={mainPromo.endsAt ?? ''}>
-            <a href={url.promotions}><em>{mainPromo.label}</em>{promoLastDay(mainPromo.endsAt) && ` do ${dayMonth(promoLastDay(mainPromo.endsAt))}`}</a>
-          </p>
-        )}
       </div>
     </div>
   </section>
@@ -107,7 +99,7 @@ const advisorImg = collectionImage(advisorCol, 'detail');
     </div>
   </section>
 
-  <Section id="polecane" title="Polecane meble" lead="Ceny sugerowane przez producenta. Meble kupisz w salonach partnerskich." class="section--center section--products">
+  <Section id="polecane" title="Polecane meble" lead="Meble kupisz w salonach partnerskich — tam poznasz cenę i termin dostawy." class="section--center section--products">
     <ul class="product-grid product-grid--4">
       {featured.map((p, i) => <ProductCard product={p} order={i} sizes="(min-width: 60rem) 18rem, 46vw" />)}
     </ul>
@@ -116,7 +108,7 @@ const advisorImg = collectionImage(advisorCol, 'detail');
 
   <section class="feature-band on-dark" aria-labelledby="doradca-tytul">
     <div class="feature-band__media" data-reveal>
-      <Media image={advisorImg} alt="" widths={[720, 1080, 1440, 1920]} sizes="(min-width: 60rem) 50vw, 100vw" ratio="4 / 5" placeholderLabel="Doradca wnętrz" />
+      <Media image={advisorImg} alt="" widths={[1280, 2400]} sizes="(min-width: 60rem) 50vw, 100vw" ratio="4 / 5" placeholderLabel="Doradca wnętrz" />
     </div>
     <div class="feature-band__text" data-reveal style="--d: 120ms">
       <h2 id="doradca-tytul">Pokaż pokój, a dobierzemy komplet</h2>
@@ -138,5 +130,4 @@ const advisorImg = collectionImage(advisorCol, 'detail');
   </Section>
 
   <Faq title={page.faq.title} items={page.faq.items} />
-  <PriceData products={featured} />
 </BaseLayout>

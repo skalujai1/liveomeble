@@ -5,7 +5,11 @@
   "seo": {
     "title": "Doradca wnętrz — dobierz meble ze zdjęcia pokoju | Liveo",
     "description": "Wyślij zdjęcie pokoju, a doradca wnętrz Liveo zaproponuje komplet mebli z jednej kolekcji dopasowany do kolorów wnętrza. Zdjęcie zostaje na urządzeniu.",
-    "jsonLd": ["WebPage", "BreadcrumbList", "FAQPage"],
+    "jsonLd": [
+      "WebPage",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
     "_note": "Bez SoftwareApplication/Review — nie mamy ocen ani opinii, nie dodajemy aggregateRating."
   },
   "h1": "Doradca wnętrz",
@@ -14,7 +18,10 @@
       "id": "hero",
       "type": "hero",
       "lead": "Pokaż zdjęcie pokoju, który urządzasz. Doradca rozpozna pomieszczenie i jego kolory, a potem zaproponuje komplet mebli z jednej kolekcji, który do nich pasuje.",
-      "howLink": { "label": "Jak korzystać z doradcy", "href": "#jak-korzystac" },
+      "howLink": {
+        "label": "Jak korzystać z doradcy",
+        "href": "#jak-korzystac"
+      },
       "privacy": "Zdjęcie analizuje Twoja przeglądarka. Nie wysyłamy go na serwer i go nie zapisujemy.",
       "aiNote": "Odpowiada asystent AI. Może się mylić — przed zakupem sprawdź wymiary i kolory w sklepie.",
       "_notes": [
@@ -58,18 +65,37 @@
       "tips": {
         "title": "Jak zrobić zdjęcie, które zadziała",
         "items": [
-          { "title": "Światło dzienne", "text": "przy żółtym świetle ściany i podłoga wychodzą cieplejsze, niż są." },
-          { "title": "Szeroki kadr", "text": "pokaż podłogę, ścianę i okno, a nie jeden przedmiot." },
-          { "title": "Bez filtrów", "text": "filtry i tryb portretowy zmieniają kolory." },
-          { "title": "Pusty pokój też jest dobry", "text": "doradca dobiera meble do podłogi i ścian." }
+          {
+            "title": "Światło dzienne",
+            "text": "przy żółtym świetle ściany i podłoga wychodzą cieplejsze, niż są."
+          },
+          {
+            "title": "Szeroki kadr",
+            "text": "pokaż podłogę, ścianę i okno, a nie jeden przedmiot."
+          },
+          {
+            "title": "Bez filtrów",
+            "text": "filtry i tryb portretowy zmieniają kolory."
+          },
+          {
+            "title": "Pusty pokój też jest dobry",
+            "text": "doradca dobiera meble do podłogi i ścian."
+          }
         ]
       },
-      "rooms": { "title": "Nie masz zdjęcia? Wybierz pomieszczenie", "note": "Bez zdjęcia doradca dobierze meble w uniwersalnej, jasnej kolorystyce." },
+      "rooms": {
+        "title": "Nie masz zdjęcia? Wybierz pomieszczenie",
+        "note": "Bez zdjęcia doradca dobierze meble w uniwersalnej, jasnej kolorystyce."
+      },
       "ask": {
         "label": "Napisz, czego szukasz",
         "placeholder": "np. biała komoda",
         "submit": "Pokaż",
-        "examples": ["jaśniejsze", "coś tańszego", "szafa do przedpokoju"]
+        "examples": [
+          "jaśniejsze",
+          "coś tańszego",
+          "szafa do przedpokoju"
+        ]
       }
     },
     {
@@ -138,14 +164,20 @@
           "text": "Odpowiedzi doradcy są oznaczone jako odpowiedzi asystenta AI."
         }
       ],
-      "link": { "label": "Szczegóły w polityce prywatności", "href": "/polityka-prywatnosci/#doradca-wnetrz" }
+      "link": {
+        "label": "Szczegóły w polityce prywatności",
+        "href": "/polityka-prywatnosci/#doradca-wnetrz"
+      }
     },
     {
       "id": "dalej",
       "type": "band",
       "title": "Wolisz wybrać sam?",
-      "text": "Przejrzyj kolekcje — przy każdej zobaczysz meble w aranżacji, kolory i ceny.",
-      "cta": { "label": "Zobacz kolekcje", "href": "/kolekcje/" }
+      "text": "Przejrzyj kolekcje — przy każdej zobaczysz meble w aranżacji, kolory i wymiary.",
+      "cta": {
+        "label": "Zobacz kolekcje",
+        "href": "/kolekcje/"
+      }
     }
   ],
   "faq": {
@@ -177,7 +209,7 @@
       },
       {
         "q": "Dlaczego doradca proponuje meble tylko z jednej kolekcji?",
-        "a": "Bo meble z jednej kolekcji mają te same kolory, uchwyty i podstawę, więc razem wyglądają spokojnie. Jeśli chcesz, wybierz pojedynczy rodzaj mebla albo inną kolekcję."
+        "a": "Bo meble z jednej kolekcji mają te same kolory i wykończenie, więc razem wyglądają spokojnie. Jeśli chcesz, wybierz pojedynczy rodzaj mebla albo inną kolekcję."
       },
       {
         "q": "Czy doradca działa na telefonie?",

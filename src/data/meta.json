@@ -1,18 +1,19 @@
 {
-  "demo": true,
-  "note": "Dane demonstracyjne — fikcyjne kolekcje, meble, ceny, promocje i sklepy. Docelowo: ERP Navireo + arkusz Excel klienta.",
-  "generatedFor": "2026-10-20",
-  "seed": "liveo-demo-2026",
+  "demo": false,
+  "note": "Katalog z kart produktu Liveo (eksport Navireo, Drive „karty produktu dla białegostoku”), salony z liveomeble.pl. Bez cen i stanów — karty ich nie zawierają.",
+  "generatedFor": "2026-10-28",
+  "source": "Google Drive: „karty produktu dla białegostoku” (Liveo, udostępnione 28.10.2026), eksport Navireo",
   "generator": "tools/data/generate.mjs",
   "counts": {
-    "finishes": 13,
-    "types": 16,
-    "rooms": 6,
-    "collections": 8,
-    "products": 87,
-    "promotions": 4,
+    "finishes": 35,
+    "types": 18,
+    "rooms": 7,
+    "collections": 32,
+    "products": 469,
+    "promotions": 0,
     "postcodes": 99,
     "resellers": 443
   },
-  "variants": 219
+  "variants": 666,
+  "withoutPhoto": []
 }

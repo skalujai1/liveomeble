@@ -1,340 +1,2789 @@
 [
   {
-    "slug": "olmo",
-    "name": "OLMO",
-    "tagline": "Dekor jasnego dębu, spokojne proporcje i drewniane nóżki.",
-    "description": "OLMO to komplet do salonu, jadalni i sypialni w dekorze dębu naturalnego. Fronty chwyta się za wyprofilowaną krawędź, więc na meblach nie ma widocznych uchwytów. Szafki stoją na nóżkach 12 cm, dzięki czemu łatwo pod nimi posprzątać.",
-    "style": "naturalny",
+    "slug": "dante",
+    "name": "DANTE",
+    "tagline": "Dąb cremona torro i fronty w 5 kolorach. 24 meble do pokoju młodzieżowego, sypialni i salonu.",
+    "description": "Ciepła barwa światła podkreśla naturalny rysunek drewna i dodaje wnętrzu przytulnego klimatu. Całości dopełniają złote lub czarne, pionowe uchwyty, które są zarówno ozdobne, jak i ergonomiczne.",
+    "style": "nowoczesny",
+    "rooms": [
+      "pokoj-mlodziezowy",
+      "sypialnia",
+      "salon",
+      "jadalnia"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-cremona-torro-antracyt-mat",
+        "label": "Dąb cremona torro / antracyt mat",
+        "body": "dab-cremona-torro",
+        "front": "antracyt-mat",
+        "accent": null
+      },
+      {
+        "code": "dab-cremona-torro-bialy-mat",
+        "label": "Dąb cremona torro / biały mat",
+        "body": "dab-cremona-torro",
+        "front": "bialy-mat",
+        "accent": null
+      },
+      {
+        "code": "dab-cremona-torro-kaszmir-mat",
+        "label": "Dąb cremona torro / kaszmir mat",
+        "body": "dab-cremona-torro",
+        "front": "kaszmir-mat",
+        "accent": null
+      },
+      {
+        "code": "dab-cremona-torro-szary-mat",
+        "label": "Dąb cremona torro / szary mat",
+        "body": "dab-cremona-torro",
+        "front": "szary-mat",
+        "accent": null
+      },
+      {
+        "code": "dab-cremona-torro-zielony-mat",
+        "label": "Dąb cremona torro / zielony mat",
+        "body": "dab-cremona-torro",
+        "front": "zielony-mat",
+        "accent": null
+      },
+      {
+        "code": "dab-cremona-torro",
+        "label": "Dąb cremona torro",
+        "body": "dab-cremona-torro",
+        "front": "dab-cremona-torro",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/fb094f978a-dante_01_antracyt_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_01_antracyt_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/5b2d9eddb9-dante_02_antracyt_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_02_antracyt_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/f69dde3353-dante_05_antracyt_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_05_antracyt_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/f9580ddc11-dante_04_antracyt_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_04_antracyt_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/be686dec2a-dante_06_antracyt_2160px",
+        "widths": [
+          1280,
+          2160
+        ],
+        "w": 2160,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_06_antracyt_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/cf2db1d62a-dante_03_antracyt",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_03_antracyt.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/6bc399de7b-dante_01_bialy_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_01_bialy_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/d219d6e24c-dante_02_bialy_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_02_bialy_2160px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 24,
+    "isNew": false,
+    "demo": false,
+    "order": 1
+  },
+  {
+    "slug": "remi",
+    "name": "REMI",
+    "tagline": "Biały i dąb evoke. 19 mebli do salonu, pokoju młodzieżowego i jadalni.",
+    "description": "Kolekcja charakteryzuje się minimalistycznym wyglądem oraz funkcjonalnością. Nowoczesna kolorystyka pozwoli stworzyć idealne wnętrze, dostosowane do gustu i wymagań jego użytkowników.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "pokoj-mlodziezowy",
+      "jadalnia",
+      "sypialnia",
+      "przedpokoj"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "bialy-dab-evoke",
+        "label": "Biały / dąb evoke",
+        "body": "bialy",
+        "front": "dab-evoke",
+        "accent": null
+      },
+      {
+        "code": "dab-castello",
+        "label": "Dąb castello",
+        "body": "dab-castello",
+        "front": "dab-castello",
+        "accent": null
+      },
+      {
+        "code": "dab-evoke",
+        "label": "Dąb evoke",
+        "body": "dab-evoke",
+        "front": "dab-evoke",
+        "accent": null
+      },
+      {
+        "code": "dab-sonoma",
+        "label": "Dąb sonoma",
+        "body": "dab-sonoma",
+        "front": "dab-sonoma",
+        "accent": null
+      },
+      {
+        "code": "bialy",
+        "label": "Biały",
+        "body": "bialy",
+        "front": "bialy",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/8cfe9ced35-remi_rm01_bialy-evoke_2160px",
+        "widths": [
+          1280,
+          2144
+        ],
+        "w": 2144,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/remi/REMI_RM01_bialy-evoke_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/7b1256f6be-remi_rm02_bialy-evoke_2160px",
+        "widths": [
+          1280,
+          2144
+        ],
+        "w": 2144,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/remi/REMI_RM02_bialy-evoke_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/21469e7c73-remi_rm03_bialy-evoke_2160px",
+        "widths": [
+          1280,
+          2309
+        ],
+        "w": 2309,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/remi/REMI_RM03_bialy-evoke_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/ba8c0c0ff7-remi_03_bialy-evoke_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3540,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/remi/REMI_03_bialy-evoke_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/f417387bbc-remi_rm04_bialy-evoke_2160px",
+        "widths": [
+          1280,
+          2144
+        ],
+        "w": 2144,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/remi/REMI_RM04_bialy-evoke_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/389b44eb04-remi_rm05_bialy-evoke_2160px",
+        "widths": [
+          1280,
+          2144
+        ],
+        "w": 2144,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/remi/REMI_RM05_bialy-evoke_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/9e0c6d2009-remi_rm06_bialy-evoke_2160px",
+        "widths": [
+          1280,
+          2144
+        ],
+        "w": 2144,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/remi/REMI_RM06_bialy-evoke_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/ea829eeb04-remi_rm11_bialy-evoke_2160px",
+        "widths": [
+          1280,
+          2144
+        ],
+        "w": 2144,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/remi/REMI_RM11_bialy-evoke_2160px.jpg",
+        "room": "przedpokoj"
+      }
+    ],
+    "productCount": 19,
+    "isNew": false,
+    "demo": false,
+    "order": 2
+  },
+  {
+    "slug": "milton",
+    "name": "MILTON",
+    "tagline": "Dąb cremona torro i fronty w 4 kolorach. 12 mebli do salonu i jadalni.",
+    "description": "Stylowe uchwyty w kolorze złotym dodają całości eleganckiego wykończenia. Korpus w dekorze dąb cremona torro ociepla design, wprowadzając naturalny akcent do wnętrza.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-cremona-torro-antracyt-mat",
+        "label": "Dąb cremona torro / antracyt mat",
+        "body": "dab-cremona-torro",
+        "front": "antracyt-mat",
+        "accent": null
+      },
+      {
+        "code": "dab-cremona-torro-bialy-mat",
+        "label": "Dąb cremona torro / biały mat",
+        "body": "dab-cremona-torro",
+        "front": "bialy-mat",
+        "accent": null
+      },
+      {
+        "code": "dab-cremona-torro-kaszmir-mat",
+        "label": "Dąb cremona torro / kaszmir mat",
+        "body": "dab-cremona-torro",
+        "front": "kaszmir-mat",
+        "accent": null
+      },
+      {
+        "code": "dab-cremona-torro-szary-mat",
+        "label": "Dąb cremona torro / szary mat",
+        "body": "dab-cremona-torro",
+        "front": "szary-mat",
+        "accent": null
+      },
+      {
+        "code": "dab-cremona-torro",
+        "label": "Dąb cremona torro",
+        "body": "dab-cremona-torro",
+        "front": "dab-cremona-torro",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/8d6587069a-milton_01_antracyt_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/milton/MILTON_01_antracyt_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/4c36287ead-milton_02_antracyt_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/milton/MILTON_02_antracyt_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/e3194cd4b3-milton_03_antracyt_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/milton/MILTON_03_antracyt_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/4d2cf0bc14-milton_01_bialy_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/milton/MILTON_01_bialy_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/d977a9c491-milton_02_bialy_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/milton/MILTON_02_bialy_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/3c85d93c3b-milton_03_bialy_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/milton/MILTON_03_bialy_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/cf27f89759-milton_01_kaszmir_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/milton/MILTON_01_kaszmir_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/2081b4458c-milton_02_kaszmir_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/milton/MILTON_02_kaszmir_2160px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 12,
+    "isNew": false,
+    "demo": false,
+    "order": 3
+  },
+  {
+    "slug": "irma",
+    "name": "IRMA",
+    "tagline": "Biały połysk. 23 meble do sypialni, salonu i jadalni.",
+    "description": "Spokojna biel frontów w połączeniu z ciepłą dębową barwą korpusu wniesie do przestrzeni przytulną atmosferę pomieszczenia. W standardzie znajdują się dwa kolory wstawek - biały oraz dąb maggia do wyboru wedle własnego uznania.",
+    "style": "nowoczesny",
+    "rooms": [
+      "sypialnia",
+      "salon",
+      "jadalnia",
+      "przedpokoj",
+      "pokoj-mlodziezowy"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "bialy-polysk",
+        "label": "Biały połysk",
+        "body": "bialy-polysk",
+        "front": "bialy-polysk",
+        "accent": null
+      },
+      {
+        "code": "dab-bialy-polysk",
+        "label": "Dąb / biały połysk",
+        "body": "dab",
+        "front": "bialy-polysk",
+        "accent": null
+      },
+      {
+        "code": "bialy-dab-magia",
+        "label": "Biały / dąb magia",
+        "body": "bialy",
+        "front": "dab-magia",
+        "accent": null
+      },
+      {
+        "code": "dab",
+        "label": "Dąb",
+        "body": "dab",
+        "front": "dab",
+        "accent": null
+      },
+      {
+        "code": "bialy",
+        "label": "Biały",
+        "body": "bialy",
+        "front": "bialy",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/37652503ca-g-te_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3278,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/g-te/G-TE_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/42ebfc45bb-g-te_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3175,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/g-te/G-TE_02_2160px.jpg",
+        "room": "jadalnia"
+      },
+      {
+        "base": "/katalog/1f521a3f07-irma_03_v2_720px",
+        "widths": [
+          1225
+        ],
+        "w": 1225,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/irma-dab/IRMA_03_v2_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/c051f92448-irma_06_720px",
+        "widths": [
+          1187
+        ],
+        "w": 1187,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/irma-bialy/IRMA_06_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/8410940805-irma_09_720px",
+        "widths": [
+          1244
+        ],
+        "w": 1244,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/irma-bialy/IRMA_09_720px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/975a801734-irma_08_720px",
+        "widths": [
+          968
+        ],
+        "w": 968,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/irma-bialy/IRMA_08_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/7209b9019d-irma_05_v2_720px",
+        "widths": [
+          1200
+        ],
+        "w": 1200,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/irma-bialy/IRMA_05_v2_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/c0e8c36a60-irma_02_v2_720px",
+        "widths": [
+          1128
+        ],
+        "w": 1128,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/irma-dab/IRMA_02_v2_720px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 23,
+    "isNew": false,
+    "demo": false,
+    "order": 4
+  },
+  {
+    "slug": "ate",
+    "name": "ATE",
+    "tagline": "Dąb kamienny i czarny. 25 mebli do salonu, sypialni i pokoju młodzieżowego.",
+    "description": "Kolekcja ATE utrzymana jest w modnym kolorze dąb kamienny, który w połączeniu z czarnymi wstawkami zapewnia kontrastowe połączenie, które przyciąga uwagę i nadaje pomieszczeniu elegancji. Blat, podstawa oraz nogi są w tym samym w kolorze dąb kamienny.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "sypialnia",
+      "pokoj-mlodziezowy",
+      "jadalnia",
+      "przedpokoj",
+      "biuro"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-kamienny-czarny",
+        "label": "Dąb kamienny / czarny",
+        "body": "dab-kamienny",
+        "front": "czarny",
+        "accent": null
+      },
+      {
+        "code": "dab-kamienny",
+        "label": "Dąb kamienny",
+        "body": "dab-kamienny",
+        "front": "dab-kamienny",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/54fea29f6c-ate_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2863,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/ate/ATE_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/eb3db16e69-ate_05_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2588,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/ate/ATE_05_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/9315ec6ea9-ate_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2995,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/ate/ATE_02_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/74bdc26584-ate_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3482,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/ate/ATE_03_2160px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/c561a6f0ea-ate_04_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3423,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/ate/ATE_04_2160px.jpg",
+        "room": "sypialnia"
+      }
+    ],
+    "productCount": 25,
+    "isNew": false,
+    "demo": false,
+    "order": 5
+  },
+  {
+    "slug": "mati",
+    "name": "MATI",
+    "tagline": "Dąb cremona cotta i czarny. 23 meble do salonu, jadalni i sypialni.",
+    "description": "Stylowa kolorystyka w odcieniach dębu Cremona z czarnymi detalami nadaje mu elegancki i współczesny wygląd, który doskonale komponuje się z nowoczesnymi wnętrzami. Idealnie sprawdzi się w salonie, biurze czy pokoju młodzieżowym, oferując przestrzeń do przechowywania książek, dekoracji i innych przedmiotów.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "sypialnia",
+      "pokoj-mlodziezowy",
+      "przedpokoj"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-cremona-cotta-czarny",
+        "label": "Dąb cremona cotta / czarny",
+        "body": "dab-cremona-cotta",
+        "front": "czarny",
+        "accent": null
+      },
+      {
+        "code": "dab-cremona-cotta",
+        "label": "Dąb cremona cotta",
+        "body": "dab-cremona-cotta",
+        "front": "dab-cremona-cotta",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/78144835ba-mati_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/mati/MATI_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/0a4582c714-mati_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/mati/MATI_02_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/76df29a010-mati_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/mati/MATI_03_2160px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/60206ba5fe-mati_04_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/mati/MATI_04_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/f4ed064d97-mati_05_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/mati/MATI_05_2160px.jpg",
+        "room": "sypialnia"
+      }
+    ],
+    "productCount": 23,
+    "isNew": false,
+    "demo": false,
+    "order": 6
+  },
+  {
+    "slug": "york",
+    "name": "YORK",
+    "tagline": "Dąb grandson i grafit. 23 meble do sypialni, salonu i jadalni.",
+    "description": "Kolekcja YORK to 23 meble do sypialni, salonu, jadalni, pokoju młodzieżowego i przedpokoju w kolorach: dąb grandson / grafit i dąb grandson.",
+    "style": "nowoczesny",
+    "rooms": [
+      "sypialnia",
+      "salon",
+      "jadalnia",
+      "pokoj-mlodziezowy",
+      "przedpokoj"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-grandson-grafit",
+        "label": "Dąb grandson / grafit",
+        "body": "dab-grandson",
+        "front": "grafit",
+        "accent": null
+      },
+      {
+        "code": "dab-grandson",
+        "label": "Dąb grandson",
+        "body": "dab-grandson",
+        "front": "dab-grandson",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/59c524fc5a-york_01_720px",
+        "widths": [
+          958
+        ],
+        "w": 958,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/york/YORK_01_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/acdee6c36b-york_03_720px",
+        "widths": [
+          1113
+        ],
+        "w": 1113,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/york/YORK_03_720px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/869a2fa5cb-york_06_720px",
+        "widths": [
+          977
+        ],
+        "w": 977,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/york/YORK_06_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/fe85764071-york_02_720px",
+        "widths": [
+          1257
+        ],
+        "w": 1257,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/york/YORK_02_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/948526fc79-york_04_720px",
+        "widths": [
+          1280,
+          1337
+        ],
+        "w": 1337,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/york/YORK_04_720px.jpg",
+        "room": "sypialnia"
+      }
+    ],
+    "productCount": 23,
+    "isNew": false,
+    "demo": false,
+    "order": 7
+  },
+  {
+    "slug": "ferro",
+    "name": "FERRO",
+    "tagline": "Dąb cremona torro i czarny. 22 meble do salonu, jadalni i sypialni.",
+    "description": "Nowoczesny design w kolorze dębu cremona torro z czarnymi wstawkami nadaje wnętrzu elegancji i harmonijnie komponuje się z różnymi aranżacjami. Świetnie sprawdzi się jako miejsce do eksponowania książek, dekoracji czy pamiątek.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "sypialnia",
+      "pokoj-mlodziezowy"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-cremona-torro-czarny",
+        "label": "Dąb cremona torro / czarny",
+        "body": "dab-cremona-torro",
+        "front": "czarny",
+        "accent": null
+      },
+      {
+        "code": "dab-cremona-torro",
+        "label": "Dąb cremona torro",
+        "body": "dab-cremona-torro",
+        "front": "dab-cremona-torro",
+        "accent": null
+      },
+      {
+        "code": "dab-cremona",
+        "label": "Dąb cremona",
+        "body": "dab-cremona",
+        "front": "dab-cremona",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/5f2a2e784b-ferro_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/ferro/FERRO_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/a075f453ad-ferro_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/ferro/FERRO_03_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/3a913688cb-ferro_04_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/ferro/FERRO_04_2160px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/994bb8c0bb-ferro_05_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/ferro/FERRO_05_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/b60a8b6acb-ferro_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/ferro/FERRO_02_2160px.jpg",
+        "room": "sypialnia"
+      }
+    ],
+    "productCount": 22,
+    "isNew": false,
+    "demo": false,
+    "order": 8
+  },
+  {
+    "slug": "lionel",
+    "name": "LIONEL",
+    "tagline": "Dąb sonoma truflowy i biały połysk. 21 mebli do sypialni, pokoju młodzieżowego i salonu.",
+    "description": "Nowoczesny design podkreślają eleganckie podfrezowania na frontach, a jasna kolorystyka nadaje wnętrzu przestronności.",
+    "style": "nowoczesny",
+    "rooms": [
+      "sypialnia",
+      "pokoj-mlodziezowy",
+      "salon",
+      "jadalnia"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-sonoma-truflowy-bialy-polysk",
+        "label": "Dąb sonoma truflowy / biały połysk",
+        "body": "dab-sonoma-truflowy",
+        "front": "bialy-polysk",
+        "accent": null
+      },
+      {
+        "code": "dab-sonoma-truflowy-bialy",
+        "label": "Dąb sonoma truflowy / biały",
+        "body": "dab-sonoma-truflowy",
+        "front": "bialy",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/6e6724ab33-lionel_01_720px",
+        "widths": [
+          1121
+        ],
+        "w": 1121,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/lionel/LIONEL_01_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/4fb6ad59d7-lionel_04_720px",
+        "widths": [
+          1089
+        ],
+        "w": 1089,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/lionel/LIONEL_04_720px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/7ae2a0d480-lionel_03_720px",
+        "widths": [
+          1195
+        ],
+        "w": 1195,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/lionel/LIONEL_03_720px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/a7ecd29f5a-lionel_05_720px",
+        "widths": [
+          1079
+        ],
+        "w": 1079,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/lionel/LIONEL_05_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/162f72617e-lionel_02_720px",
+        "widths": [
+          1280,
+          1320
+        ],
+        "w": 1320,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/lionel/LIONEL_02_720px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 21,
+    "isNew": false,
+    "demo": false,
+    "order": 9
+  },
+  {
+    "slug": "aris",
+    "name": "ARIS",
+    "tagline": "Dąb evoke i czarny połysk. 19 mebli do salonu, jadalni i sypialni.",
+    "description": "Swoją uwagę przykuwa dzięki modnemu połączeniu kolorystycznemu. Czarne fronty w połysku w zestawieniu z dekorem drewna wzbogacone efektem lameli nadają wnętrzu elegancji.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "sypialnia",
+      "pokoj-mlodziezowy"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-evoke-czarny-polysk",
+        "label": "Dąb evoke / czarny połysk",
+        "body": "dab-evoke",
+        "front": "czarny-polysk",
+        "accent": null
+      },
+      {
+        "code": "dab-evoke-czarny",
+        "label": "Dąb evoke / czarny",
+        "body": "dab-evoke",
+        "front": "czarny",
+        "accent": null
+      },
+      {
+        "code": "dab-evoke",
+        "label": "Dąb evoke",
+        "body": "dab-evoke",
+        "front": "dab-evoke",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/00baf3871e-aris_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3614,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/aris/ARIS_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/d97d40e348-aris_04_2160px",
+        "widths": [
+          1280,
+          2373
+        ],
+        "w": 2373,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/aris/ARIS_04_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/d1c8d91c6a-aris_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3461,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/aris/ARIS_02_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/b05d6434d1-aris_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3240,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/aris/ARIS_03_2160px.jpg",
+        "room": "sypialnia"
+      }
+    ],
+    "productCount": 19,
+    "isNew": false,
+    "demo": false,
+    "order": 10
+  },
+  {
+    "slug": "forrest",
+    "name": "FORREST",
+    "tagline": "Orzech ciemny i dąb milano. 18 mebli do salonu, jadalni i sypialni.",
+    "description": "Kolekcja FORREST to 18 mebli do salonu, jadalni i sypialni w kolorach: orzech ciemny / dąb milano.",
+    "style": "nowoczesny",
     "rooms": [
       "salon",
       "jadalnia",
       "sypialnia"
     ],
     "heroRoom": "salon",
-    "handle": "edge",
-    "base": "legsWood",
     "finishes": [
       {
-        "code": "DN",
-        "label": "Dąb naturalny",
-        "body": "dab-naturalny",
-        "front": "dab-naturalny",
-        "legs": "dab-naturalny",
-        "metal": "czarny"
-      },
-      {
-        "code": "KA-DN",
-        "label": "Kaszmir / dąb naturalny",
-        "body": "kaszmir",
-        "front": "kaszmir",
-        "top": "dab-naturalny",
-        "legs": "dab-naturalny",
-        "metal": "czarny"
-      },
-      {
-        "code": "BM-DN",
-        "label": "Biały mat / dąb naturalny",
-        "body": "bialy-mat",
-        "front": "bialy-mat",
-        "top": "dab-naturalny",
-        "legs": "dab-naturalny",
-        "metal": "czarny"
+        "code": "orzech-ciemny-dab-milano",
+        "label": "Orzech ciemny / dąb milano",
+        "body": "orzech-ciemny",
+        "front": "dab-milano",
+        "accent": null
       }
     ],
-    "isNew": false,
-    "order": 1,
-    "demo": true
-  },
-  {
-    "slug": "talve",
-    "name": "TALVE",
-    "tagline": "Matowe fronty, dębowe blaty i małe okrągłe gałki.",
-    "description": "TALVE łączy gładkie, matowe fronty z blatami w dekorze dębu naturalnego. Meble stoją na wysokich drewnianych nóżkach, a małe czarne gałki są jedynym metalowym akcentem. Kolekcja ma meble do salonu, sypialni i pokoju nastolatka.",
-    "style": "skandynawski",
-    "rooms": [
-      "salon",
-      "sypialnia",
-      "pokoj-mlodziezowy"
-    ],
-    "heroRoom": "sypialnia",
-    "handle": "knob",
-    "base": "legsWood",
-    "finishes": [
+    "arrangements": [
       {
-        "code": "BM-DN",
-        "label": "Biały mat / dąb naturalny",
-        "body": "bialy-mat",
-        "front": "bialy-mat",
-        "top": "dab-naturalny",
-        "legs": "dab-naturalny",
-        "metal": "czarny"
+        "base": "/katalog/70479e11c7-forrest_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3257,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/forrest/FORREST_01_2160px.jpg",
+        "room": "salon"
       },
       {
-        "code": "SZ-DN",
-        "label": "Szałwia / dąb naturalny",
-        "body": "szalwia",
-        "front": "szalwia",
-        "top": "dab-naturalny",
-        "legs": "dab-naturalny",
-        "metal": "czarny"
+        "base": "/katalog/e328da0ba2-forrest_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3431,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/forrest/FORREST_02_2160px.jpg",
+        "room": "salon"
       },
       {
-        "code": "GR-DN",
-        "label": "Grafit / dąb naturalny",
-        "body": "grafit",
-        "front": "grafit",
-        "top": "dab-naturalny",
-        "legs": "dab-naturalny",
-        "metal": "czarny"
+        "base": "/katalog/3ff5c0ca61-forrest_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3365,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/forrest/FORREST_03_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/2cfbff3d4c-forrest_05_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3811,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/forrest/FORREST_05_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/267a8548bc-forrest_06_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3588,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/forrest/FORREST_06_2160px.jpg",
+        "room": "sypialnia"
       }
     ],
+    "productCount": 18,
     "isNew": false,
-    "order": 2,
-    "demo": true
+    "demo": false,
+    "order": 11
   },
   {
-    "slug": "nokta",
-    "name": "NOKTA",
-    "tagline": "Ciepłe drewno na czarnym, metalowym stelażu.",
-    "description": "NOKTA zestawia fronty w dekorze dębu miodowego albo orzecha z ciemnym, matowym korpusem. Meble stoją na cienkich metalowych nogach, a długie czarne uchwyty podkreślają poziome linie. Pasuje do salonu, jadalni i domowego biura.",
-    "style": "loft",
+    "slug": "besto",
+    "name": "BESTO",
+    "tagline": "Dąb evoke i biały połysk. 17 mebli do salonu, jadalni i sypialni.",
+    "description": "Jasne drewno, białe fronty i proste grafitowe uchwyty idealnie pasują do wnętrz jasnych, wzbogaconych drewnianymi elementami dekoracyjnymi. Eksponowane szkło lub dekoracje można dodatkowo podkreślić, dobierając podświetlenie LED.",
+    "style": "nowoczesny",
     "rooms": [
       "salon",
       "jadalnia",
-      "biuro"
+      "sypialnia"
     ],
-    "heroRoom": "jadalnia",
-    "handle": "bar",
-    "base": "legsMetal",
+    "heroRoom": "salon",
     "finishes": [
       {
-        "code": "DM-CM",
-        "label": "Dąb miodowy / czarny mat",
-        "body": "czarny-mat",
-        "front": "dab-miodowy",
-        "metal": "czarny"
+        "code": "dab-evoke-bialy-polysk",
+        "label": "Dąb evoke / biały połysk",
+        "body": "dab-evoke",
+        "front": "bialy-polysk",
+        "accent": null
       },
       {
-        "code": "OR-GR",
-        "label": "Orzech / grafit",
-        "body": "grafit",
-        "front": "orzech",
-        "metal": "czarny"
+        "code": "dab-evoke",
+        "label": "Dąb evoke",
+        "body": "dab-evoke",
+        "front": "dab-evoke",
+        "accent": null
       }
     ],
+    "arrangements": [
+      {
+        "base": "/katalog/d200a65755-besto_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3240,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/besto/BESTO_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/b82f111de7-besto_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3273,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/besto/BESTO_03_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/bd3bd2de88-besto_04_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3094,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/besto/BESTO_04_2160px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/61291359df-besto_05_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3294,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/besto/BESTO_05_2160px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/a63b5b02f1-besto_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3240,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/besto/BESTO_02_2160px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 17,
     "isNew": false,
-    "order": 3,
-    "demo": true
+    "demo": false,
+    "order": 12
   },
   {
-    "slug": "solma",
-    "name": "SOLMA",
-    "tagline": "Gładkie fronty i akcenty w kolorze szczotkowanego mosiądzu.",
-    "description": "SOLMA to kolekcja z lekkim akcentem glamour: gładkie fronty, cienkie nogi i uchwyty w kolorze szczotkowanego mosiądzu. Obejmuje meble do sypialni, salonu i przedpokoju — od łóżka i toaletki po szafę i szafkę na buty. Do wyboru biały połysk, kaszmir albo czarny mat.",
-    "style": "glamour-lekki",
+    "slug": "dorian",
+    "name": "DORIAN",
+    "tagline": "Dąb april, czarny i listwa drewno sosnowe. 17 mebli do salonu, jadalni i sypialni.",
+    "description": "Dodatkowego uroku dodaje listwa wykonana z naturalnego drewna, z podświetleniem LED. Ciepła kolorystyka oraz minimalistyczna forma stworzy interesujące nowoczesne wnętrze.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "sypialnia"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-april-czarny-listwa-drewno-sosnowe",
+        "label": "Dąb april / czarny / listwa drewno sosnowe",
+        "body": "dab-april",
+        "front": "czarny",
+        "accent": "listwa-drewno-sosnowe"
+      },
+      {
+        "code": "dab-april-czarny",
+        "label": "Dąb april / czarny",
+        "body": "dab-april",
+        "front": "czarny",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/1896b328c7-dorian_r01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dorian/DORIAN_R01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/91b7aeb4ea-dorian_r02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dorian/DORIAN_R02_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/b3ad36e82f-dorian_r04_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dorian/DORIAN_R04_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/af179250bd-dorian_r03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dorian/DORIAN_R03_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/4c0ca336ae-dorian_r05_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3602,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dorian/DORIAN_R05_2160px.jpg",
+        "room": "sypialnia"
+      }
+    ],
+    "productCount": 17,
+    "isNew": false,
+    "demo": false,
+    "order": 13
+  },
+  {
+    "slug": "aston",
+    "name": "ASTON",
+    "tagline": "Dąb cremona i kaszmir. 16 mebli do salonu, jadalni i pokoju młodzieżowego.",
+    "description": "Kolor ten charakteryzuje się delikatnymi wzorami słojów drewna, dodającymi mu subtelnego uroku i elegancji. Fronty w kolorze kaszmir/ dąb cremona dodają meblowi subtelności i wyrafinowania, tworząc harmonijną kompozycję kolorystyczną.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "pokoj-mlodziezowy",
+      "sypialnia"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-cremona-kaszmir",
+        "label": "Dąb cremona / kaszmir",
+        "body": "dab-cremona",
+        "front": "kaszmir",
+        "accent": null
+      },
+      {
+        "code": "dab-cremona",
+        "label": "Dąb cremona",
+        "body": "dab-cremona",
+        "front": "dab-cremona",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/39c203abbd-aston_r01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/aston/ASTON_R01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/b950c57096-aston_r03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/aston/ASTON_R03_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/46de712a90-aston_r02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/aston/ASTON_R02_2160px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 16,
+    "isNew": false,
+    "demo": false,
+    "order": 14
+  },
+  {
+    "slug": "tiffany",
+    "name": "TIFFANY",
+    "tagline": "Biały połysk. 5 mebli do kuchni.",
+    "description": "Kolekcja TIFFANY to 5 mebli do kuchni w kolorach: biały połysk, biały połysk / szary połysk i biały / szary połysk.",
+    "style": "nowoczesny",
+    "rooms": [
+      "kuchnia"
+    ],
+    "heroRoom": "kuchnia",
+    "finishes": [
+      {
+        "code": "bialy-polysk",
+        "label": "Biały połysk",
+        "body": "bialy-polysk",
+        "front": "bialy-polysk",
+        "accent": null
+      },
+      {
+        "code": "bialy-polysk-szary-polysk",
+        "label": "Biały połysk / szary połysk",
+        "body": "bialy-polysk",
+        "front": "szary-polysk",
+        "accent": null
+      },
+      {
+        "code": "bialy-szary-polysk",
+        "label": "Biały / szary połysk",
+        "body": "bialy",
+        "front": "szary-polysk",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/92da153b8f-tiffany_z200_bialy-bialy-bialy_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2418,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z200_bialy-bialy-bialy_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/ebaa1b8bfa-tiffany_z220_bialy-bialy-bialy_1440px",
+        "widths": [
+          1280,
+          2171
+        ],
+        "w": 2171,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z220_bialy-bialy-bialy_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/b972456442-tiffany_z240_bialy-bialy-bialy_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z240_bialy-bialy-bialy_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/efbd9fb095-tiffany_z240_bialy-bialy-craft_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z240_bialy-bialy-craft_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/845e1f7d09-tiffany_z260_bialy-bialy-bialy_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z260_bialy-bialy-bialy_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/b1fcdf8af9-tiffany_z260_bialy-bialy-craft_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z260_bialy-bialy-craft_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/8f6fb838c1-tiffany_z180_bialy-bialy-bialy_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z180_bialy-bialy-bialy_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/05e183af8d-tiffany_z200_szary-bialy-bialy_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2418,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z200_szary-bialy-bialy_1440px.jpg",
+        "room": "kuchnia"
+      }
+    ],
+    "productCount": 5,
+    "isNew": false,
+    "demo": false,
+    "order": 15
+  },
+  {
+    "slug": "snobi",
+    "name": "SNOBI",
+    "tagline": "Dąb craft złoty i biel alpejska połysk. 14 mebli do salonu, jadalni i pokoju młodzieżowego.",
+    "description": "Biel w połączeniu z kolorem naturalnego drewna wizualnie ociepli przestrzeń i wprowadzi przytulny klimat nadając meblom lekkości. Atutem jest możliwość dobrania zestawu z oświetleniem LED, które podkreśli piękno dekoracji.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "pokoj-mlodziezowy",
+      "sypialnia"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-craft-zloty-biel-alpejska-polysk",
+        "label": "Dąb craft złoty / biel alpejska połysk",
+        "body": "dab-craft-zloty",
+        "front": "biel-alpejska-polysk",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/1e5b8c42fd-snobi_01_720px",
+        "widths": [
+          1081
+        ],
+        "w": 1081,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/snobi/SNOBI_01_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/55b20156da-snobi_02_720px",
+        "widths": [
+          1014
+        ],
+        "w": 1014,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/snobi/SNOBI_02_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/a2145b9dfa-snobi_05_720px",
+        "widths": [
+          799
+        ],
+        "w": 799,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/snobi/SNOBI_05_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/d3ab022646-snobi_04_720px",
+        "widths": [
+          970
+        ],
+        "w": 970,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/snobi/SNOBI_04_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/181cc18403-snobi_03_720px",
+        "widths": [
+          1082
+        ],
+        "w": 1082,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/snobi/SNOBI_03_720px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 14,
+    "isNew": false,
+    "demo": false,
+    "order": 16
+  },
+  {
+    "slug": "intenso",
+    "name": "INTENSO",
+    "tagline": "Dąb evoke. 13 mebli do salonu, jadalni i pokoju młodzieżowego.",
+    "description": "Laminat, imitujący wyraźną strukturę drewna dębowego w kolorze evoke ociepla wnętrze i nadaje mu rustykalny charakter. W kolorze dąb Evoke, łączy nowoczesny design z praktycznymi rozwiązaniami.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "pokoj-mlodziezowy",
+      "sypialnia"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-evoke",
+        "label": "Dąb evoke",
+        "body": "dab-evoke",
+        "front": "dab-evoke",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/dad3f13b49-intenso_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3832,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/intenso/INTENSO_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/b36f528ad2-intenso_04_1448px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1448,
+        "url": "https://upload.liveomeble.pl/img/intenso/INTENSO_04_1448px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/8aa6d7e0aa-intenso_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3832,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/intenso/INTENSO_03_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/94eeadf894-intenso_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3832,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/intenso/INTENSO_02_2160px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 13,
+    "isNew": false,
+    "demo": false,
+    "order": 17
+  },
+  {
+    "slug": "ivo",
+    "name": "IVO",
+    "tagline": "Dąb april. 13 mebli do salonu, jadalni i pokoju młodzieżowego.",
+    "description": "Zjawiskowa faktura drewna łączy elegancką klasykę z nutką industrialnego stylu.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "pokoj-mlodziezowy",
+      "sypialnia"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-april",
+        "label": "Dąb april",
+        "body": "dab-april",
+        "front": "dab-april",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/ead431a723-ivo_02_720px",
+        "widths": [
+          1080
+        ],
+        "w": 1080,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/ivo/IVO_02_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/b3ace48f2a-ivo_04_720px",
+        "widths": [
+          1120
+        ],
+        "w": 1120,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/ivo/IVO_04_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/0568c47d52-ivo_01_720px",
+        "widths": [
+          1154
+        ],
+        "w": 1154,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/ivo/IVO_01_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/32bf332dd8-ivo_03_720px",
+        "widths": [
+          1193
+        ],
+        "w": 1193,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/ivo/IVO_03_720px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 13,
+    "isNew": false,
+    "demo": false,
+    "order": 18
+  },
+  {
+    "slug": "naomi",
+    "name": "NAOMI",
+    "tagline": "Orzech i wenge. 13 mebli do salonu, jadalni i pokoju młodzieżowego.",
+    "description": "Ciepłą kolorystykę korpusów i frontów w kolorze orzech podkreślają oryginalne detale wykończeniowe. Ozdobne delikatnie zaokrąglone listwy w kolorze wenge w połączeniu z kolorem orzecha idealnie komponują się z wieloma kolorami, co daje duże możliwości w tworzeniu własnych aranżacji.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "pokoj-mlodziezowy",
+      "sypialnia"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "orzech-wenge",
+        "label": "Orzech / wenge",
+        "body": "orzech",
+        "front": "wenge",
+        "accent": null
+      },
+      {
+        "code": "orzech",
+        "label": "Orzech",
+        "body": "orzech",
+        "front": "orzech",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/fa394f2732-naomi_03_720px",
+        "widths": [
+          1144
+        ],
+        "w": 1144,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/naomi/NAOMI_03_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/d86f8f3b60-naomi_01_720px",
+        "widths": [
+          1218
+        ],
+        "w": 1218,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/naomi/NAOMI_01_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/3f95b0e4dd-naomi_07_720px",
+        "widths": [
+          1280,
+          1638
+        ],
+        "w": 1638,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/naomi/NAOMI_07_720px.jpg",
+        "room": "sypialnia"
+      }
+    ],
+    "productCount": 13,
+    "isNew": false,
+    "demo": false,
+    "order": 19
+  },
+  {
+    "slug": "kris",
+    "name": "KRIS",
+    "tagline": "Dąb evoke i czarny. 12 mebli do salonu, jadalni i pokoju młodzieżowego.",
+    "description": "Kolor dębu wprowadza do pomieszczenia przytulny nastrój i zachęca do spędzenia w nim czasu. Kolorystyka \"Dąb Evoke Czarny\" nadaje meblowi wyjątkowego wyglądu.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "pokoj-mlodziezowy",
+      "sypialnia",
+      "przedpokoj"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-evoke-czarny",
+        "label": "Dąb evoke / czarny",
+        "body": "dab-evoke",
+        "front": "czarny",
+        "accent": null
+      },
+      {
+        "code": "dab-evoke",
+        "label": "Dąb evoke",
+        "body": "dab-evoke",
+        "front": "dab-evoke",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/21f4e82281-kris_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3401,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/kris/KRIS_02_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/5a016fcb46-kris_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3171,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/kris/KRIS_01_2160px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 12,
+    "isNew": false,
+    "demo": false,
+    "order": 20
+  },
+  {
+    "slug": "kubo",
+    "name": "KUBO",
+    "tagline": "Dąb nagano i biały połysk. 12 mebli do pokoju młodzieżowego, sypialni i salonu.",
+    "description": "Ciepła kolorystyka korpusu oraz białe, błyszczące fronty rozjaśnią i optycznie powiększą przestrzeń i nadadzą przytulności pomieszczeniu. Połączenie bieli z ciepłym wybarwieniem dębu rozjaśni i optycznie powiększy przestrzeń oraz nada przytulności pomieszczeniu.",
+    "style": "nowoczesny",
+    "rooms": [
+      "pokoj-mlodziezowy",
+      "sypialnia",
+      "salon",
+      "jadalnia"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-nagano-bialy-polysk",
+        "label": "Dąb nagano / biały połysk",
+        "body": "dab-nagano",
+        "front": "bialy-polysk",
+        "accent": null
+      },
+      {
+        "code": "dab-nagano",
+        "label": "Dąb nagano",
+        "body": "dab-nagano",
+        "front": "dab-nagano",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/6fb6de67ee-kubo_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3231,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/kubo/KUBO_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/d46be1531b-kubo_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3285,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/kubo/KUBO_02_2160px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/3b5254b3ec-kubo_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3240,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/kubo/KUBO_03_2160px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 12,
+    "isNew": false,
+    "demo": false,
+    "order": 21
+  },
+  {
+    "slug": "marco",
+    "name": "MARCO",
+    "tagline": "Biały mat i czarny. 12 mebli do salonu i jadalni.",
+    "description": "Dodatkowego uroku dodaje listwa wykonana z naturalnego drewna, podświetlona LEDem. Blat można wykorzystać na wyeksponowanie stylowych dekoracji, pamiątek lub fotografii.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "bialy-mat-czarny",
+        "label": "Biały mat / czarny",
+        "body": "bialy-mat",
+        "front": "czarny",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/ba38299dd4-marco_r01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/marco/MARCO_R01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/4c373c9cdd-marco_r04_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/marco/MARCO_R04_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/d527aba268-marco_r03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/marco/MARCO_R03_2160px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 12,
+    "isNew": false,
+    "demo": false,
+    "order": 22
+  },
+  {
+    "slug": "vero",
+    "name": "VERO",
+    "tagline": "Orzech opera i czarny. 12 mebli do salonu, jadalni i pokoju młodzieżowego.",
+    "description": "Kolor dębu wprowadza do pomieszczenia przytulny nastrój i zachęca do spędzenia w nim czasu. Kolorystyka \"Orzech Opera/ Czarny\" nadaje meblowi wyjątkowego wyglądu.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "pokoj-mlodziezowy",
+      "sypialnia",
+      "przedpokoj"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "orzech-opera-czarny",
+        "label": "Orzech opera / czarny",
+        "body": "orzech-opera",
+        "front": "czarny",
+        "accent": null
+      },
+      {
+        "code": "orzech-opera-mat",
+        "label": "Orzech opera mat",
+        "body": "orzech-opera-mat",
+        "front": "orzech-opera-mat",
+        "accent": null
+      },
+      {
+        "code": "orzech-opera",
+        "label": "Orzech opera",
+        "body": "orzech-opera",
+        "front": "orzech-opera",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/345117cf93-vero_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3519,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/vero/VERO_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/e87aebacaf-vero_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3328,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/vero/VERO_02_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/cb6a7612dc-vero_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2700,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/vero/VERO_03_2160px.jpg",
+        "room": "sypialnia"
+      }
+    ],
+    "productCount": 12,
+    "isNew": false,
+    "demo": false,
+    "order": 23
+  },
+  {
+    "slug": "luxor",
+    "name": "LUXOR",
+    "tagline": "Biały połysk. 11 mebli do salonu, jadalni i sypialni.",
+    "description": "Błyszcząca, biała powierzchnia frontów harmonijnie współgra z chromowanymi nóżkami, które przyciągają wzrok swoją lekką, delikatnie wygiętą formą. Fronty o wysokim połysku prezentują się niezwykle elegancko i odbijają światło, optycznie powiększając pomieszczenie.",
+    "style": "glamour",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "sypialnia"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "bialy-polysk",
+        "label": "Biały połysk",
+        "body": "bialy-polysk",
+        "front": "bialy-polysk",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/ef3de6dac1-luxor_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/luxor/LUXOR_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/f8b6bc82d2-luxor_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/luxor/LUXOR_03_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/6ae0a0e0fd-luxor_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/luxor/LUXOR_02_2160px.jpg",
+        "room": "sypialnia"
+      }
+    ],
+    "productCount": 11,
+    "isNew": false,
+    "demo": false,
+    "order": 24
+  },
+  {
+    "slug": "noel",
+    "name": "NOEL",
+    "tagline": "Dąb evoke i czarny. 11 mebli do salonu, jadalni i pokoju młodzieżowego.",
+    "description": "Motyw dębu evoke wzbogacony efektem lameli nadaje wnętrzu nowoczesności i industrialnego wyglądu. Przeszklony front sprawdzi się przy wyeksponowaniu zdjęć, książek i innych ważnych przedmiotów.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "pokoj-mlodziezowy",
+      "sypialnia"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-evoke-czarny",
+        "label": "Dąb evoke / czarny",
+        "body": "dab-evoke",
+        "front": "czarny",
+        "accent": null
+      },
+      {
+        "code": "dab-evoke",
+        "label": "Dąb evoke",
+        "body": "dab-evoke",
+        "front": "dab-evoke",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/a3e691d69f-noel_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2838,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/noel/NOEL_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/59e6a756c8-noel_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2583,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/noel/NOEL_03_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/f34ac2b6a5-noel_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3226,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/noel/NOEL_02_2160px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 11,
+    "isNew": false,
+    "demo": false,
+    "order": 25
+  },
+  {
+    "slug": "s-line",
+    "name": "S-LINE",
+    "tagline": "Czarny i dąb evoke. 11 mebli do salonu, jadalni i przedpokoju.",
+    "description": "Kolekcja charakteryzuje się minimalistycznym wyglądem oraz funkcjonalnością. Nowoczesna kolorystyka pozwoli stworzyć idealne wnętrze, dostosowane do gustu i wymagań jego użytkowników.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "przedpokoj"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "czarny-dab-evoke",
+        "label": "Czarny / dąb evoke",
+        "body": "czarny",
+        "front": "dab-evoke",
+        "accent": null
+      },
+      {
+        "code": "dab-evoke",
+        "label": "Dąb evoke",
+        "body": "dab-evoke",
+        "front": "dab-evoke",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/116ff15534-s-line_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3380,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/s-line/S-LINE_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/84f2090de1-s-line_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3136,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/s-line/S-LINE_02_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/e4a023e0dd-s-line_04_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2557,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/s-line/S-LINE_04_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/6e10cc4bc5-s-line_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3019,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/s-line/S-LINE_03_2160px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 11,
+    "isNew": false,
+    "demo": false,
+    "order": 26
+  },
+  {
+    "slug": "sandy",
+    "name": "SANDY",
+    "tagline": "Dąb grandson. 11 mebli do salonu, jadalni i przedpokoju.",
+    "description": "Kolor dąb grandson to gratka dla fanów naturalnego, drewnianego wyglądu.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "przedpokoj"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-grandson",
+        "label": "Dąb grandson",
+        "body": "dab-grandson",
+        "front": "dab-grandson",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/cfb41612bf-sandy_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2998,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/sandy/SANDY_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/453172977e-sandy_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3673,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/sandy/SANDY_03_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/9000bf9f47-sandy_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3080,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/sandy/SANDY_02_2160px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 11,
+    "isNew": false,
+    "demo": false,
+    "order": 27
+  },
+  {
+    "slug": "brando",
+    "name": "BRANDO",
+    "tagline": "Beton i biały połysk. 10 mebli do salonu, jadalni i przedpokoju.",
+    "description": "Pojemne wnętrze pozwoli na przechowanie dużej ilości przedmiotów niezbędnych w każdym domu, a na szerokim blacie można ustawić ozodoby dekoracyjne i pamiątki.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia",
+      "przedpokoj"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "beton-bialy-polysk",
+        "label": "Beton / biały połysk",
+        "body": "beton",
+        "front": "bialy-polysk",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/159ede0f15-brando_02_720px",
+        "widths": [
+          1257
+        ],
+        "w": 1257,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/brando/BRANDO_02_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/0dd5de80b3-brando_r01_720px",
+        "widths": [
+          1280
+        ],
+        "w": 1280,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/brando/BRANDO_R01_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/f41aa3243b-brando_r02_720px",
+        "widths": [
+          1080
+        ],
+        "w": 1080,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/brando/BRANDO_R02_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/4150619203-brando_01_720px",
+        "widths": [
+          1079
+        ],
+        "w": 1079,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/brando/BRANDO_01_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/3a5472674b-brando_03_720px",
+        "widths": [
+          1059
+        ],
+        "w": 1059,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/brando/BRANDO_03_720px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 10,
+    "isNew": false,
+    "demo": false,
+    "order": 28
+  },
+  {
+    "slug": "prisco",
+    "name": "PRISCO",
+    "tagline": "Dąb craft złoty i czarny. 10 mebli do salonu i jadalni.",
+    "description": "Ciepły odcień drewna przyciąga wzrok oraz wprowadza do wnętrza ciepły, przytulny nastrój. Sprawdzi się jako miejsce do wyeksponowania książek oraz ulubionych dekoracji.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon",
+      "jadalnia"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "dab-craft-zloty-czarny",
+        "label": "Dąb craft złoty / czarny",
+        "body": "dab-craft-zloty",
+        "front": "czarny",
+        "accent": null
+      },
+      {
+        "code": "dab-craft-zloty",
+        "label": "Dąb craft złoty",
+        "body": "dab-craft-zloty",
+        "front": "dab-craft-zloty",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/a91fccf9e2-prisco_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3240,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/prisco/PRISCO_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/5eb10c3932-prisco_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2792,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/prisco/PRISCO_03_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/5d3f6941ad-prisco_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3140,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/prisco/PRISCO_02_2160px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 10,
+    "isNew": false,
+    "demo": false,
+    "order": 29
+  },
+  {
+    "slug": "vigo",
+    "name": "VIGO",
+    "tagline": "Kaszmir. 9 mebli do salonu.",
+    "description": "Kolekcja VIGO to 9 mebli do salonu w kolorach: kaszmir.",
+    "style": "nowoczesny",
+    "rooms": [
+      "salon"
+    ],
+    "heroRoom": "salon",
+    "finishes": [
+      {
+        "code": "kaszmir",
+        "label": "Kaszmir",
+        "body": "kaszmir",
+        "front": "kaszmir",
+        "accent": null
+      }
+    ],
+    "arrangements": [
+      {
+        "base": "/katalog/73c643f37b-vigo_02_kc_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/vigo/VIGO_02_KC_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/10f2fe016c-vigo_01_kc_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/vigo/VIGO_01_KC_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/d9262ddfe6-vigo_03_kc_2160px",
+        "widths": [
+          1280,
+          2160
+        ],
+        "w": 2160,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/vigo/VIGO_03_KC_2160px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 9,
+    "isNew": false,
+    "demo": false,
+    "order": 30
+  },
+  {
+    "slug": "montana",
+    "name": "MONTANA",
+    "tagline": "Biały. 4 meble do salonu, sypialni i przedpokoju.",
+    "description": "Kolekcja MONTANA to 4 meble do salonu, sypialni i przedpokoju w kolorach: biały i dąb evoke.",
+    "style": "nowoczesny",
     "rooms": [
       "salon",
       "sypialnia",
       "przedpokoj"
     ],
     "heroRoom": "sypialnia",
-    "handle": "bar",
-    "base": "legsMetal",
     "finishes": [
       {
-        "code": "BP-ZL",
-        "label": "Biały połysk / złoty",
-        "body": "bialy-mat",
-        "front": "bialy-polysk",
-        "top": "bialy-polysk",
-        "metal": "zloty"
+        "code": "bialy",
+        "label": "Biały",
+        "body": "bialy",
+        "front": "bialy",
+        "accent": null
       },
       {
-        "code": "KA-ZL",
-        "label": "Kaszmir / złoty",
-        "body": "kaszmir",
-        "front": "kaszmir",
-        "metal": "zloty"
-      },
-      {
-        "code": "CM-ZL",
-        "label": "Czarny mat / złoty",
-        "body": "czarny-mat",
-        "front": "czarny-mat",
-        "metal": "zloty"
+        "code": "dab-evoke",
+        "label": "Dąb evoke",
+        "body": "dab-evoke",
+        "front": "dab-evoke",
+        "accent": null
       }
     ],
+    "arrangements": [
+      {
+        "base": "/katalog/ea18c55a8c-montana_mt01_bialy_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3240,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/montana/MONTANA_MT01_bialy_2160px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/6113966489-montana_mt01_evoke_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3240,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/montana/MONTANA_MT01_evoke_2160px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/05662a16f5-montana_mt02_bialy_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3240,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/montana/MONTANA_MT02_bialy_2160px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/e48e8e8c32-montana_mt02_evoke_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3240,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/montana/MONTANA_MT02_evoke_2160px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/ff5eacc722-montana_mt03_bialy_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3240,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/montana/MONTANA_MT03_bialy_2160px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/c310a3da39-montana_mt03_evoke_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3240,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/montana/MONTANA_MT03_evoke_2160px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/905ec56fe9-montana_mt04_bialy_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3240,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/montana/MONTANA_MT04_bialy_2160px.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/860a7b4151-montana_mt04_evoke_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3240,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/montana/MONTANA_MT04_evoke_2160px.jpg",
+        "room": "sypialnia"
+      }
+    ],
+    "productCount": 4,
     "isNew": false,
-    "order": 4,
-    "demo": true
+    "demo": false,
+    "order": 31
   },
   {
-    "slug": "liran",
-    "name": "LIRAN",
-    "tagline": "Fronty bez uchwytów, cofnięty cokół i blaty w dekorze dębu.",
-    "description": "LIRAN ma fronty bez uchwytów — szuflady i drzwi otwiera się lekkim naciśnięciem (push-to-open). Korpusy stoją na cofniętym cokole albo wiszą na ścianie, więc bryły wyglądają lekko. Matowa czerń lub biel z blatem w dekorze dębu, a także jednolity grafit.",
+    "slug": "g-te",
+    "name": "G-TE",
+    "tagline": "Dąb i czarny połysk. 7 mebli do salonu, jadalni i pokoju młodzieżowego.",
+    "description": "Modne połączenie kolorystyczne wraz z oryginalnym ryflowaniem na froncie przykuwa uwagę.",
     "style": "nowoczesny",
     "rooms": [
       "salon",
       "jadalnia",
-      "biuro"
+      "pokoj-mlodziezowy",
+      "sypialnia"
     ],
     "heroRoom": "salon",
-    "handle": "push",
-    "base": "plinth",
     "finishes": [
       {
-        "code": "CM-DN",
-        "label": "Czarny mat / dąb naturalny",
-        "body": "czarny-mat",
-        "front": "czarny-mat",
-        "top": "dab-naturalny",
-        "metal": "stal"
-      },
-      {
-        "code": "BM-DN",
-        "label": "Biały mat / dąb naturalny",
-        "body": "bialy-mat",
-        "front": "bialy-mat",
-        "top": "dab-naturalny",
-        "metal": "stal"
-      },
-      {
-        "code": "GR",
-        "label": "Grafit",
-        "body": "grafit",
-        "front": "grafit",
-        "metal": "stal"
+        "code": "dab-czarny-polysk",
+        "label": "Dąb / czarny połysk",
+        "body": "dab",
+        "front": "czarny-polysk",
+        "accent": null
       }
     ],
+    "arrangements": [
+      {
+        "base": "/katalog/37652503ca-g-te_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3278,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/g-te/G-TE_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/42ebfc45bb-g-te_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3175,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/g-te/G-TE_02_2160px.jpg",
+        "room": "salon"
+      }
+    ],
+    "productCount": 7,
     "isNew": false,
-    "order": 5,
-    "demo": true
-  },
-  {
-    "slug": "melva",
-    "name": "MELVA",
-    "tagline": "Stonowane kolory, blaty w dekorze dębu miodowego i złote gałki.",
-    "description": "MELVA to klasyka w nowoczesnym wydaniu: fronty w kolorze kaszmiru lub szałwii, blaty w dekorze dębu miodowego i małe gałki w kolorze mosiądzu. Kolekcja ma meble do jadalni, salonu i sypialni, w tym kredens z przeszkleniem i rozkładany stół.",
-    "style": "klasyczny-nowoczesny",
-    "rooms": [
-      "salon",
-      "jadalnia",
-      "sypialnia"
-    ],
-    "heroRoom": "jadalnia",
-    "handle": "knob",
-    "base": "legsWood",
-    "finishes": [
-      {
-        "code": "KA-DM",
-        "label": "Kaszmir / dąb miodowy",
-        "body": "kaszmir",
-        "front": "kaszmir",
-        "top": "dab-miodowy",
-        "legs": "dab-miodowy",
-        "metal": "zloty"
-      },
-      {
-        "code": "SZ-DM",
-        "label": "Szałwia / dąb miodowy",
-        "body": "szalwia",
-        "front": "szalwia",
-        "top": "dab-miodowy",
-        "legs": "dab-miodowy",
-        "metal": "zloty"
-      },
-      {
-        "code": "OR",
-        "label": "Orzech",
-        "body": "orzech",
-        "front": "orzech",
-        "legs": "orzech",
-        "metal": "zloty"
-      }
-    ],
-    "isNew": false,
-    "order": 6,
-    "demo": true
-  },
-  {
-    "slug": "briso",
-    "name": "BRISO",
-    "tagline": "Biurka, regały i łóżka do nauki i odpoczynku w jednym stylu.",
-    "description": "BRISO to kolekcja do pokoju młodzieżowego i domowego biura: biurka z szufladami, otwarte regały, łóżka 90 i 120 cm oraz szafa. Uchwyty są wyfrezowane we frontach, więc nic nie wystaje. Korpusy białe albo grafitowe, fronty w dekorze dębu lub w kolorze szałwii.",
-    "style": "nowoczesny",
-    "rooms": [
-      "pokoj-mlodziezowy",
-      "biuro"
-    ],
-    "heroRoom": "pokoj-mlodziezowy",
-    "handle": "groove",
-    "base": "legsMetal",
-    "finishes": [
-      {
-        "code": "BM-DN",
-        "label": "Biały mat / dąb naturalny",
-        "body": "bialy-mat",
-        "front": "dab-naturalny",
-        "metal": "czarny"
-      },
-      {
-        "code": "BM-SZ",
-        "label": "Biały mat / szałwia",
-        "body": "bialy-mat",
-        "front": "szalwia",
-        "metal": "czarny"
-      },
-      {
-        "code": "GR-DM",
-        "label": "Grafit / dąb miodowy",
-        "body": "grafit",
-        "front": "dab-miodowy",
-        "metal": "czarny"
-      }
-    ],
-    "isNew": true,
-    "order": 7,
-    "demo": true
-  },
-  {
-    "slug": "verno",
-    "name": "VERNO",
-    "tagline": "Pojemne szafy i meble do przedpokoju o prostych, cichych frontach.",
-    "description": "VERNO porządkuje przedpokój i sypialnię: szafy 100 i 150 cm, szafki na buty z uchylnymi komorami, wieszak, lustro, komoda i łóżka z pojemnikiem. Fronty mają wyfrezowany uchwyt, a korpusy stoją na niskim cokole. Biel z dekorem dębu, kaszmir albo grafit z dębem miodowym.",
-    "style": "minimalistyczny",
-    "rooms": [
-      "przedpokoj",
-      "sypialnia"
-    ],
-    "heroRoom": "przedpokoj",
-    "handle": "groove",
-    "base": "plinth",
-    "finishes": [
-      {
-        "code": "BM-DN",
-        "label": "Biały mat / dąb naturalny",
-        "body": "bialy-mat",
-        "front": "dab-naturalny",
-        "metal": "stal"
-      },
-      {
-        "code": "KA",
-        "label": "Kaszmir",
-        "body": "kaszmir",
-        "front": "kaszmir",
-        "metal": "stal"
-      },
-      {
-        "code": "GR-DM",
-        "label": "Grafit / dąb miodowy",
-        "body": "grafit",
-        "front": "dab-miodowy",
-        "metal": "stal"
-      }
-    ],
-    "isNew": true,
-    "order": 8,
-    "demo": true
+    "demo": false,
+    "order": 32
   }
 ]

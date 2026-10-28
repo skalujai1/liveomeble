@@ -1,6 +1,5 @@
-// Karta mebla: przełącznik koloru (radio). Bez JS warianty są zwykłą listą z dostępnością.
-// Zmiana koloru podmienia zdjęcie, cenę, dostępność i ?kolor= w adresie (canonical zostaje bez parametru).
-import { renderPrice, renderStock } from './prices';
+// Karta mebla: przełącznik koloru (radio). Bez JS warianty są zwykłą listą.
+// Zmiana koloru podmienia zdjęcie, opis wariantu i ?kolor= w adresie (canonical zostaje bez parametru).
 
 export function initProductPage() {
   const root = document.querySelector<HTMLElement>('[data-product-page]');
@@ -14,9 +13,11 @@ export function initProductPage() {
     const radio = radios.find(r => r.value === code);
     if (!radio) return;
     radio.checked = true;
-    root.querySelectorAll<HTMLElement>('[data-gallery-item]').forEach(f => f.classList.toggle('is-active', f.dataset.variant === code));
-    root.querySelectorAll<HTMLElement>('[data-price]').forEach(el => { el.dataset.variant = code; renderPrice(el); });
-    root.querySelectorAll<HTMLElement>('[data-stock][data-product]').forEach(el => { el.dataset.variant = code; renderStock(el); });
+    document.querySelectorAll<HTMLElement>('[data-gallery-item], [data-variant-only]').forEach(f => {
+      const on = f.dataset.variant === code;
+      if (f.hasAttribute('data-gallery-item')) f.classList.toggle('is-active', on);
+      else f.hidden = !on;
+    });
     if (title?.dataset.template) title.textContent = title.dataset.template.replace('{colorLabel}', radio.dataset.label ?? code);
     if (updateUrl) {
       const u = new URL(location.href);

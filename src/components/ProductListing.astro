@@ -1,9 +1,8 @@
 ---
-// Lista mebli z filtrami (pomieszczenie, rodzaj, kolekcja, kolor, cena, tylko promocje) i sortowaniem.
+// Lista mebli z filtrami (pomieszczenie, rodzaj, kolekcja, kolor, dostawa w 72 h) i sortowaniem.
 // Bez JS: zwykły formularz GET i pełna lista w HTML. Z JS (scripts/listing.ts): filtrowanie bez przeładowania,
 // adres aktualizowany przez history.replaceState (canonical zostaje bez parametrów).
 import ProductCard from './ProductCard.astro';
-import PriceData from './PriceData.astro';
 import { boardFinishes, collections, pages, productCount, rooms, site, types, type Product } from '../lib/site';
 import { fill } from '../lib/text';
 
@@ -35,8 +34,8 @@ const options: Record<string, { value: string; label: string }[]> = {
 };
 const swatch = Object.fromEntries(boardFinishes.map(b => [b.id, b.hex]));
 const multi = ['pokoj', 'typ', 'kolekcja', 'kolor'].filter(x => !hide.includes(x) && options[x].length > 1);
-const cena = g('cena');
-const promo = g('promocje');
+const dostawa = g('dostawa');
+const anyDelivery = products.some(p => p.delivery72);
 const total = productCount(products.length);
 ---
 <div class="listing" id={id} data-listing data-action={action}>
@@ -62,21 +61,14 @@ const total = productCount(products.length);
           </ul>
         </fieldset>
       ))}
-      <fieldset class="filters__group" data-filter="cena">
-        <legend class="filters__legend">{cena.label}</legend>
-        <ul class="filters__options">
-          <li><label class="check"><input type="radio" name={cena.param} value="" checked /> <span>Dowolna</span></label></li>
-          {cena.options!.map(o => (
-            <li><label class="check"><input type="radio" name={cena.param} value={o.value} /> <span>{o.label}</span></label></li>
-          ))}
-        </ul>
-      </fieldset>
-      <div class="filters__group filters__group--inline">
-        <label class="check check--toggle">
-          <input type="checkbox" name={promo.param} value={promo.value} />
-          <span>{promo.label}</span>
-        </label>
-      </div>
+      {anyDelivery && (
+        <div class="filters__group filters__group--inline">
+          <label class="check check--toggle">
+            <input type="checkbox" name={dostawa.param} value={dostawa.value} />
+            <span>{dostawa.label}</span>
+          </label>
+        </div>
+      )}
     </div>
     <div class="filters__footer">
       <label class="field field--inline">
@@ -101,7 +93,6 @@ const total = productCount(products.length);
     <button class="btn btn--secondary" type="button" data-listing-clear>{f.clear}</button>
   </div>
 </div>
-<PriceData products={products} />
 
 <script>
   import { initListings } from '../scripts/listing';

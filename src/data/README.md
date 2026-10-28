@@ -1,61 +1,50 @@
-# Dane demo — Liveo Meble
+# Dane strony — Liveo Meble
 
-Wszystkie pliki w tym katalogu generuje `node tools/data/generate.mjs [--today=YYYY-MM-DD]`
-(deterministycznie, bez zależności). **Kolekcje, meble, ceny, promocje i sklepy są fikcyjne**
-(`demo: true`). Docelowo dane przyjdą z ERP Navireo (API) i arkusza Excel klienta — pola
-poniżej są do tego przygotowane. Po zmianie generatora: `node --test tools/data/`.
+Katalog na stronie to **prawdziwe meble Liveo z kart produktu** (eksport Navireo), a lista salonów —
+prawdziwe salony partnerskie z liveomeble.pl. Pliki w tym katalogu generuje `node tools/data/generate.mjs`
+(bez zależności). Po zmianie generatora: `npm test`.
 
-| Plik | Zawartość | Docelowe źródło |
+## Skąd są dane
+
+| Krok | Skrypt | Wejście → wyjście |
 |---|---|---|
-| `finishes.json` | wykończenia: płyty (`group: "board"`), metale (`"metal"`), szkło (`"glass"`); `light` = L* 0–1 | słownik kolorów z Excela |
-| `types.json` | 16 typów mebli: nazwy l.poj./l.mn./dopełniacz l.mn., slug kategorii, pokoje, `priceRange`, `kind` modelu 3D | stałe strony |
-| `rooms.json` | 6 pomieszczeń (bez kuchni), przypadki, `assistantKey` dla doradcy | stałe strony |
-| `collections.json` | 8 kolekcji: opis, styl, pokoje, `finishes` (warianty kolorystyczne), uchwyt, podstawa | Excel (opisy) |
-| `products.json` | 87 mebli, 219 wariantów kolorystycznych | Navireo (indeksy, ceny, stany) + Excel (opisy, cechy, wymiary) |
-| `promotions.json` | promocje (aktywne/przyszła/wygasła względem `--today`) | Navireo |
-| `postcodes.json` | prefiks kodu (2 cyfry) → przybliżony środek okręgu | stałe (opracowanie własne) |
-| `resellers.json` | 45 sklepów partnerskich | lista partnerów od klienta / CRM |
-| `meta.json` | data generowania, ziarno, liczności | — |
+| 1. Import kart | `python tools/data/import-karty.py "<folder z xlsx>"` (openpyxl) | karty produktu `*.xlsx` (Drive Liveo: „karty produktu dla białegostoku”, 46 plików) → `tools/data/karty-liveo.json` |
+| 2. Zdjęcia | `npm run images` (`tools/data/fetch-images.mjs`, sharp) | linki z kart (serwer `upload.liveomeble.pl`) → `public/katalog/*.webp` + `manifest.json` (poza repozytorium; w CI w cache) |
+| 3. Dane strony | `npm run data` (`tools/data/generate.mjs`) | `karty-liveo.json` + `salony-liveo.json` + manifest zdjęć → `src/data/*.json` |
 
-## Produkt
+`npm run build` robi kroki 2–3 sam (prebuild). Krok 1 uruchamia się ręcznie, gdy Liveo przyśle nowe karty.
 
-- `sku` = indeks produktu (`LV-<KOLEKCJA>-<TYP><SZER>[SUFIKS]`), wariant: `variants[].sku = <sku>-<code>`.
-- `basePrice` — cena regularna brutto PLN; cenę do pokazania liczy **zawsze** `priceFor()` z `src/lib/pricing.js`
-  (promocja z ERP przecenia mebel bez zmiany danych produktu).
-- `priceHistory` — zmiany faktycznej ceny sprzedaży z 60 dni (`{date, price}` = cena od tego dnia); źródło informacji Omnibus.
-- `variants[].stock`: `dostepny` | `na-zamowienie` (+ `leadTimeDays`) | `wyprzedany`.
-- `variants[].images.packshot` = `renders/products/<sku>--<code>.webp` (renderer, wg `model3d` + `variants[].finish`).
-- `rooms` — slugi z `rooms.json`; łóżka ≤ 120 cm → pokój młodzieżowy, ≥ 140 cm → sypialnia.
+## Zasady importu (uzgodnione 28.10.2026)
 
-## model3d — konwencje i rozszerzenia kontraktu
+- **Mebel** = kolekcja + kod bryły (np. ARIS AS01). **Wariant** = kolor (osobny wiersz/plik w karcie, np. DANTE w 5 kolorach frontów).
+- **Łóżka**: osobny mebel na rozmiar materaca i wersję (z pojemnikiem / bez stelaża), np. „Łóżko 160 z pojemnikiem ATE AT15”.
+- **Kuchnie** tylko jako gotowe zestawy (TIFFANY T-35, długość 180–260 cm; A/B/C to kolory). Pojedyncze szafki, fronty, blaty i cokoły (PATI, TIFFANY) — pominięte.
+- **Pominięte** jako akcesoria: uchwyty, LED i zasilacze, panele zagłowia, półki i fronty do szaf, korpusy FRESCO (system szaf z elementów). Lista w `karty-liveo.json → excluded` (z powodem).
+- **Bez cen i promocji**: karty nie mają cen detalicznych (tylko cenę dropshipping netto w 11 wierszach — nie pokazujemy jej). Strona odsyła po cenę do salonu partnerskiego. `promotions.json` jest pusty, `src/lib/pricing.js` czeka na cennik z Navireo.
+- Kolory: nazwy z kolumn KOLORYSTYKA KORPUSU / FRONTU, skróty z nazw handlowych rozwinięte („DĄB CR. T” → „dąb cremona torro”). Próbki kolorów (`finishes.json → hex`) są poglądowe.
+- Opis kolekcji: zdania z opisów marketingowych z kart, które dotyczą całej serii (kolorów, charakteru) — bez dopisywania własnych.
 
-Wymiary w cm (`w`, `h`, `d` = `dims`). `finish` w `model3d` to wariant domyślny; każdy wariant ma własny `finish`.
+## Pliki
 
-- **Komórki frontów** (`columns[].cells`) są wymienione **od góry do dołu**; `w`/`h` to proporcje.
-- **`legH`** — wysokość nóg/cokołu wliczona w `h`. Stoły, ławy, biurka: `legH = h − top`. Meble wiszące: `legH = 0`,
-  a **`mountH`** to sugerowana wysokość dolnej krawędzi nad podłogą (do aranżacji).
-- **cabinet**: `glassShelves: true`, gdy są drzwi przeszklone (szklane półki widoczne za szkłem).
-- **desk** (biurko, toaletka): `pedestal` (cm) + `pedestalSide` (`left`|`right`) — kontener pod blatem;
-  `columns` opisują **tylko kontener**; reszta szerokości to miejsce na nogi. `drawerH` (cm, opcjonalnie) —
-  płytka szuflada pod blatem nad miejscem na nogi.
-- **bed**: `mattress: [szer, dł]`, `headboardH`, `frameH` (wysokość ramy), `storage` (pojemnik), `upholstered`
-  (tapicerowane wezgłowie w kolorze `finish.body`), opcjonalnie `headboard: "channels"`.
-- **table**: opcjonalnie `extendTo` (cm po rozłożeniu). **coffeeTable**: `shelf` (półka pod blatem).
-- **wallShelf**: `style` `board` (jedna deska, `top` = grubość) | `box` (otwarta skrzynka), `dividers`, `shelves`.
-- **mirror**: `frame` (cm), `shape` `rect`|`arch`, `frameMaterial` `board`|`metal` (metal = kolor `finish.metal`).
-- **coatRack**: `hooks`, `shelf`.
-- `finish.legs` (opcjonalnie) — kolor drewnianych nóg (`base: "legsWood"`).
+| Plik | Zawartość |
+|---|---|
+| `collections.json` | 32 kolekcje: opis, kolory (`finishes`), pomieszczenia, aranżacje z kart (`arrangements` z pokojem) |
+| `products.json` | 469 mebli, 666 wariantów: wymiary, waga, paczki z EAN, materiały (`specs`), dostawa 72 h, zdjęcia, rysunek wymiarowy, instrukcja PDF, animacja 360° |
+| `finishes.json` | 35 dekorów z kart (hex próbki, jasność, drewno, połysk) |
+| `types.json` | rodzaje mebli z kart (z pomieszczeniami liczonymi z danych) |
+| `rooms.json` | 7 pomieszczeń (z kuchnią) |
+| `promotions.json` | pusta lista — karty nie zawierają promocji |
+| `postcodes.json` | prefiks kodu (2 cyfry) → przybliżony środek okręgu |
+| `resellers.json` | 443 salony partnerskie z liveomeble.pl |
+| `meta.json` | data importu, źródło, liczności |
 
 ## Logika (src/lib)
 
-- `pricing.js` — `priceFor(product, variantCode, promotions, now)`, `formatPrice`, `activePromotions`.
-  Najlepsza pojedyncza promocja (bez łączenia), aktywna gdy `startsAt <= now < endsAt`, cena w dół do pełnych zł, min. 1 zł.
-  Zakres promocji: listy `collections`/`types`/`skus` łączone przez AND, wartości w liście przez OR.
-- `locator.js` — `normalizePostcode`, `lookupPostcode`, `haversineKm`, `nearestResellers` (filtr po kolekcji).
+- `images.ts` — zdjęcia katalogu z `public/katalog` (packshot wariantu, aranżacje kolekcji i pokoi).
+- `locator.js` — `normalizePostcode`, `lookupPostcode`, `haversineKm`, `nearestResellers`.
+- `pricing.js` — silnik cen i promocji (Omnibus), gotowy na cennik z Navireo; dziś nieużywany przez strony.
 
 ## Eksport dla doradcy wnętrz
 
-`node tools/data/export-assistant-catalog.mjs [--now=ISO]` → `liveo-assistant/data/catalog.json`
-(jeden rekord na wariant, ceny z `priceFor()` w chwili `--now`, bez wariantów wyprzedanych).
-Pokoje mapowane przez `rooms[].assistantKey`; stoły i kredensy z jadalni dostają też klucz `kuchnia`,
-bo widżet ma przycisk „Kuchnia”, a kuchni na razie nie modelujemy.
+`node tools/data/export-assistant-catalog.mjs` → `liveo-assistant/data/catalog.json`
+(jeden rekord na wariant, `price: null`, zdjęcie z `/katalog/`, profil koloru z dekorów).

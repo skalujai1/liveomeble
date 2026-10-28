@@ -40,7 +40,7 @@
     "accusative": "pokój młodzieżowy",
     "locative": "w pokoju młodzieżowym",
     "assistantKey": "mlodziezowy",
-    "description": "Biurka, łóżka 90 i 120 cm, regały, komody i szafy do pokoju nastolatka.",
+    "description": "Biurka, łóżka, regały, komody i szafy do pokoju nastolatka.",
     "order": 4
   },
   {
@@ -64,5 +64,16 @@
     "assistantKey": "biuro",
     "description": "Biurka, regały, komody i półki do pracy w domu.",
     "order": 6
+  },
+  {
+    "slug": "kuchnia",
+    "name": "Kuchnia",
+    "shortName": "Kuchnia",
+    "genitive": "kuchni",
+    "accusative": "kuchnię",
+    "locative": "w kuchni",
+    "assistantKey": "kuchnia",
+    "description": "Gotowe zestawy kuchenne o długości od 180 do 260 cm.",
+    "order": 7
   }
 ]
