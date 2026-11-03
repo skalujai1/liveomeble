@@ -19,7 +19,8 @@ const route = (s: (typeof resellers)[number]) =>
     <details class="store-directory__group" id={`woj-${slugify(g.name)}`}>
       <summary class="store-directory__summary">
         <span class="store-directory__title">{g.name.charAt(0).toLocaleUpperCase('pl') + g.name.slice(1)}</span>
-        <span class="store-directory__meta">{plural(site.plural.stores, g.stores.length)} · {[...new Set(g.stores.map(s => s.city))].join(', ')}</span>
+        <span class="store-directory__count">{plural(site.plural.stores, g.stores.length)}</span>
+        <span class="store-directory__meta">{[...new Set(g.stores.map(s => s.city))].join(', ')}</span>
       </summary>
       <ul class="store-directory__list">
         {g.stores.map(s => (
