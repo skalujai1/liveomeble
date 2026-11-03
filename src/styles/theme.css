@@ -580,7 +580,7 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
 .store-directory__summary {
   display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 0.25rem var(--space-4);
   padding: var(--space-4) 2.75rem var(--space-4) 0; position: relative; list-style: none; cursor: pointer;
-  transition: background-color var(--dur) var(--ease-out), padding var(--dur) var(--ease-out);
+  transition: background-color var(--dur) var(--ease-out);
 }
 .store-directory__summary::-webkit-details-marker { display: none; }
 .store-directory__summary::after {
@@ -588,8 +588,9 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
   border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform var(--dur) var(--ease-out);
 }
 .store-directory__group[open] > .store-directory__summary::after { transform: translateY(0.25rem) rotate(-135deg); }
-.store-directory__summary:hover { background: var(--color-surface); padding-left: var(--space-3); }
-.store-directory__title { grid-column: 1; font: var(--weight-display) var(--text-xl)/1.2 var(--font-display); margin: 0; }
+.store-directory__summary:hover { background: var(--color-surface); }
+.store-directory__summary:hover .store-directory__title { translate: var(--space-3) 0; }
+.store-directory__title { grid-column: 1; font: var(--weight-display) var(--text-xl)/1.2 var(--font-display); margin: 0; transition: translate var(--dur) var(--ease-out); }
 .store-directory__count { grid-column: 2; font-size: var(--text-sm); color: var(--color-text-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .store-directory__meta {
   grid-column: 1 / -1; font-size: var(--text-sm); color: var(--color-text-muted);
@@ -608,7 +609,7 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
   .store-directory__count { grid-column: 2; }
   .store-directory__meta { grid-column: 3; }
 }
-@media (prefers-reduced-motion: reduce) { .store-directory__summary, .store-directory__summary::after { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .store-directory__summary, .store-directory__summary::after, .store-directory__title { transition: none; } }
 
 /* ---------- Promocje: karty z plakietką rabatu ---------- */
 .card-grid--promos { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--space-5); }
