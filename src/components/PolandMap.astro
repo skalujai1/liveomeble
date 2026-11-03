@@ -1,45 +1,68 @@
 ---
-// Mapa salonów jako raster kropek: Polska z drobnej siatki, kropka puchnie tam, gdzie jest więcej salonów.
-// Kropki rozchodzą się falą od fabryki w Raniżowie. Dane: prawdziwe salony z liveomeble.pl (src/data/resellers.json).
+// Mapa salonów jako raster kropek: Polska z drobnej siatki (granice z PRG/GUGiK), kropka puchnie tam, gdzie jest więcej
+// salonów. Kropki rozchodzą się falą od fabryki w Raniżowie. Dane: baza salonów (tools/data/salony-liveo.xlsx).
+// Województwo to link do jego listy salonów pod mapą (#woj-…), kropka ma podpis z miastami (natywny tooltip).
 // scripts/store-finder.ts podświetla kropki z wynikami wyszukiwania i zaznacza punkt wyszukiwania.
-import { MAP, outlinePath, project } from '../lib/geo';
+import { MAP, outlinePath, project, regions } from '../lib/geo';
 import type { Reseller } from '../lib/site';
-import { plural } from '../lib/text';
+import { plural, slugify } from '../lib/text';
 
 interface Props { stores: Reseller[]; note: string; label?: string }
 const { stores, note, label = 'Mapa salonów partnerskich Liveo w Polsce' } = Astro.props;
+const salony = (n: number) => plural({ one: '{n} salon', few: '{n} salony', many: '{n} salonów' }, n);
 
+const pl = stores.filter(s => s.country === 'PL');
+const abroad = stores.filter(s => s.country !== 'PL');
 const STEP = 12; // oczko siatki w jednostkach mapy
 const HQ = project(50.2456, 21.9883); // Raniżów — siedziba i fabryka Liveo
-const cells = new Map<string, { x: number; y: number; ids: string[] }>();
-for (const s of stores) {
+const cells = new Map<string, { x: number; y: number; ids: string[]; cities: Map<string, number> }>();
+for (const s of pl) {
   const { x, y } = project(s.lat, s.lng);
   const cx = Math.round(x / STEP) * STEP, cy = Math.round(y / STEP) * STEP;
-  const c = cells.get(`${cx},${cy}`) ?? { x: cx, y: cy, ids: [] };
+  const c = cells.get(`${cx},${cy}`) ?? { x: cx, y: cy, ids: [], cities: new Map() };
   c.ids.push(s.id);
+  c.cities.set(s.city, (c.cities.get(s.city) ?? 0) + 1);
   cells.set(`${cx},${cy}`, c);
 }
-const regions = new Set(stores.map(s => s.voivodeship)).size;
+const byRegion = new Map<string, number>();
+for (const s of pl) byRegion.set(s.voivodeship, (byRegion.get(s.voivodeship) ?? 0) + 1);
 const noun = plural({ one: 'salon partnerski', few: 'salony partnerskie', many: 'salonów partnerskich' }, stores.length);
 const dots = [...cells.values()].map(c => ({
   ...c,
   r: Math.min(5.6, 1.9 + 1.25 * Math.sqrt(c.ids.length)).toFixed(2),
   d: Math.round(Math.hypot(c.x - HQ.x, c.y - HQ.y) * 2.2), // opóźnienie fali (ms)
+  title: [...c.cities].map(([city, n]) => (n > 1 ? `${city} (${n})` : city)).join(', '),
+  region: slugify(pl.find(s => s.id === c.ids[0])!.voivodeship),
 }));
 ---
 <figure class="poland-map" data-sf-map data-reveal>
-  <p class="poland-map__count"><span class="poland-map__num">{stores.length}</span> {noun} <span class="poland-map__sub">w {regions} województwach</span></p>
-  <svg viewBox={`-10 -10 ${MAP.width + 20} ${MAP.height + 20}`} role="img" aria-label={`${label}: ${stores.length}`} data-map-lng0={MAP.lng0} data-map-lat0={MAP.lat0} data-map-kx={MAP.kx} data-map-ky={MAP.ky}>
+  <p class="poland-map__count">
+    <span class="poland-map__num">{stores.length}</span> {noun}
+    <span class="poland-map__sub">{pl.length} w Polsce, w {byRegion.size} województwach{abroad.length > 0 && ` · ${salony(abroad.length)} w Słowenii`}</span>
+  </p>
+  <svg viewBox={`-10 -10 ${MAP.width + 20} ${MAP.height + 20}`} role="group" aria-label={`${label}: ${salony(pl.length)}. Województwa prowadzą do list salonów.`} data-map-lng0={MAP.lng0} data-map-lat0={MAP.lat0} data-map-kx={MAP.kx} data-map-ky={MAP.ky}>
     <defs>
       <pattern id="pm-grid" width={STEP} height={STEP} x={-STEP / 2} y={-STEP / 2} patternUnits="userSpaceOnUse">
         <circle cx={STEP / 2} cy={STEP / 2} r="1.5" class="poland-map__grid" />
       </pattern>
     </defs>
     <path class="poland-map__land" d={outlinePath()} fill="url(#pm-grid)" />
-    <g class="poland-map__stores">
-      {dots.map(c => <circle class="poland-map__store" cx={c.x} cy={c.y} r={c.r} style={`--d:${c.d}ms`} data-store-ids={c.ids.join(' ')} />)}
+    <g class="poland-map__regions">
+      {regions.map(r => (
+        <a href={`#woj-${slugify(r.name)}`} aria-label={`${r.name}: ${salony(byRegion.get(r.name) ?? 0)}`} data-region={slugify(r.name)}>
+          <title>{r.name}: {salony(byRegion.get(r.name) ?? 0)}</title>
+          <path class="poland-map__region" d={r.d} />
+        </a>
+      ))}
     </g>
-    <g class="poland-map__hq" transform={`translate(${HQ.x} ${HQ.y})`}>
+    <g class="poland-map__stores" aria-hidden="true">
+      {dots.map(c => (
+        <circle class="poland-map__store" cx={c.x} cy={c.y} r={c.r} style={`--d:${c.d}ms`} data-store-ids={c.ids.join(' ')} data-region={c.region}>
+          <title>{c.title}</title>
+        </circle>
+      ))}
+    </g>
+    <g class="poland-map__hq" transform={`translate(${HQ.x} ${HQ.y})`} aria-hidden="true">
       <circle class="poland-map__hq-pulse" r="7" />
       <circle r="7" />
       <text x="14" y="4">Raniżów</text>
@@ -48,3 +71,15 @@ const dots = [...cells.values()].map(c => ({
   </svg>
   <figcaption class="poland-map__note">{note}</figcaption>
 </figure>
+
+<script>
+  // Kropka salonu → lista jego województwa pod mapą (jak kliknięcie w województwo). Otwiera <details> z kotwicy.
+  const openFromHash = () => {
+    const el = location.hash.startsWith('#woj-') ? document.getElementById(location.hash.slice(1)) : null;
+    if (el instanceof HTMLDetailsElement) { el.open = true; el.querySelector('summary')?.focus({ preventScroll: true }); }
+  };
+  document.querySelectorAll<SVGCircleElement>('.poland-map__store[data-region]').forEach(c =>
+    c.addEventListener('click', () => { location.hash = `woj-${c.dataset.region}`; }));
+  addEventListener('hashchange', openFromHash);
+  openFromHash();
+</script>

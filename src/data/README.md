@@ -9,6 +9,8 @@ prawdziwe salony partnerskie z liveomeble.pl. Pliki w tym katalogu generuje `nod
 | Krok | Skrypt | Wejście → wyjście |
 |---|---|---|
 | 1. Import kart | `python tools/data/import-karty.py "<folder z xlsx>"` (openpyxl) | karty produktu `*.xlsx` (Drive Liveo: „karty produktu dla białegostoku”, 46 plików) → `tools/data/karty-liveo.json` |
+| 1b. Salony | `python tools/data/import-salony.py` (openpyxl) | **baza salonów `tools/data/salony-liveo.xlsx`** (źródło prawdy od 03.11.2026) → `tools/data/salony-liveo.json` |
+| 1c. Granice | `python tools/data/build-geo.py <wojewodztwa-min.geojson>` | PRG (GUGiK) z github.com/ppatrzyk/polska-geojson → `src/lib/geo-pl.json` (mapa salonów) |
 | 2. Zdjęcia | `npm run images` (`tools/data/fetch-images.mjs`, sharp) | linki z kart (serwer `upload.liveomeble.pl`) → `public/katalog/*.webp` + `manifest.json` (poza repozytorium; w CI w cache) |
 | 3. Dane strony | `npm run data` (`tools/data/generate.mjs`) | `karty-liveo.json` + `salony-liveo.json` + manifest zdjęć → `src/data/*.json` |
 
@@ -35,7 +37,7 @@ prawdziwe salony partnerskie z liveomeble.pl. Pliki w tym katalogu generuje `nod
 | `rooms.json` | 7 pomieszczeń (z kuchnią) |
 | `promotions.json` | pusta lista — karty nie zawierają promocji |
 | `postcodes.json` | prefiks kodu (2 cyfry) → przybliżony środek okręgu |
-| `resellers.json` | 443 salony partnerskie z liveomeble.pl |
+| `resellers.json` | 448 salonów z bazy xlsx (443 w Polsce, 5 w Słowenii): adres, województwo, `offer` (meble skrzyniowe / tapicerka), `approx` + `note` (pinezka przybliżona) |
 | `meta.json` | data importu, źródło, liczności |
 
 ## Logika (src/lib)

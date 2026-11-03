@@ -6,8 +6,8 @@ import { REGION_API } from '../config';
 import { lookupPostcode, nearestResellers, normalizePostcode } from '../lib/locator.js';
 
 type Store = {
-  id: string; name: string; address: string; city: string; district?: string; postcode: string; voivodeship: string;
-  lat: number; lng: number; phone: string | null; email: string | null; collections: string[];
+  id: string; name: string; address: string; city: string; district?: string; postcode: string; country: string; voivodeship: string;
+  lat: number; lng: number; phone: string | null; email: string | null; collections: string[]; offer: string[]; approx: boolean;
   services: Record<string, boolean>; openingHours: string | null; distanceKm?: number;
 };
 type Texts = {
@@ -80,19 +80,21 @@ function setupFinder(root: HTMLElement) {
   const storeItem = (s: Store, collection: string) => {
     const it = t.item;
     const H = `h${Math.min(6, t.headingLevel)}` as 'h3';
-    const addr = `${s.address}, ${s.postcode} ${s.city}`;
+    const addr = `${s.address}, ${s.postcode} ${s.city}${s.country === 'SI' ? ', Słowenia' : ''}`;
     const services = Object.entries(s.services).filter(([, on]) => on).map(([k]) => it.services[k]).filter(Boolean);
     const collLinks = el('span', { class: 'store__collections-list' });
     s.collections.forEach((c, i) => {
       if (i) collLinks.append(', ');
       collLinks.append(el('a', { href: `/kolekcje/${c}/` }, t.collectionNames[c] ?? c.toUpperCase()));
     });
-    const route = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${s.address}, ${s.postcode} ${s.city}`)}`;
+    const route = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(addr)}`;
     return el('li', { class: 'store', 'data-store-id': s.id },
       el(H, { class: 'store__name' }, s.name),
       s.distanceKm != null ? el('p', { class: 'store__distance' }, fill(it.distance, { km: km(s.distanceKm) })) : null,
       collection ? el('p', { class: 'store__highlight' }, fill(it.highlight, { collection: t.collectionNames[collection] ?? collection })) : null,
       el('p', { class: 'store__address' }, addr),
+      s.offer?.length ? el('p', { class: 'store__offer' }, `${it.offer}: ${s.offer.join(', ')}`) : null,
+      s.approx ? el('p', { class: 'store__approx' }, it.approx) : null,
       s.collections.length < Object.keys(t.collectionNames).length ? el('p', { class: 'store__collections' }, `${it.collections}: `, collLinks) : null,
       services.length ? el('p', { class: 'store__services' }, services.join(' · ')) : null,
       s.openingHours ? el('p', { class: 'store__hours' }, `${it.hours}: ${s.openingHours}`) : null,

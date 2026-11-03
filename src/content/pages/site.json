@@ -251,9 +251,9 @@
       "many": "{n} kolorów"
     },
     "stores": {
-      "one": "{n} sklep",
-      "few": "{n} sklepy",
-      "many": "{n} sklepów"
+      "one": "{n} salon",
+      "few": "{n} salony",
+      "many": "{n} salonów"
     },
     "collections": {
       "one": "{n} kolekcja",

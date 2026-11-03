@@ -5,7 +5,7 @@
 //
 // Źródła (oba w repozytorium, odświeżane osobnymi skryptami):
 //   tools/data/karty-liveo.json   ← tools/data/import-karty.py (karty produktu xlsx z eksportu Navireo, Drive Liveo)
-//   tools/data/salony-liveo.json  ← lista salonów z liveomeble.pl/salony-partnerskie
+//   tools/data/salony-liveo.json  ← tools/data/import-salony.py (baza salonów salony-liveo.xlsx)
 //   public/katalog/manifest.json  ← tools/data/fetch-images.mjs (zdjęcia z serwera Liveo, WebP)
 // Karty nie mają cen detalicznych ani stanów magazynowych — strona ich nie pokazuje (cena w salonie partnerskim).
 // Bez zależności — tylko Node (ESM). Wynik jest deterministyczny dla tych samych plików źródłowych.
@@ -459,8 +459,9 @@ const postcodes = {
 };
 
 // ---------------------------------------------------------------------------
-// Sklepy partnerskie: prawdziwa lista z liveomeble.pl/salony-partnerskie (tools/data/salony-liveo.json).
-// Oficjalna strona nie podaje, które kolekcje ma salon — każdy salon dostaje wszystkie (ofertę potwierdza salon).
+// Salony partnerskie: baza tools/data/salony-liveo.xlsx (→ salony-liveo.json przez import-salony.py), 448 salonów
+// (443 w Polsce, 5 w Słowenii). Baza nie podaje kolekcji salonu — każdy dostaje wszystkie (ofertę potwierdza salon);
+// `offer` = rodzaj oferty z bazy (meble skrzyniowe, tapicerka), `approx` = pinezka przybliżona (opis w `note`).
 // ---------------------------------------------------------------------------
 const SALONY = JSON.parse(readFileSync(join(ROOT, 'tools/data/salony-liveo.json'), 'utf8')).stores;
 const collSlugs = collections.map(c => c.slug);
@@ -471,12 +472,16 @@ const resellers = SALONY.map(s => ({
   city: s.city,
   district: null,
   postcode: s.postcode,
-  voivodeship: s.voivodeship,
+  country: s.country,
+  voivodeship: s.voivodeship ?? 'Słowenia',
   lat: s.lat,
   lng: s.lng,
   phone: null,
   email: null,
   collections: collSlugs,
+  offer: s.offer,
+  approx: s.approx,
+  note: s.note,
   services: {},
   openingHours: null,
   demo: false,

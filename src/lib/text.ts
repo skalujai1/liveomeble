@@ -3,6 +3,10 @@
 
 import { warsawDay } from './pricing.js';
 
+const PL: Record<string, string> = { ą: 'a', ć: 'c', ę: 'e', ł: 'l', ń: 'n', ó: 'o', ś: 's', ź: 'z', ż: 'z' };
+/** „Warmińsko-mazurskie” → „warminsko-mazurskie” (kotwice, adresy). */
+export const slugify = (s: string) => s.toLowerCase().replace(/[ąćęłńóśźż]/g, c => PL[c]).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
 const ESC: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 export const escapeHtml = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, c => ESC[c]);
 

@@ -59,6 +59,11 @@ export function validateData(data) {
   // sklepy
   for (const r of resellers) {
     const w = `sklep ${r.id}`;
+    if (!r.collections.length || !r.collections.every(x => collSlugs.has(x))) e.push(`${w}: kolekcje`);
+    if (r.country !== 'PL') {
+      if (!(r.lat > 35 && r.lat < 60 && r.lng > -10 && r.lng < 30)) e.push(`${w}: współrzędne poza Europą`);
+      continue; // salony za granicą (Słowenia) — bez polskiego kodu pocztowego
+    }
     if (!/^\d{2}-\d{3}$/.test(r.postcode)) e.push(`${w}: kod ${r.postcode}`);
     const c = pref[r.postcode.slice(0, 2)];
     if (!c) e.push(`${w}: prefiks ${r.postcode} nie istnieje`);
@@ -66,7 +71,6 @@ export function validateData(data) {
       const dKm = Math.hypot((r.lat - c.lat) * 111, (r.lng - c.lng) * 111 * Math.cos((r.lat * Math.PI) / 180));
       if (dKm > 110) e.push(`${w}: ${Math.round(dKm)} km od środka prefiksu ${r.postcode.slice(0, 2)}`);
     }
-    if (!r.collections.length || !r.collections.every(x => collSlugs.has(x))) e.push(`${w}: kolekcje`);
   }
   return e;
 }

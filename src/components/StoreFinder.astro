@@ -98,7 +98,7 @@ const quickCities = [...byCity.values()].sort((a, b) => b.n - a.n || a.city.loca
   {note && <p class="store-finder__tip">{note}</p>}
   {showMap && (
     <nav class="store-finder__quick" aria-labelledby={`${id}-szybko`}>
-      <p class="store-finder__quick-title" id={`${id}-szybko`}>Sklepy w największych miastach</p>
+      <p class="store-finder__quick-title" id={`${id}-szybko`}>Salony w największych miastach</p>
       <ul>
         {quickCities.map(c => <li><a href={`/gdzie-kupic/?kod=${c.postcode}`}>{c.city}</a></li>)}
       </ul>

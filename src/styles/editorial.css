@@ -455,3 +455,14 @@ h1, h2, .section__title { letter-spacing: -0.01em; }
 /* Packshoty z kart Liveo mają białe tło — ramka też biała, żeby zdjęcie nie wyglądało jak naklejka na lnie */
 .product-card .media--contain, .gallery__item .media--contain, .gallery__more a { background: #fff; box-shadow: inset 0 0 0 1px var(--color-line); }
 .dims-drawing--photo img { max-height: 34rem; object-fit: contain; }
+
+/* ---------- Mapa salonów: województwa (granice PRG) ---------- */
+.poland-map svg { overflow: visible; }
+.poland-map__regions a { outline: none; }
+.poland-map__region { fill: transparent; stroke: rgb(42 36 32 / 0.14); stroke-width: 0.8; stroke-linejoin: round; transition: fill var(--dur) var(--ease-out), stroke var(--dur) var(--ease-out); cursor: pointer; }
+.poland-map__regions a:hover .poland-map__region { fill: rgb(74 52 39 / 0.07); stroke: rgb(42 36 32 / 0.4); }
+.poland-map__regions a:focus-visible .poland-map__region { fill: rgb(74 52 39 / 0.1); stroke: var(--color-focus); stroke-width: 2.5; }
+.poland-map__store { cursor: pointer; }
+.poland-map__store:hover { fill: var(--color-dark); }
+.store__offer, .store__approx { margin: 0; font-size: var(--text-sm); color: var(--color-text-muted); }
+.store-directory__group:target { scroll-margin-top: 8rem; }
