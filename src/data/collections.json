@@ -493,28 +493,6 @@
     ],
     "arrangements": [
       {
-        "base": "/katalog/37652503ca-g-te_01_2160px",
-        "widths": [
-          1280,
-          2400
-        ],
-        "w": 3278,
-        "h": 2160,
-        "url": "https://upload.liveomeble.pl/img/g-te/G-TE_01_2160px.jpg",
-        "room": "salon"
-      },
-      {
-        "base": "/katalog/42ebfc45bb-g-te_02_2160px",
-        "widths": [
-          1280,
-          2400
-        ],
-        "w": 3175,
-        "h": 2160,
-        "url": "https://upload.liveomeble.pl/img/g-te/G-TE_02_2160px.jpg",
-        "room": "jadalnia"
-      },
-      {
         "base": "/katalog/1f521a3f07-irma_03_v2_720px",
         "widths": [
           1225
@@ -573,6 +551,28 @@
         "h": 720,
         "url": "https://upload.liveomeble.pl/img/irma-dab/IRMA_02_v2_720px.jpg",
         "room": "salon"
+      },
+      {
+        "base": "/katalog/37652503ca-g-te_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3278,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/g-te/G-TE_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/42ebfc45bb-g-te_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3175,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/g-te/G-TE_02_2160px.jpg",
+        "room": "jadalnia"
       }
     ],
     "productCount": 23,

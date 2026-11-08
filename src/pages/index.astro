@@ -26,7 +26,8 @@ const steps = section(page, 'jak-kupic');
 const path = '/';
 
 // Kurtyna: 8 kolekcji z kolejności w danych (najszersze kolekcje z aranżacjami).
-const heroCollections = collections.filter(c => c.arrangements.length).slice(0, 8);
+// Hero na cały ekran: tylko kolekcje z własnym zdjęciem w wysokiej rozdzielczości (min. 1600 px szerokości).
+const heroCollections = collections.filter(c => c.arrangements.length && (c.arrangements[0] as { w: number }).w >= 1600).slice(0, 8);
 // Rozkładówki: trzy kolekcje o różnym charakterze (różne kolory wiodące), z co najmniej 4 aranżacjami.
 const spreads = heroCollections.filter(c => c.arrangements.length >= 4)
   .filter((c, i, all) => all.findIndex(x => x.finishes[0].front === c.finishes[0].front) === i)

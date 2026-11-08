@@ -1,0 +1,51 @@
+{
+  "_opis": "Kropki na zdjęciach w hero strony głównej. Klucz: kolekcja; image: nazwa pliku zdjęcia (bez /katalog/), na którym są kropki — gdy zdjęcie w danych się zmieni, kropki tej kolekcji znikają. x, y: środek kropki w % szerokości i wysokości zdjęcia; box: [x1, y1, x2, y2] w % — obszar mebla podświetlany po najechaniu.",
+  "dante": { "image": "fb094f978a-dante_01_antracyt_2160px", "spots": [
+    { "sku": "DT07", "x": 22, "y": 54, "box": [4, 51, 32, 84] },
+    { "sku": "DT12", "x": 49, "y": 47, "box": [42, 30, 56, 70] },
+    { "sku": "DT01", "x": 71, "y": 61, "box": [58, 55, 84, 72] }
+  ] },
+  "remi": { "image": "8cfe9ced35-remi_rm01_bialy-evoke_2160px", "spots": [
+    { "sku": "RM01", "x": 46, "y": 72, "box": [6, 56, 70, 92] }
+  ] },
+  "milton": { "image": "8d6587069a-milton_01_antracyt_2160px", "spots": [
+    { "sku": "ML01", "x": 19, "y": 66, "box": [4, 59, 34, 80] },
+    { "sku": "ST10", "x": 52, "y": 56, "box": [39, 52, 61, 73] },
+    { "sku": "ML05", "x": 69, "y": 45, "box": [65, 26, 74, 69] },
+    { "sku": "ML03", "x": 86, "y": 60, "box": [74, 50, 97, 73] },
+    { "sku": "LA11", "x": 57, "y": 82, "box": [41, 74, 75, 92] }
+  ] },
+  "ate": { "image": "54fea29f6c-ate_01_2160px", "spots": [
+    { "sku": "AT01", "x": 18, "y": 72, "box": [3, 63, 32, 84] },
+    { "sku": "AT04", "x": 52, "y": 60, "box": [46, 47, 58, 74] },
+    { "sku": "AT03", "x": 70, "y": 66, "box": [59, 57, 82, 75] },
+    { "sku": "AT07", "x": 91, "y": 55, "box": [86, 36, 96, 75] },
+    { "sku": "LA09", "x": 46, "y": 84, "box": [30, 73, 61, 97] }
+  ] },
+  "mati": { "image": "78144835ba-mati_01_2160px", "spots": [
+    { "sku": "MI04", "x": 14, "y": 58, "box": [3, 50, 24, 70] },
+    { "sku": "MI03", "x": 39, "y": 60, "box": [30, 52, 48, 77] },
+    { "sku": "MI01", "x": 58, "y": 62, "box": [48, 56, 68, 75] },
+    { "sku": "MI07", "x": 70, "y": 47, "box": [66, 26, 76, 68] },
+    { "sku": "LA13", "x": 83, "y": 73, "box": [68, 70, 99, 97] }
+  ] },
+  "ferro": { "image": "5f2a2e784b-ferro_01_2160px", "spots": [
+    { "sku": "FE04", "x": 14, "y": 46, "box": [7, 35, 21, 69] },
+    { "sku": "FE02", "x": 30, "y": 56, "box": [23, 47, 38, 67] },
+    { "sku": "ST10", "x": 51, "y": 55, "box": [41, 50, 66, 72] },
+    { "sku": "LA11", "x": 29, "y": 73, "box": [19, 66, 39, 88] },
+    { "sku": "FE01", "x": 82, "y": 72, "box": [67, 57, 95, 87] }
+  ] },
+  "aris": { "image": "00baf3871e-aris_01_2160px", "spots": [
+    { "sku": "AS03", "x": 20, "y": 62, "box": [7, 50, 33, 80] },
+    { "sku": "AS08", "x": 48, "y": 46, "box": [43, 27, 53, 66] },
+    { "sku": "AS01", "x": 63, "y": 60, "box": [53, 56, 74, 70] },
+    { "sku": "AS05", "x": 87, "y": 62, "box": [77, 39, 97, 85] },
+    { "sku": "LA03", "x": 50, "y": 78, "box": [35, 68, 65, 97] }
+  ] },
+  "forrest": { "image": "70479e11c7-forrest_01_2160px", "spots": [
+    { "sku": "FR04", "x": 12, "y": 56, "box": [2, 41, 23, 69] },
+    { "sku": "FR02", "x": 61, "y": 64, "box": [49, 54, 73, 75] },
+    { "sku": "FR06", "x": 86, "y": 58, "box": [74, 39, 98, 81] }
+  ] }
+}

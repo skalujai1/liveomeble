@@ -2,9 +2,14 @@
 // Hero strony głównej — „kurtyna kolekcji”: każda kolekcja na cały ekran (kadr cinema 2:1, na telefonie pion 4:5),
 // nazwa w Italianie w skali plakatu, kolor i liczba mebli, dwa działania; indeks nazw na dole steruje slajdami (src/scripts/motion.ts).
 // Bez JS widać pierwszą kolekcję, a indeks to zwykłe linki do kolekcji.
+// Kropki na meblach (src/content/hotspots.json): klik → strona mebla, najechanie → podświetlenie mebla i krótka specyfikacja.
 import HeroPicture from './HeroPicture.astro';
-import { collectionImage } from '../lib/images';
-import { finishById, productsByCollection, url, type Collection } from '../lib/site';
+import hotspots from '../content/hotspots.json';
+import { collectionImage, packshotFor, srcOf } from '../lib/images';
+import { colorCount, dimsLong, finishById, productsByCollection, site, url, type Collection } from '../lib/site';
+
+type Spot = { sku: string; x: number; y: number; box: [number, number, number, number] };
+const HOTSPOTS = hotspots as unknown as Record<string, { image: string; spots: Spot[] }>;
 
 interface Props { collections: Collection[] }
 const { collections } = Astro.props;
@@ -19,14 +24,52 @@ const slides = collections.map(c => {
     color: c.finishes[0].label,
     hex: finishById.get(c.finishes[0].front)?.hex,
     meta: pieces(items.length),
+    ar: wide.pub ? wide.pub.w / wide.pub.h : 2,
+    spots: spotsFor(c, wide.pub?.base, items),
   };
 });
+
+// Kropki tylko wtedy, gdy zdjęcie w danych to wciąż to samo, na którym je zaznaczono.
+function spotsFor(c: Collection, base: string | undefined, items: ReturnType<typeof productsByCollection>) {
+  const h = HOTSPOTS[c.slug];
+  if (!h || !base || base.split('/').pop() !== h.image) return [];
+  return h.spots.flatMap(s => {
+    const p = items.find(x => x.sku === s.sku);
+    if (!p) return [];
+    const v = p.variants[0];
+    const pk = packshotFor(p, v);
+    return [{
+      ...s, href: url.product(p.slug), name: p.name, dims: dimsLong(p), colors: colorCount(p), delivery: p.delivery72,
+      thumb: pk?.pub && !pk.approximate ? srcOf(pk.pub, 480) : null,
+    }];
+  });
+}
 ---
 <section class="hero-curtain on-dark" aria-roledescription="karuzela" aria-label="Kolekcje Liveo" data-hero data-overlay-hero style={`--count: ${slides.length}`}>
   <div class="hero-curtain__slides">
     {slides.map((s, i) => (
       <div class:list={['hero-curtain__slide', { 'is-active': i === 0 }]} data-slide role="group" aria-roledescription="slajd" aria-label={`${i + 1} z ${slides.length}: kolekcja ${s.c.name}`} aria-hidden={i === 0 ? undefined : 'true'} inert={i !== 0}>
         <HeroPicture wide={s.wide} tall={s.tall} alt={s.alt} class="hero-curtain__media" sizes="100vw" priority={i === 0} />
+        {s.spots.length > 0 && (
+          <ul class="hero-spots" style={`--ar: ${s.ar.toFixed(4)}`} aria-label={`Meble na zdjęciu kolekcji ${s.c.name}`} data-spots>
+            {s.spots.map(sp => (
+              <li class:list={['hero-spot', { 'hero-spot--left': sp.x > 58 }]} style={`--x: ${sp.x}%; --y: ${sp.y}%`} data-box={sp.box.join(' ')}>
+                <a class="hero-spot__link" href={sp.href}>
+                  <span class="hero-spot__dot" aria-hidden="true"></span>
+                  <span class="hero-spot__card">
+                    {sp.thumb && <span class="hero-spot__thumb" data-thumb={sp.thumb} aria-hidden="true"></span>}
+                    <span class="hero-spot__text">
+                      <span class="hero-spot__name">{sp.name}</span>
+                      <span class="hero-spot__spec">{sp.dims}</span>
+                      <span class="hero-spot__spec">{sp.colors}{sp.delivery && ` · ${site.labels.delivery72}`}</span>
+                      <span class="hero-spot__more">Zobacz mebel</span>
+                    </span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
         <div class="hero-curtain__copy container">
           <p class="hero-curtain__name"><span class="visually-hidden">Kolekcja </span>{s.c.name}</p>
           <p class="hero-curtain__meta">

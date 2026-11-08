@@ -48,6 +48,61 @@ function initHeader() {
   update();
 }
 
+// Kropki na meblach w hero: podświetlenie mebla (zmienne CSS obszaru), miniatura ładowana dopiero przy pierwszym najechaniu,
+// a kropki, które wypadłyby pod nazwą kolekcji, przyciskami albo paskiem indeksu, są ukrywane.
+function initHotspots() {
+  const lists = [...document.querySelectorAll<HTMLElement>('[data-spots]')];
+  if (!lists.length) return;
+  for (const list of lists) {
+    list.querySelectorAll<HTMLElement>('.hero-spot').forEach(spot => {
+      const [x1, y1, x2, y2] = (spot.dataset.box || '').split(' ').map(Number);
+      const on = () => {
+        list.style.setProperty('--bx', `${(x1 + x2) / 2}%`);
+        list.style.setProperty('--by', `${(y1 + y2) / 2}%`);
+        list.style.setProperty('--bw', `${x2 - x1}%`);
+        list.style.setProperty('--bh', `${y2 - y1}%`);
+        list.classList.add('is-lit');
+        const t = spot.querySelector<HTMLElement>('[data-thumb]');
+        if (t?.dataset.thumb) { t.style.backgroundImage = `url("${t.dataset.thumb}")`; delete t.dataset.thumb; }
+      };
+      const off = () => list.classList.remove('is-lit');
+      spot.addEventListener('pointerenter', on);
+      spot.addEventListener('pointerleave', off);
+      spot.addEventListener('focusin', on);
+      spot.addEventListener('focusout', off);
+    });
+  }
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const bar = hero?.querySelector<HTMLElement>('.hero-curtain__bar');
+  const rectOf = (els: Element[]) => els.map(el => {
+    // nazwa: prostokąt samego tekstu; czcionka ma wysoki zapas nad literami, więc górę obcinamy o 18% wysokości
+    if (el.matches('.hero-curtain__name')) { const r = document.createRange(); r.selectNodeContents(el); const b = r.getBoundingClientRect(); return new DOMRect(b.left, b.top + b.height * 0.18, b.width, b.height * 0.82); }
+    return el.getBoundingClientRect();
+  });
+  const layout = () => {
+    const top = header ? header.getBoundingClientRect().bottom + 8 : 0;
+    const bottom = bar ? bar.getBoundingClientRect().top - 12 : innerHeight;
+    for (const list of lists) {
+      const slide = list.closest('[data-slide]');
+      const copy = slide?.querySelector('.hero-curtain__copy');
+      const blocks = copy ? rectOf([copy.querySelector('.hero-curtain__name')!, ...copy.querySelectorAll('.hero-curtain__meta > *, .hero-curtain__cta > *')].filter(Boolean)) : [];
+      list.querySelectorAll<HTMLElement>('.hero-spot').forEach(spot => {
+        spot.classList.remove('is-covered');
+        const d = spot.getBoundingClientRect();
+        const hit = d.top < top || d.top > bottom || d.left < 16 || d.left > innerWidth - 16
+          || blocks.some(b => d.left > b.left - 28 && d.left < b.right + 28 && d.top > b.top - 28 && d.top < b.bottom + 28);
+        spot.classList.toggle('is-covered', hit);
+      });
+    }
+  };
+  let raf = 0;
+  addEventListener('resize', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(layout); });
+  document.fonts?.ready.then(layout);
+  layout();
+  setTimeout(layout, 1400); // po animacji wejścia tekstu pierwszego slajdu
+}
+
 function initHero() {
   document.querySelectorAll<HTMLElement>('[data-hero]').forEach(hero => {
     const slides = [...hero.querySelectorAll<HTMLElement>('[data-slide]')];
@@ -185,6 +240,7 @@ export function initMotion() {
   initReveal();
   initHeader();
   initHero();
+  initHotspots();
   initRails();
   initShowcase();
 }

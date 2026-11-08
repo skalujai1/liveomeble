@@ -310,7 +310,11 @@ const collections = [...collMap.keys()].map(collName => {
     if (!img) return null;
     const votes = [...(arrRoom.get(u) || new Map())].sort((a, b) => b[1] - a[1]);
     return { ...img, url: u, room: votes[0]?.[0] ?? collRooms[0] };
-  }).filter(Boolean);
+  }).filter(Boolean)
+    // najpierw zdjęcia tej kolekcji (nazwa w pliku), potem wspólne z innych kart (np. stół z kolekcji G-TE przy IRMA)
+    .map((a, i) => ({ a, i, own: decodeURIComponent(a.url).toLowerCase().replace(/[^a-z0-9]/g, '').includes(collName.toLowerCase().replace(/[^a-z0-9]/g, '')) }))
+    .sort((x, y) => (y.own - x.own) || (x.i - y.i))
+    .map(x => x.a);
   const descs = collMap.get(collName).flatMap(k => k.variants.map(v => v.description));
   const sentences = collectionSentences(descs, collName);
   const top = finishes[0];
