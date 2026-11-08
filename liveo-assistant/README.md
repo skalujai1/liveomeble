@@ -20,9 +20,12 @@ Doradca ma dwie formy:
 | `widget/engine.js`, `widget/prompts.js` | analiza zdjęć w przeglądarce |
 | `data/catalog.json` | katalog dla widżetu (generuje `tools/data/export-assistant-catalog.mjs` w roocie repo) |
 | `data/wiedza.txt` | baza wiedzy dla modelu językowego (fakty o firmie, zakupach, kontakcie) |
+| `data/text-embeddings.json` | gotowe wektory opisów z `widget/prompts.js` (bez nich przeglądarka klienta liczy je sama i pobiera dodatkowe ~43 MB) |
 | `worker/` | Cloudflare Worker: widżet → Worker → OpenRouter |
 | `tools/build_catalog.py` | stary skrypt pobierający katalog ze starej strony (przejściowy) |
 | `server.py`, `index.html` | lokalny podgląd |
+| `tools/build-embeddings.html` | przeliczenie `data/text-embeddings.json` po zmianie `widget/prompts.js` (przez `server.py`) |
+| `tools/eval.html`, `tools/test-images.json` | test rozpoznawania na 80 zdjęciach: pomieszczenie / nie-pomieszczenie i rodzaj pomieszczenia |
 
 ## Osadzenie na stronie
 
@@ -62,6 +65,10 @@ python3 server.py                      # → http://localhost:5180
 # czat z AI: Worker lokalnie (wymaga pliku worker/.dev.vars z OPENROUTER_API_KEY=...)
 cd worker && npm install && npx wrangler dev   # → http://127.0.0.1:8787
 # potem: http://localhost:5180/?chat=http://127.0.0.1:8787/chat
+
+# po zmianie widget/prompts.js: przelicz wektory, potem sprawdź skuteczność (serwer musi działać)
+open http://localhost:5180/tools/build-embeddings.html
+open http://localhost:5180/tools/eval.html
 
 # testy Workera
 cd worker && npm test
