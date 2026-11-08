@@ -75,7 +75,7 @@ const [gWide, gDetail, gAngle, ...gMore] = rest;
   pageClass="page-collection"
   overlay
   ogImage={collectionImage(c, 'wide') ? `/og/kolekcje/${c.slug}.jpg` : undefined}
-  ogImageAlt={`Kolekcja ${c.name} — aranżacja`}
+  ogImageAlt={`Kolekcja ${c.name}, aranżacja`}
   breadcrumbs={[{ name: 'Kolekcje', url: url.collections }, { name: c.name, url: path }]}
   jsonLd={[
     webPage('CollectionPage', { path, title, description, hasBreadcrumb: true }),
@@ -111,17 +111,17 @@ const [gWide, gDetail, gAngle, ...gMore] = rest;
       )}
       {gDetail && (
         <figure class="collection-gallery__item collection-gallery__item--detail" data-reveal>
-          <Media image={gDetail} alt={`Kolekcja ${c.name} — kolejna aranżacja`} widths={[1280]} sizes="(min-width: 64rem) 31vw, 50vw" ratio="4 / 5" placeholderLabel={`Kolekcja ${c.name}`} />
+          <Media image={gDetail} alt={`Kolekcja ${c.name}, kolejna aranżacja`} widths={[1280]} sizes="(min-width: 64rem) 31vw, 50vw" ratio="4 / 5" placeholderLabel={`Kolekcja ${c.name}`} />
         </figure>
       )}
       {gAngle && (
         <figure class="collection-gallery__item collection-gallery__item--angle" data-reveal style="--d: 120ms">
-          <Media image={gAngle} alt={`Kolekcja ${c.name} — kolejna aranżacja`} widths={[1280, 2400]} sizes="(min-width: 64rem) 52vw, 100vw" ratio="3 / 2" placeholderLabel={`Kolekcja ${c.name}`} />
+          <Media image={gAngle} alt={`Kolekcja ${c.name}, kolejna aranżacja`} widths={[1280, 2400]} sizes="(min-width: 64rem) 52vw, 100vw" ratio="3 / 2" placeholderLabel={`Kolekcja ${c.name}`} />
         </figure>
       )}
       {gMore.map(g => (
         <figure class="collection-gallery__item collection-gallery__item--more" data-reveal>
-          <Media image={g} alt={`Kolekcja ${c.name} — aranżacja`} widths={[1280]} sizes="(min-width: 64rem) 38vw, 100vw" ratio="3 / 2" placeholderLabel={`Kolekcja ${c.name}`} />
+          <Media image={g} alt={`Kolekcja ${c.name}, aranżacja`} widths={[1280]} sizes="(min-width: 64rem) 38vw, 100vw" ratio="3 / 2" placeholderLabel={`Kolekcja ${c.name}`} />
         </figure>
       ))}
       <p class="collection-gallery__caption">Aranżacje z materiałów Liveo. Kolory na ekranie mogą nieco różnić się od rzeczywistych.</p>
@@ -168,7 +168,7 @@ const [gWide, gDetail, gAngle, ...gMore] = rest;
   </section>
 
   <Section id="doradca" title="Nie wiesz, który kolor wybrać?" class="section--band">
-    <div class="band"><p class="band__text">Wyślij zdjęcie pokoju — doradca wnętrz podpowie kolor kolekcji {c.name} pasujący do podłogi i ścian.</p></div>
+    <div class="band"><p class="band__text">Wyślij zdjęcie pokoju, a doradca wnętrz podpowie kolor kolekcji {c.name} pasujący do podłogi i ścian.</p></div>
     <p class="cta-row"><a class="btn btn--secondary" href={url.advisor}>Doradca wnętrz</a></p>
   </Section>
 

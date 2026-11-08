@@ -3,7 +3,7 @@
   "url": "/gdzie-kupic/",
   "status": "draft",
   "seo": {
-    "title": "Gdzie kupić meble Liveo — salony partnerskie blisko Ciebie",
+    "title": "Gdzie kupić meble Liveo | Salony partnerskie blisko Ciebie",
     "description": "Wpisz kod pocztowy i znajdź najbliższy z 448 salonów partnerskich Liveo w Polsce i Słowenii. Sprawdź adres, ofertę i wyznacz trasę.",
     "jsonLd": [
       "WebPage",
@@ -17,7 +17,7 @@
     {
       "id": "wyszukiwarka",
       "type": "store-finder",
-      "lead": "Liveo nie ma sklepów firmowych — meble sprzedają salony partnerskie w całej Polsce. Wpisz kod pocztowy, a pokażemy najbliższe.",
+      "lead": "Liveo nie ma sklepów firmowych. Meble sprzedają salony partnerskie w całej Polsce. Wpisz kod pocztowy, a pokażemy najbliższe.",
       "form": {
         "postcodeLabel": "Kod pocztowy",
         "postcodeHint": "np. 35-060",
@@ -42,7 +42,7 @@
       "errors": {
         "invalid": "Wpisz kod pocztowy w formacie 00-000, np. 35-060.",
         "unknown": "Nie rozpoznajemy tego kodu. Sprawdź, czy jest poprawny.",
-        "geoDenied": "Nie mamy dostępu do lokalizacji. Wpisz kod pocztowy — działa tak samo dobrze.",
+        "geoDenied": "Nie mamy dostępu do lokalizacji. Wpisz kod pocztowy, to działa tak samo dobrze.",
         "geoUnavailable": "Nie udało się ustalić lokalizacji. Wpisz kod pocztowy.",
         "noneNearby": "W promieniu {km} km nie ma salonu z kolekcją {collection}. Pokazujemy najbliższe salony, które ją mają:",
         "noneAtAll": "Żaden salon nie ma teraz kolekcji {collection} w ofercie. Zobacz salony z innymi kolekcjami albo napisz do nas.",
@@ -71,10 +71,10 @@
         "email": "Napisz",
         "highlight": "Ma kolekcję {collection}",
         "offer": "Oferta",
-        "approx": "Pinezka przybliżona — dokładny adres sprawdź w trasie."
+        "approx": "Pinezka jest przybliżona. Dokładny adres sprawdź przed wyjazdem."
       },
       "accuracyNote": "Odległość liczymy w linii prostej od środka okręgu pocztowego (pierwsze dwie cyfry kodu), więc jest przybliżona.",
-      "demoNote": "Lista salonów pochodzi z liveomeble.pl. Nie każdy salon ma wszystkie kolekcje na ekspozycji — ofertę potwierdź w salonie.",
+      "demoNote": "Lista salonów pochodzi z liveomeble.pl. Nie każdy salon ma wszystkie kolekcje na ekspozycji, więc przed wizytą zadzwoń i zapytaj.",
       "more": "Pokaż kolejne salony",
       "mapNote": "Im większa kropka, tym więcej salonów w okolicy. Kliknij województwo, żeby zobaczyć jego salony. Granice: PRG (GUGiK).",
       "_notes": [
@@ -114,7 +114,7 @@
       "id": "partnerzy",
       "type": "band",
       "title": "Masz salon meblowy?",
-      "text": "Dołącz do sieci partnerów Liveo — Twój salon pojawi się w tej wyszukiwarce.",
+      "text": "Dołącz do sieci partnerów Liveo, a Twój salon pojawi się w tej wyszukiwarce.",
       "cta": {
         "label": "Współpraca dla sklepów",
         "href": "/dla-partnerow/"
@@ -126,7 +126,7 @@
     "items": [
       {
         "q": "Jak znaleźć najbliższy salon z meblami Liveo?",
-        "a": "Wpisz kod pocztowy w wyszukiwarce na tej stronie — pokażemy salony partnerskie posortowane od najbliższego. Możesz też zawęzić wyniki do jednej kolekcji."
+        "a": "Wpisz kod pocztowy w wyszukiwarce na tej stronie. Pokażemy salony partnerskie od najbliższego. Wyniki możesz zawęzić do jednej kolekcji."
       },
       {
         "q": "Dlaczego pytacie o kod pocztowy, a nie o lokalizację?",
@@ -134,11 +134,11 @@
       },
       {
         "q": "Czy każdy salon ma wszystkie kolekcje Liveo?",
-        "a": "Nie — każdy salon sam wybiera kolekcje, które sprzedaje. Przy salonie podajemy listę jego kolekcji, a filtr „Kolekcja” pokaże tylko salony z wybraną."
+        "a": "Nie. Każdy salon sam wybiera kolekcje, które sprzedaje. Przy salonie podajemy listę jego kolekcji, a filtr „Kolekcja” pokaże tylko salony z wybraną."
       },
       {
         "q": "Czy sklep zamówi mebel, którego nie ma na ekspozycji?",
-        "a": "Zapytaj w salonie — salony partnerskie mogą zamawiać u nas meble z kolekcji, które sprzedają, także te, których nie pokazują na ekspozycji [do potwierdzenia]."
+        "a": "Zapytaj w salonie, czy może zamówić ten mebel dla Ciebie."
       },
       {
         "q": "Jak dokładna jest odległość do salonu?",
@@ -146,11 +146,11 @@
       },
       {
         "q": "Czy sklep dowiezie i zmontuje meble?",
-        "a": "To zależy od salonu — przy każdym podajemy, czy oferuje dostawę i montaż. Koszty i terminy ustalisz bezpośrednio ze sprzedawcą."
+        "a": "To zależy od salonu. Koszt i termin dostawy oraz montażu ustalisz bezpośrednio ze sprzedawcą."
       },
       {
         "q": "Gdzie złożyć reklamację mebla Liveo?",
-        "a": "Reklamację złóż w salonie, w którym kupiłeś mebel — to sprzedawca odpowiada wobec Ciebie za zgodność towaru z umową. Zasady ewentualnej gwarancji producenta: [do potwierdzenia]."
+        "a": "Reklamację złóż w salonie, w którym kupiłeś mebel. To sprzedawca odpowiada wobec Ciebie za zgodność towaru z umową."
       }
     ]
   },

@@ -12,7 +12,7 @@ export async function llmsTxt(): Promise<string> {
   const L: string[] = [];
   L.push('# Liveo Meble', '');
   L.push('> Liveo Meble sp. z o.o. to polski producent mebli skrzyniowych i systemowych z Raniżowa (Podkarpacie).');
-  L.push('> Meble są projektowane w kolekcjach — szafka RTV, komoda, witryna czy szafa z jednej kolekcji mają te same kolory.');
+  L.push('> Meble są projektowane w kolekcjach: szafka RTV, komoda, witryna czy szafa z jednej kolekcji mają te same kolory.');
   L.push('> Liveo nie ma własnych salonów i nie sprzedaje mebli na tej stronie: meble kupuje się w salonach partnerskich, które podają cenę i termin dostawy.', '');
   if (DEMO) L.push(`Uwaga: ${site.footer.demoNotice}`, '');
   L.push('## Jak kupić');
@@ -31,7 +31,7 @@ export async function llmsTxt(): Promise<string> {
   L.push(`- [O nas](${abs('/o-nas/')}): kim jest Liveo i dlaczego meble w kolekcjach.`);
   L.push(`- [Kontakt](${abs('/kontakt/')}): dane producenta; zakup i reklamacje załatwia sklep partnerski.`);
   L.push(`- [Dla partnerów](${abs('/dla-partnerow/')}): współpraca dla sklepów meblowych.`);
-  L.push(`- [Doradca wnętrz](${abs('/doradca-wnetrz/')}): asystent AI — dobiera komplet z jednej kolekcji do zdjęcia pokoju; zdjęcie zostaje na urządzeniu.`);
+  L.push(`- [Doradca wnętrz](${abs('/doradca-wnetrz/')}): asystent AI, który dobiera komplet z jednej kolekcji do zdjęcia pokoju; zdjęcie zostaje na urządzeniu.`);
   L.push('', '## Optional');
   L.push(`- [Polityka prywatności](${abs('/polityka-prywatnosci/')})`);
   L.push(`- [Regulamin](${abs('/regulamin/')})`);
@@ -41,7 +41,7 @@ export async function llmsTxt(): Promise<string> {
 
 export async function llmsFullTxt(): Promise<string> {
   const articles = await getArticles();
-  const L: string[] = ['# Liveo Meble — poradniki i najczęstsze pytania', ''];
+  const L: string[] = ['# Liveo Meble: poradniki i najczęstsze pytania', ''];
   if (DEMO) L.push(`Uwaga: ${site.footer.demoNotice}`, '');
   const faqPages: [string, string, { q: string; a: string }[]][] = [
     ['Strona główna', '/', pages.home.faq.items],

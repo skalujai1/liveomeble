@@ -14,7 +14,7 @@
     "region": "podkarpackie",
     "country": "PL",
     "logo": "/brand/liveo-logo.svg",
-    "logoAlt": "Liveo Meble — strona główna",
+    "logoAlt": "Liveo Meble, strona główna",
     "streetAddress": "ul. Borki 5",
     "postalCode": "36-130",
     "telephone": "+48 17 58 18 000",
@@ -97,45 +97,20 @@
     "lead": "Meble projektowane w kolekcjach. Producent z Raniżowa na Podkarpaciu.",
     "columns": [
       {
-        "title": "Kolekcje",
-        "source": "collections.json",
-        "items": [],
-        "more": {
-          "label": "Wszystkie kolekcje",
-          "href": "/kolekcje/"
-        }
-      },
-      {
-        "title": "Meble",
-        "items": [
-          {
-            "label": "Salon",
-            "href": "/pomieszczenia/salon/"
-          },
-          {
-            "label": "Jadalnia",
-            "href": "/pomieszczenia/jadalnia/"
-          },
-          {
-            "label": "Sypialnia",
-            "href": "/pomieszczenia/sypialnia/"
-          },
-          {
-            "label": "Pokój młodzieżowy",
-            "href": "/pomieszczenia/pokoj-mlodziezowy/"
-          },
-          {
-            "label": "Przedpokój",
-            "href": "/pomieszczenia/przedpokoj/"
-          },
-          {
-            "label": "Domowe biuro",
-            "href": "/pomieszczenia/biuro/"
-          }
-        ],
+        "title": "Pomieszczenia",
+        "source": "rooms",
         "more": {
           "label": "Wszystkie meble",
           "href": "/meble/"
+        }
+      },
+      {
+        "title": "Rodzaje mebli",
+        "source": "types",
+        "limit": 8,
+        "more": {
+          "label": "Wszystkie rodzaje",
+          "href": "/meble/#rodzaje"
         }
       },
       {
@@ -152,6 +127,10 @@
           {
             "label": "Poradnik",
             "href": "/poradnik/"
+          },
+          {
+            "label": "Kontakt",
+            "href": "/kontakt/"
           }
         ]
       },
@@ -161,10 +140,6 @@
           {
             "label": "O nas",
             "href": "/o-nas/"
-          },
-          {
-            "label": "Kontakt",
-            "href": "/kontakt/"
           },
           {
             "label": "Dla partnerów",
@@ -194,7 +169,14 @@
     ],
     "company": "LIVEO Meble sp. z o.o. · ul. Borki 5, 36-130 Raniżów · tel. +48 17 58 18 000 · biuro@liveomeble.pl",
     "copyright": "© {year} Liveo Meble sp. z o.o.",
-    "demoNotice": "Wersja robocza strony: katalog pochodzi z kart produktu Liveo, salony partnerskie z liveomeble.pl. Cen na stronie nie ma — podaje je salon."
+    "demoNotice": "Wersja robocza strony. Katalog pochodzi z kart produktu Liveo, salony partnerskie z liveomeble.pl. Ceny podaje salon partnerski.",
+    "contact": {
+      "address": "ul. Borki 5, 36-130 Raniżów",
+      "phone": "+48 17 58 18 000",
+      "phoneHref": "tel:+48175818000",
+      "email": "biuro@liveomeble.pl"
+    },
+    "collectionsTitle": "Kolekcje"
   },
   "demo": {
     "badge": "DEMO",
@@ -215,13 +197,13 @@
   },
   "price": {
     "inStore": "Cenę sprawdzisz w salonie partnerskim",
-    "inStoreNote": "Liveo sprzedaje meble przez salony partnerskie — tam poznasz cenę, termin dostawy i koszt montażu.",
+    "inStoreNote": "Liveo sprzedaje meble przez salony partnerskie. Tam poznasz cenę, termin dostawy i koszt montażu.",
     "inStoreLink": "Znajdź salon z tą kolekcją",
     "_note": "Karty produktu Liveo (eksport Navireo) nie zawierają cen detalicznych — strona ich nie pokazuje."
   },
   "stock": {
     "dostepny": "Dostępny",
-    "na-zamowienie": "Na zamówienie — ok. {days} dni",
+    "na-zamowienie": "Na zamówienie, ok. {days} dni",
     "na-zamowienie-short": "Na zamówienie",
     "wyprzedany": "Wyprzedany",
     "unknown": "Dostępność sprawdź w sklepie",
@@ -295,7 +277,7 @@
     "edge": "wyprofilowana krawędź frontu, bez uchwytów",
     "knob": "małe okrągłe gałki",
     "bar": "podłużne uchwyty",
-    "push": "bez uchwytów — otwieranie naciśnięciem (push-to-open)",
+    "push": "bez uchwytów, otwieranie naciśnięciem (push-to-open)",
     "groove": "uchwyt wyfrezowany we froncie"
   },
   "bases": {
@@ -341,19 +323,19 @@
     "required": "To pole jest wymagane.",
     "optional": "(opcjonalnie)",
     "email": "Wpisz adres e-mail w formacie nazwa@domena.pl.",
-    "phone": "Wpisz numer telefonu — same cyfry, np. 600 100 200.",
+    "phone": "Wpisz numer telefonu, same cyfry, np. 600 100 200.",
     "postcode": "Wpisz kod pocztowy w formacie 00-000, np. 35-060.",
     "nip": "Wpisz 10 cyfr NIP, bez kresek.",
-    "tooLong": "Tekst jest za długi — maksymalnie {max} znaków.",
+    "tooLong": "Tekst jest za długi. Maksymalnie {max} znaków.",
     "sending": "Wysyłamy…",
     "error": "Nie udało się wysłać. Spróbuj ponownie za chwilę albo napisz na adres {email}.",
     "consent": "Administratorem danych jest Liveo Meble sp. z o.o. Użyjemy ich tylko, żeby odpowiedzieć na wiadomość. Szczegóły w [polityce prywatności](/polityka-prywatnosci/).",
-    "antispamNote": "Formularz chroni przed spamem niewidoczny test — nie musisz niczego klikać."
+    "antispamNote": "Formularz chroni niewidoczny test przed spamem. Nie musisz niczego klikać."
   },
   "cookies": {
     "_note": "Baner pokazujemy TYLKO, jeśli strona używa plików cookie lub podobnych technologii wymagających zgody (np. analityka). Bez nich — brak banera, tylko informacja w polityce prywatności.",
     "title": "Pliki cookie",
-    "text": "Używamy plików cookie niezbędnych do działania strony. Za Twoją zgodą użyjemy też narzędzia do statystyk odwiedzin [do uzupełnienia: nazwa narzędzia], żeby wiedzieć, które strony są przydatne.",
+    "text": "Używamy plików cookie niezbędnych do działania strony. Za Twoją zgodą użyjemy też narzędzia do statystyk odwiedzin, żeby wiedzieć, które strony są przydatne.",
     "accept": "Zgadzam się na statystyki",
     "reject": "Tylko niezbędne",
     "settings": "Ustawienia",
@@ -385,6 +367,6 @@
         "href": "/"
       }
     ],
-    "oldSiteNote": "Szukasz czegoś ze starej strony Liveo? Napisz do nas przez [formularz kontaktowy](/kontakt/) — pomożemy."
+    "oldSiteNote": "Szukasz czegoś ze starej strony Liveo? Napisz do nas przez [formularz kontaktowy](/kontakt/), pomożemy."
   }
 }

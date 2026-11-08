@@ -22,7 +22,7 @@
       "items": [
         {
           "q": "Ile kosztują {pluralLower} Liveo?",
-          "a": "Cenę podaje salon partnerski — Liveo sprzedaje meble przez salony w całej Polsce. Na stronie każdego mebla wyszukasz najbliższy salon z jego kolekcją."
+          "a": "Cenę podaje salon partnerski. Liveo sprzedaje meble przez salony w całej Polsce, a na stronie każdego mebla wyszukasz najbliższy salon z jego kolekcją."
         },
         {
           "q": "W jakich kolekcjach są {pluralLower}?",
@@ -38,7 +38,7 @@
         },
         {
           "q": "Gdzie kupić {pluralLower} Liveo?",
-          "a": "{plural} Liveo kupisz w salonach partnerskich — Liveo nie ma własnych salonów. Wpisz kod pocztowy na stronie [Gdzie kupić](/gdzie-kupic/), a pokażemy najbliższe salony."
+          "a": "{plural} Liveo kupisz w salonach partnerskich, bo Liveo nie ma własnych sklepów. Wpisz kod pocztowy na stronie [Gdzie kupić](/gdzie-kupic/), a pokażemy najbliższe salony."
         }
       ]
     }
@@ -51,9 +51,9 @@
         "title": "Szafki RTV pod telewizor | Liveo",
         "description": "Szafki RTV z kolekcji Liveo z szufladami, drzwiami i wnękami na sprzęt. Sprawdź wymiary, kolory i salony partnerskie."
       },
-      "intro": "Szafka RTV to zwykle najdłuższy mebel w salonie, więc wyznacza jego charakter. Przy każdej podajemy szerokość, wysokość i głębokość — porównaj je z telewizorem i miejscem pod ścianą.",
+      "intro": "Szafka RTV to zwykle najdłuższy mebel w salonie i to ona nadaje mu charakter. Przy każdej podajemy szerokość, wysokość i głębokość. Porównaj je z telewizorem i miejscem pod ścianą.",
       "tips": [
-        "Wybierz szafkę szerszą od telewizora — ekran, który nie wystaje poza blat, wygląda spokojniej.",
+        "Wybierz szafkę szerszą od telewizora. Ekran, który nie wystaje poza blat, wygląda spokojniej.",
         "Sprawdź głębokość, jeśli w szafce ma stanąć konsola albo amplituner."
       ],
       "guide": "jak-dobrac-szafke-rtv"
@@ -63,12 +63,12 @@
       "slug": "komody",
       "seo": {
         "title": "Komody do salonu, sypialni i przedpokoju | Liveo",
-        "description": "Komody Liveo z szufladami i drzwiami — niskie, szerokie i wysokie. Kolory dopasowane do reszty mebli z kolekcji. Sprawdź wymiary."
+        "description": "Komody Liveo z szufladami i drzwiami: niskie, szerokie i wysokie. Kolory pasują do reszty mebli z kolekcji. Sprawdź wymiary."
       },
       "intro": "Komoda pasuje do każdego pokoju: w sypialni mieści ubrania, w salonie zastawę i dokumenty, a w przedpokoju czapki i rękawiczki.",
       "tips": [
         "Niska, szeroka komoda może służyć też jako szafka pod telewizor albo toaletka z lustrem nad nią.",
-        "Wysoka komoda zajmuje mniej podłogi — dobrze sprawdza się w małej sypialni.",
+        "Wysoka komoda zajmuje mniej podłogi, więc dobrze sprawdza się w małej sypialni.",
         "Przed komodą zostaw tyle miejsca, żeby swobodnie wysunąć szuflady i przy nich stanąć."
       ],
       "guide": "jak-urzadzic-mala-sypialnie"
@@ -80,7 +80,7 @@
         "title": "Witryny z przeszkleniem do salonu i jadalni | Liveo",
         "description": "Witryny Liveo z przeszklonymi drzwiami na zastawę, książki i pamiątki. Pasują do szafek RTV, komód i stołów z tych samych kolekcji."
       },
-      "intro": "Witryna łączy schowek z ekspozycją: za szkłem stoi to, co chcesz pokazać, a za pełnymi drzwiami i w szufladach — to, co ma zniknąć z widoku.",
+      "intro": "Witryna łączy schowek z ekspozycją. Za szkłem stoi to, co chcesz pokazać, a za pełnymi drzwiami i w szufladach to, co ma zniknąć z widoku.",
       "tips": [
         "Wąska, wysoka witryna dobrze wypełnia miejsce obok okna albo w rogu pokoju.",
         "Wysoką witrynę zawsze przymocuj do ściany, zwłaszcza gdy w domu są dzieci."
@@ -90,13 +90,13 @@
       "type": "regal",
       "slug": "regaly",
       "seo": {
-        "title": "Regały na książki — otwarte i z drzwiami | Liveo",
+        "title": "Regały na książki, otwarte i z drzwiami | Liveo",
         "description": "Regały Liveo do salonu, pokoju młodzieżowego i domowego biura: otwarte półki, wnęki i szafki z drzwiami. Sprawdź wymiary i kolory."
       },
       "intro": "Regał porządkuje książki, segregatory i pudełka, a przy okazji wypełnia pustą ścianę.",
       "tips": [
         "Wysoki regał zawsze przymocuj do ściany, zwłaszcza gdy w domu są dzieci.",
-        "Najcięższe rzeczy układaj na dolnych półkach — regał stoi wtedy stabilniej."
+        "Najcięższe rzeczy układaj na dolnych półkach, wtedy regał stoi stabilniej."
       ],
       "guide": "plyta-meblowa-laminowana"
     },
@@ -118,12 +118,12 @@
       "slug": "polki",
       "seo": {
         "title": "Półki wiszące na ścianę | Liveo",
-        "description": "Półki wiszące Liveo do salonu, sypialni, przedpokoju i biura — w kolorach kolekcji."
+        "description": "Półki wiszące Liveo do salonu, sypialni, przedpokoju i biura, w kolorach kolekcji."
       },
       "intro": "Półka wisząca daje miejsce na książki i drobiazgi, nie zajmując podłogi. W kolorze szafki RTV albo biurka domyka komplet.",
       "tips": [
         "Sprawdź zalecane obciążenie półki i nie układaj na niej więcej.",
-        "Kołki dobierz do ściany — inne do betonu i cegły, inne do płyty gipsowo-kartonowej."
+        "Kołki dobierz do ściany: inne są do betonu i cegły, inne do płyty gipsowo-kartonowej."
       ]
     },
     {
@@ -131,9 +131,9 @@
       "slug": "stoly",
       "seo": {
         "title": "Stoły do jadalni, także rozkładane | Liveo",
-        "description": "Stoły Liveo do jadalni i salonu — stałe i rozkładane, z blatem w dekorze drewna. Sprawdź wymiary blatu i kolory."
+        "description": "Stoły Liveo do jadalni i salonu, stałe i rozkładane, z blatem w dekorze drewna. Sprawdź wymiary blatu i kolory."
       },
-      "intro": "Stół wybiera się do liczby osób i wielkości jadalni. Przy każdym podajemy wymiary blatu, a przy rozkładanych — długość po rozłożeniu.",
+      "intro": "Stół wybiera się do liczby osób i wielkości jadalni. Przy każdym podajemy wymiary blatu, a przy rozkładanych także długość po rozłożeniu.",
       "tips": [
         "Na jedną osobę przy stole przyjmuje się zwykle ok. 60 cm długości blatu.",
         "Wokół stołu zostaw co najmniej ok. 80 cm, żeby swobodnie odsunąć krzesło i wstać."
@@ -144,7 +144,7 @@
       "slug": "kredensy",
       "seo": {
         "title": "Kredensy do jadalni i salonu | Liveo",
-        "description": "Kredensy Liveo z szufladami, drzwiami i przeszkleniem — na zastawę, obrusy i sztućce. Pasują do stołów i witryn z tych samych kolekcji."
+        "description": "Kredensy Liveo z szufladami, drzwiami i przeszkleniem, na zastawę, obrusy i sztućce. Pasują do stołów i witryn z tych samych kolekcji."
       },
       "intro": "Kredens to pojemny mebel do jadalni: w szufladach sztućce i obrusy, za drzwiami zastawa, a na blacie miejsce na lampę albo owoce.",
       "tips": [
@@ -159,9 +159,9 @@
         "title": "Łóżka 120, 140, 160 i 180 cm, także z pojemnikiem | Liveo",
         "description": "Łóżka Liveo do sypialni i pokoju młodzieżowego: na materace 120, 140, 160 i 180 cm, z pojemnikiem na pościel lub bez. Sprawdź wymiary i kolory."
       },
-      "intro": "Liczba w nazwie łóżka to szerokość materaca. Samo łóżko jest kilka centymetrów szersze i dłuższe — dokładne wymiary podajemy przy każdym modelu.",
+      "intro": "Liczba w nazwie łóżka to szerokość materaca. Samo łóżko jest kilka centymetrów szersze i dłuższe, a dokładne wymiary podajemy przy każdym modelu.",
       "tips": [
-        "Z boku łóżka zostaw przejście — wygodnie, gdy ma ok. 60 cm.",
+        "Z boku łóżka zostaw przejście. Wygodnie, gdy ma ok. 60 cm.",
         "W małej sypialni łóżko z pojemnikiem zastąpi komodę na pościel."
       ],
       "guide": "jak-urzadzic-mala-sypialnie"
@@ -184,12 +184,12 @@
       "slug": "szafy",
       "seo": {
         "title": "Szafy do sypialni, przedpokoju i pokoju nastolatka | Liveo",
-        "description": "Szafy Liveo do sypialni, przedpokoju i pokoju młodzieżowego — z drążkiem na ubrania i półkami. Sprawdź wymiary i kolory."
+        "description": "Szafy Liveo do sypialni, przedpokoju i pokoju młodzieżowego, z drążkiem na ubrania i półkami. Sprawdź wymiary i kolory."
       },
       "intro": "Szafa to największy mebel w pokoju, więc najważniejsze są wymiary: szerokość, wysokość, głębokość i miejsce na otwarcie drzwi.",
       "tips": [
         "Przed zakupem zmierz wnękę w kilku punktach i weź najmniejszy wynik.",
-        "Szafę składa się zwykle na leżąco i podnosi do pionu — sprawdź, czy przekątna jej boku zmieści się pod sufitem."
+        "Szafę zwykle składa się na leżąco i podnosi do pionu. Sprawdź, czy przekątna jej boku zmieści się pod sufitem."
       ],
       "guide": "jak-zmierzyc-wneke-pod-szafe"
     },
@@ -229,7 +229,7 @@
       "intro": "Biurko wybiera się do sposobu pracy: do laptopa wystarczy mniejszy blat, do monitora i papierów potrzeba więcej miejsca.",
       "tips": [
         "Do pracy z monitorem wybierz blat o głębokości co najmniej ok. 60 cm.",
-        "Ustaw biurko tak, żeby światło dzienne padało z boku — nie zza pleców i nie prosto na ekran."
+        "Ustaw biurko tak, żeby światło dzienne padało z boku, a nie zza pleców albo prosto na ekran."
       ]
     },
     {
@@ -237,11 +237,11 @@
       "slug": "szafki-na-buty",
       "seo": {
         "title": "Szafki na buty do przedpokoju | Liveo",
-        "description": "Szafki na buty Liveo do przedpokoju — w kolorach szaf i komód z tych samych kolekcji."
+        "description": "Szafki na buty Liveo do przedpokoju, w kolorach szaf i komód z tych samych kolekcji."
       },
       "intro": "Szafka na buty porządkuje przedpokój: buty znikają z podłogi, a blat zostaje na klucze i torbę.",
       "tips": [
-        "Zmierz szerokość przejścia — po postawieniu szafki zostaw miejsce, żeby swobodnie minąć się z drugą osobą.",
+        "Zmierz szerokość przejścia. Po postawieniu szafki zostaw tyle miejsca, żeby swobodnie minąć się z drugą osobą.",
         "Na blacie szafki zmieszczą się klucze i torba, a lustro nad nią zastąpi osobną toaletkę w przedpokoju."
       ]
     },
@@ -250,7 +250,7 @@
       "slug": "wieszaki",
       "seo": {
         "title": "Wieszaki do przedpokoju | Liveo",
-        "description": "Wieszaki Liveo do przedpokoju — w kolorach szaf i komód z tych samych kolekcji."
+        "description": "Wieszaki Liveo do przedpokoju, w kolorach szaf i komód z tych samych kolekcji."
       },
       "intro": "Wieszak przy drzwiach to miejsce na rzeczy używane codziennie: kurtkę, torbę, parasol.",
       "tips": [
@@ -263,12 +263,12 @@
       "slug": "szafki",
       "seo": {
         "title": "Szafki do salonu i przedpokoju | Liveo",
-        "description": "Szafki Liveo — niskie, wysokie i wiszące, z drzwiami i półkami. Dobierz je do mebli z tej samej kolekcji."
+        "description": "Szafki Liveo: niskie, wysokie i wiszące, z drzwiami i półkami. Dobierz je do mebli z tej samej kolekcji."
       },
       "intro": "Szafka uzupełnia komplet tam, gdzie komoda byłaby za duża: obok witryny, w przedpokoju albo w pokoju młodzieżowym.",
       "tips": [
         "Wysoką szafkę zawsze przymocuj do ściany, zwłaszcza gdy w domu są dzieci.",
-        "Szafki z kolekcji mają te same kolory co reszta mebli — łatwo zestawić je obok witryny lub regału."
+        "Szafki z kolekcji mają te same kolory co reszta mebli, więc łatwo postawić je obok witryny albo regału."
       ]
     },
     {
@@ -281,7 +281,7 @@
       "intro": "Gotowy zestaw kuchenny to szafki górne i dolne dobrane do jednej długości ściany. Liczba w nazwie to długość zabudowy w centymetrach.",
       "tips": [
         "Zmierz ścianę, przy której stanie kuchnia, i wybierz zestaw o kilka centymetrów krótszy.",
-        "Sprawdź, gdzie są przyłącza wody i gazu — od nich zależy miejsce szafki pod zlew."
+        "Sprawdź, gdzie są przyłącza wody i gazu. Od nich zależy miejsce szafki pod zlew."
       ]
     }
   ]

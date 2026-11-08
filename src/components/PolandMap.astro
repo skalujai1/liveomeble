@@ -1,5 +1,5 @@
 ---
-// Mapa salonów jako raster kropek: Polska z drobnej siatki (granice z PRG/GUGiK), kropka puchnie tam, gdzie jest więcej
+// Mapa salonów: kontur Polski i województw (granice z PRG/GUGiK), kropki tylko tam, gdzie są salony; kropka puchnie tam, gdzie jest więcej
 // salonów. Kropki rozchodzą się falą od fabryki w Raniżowie. Dane: baza salonów (tools/data/salony-liveo.xlsx).
 // Województwo to link do jego listy salonów pod mapą (#woj-…), kropka ma podpis z miastami (natywny tooltip).
 // scripts/store-finder.ts podświetla kropki z wynikami wyszukiwania i zaznacza punkt wyszukiwania.
@@ -13,7 +13,7 @@ const salony = (n: number) => plural({ one: '{n} salon', few: '{n} salony', many
 
 const pl = stores.filter(s => s.country === 'PL');
 const abroad = stores.filter(s => s.country !== 'PL');
-const STEP = 12; // oczko siatki w jednostkach mapy
+const STEP = 12; // oczko siatki, do której przyciągamy kropki salonów (jednostki mapy)
 const HQ = project(50.2456, 21.9883); // Raniżów — siedziba i fabryka Liveo
 const cells = new Map<string, { x: number; y: number; ids: string[]; cities: Map<string, number> }>();
 for (const s of pl) {
@@ -41,12 +41,7 @@ const dots = [...cells.values()].map(c => ({
     <span class="poland-map__sub">{pl.length} w Polsce, w {byRegion.size} województwach{abroad.length > 0 && ` · ${salony(abroad.length)} w Słowenii`}</span>
   </p>
   <svg viewBox={`-10 -10 ${MAP.width + 20} ${MAP.height + 20}`} role="group" aria-label={`${label}: ${salony(pl.length)}. Województwa prowadzą do list salonów.`} data-map-lng0={MAP.lng0} data-map-lat0={MAP.lat0} data-map-kx={MAP.kx} data-map-ky={MAP.ky}>
-    <defs>
-      <pattern id="pm-grid" width={STEP} height={STEP} x={-STEP / 2} y={-STEP / 2} patternUnits="userSpaceOnUse">
-        <circle cx={STEP / 2} cy={STEP / 2} r="1.5" class="poland-map__grid" />
-      </pattern>
-    </defs>
-    <path class="poland-map__land" d={outlinePath()} fill="url(#pm-grid)" />
+    <path class="poland-map__land" d={outlinePath()} />
     <g class="poland-map__regions">
       {regions.map(r => (
         <a href={`#woj-${slugify(r.name)}`} aria-label={`${r.name}: ${salony(byRegion.get(r.name) ?? 0)}`} data-region={slugify(r.name)}>

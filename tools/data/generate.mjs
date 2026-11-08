@@ -60,7 +60,7 @@ const ROOMS = [
   { slug: 'salon', name: 'Salon', shortName: 'Salon', genitive: 'salonu', accusative: 'salon', locative: 'w salonie',
     assistantKey: 'salon', description: 'Szafki RTV, komody, witryny, regały, ławy i półki do strefy dziennej.' },
   { slug: 'jadalnia', name: 'Jadalnia', shortName: 'Jadalnia', genitive: 'jadalni', accusative: 'jadalnię', locative: 'w jadalni',
-    assistantKey: 'jadalnia', description: 'Stoły, kredensy, witryny i komody — miejsce na zastawę i wspólne posiłki.' },
+    assistantKey: 'jadalnia', description: 'Stoły, kredensy, witryny i komody: miejsce na zastawę i wspólne posiłki.' },
   { slug: 'sypialnia', name: 'Sypialnia', shortName: 'Sypialnia', genitive: 'sypialni', accusative: 'sypialnię', locative: 'w sypialni',
     assistantKey: 'sypialnia', description: 'Łóżka, szafki nocne, szafy, komody, toaletki i lustra.' },
   { slug: 'pokoj-mlodziezowy', name: 'Pokój młodzieżowy', shortName: 'Pokój młodzieżowy', genitive: 'pokoju młodzieżowego',
@@ -164,7 +164,7 @@ const clean = v => (v == null || v === '' ? null : tidy(v).replace(/^\(|\)$/g, '
 function specsOf(m) {
   const rows = [];
   for (const [label, get] of MATERIAL_ROWS) {
-    const vals = [...new Set(get(m).map(clean).filter(v => v && !/^(nie|-|brak)$/i.test(v)))];
+    const vals = [...new Set(get(m).map(clean).filter(v => v && !/^(nie|-|brak|false|true)$/i.test(v)))];
     if (vals.length) rows.push({ label, value: cap(vals.join(', ')) });
   }
   return rows;

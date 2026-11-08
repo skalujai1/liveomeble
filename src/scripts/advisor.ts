@@ -28,7 +28,7 @@ const OBJECTS: Record<string, string> = {
   osoba: 'Widzę na zdjęciu osobę, ale nie widzę wnętrza.',
   zwierze: 'Na tym zdjęciu jest zwierzę, ale nie widzę wnętrza.',
   jedzenie: 'To zdjęcie jedzenia, a nie pomieszczenia.',
-  dokument: 'To wygląda na dokument, rysunek albo zrzut ekranu — do takiego zdjęcia nie dobiorę mebli.',
+  dokument: 'To wygląda na dokument, rysunek albo zrzut ekranu. Do takiego zdjęcia nie dobiorę mebli.',
 };
 
 // ---------------------------------------------------------------------------
@@ -311,7 +311,7 @@ export function initAdvisor() {
         case 'room':
           if (d.room === 'kuchnia' && boot.rooms.jadalnia) {
             // Kuchni nie ma na liście pomieszczeń; stoły i kredensy z jadalni pasują do kuchni z częścią jadalną.
-            lead = `Widzę **kuchnię**${styleTxt}${pal}. Do kuchni z częścią jadalną pasują meble z jadalni — stoły i kredensy — więc zaznaczyłem jadalnię.`;
+            lead = `Widzę **kuchnię**${styleTxt}${pal}. Do kuchni z częścią jadalną pasują meble z jadalni, czyli stoły i kredensy, więc zaznaczyłem jadalnię.`;
             S.room = 'jadalnia';
           } else if (!boot.rooms[d.room] || (products.length && !availableRoom(d.room, products))) {
             lead = `Widzę **${ROOMS[d.room]?.acc ?? 'pomieszczenie'}**, ale nie mam do tego pomieszczenia propozycji. Wybierz inne poniżej.`;
@@ -329,15 +329,15 @@ export function initAdvisor() {
           break;
         case 'nofurn':
           lead = d.scene?.key === 'garaz'
-            ? 'To **garaż** — tutaj nasze meble raczej się nie sprawdzą. Dodaj zdjęcie innego pomieszczenia.'
-            : 'To **łazienka** — w ofercie Liveo nie ma mebli łazienkowych. Dodaj zdjęcie innego pomieszczenia.';
+            ? 'To **garaż**, tutaj nasze meble raczej się nie sprawdzą. Dodaj zdjęcie innego pomieszczenia.'
+            : 'To **łazienka**, a w ofercie Liveo nie ma mebli łazienkowych. Dodaj zdjęcie innego pomieszczenia.';
           seenForm.hidden = true;
           problem.hidden = false;
           break;
         case 'reject':
         default: {
           const place = PLACES[d.scene?.key];
-          lead = `${place ? `Wygląda na to, że to zdjęcie przedstawia **${place}**.` : OBJECTS[d.scene?.key] || 'Na tym zdjęciu nie widzę wnętrza.'} Liveo tworzy meble do wnętrz — dodaj zdjęcie pomieszczenia, które urządzasz.`;
+          lead = `${place ? `Wygląda na to, że to zdjęcie przedstawia **${place}**.` : OBJECTS[d.scene?.key] || 'Na tym zdjęciu nie widzę wnętrza.'} Liveo tworzy meble do wnętrz. Dodaj zdjęcie pomieszczenia, które urządzasz.`;
           seenForm.hidden = true;
           problem.hidden = false;
         }
@@ -617,7 +617,7 @@ export function initAdvisor() {
   function applyLocal(text: string) {
     const q = parseQuery(text);
     if (q.nofurn) return reply(q.nofurn === 'lazienka' ? 'W ofercie Liveo nie ma mebli łazienkowych.' : 'Do garażu nasze meble raczej się nie sprawdzą.');
-    if (q.outdoor && !q.room) return reply('Liveo tworzy meble do wnętrz — nie ma w ofercie mebli ogrodowych ani balkonowych.');
+    if (q.outdoor && !q.room) return reply('Liveo tworzy meble do wnętrz i nie ma w ofercie mebli ogrodowych ani balkonowych.');
     if (q.info) return reply('W sprawach zamówień, dostawy, montażu i gwarancji pomoże obsługa klienta Liveo.', false, { label: 'Kontakt z Liveo', href: '/kontakt/' });
 
     const done: string[] = [];

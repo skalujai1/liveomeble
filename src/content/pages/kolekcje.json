@@ -3,7 +3,7 @@
   "url": "/kolekcje/",
   "status": "draft",
   "seo": {
-    "title": "Kolekcje mebli — komplety do salonu i sypialni | Liveo",
+    "title": "Kolekcje mebli do salonu i sypialni | Liveo",
     "description": "Kolekcje mebli Liveo: meble do salonu, jadalni, sypialni, przedpokoju i pokoju młodzieżowego w tych samych kolorach.",
     "jsonLd": [
       "CollectionPage",
@@ -17,7 +17,7 @@
     {
       "id": "wstep",
       "type": "intro",
-      "lead": "Każdą kolekcję projektujemy jako całość. Meble z jednej kolekcji mają te same kolory i wykończenie, więc możesz urządzić nimi cały pokój — albo kilka pokoi w jednym stylu."
+      "lead": "Każdą kolekcję projektujemy jako całość. Meble z jednej kolekcji mają te same kolory i wykończenie, więc urządzisz nimi cały pokój albo kilka pokoi w jednym stylu."
     },
     {
       "id": "lista",
@@ -39,7 +39,7 @@
         ],
         "badgeNew": "Nowa kolekcja",
         "link": "Zobacz kolekcję {name}",
-        "imageAlt": "Meble z kolekcji {name} — {heroRoomLocative}"
+        "imageAlt": "Meble z kolekcji {name} {heroRoomLocative}"
       }
     },
     {
@@ -73,7 +73,7 @@
       "id": "gdzie-zobaczyc",
       "type": "band",
       "title": "Zobacz kolekcję na żywo",
-      "text": "Wpisz kod pocztowy — pokażemy najbliższe sklepy partnerskie z wybraną kolekcją.",
+      "text": "Wpisz kod pocztowy, a pokażemy najbliższe salony partnerskie z wybraną kolekcją.",
       "cta": {
         "label": "Gdzie kupić",
         "href": "/gdzie-kupic/"
@@ -85,19 +85,19 @@
     "items": [
       {
         "q": "Czym różnią się kolekcje Liveo?",
-        "a": "Kolekcje różnią się kolorami i charakterem — od jasnego dębu po ciemny orzech i biel w połysku. Każda ma też inny zestaw mebli: jedne obejmują salon i jadalnię, inne sypialnię, przedpokój albo pokój młodzieżowy."
+        "a": "Kolekcje różnią się kolorami i charakterem. Każda ma też inny zestaw mebli: jedne obejmują salon i jadalnię, inne sypialnię, przedpokój albo pokój młodzieżowy."
       },
       {
         "q": "Czy mogę łączyć meble z różnych kolekcji?",
-        "a": "Możesz, ale najspokojniej wygląda komplet z jednej kolekcji, bo meble mają te same kolory. Jeśli łączysz kolekcje, wybierz te w podobnym dekorze — na przykład dwie z dębem evoke."
+        "a": "Możesz, ale najspokojniej wygląda komplet z jednej kolekcji, bo meble mają te same kolory. Jeśli łączysz kolekcje, wybierz te w podobnym dekorze."
       },
       {
         "q": "Czy każdy mebel z kolekcji jest dostępny we wszystkich kolorach?",
-        "a": "Nie zawsze — dostępne kolory podajemy na stronie każdego mebla. Kolory całej kolekcji znajdziesz na stronie kolekcji."
+        "a": "Nie zawsze. Dostępne kolory podajemy na stronie każdego mebla, a kolory całej kolekcji na stronie kolekcji."
       },
       {
         "q": "Jak sprawdzić, który sklep ma daną kolekcję?",
-        "a": "Wpisz kod pocztowy na stronie [Gdzie kupić](/gdzie-kupic/) i wybierz kolekcję — pokażemy najbliższe sklepy, które ją oferują. Ta sama wyszukiwarka jest na stronie każdej kolekcji i każdego mebla."
+        "a": "Wpisz kod pocztowy na stronie [Gdzie kupić](/gdzie-kupic/) i wybierz kolekcję. Pokażemy najbliższe salony, które ją oferują. Ta sama wyszukiwarka jest na stronie każdej kolekcji i każdego mebla."
       },
       {
         "q": "Czy kolor mebla na zdjęciu zgadza się z rzeczywistym?",
@@ -105,7 +105,7 @@
       },
       {
         "q": "Jaką kolekcję wybrać do małego pokoju?",
-        "a": "Do małego pokoju zwykle lepiej sprawdzają się kolekcje w jasnych kolorach — biel, kaszmir albo jasny dekor dębu — bo optycznie powiększają wnętrze. Pomagają też meble wiszące, bo widać pod nimi podłogę."
+        "a": "Do małego pokoju lepiej pasują kolekcje w jasnych kolorach, bo optycznie powiększają wnętrze. Pomagają też meble wiszące, bo widać pod nimi podłogę."
       }
     ]
   },
@@ -115,7 +115,7 @@
       "Kolejność sekcji = kolejność na stronie. Każda sekcja to jedna myśl."
     ],
     "seo": {
-      "title": "Kolekcja {name} — meble {styleIn} | Liveo",
+      "title": "Kolekcja {name}, meble {styleIn} | Liveo",
       "titleFallback": "Kolekcja mebli {name} | Liveo",
       "description": "{tagline} Meble z kolekcji {name} do: {roomsList}. Sprawdź kolory, wymiary i salony partnerskie.",
       "jsonLd": [
@@ -132,7 +132,7 @@
         "type": "hero",
         "lead": "{tagline}",
         "image": {
-          "alt": "Kolekcja {name} {heroRoomLocative} — aranżacja"
+          "alt": "Aranżacja z meblami kolekcji {name} {heroRoomLocative}"
         }
       },
       {
@@ -187,7 +187,7 @@
         "id": "gdzie-kupic",
         "type": "store-finder",
         "title": "Gdzie zobaczyć kolekcję {name}",
-        "lead": "Wpisz kod pocztowy — pokażemy najbliższe salony partnerskie Liveo.",
+        "lead": "Wpisz kod pocztowy, a pokażemy najbliższe salony partnerskie Liveo.",
         "presetCollection": "{slug}"
       },
       {
@@ -206,7 +206,7 @@
         },
         {
           "q": "W jakich kolorach jest kolekcja {name}?",
-          "a": "Kolekcja {name} jest dostępna w kolorach: {finishLabels}. Nie każdy mebel ma wszystkie kolory — sprawdzisz to na stronie mebla."
+          "a": "Kolekcja {name} jest dostępna w kolorach: {finishLabels}. Nie każdy mebel ma wszystkie kolory, sprawdzisz to na stronie mebla."
         },
         {
           "q": "Do jakich pomieszczeń pasuje kolekcja {name}?",
@@ -214,7 +214,7 @@
         },
         {
           "q": "Gdzie kupić meble z kolekcji {name}?",
-          "a": "Meble z kolekcji {name} kupisz w salonach partnerskich Liveo — tam poznasz cenę i termin dostawy. Wpisz kod pocztowy w wyszukiwarce na tej stronie, a pokażemy najbliższe salony."
+          "a": "Meble z kolekcji {name} kupisz w salonach partnerskich Liveo, gdzie poznasz cenę i termin dostawy. Wpisz kod pocztowy w wyszukiwarce na tej stronie, a pokażemy najbliższe salony."
         }
       ]
     }

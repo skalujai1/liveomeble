@@ -72,7 +72,7 @@ const hex = (id?: string | null) => (id && finishById.get(id)?.hex) || '#ccc';
 const variants = p.variants.map(v => {
   const img = packshotFor(p, v);
   const alt = img?.approximate
-    ? `${p.name} — aranżacja kolekcji ${c.name}`
+    ? `${p.name}, aranżacja kolekcji ${c.name}`
     : fill(sec('galeria').imageAlt[0], { name: p.name, colorLabel: v.colorLabel.toLocaleLowerCase('pl') });
   const ldImage = img?.pub && !img.approximate ? srcOf(img.pub, 1000) : undefined;
   // dodatkowe zdjęcia z karty (serwer Liveo): bez pierwszego — to packshot powyżej
@@ -165,6 +165,15 @@ const dimRows = dimsSec.rows.filter((r: any) => vars[r.key] != null && vars[r.ke
           ))}
         </ul>
       </fieldset>
+
+      <dl class="summary__facts">
+        <div><dt>Szerokość</dt><dd>{num(p.dims.w)} cm</dd></div>
+        <div><dt>Wysokość</dt><dd>{num(p.dims.h)} cm</dd></div>
+        {p.dims.d ? <div><dt>Głębokość</dt><dd>{num(p.dims.d)} cm</dd></div> : null}
+        {p.weightKg ? <div><dt>Waga netto</dt><dd>{num(Math.round(p.weightKg * 10) / 10)} kg</dd></div> : null}
+        {packages.length > 0 && <div><dt>Paczki</dt><dd>{packages.length}</dd></div>}
+        <div><dt>Kolory</dt><dd>{p.variants.length}</dd></div>
+      </dl>
 
       <PriceBlock product={p} />
       {p.delivery72 && <p class="stock stock--dostepny">{summary.delivery}</p>}

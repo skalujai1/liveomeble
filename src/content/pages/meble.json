@@ -3,7 +3,7 @@
   "url": "/meble/",
   "status": "draft",
   "seo": {
-    "title": "Meble do salonu, sypialni i przedpokoju — katalog | Liveo",
+    "title": "Meble do salonu, sypialni i przedpokoju | Katalog Liveo",
     "description": "Wszystkie meble Liveo w jednym miejscu: szafki RTV, komody, witryny, stoły, łóżka, szafy i biurka. Filtruj według pokoju, koloru i kolekcji.",
     "jsonLd": [
       "CollectionPage",
@@ -120,7 +120,7 @@
       "id": "doradca",
       "type": "band",
       "title": "Nie wiesz, od czego zacząć?",
-      "text": "Wyślij zdjęcie pokoju — doradca wnętrz zaproponuje komplet z jednej kolekcji.",
+      "text": "Wyślij zdjęcie pokoju, a doradca wnętrz zaproponuje komplet z jednej kolekcji.",
       "cta": {
         "label": "Otwórz doradcę wnętrz",
         "href": "/doradca-wnetrz/"
@@ -132,27 +132,27 @@
     "items": [
       {
         "q": "Co oznacza liczba w nazwie mebla?",
-        "a": "Nazwa mebla to rodzaj, kolekcja i symbol producenta — na przykład „Komoda DANTE DT03”. Przy łóżkach liczba to szerokość materaca: „Łóżko 160 z pojemnikiem” jest na materac 160 cm."
+        "a": "Nazwa mebla to rodzaj, kolekcja i symbol producenta, na przykład „Komoda DANTE DT03”. Przy łóżkach liczba oznacza szerokość materaca: „Łóżko 160 z pojemnikiem” jest na materac 160 cm."
       },
       {
-        "q": "Co oznacza status „na zamówienie”?",
-        "a": "„Na zamówienie” znaczy, że mebla nie ma teraz w magazynie producenta i zostanie wyprodukowany — przybliżony czas podajemy przy meblu. Sklep partnerski może mieć go na miejscu, więc warto zapytać."
+        "q": "Gdzie znajdę instrukcję montażu?",
+        "a": "Na stronie mebla, w sekcji „Do pobrania”. Instrukcja jest w pliku PDF z serwera Liveo."
       },
       {
         "q": "Gdzie sprawdzę cenę mebla?",
-        "a": "W salonie partnerskim — to on podaje cenę, koszt dostawy i montażu. Najbliższy salon znajdziesz na stronie [Gdzie kupić](/gdzie-kupic/)."
+        "a": "W salonie partnerskim. To on podaje cenę oraz koszt dostawy i montażu. Najbliższy salon znajdziesz na stronie [Gdzie kupić](/gdzie-kupic/)."
       },
       {
         "q": "Które meble są dostępne w 72 godziny?",
-        "a": "Zaznacz filtr „Dostawa w 72 godziny” — lista pokaże meble, które według kart produktu Liveo mają dostawę w 72 godziny."
+        "a": "Zaznacz filtr „Dostawa w 72 godziny”. Lista pokaże meble, które według kart produktu Liveo mają dostawę w 72 godziny."
       },
       {
         "q": "Jak dobrać meble w jednym kolorze?",
-        "a": "Wybierz kolor w filtrze „Kolor” — zobaczysz meble ze wszystkich kolekcji w tym wykończeniu. Najlepiej dopasowane są jednak meble z jednej kolekcji, bo mają też to samo wykończenie."
+        "a": "Wybierz kolor w filtrze „Kolor”, a zobaczysz meble ze wszystkich kolekcji w tym wykończeniu. Najlepiej pasują do siebie jednak meble z jednej kolekcji."
       },
       {
         "q": "Jak sprawdzić, czy mebel zmieści się w moim pokoju?",
-        "a": "Porównaj wymiary z karty mebla z miejscem, które masz — zmierz szerokość, wysokość i głębokość w kilku punktach. Jak to zrobić krok po kroku, opisujemy w poradniku [Jak zmierzyć wnękę pod szafę](/poradnik/jak-zmierzyc-wneke-pod-szafe/)."
+        "a": "Porównaj wymiary z karty mebla z miejscem, które masz. Zmierz szerokość, wysokość i głębokość w kilku punktach. Jak to zrobić krok po kroku, opisujemy w poradniku [Jak zmierzyć wnękę pod szafę](/poradnik/jak-zmierzyc-wneke-pod-szafe/)."
       }
     ]
   },

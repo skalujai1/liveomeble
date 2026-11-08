@@ -6,7 +6,6 @@ description: "Jak zmierzyć wnękę pod szafę krok po kroku: szerokość, wysok
 date: "2026-10-20"
 updated: "2026-10-20"
 author: "Redakcja Liveo"
-authorNote: "[do potwierdzenia: podpis autora]"
 readingTime: 7
 keyTakeaway: "Zmierz szerokość, wysokość i głębokość wnęki w kilku miejscach, zapisz najmniejsze wartości, zostaw zapas na montaż i sprawdź, czy szafa zmieści się pod sufitem, gdy będziesz ją podnosić z pozycji leżącej."
 related:
@@ -28,23 +27,23 @@ faq:
     a: "Wysoką szafę warto przykręcić do ściany, bo zabezpiecza to ją przed przewróceniem, zwłaszcza gdy w domu są dzieci. Użyj kołków odpowiednich do rodzaju ściany i sprawdź zalecenia w instrukcji mebla."
 ---
 
-Wnęka wygląda na prostokąt, ale rzadko nim jest. Ściany bywają krzywe, podłoga nierówna, a w rogu czeka listwa, rura albo gniazdko. Kilka pomiarów zamiast jednego oszczędzi Ci szafy, która nie wchodzi o centymetr. Ten poradnik prowadzi przez pomiar krok po kroku — od miarki po sprawdzenie sufitu.
+Wnęka wygląda na prostokąt, ale rzadko nim jest. Ściany bywają krzywe, podłoga nierówna, a w rogu czeka listwa, rura albo gniazdko. Kilka pomiarów zamiast jednego oszczędzi Ci szafy, która nie wchodzi o centymetr. Ten poradnik prowadzi przez pomiar krok po kroku, od miarki po sprawdzenie sufitu.
 
 **Najważniejsze w jednym zdaniu:** Zmierz szerokość, wysokość i głębokość wnęki w kilku miejscach, zapisz najmniejsze wartości, zostaw zapas na montaż i sprawdź, czy szafa zmieści się pod sufitem, gdy będziesz ją podnosić z pozycji leżącej.
 
 ## Czego potrzebujesz do pomiaru?
 
 - **Miarki zwijanej**, najlepiej stalowej, o długości co najmniej 5 m. Dalmierz laserowy przyda się do długich odcinków, ale w ciasnej wnęce miarka bywa dokładniejsza.
-- **Poziomicy** — do sprawdzenia podłogi i ścian.
+- **Poziomicy** do sprawdzenia podłogi i ścian.
 - **Kartki i ołówka.** Narysuj wnękę z przodu i z góry, a wymiary wpisuj od razu na rysunek.
-- **Drugiej osoby** — przytrzyma miarkę przy długich pomiarach.
+- **Drugiej osoby**, która przytrzyma miarkę przy długich pomiarach.
 - **Telefonu**, żeby zrobić zdjęcia wnęki z przyłożoną miarką. Przydadzą się w sklepie.
 
 Wszystkie wymiary zapisuj w tej samej jednostce, najlepiej w centymetrach z jednym miejscem po przecinku.
 
 ## Jak zmierzyć szerokość wnęki?
 
-Zmierz szerokość w trzech miejscach: przy podłodze, w połowie wysokości i tuż pod sufitem. Ściany rzadko są idealnie równoległe, więc każdy pomiar może dać inny wynik. Do dalszych obliczeń bierzesz **najmniejszą** wartość — szafa musi zmieścić się w najwęższym miejscu.
+Zmierz szerokość w trzech miejscach: przy podłodze, w połowie wysokości i tuż pod sufitem. Ściany rzadko są idealnie równoległe, więc każdy pomiar może dać inny wynik. Do dalszych obliczeń bierzesz **najmniejszą** wartość, bo szafa musi zmieścić się w najwęższym miejscu.
 
 Przy podłodze mierz nad listwą przypodłogową i na jej wysokości. Jeśli listwy są po obu stronach wnęki, zabierają kilka centymetrów szerokości właśnie tam, gdzie stoi cokół szafy.
 
@@ -58,13 +57,13 @@ Zmierz wysokość przy lewej ścianie, pośrodku i przy prawej ścianie. Znowu l
 
 ## Jak zmierzyć głębokość wnęki?
 
-Głębokość mierz od tylnej ściany do przedniej krawędzi wnęki — przy podłodze i na wysokości ok. 1 m. Jeśli wnęka nie ma bocznych ścian na całej głębokości, zmierz, jak daleko szafa może wystawać, żeby nie blokować przejścia.
+Głębokość mierz od tylnej ściany do przedniej krawędzi wnęki, przy podłodze i na wysokości ok. 1 m. Jeśli wnęka nie ma bocznych ścian na całej głębokości, zmierz, jak daleko szafa może wystawać, żeby nie blokować przejścia.
 
-Na tylnej ścianie sprawdź gniazdka, włączniki, rury i grzejnik. Szafa je zasłoni albo oprze się o nie. Listwa przypodłogowa odsuwa szafę od ściany o swoją grubość — możesz ją zdjąć na odcinku za szafą albo uwzględnić w pomiarze.
+Na tylnej ścianie sprawdź gniazdka, włączniki, rury i grzejnik. Szafa je zasłoni albo oprze się o nie. Listwa przypodłogowa odsuwa szafę od ściany o swoją grubość. Możesz ją zdjąć na odcinku za szafą albo uwzględnić w pomiarze.
 
 ## Jak sprawdzić, czy wnęka jest prosta?
 
-Połóż poziomicę na podłodze wzdłuż i w poprzek wnęki. Jeśli podłoga opada, zmierz, o ile. Niewielką różnicę wyrównają regulowane stopki — sprawdź, czy wybrana szafa je ma.
+Połóż poziomicę na podłodze wzdłuż i w poprzek wnęki. Jeśli podłoga opada, zmierz, o ile. Niewielką różnicę wyrównają regulowane stopki. Sprawdź, czy wybrana szafa je ma.
 
 Potem zmierz obie przekątne otworu wnęki: od lewego dolnego rogu do prawego górnego i od prawego dolnego do lewego górnego. Jeśli są równe, wnęka jest prostokątna. Im większa różnica, tym bardziej wnęka jest przekrzywiona i tym większy zapas trzeba zostawić.
 
@@ -112,7 +111,7 @@ Głębokość szafy na ubrania też ma znaczenie. Typowy wieszak ma ok. 40–45 
 - Brak sprawdzenia przekątnej boku szafy.
 - Drzwi szafy, które uderzają w drzwi pokoju, łóżko albo grzejnik.
 - Porównywanie wymiarów wnętrza szafy z wymiarami wnęki.
-- Wysoka szafa nieprzykręcona do ściany — warto ją zabezpieczyć przed przewróceniem, zwłaszcza gdy w domu są dzieci.
+- Wysoka szafa nieprzykręcona do ściany. Warto ją zabezpieczyć przed przewróceniem, zwłaszcza gdy w domu są dzieci.
 - Zapomniana droga do pokoju: sprawdź, czy najdłuższa paczka przejdzie przez drzwi, zakręt korytarza i klatkę schodową.
 
 ## Jak zabrać się do tego krok po kroku?
@@ -150,6 +149,6 @@ Wysoką szafę warto przykręcić do ściany, bo zabezpiecza to ją przed przewr
 
 ## Gdzie znaleźć szafę z wymiarami?
 
-- [Szafy](/meble/szafy/) — przy każdej podajemy szerokość, wysokość i głębokość, więc od razu porównasz je z pomiarem.
-- [Meble do przedpokoju](/pomieszczenia/przedpokoj/) i [do sypialni](/pomieszczenia/sypialnia/) — szafy razem z komodami i szafkami z tych samych kolekcji.
-- [Gdzie kupić](/gdzie-kupic/) — weź rysunek wnęki do sklepu partnerskiego i porozmawiaj ze sprzedawcą.
+- [Szafy](/meble/szafy/): przy każdej podajemy szerokość, wysokość i głębokość, więc od razu porównasz je z pomiarem.
+- [Meble do przedpokoju](/pomieszczenia/przedpokoj/) i [do sypialni](/pomieszczenia/sypialnia/): szafy razem z komodami i szafkami z tych samych kolekcji.
+- [Gdzie kupić](/gdzie-kupic/): weź rysunek wnęki do salonu partnerskiego i porozmawiaj ze sprzedawcą.

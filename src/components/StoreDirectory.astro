@@ -28,7 +28,7 @@ const route = (s: (typeof resellers)[number]) =>
             <H class="store__name">{s.name}</H>
             <p class="store__address">{s.address}, {s.postcode} {s.city}</p>
             {s.offer.length > 0 && <p class="store__offer">Oferta: {s.offer.join(', ')}</p>}
-            {s.approx && <p class="store__approx">Pinezka przybliżona — dokładny adres sprawdź w trasie.</p>}
+            {s.approx && <p class="store__approx">Pinezka jest przybliżona. Dokładny adres sprawdź przed wyjazdem.</p>}
             <p class="store__actions"><a href={route(s)} target="_blank" rel="noopener" aria-label={`Wyznacz trasę do: ${s.name} (otwiera mapę w nowej karcie)`}>Wyznacz trasę</a></p>
           </li>
         ))}

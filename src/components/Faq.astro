@@ -1,22 +1,31 @@
 ---
-// FAQ na dole strony: H2 = tytuł, H3 = pytanie, akapit = odpowiedź.
-// Z TEJ SAMEJ listy powstaje FAQPage w JSON-LD (lib/jsonld.ts → faqPage), więc tekst jest identyczny.
+// FAQ na dole strony (kierunek C): po lewej tytuł i link do kontaktu, po prawej rozwijane pytania (<details>).
+// H2 = tytuł, H3 = pytanie, akapit = odpowiedź. Odpowiedzi są w HTML także po zwinięciu, więc FAQPage
+// w JSON-LD (lib/jsonld.ts → faqPage) ma ten sam tekst — sprawdza to tools/check/run-all.mjs ([data-faq]).
 import Rich from './Rich.astro';
-import type { FaqItem } from '../lib/site';
+import { url, type FaqItem } from '../lib/site';
 
-interface Props { title: string; items: FaqItem[]; id?: string }
-const { title, items, id = 'pytania' } = Astro.props;
+interface Props { title: string; items: FaqItem[]; id?: string; lead?: string }
+const { title, items, id = 'pytania', lead = 'Nie ma tu Twojego pytania? Napisz albo zadzwoń.' } = Astro.props;
 ---
 {items.length > 0 && (
   <section class="section faq" id={id} aria-labelledby={`${id}-tytul`}>
-    <div class="container">
-      <h2 class="section__title" id={`${id}-tytul`}>{title}</h2>
+    <div class="container faq__inner">
+      <div class="faq__head">
+        <p class="faq__kicker">Pytania i odpowiedzi</p>
+        <h2 class="faq__title" id={`${id}-tytul`}>{title}</h2>
+        <p class="faq__lead">{lead}</p>
+        <p class="faq__contact"><a class="link" href={url.contact}>Kontakt z Liveo</a></p>
+      </div>
       <div class="faq__list" data-faq>
-        {items.map(it => (
-          <div class="faq__item">
-            <h3 class="faq__q"><Rich text={it.q} /></h3>
+        {items.map((it, i) => (
+          <details class="faq__item" open={i === 0}>
+            <summary>
+              <h3 class="faq__q"><Rich text={it.q} /></h3>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
             <p class="faq__a" data-faq-answer><Rich text={it.a} /></p>
-          </div>
+          </details>
         ))}
       </div>
     </div>

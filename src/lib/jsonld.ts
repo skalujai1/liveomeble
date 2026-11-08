@@ -154,7 +154,7 @@ export function productLd(o: {
   const variant = (v: VariantLd, standalone: boolean): Node => ({
     '@type': 'Product',
     '@id': standalone ? `${url}#product` : `${url}#${v.code}`,
-    name: standalone ? o.name : `${o.name} — ${v.color}`,
+    name: standalone ? o.name : `${o.name}, ${v.color}`,
     ...(standalone ? { description: o.description } : {}),
     sku: v.sku,
     ...(v.gtin13 ? { gtin13: v.gtin13 } : {}),

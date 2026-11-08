@@ -6,7 +6,6 @@ description: "Jak urządzić małą sypialnię: rozmiar łóżka, przejścia, us
 date: "2026-10-20"
 updated: "2026-10-20"
 author: "Redakcja Liveo"
-authorNote: "[do potwierdzenia: podpis autora]"
 readingTime: 7
 keyTakeaway: "Zacznij od łóżka i przejść wokół niego, wybierz szafę z drzwiami przesuwnymi albo wysoką komodę zamiast kilku niskich mebli, a dodatkowego miejsca na rzeczy szukaj pod łóżkiem i na ścianach."
 related:
@@ -28,13 +27,13 @@ faq:
     a: "Wybierz jasne meble z jednej kolekcji, meble na nóżkach i lustro, które odbija światło z okna. Mniej, ale pojemniejszych mebli daje spokojniejszy efekt niż wiele małych."
 ---
 
-W małej sypialni każdy centymetr ma swoje zadanie. Najpierw łóżko, potem przejścia, na końcu schowki — w tej kolejności urządzisz pokój, w którym da się wygodnie wstać, otworzyć szafę i niczego nie potrącać. Poniżej znajdziesz wymiary, które warto znać, przykład z liczbami i listę najczęstszych błędów.
+W małej sypialni każdy centymetr ma swoje zadanie. Najpierw łóżko, potem przejścia, na końcu schowki. W tej kolejności urządzisz pokój, w którym da się wygodnie wstać, otworzyć szafę i niczego nie potrącać. Poniżej znajdziesz wymiary, które warto znać, przykład z liczbami i listę najczęstszych błędów.
 
 **Najważniejsze w jednym zdaniu:** Zacznij od łóżka i przejść wokół niego, wybierz szafę z drzwiami przesuwnymi albo wysoką komodę zamiast kilku niskich mebli, a dodatkowego miejsca na rzeczy szukaj pod łóżkiem i na ścianach.
 
 ## Od czego zacząć urządzanie małej sypialni?
 
-Od planu na papierze w skali — na przykład jedna kratka zeszytu to 10 cm. Zaznacz na nim:
+Od planu na papierze w skali, na przykład jedna kratka zeszytu to 10 cm. Zaznacz na nim:
 
 - drzwi i kierunek ich otwierania,
 - okno, parapet i grzejnik,
@@ -50,11 +49,11 @@ Potem wytnij z kartki prostokąty mebli w tej samej skali, według ich wymiarów
 |---|---|---|
 | 90 × 200 cm | jedna osoba | zostawia najwięcej miejsca |
 | 120 × 200 cm | jedna osoba wygodnie | dobre rozwiązanie dla singla |
-| 140 × 200 cm | para | popularny kompromis — ok. 70 cm na osobę |
+| 140 × 200 cm | para | popularny kompromis, ok. 70 cm na osobę |
 | 160 × 200 cm | para wygodnie | potrzebny szerszy pokój |
 | 180 × 200 cm | para bardzo wygodnie | zwykle za duże do małej sypialni |
 
-Rama łóżka jest większa od materaca — zwykle o kilka do kilkunastu centymetrów, zależnie od wezgłowia i boków. Na planie rysuj zawsze wymiary zewnętrzne łóżka, nie materaca.
+Rama łóżka jest większa od materaca, zwykle o kilka do kilkunastu centymetrów, zależnie od wezgłowia i boków. Na planie rysuj zawsze wymiary zewnętrzne łóżka, nie materaca.
 
 W małym pokoju dobrze sprawdza się **łóżko z pojemnikiem**: mieści pościel, koce i ubrania sezonowe, więc szafa może być mniejsza. Łóżko na nóżkach wygląda lżej, bo widać pod nim podłogę.
 
@@ -64,11 +63,11 @@ Praktyczna zasada: przejście obok łóżka powinno mieć co najmniej ok. 60 cm,
 
 Pamiętaj też o miejscu przed innymi meblami:
 
-- przed szafą z drzwiami uchylnymi — szerokość skrzydła i miejsce, żeby przy nim stanąć,
-- przed komodą — głębokość wysuniętej szuflady i miejsce dla Ciebie,
-- pod oknem — tyle, żeby je otworzyć i dosięgnąć klamki.
+- przed szafą z drzwiami uchylnymi: szerokość skrzydła i miejsce, żeby przy nim stanąć,
+- przed komodą: głębokość wysuniętej szuflady i miejsce dla Ciebie,
+- pod oknem: tyle, żeby je otworzyć i dosięgnąć klamki.
 
-**Przykład z liczbami.** Sypialnia ma 3,0 × 3,3 m, czyli ok. 10 m². Łóżko na materac 140 × 200 cm ma ramę o wymiarach 150 × 210 cm. Stawiamy je wezgłowiem do krótszej ściany, na środku. Po bokach zostaje (300 − 150) : 2 = 75 cm, a w nogach 330 − 210 = 120 cm. Jeśli w nogach stanie szafa o głębokości 60 cm, przed nią zostanie 60 cm przejścia. To wystarczy przy drzwiach przesuwnych. Przy drzwiach uchylnych o szerokości 50 cm otwieranie byłoby niewygodne. Wymiary ramy łóżka są tu przykładowe — sprawdź je przy konkretnym modelu i zaznacz na planie drzwi do pokoju.
+**Przykład z liczbami.** Sypialnia ma 3,0 × 3,3 m, czyli ok. 10 m². Łóżko na materac 140 × 200 cm ma ramę o wymiarach 150 × 210 cm. Stawiamy je wezgłowiem do krótszej ściany, na środku. Po bokach zostaje (300 − 150) : 2 = 75 cm, a w nogach 330 − 210 = 120 cm. Jeśli w nogach stanie szafa o głębokości 60 cm, przed nią zostanie 60 cm przejścia. To wystarczy przy drzwiach przesuwnych. Przy drzwiach uchylnych o szerokości 50 cm otwieranie byłoby niewygodne. Wymiary ramy łóżka są tu przykładowe. Sprawdź je przy konkretnym modelu i zaznacz na planie drzwi do pokoju.
 
 ## Jak ustawić łóżko w małej sypialni?
 
@@ -86,24 +85,24 @@ W małym pokoju zwykle lepsza jest szafa z **drzwiami przesuwnymi**. Jej drzwi n
 
 Kilka sposobów na więcej miejsca w tej samej szafie:
 
-- **wysoka szafa** — górne półki na rzeczy, których używasz raz w sezonie,
-- **lustro na drzwiach** — zastępuje osobne lustro i odbija światło,
-- **komoda zamiast drugiej szafy** — gdy większość ubrań da się złożyć.
+- **wysoka szafa**: górne półki na rzeczy, których używasz raz w sezonie,
+- **lustro na drzwiach**: zastępuje osobne lustro i odbija światło,
+- **komoda zamiast drugiej szafy**, gdy większość ubrań da się złożyć.
 
 Jak zmierzyć miejsce na szafę i sprawdzić sufit, opisujemy w osobnym poradniku o mierzeniu wnęki.
 
 ## Gdzie znaleźć dodatkowe miejsce na rzeczy?
 
-- **Pod łóżkiem** — pojemnik albo płaskie pudła na kółkach.
-- **Na ścianach** — półki wiszące nad biurkiem albo komodą. Nad łóżkiem stawiaj tylko lekkie rzeczy i mocuj półki solidnie.
-- **Wysoka komoda zamiast niskiej** — ta sama pojemność na mniejszej powierzchni podłogi.
-- **Wąskie albo wiszące szafki nocne** — zostawiają więcej przejścia.
-- **Komoda z lustrem nad nią** — zastąpi osobną toaletkę.
+- **Pod łóżkiem**: pojemnik albo płaskie pudła na kółkach.
+- **Na ścianach**: półki wiszące nad biurkiem albo komodą. Nad łóżkiem stawiaj tylko lekkie rzeczy i mocuj półki solidnie.
+- **Wysoka komoda zamiast niskiej**: ta sama pojemność na mniejszej powierzchni podłogi.
+- **Wąskie albo wiszące szafki nocne** zostawiają więcej przejścia.
+- **Komoda z lustrem nad nią** zastąpi osobną toaletkę.
 
 ## Jak sprawić, żeby mała sypialnia wydawała się większa?
 
-- Wybierz **jasne meble z jednej kolekcji** — jeden kolor i te same uchwyty to mniej wizualnego zamieszania.
-- Postaw meble **na nóżkach** — widoczna podłoga powiększa pokój.
+- Wybierz **jasne meble z jednej kolekcji**. Jeden kolor i te same uchwyty to mniej wizualnego zamieszania.
+- Postaw meble **na nóżkach**. Widoczna podłoga powiększa pokój.
 - Powieś **lustro** tak, żeby odbijało światło z okna.
 - Zamiast wielu małych mebli wybierz **mniej, ale pojemniejszych**.
 - Zaplanuj kilka źródeł światła: lampę sufitową i lampki przy łóżku.
@@ -123,7 +122,7 @@ Jak zmierzyć miejsce na szafę i sprawdzić sufit, opisujemy w osobnym poradnik
 2. Narysuj plan w skali.
 3. Wybierz rozmiar materaca i sprawdź wymiary zewnętrzne łóżka.
 4. Wyznacz przejścia wokół łóżka.
-5. Dobierz szafę i komodę — sprawdź miejsce na drzwi i szuflady.
+5. Dobierz szafę i komodę. Sprawdź miejsce na drzwi i szuflady.
 6. Dodaj szafki nocne, lustro i oświetlenie.
 7. Wybierz meble z jednej kolekcji, żeby pasowały do siebie.
 
@@ -151,7 +150,7 @@ Wybierz jasne meble z jednej kolekcji, meble na nóżkach i lustro, które odbij
 
 ## Gdzie znaleźć meble do małej sypialni?
 
-- [Meble do sypialni](/pomieszczenia/sypialnia/) — łóżka, szafy, komody i szafki nocne z tych samych kolekcji.
-- [Łóżka](/meble/lozka/) i [szafy](/meble/szafy/) — z wymiarami zewnętrznymi do Twojego planu.
-- [Doradca wnętrz](/doradca-wnetrz/) — wyślij zdjęcie sypialni, a zaproponujemy komplet w pasującym kolorze.
-- [Gdzie kupić](/gdzie-kupic/) — zobacz meble na żywo w sklepie partnerskim blisko domu.
+- [Meble do sypialni](/pomieszczenia/sypialnia/): łóżka, szafy, komody i szafki nocne z tych samych kolekcji.
+- [Łóżka](/meble/lozka/) i [szafy](/meble/szafy/) z wymiarami zewnętrznymi do Twojego planu.
+- [Doradca wnętrz](/doradca-wnetrz/): wyślij zdjęcie sypialni, a zaproponujemy komplet w pasującym kolorze.
+- [Gdzie kupić](/gdzie-kupic/): zobacz meble na żywo w salonie partnerskim blisko domu.

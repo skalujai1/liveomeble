@@ -3,7 +3,7 @@
   "url": "/",
   "status": "draft",
   "seo": {
-    "title": "Liveo Meble — kolekcje mebli do całego domu",
+    "title": "Liveo Meble | Kolekcje mebli do całego domu",
     "description": "Meble projektowane w kolekcjach: szafki RTV, komody, witryny, łóżka i szafy w spójnych kolorach. Wybierz kolekcję i znajdź sklep partnerski blisko domu.",
     "jsonLd": [
       "Organization",
@@ -39,14 +39,14 @@
       "id": "kolekcje",
       "type": "collections",
       "title": "Zacznij od kolekcji",
-      "lead": "Każda kolekcja ma swój charakter — od jasnego dębu evoke po ciemny orzech i biel w połysku. Wybierz tę, która pasuje do Twojego wnętrza, a potem dobierz meble.",
+      "lead": "Kolekcje różnią się kolorem i charakterem: jasny dąb evoke, ciemny orzech, biel w połysku. Wybierz tę, która pasuje do Twojego wnętrza, i dobierz do niej meble.",
       "source": "collections.json (sortowanie: order)",
       "card": {
         "title": "{name}",
         "text": "{tagline}",
         "meta": "{roomsList}",
         "link": "Zobacz kolekcję {name}",
-        "imageAlt": "Meble z kolekcji {name} — {heroRoomLocative}"
+        "imageAlt": "Meble z kolekcji {name} {heroRoomLocative}"
       },
       "more": {
         "label": "Wszystkie kolekcje",
@@ -70,11 +70,11 @@
       "id": "jak-kupic",
       "type": "steps",
       "title": "Wybierasz tutaj, <br>kupujesz w sklepie obok",
-      "lead": "Liveo nie ma własnych salonów. Meble sprzedają sklepy partnerskie — strona prowadzi Cię do najbliższego.",
+      "lead": "Liveo nie ma własnych salonów. Meble sprzedają salony partnerskie, a ta strona prowadzi Cię do najbliższego.",
       "items": [
         {
           "title": "Wybierz kolekcję i kolor",
-          "text": "Przy każdym meblu podajemy wymiary, kolory, materiały i paczki — cenę poda salon partnerski."
+          "text": "Przy każdym meblu podajemy wymiary, kolory, materiały i paczki. Cenę poda salon partnerski."
         },
         {
           "title": "Wpisz kod pocztowy",
@@ -97,7 +97,7 @@
     {
       "id": "doradca",
       "type": "feature",
-      "title": "Wyślij zdjęcie pokoju — <br>podpowiemy komplet",
+      "title": "Wyślij zdjęcie pokoju, <br>podpowiemy komplet",
       "text": "Doradca wnętrz rozpoznaje pomieszczenie i kolory na zdjęciu, a potem proponuje meble z jednej kolekcji, które do nich pasują. Zdjęcie zostaje na Twoim urządzeniu.",
       "note": "Doradca podpowiada, ale nie mierzy. Przed zakupem sprawdź wymiary.",
       "cta": {
@@ -109,7 +109,7 @@
       "id": "producent",
       "type": "text",
       "title": "Prosto od producenta z Podkarpacia",
-      "text": "Meble Liveo powstają w Raniżowie [do potwierdzenia: miejsce produkcji]. Projektujemy je w kompletach, bo tak urządza się dom: najpierw salon, potem sypialnia, przedpokój. Kolekcje sprzedajemy przez sklepy partnerskie [do potwierdzenia: zasięg sieci, np. „w całej Polsce”].",
+      "text": "Liveo to producent mebli z Raniżowa na Podkarpaciu. Projektujemy meble w kolekcjach, bo tak urządza się dom: najpierw salon, potem sypialnia i przedpokój. Kolekcje sprzedajemy przez salony partnerskie w całej Polsce.",
       "cta": {
         "label": "Poznaj Liveo",
         "href": "/o-nas/"
@@ -142,31 +142,39 @@
     "items": [
       {
         "q": "Gdzie kupię meble Liveo?",
-        "a": "Meble Liveo kupisz w sklepach partnerskich — Liveo nie ma własnych salonów. Wpisz kod pocztowy na stronie [Gdzie kupić](/gdzie-kupic/), a pokażemy najbliższe sklepy z wybraną kolekcją."
+        "a": "Meble Liveo kupisz w salonach partnerskich, bo Liveo nie ma własnych sklepów. Wpisz kod pocztowy na stronie [Gdzie kupić](/gdzie-kupic/), a pokażemy najbliższe salony z wybraną kolekcją."
       },
       {
-        "q": "Czy mogę kupić meble Liveo przez internet?",
-        "a": "Na tej stronie nie sprzedajemy mebli — tu wybierasz meble i znajdujesz sklep, który je sprzeda. Część sklepów partnerskich może sprzedawać też przez internet [do potwierdzenia]."
+        "q": "Dlaczego na stronie nie ma cen?",
+        "a": "Liveo nie sprzedaje mebli bezpośrednio. Sprzedają je salony partnerskie i to one ustalają ceny, promocje, dostawę i montaż. Najbliższy salon znajdziesz po kodzie pocztowym."
+      },
+      {
+        "q": "Czy zobaczę meble na żywo przed zakupem?",
+        "a": "Tak, w salonach partnerskich. Nie każdy salon ma wszystkie kolekcje na ekspozycji, więc przed wizytą zadzwoń i zapytaj o wybrany mebel. Salony znajdziesz na stronie [Gdzie kupić](/gdzie-kupic/)."
+      },
+      {
+        "q": "Jak sprawdzić, czy mebel zmieści się w pokoju?",
+        "a": "Na stronie mebla podajemy szerokość, wysokość i głębokość, a przy wielu meblach także rysunek wymiarowy. Zmierz miejsce w kilku punktach i porównaj. Jak to zrobić, opisujemy w poradniku [Jak zmierzyć wnękę pod szafę](/poradnik/jak-zmierzyc-wneke-pod-szafe/)."
+      },
+      {
+        "q": "Z czego są wykonane meble Liveo?",
+        "a": "Korpusy są głównie z płyty wiórowej laminowanej o grubości 16 mm, a niektóre elementy, na przykład blaty, z grubszej płyty. Materiały korpusu, frontów, blatu i nóżek podajemy przy każdym meblu, według karty produktu Liveo."
+      },
+      {
+        "q": "Czy meble Liveo trzeba składać samodzielnie?",
+        "a": "Tak, meble Liveo są do samodzielnego montażu. Instrukcję w PDF pobierzesz ze strony mebla, w sekcji „Do pobrania”. O montaż możesz zapytać w salonie partnerskim."
       },
       {
         "q": "Czym jest kolekcja mebli?",
         "a": "Kolekcja to meble zaprojektowane razem: mają te same kolory i podobne proporcje. Dzięki temu szafka RTV, komoda i witryna z jednej kolekcji tworzą spójny komplet."
       },
       {
-        "q": "Z czego są wykonane meble Liveo?",
-        "a": "Korpusy i fronty mebli Liveo są z płyty laminowanej w dekorach drewna i kolorach jednolitych [do potwierdzenia: rodzaj i grubość płyty]. Okucia, wymiary i wykończenie każdego mebla opisujemy na jego stronie."
+        "q": "Jak dobrać meble do mojego wnętrza?",
+        "a": "Wyślij zdjęcie pokoju do [doradcy wnętrz](/doradca-wnetrz/). Zaproponuje komplet z jednej kolekcji w kolorach pasujących do podłogi i ścian."
       },
       {
-        "q": "Czy meble Liveo trzeba składać samodzielnie?",
-        "a": "Tak, meble Liveo są dostarczane w paczkach do samodzielnego montażu, z instrukcją i okuciami [do potwierdzenia]. Niektóre sklepy partnerskie oferują montaż — informację znajdziesz przy sklepie na stronie Gdzie kupić."
-      },
-      {
-        "q": "Czy zobaczę meble na żywo przed zakupem?",
-        "a": "Tak, w sklepach partnerskich z ekspozycją. Przy każdym sklepie na stronie [Gdzie kupić](/gdzie-kupic/) podajemy, czy ma meble na ekspozycji i które kolekcje oferuje."
-      },
-      {
-        "q": "Dlaczego na stronie nie ma cen?",
-        "a": "Liveo nie sprzedaje mebli bezpośrednio — sprzedają je salony partnerskie i to one ustalają ceny, promocje, dostawę i montaż. Najbliższy salon znajdziesz po kodzie pocztowym."
+        "q": "Czy mogę kupić meble Liveo przez internet?",
+        "a": "Nie na tej stronie. Tu wybierasz meble i znajdujesz salon, który je sprzeda. O zakup przez internet zapytaj w wybranym salonie."
       }
     ]
   },

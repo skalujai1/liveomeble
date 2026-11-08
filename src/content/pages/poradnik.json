@@ -3,16 +3,20 @@
   "url": "/poradnik/",
   "status": "draft",
   "seo": {
-    "title": "Poradnik — jak wybrać i ustawić meble | Liveo",
+    "title": "Poradnik: jak wybrać i ustawić meble | Liveo",
     "description": "Praktyczne poradniki przed zakupem mebli: jak zmierzyć wnękę, dobrać szafkę RTV, urządzić małą sypialnię i na co patrzeć przy płycie meblowej.",
-    "jsonLd": ["CollectionPage", "ItemList", "BreadcrumbList"]
+    "jsonLd": [
+      "CollectionPage",
+      "ItemList",
+      "BreadcrumbList"
+    ]
   },
   "h1": "Poradnik",
   "sections": [
     {
       "id": "wstep",
       "type": "intro",
-      "lead": "Konkretne wskazówki, zanim kupisz mebel: jak mierzyć, jak ustawiać, na co patrzeć w sklepie. Piszemy ogólnie i rzetelnie — bez reklamy w środku tekstu."
+      "lead": "Praktyczne wskazówki przed zakupem mebla: jak mierzyć, jak ustawiać i na co patrzeć w salonie."
     },
     {
       "id": "lista",
@@ -31,8 +35,11 @@
       "id": "doradca",
       "type": "band",
       "title": "Wolisz zapytać?",
-      "text": "Wyślij zdjęcie pokoju — doradca wnętrz zaproponuje komplet mebli z jednej kolekcji.",
-      "cta": { "label": "Otwórz doradcę wnętrz", "href": "/doradca-wnetrz/" }
+      "text": "Wyślij zdjęcie pokoju, a doradca wnętrz zaproponuje komplet mebli z jednej kolekcji.",
+      "cta": {
+        "label": "Otwórz doradcę wnętrz",
+        "href": "/doradca-wnetrz/"
+      }
     }
   ],
   "article": {
@@ -46,7 +53,11 @@
       "title": "{title} | Liveo",
       "titleFallback": "{title}",
       "description": "{description}",
-      "jsonLd": ["Article", "BreadcrumbList", "FAQPage"]
+      "jsonLd": [
+        "Article",
+        "BreadcrumbList",
+        "FAQPage"
+      ]
     },
     "meta": {
       "author": "{author}",

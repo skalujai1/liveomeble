@@ -17,7 +17,7 @@ const H = `h${headingLevel}` as 'h2' | 'h3';
 const items = productsByCollection(c.slug);
 const pieces = (n: number) => `${n} ${n === 1 ? 'mebel' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 'meble' : 'mebli'}`;
 const altOf = (img: ReturnType<typeof collectionImage>, what: string) =>
-  img?.approximate ? `Aranżacja poglądowa: ${img.title}` : `Kolekcja ${c.name} — ${what.toLocaleLowerCase('pl')}`;
+  img?.approximate ? `Aranżacja poglądowa: ${img.title}` : `Kolekcja ${c.name}, ${what.toLocaleLowerCase('pl')}`;
 const angle = collectionImage(c, 'angle');
 const tall = collectionImage(c, 'tall');
 const detail = collectionImage(c, 'detail');

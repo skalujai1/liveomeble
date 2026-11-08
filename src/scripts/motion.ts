@@ -235,12 +235,30 @@ function initShowcase() {
   });
 }
 
+// Karta mebla: drugi widok (np. z otwartymi drzwiami) ładowany dopiero przy pierwszym najechaniu myszą.
+function initCardFlip() {
+  if (!matchMedia('(hover: hover)').matches) return;
+  document.addEventListener('pointerover', e => {
+    const card = (e.target as Element).closest?.<HTMLElement>('.product-card--flip');
+    if (!card || card.dataset.flip) return;
+    card.dataset.flip = '1';
+    const el = card.querySelector<HTMLElement>('.product-card__second[data-src]');
+    if (!el) return;
+    const src = el.dataset.src!;
+    el.removeAttribute('data-src');
+    const img = new Image();
+    img.onload = () => { el.style.backgroundImage = `url("${src}")`; card.classList.add('is-ready'); };
+    img.src = src;
+  }, { passive: true });
+}
+
 export function initMotion() {
   document.documentElement.classList.add('motion-ready');
   initReveal();
   initHeader();
   initHero();
   initHotspots();
+  initCardFlip();
   initRails();
   initShowcase();
 }

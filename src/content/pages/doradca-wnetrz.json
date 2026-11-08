@@ -3,7 +3,7 @@
   "url": "/doradca-wnetrz/",
   "status": "draft",
   "seo": {
-    "title": "Doradca wnętrz — dobierz meble ze zdjęcia pokoju | Liveo",
+    "title": "Doradca wnętrz | Dobierz meble do zdjęcia pokoju | Liveo",
     "description": "Wyślij zdjęcie pokoju, a doradca wnętrz Liveo zaproponuje komplet mebli z jednej kolekcji dopasowany do kolorów wnętrza. Zdjęcie zostaje na urządzeniu.",
     "jsonLd": [
       "WebPage",
@@ -23,7 +23,7 @@
         "href": "#jak-korzystac"
       },
       "privacy": "Zdjęcie analizuje Twoja przeglądarka. Nie wysyłamy go na serwer i go nie zapisujemy.",
-      "aiNote": "Odpowiada asystent AI. Może się mylić — przed zakupem sprawdź wymiary i kolory w sklepie.",
+      "aiNote": "Odpowiada asystent AI i może się pomylić. Przed zakupem sprawdź wymiary i kolory w salonie.",
       "_notes": [
         "Narzędzie działa na tej stronie (src/components/AdvisorTool.astro + src/scripts/advisor.ts). Mały czat z liveo-assistant/ jest na pozostałych stronach i przenosi tu zdjęcie oraz wynik.",
         "Bez JS: komunikat, że doradca wymaga JavaScriptu; kafle pomieszczeń prowadzą do /pomieszczenia/<slug>/."
@@ -46,7 +46,7 @@
         {
           "label": "Komplety",
           "title": "Porównaj komplety",
-          "text": "Najlepiej dopasowany komplet jest pierwszy. Zmień budżet, ton albo rodzaj mebla — albo napisz, czego szukasz."
+          "text": "Najlepiej dopasowany komplet jest pierwszy. Zmień ton albo rodzaj mebla albo napisz, czego szukasz."
         },
         {
           "label": "Gdzie kupić",
@@ -102,11 +102,11 @@
       "id": "jak-korzystac",
       "type": "steps",
       "title": "Jak korzystać z doradcy wnętrz",
-      "lead": "Te same cztery kroki co w narzędziu powyżej — tu z wyjaśnieniem, co dzieje się w każdym z nich.",
+      "lead": "Te same cztery kroki co w narzędziu powyżej, tym razem z wyjaśnieniem.",
       "items": [
         {
           "title": "Zdjęcie",
-          "text": "Zrób zdjęcie pokoju telefonem albo wybierz je z galerii. Na komputerze możesz też przeciągnąć plik na pole zdjęcia albo wkleić go skrótem Ctrl+V. Nie masz zdjęcia? Wybierz pomieszczenie z listy — doradca dobierze meble w uniwersalnej kolorystyce."
+          "text": "Zrób zdjęcie pokoju telefonem albo wybierz je z galerii. Na komputerze możesz też przeciągnąć plik na pole zdjęcia albo wkleić go skrótem Ctrl+V. Nie masz zdjęcia? Wybierz pomieszczenie z listy, a doradca dobierze meble w uniwersalnych kolorach."
         },
         {
           "title": "Pokój i kolory",
@@ -153,11 +153,11 @@
       "items": [
         {
           "title": "Zdjęcie zostaje na Twoim urządzeniu",
-          "text": "Analizuje je Twoja przeglądarka. Nie wysyłamy zdjęcia na serwer i go nie zapisujemy. Przy pierwszym zdjęciu przeglądarka pobiera model do analizy obrazu — to kilkadziesiąt MB [do potwierdzenia: rozmiar po wdrożeniu], więc lepiej użyć Wi-Fi."
+          "text": "Zdjęcie analizuje Twoja przeglądarka. Nie wysyłamy go na serwer i go nie zapisujemy. Przy pierwszym zdjęciu przeglądarka pobiera większy plik z modelem do analizy obrazu, więc lepiej użyć Wi-Fi."
         },
         {
           "title": "Tekst może trafić do modelu AI",
-          "text": "Wiadomości, które piszesz w czacie albo w polu „Napisz, czego szukasz”, przesyłamy do modelu językowego przez naszego pośrednika [do uzupełnienia: dostawca, np. OpenRouter, i dostawca modelu]. Nie zapisujemy treści rozmów. Nie wpisuj danych osobowych."
+          "text": "Wiadomości, które piszesz w czacie albo w polu „Napisz, czego szukasz”, trafiają do modelu językowego przez serwis OpenRouter. Nie zapisujemy treści rozmów. Nie wpisuj danych osobowych."
         },
         {
           "title": "Wiesz, że rozmawiasz z AI",
@@ -173,7 +173,7 @@
       "id": "dalej",
       "type": "band",
       "title": "Wolisz wybrać sam?",
-      "text": "Przejrzyj kolekcje — przy każdej zobaczysz meble w aranżacji, kolory i wymiary.",
+      "text": "Przejrzyj kolekcje. Przy każdej zobaczysz meble w aranżacji, kolory i wymiary.",
       "cta": {
         "label": "Zobacz kolekcje",
         "href": "/kolekcje/"
@@ -201,7 +201,7 @@
       },
       {
         "q": "Czy doradca sprawdzi, czy mebel zmieści się w pokoju?",
-        "a": "Nie, doradca nie mierzy pokoju ze zdjęcia. Wymiary znajdziesz na stronie każdego mebla — porównaj je z miejscem, które zmierzysz miarką."
+        "a": "Nie, doradca nie mierzy pokoju ze zdjęcia. Wymiary znajdziesz na stronie każdego mebla. Porównaj je z miejscem zmierzonym miarką."
       },
       {
         "q": "Czy mogę kupić meble przez doradcę?",

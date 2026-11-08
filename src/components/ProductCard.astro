@@ -1,9 +1,11 @@
 ---
-// Karta mebla na listach. Atrybuty data-* opisują mebel dla filtrów (scripts/listing.ts) —
-// bez JS karta jest zwykłym linkiem. Karty produktu Liveo nie mają cen: zamiast ceny kolory i dostawa w 72 h.
+// Karta mebla na listach (kierunek C): kwadratowy kadr na lnie (białe tło packshotu znika przez mix-blend-mode),
+// po najechaniu drugi widok z karty produktu (np. z otwartymi drzwiami), nazwa w szeryfie, kolekcja,
+// wymiary, kolory i dostawa w 72 h. Atrybuty data-* opisują mebel dla filtrów (scripts/listing.ts) —
+// bez JS karta jest zwykłym linkiem. Karty produktu Liveo nie mają cen.
 import Media from './Media.astro';
-import { packshotFor } from '../lib/images';
-import { collectionOf, colorCount, defaultVariant, dims, finishById, pages, site, typeOf, url, variantBoardColors, type Product } from '../lib/site';
+import { packshotFor, srcOf, type PublicImage } from '../lib/images';
+import { collectionOf, colorCount, defaultVariant, dimsLong, finishById, pages, site, typeOf, url, variantBoardColors, type Product } from '../lib/site';
 import { fill } from '../lib/text';
 
 interface Props {
@@ -19,8 +21,9 @@ const { product: p, code, headingLevel = 3, order = 0, sizes = '(min-width: 75re
 const v = (code && p.variants.find(x => x.code === code)) || defaultVariant(p);
 const img = packshotFor(p, v);
 const card = pages.meble.sections.find(s => s.id === 'lista')!.card!;
+const col = collectionOf(p);
 const alt = img?.approximate
-  ? `${p.name} — aranżacja kolekcji ${collectionOf(p).name}`
+  ? `${p.name}, aranżacja kolekcji ${col.name}`
   : fill(card.imageAlt, { name: p.name, colorLabel: v.colorLabel.toLocaleLowerCase('pl') });
 const colors = [...new Set(p.variants.flatMap(variantBoardColors))];
 const H = `h${headingLevel}` as 'h3' | 'h4';
@@ -28,9 +31,11 @@ const H = `h${headingLevel}` as 'h3' | 'h4';
 const hex = (id?: string | null) => (id && finishById.get(id)?.hex) || '#ccc';
 const variantDots = p.variants.slice(0, 5).map(x => ({ c1: hex(x.finish.front), c2: hex(x.finish.body ?? x.finish.front) }));
 const href = url.product(p.slug, v.code === defaultVariant(p).code ? undefined : v.code);
+// Drugi widok na najechanie: zdjęcie „otwarte” (_o) tego samego koloru; ładowane dopiero przy najechaniu (motion.ts).
+const second = !img?.approximate ? ((v.gallery ?? []) as PublicImage[]).find(g => /_o$/.test(g.base)) : undefined;
 ---
 <li
-  class="product-card"
+  class:list={['product-card', { 'product-card--flip': !!second }]}
   data-listing-item
   data-product={p.sku}
   data-rooms={p.rooms.join(' ')}
@@ -42,25 +47,29 @@ const href = url.product(p.slug, v.code === defaultVariant(p).code ? undefined :
   data-order={order}
 >
   <a class="product-card__link" href={href}>
-    <Media
-      image={img}
-      alt={alt}
-      widths={[480, 1000]}
-      sizes={sizes}
-      ratio="4 / 3"
-      fit={img?.approximate ? 'cover' : 'contain'}
-      placeholderLabel={typeOf(p).name}
-    />
+    <span class="product-card__frame">
+      <Media
+        image={img}
+        alt={alt}
+        widths={[480, 1000]}
+        sizes={sizes}
+        ratio="1 / 1"
+        fit={img?.approximate ? 'cover' : 'contain'}
+        placeholderLabel={typeOf(p).name}
+      />
+      {second && <span class="product-card__second" data-src={srcOf(second, 480)} aria-hidden="true"></span>}
+    </span>
     <H class="product-card__title">{p.name}</H>
   </a>
   <p class="product-card__meta">
-    <span class="product-card__collection">{site.labels.collection} {collectionOf(p).name}</span>
-    <span>{colorCount(p)} · {dims(p)}</span>
+    <span class="product-card__collection">{site.labels.collection} {col.name}</span>
+    <span class="product-card__dims">{dimsLong(p)}</span>
   </p>
-  <p class="product-card__dots" role="img" aria-label={`Kolory: ${p.variants.map(x => x.colorLabel).join(', ')}`}>
-    {variantDots.map(d => <i style={`--c: ${d.c1}; --c2: ${d.c2}`}></i>)}
+  <p class="product-card__foot">
+    <span class="product-card__dots" role="img" aria-label={`Kolory: ${p.variants.map(x => x.colorLabel).join(', ')}`}>
+      {variantDots.map(d => <i style={`--c: ${d.c1}; --c2: ${d.c2}`}></i>)}
+    </span>
+    <span class="product-card__count">{colorCount(p)}</span>
+    {p.delivery72 && <span class="product-card__delivery">{site.labels.delivery72}</span>}
   </p>
-  {p.delivery72 && (
-    <p class="product-card__badges"><span class="badge badge--delivery">{site.labels.delivery72}</span></p>
-  )}
 </li>

@@ -47,7 +47,7 @@ const typeRooms = rooms.filter(r => t.rooms.includes(r.slug));
 >
   <PageHeader {h1} lead={item.intro} />
 
-  <Section id="lista" title={`${t.plural} — lista`} titleHidden>
+  <Section id="lista" title={`${t.plural}: lista`} titleHidden>
     <ProductListing products={list} action={path} hide={['typ']} />
   </Section>
 

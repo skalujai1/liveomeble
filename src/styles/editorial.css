@@ -453,7 +453,7 @@ h1, h2, .section__title { letter-spacing: -0.01em; }
 .poland-map__count { display: grid; gap: 0.25rem; margin: 0; font-size: var(--text-lg); line-height: 1.3; }
 .poland-map__num { font: var(--weight-display) var(--text-6xl)/0.9 var(--font-display); letter-spacing: -0.03em; color: var(--color-dark); }
 .poland-map__sub { color: var(--color-text-muted); font-size: var(--text-sm); }
-.poland-map__grid { fill: #d8cebf; }
+.poland-map__land { fill: rgb(42 36 32 / 0.025); stroke: rgb(42 36 32 / 0.3); stroke-width: 1.2; stroke-linejoin: round; }
 .poland-map__store { fill: var(--color-walnut); transform-box: fill-box; transform-origin: center; transition: fill var(--dur) var(--ease-out), opacity var(--dur) var(--ease-out); }
 .poland-map__hq circle { fill: var(--color-dark); stroke: var(--color-bg); stroke-width: 2; }
 .poland-map__hq .poland-map__hq-pulse { stroke: none; opacity: 0; }
@@ -499,8 +499,9 @@ h1, h2, .section__title { letter-spacing: -0.01em; }
 .data-table--packages { margin-top: var(--space-5); font-size: var(--text-sm); }
 .data-table--packages caption { text-align: left; font-weight: var(--weight-medium); padding-bottom: var(--space-2); }
 .doc-links { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-6); margin: 0; padding: 0; list-style: none; }
-/* Packshoty z kart Liveo mają białe tło — ramka też biała, żeby zdjęcie nie wyglądało jak naklejka na lnie */
-.product-card .media--contain, .gallery__item .media--contain, .gallery__more a { background: #fff; box-shadow: inset 0 0 0 1px var(--color-line); }
+/* Packshoty z kart Liveo mają białe tło: na lnie z mix-blend-mode: multiply biel znika i mebel stoi na lnie jak w aranżacji */
+.product-card .media--contain, .gallery__item .media--contain, .gallery__more a { background: var(--color-surface); box-shadow: none; }
+.product-card .media--contain .media__img, .gallery__item .media--contain .media__img, .gallery__more img, .type-tile__thumb img { mix-blend-mode: multiply; }
 .dims-drawing--photo img { max-height: 34rem; object-fit: contain; }
 
 /* ---------- Mapa salonów: województwa (granice PRG) ---------- */
@@ -513,3 +514,104 @@ h1, h2, .section__title { letter-spacing: -0.01em; }
 .poland-map__store:hover { fill: var(--color-dark); }
 .store__offer, .store__approx { margin: 0; font-size: var(--text-sm); color: var(--color-text-muted); }
 .store-directory__group:target { scroll-margin-top: 8rem; }
+
+/* ==========================================================================
+   Podstrony w jednym stylu ze stroną główną (8.11.2026): bez beżowych „pudełek” z poprzedniego szablonu.
+   Bloki treści (ContentSection, poradnik, kontakt, o nas, dla partnerów, gdzie kupić) dostają cienkie linie,
+   numerację w szeryfie, ciemny pas zamiast lnianego i spokojny formularz.
+   ========================================================================== */
+.page-header { padding-top: clamp(2rem, 1rem + 3vw, 3.5rem); padding-bottom: clamp(1rem, 0.5rem + 1.5vw, 2rem); }
+.page-header__title { font-size: var(--text-4xl); line-height: 1; letter-spacing: -0.02em; text-wrap: balance; }
+.page-header__lead { font-size: var(--text-lg); line-height: 1.55; max-width: 38rem; }
+
+/* Listy cech i ścieżek (kontakt „W jakiej sprawie”, dla partnerów, o nas): linia u góry, numer, bez tła */
+.feature-list { counter-reset: cecha; gap: var(--space-7) var(--space-6); }
+.feature-list__item, .section--alt .feature-list__item {
+  counter-increment: cecha; gap: 0.75rem; padding: 1.25rem 0 0; background: none; border-radius: 0; border-top: 1px solid var(--color-line-strong);
+}
+.feature-list__item::before { content: counter(cecha, decimal-leading-zero); font: var(--weight-display) 1rem/1 var(--font-display); color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.feature-list__title { font: var(--weight-display) clamp(1.3125rem, 1.1rem + 0.5vw, 1.5rem)/1.2 var(--font-display); }
+.feature-list__text { line-height: 1.6; }
+.feature-list__link { margin-top: 0.5rem; }
+
+/* Kroki: duża cyfra w szeryfie zamiast kółka */
+.steps { gap: var(--space-7) var(--space-6); }
+.steps__item { gap: 0.625rem; padding-top: 1.25rem; border-top: 1px solid var(--color-line-strong); }
+.steps__item::before, .section--alt .steps__item::before, .section--band .steps__item::before, .page-advisor #jak-korzystac .steps__item::before {
+  content: counter(step, decimal-leading-zero); display: block; width: auto; height: auto; background: none; border-radius: 0;
+  font: var(--weight-display) 2.25rem/1 var(--font-display); color: var(--color-text); letter-spacing: -0.02em;
+}
+.steps__title { font-size: 1.0625rem; }
+.buy-steps { gap: var(--space-6); }
+.buy-steps li { grid-template-columns: 1fr; row-gap: 0.5rem; padding-top: 1.25rem; border-top: 1px solid var(--color-line-strong); }
+.buy-steps li::before { content: counter(krok, decimal-leading-zero); grid-row: auto; display: block; width: auto; height: auto; background: none; border-radius: 0; font: var(--weight-display) 2.25rem/1 var(--font-display); color: var(--color-text); }
+
+/* Pas z wezwaniem (np. „Wolisz zapytać?”): pełna szerokość na lnie, duży tytuł — jak sekcja „Znajdź salon” na stronie głównej.
+   Ciemny pas zlewałby się ze stopką, bo zwykle stoi tuż nad nią. */
+.section--band, .section--feature { background: var(--color-surface); padding-block: clamp(3.5rem, 2rem + 4vw, 6rem); }
+.section--band .section__title, .section--feature .section__title { font-size: var(--text-3xl); line-height: 1.05; letter-spacing: -0.015em; }
+.section--band .band__text, .section--feature .band__text { font-size: var(--text-lg); line-height: 1.55; color: var(--color-text-muted); max-width: 38rem; }
+
+/* Tabele faktów (kontakt, o nas): etykieta drobnymi wersalikami, cienkie linie */
+.facts { border-top: 1px solid var(--color-line-strong); }
+.facts__row { padding-block: 1rem; border-bottom: 1px solid var(--color-line); }
+.facts dt { font-size: 0.75rem; font-weight: var(--weight-medium); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); padding-top: 0.2rem; }
+.facts dd { font-size: 1.0625rem; }
+.explainer__example { background: none; padding: 1.25rem 0 0; border-top: 1px solid var(--color-line-strong); }
+.two-lists__col, .page-advisor .two-lists__col { padding: 1.25rem 0 0; border: 0; border-top: 1px solid var(--color-line-strong); }
+.two-lists__col h3 { font: var(--weight-display) 1.5rem/1.2 var(--font-display); }
+
+/* Poradnik: zamiast lnianych kart — wpisy oddzielone linią, tytuł w szeryfie */
+.article-card, .section--alt .article-card, .section--band .article-card {
+  gap: 0.75rem; padding: 1.25rem 0 0; background: none; border-radius: 0; border-top: 1px solid var(--color-line-strong);
+}
+.article-card__title { font-size: clamp(1.5rem, 1.25rem + 0.6vw, 1.875rem); line-height: 1.12; letter-spacing: -0.01em; }
+.article-card__text { line-height: 1.6; }
+.article-card__meta { font-size: 0.75rem; font-weight: var(--weight-medium); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+.article-card__link { font-weight: var(--weight-medium); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.article-card:hover .article-card__title { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+
+/* Formularze: bez beżowego tła, pola na białym z cienką linią */
+.form-card { padding: 1.5rem 0 0; border-radius: 0; background: none; border-top: 1px solid var(--color-line-strong); }
+.form-card .field__control { background-color: #fff; }
+.form-aside { border-radius: 0; box-shadow: none; padding: 1.25rem 0 0; border-top: 1px solid var(--color-line-strong); }
+
+/* Znaczniki [do potwierdzenia] (tylko w szkicach prawnych): bez żółtego tła, jako cichy dopisek */
+mark.todo { background: none; color: var(--color-text-muted); padding: 0; border-radius: 0; font-style: italic; text-decoration: underline dotted; text-underline-offset: 3px; }
+
+/* ---------- Katalog: karta mebla (8.11.2026) ---------- */
+.product-grid { gap: var(--space-7) var(--space-5); }
+.product-card { gap: 0; }
+.product-card__link { display: block; gap: 0; color: var(--color-text); text-decoration: none; }
+.product-card__frame { position: relative; display: block; overflow: hidden; background: var(--color-surface); }
+.product-card .media { aspect-ratio: 1; background: var(--color-surface); }
+.product-card .media--contain .media__img { padding: 11%; }
+.product-card__second { position: absolute; inset: 11%; background: center / contain no-repeat; mix-blend-mode: multiply; opacity: 0; transition: opacity 500ms var(--ease-expo); }
+.product-card--flip.is-ready .product-card__link:hover .product-card__second { opacity: 1; }
+.product-card--flip.is-ready .product-card__link:hover .media__img { opacity: 0; transition: opacity 500ms var(--ease-expo); }
+.product-card__title { margin: 1rem 0 0; font: var(--weight-display) 1.1875rem/1.25 var(--font-display); letter-spacing: -0.005em; }
+.product-card__link:hover .product-card__title { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+.product-card__meta { display: grid; gap: 0.25rem; margin-top: 0.375rem; font-size: 0.875rem; line-height: 1.4; color: var(--color-text-muted); }
+.product-card__collection { font-size: 0.6875rem; font-weight: var(--weight-medium); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text); }
+.product-card__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem 0.625rem; margin: 0.75rem 0 0; padding-top: 0.75rem; border-top: 1px solid var(--color-line); font-size: 0.8125rem; color: var(--color-text-muted); }
+.product-card__foot .product-card__dots { display: flex; gap: 0.25rem; margin: 0; }
+.product-card__foot .product-card__dots i { width: 0.875rem; height: 0.875rem; }
+.product-card__delivery { margin-left: auto; font-size: 0.6875rem; font-weight: var(--weight-medium); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-forest); }
+@media (max-width: 47.9rem) {
+  .product-card__title { font-size: 1.0625rem; }
+  .product-card__delivery { margin-left: 0; flex-basis: 100%; }
+}
+
+/* Rodzaje mebli (kafle): packshot na lnie, nazwa w szeryfie */
+.type-tiles { gap: 1.5rem 0.75rem; }
+.type-tile__thumb { background: var(--color-surface); }
+.type-tile__thumb img { width: 82%; }
+.type-tile__name { margin-top: 0.75rem; font: var(--weight-display) 1.0625rem/1.2 var(--font-display); }
+.type-tile__count { font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* Strona mebla: najważniejsze dane obok wyboru koloru */
+.summary__facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: var(--space-5) 0 0; border-top: 1px solid var(--color-line-strong); }
+.summary__facts div { padding: 0.875rem 0.75rem 0.875rem 0; border-bottom: 1px solid var(--color-line); }
+.summary__facts dt { font-size: 0.6875rem; font-weight: var(--weight-medium); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+.summary__facts dd { margin: 0.25rem 0 0; font: var(--weight-display) 1.375rem/1.1 var(--font-display); font-variant-numeric: tabular-nums; }
+.gallery .media, .gallery__item .media { border-radius: 0; }

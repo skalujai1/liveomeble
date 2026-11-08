@@ -201,7 +201,7 @@ export function initPartnerZone() {
       const rm = h('button', { type: 'button', class: 'btn btn--text', 'aria-label': fill(B.t.remove, { name: `${r.name}, ${r.color}` }) }, 'Usuń');
       rm.addEventListener('click', () => { cart = cart.filter(x => x !== l); store.set(sessionStorage, CART, cart); renderOrder(); });
       const lead = r.delivery72 ? null : h('span', { class: 'field__hint' }, ` · dostawa ${deliveryText(r)}`);
-      return h('tr', {}, h('td', {}, `${r.name} — ${r.color} `, h('code', {}, r.sku), lead), h('td', {}, qty),
+      return h('tr', {}, h('td', {}, `${r.name}, ${r.color} `, h('code', {}, r.sku), lead), h('td', {}, qty),
         h('td', { class: 'num' }, String(r.packages || '—')), h('td', { class: 'num' }, String(r.packages * l.qty || '—')), h('td', {}, rm));
     }));
     const t = totals(cart);

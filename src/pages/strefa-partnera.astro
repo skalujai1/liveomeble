@@ -70,7 +70,7 @@ const tabs = P.nav.items;
     <header class="page-header__text">
       <h1 class="page-header__title">{page.h1}</h1>
       <div class="demo-banner" role="note">
-        <p class="demo-banner__title"><strong>DEMO — {page.demoBanner.title}</strong></p>
+        <p class="demo-banner__title"><strong>DEMO: {page.demoBanner.title}</strong></p>
         <p>{page.demoBanner.text}</p>
       </div>
     </header>
@@ -176,7 +176,7 @@ const tabs = P.nav.items;
           </label>
           <button class="btn btn--secondary" type="submit">{P.pricelist.addButton}</button>
           <p class="field__error" data-quick-error hidden></p>
-          <datalist id="pz-skus">{rows.map(r => <option value={r.sku}>{`${r.name} — ${r.color}`}</option>)}</datalist>
+          <datalist id="pz-skus">{rows.map(r => <option value={r.sku}>{`${r.name}, ${r.color}`}</option>)}</datalist>
         </form>
         <p data-order-empty>{P.order.empty}</p>
         <div class="partner-table-wrap" tabindex="0" role="region" aria-label={P.order.title} data-order-wrap hidden>
@@ -225,7 +225,7 @@ const tabs = P.nav.items;
             <button class="btn btn--primary" type="button" data-order-confirm hidden>Potwierdź zamówienie (DEMO)</button>
             <button class="btn btn--text" type="button" data-order-cancel hidden>Wróć do edycji</button>
           </p>
-          <p class="form__demo-note">W wersji produkcyjnej zamówienie trafi do Navireo (ERP Liveo) — tu nic nie jest wysyłane.</p>
+          <p class="form__demo-note">W wersji produkcyjnej zamówienie trafi do Navireo (ERP Liveo). Tu nic nie jest wysyłane.</p>
         </form>
         <div class="form__result" role="status" aria-live="polite" tabindex="-1" data-order-result hidden></div>
       </div>
@@ -252,7 +252,7 @@ const tabs = P.nav.items;
       <div role="tabpanel" id="panel-materialy" aria-labelledby="tab-materialy" data-panel="materialy" class="partner-panel__body" hidden>
         <h3>{P.materials.title}</h3>
         <p>{P.materials.lead}</p>
-        <ul class="feature-bullets">{P.materials.items.map(i => <li>{i.label} <span class="field__hint">(DEMO — plik niedostępny)</span></li>)}</ul>
+        <ul class="feature-bullets">{P.materials.items.map(i => <li>{i.label} <span class="field__hint">(DEMO, plik niedostępny)</span></li>)}</ul>
         <p class="field__hint">{P.materials.license}</p>
       </div>
 

@@ -9,7 +9,7 @@
     "Kuchnia: brak strony, dopóki klient nie zdecyduje o kuchniach (docs/do-potwierdzenia.md)."
   ],
   "seo": {
-    "title": "Meble według pomieszczenia — od salonu po przedpokój | Liveo",
+    "title": "Meble według pomieszczenia, od salonu po przedpokój | Liveo",
     "description": "Wybierz pokój, który urządzasz: salon, jadalnia, sypialnia, pokój młodzieżowy, przedpokój albo domowe biuro. Pokażemy pasujące meble i kolekcje.",
     "jsonLd": [
       "CollectionPage",
@@ -39,11 +39,11 @@
       "items": [
         {
           "q": "Gdzie kupić meble Liveo do {roomGenitive}?",
-          "a": "Meble Liveo do {roomGenitive} kupisz w sklepach partnerskich — Liveo nie ma własnych salonów. Wpisz kod pocztowy na stronie [Gdzie kupić](/gdzie-kupic/), a pokażemy najbliższe sklepy z wybraną kolekcją."
+          "a": "Meble Liveo do {roomGenitive} kupisz w salonach partnerskich, bo Liveo nie ma własnych sklepów. Wpisz kod pocztowy na stronie [Gdzie kupić](/gdzie-kupic/), a pokażemy najbliższe salony z wybraną kolekcją."
         },
         {
           "q": "Czy doradca wnętrz pomoże urządzić {roomAccusative}?",
-          "a": "Tak — wyślij zdjęcie pomieszczenia, a [doradca wnętrz](/doradca-wnetrz/) zaproponuje komplet z jednej kolekcji dopasowany do kolorów podłogi i ścian. Wymiary mebli sprawdzisz przy każdej propozycji."
+          "a": "Tak. Wyślij zdjęcie pomieszczenia, a [doradca wnętrz](/doradca-wnetrz/) zaproponuje komplet z jednej kolekcji dopasowany do kolorów podłogi i ścian. Wymiary mebli sprawdzisz przy każdej propozycji."
         }
       ]
     },
@@ -54,10 +54,10 @@
       "slug": "salon",
       "h1": "Meble do salonu",
       "seo": {
-        "title": "Meble do salonu — szafki RTV, komody, witryny | Liveo",
+        "title": "Meble do salonu: szafki RTV, komody, witryny | Liveo",
         "description": "Meble do salonu z kolekcji Liveo: szafki RTV, komody, witryny, regały, ławy i półki w spójnych kolorach. Sprawdź wymiary, kolory i salony."
       },
-      "intro": "Salon urządza się wokół dwóch miejsc: kanapy i ściany z telewizorem. Meble z jednej kolekcji — szafka RTV, komoda, witryna i ława — mają te same kolory, więc pokój wygląda spokojnie.",
+      "intro": "Salon urządza się wokół dwóch miejsc: kanapy i ściany z telewizorem. Szafka RTV, komoda, witryna i ława z jednej kolekcji mają te same kolory, więc pokój wygląda spokojnie.",
       "tips": [
         {
           "title": "Zacznij od szafki RTV",
@@ -75,7 +75,7 @@
       "faq": [
         {
           "q": "Jakie meble są potrzebne do salonu?",
-          "a": "Do salonu zwykle wystarczą szafka RTV, ława i jeden mebel na rzeczy — komoda, witryna albo regał. Resztę możesz dobierać stopniowo z tej samej kolekcji."
+          "a": "Do salonu zwykle wystarczą szafka RTV, ława i jeden mebel na rzeczy: komoda, witryna albo regał. Resztę możesz dobierać stopniowo z tej samej kolekcji."
         },
         {
           "q": "Jak dobrać meble do małego salonu?",
@@ -83,7 +83,7 @@
         },
         {
           "q": "Która kolekcja Liveo pasuje do salonu?",
-          "a": "Meble do salonu mają kolekcje: {collectionsList}. Różnią się kolorami i charakterem — porównasz je wyżej na tej stronie."
+          "a": "Meble do salonu mają kolekcje: {collectionsList}. Różnią się kolorami i charakterem, porównasz je wyżej na tej stronie."
         }
       ],
       "guide": "jak-dobrac-szafke-rtv"
@@ -92,7 +92,7 @@
       "slug": "jadalnia",
       "h1": "Meble do jadalni",
       "seo": {
-        "title": "Meble do jadalni — stoły, kredensy, witryny | Liveo",
+        "title": "Meble do jadalni: stoły, kredensy, witryny | Liveo",
         "description": "Meble do jadalni z kolekcji Liveo: stoły, także rozkładane, kredensy, witryny i komody na zastawę. Sprawdź wymiary, kolory i salony."
       },
       "intro": "Jadalnia to stół i miejsce na zastawę. Kredens albo witryna z tej samej kolekcji co stół sprawią, że kącik jadalny wygląda na przemyślany, nawet jeśli jest częścią salonu.",
@@ -117,7 +117,7 @@
         },
         {
           "q": "Czym różni się kredens od witryny?",
-          "a": "Kredens jest niższy i szerszy, z szufladami i drzwiami, a witryna — wyższa i węższa, z przeszkleniem na zastawę lub książki. W jadalni często stoją razem."
+          "a": "Kredens jest niższy i szerszy, z szufladami i drzwiami. Witryna jest wyższa i węższa, z przeszkleniem na zastawę albo książki. W jadalni często stoją razem."
         },
         {
           "q": "Która kolekcja Liveo ma meble do jadalni?",
@@ -129,14 +129,14 @@
       "slug": "sypialnia",
       "h1": "Meble do sypialni",
       "seo": {
-        "title": "Meble do sypialni — łóżka, szafy, komody | Liveo",
+        "title": "Meble do sypialni: łóżka, szafy, komody | Liveo",
         "description": "Meble do sypialni z kolekcji Liveo: łóżka 140 i 160 cm, szafki nocne, szafy, komody, toaletki i lustra. Sprawdź wymiary, kolory i salony."
       },
       "intro": "Sypialnia potrzebuje spokoju, więc tu komplet z jednej kolekcji sprawdza się najlepiej. Łóżko, szafki nocne i szafa w tych samych kolorach nie męczą wzroku.",
       "tips": [
         {
           "title": "Najpierw łóżko",
-          "text": "Zmierz pokój i sprawdź, czy wokół łóżka zostanie przejście — wygodnie, gdy ma ok. 60 cm."
+          "text": "Zmierz pokój i sprawdź, czy wokół łóżka zostanie przejście. Wygodnie, gdy ma ok. 60 cm."
         },
         {
           "title": "Szafa a drzwi",
@@ -167,14 +167,14 @@
       "slug": "pokoj-mlodziezowy",
       "h1": "Meble do pokoju młodzieżowego",
       "seo": {
-        "title": "Meble do pokoju młodzieżowego — biurka, łóżka | Liveo",
+        "title": "Meble do pokoju młodzieżowego: biurka, łóżka | Liveo",
         "description": "Meble do pokoju nastolatka z kolekcji Liveo: biurka, łóżka 90 i 120 cm, regały, komody i szafy. Sprawdź wymiary, kolory i salony."
       },
       "intro": "Pokój nastolatka to sypialnia, miejsce do nauki i schowek w jednym. Biurko, łóżko i regał z jednej kolekcji porządkują te funkcje bez wrażenia tłoku.",
       "tips": [
         {
           "title": "Biurko przy oknie",
-          "text": "Ustaw biurko tak, żeby światło dzienne padało z boku — nie zza pleców i nie prosto na ekran."
+          "text": "Ustaw biurko tak, żeby światło dzienne padało z boku, a nie zza pleców albo prosto na ekran."
         },
         {
           "title": "Łóżko 90 czy 120 cm?",
@@ -204,7 +204,7 @@
       "slug": "przedpokoj",
       "h1": "Meble do przedpokoju",
       "seo": {
-        "title": "Meble do przedpokoju — szafy, szafki na buty | Liveo",
+        "title": "Meble do przedpokoju: szafy, szafki na buty | Liveo",
         "description": "Meble do przedpokoju z kolekcji Liveo: szafy, szafki na buty, wieszaki, lustra i komody. Płytkie i pojemne. Sprawdź wymiary i kolory."
       },
       "intro": "Przedpokój bywa wąski, a musi pomieścić kurtki, buty i klucze. Płytkie szafki na buty, wieszak i lustro z jednej kolekcji porządkują wejście bez zabierania przejścia.",
@@ -229,7 +229,7 @@
         },
         {
           "q": "Ile par butów zmieści szafka na buty?",
-          "a": "To zależy od modelu — przybliżoną liczbę par podajemy przy każdej szafce na buty Liveo. Liczba dotyczy niskich butów; kozaki i duże rozmiary zajmą więcej miejsca."
+          "a": "To zależy od modelu. Wymiary szafki i liczbę półek sprawdzisz na stronie mebla."
         },
         {
           "q": "Która kolekcja Liveo ma meble do przedpokoju?",
@@ -242,7 +242,7 @@
       "slug": "biuro",
       "h1": "Meble do domowego biura",
       "seo": {
-        "title": "Meble do domowego biura — biurka, regały | Liveo",
+        "title": "Meble do domowego biura: biurka, regały | Liveo",
         "description": "Meble do pracy w domu z kolekcji Liveo: biurka z szufladami, regały, komody i półki. Sprawdź wymiary blatu, kolory i salony."
       },
       "intro": "Domowe biuro bywa osobnym pokojem albo kątem w salonie. Biurko i regał w kolorach reszty mieszkania sprawią, że miejsce pracy nie wygląda jak wypożyczone z biurowca.",
@@ -267,7 +267,7 @@
         },
         {
           "q": "Jak urządzić biuro w salonie?",
-          "a": "Wybierz biurko i regał z tej samej kolekcji co meble w salonie — wtedy kącik do pracy nie odcina się od reszty pokoju. Po pracy schowaj papiery do szafki z drzwiami."
+          "a": "Wybierz biurko i regał z tej samej kolekcji co meble w salonie. Wtedy kącik do pracy nie odcina się od reszty pokoju, a papiery po pracy schowasz do szafki z drzwiami."
         },
         {
           "q": "Która kolekcja Liveo ma meble do domowego biura?",
@@ -282,7 +282,7 @@
         "title": "Zestawy kuchenne Liveo 180–260 cm | Liveo",
         "description": "Gotowe zestawy kuchenne Liveo o długości od 180 do 260 cm, w kilku wersjach kolorystycznych. Sprawdź wymiary i salony partnerskie."
       },
-      "intro": "Gotowy zestaw kuchenny to szafki górne i dolne dobrane do jednej długości ściany. Wybierasz długość zabudowy i kolor frontów — resztę dobiera producent.",
+      "intro": "Gotowy zestaw kuchenny to szafki górne i dolne dobrane do jednej długości ściany. Wybierasz długość zabudowy i kolor frontów, a resztę dobiera producent.",
       "tips": [
         {
           "title": "Zmierz ścianę",
@@ -290,7 +290,7 @@
         },
         {
           "title": "Przyłącza",
-          "text": "Sprawdź, gdzie są woda, odpływ i gaz — od nich zależy miejsce szafki pod zlew."
+          "text": "Sprawdź, gdzie są woda, odpływ i gaz. Od nich zależy miejsce szafki pod zlew."
         },
         {
           "title": "Sprzęt AGD",

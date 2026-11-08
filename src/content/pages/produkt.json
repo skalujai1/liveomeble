@@ -9,8 +9,8 @@
     "FAQ jest generowany z danych — każda odpowiedź wynika z pól mebla, nic nie dopisujemy ręcznie."
   ],
   "seo": {
-    "title": "{name} — {colorLabel} | Liveo",
-    "titleLong": "{name} — wymiary i kolory | Liveo",
+    "title": "{name}, {colorLabel} | Liveo",
+    "titleLong": "{name}: wymiary i kolory | Liveo",
     "description": "{name}: {dimsLong}. {descriptionFirstSentence} Kolory: {colorLabels}.",
     "descriptionMax": 155,
     "jsonLd": [
@@ -31,9 +31,9 @@
       "type": "gallery",
       "ariaLabel": "Zdjęcia: {name}",
       "imageAlt": [
-        "{name} w kolorze {colorLabel} — widok z przodu",
-        "{name} w kolorze {colorLabel} — aranżacja {roomLocative}",
-        "{name} — szczegół: {detail}"
+        "{name} w kolorze {colorLabel}, widok z przodu",
+        "{name} w kolorze {colorLabel}, aranżacja {roomLocative}",
+        "{name}, szczegół: {detail}"
       ],
       "zoom": "Powiększ zdjęcie",
       "prev": "Poprzednie zdjęcie",
@@ -41,7 +41,7 @@
       "counter": "Zdjęcie {i} z {n}",
       "colorDisclaimer": "Kolor na ekranie może się nieco różnić od rzeczywistego.",
       "more": "Więcej zdjęć: {name}",
-      "moreAlt": "{name} w kolorze {colorLabel} — zdjęcie {i}",
+      "moreAlt": "{name} w kolorze {colorLabel}, zdjęcie {i}",
       "original": "Zdjęcia i rysunki pochodzą z materiałów producenta."
     },
     {
@@ -138,7 +138,7 @@
       "id": "gdzie-kupic",
       "type": "store-finder",
       "title": "Gdzie kupić: {name}",
-      "lead": "Wpisz kod pocztowy — pokażemy najbliższe salony partnerskie Liveo. Cenę i termin dostawy poda salon.",
+      "lead": "Wpisz kod pocztowy, a pokażemy najbliższe salony partnerskie Liveo. Cenę i termin dostawy poda salon.",
       "presetCollection": "{collection}",
       "limit": 3,
       "more": {
@@ -162,7 +162,7 @@
       "id": "doradca",
       "type": "band",
       "title": "Nie wiesz, czy pasuje do Twojego wnętrza?",
-      "text": "Wyślij zdjęcie pokoju — doradca wnętrz podpowie kolekcję i kolor.",
+      "text": "Wyślij zdjęcie pokoju, a doradca wnętrz podpowie kolekcję i kolor.",
       "cta": {
         "label": "Otwórz doradcę",
         "href": "/doradca-wnetrz/"
@@ -182,7 +182,7 @@
       },
       {
         "q": "Ile kosztuje {name}?",
-        "a": "Liveo sprzedaje meble przez salony partnerskie — to one podają cenę, termin dostawy i koszt montażu. Najbliższy salon znajdziesz w sekcji „Gdzie kupić” na tej stronie."
+        "a": "Liveo sprzedaje meble przez salony partnerskie i to one podają cenę, termin dostawy i koszt montażu. Najbliższy salon znajdziesz w sekcji „Gdzie kupić” na tej stronie."
       },
       {
         "q": "Czy mebel trzeba złożyć samodzielnie?",
