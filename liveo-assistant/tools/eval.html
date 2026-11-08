@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liveo – test rozpoznawania</title>
+<style>
+  :root { --ok: #1f8a4c; --bad: #c62828; --warn: #b26a00; }
+  body { font: 13px/1.4 system-ui, sans-serif; margin: 24px; color: #1d1d1b; background: #fff; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  #summary { font-size: 15px; margin: 8px 0 20px; }
+  #grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+  .card { border: 1px solid #e6e6e6; border-radius: 10px; overflow: hidden; }
+  .card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+  .card div { padding: 8px 10px; }
+  .ok { color: var(--ok); } .bad { color: var(--bad); font-weight: 600; } .warn { color: var(--warn); }
+  .sw { display: inline-block; width: 14px; height: 14px; border-radius: 3px; margin-right: 2px; vertical-align: -2px; border: 1px solid #0001; }
+  small { color: #666; }
+</style>
+</head>
+<body>
+<h1>Test rozpoznawania zdjęć</h1>
+<div id="summary">Ładowanie modelu…</div>
+<div id="grid"></div>
+<script type="module">
+  import { VisionEngine, loadImage } from '../widget/engine.js';
+  import { SCENES } from '../widget/prompts.js';
+
+  const params = new URLSearchParams(location.search);
+  const engine = new VisionEngine({
+    embeddingsUrl: new URL('../data/text-embeddings.json', import.meta.url),
+    dtype: params.get('dtype') || 'fp32',
+    onProgress: p => (document.querySelector('#summary').textContent = `Ładowanie modelu… ${Math.round(p * 100)}%`),
+  });
+  const tests = await (await fetch('test-images.json')).json();
+  const ROOM = Object.keys(SCENES).filter(k => SCENES[k].kind === 'room');
+  const expectKind = e => ROOM.includes(e) || e === 'loft' ? 'room' : e === 'pusty' ? 'ask' : SCENES[e].kind;
+
+  const t0 = performance.now();
+  await engine.load();
+  const loadMs = performance.now() - t0;
+  const results = [];
+  let inferMs = 0;
+  for (const t of tests) {
+    let r, err;
+    try {
+      const canvas = await loadImage(t.url, 768);
+      const s = performance.now();
+      r = await engine.analyze(canvas);
+      inferMs += performance.now() - s;
+    } catch (e) { err = e.message; }
+    const d = r?.decision;
+    const want = expectKind(t.expected);
+    // bramka: czy poprawnie zdecydowano "pomagamy / nie pomagamy"
+    const helpful = d && (d.type === 'room' || d.type === 'ask');
+    const gateOk = d && (want === 'room' || want === 'ask' ? helpful : !helpful);
+    const roomOk = want !== 'room' || t.expected === 'loft' ? null : d?.type === 'room' && d.room === t.expected;
+    const res = { exp: t.expected, type: d?.type, got: d?.room || d?.scene?.key || d?.suggestions?.join('/'),
+                  top: r?.scenes.slice(0, 3).map(s => `${s.key} ${(s.p * 100).toFixed(0)}`).join(', '),
+                  style: r?.styles[0].key, gateOk, roomOk, err };
+    results.push(res);
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.innerHTML = `<img src="${t.url}" alt="">
+      <div><b>oczekiwane:</b> ${t.expected}<br>
+      <b class="${gateOk ? 'ok' : 'bad'}">${res.type} → ${res.got}</b> ${roomOk === false ? '<span class="warn">(inne pom.)</span>' : ''}<br>
+      <small>${res.top}<br>styl: ${res.style} · ${r?.palette.words.join(', ')}<br>
+      ${(r?.palette.colors || []).map(c => `<span class="sw" style="background:${c.hex}"></span>`).join('')}</small>
+      ${err ? `<br><span class="bad">${err}</span>` : ''}</div>`;
+    document.querySelector('#grid').append(el);
+  }
+  const gate = results.filter(r => r.gateOk).length;
+  const roomT = results.filter(r => r.roomOk !== null);
+  const roomOk = roomT.filter(r => r.roomOk).length;
+  const summary = `Bramka (pomieszczenie vs nie): ${gate}/${results.length} · Trafne pomieszczenie: ${roomOk}/${roomT.length}` +
+                  ` · ładowanie ${(loadMs / 1000).toFixed(1)} s · analiza śr. ${(inferMs / results.length).toFixed(0)} ms (${engine.dtype})`;
+  document.querySelector('#summary').textContent = summary;
+  window.__eval = { summary, errors: results.filter(r => !r.gateOk || r.roomOk === false) };
+</script>
+</body>
+</html>
