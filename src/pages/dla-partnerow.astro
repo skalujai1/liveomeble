@@ -6,16 +6,30 @@ import Section from '../components/Section.astro';
 import ContentSection from '../components/ContentSection.astro';
 import Form from '../components/Form.astro';
 import Faq from '../components/Faq.astro';
-import { roomImage } from '../lib/images';
+import Media from '../components/Media.astro';
+import Rich from '../components/Rich.astro';
+import { collectionImage } from '../lib/images';
 import { faqPage, webPage } from '../lib/jsonld';
-import { pages, section, site, url } from '../lib/site';
+import { collections, pages, products, resellers, section, site, url } from '../lib/site';
 
 const page = pages.dlaPartnerow;
 const path = url.partners;
 const hero = section(page, 'hero');
-// Obraz nagłówka: aranżacja salonu (atrapa 3D do czasu zdjęć od Liveo).
-const heroImg = roomImage('salon', 'wide', 1);
-const heroAlt = heroImg?.title ? `Aranżacja: ${heroImg.title}` : '';
+// Zdjęcia: aranżacje z kart Liveo w wysokiej rozdzielczości (nagłówek i sekcja „Kogo szukamy”).
+const big = collections.filter(c => c.arrangements.length && (c.arrangements[0] as { w: number }).w >= 1600);
+const heroCol = big.find(c => c.slug === 'aris') ?? big[1] ?? big[0];
+const sideCol = big.find(c => c.slug === 'milton' && c !== heroCol) ?? big.find(c => c !== heroCol) ?? heroCol;
+const heroImg = collectionImage(heroCol, 'wide');
+const heroAlt = `Meble z kolekcji ${heroCol.name} w aranżacji salonu`;
+const sideImg = collectionImage(sideCol, 'angle') ?? collectionImage(sideCol, 'wide');
+// Liczby z danych (karty produktu i baza salonów) — bez szacunków.
+const pieces = (n: number, one: string, few: string, many: string) => (n === 1 ? one : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? few : many);
+const pl = resellers.filter(r => r.country === 'PL');
+const stats = [
+  { n: resellers.length, label: pieces(resellers.length, 'salon partnerski', 'salony partnerskie', 'salonów partnerskich'), sub: `w ${new Set(pl.map(r => r.voivodeship)).size} województwach i w Słowenii` },
+  { n: collections.length, label: pieces(collections.length, 'kolekcja', 'kolekcje', 'kolekcji'), sub: 'meble do salonu, jadalni, sypialni i przedpokoju' },
+  { n: products.length, label: `${pieces(products.length, 'mebel', 'meble', 'mebli')} w katalogu`, sub: 'z wymiarami, paczkami i kodami EAN' },
+];
 const tel = site.brand.telephone;
 ---
 <BaseLayout
@@ -28,8 +42,39 @@ const tel = site.brand.telephone;
 >
   <PageHeader h1={page.h1} lead={hero.lead} ctas={hero.cta} image={heroImg} imageAlt={heroAlt} placeholderLabel="Aranżacja" />
 
+  <section class="partner-stats" aria-label="Liveo w liczbach">
+    <div class="container">
+      <ul class="partner-stats__list">
+        {stats.map(x => (
+          <li>
+            <span class="partner-stats__num">{x.n}</span>
+            <span class="partner-stats__label">{x.label}</span>
+            <span class="partner-stats__sub">{x.sub}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
   {page.sections.slice(1).map((s: any) =>
-    s.type === 'form' ? (
+    s.id === 'jak-zaczac' ? <ContentSection s={s} class="section--linen" />
+    : s.id === 'kogo-szukamy' ? (
+      <section class="section partner-split" id={s.id} aria-labelledby={`${s.id}-tytul`}>
+        <div class="container partner-split__inner">
+          <Media image={sideImg} alt={`Meble z kolekcji ${sideCol.name} w aranżacji`} widths={[640, 960, 1280]} sizes="(min-width: 60rem) 50vw, 100vw" ratio="4 / 3" placeholderLabel="Aranżacja" class="partner-split__media" />
+          <div class="partner-split__text">
+            <p class="partner-split__kicker">Dla salonów meblowych</p>
+            <h2 class="section__title" id={`${s.id}-tytul`}>{s.title}</h2>
+            <p class="partner-split__lead"><Rich text={s.text} /></p>
+            <p class="cta-row">
+              <a class="btn btn--primary" href="#zgloszenie">Zgłoś sklep</a>
+              <a class="link" href={url.stores()}>Zobacz mapę salonów</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    )
+    : s.type === 'form' ? (
       <Section id={s.id} title={s.title} lead={s.lead} class="section--form">
         <div class="form-layout">
           <div class="form-card">

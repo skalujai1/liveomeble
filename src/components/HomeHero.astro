@@ -51,6 +51,7 @@ function spotsFor(c: Collection, base: string | undefined, items: ReturnType<typ
       <div class:list={['hero-curtain__slide', { 'is-active': i === 0 }]} data-slide role="group" aria-roledescription="slajd" aria-label={`${i + 1} z ${slides.length}: kolekcja ${s.c.name}`} aria-hidden={i === 0 ? undefined : 'true'} inert={i !== 0}>
         <HeroPicture wide={s.wide} tall={s.tall} alt={s.alt} class="hero-curtain__media" sizes="100vw" priority={i === 0} />
         {s.spots.length > 0 && (
+          <div class="hero-spots-wrap">
           <ul class="hero-spots" style={`--ar: ${s.ar.toFixed(4)}`} aria-label={`Meble na zdjęciu kolekcji ${s.c.name}`} data-spots>
             {s.spots.map(sp => (
               <li class:list={['hero-spot', { 'hero-spot--left': sp.x > 58 }]} style={`--x: ${sp.x}%; --y: ${sp.y}%`} data-box={sp.box.join(' ')}>
@@ -69,6 +70,7 @@ function spotsFor(c: Collection, base: string | undefined, items: ReturnType<typ
               </li>
             ))}
           </ul>
+          </div>
         )}
         <div class="hero-curtain__copy container">
           <p class="hero-curtain__name"><span class="visually-hidden">Kolekcja </span>{s.c.name}</p>

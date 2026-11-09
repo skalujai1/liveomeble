@@ -123,11 +123,11 @@
 @media (prefers-reduced-motion: no-preference) {
   /* wejście slajdu: odsłona ze szczeliny w połowie wysokości + oddech skali, tekst wjeżdża po kolei */
   .is-live .hero-curtain__slide.is-active { animation: odslona 1300ms var(--ease-expo) both; }
-  .is-live .hero-curtain__slide.is-active .media__img { animation: curtain-breathe 9s var(--ease-expo) both; }
+  .is-live .hero-curtain__slide.is-active :is(.media__img, .hero-spots-wrap) { animation: curtain-breathe 9s var(--ease-expo) both; }
   .is-live .hero-curtain__slide.is-active .hero-curtain__copy > * { animation: copy-in 1000ms var(--ease-expo) both; }
   .is-live .hero-curtain__slide.is-active .hero-curtain__meta { animation-delay: 120ms; }
   .is-live .hero-curtain__slide.is-active .hero-curtain__cta { animation-delay: 220ms; }
-  .is-live .hero-curtain__slide.is-leaving .media__img { scale: 1.02; transition: scale 1300ms var(--ease-expo); }
+  .is-live .hero-curtain__slide.is-leaving :is(.media__img, .hero-spots-wrap) { scale: 1.02; transition: scale 1300ms var(--ease-expo); }
   /* pasek postępu pod aktywną nazwą (czas = data-delay) */
   .is-live.is-ticking .hero-curtain__dot[aria-current="true"] .hero-curtain__tick { animation: curtain-tick 7s linear both; }
   .is-live:is(.is-paused, .is-held) .hero-curtain__dot[aria-current="true"] .hero-curtain__tick { animation-play-state: paused; }
@@ -150,8 +150,12 @@
 /* Blok tekstu ma pełną szerokość kontenera — klikalne są tylko linki, reszta przepuszcza kursor do kropek */
 .hero-curtain__copy { pointer-events: none; }
 .hero-curtain__copy a { pointer-events: auto; }
+/* Opakowanie ma ten sam prostokąt co zdjęcie i ten sam powolny zoom (curtain-breathe), więc kropki stoją w miejscu na meblu */
+.hero-spots-wrap { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+/* Otwarta karta ma być nad nazwą kolekcji i przyciskami (te mają z-index 1 i stoją później w kodzie) */
+.hero-spots-wrap:has(.hero-spot__link:is(:hover, :focus-visible)) { z-index: 3; }
 .hero-spots {
-  position: absolute; z-index: 1; left: 50%; top: 58%; margin: 0; padding: 0; list-style: none; pointer-events: none;
+  position: absolute; left: 50%; top: 58%; margin: 0; padding: 0; list-style: none; pointer-events: none;
   width: max(100cqw, calc(100cqh * var(--ar))); aspect-ratio: var(--ar); translate: -50% -58%;
 }
 /* Podświetlenie mebla: reszta zdjęcia lekko przygasa, mebel zostaje w jasnej „plamie” */
@@ -178,7 +182,7 @@
 }
 .hero-spot--left .hero-spot__card { left: auto; right: calc(100% + 0.25rem); translate: 0.375rem -50%; }
 .hero-spot__link:is(:hover, :focus-visible) .hero-spot__card { opacity: 1; visibility: visible; translate: 0 -50%; transition: opacity 250ms ease, translate 350ms var(--ease-expo), visibility 0s; }
-.hero-spot__thumb { flex: none; width: 4.5rem; height: 4.5rem; background: var(--color-surface) center / 86% no-repeat; }
+.hero-spot__thumb { flex: none; width: 4.5rem; height: 4.5rem; background: var(--color-surface) center / 86% no-repeat; background-blend-mode: multiply; } /* białe tło packshotu znika na lnie */
 .hero-spot__text { display: grid; gap: 0.125rem; }
 .hero-spot__name { font-size: 0.9375rem; line-height: 1.3; font-weight: var(--weight-medium); }
 .hero-spot__spec { font-size: 0.8125rem; line-height: 1.4; color: var(--color-text-muted); white-space: nowrap; }
@@ -188,7 +192,7 @@
 }
 @keyframes spot-in { from { opacity: 0; scale: 0.4; } }
 /* Na telefonie hero pokazuje inny, pionowy kadr — kropki są tylko na zdjęciu poziomym */
-@media (max-width: 59.99rem) { .hero-spots { display: none; } }
+@media (max-width: 59.99rem) { .hero-spots-wrap { display: none; } }
 
 /* ---------- Manifest pod hero (H1) ---------- */
 .manifest { padding-block: var(--space-9) var(--space-8); }
@@ -615,3 +619,21 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .summary__facts dt { font-size: 0.6875rem; font-weight: var(--weight-medium); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
 .summary__facts dd { margin: 0.25rem 0 0; font: var(--weight-display) 1.375rem/1.1 var(--font-display); font-variant-numeric: tabular-nums; }
 .gallery .media, .gallery__item .media { border-radius: 0; }
+
+/* ---------- Dla partnerów: liczby, kroki na lnie, zdjęcie z tekstem ---------- */
+.partner-stats { padding-block: clamp(2.5rem, 1.5rem + 3vw, 4.5rem) var(--space-5); }
+.partner-stats__list { display: grid; gap: var(--space-5); margin: 0; padding: 0; list-style: none; }
+.partner-stats__list li { display: grid; gap: 0.375rem; align-content: start; padding-top: 1.25rem; border-top: 1px solid var(--color-line-strong); }
+.partner-stats__num { font: var(--weight-display) clamp(3.5rem, 2rem + 5vw, 6rem)/0.9 var(--font-display); letter-spacing: -0.03em; color: var(--color-dark); font-variant-numeric: tabular-nums; }
+.partner-stats__label { font-size: 1.0625rem; font-weight: var(--weight-medium); }
+.partner-stats__sub { font-size: 0.875rem; color: var(--color-text-muted); }
+@media (min-width: 48rem) { .partner-stats__list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6); } }
+.section--linen { background: var(--color-surface); padding-block: clamp(3.5rem, 2rem + 4vw, 6rem); margin-block: clamp(2.5rem, 1.5rem + 3vw, 4.5rem); }
+.section--linen .steps__item { border-top-color: var(--color-text); }
+.partner-split__inner { display: grid; gap: var(--space-6); align-items: center; }
+.partner-split__media.media { border-radius: 0; }
+.partner-split__media .media__img { filter: var(--photo-grade); }
+.partner-split__kicker { margin: 0 0 0.75rem; font-size: 0.75rem; font-weight: var(--weight-medium); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+.partner-split__lead { margin-top: 1rem; font-size: var(--text-lg); line-height: 1.6; color: var(--color-text-muted); max-width: 34rem; }
+.partner-split .cta-row { margin-top: var(--space-5); align-items: center; gap: 0.75rem 1.75rem; }
+@media (min-width: 60rem) { .partner-split__inner { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-8); } }

@@ -6,8 +6,8 @@ import Section from './Section.astro';
 import Rich from './Rich.astro';
 import AssistantButton from './AssistantButton.astro';
 
-interface Props { s: any; headingId?: string }
-const { s } = Astro.props;
+interface Props { s: any; headingId?: string; class?: string }
+const { s, class: extra } = Astro.props;
 const ctas: any[] = Array.isArray(s.cta) ? s.cta : s.cta ? [s.cta] : [];
 const isBand = s.type === 'band' || s.type === 'feature';
 ---
@@ -16,7 +16,7 @@ const isBand = s.type === 'band' || s.type === 'feature';
     <p class="page-intro__lead"><Rich text={s.lead} /></p>
   </div>
 ) : s.type === 'links' && !(s.items?.length) ? null : (
-  <Section id={s.id} title={s.title} lead={s.lead} class={`section--${s.type}`} width={['text', 'rules', 'company', 'contact-details'].includes(s.type) ? 'narrow' : 'wide'}>
+  <Section id={s.id} title={s.title} lead={s.lead} class={`section--${s.type}${extra ? ` ${extra}` : ''}`} width={['text', 'rules', 'company', 'contact-details'].includes(s.type) ? 'narrow' : 'wide'}>
     {s.type === 'text' && (
       <div class="prose">
         {s.text && <p><Rich text={s.text} /></p>}
