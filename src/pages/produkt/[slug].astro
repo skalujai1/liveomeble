@@ -219,7 +219,7 @@ const dimRows = dimsSec.rows.filter((r: any) => vars[r.key] != null && vars[r.ke
               {packages.map((x, i) => (
                 <tr>
                   <th scope="row">{i + 1}</th>
-                  <td>{[x.w, x.h, x.d].map(n => num(n)).join(' × ')}</td>
+                  <td>{[x.w, x.h, x.d].some(n => n != null) ? [x.w, x.h, x.d].map(n => num(n)).join(' × ') : '—'}</td>
                   <td>{x.kg ? `${num(x.kg)} kg` : '—'}</td>
                   <td>{x.ean ?? '—'}</td>
                 </tr>
