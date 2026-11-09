@@ -13,8 +13,17 @@ export function getConsent(): Consent | null {
   }
 }
 
+// Pliki cookie Google Analytics (_ga, _ga_XXXX) — usuwane, gdy ktoś odbiera zgodę na statystyki.
+function clearAnalyticsCookies() {
+  const host = location.hostname;
+  const domains = ['', host, `.${host}`, `.${host.split('.').slice(-2).join('.')}`];
+  for (const name of document.cookie.split(';').map(c => c.split('=')[0].trim()).filter(n => /^_ga(_|$)/.test(n)))
+    for (const d of domains) document.cookie = `${name}=; Max-Age=0; path=/${d ? `; domain=${d}` : ''}`;
+}
+
 function save(c: Omit<Consent, 'v' | 'at'>) {
   const full: Consent = { v: 1, ...c, at: new Date().toISOString() };
+  if (!full.analytics) clearAnalyticsCookies();
   try { localStorage.setItem(KEY, JSON.stringify(full)); } catch { /* tryb prywatny — decyzja tylko na tę wizytę */ }
   activate(full);
   document.dispatchEvent(new CustomEvent('liveo:consent', { detail: full }));

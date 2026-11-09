@@ -54,8 +54,18 @@ export const PARTNER_DEMO = {
 } as const;
 
 /**
+ * Google Analytics 4 — identyfikator strumienia danych („G-XXXXXXXXXX”, Analytics → Administracja → Strumienie danych).
+ * To nie jest sekret (widać go w kodzie każdej strony z GA). Pusty = brak statystyk i brak banera cookies.
+ * GA ładuje się dopiero po zgodzie „Statystyki odwiedzin”; zdarzenia (wyszukanie salonu, telefon, trasa, doradca,
+ * formularze) wysyła src/scripts/analytics.ts.
+ */
+export const GA4_ID = '';
+
+/**
  * Skrypty wymagające zgody (analityka, marketing). Każdy trafia na stronę jako
  * <script type="text/plain" data-consent="..."> i uruchamia się dopiero po zgodzie.
  * Pusta lista = brak banera cookies (strona używa tylko pamięci niezbędnej).
  */
-export const CONSENT_SCRIPTS: ReadonlyArray<{ category: 'analytics' | 'marketing'; src: string }> = [];
+export const CONSENT_SCRIPTS: ReadonlyArray<{ category: 'analytics' | 'marketing'; src: string }> = GA4_ID
+  ? [{ category: 'analytics', src: `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}` }]
+  : [];

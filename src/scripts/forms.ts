@@ -150,6 +150,7 @@ function setupForm(form: HTMLFormElement) {
       if (!res.ok) throw new Error(String(res.status));
       form.reset();
       showResult(true, successText, t.success.title);
+      document.dispatchEvent(new CustomEvent('liveo:form-sent', { detail: { form: form.dataset.form || form.id } }));
     } catch {
       showResult(false, m.error);
     } finally {

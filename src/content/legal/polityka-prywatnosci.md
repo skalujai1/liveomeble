@@ -87,7 +87,7 @@ Strona korzysta z pamięci Twojej przeglądarki (pliki cookie, `localStorage`) w
 | Utrzymanie zalogowania w strefie partnera | plik cookie sesji | nie, niezbędny do działania usługi |
 | Zapamiętanie ustawień (np. zamknięte komunikaty, wybrany widok listy), tylko w Twojej przeglądarce | `localStorage` | nie, niezbędny do działania funkcji, o którą prosisz [do weryfikacji] |
 | Przykładowe zamówienia w wersji DEMO strefy partnera | `localStorage` | nie, działa tylko w Twojej przeglądarce |
-| Statystyki odwiedzin [do uzupełnienia: nazwa narzędzia lub „nie używamy”] | [do uzupełnienia] | tak, tylko po wyrażeniu zgody |
+| Statystyki odwiedzin (Google Analytics 4) | pliki cookie `_ga`, `_ga_*` | tak, tylko po wyrażeniu zgody |
 
 Zgodę na pliki cookie wymagające zgody możesz w każdej chwili zmienić w „Ustawieniach plików cookie” w stopce strony. Możesz też usunąć pliki cookie i dane strony w ustawieniach przeglądarki. Zasady wynikają z przepisów Prawa komunikacji elektronicznej [do weryfikacji: aktualny przepis].
 

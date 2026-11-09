@@ -335,7 +335,7 @@
   "cookies": {
     "_note": "Baner pokazujemy TYLKO, jeśli strona używa plików cookie lub podobnych technologii wymagających zgody (np. analityka). Bez nich — brak banera, tylko informacja w polityce prywatności.",
     "title": "Pliki cookie",
-    "text": "Używamy plików cookie niezbędnych do działania strony. Za Twoją zgodą użyjemy też narzędzia do statystyk odwiedzin, żeby wiedzieć, które strony są przydatne.",
+    "text": "Używamy plików cookie niezbędnych do działania strony. Za Twoją zgodą użyjemy też Google Analytics, żeby wiedzieć, które strony są przydatne i ile osób szuka salonów.",
     "accept": "Zgadzam się na statystyki",
     "reject": "Tylko niezbędne",
     "settings": "Ustawienia",
