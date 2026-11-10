@@ -157,7 +157,10 @@ strong, b { font-weight: var(--weight-bold); }
   .site-header__where span { display: block; }
 
   /* Mega-menu: display:none, dopóki zamknięte — obrazy (loading=lazy) nie pobierają się na każdej stronie. */
-  .mega { position: absolute; left: 0; right: 0; top: 100%; z-index: var(--z-overlay); }
+  /* Warstwa .mega ma pełną szerokość okna, ale klikalny jest tylko sam panel: zjazd myszą w bok (na marginesy
+     obok panelu) to już „poza menu”, więc panel się chowa tak samo jak przy zjeździe w dół. */
+  .mega { position: absolute; left: 0; right: 0; top: 100%; z-index: var(--z-overlay); pointer-events: none; }
+  .mega__panel { pointer-events: auto; }
   .site-nav__item.is-open > .mega { display: block; }
   /* Najechanie myszą obsługuje scripts/menu.ts (z opóźnieniem przy zjeździe); bez JS panel otwiera samo :hover. */
   @media (hover: hover) { html:not(.js) .site-nav__item--mega:hover > .mega { display: block; } }
