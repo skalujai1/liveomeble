@@ -1,0 +1,46 @@
+---
+// Polecane meble na stronie głównej jako duże kafle (jak kafle produktów w sklepach marek): wszystko w jednym
+// pudełku — kolekcja, nazwa, krótki opis, dwa przyciski i duże zdjęcie mebla. Kafle na przemian białe
+// i lniane; packshoty z kart Liveo mają białe tło, więc na lnie znika ono przez mix-blend-mode: multiply.
+// Cały kafel prowadzi do mebla (rozciągnięty link „Zobacz mebel”); „Gdzie kupić” leży nad nim.
+import Media from './Media.astro';
+import { packshotFor } from '../lib/images';
+import { collectionOf, colorCount, defaultVariant, dimsLong, finishById, site, url, type Product } from '../lib/site';
+
+interface Props { products: Product[] }
+const { products } = Astro.props;
+const hex = (id?: string | null) => (id && finishById.get(id)?.hex) || '#ccc';
+const tiles = products.map((p, i) => {
+  const v = defaultVariant(p);
+  const col = collectionOf(p);
+  return {
+    p, col, img: packshotFor(p, v),
+    tone: i % 4 === 0 || i % 4 === 3 ? 'white' : 'linen',
+    dots: p.variants.slice(0, 6).map(x => ({ c1: hex(x.finish.front), c2: hex(x.finish.body ?? x.finish.front) })),
+  };
+});
+---
+<ul class="featured-tiles">
+  {tiles.map(({ p, col, img, tone, dots }) => (
+    <li class:list={['featured-tile', `featured-tile--${tone}`]}>
+      <div class="featured-tile__text">
+        <p class="featured-tile__kicker">{site.labels.collection} {col.name}</p>
+        <h3 class="featured-tile__title">{p.name}</h3>
+        <p class="featured-tile__sub">{dimsLong(p)}</p>
+        <p class="featured-tile__colors">
+          <span class="featured-tile__dots" role="img" aria-label={`Kolory: ${p.variants.map(x => x.colorLabel).join(', ')}`}>
+            {dots.map(d => <i style={`--c: ${d.c1}; --c2: ${d.c2}`}></i>)}
+          </span>
+          <span>{colorCount(p)}{p.delivery72 && ` · ${site.labels.delivery72}`}</span>
+        </p>
+        <p class="featured-tile__cta">
+          <a class="pill pill--solid" href={url.product(p.slug)}>Zobacz mebel<span class="visually-hidden">: {p.name}</span></a>
+          <a class="pill pill--line" href={url.stores(p.collection)}>Gdzie kupić<span class="visually-hidden"> kolekcję {col.name}</span></a>
+        </p>
+      </div>
+      <div class="featured-tile__media">
+        <Media image={img} alt="" widths={[480, 1000]} sizes="(min-width: 60rem) 36rem, 90vw" ratio="4 / 3" fit="contain" placeholderLabel={p.name} />
+      </div>
+    </li>
+  ))}
+</ul>

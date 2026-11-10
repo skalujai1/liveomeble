@@ -9,7 +9,7 @@ import HomeHero from '../components/HomeHero.astro';
 import CollectionSpread from '../components/CollectionSpread.astro';
 import CollectionRail from '../components/CollectionRail.astro';
 import RoomShowcase from '../components/RoomShowcase.astro';
-import ProductCard from '../components/ProductCard.astro';
+import FeaturedTiles from '../components/FeaturedTiles.astro';
 import StoreFinder from '../components/StoreFinder.astro';
 import Faq from '../components/Faq.astro';
 import Media from '../components/Media.astro';
@@ -101,9 +101,7 @@ const advisorImg = collectionImage(advisorCol, 'detail');
   </section>
 
   <Section id="polecane" title="Polecane meble" lead="Meble kupisz w salonach partnerskich, gdzie poznasz cenę i termin dostawy." class="section--center section--products">
-    <ul class="product-grid product-grid--4">
-      {featured.map((p, i) => <ProductCard product={p} order={i} sizes="(min-width: 60rem) 18rem, 46vw" />)}
-    </ul>
+    <FeaturedTiles products={featured} />
     <p class="section__more"><a href={url.products}>Wszystkie meble</a></p>
   </Section>
 
