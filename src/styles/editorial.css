@@ -650,12 +650,12 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
   .article-card--cover:hover .article-card__media .media__img { transform: scale(1.03); }
 }
 
-/* ---------- Blog: karty 3 w rzędzie, duże zdjęcia, zaokrąglone pudełka (życzenie klienta 10.11.2026) ---------- */
+/* ---------- Blog: karty 3 w rzędzie, duże zdjęcia, kwadratowe ramki (życzenie klienta 10.11.2026) ---------- */
 .card-grid--articles { grid-template-columns: 1fr; gap: 1.5rem; }
 @media (min-width: 48rem) { .card-grid--articles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem; } }
 @media (min-width: 64rem) { .card-grid--articles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; } }
 .article-card, .article-card--cover, .section--alt .article-card, .section--band .article-card {
-  position: relative; display: flex; flex-direction: column; gap: 0; padding: 0; border: 0; border-radius: 1.25rem;
+  position: relative; display: flex; flex-direction: column; gap: 0; padding: 0; border: 0; border-radius: 0;
   background: var(--color-surface); overflow: hidden;
 }
 .article-card__media.media { aspect-ratio: 3 / 2; margin: 0; border-radius: 0; }
@@ -667,7 +667,7 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .article-card__link .ico { width: 1.125rem; height: 1.125rem; transition: translate var(--dur) var(--ease-out); }
 .article-card:hover .article-card__link .ico { translate: 4px 0; }
 .article-card:hover .article-card__title { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
-.article-card a:focus-visible::after { border-radius: 1.25rem; }
+.article-card a:focus-visible::after { border-radius: 0; }
 @media (prefers-reduced-motion: no-preference) {
   .article-card { transition: transform 450ms var(--ease-expo), box-shadow 450ms var(--ease-expo); }
   /* najechanie albo fokus z klawiatury: karta lekko się powiększa i wychodzi nad sąsiednie */
@@ -677,7 +677,7 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 /* ---------- Strona główna: polecane meble jako duże kafle (wszystko w jednym pudełku) ---------- */
 .featured-tiles { display: grid; gap: 0.75rem; margin: 0; padding: 0; list-style: none; text-align: center; }
 @media (min-width: 60rem) { .featured-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; } }
-.featured-tile { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 34rem; padding: clamp(2.25rem, 1.5rem + 2vw, 3.25rem) 1.5rem 0; border-radius: 1.5rem; overflow: hidden; }
+.featured-tile { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 34rem; padding: clamp(2.25rem, 1.5rem + 2vw, 3.25rem) 1.5rem 0; border-radius: 0; overflow: hidden; }
 .featured-tile--white { background: #fff; }
 .featured-tile--linen { background: var(--color-surface); }
 .featured-tile__text { display: grid; justify-items: center; gap: 0.5rem; max-width: 30rem; }
@@ -693,7 +693,7 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .pill--solid:hover { background: var(--color-accent-hover); color: #fff; }
 .pill--line { color: var(--color-accent); box-shadow: inset 0 0 0 1px var(--color-accent); }
 .pill--line:hover { background: var(--color-accent); color: #fff; }
-.featured-tile .pill--solid::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 1.5rem; }
+.featured-tile .pill--solid::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 0; }
 .featured-tile .pill--line { position: relative; z-index: 2; }
 .featured-tile .pill--solid:focus-visible { outline-offset: 3px; }
 .featured-tile__media { display: block; width: 100%; max-width: 36rem; margin-top: auto; }
