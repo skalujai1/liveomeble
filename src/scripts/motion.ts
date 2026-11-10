@@ -53,27 +53,80 @@ function initHeader() {
 function initHotspots() {
   const lists = [...document.querySelectorAll<HTMLElement>('[data-spots]')];
   if (!lists.length) return;
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(v, Math.max(lo, hi)));
+  const GAP = 20;
+  // Karta stoi obok mebla (po prawej, lewej, nad albo pod nim) tak, żeby go nie zasłaniała i mieściła się w kadrze;
+  // spośród miejsc bez zasłaniania wybiera najbliższe kropce. Liczone w układzie warstwy kropek (bez jej zoomu).
+  const place = (list: HTMLElement, spot: HTMLElement, box: number[]) => {
+    const card = spot.querySelector<HTMLElement>('.hero-spot__card');
+    const line = spot.querySelector<HTMLElement>('.hero-spot__line');
+    const slide = list.closest<HTMLElement>('[data-slide]');
+    if (!card || !line || !slide) return;
+    const W = list.offsetWidth, H = list.offsetHeight, sw = slide.clientWidth, sh = slide.clientHeight;
+    const offX = (sw - W) * 0.5, offY = (sh - H) * 0.58; // warstwa jest wyśrodkowana jak kadr zdjęcia (50% 58%)
+    const sr = slide.getBoundingClientRect();
+    const bar = slide.closest('[data-hero]')?.querySelector<HTMLElement>('.hero-curtain__bar');
+    const top = Math.max(16, (header ? header.getBoundingClientRect().bottom - sr.top : 0) + 16);
+    const bottom = Math.min(sh - 16, bar ? bar.getBoundingClientRect().top - sr.top - 16 : sh - 16);
+    const safe = { l: 16 - offX, r: sw - 16 - offX, t: top - offY, b: bottom - offY };
+    const [x1, y1, x2, y2] = box.map((v, i) => (v / 100) * (i % 2 ? H : W));
+    const px = spot.offsetLeft, py = spot.offsetTop;
+    const w = card.offsetWidth, h = card.offsetHeight;
+    const cy = clamp(py - h / 2, safe.t, safe.b - h), cx = clamp(px - w / 2, safe.l, safe.r - w);
+    const best = [
+      { l: x2 + GAP, t: cy }, { l: x1 - GAP - w, t: cy }, { l: cx, t: y1 - GAP - h }, { l: cx, t: y2 + GAP },
+    ].map(c => {
+      const L = clamp(c.l, safe.l, safe.r - w), T = clamp(c.t, safe.t, safe.b - h);
+      const cover = Math.max(0, Math.min(L + w, x2) - Math.max(L, x1)) * Math.max(0, Math.min(T + h, y2) - Math.max(T, y1));
+      const nx = clamp(px, L, L + w), ny = clamp(py, T, T + h);
+      return { L, T, cover, nx, ny, d: Math.hypot(nx - px, ny - py) };
+    }).sort((a, b) => a.cover - b.cover || a.d - b.d)[0];
+    card.style.left = `calc(50% + ${Math.round(best.L - px)}px)`;
+    card.style.top = `calc(50% + ${Math.round(best.T - py)}px)`;
+    // linia: od brzegu kropki do najbliższego punktu karty
+    line.style.width = `${Math.max(0, best.d - 12)}px`;
+    line.style.rotate = `${Math.atan2(best.ny - py, best.nx - px)}rad`;
+  };
   for (const list of lists) {
+    let active: HTMLElement | null = null;
+    let timer = 0;
+    const off = () => {
+      active?.classList.remove('is-active');
+      active = null;
+      list.classList.remove('is-lit');
+    };
+    const on = (spot: HTMLElement) => {
+      clearTimeout(timer);
+      if (active === spot) return;
+      active?.classList.remove('is-active');
+      const box = (spot.dataset.box || '').split(' ').map(Number);
+      const [x1, y1, x2, y2] = box;
+      list.style.setProperty('--bl', `${x1 - 1}%`);
+      list.style.setProperty('--bt', `${y1 - 1}%`);
+      list.style.setProperty('--bw', `${x2 - x1 + 2}%`);
+      list.style.setProperty('--bh', `${y2 - y1 + 2}%`);
+      // reflektor pojawia się od razu na meblu (bez przejazdu z poprzedniego miejsca), dalej przesuwa się płynnie
+      if (!list.classList.contains('is-lit')) { void list.offsetWidth; list.classList.add('is-lit'); }
+      const t = spot.querySelector<HTMLElement>('[data-thumb]');
+      if (t?.dataset.thumb) { t.style.backgroundImage = `url("${t.dataset.thumb}")`; delete t.dataset.thumb; }
+      place(list, spot, box);
+      spot.classList.add('is-active');
+      active = spot;
+    };
+    // zjazd z kropki daje chwilę na dojechanie kursorem do karty (karta stoi obok mebla, nie przy kropce)
+    const later = () => { clearTimeout(timer); timer = window.setTimeout(off, 450); };
     list.querySelectorAll<HTMLElement>('.hero-spot').forEach(spot => {
-      const [x1, y1, x2, y2] = (spot.dataset.box || '').split(' ').map(Number);
-      const on = () => {
-        list.style.setProperty('--bx', `${(x1 + x2) / 2}%`);
-        list.style.setProperty('--by', `${(y1 + y2) / 2}%`);
-        list.style.setProperty('--bw', `${x2 - x1}%`);
-        list.style.setProperty('--bh', `${y2 - y1}%`);
-        list.classList.add('is-lit');
-        const t = spot.querySelector<HTMLElement>('[data-thumb]');
-        if (t?.dataset.thumb) { t.style.backgroundImage = `url("${t.dataset.thumb}")`; delete t.dataset.thumb; }
-      };
-      const off = () => list.classList.remove('is-lit');
-      spot.addEventListener('pointerenter', on);
-      spot.addEventListener('pointerleave', off);
-      spot.addEventListener('focusin', on);
-      spot.addEventListener('focusout', off);
+      const link = spot.querySelector<HTMLElement>('.hero-spot__link');
+      if (!link) return;
+      link.addEventListener('pointerenter', () => on(spot));
+      link.addEventListener('pointerleave', later);
+      link.addEventListener('focusin', () => on(spot));
+      link.addEventListener('focusout', () => { clearTimeout(timer); off(); });
     });
+    addEventListener('resize', () => { clearTimeout(timer); off(); });
   }
   const hero = document.querySelector<HTMLElement>('[data-hero]');
-  const header = document.querySelector<HTMLElement>('[data-header]');
   const bar = hero?.querySelector<HTMLElement>('.hero-curtain__bar');
   const rectOf = (els: Element[]) => els.map(el => {
     // nazwa: prostokąt samego tekstu; czcionka ma wysoki zapas nad literami, więc górę obcinamy o 18% wysokości

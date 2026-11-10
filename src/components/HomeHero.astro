@@ -54,8 +54,9 @@ function spotsFor(c: Collection, base: string | undefined, items: ReturnType<typ
           <div class="hero-spots-wrap">
           <ul class="hero-spots" style={`--ar: ${s.ar.toFixed(4)}`} aria-label={`Meble na zdjęciu kolekcji ${s.c.name}`} data-spots>
             {s.spots.map(sp => (
-              <li class:list={['hero-spot', { 'hero-spot--left': sp.x > 58 }]} style={`--x: ${sp.x}%; --y: ${sp.y}%`} data-box={sp.box.join(' ')}>
+              <li class="hero-spot" style={`--x: ${sp.x}%; --y: ${sp.y}%`} data-box={sp.box.join(' ')}>
                 <a class="hero-spot__link" href={sp.href} aria-label={`${sp.name}, ${sp.dims}`}>
+                  <span class="hero-spot__line" aria-hidden="true"></span>
                   <span class="hero-spot__dot" aria-hidden="true"></span>
                   <span class="hero-spot__card" aria-hidden="true">
                     {sp.thumb && <span class="hero-spot__thumb" data-thumb={sp.thumb} aria-hidden="true"></span>}
