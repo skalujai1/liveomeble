@@ -1,4 +1,5 @@
 // @ts-check
+import { readdirSync } from 'node:fs';
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
@@ -72,9 +73,15 @@ const OLD_URLS = {
   '/promocje/': '/meble/',
 };
 
+// Poradnik przemianowany na blog (11.2026): stare adresy /poradnik/... przekierowują na /blog/...
+const POST_URLS = Object.fromEntries([
+  ['/poradnik/', '/blog/'],
+  ...readdirSync('src/content/poradnik').filter(f => f.endsWith('.md')).map(f => [`/poradnik/${f.slice(0, -3)}/`, `/blog/${f.slice(0, -3)}/`]),
+]);
+
 export default defineConfig({
   site: 'https://liveomeble.pl',
-  redirects: Object.fromEntries(Object.entries(OLD_URLS).map(([from, to]) => [from, { status: 301, destination: to }])),
+  redirects: Object.fromEntries(Object.entries({ ...OLD_URLS, ...POST_URLS }).map(([from, to]) => [from, { status: 301, destination: to }])),
   output: 'static',
   trailingSlash: 'always',
   build: {

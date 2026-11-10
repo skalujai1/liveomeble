@@ -30,7 +30,7 @@ faq:
     a: "Pilot na podczerwień zwykle nie działa przez pełne drzwi, a przez przezroczyste szkło zazwyczaj tak. Sprzęt sterowany takim pilotem trzymaj na otwartej półce albo za szklanym frontem."
 ---
 
-Szafka RTV to zwykle najdłuższy mebel w salonie i to na nią patrzysz każdego wieczoru. Dobrze dobrana nie zwraca na siebie uwagi: telewizor stoi stabilnie, przewody są schowane, a ekran jest na wygodnej wysokości. W tym poradniku pokazujemy, jak to sprawdzić w kilka minut, z miarką i kartą techniczną telewizora.
+Szafka RTV to zwykle najdłuższy mebel w salonie i to na nią patrzysz każdego wieczoru. Dobrze dobrana nie zwraca na siebie uwagi: telewizor stoi stabilnie, przewody są schowane, a ekran jest na wygodnej wysokości. W tym artykule pokazujemy, jak to sprawdzić w kilka minut, z miarką i kartą techniczną telewizora.
 
 **Najważniejsze w jednym zdaniu:** Szafka RTV powinna być szersza od telewizora i od rozstawu jego nóżek, na tyle głęboka, żeby zmieścić podstawę i sprzęt, a na tyle niska, żeby środek ekranu wypadał mniej więcej na wysokości oczu osoby siedzącej na kanapie.
 

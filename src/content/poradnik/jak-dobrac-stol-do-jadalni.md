@@ -33,7 +33,7 @@ factCheck:
   - "Odstęp za krzesłem 75–90 cm: poradniki podają od 70–80 cm (Dekoria) do ok. 90 cm (poradniki zagraniczne); dane stołów Liveo z kart produktu (eksport Navireo, 28.10.2026)."
 ---
 
-Stół w jadalni wybiera się do dwóch rzeczy: do liczby osób, które zwykle przy nim siadają, i do pokoju, w którym ma stanąć. Za mały stół oznacza łokcie w talerzu sąsiada, a za duży zabiera przejście. Ten poradnik pokazuje, jak policzyć oba wymiary w kilka minut, z miarką i kartką.
+Stół w jadalni wybiera się do dwóch rzeczy: do liczby osób, które zwykle przy nim siadają, i do pokoju, w którym ma stanąć. Za mały stół oznacza łokcie w talerzu sąsiada, a za duży zabiera przejście. Ten artykuł pokazuje, jak policzyć oba wymiary w kilka minut, z miarką i kartką.
 
 **Najważniejsze w skrócie:** Licz ok. 60 cm długości blatu na osobę i 80–90 cm szerokości blatu, a za krzesłami zostaw 75–90 cm wolnego miejsca. Stół 160 × 90 cm wygodnie mieści 6 osób, a po rozłożeniu do 200 cm nawet 8.
 

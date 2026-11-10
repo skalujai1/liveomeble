@@ -25,8 +25,8 @@ export async function llmsTxt(): Promise<string> {
   for (const t of types) L.push(`- [${t.plural}](${abs(`/meble/${t.slug}/`)}): ${productCount(productsByType(t.id).length)}.`);
   L.push('', '## Pomieszczenia');
   for (const r of rooms) L.push(`- [${r.name}](${abs(`/pomieszczenia/${r.slug}/`)}): ${r.description}`);
-  L.push('', '## Poradnik');
-  for (const a of articles) L.push(`- [${a.data.title}](${abs(`/poradnik/${a.data.slug}/`)}): ${a.data.keyTakeaway}`);
+  L.push('', '## Blog');
+  for (const a of articles) L.push(`- [${a.data.title}](${abs(`/blog/${a.data.slug}/`)}): ${a.data.keyTakeaway}`);
   L.push('', '## Firma');
   L.push(`- [O nas](${abs('/o-nas/')}): kim jest Liveo i dlaczego meble w kolekcjach.`);
   L.push(`- [Kontakt](${abs('/kontakt/')}): dane producenta; zakup i reklamacje załatwia sklep partnerski.`);
@@ -35,13 +35,13 @@ export async function llmsTxt(): Promise<string> {
   L.push('', '## Optional');
   L.push(`- [Polityka prywatności](${abs('/polityka-prywatnosci/')})`);
   L.push(`- [Regulamin](${abs('/regulamin/')})`);
-  L.push(`- [Pełna treść poradników i FAQ](${abs('/llms-full.txt')})`);
+  L.push(`- [Pełna treść artykułów z bloga i FAQ](${abs('/llms-full.txt')})`);
   return L.join('\n') + '\n';
 }
 
 export async function llmsFullTxt(): Promise<string> {
   const articles = await getArticles();
-  const L: string[] = ['# Liveo Meble: poradniki i najczęstsze pytania', ''];
+  const L: string[] = ['# Liveo Meble: blog i najczęstsze pytania', ''];
   if (DEMO) L.push(`Uwaga: ${site.footer.demoNotice}`, '');
   const faqPages: [string, string, { q: string; a: string }[]][] = [
     ['Strona główna', '/', pages.home.faq.items],
@@ -58,9 +58,9 @@ export async function llmsFullTxt(): Promise<string> {
     L.push(`### ${name} (${abs(path)})`, '');
     for (const it of items) L.push(`**${plainText(it.q)}**`, plainText(it.a), '');
   }
-  L.push('## Poradniki', '');
+  L.push('## Artykuły z bloga', '');
   for (const a of articles) {
-    L.push(`### ${a.data.title}`, `Źródło: ${abs(`/poradnik/${a.data.slug}/`)}`, '', a.body?.trim() ?? '', '');
+    L.push(`### ${a.data.title}`, `Źródło: ${abs(`/blog/${a.data.slug}/`)}`, '', a.body?.trim() ?? '', '');
   }
   return L.join('\n') + '\n';
 }

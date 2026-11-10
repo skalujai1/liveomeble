@@ -19,7 +19,7 @@ export function sitemapLastmod(today = new Date().toISOString().slice(0, 10)) {
       const src = readFileSync(join(abs, f), 'utf8');
       const slug = frontmatterValue(src, 'slug') || f.replace(/\.md$/, '');
       const updated = frontmatterValue(src, 'updated') || frontmatterValue(src, 'date');
-      const path = dir === 'poradnik' ? `/poradnik/${slug}/` : `/${slug}/`;
+      const path = dir === 'poradnik' ? `/blog/${slug}/` : `/${slug}/`;
       if (/^\d{4}-\d{2}-\d{2}$/.test(updated || '')) map.set(path, updated);
     }
   }

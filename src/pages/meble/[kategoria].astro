@@ -53,7 +53,7 @@ const typeRooms = rooms.filter(r => t.rooms.includes(r.slug));
 
   <Section id="jak-wybrac" title={fill(tpl.tipsTitle, vars)} width="narrow">
     <ul class="feature-bullets">{item.tips.map(tip => <li>{tip}</li>)}</ul>
-    {guide && <p class="section__more">Więcej w poradniku: <a href={url.guide(guide.data.slug)}>{guide.data.title}</a></p>}
+    {guide && <p class="section__more">Więcej na blogu: <a href={url.guide(guide.data.slug)}>{guide.data.title}</a></p>}
   </Section>
 
   <Section id="pomieszczenia" title={fill(tpl.roomsTitle, vars)}>

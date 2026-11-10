@@ -96,7 +96,7 @@ const img = roomImage(r.slug, 'wide');
         </li>
       ))}
     </ul>
-    {guide && <p class="section__more">Poradnik: <a href={url.guide(guide.data.slug)}>{guide.data.title}</a></p>}
+    {guide && <p class="section__more">Na blogu: <a href={url.guide(guide.data.slug)}>{guide.data.title}</a></p>}
   </Section>
 
   <Section id="doradca" title={fill(tpl.advisor.title, vars)} class="section--band">

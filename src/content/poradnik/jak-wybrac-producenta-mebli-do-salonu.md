@@ -89,7 +89,7 @@ Wielu klientów zaczyna zakupy od strony producenta. Jeśli ta strona ma wyszuki
 
 ## 9. Jak sprawdzić jakość przed podpisaniem umowy?
 
-Obejrzyj meble na ekspozycji u innego sprzedawcy albo zamów kilka do swojego salonu. Złóż jeden mebel według instrukcji. Sprawdź obrzeża, okucia i szuflady oraz to, jak paczki przetrwały transport. Na co patrzeć przy płycie meblowej, opisujemy w poradniku [płyta meblowa laminowana](/poradnik/plyta-meblowa-laminowana/).
+Obejrzyj meble na ekspozycji u innego sprzedawcy albo zamów kilka do swojego salonu. Złóż jeden mebel według instrukcji. Sprawdź obrzeża, okucia i szuflady oraz to, jak paczki przetrwały transport. Na co patrzeć przy płycie meblowej, opisujemy w artykule [płyta meblowa laminowana](/blog/plyta-meblowa-laminowana/).
 
 ## Lista pytań do producenta
 

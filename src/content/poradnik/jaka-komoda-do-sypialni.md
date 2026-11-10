@@ -68,7 +68,7 @@ Wiele komód łączy jedno i drugie: szuflady na górze i szafkę z drzwiami na 
 
 Przed komodą musi zmieścić się wysunięta szuflada i miejsce, żeby przed nią stanąć. Szuflada wysuwa się mniej więcej na głębokość korpusu. Policz więc: głębokość komody plus głębokość szuflady plus miejsce dla Ciebie.
 
-**Przykład.** Komoda ma 40 cm głębokości, szuflada wysuwa się na ok. 35 cm. Jeśli przyjmiesz ok. pół metra na stanie, od ściany do łóżka potrzebujesz ok. 125 cm. Gdy tyle nie ma, wybierz komodę płytszą albo wysoką, która stanie w innym miejscu pokoju. Więcej o planowaniu przejść piszemy w poradniku [jak urządzić małą sypialnię](/poradnik/jak-urzadzic-mala-sypialnie/).
+**Przykład.** Komoda ma 40 cm głębokości, szuflada wysuwa się na ok. 35 cm. Jeśli przyjmiesz ok. pół metra na stanie, od ściany do łóżka potrzebujesz ok. 125 cm. Gdy tyle nie ma, wybierz komodę płytszą albo wysoką, która stanie w innym miejscu pokoju. Więcej o planowaniu przejść piszemy w artykule [jak urządzić małą sypialnię](/blog/jak-urzadzic-mala-sypialnie/).
 
 ## Dlaczego warto przymocować komodę do ściany?
 

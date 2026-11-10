@@ -21,7 +21,7 @@ const CHROME = process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1194/chrome
 const PAGES = [
   '/', '/kolekcje/', '/kolekcje/dante/', '/meble/', '/meble/komody/', '/pomieszczenia/', '/pomieszczenia/salon/',
   '/produkt/komoda-dante-dt03/', '/produkt/lozko-160-z-pojemnikiem-ate-at15/', '/pomieszczenia/kuchnia/', '/gdzie-kupic/', '/dla-partnerow/', '/strefa-partnera/',
-  '/doradca-wnetrz/', '/o-nas/', '/kontakt/', '/poradnik/', '/poradnik/jak-dobrac-szafke-rtv/',
+  '/doradca-wnetrz/', '/o-nas/', '/kontakt/', '/blog/', '/blog/jak-dobrac-szafke-rtv/',
   '/polityka-prywatnosci/', '/404.html',
 ];
 const WIDTHS = [1280, 360];

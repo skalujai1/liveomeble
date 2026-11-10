@@ -22,7 +22,7 @@ const allCollections = collections.map(c => ({ c, count: productCount(productsBy
 const secondary = [
   { label: 'Dla sklepów (B2B)', href: url.partners },
   { label: 'Strefa partnera', href: url.partnerZone },
-  { label: 'Poradnik', href: url.guides },
+  { label: 'Blog', href: url.guides },
   { label: 'Kontakt', href: url.contact },
 ];
 ---
@@ -118,7 +118,7 @@ const secondary = [
             ))}
           </ul>
           <ul class="site-nav__mobile-secondary">
-            <li><a href={url.guides}>Poradnik</a></li>
+            <li><a href={url.guides}>Blog</a></li>
             {secondary.filter(s => s.href !== url.guides).map(s => <li><a href={s.href}>{s.label}</a></li>)}
           </ul>
         </div>

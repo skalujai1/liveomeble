@@ -119,11 +119,11 @@
       "id": "poradnik",
       "type": "articles",
       "title": "Zanim kupisz",
-      "lead": "Krótkie poradniki: jak zmierzyć wnękę, dobrać szafkę RTV, urządzić małą sypialnię i na co patrzeć przy płycie meblowej.",
-      "source": "src/content/poradnik/*.md (najnowsze, maks. 4)",
+      "lead": "Na blogu: jak zmierzyć wnękę, dobrać szafkę RTV, urządzić małą sypialnię i na co patrzeć przy płycie meblowej.",
+      "source": "src/content/blog/*.md (najnowsze, maks. 4)",
       "cta": {
-        "label": "Wszystkie poradniki",
-        "href": "/poradnik/"
+        "label": "Wszystkie artykuły",
+        "href": "/blog/"
       }
     },
     {
@@ -154,7 +154,7 @@
       },
       {
         "q": "Jak sprawdzić, czy mebel zmieści się w pokoju?",
-        "a": "Na stronie mebla podajemy szerokość, wysokość i głębokość, a przy wielu meblach także rysunek wymiarowy. Zmierz miejsce w kilku punktach i porównaj. Jak to zrobić, opisujemy w poradniku [Jak zmierzyć wnękę pod szafę](/poradnik/jak-zmierzyc-wneke-pod-szafe/)."
+        "a": "Na stronie mebla podajemy szerokość, wysokość i głębokość, a przy wielu meblach także rysunek wymiarowy. Zmierz miejsce w kilku punktach i porównaj. Jak to zrobić, opisujemy na blogu w artykule [Jak zmierzyć wnękę pod szafę](/blog/jak-zmierzyc-wneke-pod-szafe/)."
       },
       {
         "q": "Z czego są wykonane meble Liveo?",

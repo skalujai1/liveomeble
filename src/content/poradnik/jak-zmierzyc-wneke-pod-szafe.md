@@ -30,7 +30,7 @@ faq:
     a: "Wysoką szafę warto przykręcić do ściany, bo zabezpiecza to ją przed przewróceniem, zwłaszcza gdy w domu są dzieci. Użyj kołków odpowiednich do rodzaju ściany i sprawdź zalecenia w instrukcji mebla."
 ---
 
-Wnęka wygląda na prostokąt, ale rzadko nim jest. Ściany bywają krzywe, podłoga nierówna, a w rogu czeka listwa, rura albo gniazdko. Kilka pomiarów zamiast jednego oszczędzi Ci szafy, która nie wchodzi o centymetr. Ten poradnik prowadzi przez pomiar krok po kroku, od miarki po sprawdzenie sufitu.
+Wnęka wygląda na prostokąt, ale rzadko nim jest. Ściany bywają krzywe, podłoga nierówna, a w rogu czeka listwa, rura albo gniazdko. Kilka pomiarów zamiast jednego oszczędzi Ci szafy, która nie wchodzi o centymetr. Ten artykuł prowadzi przez pomiar krok po kroku, od miarki po sprawdzenie sufitu.
 
 **Najważniejsze w jednym zdaniu:** Zmierz szerokość, wysokość i głębokość wnęki w kilku miejscach, zapisz najmniejsze wartości, zostaw zapas na montaż i sprawdź, czy szafa zmieści się pod sufitem, gdy będziesz ją podnosić z pozycji leżącej.
 

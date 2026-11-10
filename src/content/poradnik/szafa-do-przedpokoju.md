@@ -67,7 +67,7 @@ Drzwi przesuwne nie wychodzą w korytarz, ale zabierają kilka centymetrów gł�
 
 ## Wysokość i wnoszenie
 
-Szafy Liveo mają **191–211 cm** wysokości. Przed zakupem zmierz sufit w przedpokoju, a także drogę, którą szafa będzie wnoszona w paczkach. Szafę zwykle składa się na leżąco i podnosi do pionu, więc sprawdź, czy przekątna jej boku zmieści się pod sufitem. Jak zmierzyć wnękę i sufit, opisujemy w poradniku [jak zmierzyć wnękę pod szafę](/poradnik/jak-zmierzyc-wneke-pod-szafe/).
+Szafy Liveo mają **191–211 cm** wysokości. Przed zakupem zmierz sufit w przedpokoju, a także drogę, którą szafa będzie wnoszona w paczkach. Szafę zwykle składa się na leżąco i podnosi do pionu, więc sprawdź, czy przekątna jej boku zmieści się pod sufitem. Jak zmierzyć wnękę i sufit, opisujemy w artykule [jak zmierzyć wnękę pod szafę](/blog/jak-zmierzyc-wneke-pod-szafe/).
 
 Wysoką szafę warto przymocować do ściany. W przedpokoju to szczególnie ważne, bo ludzie często o nią zahaczają, a dzieci wieszają się na drzwiach.
 
