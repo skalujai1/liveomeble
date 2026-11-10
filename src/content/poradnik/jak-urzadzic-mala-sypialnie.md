@@ -7,6 +7,9 @@ date: "2026-10-20"
 updated: "2026-10-20"
 author: "Redakcja Liveo"
 readingTime: 7
+cover:
+  image: "d46be1531b-kubo_02_2160px"
+  alt: "Mała sypialnia z meblami z kolekcji KUBO: łóżko z szufladą, szafka nocna i szafa"
 keyTakeaway: "Zacznij od łóżka i przejść wokół niego, wybierz szafę z drzwiami przesuwnymi albo wysoką komodę zamiast kilku niskich mebli, a dodatkowego miejsca na rzeczy szukaj pod łóżkiem i na ścianach."
 related:
   - "jak-zmierzyc-wneke-pod-szafe"

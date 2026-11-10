@@ -7,6 +7,9 @@ date: "2026-11-10"
 updated: "2026-11-10"
 author: "Redakcja Liveo"
 readingTime: 7
+cover:
+  image: "4c36287ead-milton_02_antracyt_2160px"
+  alt: "Salon z kompletem mebli z kolekcji MILTON: szafka RTV, witryny, komoda i ława"
 keyTakeaway: "Zanim podpiszesz umowę z producentem mebli, sprawdź pięć rzeczy: czy meble tworzą kolekcje, które klient dokupuje, jak szybko i w jakiej formie przychodzą, jakie dane produktowe dostaniesz do sklepu i internetu, jak wyglądają zamówienia i reklamacje oraz czy producent kieruje do Ciebie klientów."
 related:
   - "plyta-meblowa-laminowana"

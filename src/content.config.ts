@@ -21,6 +21,8 @@ const poradnik = defineCollection({
     keyTakeaway: z.string(),
     related: z.array(z.string()).default([]),
     links: z.object({ category: z.string().optional(), room: z.string().optional() }).default({}),
+    /** Zdjęcie nagłówka: nazwa pliku aranżacji z kart Liveo (public/katalog, bez szerokości i .webp) i tekst alternatywny. */
+    cover: z.object({ image: z.string(), alt: z.string() }).optional(),
     faq,
     factCheck: z.array(z.any()).optional(),
   }),

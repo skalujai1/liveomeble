@@ -1,5 +1,6 @@
 // Poradniki i strony prawne z kolekcji treści (src/content.config.ts).
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { arrangementByName } from './images';
 
 export type Article = CollectionEntry<'poradnik'>;
 
@@ -12,4 +13,10 @@ export async function getArticles(): Promise<Article[]> {
   return all.sort((a, b) => b.data.date.localeCompare(a.data.date) || a.data.title.localeCompare(b.data.title, 'pl'));
 }
 
-export const articleCard = (a: Article) => ({ slug: a.data.slug, title: a.data.title, description: a.data.description, readingTime: a.data.readingTime });
+/** Zdjęcie nagłówka poradnika (null, gdy brak albo plik zniknął z katalogu). */
+export const coverOf = (a: Article) => (a.data.cover ? arrangementByName(a.data.cover.image, a.data.cover.alt) : null);
+
+export const articleCard = (a: Article) => ({
+  slug: a.data.slug, title: a.data.title, description: a.data.description, readingTime: a.data.readingTime,
+  cover: coverOf(a), coverAlt: a.data.cover?.alt ?? '',
+});

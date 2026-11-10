@@ -637,3 +637,15 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .partner-split__lead { margin-top: 1rem; font-size: var(--text-lg); line-height: 1.6; color: var(--color-text-muted); max-width: 34rem; }
 .partner-split .cta-row { margin-top: var(--space-5); align-items: center; gap: 0.75rem 1.75rem; }
 @media (min-width: 60rem) { .partner-split__inner { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-8); } }
+
+/* ---------- Poradnik: zdjęcie nagłówka i zdjęcia na kartach ---------- */
+.article-cover.media { aspect-ratio: 21 / 9; border-radius: 0; }
+.article-cover .media__img, .article-card__media .media__img { filter: var(--photo-grade); }
+@media (max-width: 47.9rem) { .article-cover.media { aspect-ratio: 4 / 3; margin-inline: calc(-1 * var(--gutter)); } }
+.article-card--cover { padding-top: 0; border-top: 0; }
+.article-card__media.media { border-radius: 0; margin-bottom: 0.5rem; }
+.article-card--cover .article-card__title { padding-top: 1rem; border-top: 1px solid var(--color-line-strong); }
+@media (prefers-reduced-motion: no-preference) {
+  .article-card__media .media__img { transition: transform 900ms var(--ease-expo); }
+  .article-card--cover:hover .article-card__media .media__img { transform: scale(1.03); }
+}

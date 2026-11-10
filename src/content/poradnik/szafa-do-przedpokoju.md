@@ -7,6 +7,9 @@ date: "2026-11-10"
 updated: "2026-11-10"
 author: "Redakcja Liveo"
 readingTime: 6
+cover:
+  image: "f4ed064d97-mati_05_2160px"
+  alt: "Przedpokój z meblami z kolekcji MATI: wieszak z siedziskiem i szafa"
 keyTakeaway: "W przedpokoju najważniejsze jest przejście. Od szerokości korytarza odejmij głębokość szafy i sprawdź, czy zmieści się otwarte skrzydło drzwi albo wybierz drzwi przesuwne. Szafy Liveo mają najczęściej 52–57,5 cm głębokości."
 related:
   - "jak-zmierzyc-wneke-pod-szafe"

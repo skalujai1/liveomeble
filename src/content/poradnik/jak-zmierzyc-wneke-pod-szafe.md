@@ -7,6 +7,9 @@ date: "2026-10-20"
 updated: "2026-10-20"
 author: "Redakcja Liveo"
 readingTime: 7
+cover:
+  image: "4c0ca336ae-dorian_r05_2160px"
+  alt: "Sypialnia z meblami z kolekcji DORIAN: szeroka szafa z lustrem i łóżko"
 keyTakeaway: "Zmierz szerokość, wysokość i głębokość wnęki w kilku miejscach, zapisz najmniejsze wartości, zostaw zapas na montaż i sprawdź, czy szafa zmieści się pod sufitem, gdy będziesz ją podnosić z pozycji leżącej."
 related:
   - "jak-urzadzic-mala-sypialnie"

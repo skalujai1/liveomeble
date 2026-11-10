@@ -5,7 +5,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../../components/Section.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import Rich from '../../components/Rich.astro';
-import { articleCard, getArticles, type Article } from '../../lib/articles';
+import Media from '../../components/Media.astro';
+import { srcOf } from '../../lib/images';
+import { articleCard, coverOf, getArticles, type Article } from '../../lib/articles';
 import { article as articleLd, faqPage, webPage } from '../../lib/jsonld';
 import { pages, url } from '../../lib/site';
 import { dateLong, fill } from '../../lib/text';
@@ -19,6 +21,7 @@ const { a, all } = Astro.props;
 const d = a.data;
 const tpl = pages.poradnik.article;
 const path = url.guide(d.slug);
+const cover = coverOf(a);
 const html = a.rendered?.html ?? '';
 const headings = (a.rendered?.metadata?.headings ?? []) as { depth: number; slug: string; text: string }[];
 const toc = headings.filter(h => h.depth === 2);
@@ -36,6 +39,8 @@ const related = [
   description={d.description}
   {path}
   ogType="article"
+  ogImage={cover?.pub ? srcOf(cover.pub, 1200) : undefined}
+  ogImageAlt={d.cover?.alt}
   pageClass="page-article"
   breadcrumbs={[{ name: pages.poradnik.h1, url: url.guides }, { name: d.title, url: path }]}
   jsonLd={[
@@ -54,6 +59,9 @@ const related = [
         <span>{fill(tpl.meta.readingTime, { readingTime: d.readingTime })}</span>
       </p>
     </header>
+    {cover && (
+      <Media image={cover} alt={d.cover!.alt} widths={[720, 1080, 1440, 2160]} sizes="(min-width: 80rem) 76rem, 100vw" ratio="21 / 9" placeholderLabel={d.title} priority class="article-cover" />
+    )}
     <div class="article-body" data-article-body>
       <Fragment set:html={intro} />
       {toc.length > 2 && (

@@ -7,6 +7,9 @@ date: "2026-10-20"
 updated: "2026-10-20"
 author: "Redakcja Liveo"
 readingTime: 7
+cover:
+  image: "5b2d9eddb9-dante_02_antracyt_2160px"
+  alt: "Salon z meblami z kolekcji DANTE: szafka RTV, stół z krzesłami, witryna i komoda"
 keyTakeaway: "Szafka RTV powinna być szersza od telewizora i od rozstawu jego nóżek, na tyle głęboka, żeby zmieścić podstawę i sprzęt, a na tyle niska, żeby środek ekranu wypadał mniej więcej na wysokości oczu osoby siedzącej na kanapie."
 related:
   - "jak-zmierzyc-wneke-pod-szafe"

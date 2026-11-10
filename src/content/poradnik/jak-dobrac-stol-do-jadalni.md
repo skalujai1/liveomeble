@@ -7,6 +7,9 @@ date: "2026-11-10"
 updated: "2026-11-10"
 author: "Redakcja Liveo"
 readingTime: 7
+cover:
+  image: "d1c8d91c6a-aris_02_2160px"
+  alt: "Jadalnia z meblami z kolekcji ARIS: stół z krzesłami, komoda i witryny"
 keyTakeaway: "Licz ok. 60 cm długości blatu na osobę i 80–90 cm szerokości blatu, a za krzesłami zostaw 75–90 cm wolnego miejsca. Stół 160 × 90 cm wygodnie mieści 6 osób, a po rozłożeniu do 200 cm nawet 8."
 related:
   - "jak-zmierzyc-wneke-pod-szafe"

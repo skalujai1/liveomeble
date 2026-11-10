@@ -1,14 +1,17 @@
 ---
 // Karta poradnika: tytuł, opis, czas czytania, link „Czytaj: …”.
+import Media from './Media.astro';
+import type { ImageRef } from '../lib/images';
 import { pages, url } from '../lib/site';
 import { fill } from '../lib/text';
 
-interface Props { article: { slug: string; title: string; description: string; readingTime: number }; headingLevel?: 2 | 3 }
+interface Props { article: { slug: string; title: string; description: string; readingTime: number; cover?: ImageRef | null; coverAlt?: string }; headingLevel?: 2 | 3 }
 const { article: a, headingLevel = 3 } = Astro.props;
 const card = (pages.poradnik.sections.find(s => s.id === 'lista') as any).card;
 const H = `h${headingLevel}` as 'h2' | 'h3';
 ---
-<li class="article-card">
+<li class:list={['article-card', { 'article-card--cover': !!a.cover }]}>
+  {a.cover && <Media image={a.cover} alt={a.coverAlt ?? ''} widths={[480, 720, 1000]} sizes="(min-width: 75rem) 18rem, (min-width: 48rem) 45vw, 92vw" ratio="4 / 3" placeholderLabel={a.title} class="article-card__media" />}
   <H class="article-card__title">{a.title}</H>
   <p class="article-card__text">{a.description}</p>
   <p class="article-card__meta">{fill(card.meta, { readingTime: a.readingTime })}</p>

@@ -7,6 +7,9 @@ date: "2026-11-10"
 updated: "2026-11-10"
 author: "Redakcja Liveo"
 readingTime: 6
+cover:
+  image: "74bdc26584-ate_03_2160px"
+  alt: "Sypialnia z meblami z kolekcji ATE: łóżko, szafka nocna, komoda i szafa"
 keyTakeaway: "Do sypialni wybierz komodę, przed którą zmieści się wysunięta szuflada i Ty. Niska i szeroka sprawdzi się pod telewizorem albo lustrem, wysoka i wąska tam, gdzie brakuje podłogi. Wyższą komodę przymocuj do ściany."
 related:
   - "jak-urzadzic-mala-sypialnie"

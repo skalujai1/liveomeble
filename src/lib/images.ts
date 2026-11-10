@@ -50,6 +50,15 @@ export function collectionImage(c: Collection, frame: Frame = 'wide', offset = 0
   return ref(a, `Kolekcja ${c.name} w aranżacji`);
 }
 
+/** Aranżacja z kart po nazwie pliku (np. „d1c8d91c6a-aris_02_2160px”) — zdjęcia nagłówków poradnika. */
+export function arrangementByName(name: string, title = ''): ImageRef | null {
+  for (const c of collections) {
+    const a = (c.arrangements as (PublicImage & { room: string })[]).find(x => x.base.split('/').pop() === name);
+    if (a) return ref(a, title || `Kolekcja ${c.name} w aranżacji`);
+  }
+  return null;
+}
+
 /** Wszystkie aranżacje kolekcji (galeria na stronie kolekcji). */
 export function collectionImages(c: Collection): ImageRef[] {
   return (c.arrangements as (PublicImage & { room: string })[]).map(a => ref(a, `Kolekcja ${c.name} w aranżacji`)!);

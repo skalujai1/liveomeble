@@ -7,6 +7,9 @@ date: "2026-10-20"
 updated: "2026-10-20"
 author: "Redakcja Liveo"
 readingTime: 7
+cover:
+  image: "be686dec2a-dante_06_antracyt_2160px"
+  alt: "Komoda z kolekcji DANTE z frontami w antracycie i korpusem w dekorze dębu"
 keyTakeaway: "Płyta laminowana to płyta wiórowa pokryta warstwą dekoracyjną. Dobrze znosi codzienne użytkowanie i łatwo ją czyścić, a o trwałości mebla w dużej mierze decydują szczelne obrzeża, dobre okucia i ochrona krawędzi przed wodą."
 related:
   - "jak-dobrac-szafke-rtv"
