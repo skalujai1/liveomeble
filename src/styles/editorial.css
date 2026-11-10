@@ -688,7 +688,7 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .featured-tile__dots { display: flex; gap: 0.25rem; }
 .featured-tile__dots i { width: 0.875rem; height: 0.875rem; border-radius: 50%; background: linear-gradient(135deg, var(--c) 50%, var(--c2, var(--c)) 50%); box-shadow: inset 0 0 0 1px rgb(42 36 32 / 0.16); }
 .featured-tile__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin: 0.75rem 0 0; }
-.pill { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: 0 1.375rem; border-radius: 999px; font-size: 0.9375rem; font-weight: var(--weight-medium); text-decoration: none; transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out); }
+.pill { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: 0 1.375rem; border-radius: var(--radius); font-size: 0.9375rem; font-weight: var(--weight-medium); text-decoration: none; transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out); }
 .pill--solid { background: var(--color-accent); color: #fff; }
 .pill--solid:hover { background: var(--color-accent-hover); color: #fff; }
 .pill--line { color: var(--color-accent); box-shadow: inset 0 0 0 1px var(--color-accent); }
