@@ -68,15 +68,19 @@ const secondary = [
                   ))}
                 </ul>
                 <div class="mega__side">
-                  <p class="mega__heading">Pozostałe</p>
-                  <ul class="mega__list">
-                    {restTypes.map(t => <li><a href={url.category(t.slug)}>{t.plural}</a></li>)}
-                  </ul>
-                  <p class="mega__heading">Według pomieszczenia</p>
-                  <ul class="mega__list">
-                    {rooms.map(r => <li><a href={url.room(r.slug)}>{r.name}</a></li>)}
-                  </ul>
-                  <p><a class="link" href={url.products}>Wszystkie meble</a></p>
+                  <div class="mega__group">
+                    <p class="mega__heading">Pozostałe</p>
+                    <ul class="mega__list">
+                      {restTypes.map(t => <li><a href={url.category(t.slug)}>{t.plural}</a></li>)}
+                    </ul>
+                  </div>
+                  <div class="mega__group">
+                    <p class="mega__heading">Według pomieszczenia</p>
+                    <ul class="mega__list">
+                      {rooms.map(r => <li><a href={url.room(r.slug)}>{r.name}</a></li>)}
+                    </ul>
+                  </div>
+                  <p class="mega__more"><a class="link" href={url.products}>Wszystkie meble</a></p>
                 </div>
               </div></div>
             </div>

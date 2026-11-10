@@ -31,36 +31,58 @@ export function initMenu() {
  */
 export function initMega() {
   const items = [...document.querySelectorAll<HTMLElement>('[data-mega-item]')];
-  const timers = new Map<HTMLElement, number>();
+  // Zamiar myszy: najechanie otwiera po 90 ms, zjechanie zamyka po 220 ms. Ten sam zamiar nie przesuwa licznika,
+  // więc ciągły ruch myszy poza panelem nie odkłada zamknięcia w nieskończoność.
+  const timers = new Map<HTMLElement, { id: number; kind: 'open' | 'close' }>();
+  const cancel = (item: HTMLElement) => {
+    const t = timers.get(item);
+    if (t) { clearTimeout(t.id); timers.delete(item); }
+  };
   const close = (item: HTMLElement, focus = false) => {
+    cancel(item);
     const btn = item.querySelector<HTMLButtonElement>('[data-mega-toggle]');
     item.classList.remove('is-open');
     btn?.setAttribute('aria-expanded', 'false');
     if (focus) btn?.focus();
   };
   const open = (item: HTMLElement) => {
+    cancel(item);
     items.forEach(i => i !== item && close(i));
     item.classList.add('is-open');
     item.querySelector<HTMLButtonElement>('[data-mega-toggle]')?.setAttribute('aria-expanded', 'true');
   };
-  const later = (item: HTMLElement, fn: () => void, ms: number) => {
-    clearTimeout(timers.get(item));
-    timers.set(item, window.setTimeout(fn, ms));
+  const intend = (item: HTMLElement, kind: 'open' | 'close', ms: number) => {
+    if (timers.get(item)?.kind === kind) return;
+    cancel(item);
+    timers.set(item, { kind, id: window.setTimeout(() => (kind === 'open' ? open(item) : close(item)), ms) });
   };
-  if (matchMedia('(hover: hover)').matches) {
-    for (const item of items) {
-      item.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') later(item, () => open(item), 90); });
-      item.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') later(item, () => close(item), 220); });
-    }
+  const isMouse = (e: PointerEvent) => e.pointerType === 'mouse';
+  // Bez warunku (hover: hover): laptopy z ekranem dotykowym zgłaszają czasem „brak hovera”, a mają mysz.
+  for (const item of items) {
+    item.addEventListener('pointerenter', e => { if (isMouse(e)) intend(item, 'open', 90); });
+    item.addEventListener('pointerleave', e => { if (isMouse(e)) intend(item, 'close', 220); });
   }
+  // Zabezpieczenie: przeglądarka potrafi zgubić pointerleave (szybki ruch, panel zmieniający się pod kursorem).
+  // Każdy ruch myszy poza otwartym panelem i tak go zamyka; ruch w panelu anuluje zaplanowane zamknięcie.
+  document.addEventListener('pointermove', e => {
+    if (!isMouse(e)) return;
+    for (const item of items) {
+      const inside = item.contains(e.target as Node);
+      const pending = timers.get(item)?.kind;
+      if (!inside && (item.classList.contains('is-open') || pending === 'open')) intend(item, 'close', 220);
+      else if (inside && pending === 'close' && item.classList.contains('is-open')) cancel(item);
+    }
+  }, { passive: true });
+  // Kursor wyjechał poza okno, okno straciło fokus albo strona idzie do pamięci „wstecz”: panel się zamyka.
+  document.documentElement.addEventListener('pointerleave', e => {
+    if (isMouse(e)) items.forEach(i => i.classList.contains('is-open') && intend(i, 'close', 220));
+  });
+  const closeAll = () => items.forEach(i => close(i));
+  window.addEventListener('blur', closeAll);
+  window.addEventListener('pagehide', closeAll);
   for (const item of items) {
     const btn = item.querySelector<HTMLButtonElement>('[data-mega-toggle]');
-    btn?.addEventListener('click', () => {
-      const open = !item.classList.contains('is-open');
-      items.forEach(i => i !== item && close(i));
-      item.classList.toggle('is-open', open);
-      btn.setAttribute('aria-expanded', String(open));
-    });
+    btn?.addEventListener('click', () => (item.classList.contains('is-open') ? close(item) : open(item)));
   }
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
