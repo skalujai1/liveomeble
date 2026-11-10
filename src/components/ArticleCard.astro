@@ -11,9 +11,11 @@ const card = (pages.poradnik.sections.find(s => s.id === 'lista') as any).card;
 const H = `h${headingLevel}` as 'h2' | 'h3';
 ---
 <li class:list={['article-card', { 'article-card--cover': !!a.cover }]}>
-  {a.cover && <Media image={a.cover} alt={a.coverAlt ?? ''} widths={[480, 720, 1000]} sizes="(min-width: 75rem) 18rem, (min-width: 48rem) 45vw, 92vw" ratio="4 / 3" placeholderLabel={a.title} class="article-card__media" />}
-  <H class="article-card__title">{a.title}</H>
-  <p class="article-card__text">{a.description}</p>
-  <p class="article-card__meta">{fill(card.meta, { readingTime: a.readingTime })}</p>
-  <a class="article-card__link stretched-link" href={url.guide(a.slug)}>{fill(card.link, { title: a.title })}</a>
+  {a.cover && <Media image={a.cover} alt={a.coverAlt ?? ''} widths={[480, 720, 1000]} sizes="(min-width: 64rem) 26rem, (min-width: 48rem) 46vw, 92vw" ratio="3 / 2" placeholderLabel={a.title} class="article-card__media" />}
+  <div class="article-card__body">
+    <p class="article-card__meta">{fill(card.meta, { readingTime: a.readingTime })}</p>
+    <H class="article-card__title">{a.title}</H>
+    <p class="article-card__text">{a.description}</p>
+    <a class="article-card__link stretched-link" href={url.guide(a.slug)}>Czytaj artykuł<span class="visually-hidden">: {a.title}</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+  </div>
 </li>
