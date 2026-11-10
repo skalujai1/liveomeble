@@ -25,16 +25,34 @@ export function initMenu() {
 
 /**
  * Mega-menu: przycisk ze strzałką obok linku otwiera panel (klik, Enter, spacja), Esc zamyka
- * i oddaje fokus na przycisk, klik poza panelem zamyka. Najechanie myszą pokazuje panel przez CSS.
+ * i oddaje fokus na przycisk, klik poza panelem zamyka. Myszą: najechanie otwiera po chwili,
+ * zjechanie zamyka po chwili (także panel otwarty kliknięciem) — krótka przerwa wybacza przejście
+ * kursora przez szczelinę między linkiem a panelem.
  */
 export function initMega() {
   const items = [...document.querySelectorAll<HTMLElement>('[data-mega-item]')];
+  const timers = new Map<HTMLElement, number>();
   const close = (item: HTMLElement, focus = false) => {
     const btn = item.querySelector<HTMLButtonElement>('[data-mega-toggle]');
     item.classList.remove('is-open');
     btn?.setAttribute('aria-expanded', 'false');
     if (focus) btn?.focus();
   };
+  const open = (item: HTMLElement) => {
+    items.forEach(i => i !== item && close(i));
+    item.classList.add('is-open');
+    item.querySelector<HTMLButtonElement>('[data-mega-toggle]')?.setAttribute('aria-expanded', 'true');
+  };
+  const later = (item: HTMLElement, fn: () => void, ms: number) => {
+    clearTimeout(timers.get(item));
+    timers.set(item, window.setTimeout(fn, ms));
+  };
+  if (matchMedia('(hover: hover)').matches) {
+    for (const item of items) {
+      item.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') later(item, () => open(item), 90); });
+      item.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') later(item, () => close(item), 220); });
+    }
+  }
   for (const item of items) {
     const btn = item.querySelector<HTMLButtonElement>('[data-mega-toggle]');
     btn?.addEventListener('click', () => {
