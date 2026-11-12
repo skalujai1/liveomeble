@@ -48,7 +48,8 @@ function initHeader() {
   update();
 }
 
-// Kropki na meblach w hero: podświetlenie mebla (zmienne CSS obszaru), miniatura ładowana dopiero przy pierwszym najechaniu,
+// Kropki na meblach w hero: sama kropka i karta z opisem (bez przyciemniania zdjęcia i obrysu mebla), miniatura ładowana
+// dopiero przy pierwszym najechaniu,
 // a kropki, które wypadłyby pod nazwą kolekcji, przyciskami albo paskiem indeksu, są ukrywane.
 function initHotspots() {
   const lists = [...document.querySelectorAll<HTMLElement>('[data-spots]')];
@@ -94,20 +95,13 @@ function initHotspots() {
     const off = () => {
       active?.classList.remove('is-active');
       active = null;
-      list.classList.remove('is-lit');
     };
     const on = (spot: HTMLElement) => {
       clearTimeout(timer);
       if (active === spot) return;
       active?.classList.remove('is-active');
+      // prostokąt mebla (box z hotspots.json) służy tylko do ustawienia karty obok mebla, żeby go nie zasłaniała
       const box = (spot.dataset.box || '').split(' ').map(Number);
-      const [x1, y1, x2, y2] = box;
-      list.style.setProperty('--bl', `${x1 - 1}%`);
-      list.style.setProperty('--bt', `${y1 - 1}%`);
-      list.style.setProperty('--bw', `${x2 - x1 + 2}%`);
-      list.style.setProperty('--bh', `${y2 - y1 + 2}%`);
-      // reflektor pojawia się od razu na meblu (bez przejazdu z poprzedniego miejsca), dalej przesuwa się płynnie
-      if (!list.classList.contains('is-lit')) { void list.offsetWidth; list.classList.add('is-lit'); }
       const t = spot.querySelector<HTMLElement>('[data-thumb]');
       if (t?.dataset.thumb) { t.style.backgroundImage = `url("${t.dataset.thumb}")`; delete t.dataset.thumb; }
       place(list, spot, box);

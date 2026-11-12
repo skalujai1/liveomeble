@@ -158,31 +158,6 @@
   position: absolute; left: 50%; top: 58%; margin: 0; padding: 0; list-style: none; pointer-events: none;
   width: max(100cqw, calc(100cqh * var(--ar))); aspect-ratio: var(--ar); translate: -50% -58%;
 }
-/* Wyróżnienie mebla („reflektor”): prostokąt mebla (box z hotspots.json) zostaje jasny i lekko rozjaśniony,
-   reszta zdjęcia ciemnieje (cień o ogromnym zasięgu z miękką krawędzią), w rogach mebla białe narożniki.
-   Przy przejściu między kropkami reflektor płynnie przesuwa się na kolejny mebel. Pozycję ustawia scripts/motion.ts. */
-.hero-spots::before, .hero-spots::after {
-  content: ""; position: absolute; pointer-events: none; opacity: 0;
-  left: var(--bl, 40%); top: var(--bt, 40%); width: var(--bw, 20%); height: var(--bh, 20%);
-  transition: opacity 350ms ease;
-}
-.hero-spots::before {
-  border-radius: 0.75rem; box-shadow: 0 0 2.5rem 200vmax rgb(var(--scrim) / 0.52);
-  -webkit-backdrop-filter: brightness(1.14) saturate(1.08); backdrop-filter: brightness(1.14) saturate(1.08);
-}
-.hero-spots::after {
-  --c: #fff; --l: 1.125rem; --t: 2px;
-  background:
-    linear-gradient(var(--c) 0 0) left top / var(--l) var(--t), linear-gradient(var(--c) 0 0) left top / var(--t) var(--l),
-    linear-gradient(var(--c) 0 0) right top / var(--l) var(--t), linear-gradient(var(--c) 0 0) right top / var(--t) var(--l),
-    linear-gradient(var(--c) 0 0) left bottom / var(--l) var(--t), linear-gradient(var(--c) 0 0) left bottom / var(--t) var(--l),
-    linear-gradient(var(--c) 0 0) right bottom / var(--l) var(--t), linear-gradient(var(--c) 0 0) right bottom / var(--t) var(--l);
-  background-repeat: no-repeat; filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.35));
-}
-.hero-spots.is-lit::before, .hero-spots.is-lit::after {
-  opacity: 1;
-  transition: opacity 350ms ease, left 550ms var(--ease-expo), top 550ms var(--ease-expo), width 550ms var(--ease-expo), height 550ms var(--ease-expo);
-}
 .hero-spot { position: absolute; left: var(--x); top: var(--y); pointer-events: auto; }
 .hero-spot.is-covered { display: none; }
 .hero-spot__link { position: absolute; left: 0; top: 0; translate: -50% -50%; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; color: var(--color-text); text-decoration: none; }
