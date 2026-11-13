@@ -194,12 +194,19 @@ const TYPE_WORDS = [
   [/zabudow|zestaw kuchen|meble kuchen|szafki kuchen/, 'zestaw_kuchenny'], [/\bszaf[aey]?\b|\bszafe\b/, 'szafa'],
 ];
 
-/** „biała komoda do sypialni do 1000 zł” → { room: 'sypialnia', type: 'komoda', maxPrice: 1000, lighter: true, … } */
-export function parseQuery(text) {
+/** Czy katalog ma ceny. Karty produktu Liveo ich nie mają — cenę podaje salon partnerski. */
+export const hasPrices = products => products.some(p => p.price != null);
+
+/**
+ * „biała komoda do sypialni do 1000 zł” → { room: 'sypialnia', type: 'komoda', maxPrice: 1000, lighter: true, … }
+ * Bez cen w katalogu (`prices: false`) polecenia cenowe niczego nie zawężają: zamiast maxPrice/budget jest `noPrice: true`,
+ * żeby nie pokazać „Komody do 1000 zł” z meblami, których ceny nie znamy.
+ */
+export function parseQuery(text, { prices = true } = {}) {
   const t = plain(text);
   const find = list => list.find(([rx]) => rx.test(t))?.[1];
   const price = t.match(/(?:do|max|maks|ponizej|nie wiecej niz|budzet)\s*(\d[\d\s]{1,6})/);
-  return {
+  const q = {
     room: find(ROOM_WORDS),
     type: find(TYPE_WORDS),
     maxPrice: price ? parseInt(price[1].replace(/\s/g, ''), 10) : null,
@@ -214,6 +221,8 @@ export function parseQuery(text) {
     info: /kontakt|telefon|dostaw|zamow|montaz|gwarancj|zwrot|reklamac|platnos|raty|sklep stacjonar|salon meblow|czas realizacji/.test(t),
     help: /co potrafisz|jak (to )?dziala|pomoc|help|jak uzywac/.test(t),
   };
+  if (!prices && (q.maxPrice || q.budget)) Object.assign(q, { maxPrice: null, budget: false, noPrice: true });
+  return q;
 }
 
 /** Skrót oferty dla modelu językowego (Worker): kolekcja → rodzaje, pomieszczenia, kolory, cena „od”. */

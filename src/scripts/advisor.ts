@@ -4,7 +4,7 @@
 // z kopii widżetu w /liveo-assistant/widget/ (tools/sync-assistant.mjs). Zdjęcie nie opuszcza przeglądarki.
 // Czat przekazuje tu zdjęcie, analizę i komplet przez sessionStorage „lv-advisor” (liveo-assistant.js, handoff()).
 import {
-  ROOMS, TYPES, prefsFromAnalysis, recommendSets, recommendByType, explainSet, formatPrice, parseQuery, catalogSummary,
+  ROOMS, TYPES, prefsFromAnalysis, recommendSets, recommendByType, explainSet, formatPrice, parseQuery, catalogSummary, hasPrices,
 } from '../../liveo-assistant/widget/recommender.js';
 
 type Room = { slug: string; name: string; accusative: string; genitive: string };
@@ -452,8 +452,8 @@ export function initAdvisor() {
       emptyState('Nie udało się wczytać katalogu mebli. Sprawdź połączenie z internetem.', { label: 'Spróbuj ponownie', run: renderResults });
       return;
     }
-    // Katalog z kart Liveo nie ma cen: limit ceny (z rozmowy albo z czatu) wyciąłby wszystkie meble, więc go nie stosujemy.
-    if (!data.products.some(p => p.price != null)) { S.maxPrice = null; S.cheaper = false; }
+    // Katalog z kart Liveo nie ma cen: limit ceny (np. przekazany z czatu) niczego by nie zawęził, a dopisałby „do … zł” w tytułach.
+    if (!hasPrices(data.products)) { S.maxPrice = null; S.cheaper = false; }
     syncControls();
     renderSummary();
     const room = boot.rooms[S.room];
@@ -587,6 +587,8 @@ export function initAdvisor() {
   }
 
   function applyAction(a: any) {
+    // Bez cen w katalogu model też nie zawęża po cenie (inaczej tytuł „Komody do 1000 zł” sugerowałby cenę).
+    if (a && !hasPrices(productsCache)) a = { ...a, maxPrice: null, cheaper: false };
     switch (a?.type) {
       case 'room':
         if (boot.rooms[a.room]) Object.assign(S, { room: a.room, type: '', main: null, maxPrice: a.maxPrice || S.maxPrice });
@@ -616,15 +618,13 @@ export function initAdvisor() {
     renderResults();
   }
 
+  const NO_PRICE = 'Ceny podaje salon partnerski, więc doradca nie dobiera mebli po cenie.';
   function applyLocal(text: string) {
-    const q = parseQuery(text);
+    const q = parseQuery(text, { prices: hasPrices(productsCache) });
     if (q.nofurn) return reply(q.nofurn === 'lazienka' ? 'W ofercie Liveo nie ma mebli łazienkowych.' : 'Do garażu nasze meble raczej się nie sprawdzą.');
     if (q.outdoor && !q.room) return reply('Liveo tworzy meble do wnętrz i nie ma w ofercie mebli ogrodowych ani balkonowych.');
     if (q.info) return reply('W sprawach zamówień, dostawy, montażu i gwarancji pomoże obsługa klienta Liveo.', false, { label: 'Kontakt z Liveo', href: '/kontakt/' });
 
-    if ((q.maxPrice || q.budget) && !productsCache.some(p => p.price != null)) {
-      return reply('Na tej stronie nie ma cen: podaje je salon partnerski. Mogę za to zawęzić meble do pomieszczenia, rodzaju albo tonu.', false, { label: 'Gdzie kupić', href: '/gdzie-kupic/' });
-    }
     const done: string[] = [];
     if (q.room && boot.rooms[q.room] && availableRoom(q.room, productsCache)) {
       if (q.room !== S.room) { Object.assign(S, { room: q.room, type: '', main: null }); S.skip.clear(); }
@@ -646,11 +646,12 @@ export function initAdvisor() {
       done.push('inna kolekcja');
     }
     if (!done.length) {
+      if (q.noPrice) return reply(`${NO_PRICE} Mogę zawęzić meble do pomieszczenia, rodzaju albo tonu.`, false, { label: 'Gdzie kupić', href: '/gdzie-kupic/' });
       return reply(q.greet || q.thanks || q.help
         ? 'Napisz, czego szukasz, np. „biała komoda”, „jaśniejsze” albo „szafa do przedpokoju”. Możesz też użyć ustawień poniżej.'
         : 'Nie zrozumiałem tego polecenia. Spróbuj np. „biała komoda”, „jaśniejsze” albo „szafa do przedpokoju”.');
     }
-    reply(`Ustawiam: ${done.join(', ')}.`);
+    reply(`Ustawiam: ${done.join(', ')}.${q.noPrice ? ` ${NO_PRICE}` : ''}`);
     renderResults();
   }
 

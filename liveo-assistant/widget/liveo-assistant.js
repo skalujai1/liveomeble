@@ -15,7 +15,7 @@
 import { VisionEngine, loadImage } from './engine.js';
 import {
   ROOMS, TYPES, NEUTRAL, prefsFromAnalysis, recommendSets, recommendByType, explainSet, formatPrice,
-  parseQuery, catalogSummary,
+  parseQuery, catalogSummary, hasPrices,
 } from './recommender.js';
 
 const HERE = new URL('./', import.meta.url);
@@ -522,7 +522,7 @@ class LiveoAssistant {
         this.shown = new Set();
         return this.chips([{ label: 'Tak, pokaż od początku', primary: true, run: () => this.showSet() }, this.photoChip(false)]);
       }
-      await this.say('Nie znalazłem mebli spełniających te warunki. Spróbuj zwiększyć budżet albo wybrać inne pomieszczenie.');
+      await this.say('Nie znalazłem mebli spełniających te warunki. Spróbuj wybrać inne pomieszczenie.');
       this.opts = {};
       return this.chips(this.roomChips([this.room]).slice(0, 4));
     }
@@ -633,7 +633,7 @@ class LiveoAssistant {
   buildHandoff() {
     return h('div', { class: 'msg wide' },
       h('a', { class: 'handoff', href: CFG.advisorUrl, onclick: e => { e.preventDefault(); this.handoff(); } },
-        h('span', null, h('b', null, 'Otwórz pełnego doradcę'), h('small', null, 'Porównanie kolekcji, budżet i ton')),
+        h('span', null, h('b', null, 'Otwórz pełnego doradcę'), h('small', null, 'Porównanie kolekcji, ton i rodzaj mebla')),
         h('span', { html: I.arrow, style: 'display:contents' })));
   }
 
@@ -650,7 +650,7 @@ class LiveoAssistant {
       const answer = await this.askAI();
       if (answer) return this.runAction(answer.action);
     }
-    return this.localReply(parseQuery(text));
+    return this.localReply(parseQuery(text, { prices: hasPrices(this.products) }));
   }
 
   // ----- model językowy (Worker → OpenRouter) ------------------------------------
@@ -701,7 +701,8 @@ class LiveoAssistant {
   /** Wykonuje akcję wybraną przez model – produkty zawsze pochodzą z lokalnego katalogu. */
   async runAction(a) {
     const roomFor = type => Object.keys(ROOMS).find(k => ROOMS[k].types.includes(type));
-    const priceOpts = a?.maxPrice ? { maxPrice: a.maxPrice } : {};
+    // bez cen w katalogu (karty Liveo ich nie mają) limit ceny od modelu niczego by nie zawęził, a dopisałby „do … zł”
+    const priceOpts = a?.maxPrice && hasPrices(this.products) ? { maxPrice: a.maxPrice } : {};
     switch (a?.type) {
       case 'room':
         if (ROOMS[a.room]) return this.showRoom(a.room, { analysis: this.analysis, confirmed: !!this.analysis, opts: priceOpts });
@@ -717,7 +718,7 @@ class LiveoAssistant {
       case 'more':
         if (this.room) {
           if (a.tone) return this.shiftTone(a.tone === 'lighter' ? 1 : -1);
-          if (a.cheaper) { this.opts.budget = true; return this.showSet({ cheaper: true }); }
+          if (a.cheaper && hasPrices(this.products)) { this.opts.budget = true; return this.showSet({ cheaper: true }); }
           return this.showSet();
         }
         return this.chips(this.roomChips(undefined, [this.photoChip()]), 'Do jakiego pomieszczenia?', { grid: true });
@@ -735,6 +736,10 @@ class LiveoAssistant {
 
   // ----- tryb lokalny (bez modelu językowego) -------------------------------------
   async localReply(q) {
+    if (q.noPrice && !q.room && !q.type && !q.next && !q.lighter && !q.darker) {
+      await this.say('Ceny podaje salon partnerski, więc nie dobieram mebli po cenie. Mogę pokazać komplet do pokoju, jaśniejsze albo ciemniejsze meble.');
+      return this.chips(this.room ? [{ label: 'Inna kolekcja', run: () => this.showSet() }, this.photoChip(false)] : this.roomChips(undefined, [this.photoChip()]));
+    }
     if (q.nofurn) {
       await this.say(q.nofurn === 'lazienka'
         ? 'W ofercie Liveo nie ma mebli łazienkowych, ale chętnie pomogę urządzić inne pomieszczenie.'
