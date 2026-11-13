@@ -35,12 +35,12 @@ const dots = [...cells.values()].map(c => ({
   region: slugify(pl.find(s => s.id === c.ids[0])!.voivodeship),
 }));
 ---
-<figure class="poland-map" data-sf-map data-reveal>
+<figure class="poland-map" data-sf-map data-reveal="in-view">
   <p class="poland-map__count">
     <span class="poland-map__num">{stores.length}</span> {noun}
     <span class="poland-map__sub">{pl.length} w Polsce, w {byRegion.size} województwach{abroad.length > 0 && ` · ${salony(abroad.length)} w Słowenii`}</span>
   </p>
-  <svg data-reveal="in-view" viewBox={`-10 -10 ${MAP.width + 20} ${MAP.height + 20}`} role="group" aria-label={`${label}: ${salony(pl.length)}. Województwa prowadzą do list salonów.`} data-map-lng0={MAP.lng0} data-map-lat0={MAP.lat0} data-map-kx={MAP.kx} data-map-ky={MAP.ky}>
+  <svg viewBox={`-10 -10 ${MAP.width + 20} ${MAP.height + 20}`} role="group" aria-label={`${label}: ${salony(pl.length)}. Województwa prowadzą do list salonów.`} data-map-lng0={MAP.lng0} data-map-lat0={MAP.lat0} data-map-kx={MAP.kx} data-map-ky={MAP.ky}>
     <path class="poland-map__land" d={outlinePath()} />
     <g class="poland-map__regions">
       {regions.map(r => (

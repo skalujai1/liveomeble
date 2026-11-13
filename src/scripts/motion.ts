@@ -23,7 +23,7 @@ function initReveal() {
     }
   };
   // zwykłe odsłony startują tuż przed wejściem w kadr: przy szybkim przewijaniu treść już jest, bez pustych miejsc;
-  // data-reveal="in-view" (mapa salonów) czeka, aż element będzie widać, bo jego ruch ma być zobaczony
+  // data-reveal="in-view" (mapa salonów: fala kropek od Raniżowa) czeka, aż element będzie widać, bo jego ruch ma być zobaczony
   const early = new IntersectionObserver(show, { rootMargin: '0px 0px 20% 0px', threshold: 0 });
   const inView = new IntersectionObserver(show, { rootMargin: '0px 0px -10% 0px', threshold: 0.2 });
   els.forEach(el => (el.dataset.reveal === 'in-view' ? inView : early).observe(el));

@@ -482,7 +482,7 @@ h1, h2, .section__title { letter-spacing: -0.01em; }
 @media (prefers-reduced-motion: no-preference) {
   /* Fala od Raniżowa: kropki rosną z zera, opóźnienie wg odległości od fabryki */
   .js .poland-map .poland-map__store { scale: 0; transition: scale 900ms var(--ease-expo) var(--d, 0ms), fill var(--dur) var(--ease-out), opacity var(--dur) var(--ease-out); }
-  .js .poland-map svg.is-in .poland-map__store { scale: 1; }
+  .js .poland-map.is-in .poland-map__store { scale: 1; }
   .poland-map__me.is-visible { animation: pm-ping 2.4s var(--ease-out) infinite; transform-box: fill-box; transform-origin: center; }
   .poland-map__hq-pulse { transform-box: fill-box; transform-origin: center; animation: pm-hq 2.8s var(--ease-out) infinite; }
   @keyframes pm-hq { 0% { scale: 1; opacity: 0.35; } 100% { scale: 2.6; opacity: 0; } }
@@ -736,7 +736,7 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 
 /* ==========================================================================
    Głębia (13.11.2026): ruch w trzecim wymiarze. Kadr karty przechodzi w zdjęcie na stronie mebla, pas kolekcji
-   składa się jak parawan, mapa salonów wstaje z płaszczyzny, a zdjęcia mają paralaksę. Sam transform i opacity,
+   składa się jak parawan, a zdjęcia mają paralaksę. Sam transform i opacity,
    tylko przy prefers-reduced-motion: no-preference; efekty przewijania wymagają animation-timeline (bez niego strona
    wygląda jak dotąd). Zdjęcia mebli po najechaniu stoją nieruchomo, kropki na meblach w hero zostają bez zmian.
    ========================================================================== */
@@ -757,14 +757,6 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
   /* Nazwa kolekcji podnosi się jak szyld: obrót wokół dolnej krawędzi zamiast zwykłego wjazdu */
   .is-live .hero-curtain__slide.is-active .hero-curtain__copy > .hero-curtain__name,
   .collection-hero__copy > .collection-hero__title { animation: name-rise 850ms var(--ease-expo) both; transform-origin: 0 85%; }
-
-  /* Mapa salonów wstaje z płaszczyzny, gdy sama wchodzi w kadr (własne data-reveal na <svg>, bo liczba salonów nad mapą
-     bywa widoczna wcześniej); kropki salonów zapalają się wtedy po kolei jak dotąd */
-  .js .poland-map svg {
-    transform: perspective(70rem) rotateX(48deg) scale(0.88); transform-origin: 50% 100%;
-    transition: transform 1100ms var(--ease-expo), opacity 900ms var(--ease-expo), translate var(--dur-reveal) var(--ease-expo);
-  }
-  .js .poland-map svg.is-in { transform: none; }
 
   /* Odpowiedź w pytaniach rozwija się płynnie (natywne <details>; bez wsparcia otwiera się skokiem jak dotąd) */
   @supports (interpolate-size: allow-keywords) {
