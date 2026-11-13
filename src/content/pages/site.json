@@ -348,6 +348,10 @@
       "noindex": true
     },
     "h1": "Tej strony nie ma",
+    "collections": {
+      "title": "Może szukasz jednej z kolekcji",
+      "more": "Lista {count} kolekcji"
+    },
     "lead": "Adres mógł się zmienić po przebudowie strony albo zawiera literówkę. Oto miejsca, od których warto zacząć:",
     "links": [
       {

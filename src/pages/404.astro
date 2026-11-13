@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CollectionRail from '../components/CollectionRail.astro';
 import Rich from '../components/Rich.astro';
 import { collections, site, url } from '../lib/site';
+import { fill } from '../lib/text';
 
 const nf = site.notFound;
 ---
@@ -21,8 +22,8 @@ const nf = site.notFound;
 
   <section class="section rail-section" aria-labelledby="kolekcje-404">
     <header class="container rail-section__head">
-      <h2 class="rail-section__title" id="kolekcje-404">Może szukasz jednej z kolekcji</h2>
-      <a class="link" href={url.collections}>Lista {collections.length} kolekcji</a>
+      <h2 class="rail-section__title" id="kolekcje-404">{nf.collections.title}</h2>
+      <a class="link" href={url.collections}>{fill(nf.collections.more, { count: collections.length })}</a>
     </header>
     <CollectionRail {collections} label="Kolekcje Liveo" />
   </section>

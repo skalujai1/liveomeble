@@ -50,8 +50,8 @@
 .has-overlay .site-header:not(.is-solid):not(:hover):not(:focus-within) .site-header__util { background: transparent; }
 .has-overlay .site-header:not(.is-solid):not(:hover):not(:focus-within) .site-header__logo img { filter: brightness(0) invert(1); }
 .has-overlay .site-header:not(.is-solid):not(:hover):not(:focus-within) :is(.site-nav__link, .site-nav__mega-toggle, .site-header__where, .site-header__where small, .site-header__toggle) { color: #fff; }
-.has-overlay .site-header:not(.is-solid):not(:hover):not(:focus-within) .site-header__finder input { background: rgb(255 255 255 / 0.14); border-color: rgb(255 255 255 / 0.55); color: #fff; }
-.has-overlay .site-header:not(.is-solid):not(:hover):not(:focus-within) .site-header__finder input::placeholder { color: rgb(255 255 255 / 0.82); }
+.has-overlay .site-header:not(.is-solid):not(:hover):not(:focus-within) .site-header__finder input { background: rgb(42 36 32 / 0.42); border-color: rgb(255 255 255 / 0.6); color: #fff; }
+.has-overlay .site-header:not(.is-solid):not(:hover):not(:focus-within) .site-header__finder input::placeholder { color: rgb(255 255 255 / 0.92); }
 .has-overlay .site-header:not(.is-solid):not(:hover):not(:focus-within) :focus-visible { outline-color: #fff; }
 .js.menu-open.has-overlay .site-header__logo img { filter: none; }
 .site-header__logo img { transition: filter 400ms ease; }
@@ -63,7 +63,7 @@
 
 /* ---------- Kurtyna kolekcji (hero strony głównej) ---------- */
 .hero-curtain {
-  position: relative; height: 100svh; min-height: 36rem; max-height: 72rem; overflow: hidden;
+  position: relative; height: calc(100svh - var(--demo-h, 0px)); min-height: 36rem; max-height: 72rem; overflow: hidden;
   color: #fff; background: var(--color-dark);
 }
 .hero-curtain__slides { position: absolute; inset: 0; }
@@ -362,7 +362,7 @@
 .page-home .section--products { padding-block: var(--space-8); }
 
 /* ---------- Hero kolekcji (strona kolekcji) ---------- */
-.collection-hero { position: relative; height: 100svh; min-height: 34rem; max-height: 68rem; overflow: hidden; color: #fff; background: var(--color-dark); }
+.collection-hero { position: relative; height: calc(100svh - var(--demo-h, 0px)); min-height: 34rem; max-height: 68rem; overflow: hidden; color: #fff; background: var(--color-dark); }
 .collection-hero__media { position: absolute; inset: 0; }
 .collection-hero__pic.media { position: absolute; inset: 0; aspect-ratio: auto; border-radius: 0; background: var(--color-dark); }
 .collection-hero__pic .media__img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%; filter: var(--photo-grade); }
@@ -449,8 +449,8 @@
 /* ---------- Czcionki w duchu Zara Home: Gilda Display w nagłówkach, Italiana w nazwach kolekcji, Inter w tekście ---------- */
 h1, h2, .section__title { letter-spacing: -0.01em; }
 .collection-hero__title:not(.collection-hero__title--room) { font-family: var(--font-name); font-weight: 400; letter-spacing: -0.02em; }
-.mega__collection b, .site-nav__mobile-collections b { font-family: var(--font-name); font-weight: 400; letter-spacing: 0.02em; color: var(--color-text); }
-/* Italiana ma włosowe kreski: poniżej ok. 24 px „T”, „L” i „F” tracą poprzeczki (MATI czyta się „MAII”), stąd większy stopień w menu */
+.mega__collection b, .site-nav__mobile-collections b { font-family: var(--font-name); font-weight: 400; letter-spacing: 0.02em; color: var(--color-text); -webkit-text-stroke: 0.35px currentColor; }
+/* Italiana ma włosowe kreski: w menu „T”, „L” i „F” traciły poprzeczki (MILTON czytało się „MIITON”), stąd większy stopień i cienki obrys w kolorze tekstu */
 .mega__collection b { font-size: 1.5rem; line-height: 1.15; }
 .site-nav__mobile-collections b { display: block; font-size: 1.5rem; line-height: 1.2; }
 /* Przyciski i menu: małe wersaliki z rozstrzeleniem */
@@ -634,7 +634,9 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 /* Rodzaje mebli (kafle): packshot na lnie, nazwa w szeryfie */
 .type-tiles { gap: 1.5rem 0.75rem; }
 .type-tile__thumb { background: var(--color-surface); }
-.type-tile__thumb img { width: 82%; height: 82%; object-fit: contain; }
+.type-tile__thumb img { inset: 9%; width: 82%; height: 82%; }
+/* Rodzaj bez packshotu (zestawy kuchenne): kadr z aranżacji wypełnia kafel, zamiast wisieć mały pośrodku lnu */
+.type-tile__thumb--scene img { inset: 0; width: 100%; height: 100%; object-fit: cover; mix-blend-mode: normal; }
 .type-tile__name { margin-top: 0.75rem; font: var(--weight-display) 1.0625rem/1.2 var(--font-display); }
 .type-tile__count { font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; }
 

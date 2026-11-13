@@ -55,13 +55,13 @@ const EN_PL = [
   [/\bPVC FOIL\b/gi, 'FOLIA PCV'], [/\bVARNISHED\b/gi, 'LAKIEROWANA'], [/\bCASHMIR\b/gi, 'KASZMIR'], [/\bMETAL HANDLE\b/gi, 'UCHWYT METALOWY'],
   [/\bMETAL WITHOUT REGULATION\b/gi, 'METALOWA BEZ REGULACJI'], [/\bFULL-EXTENSION BALL BEARING\b/gi, 'KULKOWE PEŁNEGO WYSUWU'],
   [/\bTEMPERED ANTISOL GRAPHITE\b/gi, 'HARTOWANE ANTISOL GRAFIT'], [/\bCOLORLESS\b/gi, 'BEZBARWNE'], [/^OPTION$/i, 'W OPCJI'],
-  [/\(\s*color of illumination\s*:\s*COLD WHITE\s*\)/gi, '(BARWA ŚWIATŁA: ZIMNA BIEL)'],
+  [/\(\s*color of illumination\s*:\s*COLD WHITE\s*\)/gi, '(BARWA PODŚWIETLENIA: BIAŁA ZIMNA)'],
   [/\bINSTALLATION INSTRUCTIONS\b/gi, 'INSTRUKCJA MONTAŻU'], [/\bINSTALLATION ACCESSORIES\b/gi, 'AKCESORIA MONTAŻOWE'],
 ];
 const toPl = v => EN_PL.reduce((s, [re, pl]) => s.replace(re, pl), String(v));
 /** Opis marketingowy po angielsku (karta VIGO) — lepiej bez opisu niż z obcojęzycznym. */
 const isEnglish = s => /\b(the|and|with|is)\b/i.test(s || '');
-const tidy = v => toPl(v).trim().replace(/\s+/g, ' ').replace(/(\d)\s*(MM|CM)\b/gi, (_, n, u) => `${n} ${u.toLowerCase()}`)
+const tidy = v => toPl(v).replace(/podświetlnia/gi, 'PODŚWIETLENIA').trim().replace(/\s+/g, ' ').replace(/(\d)\s*(MM|CM)\b/gi, (_, n, u) => `${n} ${u.toLowerCase()}`)
   .toLowerCase().replace(/\b(led|hdf|mdf|abs|pcv|pvc|rtv)\b/g, s => s.toUpperCase()).replace(/\s*\(\s*/g, ' (').replace(/\s+,/g, ',');
 const num = n => String(Math.round(n * 10) / 10).replace('.', ',');
 
@@ -163,7 +163,7 @@ const MATERIAL_ROWS = [ // klucze z karty → wiersze specyfikacji
   ['Wyposażenie szafy', m => [m.wardrobe]],
   ['Szuflady', m => [m.drawers && `${m.drawers} szt.`, m.runners && `prowadnice ${tidy(m.runners)}`, m.drawerBottom && `dno: ${tidy(m.drawerBottom)}`]],
   ['Uchwyty', m => [m.handle]],
-  ['Nóżki', m => [m.legs, m.legH && `wysokość ${m.legH} cm`]],
+  ['Nóżki', m => [m.legs, m.legH && `wysokość ${String(m.legH).replace('.', ',')} cm`]],
   ['Cokół', m => [m.plinth, m.plinthFinish]],
   ['Oświetlenie LED', m => [m.light && (/OPCJ/i.test(m.light) ? 'w opcji' : /STANDARD/i.test(m.light) ? 'w standardzie' : m.light), m.lightType]],
   ['Rama łóżka', m => [m.bedFrame]],

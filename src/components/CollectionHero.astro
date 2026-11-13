@@ -10,8 +10,7 @@ import { colorsCount, finishById, productCount, productsByCollection, type Colle
 interface Props { collection: Collection; h1: string; alt: string }
 const { collection: c, h1, alt } = Astro.props;
 const wide = collectionImage(c, 'cinema')!;
-// Telefon: to samo zdjęcie co desktop (środek kadru to meble); trzecia aranżacja z karty bywała wycinkiem bez mebli.
-const tall = null;
+// Telefon dostaje to samo zdjęcie co desktop: środek kadru to meble (osobny pionowy kadr bywał wycinkiem bez mebli).
 const items = productsByCollection(c.slug);
 // "Kolekcja DANTE" → małe "Kolekcja" nad nazwą w skali plakatu (jedno H1)
 const [, prefix, name] = h1.match(/^(Kolekcja)\s+(.+)$/) ?? [null, null, h1];
@@ -19,7 +18,7 @@ const dots = c.finishes.map(f => ({ label: f.label, a: finishById.get(f.front)?.
 ---
 <section class="collection-hero on-dark" aria-labelledby="h1" data-overlay-hero>
   <div class="collection-hero__media" style={`view-transition-name: kolekcja-${c.slug}`}>
-    <HeroPicture wide={wide} tall={tall} {alt} class="collection-hero__pic" sizes="100vw" />
+    <HeroPicture wide={wide} {alt} class="collection-hero__pic" sizes="100vw" />
   </div>
   <div class="container collection-hero__copy">
     <h1 class="collection-hero__title" id="h1">{prefix && <span class="visually-hidden">{prefix} </span>}<Rich text={name} /></h1>

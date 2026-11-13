@@ -17,11 +17,9 @@ const pieces = (n: number) => `${n} ${n === 1 ? 'mebel' : n % 10 >= 2 && n % 10 
 const slides = collections.map(c => {
   const items = productsByCollection(c.slug);
   const wide = collectionImage(c, 'cinema')!;
-  // Telefon dostaje to samo zdjęcie co desktop: jego środek to zawsze meble, a osobny kadr „tall” (trzecia aranżacja
-  // z karty) bywał wycinkiem bez mebli — np. roślina na pierwszym slajdzie DANTE.
-  const tall = null;
+  // Telefon dostaje to samo zdjęcie co desktop: jego środek to zawsze meble (osobny pionowy kadr bywał wycinkiem bez mebli).
   return {
-    c, wide, tall,
+    c, wide,
     alt: `Meble z kolekcji ${c.name} w aranżacji`,
     color: c.finishes[0].label,
     hex: finishById.get(c.finishes[0].front)?.hex,
@@ -51,7 +49,7 @@ function spotsFor(c: Collection, base: string | undefined, items: ReturnType<typ
   <div class="hero-curtain__slides">
     {slides.map((s, i) => (
       <div class:list={['hero-curtain__slide', { 'is-active': i === 0 }]} data-slide role="group" aria-roledescription="slajd" aria-label={`${i + 1} z ${slides.length}: kolekcja ${s.c.name}`} aria-hidden={i === 0 ? undefined : 'true'} inert={i !== 0}>
-        <HeroPicture wide={s.wide} tall={s.tall} alt={s.alt} class="hero-curtain__media" sizes="100vw" priority={i === 0} />
+        <HeroPicture wide={s.wide} alt={s.alt} class="hero-curtain__media" sizes="100vw" priority={i === 0} />
         {s.spots.length > 0 && (
           <div class="hero-spots-wrap">
           <ul class="hero-spots" style={`--ar: ${s.ar.toFixed(4)}`} aria-label={`Meble na zdjęciu kolekcji ${s.c.name}`} data-spots>

@@ -13,7 +13,7 @@ const tiles = list.map(t => ({ t, img: typeImage(t.id, products), count: product
   {tiles.map(({ t, img, count }) => (
     <li class="type-tile">
       <a href={url.category(t.slug)} aria-current={current === t.slug ? 'page' : undefined}>
-        <span class="type-tile__thumb"><Thumb image={img} sizes="(min-width: 60rem) 9rem, 22vw" /></span>
+        <span class:list={['type-tile__thumb', { 'type-tile__thumb--scene': img?.approximate }]}><Thumb image={img} sizes="(min-width: 60rem) 9rem, 22vw" /></span>
         <span class="type-tile__name">{t.plural}</span>
         <span class="type-tile__count">{productCount(count)}</span>
       </a>

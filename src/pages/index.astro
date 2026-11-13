@@ -17,6 +17,7 @@ import Rich from '../components/Rich.astro';
 import { collectionImage } from '../lib/images';
 import { faqPage } from '../lib/jsonld';
 import { collections, pages, productsSorted, section, url } from '../lib/site';
+import { fill } from '../lib/text';
 
 const page = pages.home;
 const hero = section(page, 'hero');
@@ -85,7 +86,7 @@ const advisorImg = collectionImage(advisorCol, 'detail');
   <section class="section rail-section" aria-labelledby="wszystkie-tytul">
     <header class="container rail-section__head" data-reveal>
       <h2 class="rail-section__title" id="wszystkie-tytul">Wszystkie kolekcje</h2>
-      <a class="link" href={kol.more.href}>Lista {collections.length} kolekcji</a>
+      <a class="link" href={kol.more.href}>{fill(kol.more.label, { count: collections.length })}</a>
     </header>
     <CollectionRail {collections} named={spreads.map(c => c.slug)} label="Kolekcje Liveo" />
   </section>

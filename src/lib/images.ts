@@ -76,6 +76,7 @@ export function roomImage(roomSlug: string, _frame: 'wide' | 'tall' = 'wide', in
   // tego samego kadru co salon), dopiero potem aranżacja kolekcji z meblami do tego pomieszczenia (poglądowo)
   const pick = ROOM_PICKS[roomSlug];
   const picked = pick && arrangementByName(pick.name, pick.title);
+  if (pick && !picked) console.warn(`[images] ROOM_PICKS: brak aranżacji „${pick.name}” dla pomieszczenia ${roomSlug} — po zmianie kart popraw nazwę pliku`);
   if (picked) return { ...picked, approximate: pick.approximate };
   const withRoom = collections.filter(x => x.rooms.includes(roomSlug) && x.arrangements.length);
   const c = withRoom[index % Math.max(1, withRoom.length)];

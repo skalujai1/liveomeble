@@ -49,7 +49,7 @@
         "imageAlt": "Meble z kolekcji {name} {heroRoomLocative}"
       },
       "more": {
-        "label": "Wszystkie kolekcje",
+        "label": "Lista {count} kolekcji",
         "href": "/kolekcje/"
       }
     },
