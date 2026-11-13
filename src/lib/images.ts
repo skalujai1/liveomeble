@@ -72,10 +72,22 @@ export function roomImage(roomSlug: string, _frame: 'wide' | 'tall' = 'wide', in
     const { a, c } = hits[index % hits.length];
     return ref(a, `Kolekcja ${c.name} ${roomLocative(roomSlug)}`);
   }
-  // pomieszczenie bez własnej aranżacji (np. biuro) → aranżacja kolekcji z meblami do tego pomieszczenia (poglądowo)
-  const c = collections.filter(x => x.rooms.includes(roomSlug) && x.arrangements.length)[index % Math.max(1, collections.length)] ?? collections.find(x => x.rooms.includes(roomSlug) && x.arrangements.length);
+  // pomieszczenie bez otagowanej aranżacji: najpierw zdjęcie wskazane ręcznie (żeby dwa pokoje nie dostały
+  // tego samego kadru co salon), dopiero potem aranżacja kolekcji z meblami do tego pomieszczenia (poglądowo)
+  const pick = ROOM_PICKS[roomSlug];
+  const picked = pick && arrangementByName(pick.name, pick.title);
+  if (picked) return { ...picked, approximate: pick.approximate };
+  const withRoom = collections.filter(x => x.rooms.includes(roomSlug) && x.arrangements.length);
+  const c = withRoom[index % Math.max(1, withRoom.length)];
   return c ? { ...collectionImage(c, 'wide')!, approximate: true } : null;
 }
+/** Aranżacje z kart Liveo dla pomieszczeń, których generator nie rozpoznaje na zdjęciach (nazwa pliku bez szerokości). */
+const ROOM_PICKS: Record<string, { name: string; title: string; approximate: boolean }> = {
+  // pokój z biurkiem i toaletką z kolekcji REMI — to jest pokój młodzieżowy
+  'pokoj-mlodziezowy': { name: 'ba8c0c0ff7-remi_03_bialy-evoke_2160px', title: 'Kolekcja REMI w pokoju młodzieżowym', approximate: false },
+  // kącik do pracy z kolekcji KUBO; meble „do biura” są też z innych kolekcji, więc zdjęcie zostaje poglądowe
+  biuro: { name: '6fb6de67ee-kubo_01_2160px', title: 'Biurko z kolekcji KUBO', approximate: true },
+};
 const LOC: Record<string, string> = {
   salon: 'w salonie', jadalnia: 'w jadalni', sypialnia: 'w sypialni', 'pokoj-mlodziezowy': 'w pokoju młodzieżowym',
   przedpokoj: 'w przedpokoju', biuro: 'w domowym biurze', kuchnia: 'w kuchni',

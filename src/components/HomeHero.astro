@@ -17,7 +17,9 @@ const pieces = (n: number) => `${n} ${n === 1 ? 'mebel' : n % 10 >= 2 && n % 10 
 const slides = collections.map(c => {
   const items = productsByCollection(c.slug);
   const wide = collectionImage(c, 'cinema')!;
-  const tall = collectionImage(c, 'tall');
+  // Telefon dostaje to samo zdjęcie co desktop: jego środek to zawsze meble, a osobny kadr „tall” (trzecia aranżacja
+  // z karty) bywał wycinkiem bez mebli — np. roślina na pierwszym slajdzie DANTE.
+  const tall = null;
   return {
     c, wide, tall,
     alt: `Meble z kolekcji ${c.name} w aranżacji`,

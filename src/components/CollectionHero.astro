@@ -10,7 +10,8 @@ import { colorsCount, finishById, productCount, productsByCollection, type Colle
 interface Props { collection: Collection; h1: string; alt: string }
 const { collection: c, h1, alt } = Astro.props;
 const wide = collectionImage(c, 'cinema')!;
-const tall = collectionImage(c, 'tall');
+// Telefon: to samo zdjęcie co desktop (środek kadru to meble); trzecia aranżacja z karty bywała wycinkiem bez mebli.
+const tall = null;
 const items = productsByCollection(c.slug);
 // "Kolekcja DANTE" → małe "Kolekcja" nad nazwą w skali plakatu (jedno H1)
 const [, prefix, name] = h1.match(/^(Kolekcja)\s+(.+)$/) ?? [null, null, h1];
