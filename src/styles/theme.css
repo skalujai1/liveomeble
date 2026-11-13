@@ -399,10 +399,14 @@ main { padding-bottom: 0; }
 select.field__control { appearance: none; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232a2420' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 0.875rem center; padding-right: 2.5rem; }
 .check input { accent-color: var(--color-walnut); }
 .filters { border-radius: var(--radius-lg); }
+/* Telefon: lista 32 kolekcji w filtrach w dwóch–trzech kolumnach zamiast jednej długiej */
+@media (max-width: 63.99rem) { .filters__options { grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); column-gap: var(--space-3); } }
 .form__summary { border-radius: var(--radius); }
 
 /* ---------- Gdzie kupić ---------- */
 .store-finder__form { align-items: end; }
+/* Przycisk ma swoją szerokość: w szerokiej sekcji trzecia kolumna (auto) rozciągała go na pół formularza */
+@media (min-width: 48rem) { .store-finder__submit { justify-self: start; } }
 .store { border: 0; border-radius: var(--radius-lg); background: var(--color-bg); padding: var(--space-5); }
 .section--alt .store, .section--band .store { background: var(--color-bg); }
 .store__name { font: var(--weight-medium) 1.125rem/1.35 var(--font-sans); }

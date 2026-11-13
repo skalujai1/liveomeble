@@ -26,7 +26,7 @@
       "BreadcrumbList",
       "FAQPage"
     ],
-    "collectionsTitle": "Kolekcje {roomGenitive}",
+    "collectionsTitle": "Kolekcje do {roomGenitive}",
     "productsTitle": "Meble {roomLocative}",
     "tipsTitle": "Na co zwrócić uwagę",
     "advisor": {
