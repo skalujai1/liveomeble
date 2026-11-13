@@ -18,6 +18,13 @@ export function initProductPage() {
       if (f.hasAttribute('data-gallery-item')) f.classList.toggle('is-active', on);
       else f.hidden = !on;
     });
+    // zmiana koloru przez użytkownika: mebel w nowym kolorze „obraca się” do kadru (3D), zamiast podmienić się skokiem
+    if (updateUrl && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelector<HTMLElement>('[data-gallery-item].is-active .media__img')?.animate(
+        [{ transform: 'perspective(75rem) rotateY(-26deg) scale(0.94)', opacity: 0 }, { transform: 'perspective(75rem) rotateY(0) scale(1)', opacity: 1 }],
+        { duration: 720, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' },
+      );
+    }
     if (title?.dataset.template) title.textContent = title.dataset.template.replace('{colorLabel}', radio.dataset.label ?? code);
     if (updateUrl) {
       const u = new URL(location.href);

@@ -482,7 +482,7 @@ h1, h2, .section__title { letter-spacing: -0.01em; }
 @media (prefers-reduced-motion: no-preference) {
   /* Fala od Raniżowa: kropki rosną z zera, opóźnienie wg odległości od fabryki */
   .js .poland-map .poland-map__store { scale: 0; transition: scale 900ms var(--ease-expo) var(--d, 0ms), fill var(--dur) var(--ease-out), opacity var(--dur) var(--ease-out); }
-  .js .poland-map.is-in .poland-map__store { scale: 1; }
+  .js .poland-map svg.is-in .poland-map__store { scale: 1; }
   .poland-map__me.is-visible { animation: pm-ping 2.4s var(--ease-out) infinite; transform-box: fill-box; transform-origin: center; }
   .poland-map__hq-pulse { transform-box: fill-box; transform-origin: center; animation: pm-hq 2.8s var(--ease-out) infinite; }
   @keyframes pm-hq { 0% { scale: 1; opacity: 0.35; } 100% { scale: 2.6; opacity: 0; } }
@@ -619,7 +619,7 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .product-card .media--contain .media__img { padding: 11%; }
 .product-card__second { position: absolute; inset: 11%; background: center / contain no-repeat; mix-blend-mode: multiply; opacity: 0; transition: opacity 500ms var(--ease-expo); }
 .product-card--flip.is-ready .product-card__link:hover .product-card__second { opacity: 1; }
-.product-card--flip.is-ready .product-card__link:hover .media__img { opacity: 0; transition: opacity 500ms var(--ease-expo); }
+.product-card--flip.is-ready .product-card__link:hover .media__img { opacity: 0; transition: opacity 500ms var(--ease-expo), transform 160ms var(--ease-expo); }
 .product-card__title { margin: 1rem 0 0; font: var(--weight-display) 1.1875rem/1.25 var(--font-display); letter-spacing: -0.005em; }
 .product-card__link:hover .product-card__title { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
 .product-card__meta { display: grid; gap: 0.25rem; margin-top: 0.375rem; font-size: 0.875rem; line-height: 1.4; color: var(--color-text-muted); }
@@ -732,3 +732,83 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
   .featured-tile:hover .featured-tile__media .media__img { transform: scale(1.05); }
 }
 @media (max-width: 47.9rem) { .featured-tile { min-height: 0; padding-top: 2rem; } }
+
+/* ==========================================================================
+   Głębia (13.11.2026): ruch w trzecim wymiarze. Meble to bryły, więc packshot pochyla się za kursorem, kadr karty
+   przechodzi w zdjęcie na stronie mebla, pas kolekcji biegnie po łuku, mapa salonów wstaje z płaszczyzny, a zdjęcia
+   mają paralaksę. Sam transform i opacity, tylko przy prefers-reduced-motion: no-preference; efekty przewijania
+   wymagają animation-timeline (bez niego strona wygląda jak dotąd). Kropki na meblach w hero zostają bez zmian.
+   ========================================================================== */
+
+/* Menu na telefonie: trzy kreski składają się w „X” (stan przycisku, nie ozdoba) */
+.site-header__burger path { transform-box: view-box; transform-origin: 12px 12px; transition: transform 420ms var(--ease-expo), opacity 200ms ease; }
+[aria-expanded="true"] > .site-header__burger path:nth-child(1) { transform: rotate(45deg) translateY(5px); }
+[aria-expanded="true"] > .site-header__burger path:nth-child(2) { opacity: 0; transform: scaleX(0); }
+[aria-expanded="true"] > .site-header__burger path:nth-child(3) { transform: rotate(-45deg) translateY(-5px); }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Mebel w dłoni: packshot stoi na tle w kolorze kadru, więc pochylony wygląda jak sama bryła.
+     --tx / --ty (od -0,5 do 0,5) ustawia scripts/motion.ts → initTilt; tylko mysz. */
+  @media (hover: hover) and (pointer: fine) {
+    :is(.product-card__frame, .featured-tile__media, .page-product .gallery__item .media) :is(.media__img, .product-card__second) {
+      transform: perspective(56rem) rotateY(calc(var(--tx, 0) * var(--tilt, 16deg))) rotateX(calc(var(--ty, 0) * var(--tilt, 16deg) * -0.75)) scale(var(--ts, 1));
+      transition: transform 900ms var(--ease-expo), opacity 500ms var(--ease-expo);
+    }
+    .is-tilting :is(.media__img, .product-card__second) { --ts: 1.04; transition-duration: 160ms, 500ms; }
+    .page-product .gallery__item .media { --tilt: 9deg; }
+    .page-product .gallery__item .media.is-tilting .media__img { --ts: 1.02; }
+  }
+
+  /* Karta → strona mebla: kadr klikniętej karty i zdjęcie główne noszą tę samą nazwę przejścia
+     (karcie nadaje ją skrypt w chwili kliknięcia: initProductMorph), więc mebel „przelatuje” na swoją stronę. */
+  .page-product .gallery__item.is-active .media { view-transition-name: mebel; }
+  ::view-transition-old(mebel), ::view-transition-new(mebel) { height: 100%; object-fit: cover; }
+  ::view-transition-group(mebel) { z-index: 1; }
+
+  /* Nazwa kolekcji podnosi się jak szyld: obrót wokół dolnej krawędzi zamiast zwykłego wjazdu */
+  .is-live .hero-curtain__slide.is-active .hero-curtain__copy > .hero-curtain__name,
+  .collection-hero__copy > .collection-hero__title { animation: name-rise 1300ms var(--ease-expo) both; transform-origin: 0 85%; }
+
+  /* Mapa salonów wstaje z płaszczyzny, gdy sama wchodzi w kadr (własne data-reveal na <svg>, bo liczba salonów nad mapą
+     bywa widoczna wcześniej); kropki salonów zapalają się wtedy po kolei jak dotąd */
+  .js .poland-map svg {
+    transform: perspective(70rem) rotateX(48deg) scale(0.88); transform-origin: 50% 100%;
+    transition: transform 1700ms var(--ease-expo), opacity 900ms var(--ease-expo), translate var(--dur-reveal) var(--ease-expo);
+  }
+  .js .poland-map svg.is-in { transform: none; }
+
+  /* Odpowiedź w pytaniach rozwija się płynnie (natywne <details>; bez wsparcia otwiera się skokiem jak dotąd) */
+  @supports (interpolate-size: allow-keywords) {
+    .faq__item { interpolate-size: allow-keywords; }
+    .faq__item::details-content { block-size: 0; overflow: clip; transition: block-size 520ms var(--ease-expo), content-visibility 520ms allow-discrete; }
+    .faq__item[open]::details-content { block-size: auto; }
+  }
+
+  /* Uwaga: animation-timeline stoi zawsze w osobnej regule o wyższej specyficzności niż skrót animation.
+     Minifikator (Lightning CSS) wciąga oś czasu do skrótu, a takiego zapisu przeglądarki nie przyjmują. */
+  @supports (animation-timeline: view()) {
+    /* Pas kolekcji jak parawan: karta przy krawędzi odchyla się w głąb wokół krawędzi bliższej środka, w środku staje frontem.
+       Oś czasu to pozycja karty w pasie (view-timeline na <li>), obraca się link w środku — punkty przyciągania zostają w miejscu. */
+    .rail__item { view-timeline: --rail-item inline; }
+    .rail__link { animation: rail-arc linear both; }
+    .rail .rail__link { animation-timeline: --rail-item; }
+
+    /* Hero odpływa wolniej niż strona: zdjęcie razem z kropkami mebli zostaje w głębi */
+    .hero-curtain, .collection-hero { view-timeline: --hero block; }
+    .hero-curtain__slides, .collection-hero__media { animation: depth-exit linear both; }
+    :is(.hero-curtain, .collection-hero) :is(.hero-curtain__slides, .collection-hero__media) { animation-timeline: --hero; animation-range: exit 0% exit 100%; }
+
+    /* Zdjęcia aranżacji płyną w swoich kadrach przy przewijaniu (paralaksa) */
+    .spread__fig, .collection-gallery__item { view-timeline: --kadr block; }
+    :is(.spread__fig, .collection-gallery__item) .media__img { animation: depth-drift linear both; }
+    :is(.spread__fig, .collection-gallery__item) .media .media__img { animation-timeline: --kadr; }
+  }
+}
+@keyframes name-rise { from { opacity: 0; transform: perspective(50rem) rotateX(-72deg) translateY(12%); } }
+@keyframes rail-arc {
+  from { transform: perspective(70rem) rotateY(32deg); transform-origin: 0 50%; opacity: 0.6; }
+  22%, 78% { transform: perspective(70rem) rotateY(0deg); opacity: 1; }
+  to { transform: perspective(70rem) rotateY(-32deg); transform-origin: 100% 50%; opacity: 0.6; }
+}
+@keyframes depth-exit { to { translate: 0 18%; scale: 1.05; } }
+@keyframes depth-drift { from { translate: 0 -3.5%; scale: 1.09; } to { translate: 0 3.5%; scale: 1.09; } }

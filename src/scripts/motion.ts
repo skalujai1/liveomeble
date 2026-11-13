@@ -5,6 +5,8 @@
 //  - [data-hero] — „kurtyna kolekcji”: slajdy co 7 s, indeks nazw jako sterowanie, pauza (WCAG 2.2.2).
 //  - [data-rail] — przeciągany pas kolekcji (przewijanie natywne + strzałki + przeciąganie myszą).
 //  - [data-showcase] — lista pomieszczeń podmienia duże zdjęcie przy najechaniu / fokusie.
+//  - głębia (3D): mebel przechyla się za kursorem, a kadr klikniętej karty przechodzi w zdjęcie na stronie mebla.
+//    Reszta głębi (pas kolekcji na łuku, mapa, paralaksa) to sam CSS w editorial.css.
 // Bez JS wszystko jest widoczne i statyczne; przy prefers-reduced-motion nie ma autoodtwarzania ani animacji.
 
 const reduce = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -299,6 +301,69 @@ function initCardFlip() {
   }, { passive: true });
 }
 
+// Głębia: packshot stoi na tle w kolorze kadru, więc pochylony w 3D wygląda jak sam mebel obracany w dłoni.
+// Kursor ustawia --tx / --ty (od -0,5 do 0,5) na kadrze; kąt i powrót do zera robi CSS. Tylko mysz, jeden nasłuch.
+function initTilt() {
+  if (reduce() || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  const SEL = '.product-card__frame, .featured-tile__media, .page-product .gallery__item .media';
+  let el: HTMLElement | null = null;
+  let raf = 0, px = 0, py = 0;
+  const release = () => {
+    if (!el) return;
+    el.classList.remove('is-tilting');
+    el.style.removeProperty('--tx');
+    el.style.removeProperty('--ty');
+    el = null;
+  };
+  const apply = () => {
+    raf = 0;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--tx', ((px - r.left) / r.width - 0.5).toFixed(3));
+    el.style.setProperty('--ty', ((py - r.top) / r.height - 0.5).toFixed(3));
+  };
+  document.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
+    const t = (e.target as Element).closest?.<HTMLElement>(SEL) ?? null;
+    if (t !== el) { release(); el = t; el?.classList.add('is-tilting'); }
+    if (!el) return;
+    px = e.clientX; py = e.clientY;
+    if (!raf) raf = requestAnimationFrame(apply);
+  }, { passive: true });
+  document.documentElement.addEventListener('pointerleave', release);
+  addEventListener('scroll', release, { passive: true });
+}
+
+// Przejście karta → strona mebla (View Transitions między dokumentami): kadr klikniętej karty dostaje nazwę „mebel”,
+// taką samą jak zdjęcie główne na stronie mebla, więc przeglądarka płynnie przeprowadza jedno w drugie.
+// Powrót (strona mebla → lista) obsługuje krótki skrypt w <head> (BaseLayout), bo musi zdążyć przed pierwszą klatką.
+function initProductMorph() {
+  if (!('onpageswap' in window) || reduce()) return;
+  let clicked: HTMLElement | null = null;
+  document.addEventListener('click', e => {
+    // tylko linki do mebla (kafel „Polecane” ma też link „Gdzie kupić”)
+    const a = (e.target as Element).closest?.<HTMLAnchorElement>('a[href]');
+    clicked = a && new URL(a.href).pathname.startsWith('/produkt/') ? a.closest<HTMLElement>('.product-card, .featured-tile') : null;
+  }, true);
+  addEventListener('pageswap', e => {
+    const vt = (e as Event & { viewTransition?: { finished: Promise<void> } }).viewTransition;
+    if (!vt) return;
+    // lista po powrocie wie, której karcie nadać nazwę
+    try { sessionStorage.setItem('lv-morph', location.pathname); } catch { /* tryb prywatny */ }
+    const frame = clicked?.querySelector<HTMLElement>('.product-card__frame, .featured-tile__media');
+    if (!frame) return;
+    // nazwa musi być jedna na stronę: zdjęcie główne (strona mebla → inny mebel z kompletu) oddaje ją karcie
+    document.querySelectorAll<HTMLElement>('.gallery__item .media').forEach(m => { m.style.viewTransitionName = 'none'; });
+    frame.style.viewTransitionName = 'mebel';
+    // po powrocie z pamięci podręcznej (bfcache) strona ma być w stanie wyjściowym
+    const reset = () => {
+      frame.style.viewTransitionName = '';
+      document.querySelectorAll<HTMLElement>('.gallery__item .media').forEach(m => { m.style.viewTransitionName = ''; });
+    };
+    vt.finished.then(reset, reset);
+  });
+}
+
 export function initMotion() {
   document.documentElement.classList.add('motion-ready');
   initReveal();
@@ -306,6 +371,8 @@ export function initMotion() {
   initHero();
   initHotspots();
   initCardFlip();
+  initTilt();
+  initProductMorph();
   initRails();
   initShowcase();
 }

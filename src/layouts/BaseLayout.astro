@@ -51,6 +51,22 @@ const ld: Node[] = [website(), organization(), ...jsonLd, ...(crumbs ? [breadcru
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
+    <script is:inline>
+      // Powrót ze strony mebla na listę: karta tego mebla dostaje nazwę przejścia „mebel”, więc zdjęcie wraca na swoje miejsce
+      // (druga połowa initProductMorph z scripts/motion.ts; tutaj, bo musi zdążyć przed pierwszą klatką nowej strony).
+      addEventListener('pagereveal', function (e) {
+        var from = null;
+        try { from = sessionStorage.getItem('lv-morph'); sessionStorage.removeItem('lv-morph'); } catch (_) {}
+        document.querySelectorAll('.product-card__frame, .featured-tile__media').forEach(function (f) { f.style.viewTransitionName = ''; });
+        if (!e.viewTransition || !from || from.indexOf('/produkt/') !== 0 || document.querySelector('.gallery__item')) return;
+        var link = document.querySelector(':is(.product-card, .featured-tile) a[href="' + CSS.escape(from) + '"]');
+        var frame = link && link.closest('.product-card, .featured-tile').querySelector('.product-card__frame, .featured-tile__media');
+        if (!frame) return;
+        var clear = function () { frame.style.viewTransitionName = ''; };
+        frame.style.viewTransitionName = 'mebel';
+        e.viewTransition.finished.then(clear, clear);
+      });
+    </script>
     <SeoHead {title} {description} {path} {robots} {ogType} {ogImage} {ogImageAlt} {canonical} jsonLd={ld} />
     <meta name="color-scheme" content="light" />
     <meta name="theme-color" content="#2a2420" />
