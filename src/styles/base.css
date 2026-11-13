@@ -366,7 +366,8 @@ fieldset.field { border: 0; padding: 0; }
 .article-disclaimer { font-size: var(--text-sm); color: var(--color-text-muted); max-width: var(--measure); }
 
 /* ---------- Strefa partnera (DEMO) ---------- */
-.demo-banner { padding: var(--space-4) var(--space-5); border: 2px dashed var(--color-text); display: grid; gap: var(--space-1); }
+/* Ramka przerywana wyglądała jak makieta — tło lnu jak „Najważniejsze w jednym zdaniu” w artykułach, z kreską po lewej. */
+.demo-banner { max-width: 42rem; margin-top: var(--space-5); padding: var(--space-4) var(--space-5); background: var(--color-surface); box-shadow: inset 3px 0 0 var(--color-text); display: grid; gap: var(--space-1); }
 .demo-banner__title { font-size: var(--text-base); }
 .partner-panel { display: grid; gap: var(--space-5); }
 .partner-tabs { display: flex; flex-wrap: wrap; gap: var(--space-2); border-bottom: var(--border); }

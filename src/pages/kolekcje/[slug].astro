@@ -15,7 +15,7 @@ import Rich from '../../components/Rich.astro';
 import { collectionImage, collectionImages } from '../../lib/images';
 import { faqPage, itemList, webPage } from '../../lib/jsonld';
 import {
-  collections, finishById, finishLabelsSentence, pages, productCount,
+  collections, colorsCount, finishById, finishLabels, finishLabelsSentence, pages, productCount,
   productsByCollection, roomBySlug, rooms, roomsList, styleOf, typePluralList, types, url, type Collection, type Product,
 } from '../../lib/site';
 import { fill, truncateSentence } from '../../lib/text';
@@ -35,6 +35,7 @@ const vars = {
   name: c.name, slug: c.slug, tagline: c.tagline, description: c.description, styleIn: style.in, styleLabel: style.label,
   roomsList: roomsList(c.rooms), finishLabels: finishLabelsSentence(c), heroRoomLocative: heroRoom.locative,
   finishLabel: c.finishes[0].label.toLocaleLowerCase('pl'), productCountText: productCount(list.length),
+  finishCount: c.finishes.length === 1 ? c.finishes[0].label : colorsCount(c.finishes.length),
   delivery72Text: (() => { const n = list.filter(p => p.delivery72).length; return n === list.length ? 'wszystkie meble' : n ? `${productCount(n)} z ${list.length}` : 'nie'; })(),
   typePluralList: typePluralList([...new Set(list.map(p => p.type))]),
 };
@@ -63,6 +64,8 @@ const others = collections
 const faq = tpl.faq.items.map(it => ({ q: fill(it.q, vars), a: fill(it.a, vars) }));
 const heroAlt = fill(sec('hero').image.alt, vars);
 const swatch = (id?: string | null) => (id ? finishById.get(id)?.hex : undefined);
+// Fakt „Kolory”: kropki + liczba jak w rozkładówce (pełne nazwy są niżej, w sekcji „Kolory kolekcji”).
+const finishDots = c.finishes.map(f => ({ label: f.label, a: swatch(f.front) ?? '#ccc', b: swatch(f.body) ?? swatch(f.front) ?? '#ccc' }));
 // Galeria: aranżacje z kart Liveo (bez pierwszej — jest w hero); układ wide / detal / pod kątem, reszta w rzędzie.
 const all = collectionImages(c);
 const rest = all.length > 1 ? all.slice(1) : all;
@@ -95,7 +98,9 @@ const [gWide, gDetail, gAngle, ...gMore] = rest;
         <h3 class="collection-intro__facts-title">{sec('szczegoly').title}</h3>
         <dl class="facts collection-intro__facts">
           {sec('szczegoly').items.map((it: any) => (
-            <div class="facts__row"><dt>{it.label}</dt><dd>{fill(it.value, vars)}</dd></div>
+            <div class="facts__row"><dt>{it.label}</dt>{it.swatches
+              ? <dd class="spread__dots" aria-label={finishLabels(c)}>{finishDots.map(d => <i style={`--c: ${d.a}; --c2: ${d.b}`} title={d.label}></i>)}<span>{fill(it.value, vars)}</span></dd>
+              : <dd>{fill(it.value, vars)}</dd>}</div>
           ))}
         </dl>
       </div>
@@ -169,7 +174,7 @@ const [gWide, gDetail, gAngle, ...gMore] = rest;
 
   <Section id="doradca" title="Nie wiesz, który kolor wybrać?" class="section--band">
     <div class="band"><p class="band__text">Wyślij zdjęcie pokoju, a doradca wnętrz podpowie kolor kolekcji {c.name} pasujący do podłogi i ścian.</p></div>
-    <p class="cta-row"><a class="btn btn--secondary" href={url.advisor}>Doradca wnętrz</a></p>
+    <p class="cta-row"><a class="btn btn--primary" href={url.advisor}>Otwórz doradcę wnętrz</a></p>
   </Section>
 
   <Faq title={fill(tpl.faq.title, vars)} items={faq} />

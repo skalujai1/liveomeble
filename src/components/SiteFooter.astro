@@ -4,7 +4,7 @@
 // na dole prawo i notka DEMO. Treść: src/content/pages/site.json → footer.
 import { CONSENT_SCRIPTS, DEMO } from '../config';
 import { collections, products, rooms, site, types, url, year } from '../lib/site';
-import { fill } from '../lib/text';
+import { fill, sierotki } from '../lib/text';
 
 const f = site.footer;
 type Link = { label: string; href: string };
@@ -27,7 +27,7 @@ const c = f.contact;
     <div class="site-footer__top">
       <div class="site-footer__brand">
         <img src="/brand/liveo-logo.svg" alt="Liveo Meble" width="96" height="36" loading="lazy" />
-        <p class="site-footer__lead">{f.lead}</p>
+        <p class="site-footer__lead">{sierotki(f.lead)}</p>
         <p class="site-footer__cta">
           <a class="btn btn--light" href={url.stores()}>Gdzie kupić</a>
           <a class="link" href={url.advisor}>Doradca wnętrz</a>

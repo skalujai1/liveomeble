@@ -51,7 +51,7 @@
       "colorTitle": "Kolor: {colorLabel}",
       "colorGroupLabel": "Wybierz kolor",
       "dims": "{dimsLong}",
-      "assembly": "Montaż: {assembly}",
+      "assembly": "Mebel {assembly}",
       "ctaPrimary": {
         "label": "Gdzie kupić",
         "href": "#gdzie-kupic"

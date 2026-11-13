@@ -4,6 +4,7 @@
 // w JSON-LD (lib/jsonld.ts → faqPage) ma ten sam tekst — sprawdza to tools/check/run-all.mjs ([data-faq]).
 import Rich from './Rich.astro';
 import { url, type FaqItem } from '../lib/site';
+import { sierotki } from '../lib/text';
 
 interface Props { title: string; items: FaqItem[]; id?: string; lead?: string }
 const { title, items, id = 'pytania', lead = 'Nie ma tu Twojego pytania? Napisz albo zadzwoń.' } = Astro.props;
@@ -13,7 +14,7 @@ const { title, items, id = 'pytania', lead = 'Nie ma tu Twojego pytania? Napisz 
     <div class="container faq__inner">
       <div class="faq__head">
         <p class="faq__kicker">Pytania i odpowiedzi</p>
-        <h2 class="faq__title" id={`${id}-tytul`}>{title}</h2>
+        <h2 class="faq__title" id={`${id}-tytul`}>{sierotki(title)}</h2>
         <p class="faq__lead">{lead}</p>
         <p class="faq__contact"><a class="link" href={url.contact}>Kontakt z Liveo</a></p>
       </div>

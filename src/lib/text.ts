@@ -33,6 +33,9 @@ export function listJoin(items: string[], last = ' i '): string {
   return `${xs.slice(0, -1).join(', ')}${last}${xs.at(-1)}`;
 }
 
+/** Sierotki: jednoliterowe a, i, o, u, w, z nie zostają na końcu wiersza (twarda spacja po nich), jak w polskim składzie. */
+export const sierotki = (s: string) => s.replace(/(?<=^|[\s(„])([aiouwzAIOUWZ]) +(?=\S)/g, '$1\u00a0');
+
 const TODO_RE = /\[(do potwierdzenia|do uzupełnienia|do decyzji|niezweryfikowane)([^\]]*)\]/g;
 const LINK_RE = /\[([^\]]+)\]\(([^)\s]+)\)/g;
 
@@ -41,7 +44,7 @@ const LINK_RE = /\[([^\]]+)\]\(([^)\s]+)\)/g;
  * Znaczniki [do potwierdzenia…] dostają <mark class="todo">, żeby były widoczne w wersji demo.
  */
 export function inlineMd(src: string | undefined | null): string {
-  let s = escapeHtml(src ?? '');
+  let s = sierotki(escapeHtml(src ?? ''));
   s = s.replace(/ ?&lt;br\s*\/?&gt;/g, ' <br>');
   // Najpierw linki (ich tekst nie zawiera znaczników TODO), potem TODO, potem pogrubienia.
   s = s.replace(LINK_RE, (_m, text, href) => {

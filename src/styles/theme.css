@@ -412,6 +412,8 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
 .store-finder__form { align-items: end; }
 /* Przycisk ma swoją szerokość: w szerokiej sekcji trzecia kolumna (auto) rozciągała go na pół formularza */
 @media (min-width: 48rem) { .store-finder__submit { justify-self: start; } }
+/* Na lnianej sekcji (strona mebla) len formularza zlewał się z tłem i pola wyglądały na wcięte względem tytułu */
+.section--alt .store-finder__form { background: var(--color-bg); }
 .store { border: 0; border-radius: var(--radius-lg); background: var(--color-bg); padding: var(--space-5); }
 .section--alt .store, .section--band .store { background: var(--color-bg); }
 .store__name { font: var(--weight-medium) 1.125rem/1.35 var(--font-sans); }
@@ -691,10 +693,13 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
   .promo-card:has(.promo-card__value) > .promo-card__value { grid-column: 1; grid-row: 1 / span 5; margin-bottom: 0; align-self: start; }
 }
 
-/* ---------- Pomieszczenia: 6 kafli = 2 rzędy po 3 ---------- */
+/* ---------- Pomieszczenia: 3 kolumny; przy 7 pokojach (dziś) od 64rem rząd 4 + rząd 3, bez osamotnionej „Kuchni” ---------- */
 @media (min-width: 48rem) { .card-grid--rooms { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-/* Siedem pomieszczeń: 4 + 3 zamiast 3 + 3 + jednej karty w ostatnim rzędzie */
-@media (min-width: 72rem) { .card-grid--rooms { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 64rem) {
+  .card-grid--rooms:has(> :nth-child(7):last-child) { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .card-grid--rooms:has(> :nth-child(7):last-child) > li { grid-column: span 3; }
+  .card-grid--rooms:has(> :nth-child(7):last-child) > li:nth-child(n+5) { grid-column: span 4; }
+}
 
 /* ---------- Poradnik: spis treści w bocznej kolumnie (sticky), kolejność w HTML bez zmian ---------- */
 @media (min-width: 72rem) {

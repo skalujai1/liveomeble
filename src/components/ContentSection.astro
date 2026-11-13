@@ -146,7 +146,7 @@ const isBand = s.type === 'band' || s.type === 'feature';
         {ctas.map((c: any, i: number) =>
           c.action
             ? <AssistantButton mode={c.action === 'open-assistant-chat' ? 'chat' : 'photo'} variant={c.variant ?? (i ? 'secondary' : 'primary')}>{c.label}</AssistantButton>
-            : <a class:list={['btn', `btn--${c.variant ?? (isBand || i ? 'secondary' : 'primary')}`]} href={c.href}>{c.label}</a>,
+            : <a class:list={['btn', `btn--${c.variant ?? (i ? 'secondary' : 'primary')}`]} href={c.href}>{c.label}</a>,
         )}
       </p>
     )}

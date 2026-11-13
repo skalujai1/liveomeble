@@ -574,6 +574,13 @@ h1, h2, .section__title { letter-spacing: -0.01em; }
 .section--band, .section--feature { background: var(--color-surface); padding-block: clamp(3.5rem, 2rem + 4vw, 6rem); }
 .section--band .section__title, .section--feature .section__title { font-size: var(--text-3xl); line-height: 1.05; letter-spacing: -0.015em; }
 .section--band .band__text, .section--feature .band__text { font-size: var(--text-lg); line-height: 1.55; color: var(--color-text-muted); max-width: 38rem; }
+/* Na desktopie pas w dwóch kolumnach: tytuł po lewej, tekst i jeden orzechowy przycisk po prawej — bez pustej prawej połowy. */
+@media (min-width: 64rem) {
+  .section--band > .container { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); column-gap: var(--space-8); align-items: end; }
+  .section--band .section__header { grid-row: span 2; margin-bottom: 0; }
+  .section--band :is(.band, .cta-row) { grid-column: 2; }
+  .section--band .cta-row { margin-top: var(--space-4); }
+}
 
 /* Tabele faktów (kontakt, o nas): etykieta drobnymi wersalikami, cienkie linie */
 .facts { border-top: 1px solid var(--color-line-strong); }
@@ -700,7 +707,8 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .featured-tile--linen { background: var(--color-surface); }
 .featured-tile__text { display: grid; justify-items: center; gap: 0.5rem; max-width: 30rem; }
 .featured-tile__kicker { margin: 0; font-size: 0.75rem; font-weight: var(--weight-medium); letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-text-muted); }
-.featured-tile__title { margin: 0; font: var(--weight-display) clamp(1.875rem, 1.4rem + 1.5vw, 2.75rem)/1.05 var(--font-display); letter-spacing: -0.015em; text-wrap: balance; }
+/* Nazwa mieści się w jednym wierszu („Szafka RTV DANTE DT01”), więc wymiary i przyciski w sąsiednich kaflach stoją na jednej wysokości. */
+.featured-tile__title { margin: 0; font: var(--weight-display) clamp(1.625rem, 1.25rem + 1vw, 2.25rem)/1.1 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
 .featured-tile__sub { margin: 0; font-size: 1rem; color: var(--color-text-muted); }
 .featured-tile__colors { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.375rem 0.625rem; margin: 0; font-size: 0.875rem; color: var(--color-text-muted); }
 .featured-tile__dots { display: flex; gap: 0.25rem; }

@@ -31,11 +31,13 @@ const path = url.product(p.slug);
 const dv = defaultVariant(p);
 const colorLabels = listJoin(p.variants.map(v => lowerFirst(v.colorLabel)));
 
-// Komplet: ta sama kolekcja i kolor, wspólne pomieszczenie; maks. 6, bez bieżącego (i bez innych rozmiarów tego samego modelu).
-const komplet = productsSorted
+// Komplet: ta sama kolekcja i kolor, wspólne pomieszczenie, bez bieżącego (i bez innych rozmiarów tego samego modelu).
+// Najpierw po jednym meblu z każdego innego rodzaju (szafka RTV + witryna + …), potem reszta; 4 = jeden rząd na desktopie.
+const kandydaci = productsSorted
   .filter(x => x.collection === p.collection && x.sku !== p.sku && x.rooms.some(r => p.rooms.includes(r)) && x.variants.some(v => v.code === dv.code))
-  .filter((x, i, all) => all.findIndex(y => y.sku === x.sku) === i)
-  .slice(0, 6);
+  .filter((x, i, all) => all.findIndex(y => y.sku === x.sku) === i);
+const poRodzaju = kandydaci.filter((x, i, all) => x.type !== p.type && all.findIndex(y => y.type === x.type) === i);
+const komplet = [...new Set([...poRodzaju, ...kandydaci])].slice(0, 4);
 const siblingTypes = [...new Set(komplet.map(x => lowerFirst(typeOf(x).plural)))];
 
 const packages = (p.packages ?? []) as { ean: string | null; w: number | null; h: number | null; d: number | null; kg: number | null }[];
@@ -279,7 +281,7 @@ const dimRows = dimsSec.rows.filter((r: any) => vars[r.key] != null && vars[r.ke
 
   {komplet.length > 0 && (
     <Section id="komplet" title={fill(kompletSec.title, vars)} lead={kompletSec.lead}>
-      <ProductGrid products={komplet} code={dv.code} />
+      <ProductGrid products={komplet} code={dv.code} class="product-grid--4" />
       <p class="section__more"><a href={fill(kompletSec.more.href, vars)}>{fill(kompletSec.more.label, vars)}</a></p>
     </Section>
   )}

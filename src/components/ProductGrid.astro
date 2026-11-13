@@ -9,9 +9,11 @@ interface Props {
   code?: string;
   headingLevel?: 3 | 4;
   label?: string;
+  /** Np. "product-grid--4": stała liczba kolumn zamiast auto-fill. */
+  class?: string;
 }
-const { products, code, headingLevel = 3, label } = Astro.props;
+const { products, code, headingLevel = 3, label, class: cls } = Astro.props;
 ---
-<ul class="product-grid" aria-label={label}>
+<ul class:list={['product-grid', cls]} aria-label={label}>
   {products.map((p, i) => <ProductCard product={p} code={code} headingLevel={headingLevel} order={i} />)}
 </ul>

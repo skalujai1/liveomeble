@@ -163,7 +163,8 @@
         "items": [
           {
             "label": "Kolory",
-            "value": "{finishLabels}"
+            "value": "{finishCount}",
+            "swatches": true
           },
           {
             "label": "Styl",
