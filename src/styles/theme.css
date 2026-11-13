@@ -49,8 +49,9 @@ strong, b { font-weight: var(--weight-bold); }
 .demo-bar__text { padding-block: 0.375rem; }
 
 /* ---------- Nagłówek ---------- */
+/* Na telefonie nagłówek przykleja się cały (top: 0); od 60rem chowa się tylko górny pasek (-2.25rem). */
 .site-header {
-  position: sticky; top: -2.25rem; z-index: var(--z-header);
+  position: sticky; top: 0; z-index: var(--z-header);
   background: var(--color-bg); box-shadow: 0 1px 0 var(--color-line);
 }
 .site-header__util { display: none; }
@@ -60,12 +61,12 @@ strong, b { font-weight: var(--weight-bold); }
 .site-header__logo img { height: 2rem; width: auto; }
 .site-header__toggle {
   order: 3; display: inline-flex; align-items: center; gap: 0.375rem; min-height: 2.75rem; padding: 0 0.625rem;
-  border: 0; border-radius: var(--radius); background: none; font-weight: var(--weight-medium);
+  border: 0; border-radius: var(--radius); background: none; font-weight: var(--weight-medium); white-space: nowrap;
 }
 .site-header__finder { display: none; }
 .site-header__where {
   order: 2; display: inline-flex; align-items: center; gap: 0.25rem; min-height: 2.75rem; padding: 0 0.375rem;
-  text-decoration: none; font-weight: var(--weight-medium); font-size: var(--text-sm);
+  text-decoration: none; font-weight: var(--weight-medium); font-size: var(--text-sm); white-space: nowrap;
 }
 .site-header__where small { display: none; }
 .site-header__where b { font-weight: var(--weight-medium); }
@@ -79,6 +80,9 @@ strong, b { font-weight: var(--weight-bold); }
 }
 .js.menu-open .site-nav { display: grid; align-content: start; }
 .js.menu-open body { overflow: hidden; }
+/* Otwarte menu zaczyna się 3.75rem od góry okna, więc nagłówek (logo i „Zamknij”) staje na samej górze —
+   inaczej pasek DEMO nad nim zsuwa go pod menu i przycisku zamknięcia nie da się kliknąć. */
+@media (max-width: 59.99rem) { .js.menu-open .site-header { position: fixed; top: 0; left: 0; right: 0; } }
 .no-js .site-header__row { flex-wrap: wrap; }
 .no-js .site-nav { order: 9; width: 100%; }
 .site-nav__list { display: grid; }
@@ -104,6 +108,7 @@ strong, b { font-weight: var(--weight-bold); }
 @media (max-width: 23.4rem) { .site-header__where span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } }
 
 @media (min-width: 60rem) {
+  .site-header { top: -2.25rem; }
   .site-header__util { display: block; background: var(--color-dark); color: #fff; }
   .site-header__util-inner { min-height: 2.25rem; display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); font-size: 0.875rem; line-height: 1.4; }
   .site-header__claim { color: rgb(255 255 255 / 0.85); }

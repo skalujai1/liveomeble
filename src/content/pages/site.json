@@ -24,7 +24,7 @@
   "nav": {
     "ariaLabel": "Menu główne",
     "openLabel": "Menu",
-    "closeLabel": "Zamknij menu",
+    "closeLabel": "Zamknij",
     "items": [
       {
         "label": "Kolekcje",

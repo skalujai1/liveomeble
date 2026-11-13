@@ -58,7 +58,8 @@
 
 /* Przycisk czatu nie zasłania hero (pojawia się po zjechaniu z kurtyny) */
 #liveo-assistant, .assistant-launcher { transition: opacity 400ms ease, visibility 400ms; }
-.at-hero #liveo-assistant, .at-hero .assistant-launcher { opacity: 0; visibility: hidden; }
+.at-hero #liveo-assistant, .at-hero .assistant-launcher,
+.menu-open #liveo-assistant, .menu-open .assistant-launcher { opacity: 0; visibility: hidden; }
 
 /* ---------- Kurtyna kolekcji (hero strony głównej) ---------- */
 .hero-curtain {
@@ -449,9 +450,9 @@
 h1, h2, .section__title { letter-spacing: -0.01em; }
 .collection-hero__title:not(.collection-hero__title--room) { font-family: var(--font-name); font-weight: 400; letter-spacing: -0.02em; }
 .mega__collection b, .site-nav__mobile-collections b { font-family: var(--font-name); font-weight: 400; letter-spacing: 0.02em; color: var(--color-text); }
-/* Italiana ma włosowe kreski: w menu potrzebuje większego stopnia, żeby nazwa kolekcji była czytelna */
+/* Italiana ma włosowe kreski: poniżej ok. 24 px „T”, „L” i „F” tracą poprzeczki (MATI czyta się „MAII”), stąd większy stopień w menu */
 .mega__collection b { font-size: 1.5rem; line-height: 1.15; }
-.site-nav__mobile-collections b { display: block; font-size: 1.375rem; line-height: 1.2; }
+.site-nav__mobile-collections b { display: block; font-size: 1.5rem; line-height: 1.2; }
 /* Przyciski i menu: małe wersaliki z rozstrzeleniem */
 .btn { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8125rem; font-weight: var(--weight-medium); }
 @media (min-width: 60rem) {
