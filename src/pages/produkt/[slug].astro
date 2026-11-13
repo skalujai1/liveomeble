@@ -135,11 +135,20 @@ const dimRows = dimsSec.rows.filter((r: any) => vars[r.key] != null && vars[r.ke
           <figcaption class="gallery__caption">{v.colorLabel}</figcaption>
         </figure>
       ))}
-      {variants.map(({ v, extra }) => extra.length > 0 && (
-        <ul class="gallery__more" data-variant-only data-variant={v.code} hidden={v.code !== dv.code} aria-label={fill(sec('galeria').more, vars)}>
+      {/* Miniatury: kliknięcie pokazuje zdjęcie w miejscu zdjęcia głównego (scripts/product.ts); pierwsza wraca do widoku
+          głównego. Bez JS to zwykłe linki do plików. */}
+      {variants.map(({ v, img, alt, extra }) => extra.length > 0 && (
+        <ul class="gallery__more" data-gallery-thumbs data-variant-only data-variant={v.code} hidden={v.code !== dv.code} aria-label={fill(sec('galeria').more, vars)}>
+          {img?.pub && (
+            <li>
+              <a href={srcOf(img.pub, 1000)} aria-current="true">
+                <img src={srcOf(img.pub, 1000)} alt={alt} loading="lazy" decoding="async" width={img.pub.w} height={img.pub.h} sizes="(min-width: 64rem) 12rem, 30vw" />
+              </a>
+            </li>
+          )}
           {extra.map((g, i) => (
             <li>
-              <a href={srcOf(g, 1000)} target="_blank" rel="noopener">
+              <a href={srcOf(g, 1000)}>
                 <img src={srcOf(g, 1000)} alt={fill(sec('galeria').moreAlt, { name: p.name, colorLabel: v.colorLabel.toLocaleLowerCase('pl'), i: i + 2 })} loading="lazy" decoding="async" width={g.w} height={g.h} sizes="(min-width: 64rem) 12rem, 30vw" />
               </a>
             </li>

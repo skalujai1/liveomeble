@@ -5,8 +5,8 @@
 //  - [data-hero] — „kurtyna kolekcji”: slajdy co 7 s, indeks nazw jako sterowanie, pauza (WCAG 2.2.2).
 //  - [data-rail] — przeciągany pas kolekcji (przewijanie natywne + strzałki + przeciąganie myszą).
 //  - [data-showcase] — lista pomieszczeń podmienia duże zdjęcie przy najechaniu / fokusie.
-//  - głębia (3D): mebel przechyla się za kursorem, a kadr klikniętej karty przechodzi w zdjęcie na stronie mebla.
-//    Reszta głębi (pas kolekcji na łuku, mapa, paralaksa) to sam CSS w editorial.css.
+//  - głębia (3D): kadr klikniętej karty przechodzi w zdjęcie na stronie mebla; reszta głębi (pas kolekcji jak parawan,
+//    mapa, paralaksa) to sam CSS w editorial.css. Zdjęcia mebli po najechaniu stoją nieruchomo (decyzja klienta).
 // Bez JS wszystko jest widoczne i statyczne; przy prefers-reduced-motion nie ma autoodtwarzania ani animacji.
 
 const reduce = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -15,14 +15,18 @@ function initReveal() {
   const els = document.querySelectorAll<HTMLElement>('[data-reveal]');
   if (!els.length) return;
   if (reduce() || !('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('is-in')); return; }
-  const io = new IntersectionObserver(entries => {
+  const show = (entries: IntersectionObserverEntry[], obs: IntersectionObserver) => {
     for (const e of entries) {
       if (!e.isIntersecting) continue;
       e.target.classList.add('is-in');
-      io.unobserve(e.target);
+      obs.unobserve(e.target);
     }
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
-  els.forEach(el => io.observe(el));
+  };
+  // zwykłe odsłony startują tuż przed wejściem w kadr: przy szybkim przewijaniu treść już jest, bez pustych miejsc;
+  // data-reveal="in-view" (mapa salonów) czeka, aż element będzie widać, bo jego ruch ma być zobaczony
+  const early = new IntersectionObserver(show, { rootMargin: '0px 0px 20% 0px', threshold: 0 });
+  const inView = new IntersectionObserver(show, { rootMargin: '0px 0px -10% 0px', threshold: 0.2 });
+  els.forEach(el => (el.dataset.reveal === 'in-view' ? inView : early).observe(el));
 }
 
 function initHeader() {
@@ -163,10 +167,17 @@ function initHero() {
     let timer = 0;
     let stopped = reduce();
     let held = false; // najechanie / fokus — chwilowo, bez zmiany przycisku pauzy
+    // zdjęcia kolejnych slajdów czekają w data-src (HeroPicture priority=false): pobieramy bieżący i następny slajd
+    const wake = (s?: HTMLElement) => s?.querySelectorAll<HTMLImageElement | HTMLSourceElement>('[data-src], [data-srcset]').forEach(el => {
+      if (el.dataset.srcset) { el.srcset = el.dataset.srcset; delete el.dataset.srcset; }
+      if (el instanceof HTMLImageElement && el.dataset.src) { el.src = el.dataset.src; delete el.dataset.src; }
+    });
 
     const show = (n: number, focusSlide = false) => {
       const next = (n + slides.length) % slides.length;
       if (next === i) return;
+      wake(slides[next]);
+      wake(slides[(next + 1) % slides.length]);
       slides[i].classList.remove('is-active');
       slides[i].classList.add('is-leaving');
       const prev = slides[i];
@@ -225,6 +236,9 @@ function initHero() {
 
     hero.classList.add('is-live');
     setStopped(stopped);
+    // następny slajd dopiero po wczytaniu strony, żeby nie odbierał łącza pierwszemu zdjęciu (LCP)
+    if (document.readyState === 'complete') wake(slides[1]);
+    else addEventListener('load', () => wake(slides[1]), { once: true });
   });
 }
 
@@ -301,39 +315,6 @@ function initCardFlip() {
   }, { passive: true });
 }
 
-// Głębia: packshot stoi na tle w kolorze kadru, więc pochylony w 3D wygląda jak sam mebel obracany w dłoni.
-// Kursor ustawia --tx / --ty (od -0,5 do 0,5) na kadrze; kąt i powrót do zera robi CSS. Tylko mysz, jeden nasłuch.
-function initTilt() {
-  if (reduce() || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-  const SEL = '.product-card__frame, .featured-tile__media, .page-product .gallery__item .media';
-  let el: HTMLElement | null = null;
-  let raf = 0, px = 0, py = 0;
-  const release = () => {
-    if (!el) return;
-    el.classList.remove('is-tilting');
-    el.style.removeProperty('--tx');
-    el.style.removeProperty('--ty');
-    el = null;
-  };
-  const apply = () => {
-    raf = 0;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty('--tx', ((px - r.left) / r.width - 0.5).toFixed(3));
-    el.style.setProperty('--ty', ((py - r.top) / r.height - 0.5).toFixed(3));
-  };
-  document.addEventListener('pointermove', e => {
-    if (e.pointerType !== 'mouse') return;
-    const t = (e.target as Element).closest?.<HTMLElement>(SEL) ?? null;
-    if (t !== el) { release(); el = t; el?.classList.add('is-tilting'); }
-    if (!el) return;
-    px = e.clientX; py = e.clientY;
-    if (!raf) raf = requestAnimationFrame(apply);
-  }, { passive: true });
-  document.documentElement.addEventListener('pointerleave', release);
-  addEventListener('scroll', release, { passive: true });
-}
-
 // Przejście karta → strona mebla (View Transitions między dokumentami): kadr klikniętej karty dostaje nazwę „mebel”,
 // taką samą jak zdjęcie główne na stronie mebla, więc przeglądarka płynnie przeprowadza jedno w drugie.
 // Powrót (strona mebla → lista) obsługuje krótki skrypt w <head> (BaseLayout), bo musi zdążyć przed pierwszą klatką.
@@ -341,9 +322,9 @@ function initProductMorph() {
   if (!('onpageswap' in window) || reduce()) return;
   let clicked: HTMLElement | null = null;
   document.addEventListener('click', e => {
-    // tylko linki do mebla (kafel „Polecane” ma też link „Gdzie kupić”)
-    const a = (e.target as Element).closest?.<HTMLAnchorElement>('a[href]');
-    clicked = a && new URL(a.href).pathname.startsWith('/produkt/') ? a.closest<HTMLElement>('.product-card, .featured-tile') : null;
+    // tylko linki do mebla (kafel „Polecane” ma też link „Gdzie kupić”); adresy w serwisie są względne od korzenia
+    const a = (e.target as Element).closest?.('a[href^="/produkt/"]');
+    clicked = a ? a.closest<HTMLElement>('.product-card, .featured-tile') : null;
   }, true);
   addEventListener('pageswap', e => {
     const vt = (e as Event & { viewTransition?: { finished: Promise<void> } }).viewTransition;
@@ -371,7 +352,6 @@ export function initMotion() {
   initHero();
   initHotspots();
   initCardFlip();
-  initTilt();
   initProductMorph();
   initRails();
   initShowcase();

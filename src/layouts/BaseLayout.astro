@@ -58,11 +58,24 @@ const ld: Node[] = [website(), organization(), ...jsonLd, ...(crumbs ? [breadcru
         var from = null;
         try { from = sessionStorage.getItem('lv-morph'); sessionStorage.removeItem('lv-morph'); } catch (_) {}
         document.querySelectorAll('.product-card__frame, .featured-tile__media').forEach(function (f) { f.style.viewTransitionName = ''; });
-        if (!e.viewTransition || !from || from.indexOf('/produkt/') !== 0 || document.querySelector('.gallery__item')) return;
+        if (!e.viewTransition) return;
+        var inView = function (el) { var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
+        // strona mebla otwarta niżej (np. powrót do kompletu): zdjęcie główne poza ekranem nie bierze udziału w przejściu
+        var main = document.querySelector('.gallery__item.is-active .media');
+        if (main) {
+          if (inView(main)) return;
+          main.style.viewTransitionName = 'none';
+          var back = function () { main.style.viewTransitionName = ''; };
+          return e.viewTransition.finished.then(back, back);
+        }
+        if (!from || from.indexOf('/produkt/') !== 0) return;
         var link = document.querySelector(':is(.product-card, .featured-tile) a[href="' + CSS.escape(from) + '"]');
-        var frame = link && link.closest('.product-card, .featured-tile').querySelector('.product-card__frame, .featured-tile__media');
-        if (!frame) return;
-        var clear = function () { frame.style.viewTransitionName = ''; };
+        var card = link && link.closest('.product-card, .featured-tile');
+        var frame = card && card.querySelector('.product-card__frame, .featured-tile__media');
+        if (!frame || !inView(card)) return;
+        // karta na liście ma content-visibility: auto — na czas przejścia musi być narysowana
+        card.style.contentVisibility = 'visible';
+        var clear = function () { frame.style.viewTransitionName = ''; card.style.contentVisibility = ''; };
         frame.style.viewTransitionName = 'mebel';
         e.viewTransition.finished.then(clear, clear);
       });

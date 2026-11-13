@@ -1,10 +1,33 @@
 // Karta mebla: przełącznik koloru (radio). Bez JS warianty są zwykłą listą.
 // Zmiana koloru podmienia zdjęcie, opis wariantu i ?kolor= w adresie (canonical zostaje bez parametru).
+// Miniatury pod zdjęciem pokazują wybrany widok w miejscu zdjęcia głównego (nie otwierają pliku w nowej karcie).
 
 export function initProductPage() {
   const root = document.querySelector<HTMLElement>('[data-product-page]');
-  const picker = root?.querySelector<HTMLFieldSetElement>('[data-variant-picker]');
-  if (!root || !picker) return;
+  if (!root) return;
+  const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fadeIn = (img: HTMLElement | null) => { if (img && !still()) img.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 320, easing: 'ease-out' }); };
+
+  // Miniatury: zdjęcie z klikniętej miniatury trafia do dużego kadru tego samego koloru; zaznaczenie przez aria-current.
+  root.addEventListener('click', e => {
+    const link = (e.target as Element).closest?.<HTMLAnchorElement>('[data-gallery-thumbs] a');
+    const list = link?.closest<HTMLElement>('[data-gallery-thumbs]');
+    const thumb = link?.querySelector('img');
+    const main = list && root.querySelector<HTMLImageElement>(`[data-gallery-item][data-variant="${list.dataset.variant}"] .media__img`);
+    if (!link || !list || !thumb || !main) return;
+    e.preventDefault();
+    list.querySelectorAll('a[aria-current]').forEach(a => a.removeAttribute('aria-current'));
+    link.setAttribute('aria-current', 'true');
+    if (main.getAttribute('src') === link.getAttribute('href')) return;
+    main.removeAttribute('srcset');
+    main.src = link.getAttribute('href')!;
+    main.alt = thumb.alt;
+    for (const k of ['width', 'height']) main.setAttribute(k, thumb.getAttribute(k) ?? '');
+    fadeIn(main);
+  });
+
+  const picker = root.querySelector<HTMLFieldSetElement>('[data-variant-picker]');
+  if (!picker) return;
   const def = root.dataset.defaultVariant ?? '';
   const title = picker.querySelector<HTMLElement>('[data-color-title]');
   const radios = [...picker.querySelectorAll<HTMLInputElement>('input[name="kolor"]')];
@@ -18,13 +41,8 @@ export function initProductPage() {
       if (f.hasAttribute('data-gallery-item')) f.classList.toggle('is-active', on);
       else f.hidden = !on;
     });
-    // zmiana koloru przez użytkownika: mebel w nowym kolorze „obraca się” do kadru (3D), zamiast podmienić się skokiem
-    if (updateUrl && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.querySelector<HTMLElement>('[data-gallery-item].is-active .media__img')?.animate(
-        [{ transform: 'perspective(75rem) rotateY(-26deg) scale(0.94)', opacity: 0 }, { transform: 'perspective(75rem) rotateY(0) scale(1)', opacity: 1 }],
-        { duration: 720, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' },
-      );
-    }
+    // zmiana koloru przez użytkownika: nowe zdjęcie wchodzi łagodnym przenikaniem (mebel stoi nieruchomo)
+    if (updateUrl) fadeIn(root.querySelector<HTMLElement>('[data-gallery-item].is-active .media__img'));
     if (title?.dataset.template) title.textContent = title.dataset.template.replace('{colorLabel}', radio.dataset.label ?? code);
     if (updateUrl) {
       const u = new URL(location.href);

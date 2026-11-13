@@ -5,9 +5,13 @@
 import { getImage } from 'astro:assets';
 import { srcOf, srcsetOf, type ImageRef } from '../lib/images';
 
-/** priority=false: kolejne slajdy hero — lazy, bez fetchpriority. */
+/**
+ * priority=false: kolejne slajdy hero. Slajdy leżą jeden na drugim w kadrze, więc loading="lazy" nic by nie dało —
+ * adresy zdjęć czekają w data-src / data-srcset, a pobiera je dopiero karuzela (motion.ts → initHero: bieżący i następny slajd).
+ */
 interface Props { wide: ImageRef; tall?: ImageRef | null; alt: string; class?: string; sizes?: string; priority?: boolean }
 const { wide, tall, alt, class: cls, sizes = '(min-width: 80rem) 76rem, 100vw', priority = true } = Astro.props;
+const lazy = !priority;
 const MOBILE = '(max-width: 59.99rem)';
 
 let sources: { media?: string; type: string; srcset: string; sizes: string }[] = [];
@@ -40,7 +44,7 @@ if (wide.pub) {
 ---
 <div class:list={['media', cls]}>
   <picture>
-    {sources.map(s => <source media={s.media} type={s.type} srcset={s.srcset} sizes={s.sizes} />)}
-    <img class="media__img" src={fallback} {width} {height} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" fetchpriority={priority ? 'high' : 'auto'} />
+    {sources.map(s => <source media={s.media} type={s.type} srcset={lazy ? undefined : s.srcset} data-srcset={lazy ? s.srcset : undefined} sizes={s.sizes} />)}
+    <img class="media__img" src={lazy ? undefined : fallback} data-src={lazy ? fallback : undefined} {width} {height} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" fetchpriority={priority ? 'high' : 'auto'} />
   </picture>
 </div>
