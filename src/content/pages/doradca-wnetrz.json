@@ -93,7 +93,7 @@
         "submit": "Pokaż",
         "examples": [
           "jaśniejsze",
-          "coś tańszego",
+          "inna kolekcja",
           "szafa do przedpokoju"
         ]
       }
@@ -114,7 +114,7 @@
         },
         {
           "title": "Komplety",
-          "text": "Na górze jest komplet najlepiej dopasowany do zdjęcia, niżej kolejne z innych kolekcji. Ustaw budżet na jeden mebel, ton albo rodzaj mebla, np. same komody. Możesz też napisać, czego szukasz, np. „biała komoda do 1000 zł”. Kliknij mebel, żeby zobaczyć wymiary i wszystkie kolory."
+          "text": "Na górze jest komplet najlepiej dopasowany do zdjęcia, niżej kolejne z innych kolekcji. Ustaw ton albo rodzaj mebla, np. same komody. Możesz też napisać, czego szukasz, np. „biała komoda”. Kliknij mebel, żeby zobaczyć wymiary i wszystkie kolory."
         },
         {
           "title": "Gdzie kupić",
@@ -131,7 +131,7 @@
         "items": [
           "rozpoznać rodzaj pokoju i główne kolory na zdjęciu,",
           "zaproponować komplet z jednej kolekcji w pasującym kolorze,",
-          "pokazać meble do konkretnego pokoju albo w określonej cenie,",
+          "pokazać meble do konkretnego pokoju albo jednego rodzaju, np. same komody,",
           "porównać kilka kolekcji, które pasują do tego samego wnętrza."
         ]
       },
@@ -144,7 +144,7 @@
           "przyjąć zamówienia ani reklamacji."
         ]
       },
-      "note": "Doradca proponuje tylko meble, które są w naszym katalogu, z cenami z tej strony. Nie wymyśla mebli ani rabatów."
+      "note": "Doradca proponuje tylko meble, które są w naszym katalogu. Nie wymyśla mebli, cen ani rabatów: cenę podaje salon partnerski."
     },
     {
       "id": "prywatnosc",
@@ -197,7 +197,7 @@
       },
       {
         "q": "Czym różni się ta strona od okienka czatu?",
-        "a": "Okienko czatu na innych stronach pokazuje jeden komplet na szybko. Tutaj porównasz kilka kolekcji naraz i ustawisz budżet, ton i rodzaj mebla. Z czatu przejdziesz tu jednym przyciskiem, razem ze zdjęciem."
+        "a": "Okienko czatu na innych stronach pokazuje jeden komplet na szybko. Tutaj porównasz kilka kolekcji naraz i ustawisz ton oraz rodzaj mebla. Z czatu przejdziesz tu jednym przyciskiem, razem ze zdjęciem."
       },
       {
         "q": "Czy doradca sprawdzi, czy mebel zmieści się w pokoju?",

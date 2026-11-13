@@ -452,6 +452,8 @@ export function initAdvisor() {
       emptyState('Nie udało się wczytać katalogu mebli. Sprawdź połączenie z internetem.', { label: 'Spróbuj ponownie', run: renderResults });
       return;
     }
+    // Katalog z kart Liveo nie ma cen: limit ceny (z rozmowy albo z czatu) wyciąłby wszystkie meble, więc go nie stosujemy.
+    if (!data.products.some(p => p.price != null)) { S.maxPrice = null; S.cheaper = false; }
     syncControls();
     renderSummary();
     const room = boot.rooms[S.room];
@@ -620,6 +622,9 @@ export function initAdvisor() {
     if (q.outdoor && !q.room) return reply('Liveo tworzy meble do wnętrz i nie ma w ofercie mebli ogrodowych ani balkonowych.');
     if (q.info) return reply('W sprawach zamówień, dostawy, montażu i gwarancji pomoże obsługa klienta Liveo.', false, { label: 'Kontakt z Liveo', href: '/kontakt/' });
 
+    if ((q.maxPrice || q.budget) && !productsCache.some(p => p.price != null)) {
+      return reply('Na tej stronie nie ma cen: podaje je salon partnerski. Mogę za to zawęzić meble do pomieszczenia, rodzaju albo tonu.', false, { label: 'Gdzie kupić', href: '/gdzie-kupic/' });
+    }
     const done: string[] = [];
     if (q.room && boot.rooms[q.room] && availableRoom(q.room, productsCache)) {
       if (q.room !== S.room) { Object.assign(S, { room: q.room, type: '', main: null }); S.skip.clear(); }
@@ -642,8 +647,8 @@ export function initAdvisor() {
     }
     if (!done.length) {
       return reply(q.greet || q.thanks || q.help
-        ? 'Napisz, czego szukasz, np. „komoda do 1000 zł”, „jaśniejsze” albo „szafa do przedpokoju”. Możesz też użyć ustawień poniżej.'
-        : 'Nie zrozumiałem tego polecenia. Spróbuj np. „komoda do 1000 zł”, „jaśniejsze” albo „szafa do przedpokoju”.');
+        ? 'Napisz, czego szukasz, np. „biała komoda”, „jaśniejsze” albo „szafa do przedpokoju”. Możesz też użyć ustawień poniżej.'
+        : 'Nie zrozumiałem tego polecenia. Spróbuj np. „biała komoda”, „jaśniejsze” albo „szafa do przedpokoju”.');
     }
     reply(`Ustawiam: ${done.join(', ')}.`);
     renderResults();

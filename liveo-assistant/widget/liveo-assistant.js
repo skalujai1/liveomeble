@@ -779,7 +779,7 @@ class LiveoAssistant {
       return this.chips([{ label: 'Kontakt z Liveo', href: CFG.contactUrl }, this.photoChip(false)]);
     }
     if (q.greet) {
-      await this.say('Dzień dobry. Wyślij zdjęcie pomieszczenia albo napisz, czego szukasz – np. „biała komoda do sypialni do 1000 zł”.');
+      await this.say('Dzień dobry. Wyślij zdjęcie pomieszczenia albo napisz, czego szukasz – np. „biała komoda do sypialni”.');
       return this.chips(this.roomChips(undefined, [this.photoChip()]));
     }
     if (q.thanks) {
@@ -788,8 +788,8 @@ class LiveoAssistant {
     }
     if (q.room) return this.showSet({ first: true });
     await this.say(q.help
-      ? 'Wyślij mi zdjęcie pomieszczenia – rozpoznam, jakie to wnętrze, jaki ma styl i kolory, i pokażę pasujące meble Liveo. Możesz też pisać, np. „szafa do przedpokoju”, „coś tańszego”, „jaśniejsze”.'
-      : 'Najlepiej rozumiem zdjęcia wnętrz i krótkie polecenia, np. „komoda do salonu do 1000 zł” albo „pokaż jaśniejsze”.');
+      ? 'Wyślij mi zdjęcie pomieszczenia – rozpoznam, jakie to wnętrze, jaki ma styl i kolory, i pokażę pasujące meble Liveo. Możesz też pisać, np. „szafa do przedpokoju”, „inna kolekcja”, „jaśniejsze”.'
+      : 'Najlepiej rozumiem zdjęcia wnętrz i krótkie polecenia, np. „komoda do salonu” albo „pokaż jaśniejsze”.');
     return this.chips(this.roomChips(undefined, [this.photoChip()]));
   }
 }
