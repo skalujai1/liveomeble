@@ -595,6 +595,9 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
 @media (min-width: 64rem) {
   .store-finder--map { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: var(--space-7); align-items: start; }
   .store-finder--map .poland-map { position: sticky; top: 7rem; }
+  /* Formularz stoi tu w połowie szerokości: dwa pola w rzędzie, przycisk pod nimi (select nie ucina nazwy kolekcji) */
+  .store-finder--map .store-finder__form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .store-finder--map .store-finder__submit { grid-column: 1 / -1; justify-self: start; }
   .store-finder--map .store-list { grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
 }
 
@@ -602,7 +605,11 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
 .form-layout { display: grid; gap: var(--space-6); align-items: start; }
 .form-card { padding: clamp(1.25rem, 0.75rem + 2vw, 2.25rem); border-radius: var(--radius-xl); background: var(--color-surface); }
 .form-card .form { max-width: none; }
+/* Podpowiedź stoi pod polem, nie między etykietą a polem: etykiety i pola sąsiednich kolumn trzymają jedną linię */
+.form div.field:not(.form__consent) > .field__hint { order: 1; }
+.form div.field:not(.form__consent) > .field__error { order: 2; }
 .form-card .field__control { background-color: var(--color-bg); }
+.form-card .field__options:has(input[type="checkbox"]) { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-4); }
 .form-aside { display: grid; gap: var(--space-3); padding: var(--space-5); border-radius: var(--radius-lg); box-shadow: inset 0 0 0 1px var(--color-line); }
 .form-aside h3 { font-family: var(--font-display); font-weight: var(--weight-display); font-size: 1.5rem; }
 .form-aside p { color: var(--color-text-muted); }
@@ -612,7 +619,7 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
 @media (min-width: 48rem) {
   .form-card .form { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-5); }
   .form-card .form > * { grid-column: 1 / -1; }
-  .form-card .form > div.field:not(:has(textarea)):not(.form__consent) { grid-column: auto; align-content: end; }
+  .form-card .form > div.field:not(:has(textarea)):not(.form__consent) { grid-column: auto; align-content: start; }
   .form-card .field__options:has(input[type="checkbox"]) { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--space-4); }
 }
 @media (min-width: 64rem) {
@@ -677,6 +684,8 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
 
 /* ---------- Pomieszczenia: 6 kafli = 2 rzędy po 3 ---------- */
 @media (min-width: 48rem) { .card-grid--rooms { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* Siedem pomieszczeń: 4 + 3 zamiast 3 + 3 + jednej karty w ostatnim rzędzie */
+@media (min-width: 72rem) { .card-grid--rooms { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
 /* ---------- Poradnik: spis treści w bocznej kolumnie (sticky), kolejność w HTML bez zmian ---------- */
 @media (min-width: 72rem) {
@@ -695,6 +704,14 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
 
 /* ---------- Strefa partnera: odstęp nagłówka jak w .page-header ---------- */
 .partner-zone { padding-top: var(--space-5); }
+/* Logowanie: lead z odstępem od pól, formularz i boczne wskazówki w dwóch równych kolumnach od góry */
+.partner-zone [data-view="login"] .section__title { margin-bottom: var(--space-3); }
+.partner-zone [data-view="login"] .section__lead { max-width: var(--measure); margin-bottom: var(--space-6); }
+.partner-zone [data-view="login"] .form__row { gap: var(--space-6) var(--space-8); align-items: start; }
+.partner-aside { display: grid; gap: var(--space-6); align-content: start; }
+.partner-aside .feature-list__item:first-child { border-top: 0; padding-top: 0; }
+.partner-forgot summary { cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.partner-forgot[open] summary { margin-bottom: var(--space-2); }
 .demo-banner { border-radius: var(--radius); }
 
 /* ---------- Strefa partnera: gęstsza tabela cennika, stany z kropką ---------- */

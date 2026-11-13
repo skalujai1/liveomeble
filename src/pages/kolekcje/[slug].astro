@@ -133,7 +133,7 @@ const [gWide, gDetail, gAngle, ...gMore] = rest;
       <div class="room-group">
         <h3 class="room-group__title">{gr.room.name}</h3>
         <ProductGrid products={gr.items} headingLevel={4} />
-        <p class="section__more"><a href={url.room(gr.room.slug)}>Wszystkie meble do pomieszczenia: {gr.room.name}</a></p>
+        <p class="section__more"><a href={url.room(gr.room.slug)}>Wszystkie meble do {gr.room.genitive}</a></p>
       </div>
     ))}
     <p class="section__note">Rodzaje mebli w kolekcji {c.name}:</p>

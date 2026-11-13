@@ -1,8 +1,9 @@
 ---
 // Strona 404 — docs/ia.md 3.17, treść: src/content/pages/site.json → notFound (noindex).
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CollectionRail from '../components/CollectionRail.astro';
 import Rich from '../components/Rich.astro';
-import { site } from '../lib/site';
+import { collections, site, url } from '../lib/site';
 
 const nf = site.notFound;
 ---
@@ -17,4 +18,12 @@ const nf = site.notFound;
       </div>
     </div>
   </header>
+
+  <section class="section rail-section" aria-labelledby="kolekcje-404">
+    <header class="container rail-section__head">
+      <h2 class="rail-section__title" id="kolekcje-404">Może szukasz jednej z kolekcji</h2>
+      <a class="link" href={url.collections}>Lista {collections.length} kolekcji</a>
+    </header>
+    <CollectionRail {collections} label="Kolekcje Liveo" />
+  </section>
 </BaseLayout>

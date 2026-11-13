@@ -3,7 +3,7 @@
 import Media from './Media.astro';
 import type { ImageRef } from '../lib/images';
 import { pages, url } from '../lib/site';
-import { fill } from '../lib/text';
+import { fill, truncateSentence } from '../lib/text';
 
 interface Props { article: { slug: string; title: string; description: string; readingTime: number; cover?: ImageRef | null; coverAlt?: string }; headingLevel?: 2 | 3 }
 const { article: a, headingLevel = 3 } = Astro.props;
@@ -15,7 +15,7 @@ const H = `h${headingLevel}` as 'h2' | 'h3';
   <div class="article-card__body">
     <p class="article-card__meta">{fill(card.meta, { readingTime: a.readingTime })}</p>
     <H class="article-card__title">{a.title}</H>
-    <p class="article-card__text">{a.description}</p>
+    <p class="article-card__text">{truncateSentence(a.description, 130)}</p>
     <a class="article-card__link stretched-link" href={url.guide(a.slug)}>Czytaj artykuł<span class="visually-hidden">: {a.title}</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
   </div>
 </li>

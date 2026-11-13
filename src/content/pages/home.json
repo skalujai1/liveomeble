@@ -62,7 +62,7 @@
       "card": {
         "title": "{name}",
         "text": "{description}",
-        "link": "Meble do pomieszczenia: {name}",
+        "link": "Meble do {genitive}",
         "imageAlt": "Aranżacja: {name} z meblami Liveo"
       }
     },

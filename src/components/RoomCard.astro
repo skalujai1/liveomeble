@@ -25,6 +25,6 @@ const H = `h${headingLevel}` as 'h2' | 'h3';
   </div>
   <div class="room-card__body">
     <p class="room-card__text">{r.description}</p>
-    <a class="room-card__link stretched-link" href={url.room(r.slug)}>{fill(card.link, { name: r.name })}</a>
+    <a class="room-card__link stretched-link" href={url.room(r.slug)}>{fill(card.link, { name: r.name, genitive: r.genitive })}</a>
   </div>
 </li>
