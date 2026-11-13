@@ -49,7 +49,19 @@ const image = u => {
   return e ? { base: `/katalog/${e.key}`, widths: e.widths, w: e.w, h: e.h } : null;
 };
 /** „PŁYTA WIÓROWA 16MM” → „płyta wiórowa 16 mm”; zachowuje skróty (LED, HDF, MDF). */
-const tidy = v => String(v).trim().replace(/\s+/g, ' ').replace(/(\d)\s*(MM|CM)\b/gi, (_, n, u) => `${n} ${u.toLowerCase()}`)
+// Karta kolekcji VIGO jest po angielsku (pozostałe po polsku) — stałe wartości tłumaczymy na słownictwo z polskich kart.
+const EN_PL = [
+  [/\b(\d+)\s*MM CHIPBOARD\b/gi, 'PŁYTA WIÓROWA $1 MM'], [/\bCHIPBOARD\b/gi, 'PŁYTA WIÓROWA'], [/\bLAMINATE\b/gi, 'LAMINAT'],
+  [/\bPVC FOIL\b/gi, 'FOLIA PCV'], [/\bVARNISHED\b/gi, 'LAKIEROWANA'], [/\bCASHMIR\b/gi, 'KASZMIR'], [/\bMETAL HANDLE\b/gi, 'UCHWYT METALOWY'],
+  [/\bMETAL WITHOUT REGULATION\b/gi, 'METALOWA BEZ REGULACJI'], [/\bFULL-EXTENSION BALL BEARING\b/gi, 'KULKOWE PEŁNEGO WYSUWU'],
+  [/\bTEMPERED ANTISOL GRAPHITE\b/gi, 'HARTOWANE ANTISOL GRAFIT'], [/\bCOLORLESS\b/gi, 'BEZBARWNE'], [/^OPTION$/i, 'W OPCJI'],
+  [/\(\s*color of illumination\s*:\s*COLD WHITE\s*\)/gi, '(BARWA ŚWIATŁA: ZIMNA BIEL)'],
+  [/\bINSTALLATION INSTRUCTIONS\b/gi, 'INSTRUKCJA MONTAŻU'], [/\bINSTALLATION ACCESSORIES\b/gi, 'AKCESORIA MONTAŻOWE'],
+];
+const toPl = v => EN_PL.reduce((s, [re, pl]) => s.replace(re, pl), String(v));
+/** Opis marketingowy po angielsku (karta VIGO) — lepiej bez opisu niż z obcojęzycznym. */
+const isEnglish = s => /\b(the|and|with|is)\b/i.test(s || '');
+const tidy = v => toPl(v).trim().replace(/\s+/g, ' ').replace(/(\d)\s*(MM|CM)\b/gi, (_, n, u) => `${n} ${u.toLowerCase()}`)
   .toLowerCase().replace(/\b(led|hdf|mdf|abs|pcv|pvc|rtv)\b/g, s => s.toUpperCase()).replace(/\s*\(\s*/g, ' (').replace(/\s+,/g, ',');
 const num = n => String(Math.round(n * 10) / 10).replace('.', ',');
 
@@ -144,8 +156,8 @@ const MATERIAL_ROWS = [ // klucze z karty → wiersze specyfikacji
   ['Blat', m => [m.top, m.topFinish, m.topColor]],
   ['Blat stołu / ławy', m => [!m.top && m.tableTop]],
   ['Plecy (część widoczna)', m => [m.backFinish, m.backColor]],
-  ['Półki', m => [m.shelfQty && `${m.shelfQty} szt.`, m.shelf, m.shelfLoad && `obciążenie do ${m.shelfLoad} kg`]],
-  ['Półki szklane', m => [m.glassShelfQty && `${m.glassShelfQty} szt.`, m.glassShelf, m.glassShelfMm, m.glassShelfLoad && `obciążenie do ${m.glassShelfLoad} kg`]],
+  ['Półki', m => [m.shelfQty && `${m.shelfQty} szt.`, m.shelf, m.shelfLoad && `obciążenie do ${num(m.shelfLoad)} kg`]],
+  ['Półki szklane', m => [m.glassShelfQty && `${m.glassShelfQty} szt.`, m.glassShelf, m.glassShelfMm, m.glassShelfLoad && `obciążenie do ${num(m.glassShelfLoad)} kg`]],
   ['Przeszklenie frontu', m => [m.glassFront, m.glassFrontMm]],
   ['Lustro', m => [m.mirror && `${m.mirror} mm`]],
   ['Wyposażenie szafy', m => [m.wardrobe]],
@@ -160,7 +172,12 @@ const MATERIAL_ROWS = [ // klucze z karty → wiersze specyfikacji
   ['Rozkładany', m => [m.extendable]],
   ['Mechanizm rozkładania', m => [m.tableRunner]],
 ];
-const clean = v => (v == null || v === '' ? null : tidy(v).replace(/^\(|\)$/g, '').replace(/\s*\($/, ''));
+// Nawias zdejmujemy tylko, gdy obejmuje całą wartość; urwany w karcie („LED (barwa…: biała zimna”) domykamy.
+const clean = v => {
+  if (v == null || v === '') return null;
+  const s = tidy(v).replace(/^\(([^()]*)\)$/, '$1').replace(/\s*\($/, '').replace(/\s+:/g, ':').replace(/\s+\)/g, ')');
+  return (s.match(/\(/g) || []).length > (s.match(/\)/g) || []).length ? `${s})` : s;
+};
 function specsOf(m) {
   const rows = [];
   for (const [label, get] of MATERIAL_ROWS) {
@@ -245,7 +262,7 @@ for (const [collName, list] of collMap) {
         images: { packshot: photo ?? scene, packshotIsScene: !photo && !!scene },
         // dodatkowe zdjęcia z karty (do 3, pobrane lokalnie); brakujące na serwerze Liveo pomijamy
         gallery: v.photos.slice(1, 4).map(image).filter(Boolean),
-        description: v.description || null,
+        description: v.description && !isEnglish(v.description) ? v.description : null,
       };
     });
 
@@ -263,7 +280,7 @@ for (const [collName, list] of collMap) {
       description: def.description ?? variants.find(v => v.description)?.description ?? null,
       specs: specsOf(k.materials),
       delivery72: k.delivery72,
-      assembly: /SAMODZIELN/i.test(k.assembly || '') ? 'do samodzielnego montażu' : k.assembly ? tidy(k.assembly) : null,
+      assembly: /SAMODZIELN|SELF-ASSEMBLY/i.test(k.assembly || '') ? 'do samodzielnego montażu' : k.assembly ? tidy(k.assembly) : null,
       equipment: k.equipment ? tidy(k.equipment) : null,
       packages: packages.map(x => ({ ean: x.ean ?? null, w: x.w ?? null, h: x.h ?? null, d: x.d ?? null, kg: x.kg ?? null })),
       drawing: image(k.drawing),
