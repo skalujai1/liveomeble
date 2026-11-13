@@ -217,8 +217,8 @@
     "depth": "Głębokość",
     "weight": "Waga",
     "format": "{w} × {h} × {d} cm",
-    "formatLong": "szer. {w} × wys. {h} × gł. {d} cm",
-    "formatLongNoDepth": "szer. {w} × wys. {h} cm",
+    "formatLong": "szer.\u00a0{w} × wys.\u00a0{h} × gł.\u00a0{d}\u00a0cm",
+    "formatLongNoDepth": "szer.\u00a0{w} × wys.\u00a0{h}\u00a0cm",
     "weightFormat": "ok. {kg} kg"
   },
   "plural": {

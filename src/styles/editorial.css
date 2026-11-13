@@ -604,7 +604,8 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 
 /* ---------- Katalog: karta mebla (8.11.2026) ---------- */
 .product-grid { gap: var(--space-7) var(--space-5); }
-.product-card { gap: 0; }
+/* Stopka karty (kolory) zawsze na dole: kreski i kropki stoją w jednej linii w całym rzędzie, nawet gdy nazwa ma 2 wiersze. */
+.product-card { gap: 0; grid-template-rows: auto 1fr auto; }
 .product-card__link { display: block; gap: 0; color: var(--color-text); text-decoration: none; }
 .product-card__frame { position: relative; display: block; overflow: hidden; background: var(--color-surface); }
 .product-card .media { aspect-ratio: 1; background: var(--color-surface); }
@@ -615,17 +616,13 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .product-card__title { margin: 1rem 0 0; font: var(--weight-display) 1.1875rem/1.25 var(--font-display); letter-spacing: -0.005em; }
 .product-card__link:hover .product-card__title { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
 .product-card__meta { display: grid; gap: 0.25rem; margin-top: 0.375rem; font-size: 0.875rem; line-height: 1.4; color: var(--color-text-muted); }
-.product-card__collection { font-size: 0.6875rem; font-weight: var(--weight-medium); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text); }
-.product-card__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem 0.625rem; margin: 0.75rem 0 0; padding-top: 0.75rem; border-top: 1px solid var(--color-line); font-size: 0.8125rem; color: var(--color-text-muted); }
+.product-card__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem 0.625rem; margin: 0.875rem 0 0; padding-top: 0.75rem; border-top: 1px solid var(--color-line); font-size: 0.8125rem; color: var(--color-text-muted); }
 .product-card__foot .product-card__dots { display: flex; gap: 0.25rem; margin: 0; }
 .product-card__foot .product-card__dots i { width: 0.875rem; height: 0.875rem; }
-/* Komplet na stronie mebla to najwyżej 6 kart: na desktopie jeden pełny rząd zamiast 5 + 1 */
-@media (min-width: 75rem) { .page-product #komplet .product-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
-/* Strona kolekcji i „komplet” na stronie mebla: wszystkie karty są z jednej kolekcji, więc jej nazwy nie powtarzamy */
-.page-collection .product-card__collection, .page-product #komplet .product-card__collection { display: none; }
-@media (max-width: 47.9rem) {
-  .product-card__title { font-size: 1.0625rem; }
-}
+/* Dostawa w 72 h: spokojna linia z kropką lasu (jak „Dostawa w 72 godziny” na stronie mebla), bez wersalików */
+.product-card__delivery { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8125rem; color: var(--color-forest); }
+.product-card__delivery::before { content: ""; width: 0.375rem; height: 0.375rem; border-radius: 50%; background: currentColor; }
+@media (max-width: 47.9rem) { .product-card__title { font-size: 1.0625rem; } }
 
 /* Rodzaje mebli (kafle): packshot na lnie, nazwa w szeryfie */
 .type-tiles { gap: 1.5rem 0.75rem; }

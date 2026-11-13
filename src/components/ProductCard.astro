@@ -1,7 +1,7 @@
 ---
 // Karta mebla na listach (kierunek C): kwadratowy kadr na lnie (białe tło packshotu znika przez mix-blend-mode),
-// po najechaniu drugi widok z karty produktu (np. z otwartymi drzwiami), nazwa w szeryfie, kolekcja,
-// wymiary i kolory (dostawa w 72 h dotyczy 460 z 469 mebli — jest na stronie mebla i w filtrach, nie na każdej karcie). Atrybuty data-* opisują mebel dla filtrów (scripts/listing.ts) —
+// po najechaniu drugi widok z karty produktu (np. z otwartymi drzwiami), nazwa w szeryfie (zawiera już nazwę kolekcji),
+// wymiary, dostawa w 72 h i kolory. Atrybuty data-* opisują mebel dla filtrów (scripts/listing.ts) —
 // bez JS karta jest zwykłym linkiem. Karty produktu Liveo nie mają cen.
 import Media from './Media.astro';
 import { packshotFor, srcOf, type PublicImage } from '../lib/images';
@@ -62,8 +62,8 @@ const second = !img?.approximate ? ((v.gallery ?? []) as PublicImage[]).find(g =
     <H class="product-card__title">{p.name}</H>
   </a>
   <p class="product-card__meta">
-    <span class="product-card__collection">{site.labels.collection} {col.name}</span>
     <span class="product-card__dims">{dimsLong(p)}</span>
+    {p.delivery72 && <span class="product-card__delivery">{site.labels.delivery72}</span>}
   </p>
   <p class="product-card__foot">
     <span class="product-card__dots" role="img" aria-label={`Kolory: ${p.variants.map(x => x.colorLabel).join(', ')}`}>
