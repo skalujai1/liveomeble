@@ -90,6 +90,23 @@ export function truncateSentence(text: string, max: number): string {
   return cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:–—-]$/, '') + '…';
 }
 
+/**
+ * Opis mebla z karty Liveo → nagłówek + akapity. Karty kolekcji DANTE mają tytuł opisu sklejony z pierwszym
+ * zdaniem („Komoda Dante DT03 – Wyrafinowany styl i praktyczność w jednym Odkryj wyjątkową…”): tytuł kończy się
+ * małą literą, a zdanie zaczyna wielką bez kropki pomiędzy. Resztę dzielimy na akapity po trzy zdania.
+ */
+export function descriptionBlocks(text: string | undefined | null): { lead: string; paragraphs: string[] } {
+  let t = String(text ?? '').replace(/\s+/g, ' ').trim();
+  let lead = '';
+  // „Twojego”, „Ciebie”… to zwroty grzecznościowe w środku tytułu, nie początek zdania
+  const m = t.match(/^([^.!?]{3,60}? – [^.!?]{10,90}?[a-ząćęłńóśźż]) (?=[A-ZĄĆĘŁŃÓŚŹŻ])(?!Tw[oó]j|Ciebie |Wasz)/u);
+  if (m) { lead = m[1]; t = t.slice(m[0].length); }
+  const ss = sentences(t);
+  const paragraphs: string[] = [];
+  for (let i = 0; i < ss.length; i += 3) paragraphs.push(ss.slice(i, i + 3).join(' '));
+  return { lead, paragraphs };
+}
+
 /** Pierwsze zdanie tekstu. */
 export const firstSentence = (text: string) => sentences(text)[0] ?? '';
 

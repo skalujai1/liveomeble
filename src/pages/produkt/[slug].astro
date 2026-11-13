@@ -14,7 +14,7 @@ import {
   collectionOf, defaultVariant, dimsLong, finishById, num, pages, products, productsSorted, site, typeOf, url,
   type Product,
 } from '../../lib/site';
-import { fill, firstSentence, listJoin, lowerFirst } from '../../lib/text';
+import { descriptionBlocks, fill, firstSentence, listJoin, lowerFirst } from '../../lib/text';
 
 export function getStaticPaths() {
   return products.map(p => ({ params: { slug: p.slug }, props: { p } }));
@@ -194,7 +194,10 @@ const dimRows = dimsSec.rows.filter((r: any) => vars[r.key] != null && vars[r.ke
     <Section id="opis" title={sec('opis').title} width="narrow">
       {variants.filter(({ v }) => v.description).map(({ v }) => (
         <div class="prose" data-variant-only data-variant={v.code} hidden={descriptions.length > 1 ? v.code !== dv.code : v !== variants.find(x => x.v.description)!.v}>
-          <p>{v.description}</p>
+          {(() => { const d = descriptionBlocks(v.description); return (<>
+            {d.lead && <p class="prose__lead">{d.lead}</p>}
+            {d.paragraphs.map(par => <p>{par}</p>)}
+          </>); })()}
         </div>
       ))}
     </Section>
