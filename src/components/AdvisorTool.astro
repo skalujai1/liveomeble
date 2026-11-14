@@ -1,7 +1,7 @@
 ---
 // Pełny doradca wnętrz w czterech krokach: zdjęcie → pokój i kolory → komplety → gdzie kupić.
 // Logikę doboru i analizy zdjęć dzieli z małym czatem (liveo-assistant/widget: engine.js, recommender.js).
-// Zachowanie: src/scripts/advisor.ts. Bez JS widać krok 1, a kafle pomieszczeń prowadzą do /pomieszczenia/<slug>/.
+// Zachowanie: src/scripts/advisor.ts. Kafle pomieszczeń prowadzą do /pomieszczenia/<slug>/ (wszystkie meble do pokoju).
 import Media from './Media.astro';
 import StoreFinder from './StoreFinder.astro';
 import { ASSISTANT, CHAT_URL } from '../config';
@@ -76,7 +76,7 @@ const check = '<path d="M20 6 9 17l-5-5"/>';
           <ul class="advisor-rooms__list">
             {rooms.map(r => (
               <li>
-                <a class="advisor-room" href={`/pomieszczenia/${r.slug}/`} data-room={r.assistantKey}>
+                <a class="advisor-room" href={`/pomieszczenia/${r.slug}/`}>
                   <Media image={roomImage(r.slug, 'wide')} alt="" widths={[320, 480, 640]} sizes="(min-width: 64rem) 11rem, 42vw" ratio="4 / 5" placeholderLabel={r.name} />
                   <span class="advisor-room__name">{r.name}</span>
                 </a>

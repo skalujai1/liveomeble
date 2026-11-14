@@ -189,10 +189,8 @@ export function initAdvisor() {
     const file = [...(e.clipboardData?.files || [])].find(f => f.type.startsWith('image/'));
     if (file) { e.preventDefault(); onPhoto(file); }
   });
-  $$<HTMLAnchorElement>('[data-room]').forEach(a => a.addEventListener('click', e => {
-    e.preventDefault();
-    startWithRoom(a.dataset.room!);
-  }));
+  // Kafle pomieszczeń bez zdjęcia to zwykłe linki do stron pomieszczeń (wszystkie meble do pokoju ze wszystkich
+  // kolekcji). Doradca dobiera komplet z jednej kolekcji tylko do zdjęcia albo pokoju z czatu (?pokoj=).
 
   function showDropError(text: string) {
     dropError.textContent = text;
