@@ -419,7 +419,7 @@ export function initAdvisor() {
           h('img', { class: 'media__img', src: p.img, alt: '', loading: 'lazy', decoding: 'async', width: 480, height: 480 })),
         h('h4', { class: 'product-card__title' }, name)),
       p.color && h('p', { class: 'product-card__meta' }, p.color.label),
-      p.price == null ? h('p', { class: 'product-card__meta' }, 'Cena w salonie partnerskim') : h('div', { class: 'price price--card' + (p.regular ? ' price--promo' : '') },
+      p.price == null ? null : h('div', { class: 'price price--card' + (p.regular ? ' price--promo' : '') },
         h('p', { class: 'price__main' },
           h('span', { class: 'price__current' }, formatPrice(p.price)),
           p.regular && h('s', { class: 'price__regular' }, h('span', { class: 'visually-hidden' }, 'Cena regularna: '), formatPrice(p.regular))),
@@ -490,7 +490,7 @@ export function initAdvisor() {
           finishChip(main.color))),
       h('ul', { class: 'product-grid advisor-grid' }, main.items.map(card)),
       h('footer', { class: 'advisor-set__foot' },
-        h('p', { class: 'advisor-set__total' }, main.total > 0 ? [`${pieces(main.items.length)} razem `, h('b', null, formatPrice(main.total))] : `${pieces(main.items.length)} z jednej kolekcji`),
+        h('p', { class: 'advisor-set__total' }, main.total > 0 ? [`${pieces(main.items.length)} razem `, h('b', null, formatPrice(main.total))] : `${pieces(main.items.length)} z jednej kolekcji · cenę podaje salon partnerski`),
         h('div', { class: 'advisor-set__actions' },
           href && h('a', { class: 'btn btn--secondary', href }, `Cała kolekcja ${main.collection}`),
           h('button', { class: 'btn btn--primary', type: 'button', onclick: () => { S.reached = 3; go(3); } }, `Gdzie kupić ${main.collection}`))));

@@ -158,16 +158,14 @@ const check = '<path d="M20 6 9 17l-5-5"/>';
               <input class="field__control" id="doradca-pytanie" name="q" type="text" autocomplete="off" enterkeyhint="search" placeholder={tool.ask.placeholder} maxlength="200" />
               <button class="btn btn--dark" type="submit">{tool.ask.submit}</button>
             </div>
-            <p class="advisor-ask__examples">
-              Na przykład: {tool.ask.examples.map((e: string, i: number) => <>{i > 0 && ', '}<button class="link-button" type="button" data-example>{e}</button></>)}
-            </p>
             <p class="advisor-ask__reply" role="status" data-ask-reply hidden></p>
           </form>
 
           <details class="advisor-settings" data-settings open>
-            <summary class="advisor-settings__summary">Pomieszczenie, ton i rodzaj mebla</summary>
+            <summary class="advisor-settings__summary">Ton i rodzaj mebla</summary>
             <div class="advisor-settings__body">
-              <div class="field">
+              <!-- Pokój zmienia „Zmień” przy zdjęciu (krok 2); pole zostaje dla skryptu, ale nie zagraca paska. -->
+              <div class="field" hidden>
                 <label class="field__label" for="doradca-pokoj">Pomieszczenie</label>
                 <select class="field__control" id="doradca-pokoj" data-f-room>
                   {rooms.map(r => <option value={r.assistantKey}>{r.name}</option>)}
