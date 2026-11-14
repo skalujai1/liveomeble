@@ -1,5 +1,5 @@
 ---
-// Polecane meble na stronie głównej jako duże kafle (jak kafle produktów w sklepach marek): wszystko w jednym
+// Polecane meble na stronie głównej: 4 kafle w rzędzie (na telefonie 2), wszystko w jednym
 // pudełku — kolekcja, nazwa, krótki opis, dwa przyciski i duże zdjęcie mebla. Kafle na przemian białe
 // i lniane; packshoty z kart Liveo mają białe tło, więc na lnie znika ono przez mix-blend-mode: multiply.
 // Cały kafel prowadzi do mebla (rozciągnięty link „Zobacz mebel”); „Gdzie kupić” leży nad nim.
@@ -39,7 +39,7 @@ const tiles = products.map((p, i) => {
         </p>
       </div>
       <div class="featured-tile__media">
-        <Media image={img} alt="" widths={[480, 1000]} sizes="(min-width: 60rem) 36rem, 90vw" ratio="4 / 3" fit="contain" placeholderLabel={p.name} />
+        <Media image={img} alt="" widths={[480, 1000]} sizes="(min-width: 75rem) 18rem, 46vw" ratio="1 / 1" fit="contain" placeholderLabel={p.name} />
       </div>
     </li>
   ))}
