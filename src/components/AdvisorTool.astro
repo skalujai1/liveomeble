@@ -5,7 +5,7 @@
 import Media from './Media.astro';
 import StoreFinder from './StoreFinder.astro';
 import { ASSISTANT, CHAT_URL } from '../config';
-import { roomImage } from '../lib/images';
+import { arrangementByName, roomImage } from '../lib/images';
 import { boardFinishes, rooms } from '../lib/site';
 
 interface Props { tool: any }
@@ -47,46 +47,42 @@ const check = '<path d="M20 6 9 17l-5-5"/>';
       <p class="advisor-steps__now" aria-hidden="true">Krok <b data-step-n>1</b> z {steps.length} · <span data-step-label>{steps[0].label}</span></p>
     </nav>
 
-    <!-- Krok 1: zdjęcie albo pomieszczenie -->
+    <!-- Krok 1: zdjęcie albo pomieszczenie. Pole zdjęcia leży na zdjęciu wnętrza, pomieszczenia są rzędem zdjęć. -->
     <div class="advisor-panel" data-panel="0" aria-labelledby="krok-1">
-      <header class="advisor-panel__head">
+      <header class="advisor-panel__head visually-hidden">
         <h2 class="advisor-panel__title" id="krok-1" tabindex="-1">{steps[0].title}</h2>
-        <p class="advisor-panel__text">{steps[0].text}</p>
       </header>
       <div class="advisor-start">
         <div class="advisor-drop" data-drop>
+          <Media image={arrangementByName('54fea29f6c-ate_01_2160px', 'Salon z meblami ATE') ?? roomImage('salon', 'wide', 1)} alt="" widths={[1280, 1920]} sizes="(min-width: 80rem) 76rem, 100vw" ratio="16 / 7" class="advisor-drop__bg" placeholderLabel="Salon" />
           <svg class="ico advisor-drop__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z" /><circle cx="12" cy="13" r="3.2" /></svg>
           <p class="advisor-drop__title">{tool.drop.title}</p>
-          <p class="advisor-drop__hint" data-desktop-only>{tool.drop.hint}</p>
           <div class="advisor-drop__actions">
             <button class="btn btn--primary" type="button" data-pick="camera" hidden>{tool.drop.camera}</button>
             <button class="btn btn--primary" type="button" data-pick="file" data-label-touch={tool.drop.gallery}>{tool.drop.pick}</button>
           </div>
-          <p class="advisor-drop__formats">{tool.drop.formats}</p>
+          <p class="advisor-drop__hint" data-desktop-only>{tool.drop.hint} · {tool.drop.formats}</p>
+          <p class="advisor-drop__tips">{tool.tips.title}: {tool.tips.items.join(', ')}</p>
           <p class="advisor-drop__error" role="alert" data-drop-error hidden></p>
           <input type="file" accept="image/*" hidden aria-label={tool.drop.pick} data-file />
           <input type="file" accept="image/*" capture="environment" hidden aria-label={tool.drop.camera} data-camera />
           <div class="advisor-drop__over" aria-hidden="true">Upuść zdjęcie</div>
         </div>
-        <div class="advisor-tips">
-          <h3 class="advisor-tips__title">{tool.tips.title}</h3>
-          <ul class="advisor-tips__list">
-            {tool.tips.items.map((it: any) => <li><b>{it.title}</b>: {it.text}</li>)}
-          </ul>
-        </div>
         <div class="advisor-rooms">
-          <h3 class="advisor-rooms__title">{tool.rooms.title}</h3>
+          <div class="advisor-rooms__head">
+            <h3 class="advisor-rooms__title">{tool.rooms.title}</h3>
+            <p class="advisor-rooms__note">{tool.rooms.note}</p>
+          </div>
           <ul class="advisor-rooms__list">
             {rooms.map(r => (
               <li>
                 <a class="advisor-room" href={`/pomieszczenia/${r.slug}/`} data-room={r.assistantKey}>
-                  <Media image={roomImage(r.slug, 'wide')} alt="" widths={[320, 480, 640]} sizes="(min-width: 64rem) 13rem, 45vw" ratio="3 / 2" placeholderLabel={r.name} />
+                  <Media image={roomImage(r.slug, 'wide')} alt="" widths={[320, 480, 640]} sizes="(min-width: 64rem) 11rem, 42vw" ratio="4 / 5" placeholderLabel={r.name} />
                   <span class="advisor-room__name">{r.name}</span>
                 </a>
               </li>
             ))}
           </ul>
-          <p class="advisor-rooms__note">{tool.rooms.note}</p>
         </div>
       </div>
     </div>

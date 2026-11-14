@@ -747,56 +747,52 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
 .partner-tabs button { font-size: 0.9375rem; }
 
 /* ---------- Doradca wnętrz (/doradca-wnetrz/): narzędzie w czterech krokach ---------- */
-.advisor-head { display: grid; gap: var(--space-5) var(--space-7); padding-top: var(--space-5); }
+.advisor-head { display: grid; gap: var(--space-3) var(--space-7); padding-top: var(--space-4); }
 .advisor-head__title { font-size: var(--text-3xl); line-height: 1.08; }
-.advisor-head__lead { margin-top: var(--space-3); max-width: 40rem; font-size: var(--text-base); line-height: 1.6; color: var(--color-text-muted); }
-.advisor-head__how { margin-top: var(--space-3); }
-.advisor-head__notes { display: grid; gap: var(--space-3); align-content: end; font-size: var(--text-sm); line-height: 1.5; color: var(--color-text-muted); }
-.advisor-head__privacy { display: flex; gap: 0.625rem; color: var(--color-text); }
-.advisor-head__privacy .ico { width: 1.25rem; height: 1.25rem; margin-top: 1px; }
+.advisor-head__lead { margin-top: var(--space-2); max-width: 40rem; font-size: var(--text-lg); line-height: 1.5; color: var(--color-text-muted); }
+.advisor-head__notes { display: flex; gap: 0.5rem; max-width: 24rem; font-size: var(--text-sm); line-height: 1.5; color: var(--color-text-muted); }
+.advisor-head__notes .ico { flex: none; width: 1.125rem; height: 1.125rem; margin-top: 2px; color: var(--color-text); }
+.advisor-head__notes a { color: var(--color-text); }
 .advisor-head__noscript { grid-column: 1 / -1; padding: var(--space-4); border-radius: 0; background: var(--color-surface); }
-@media (min-width: 64rem) { .advisor-head { grid-template-columns: minmax(0, 1fr) 21rem; align-items: end; } }
+@media (min-width: 64rem) { .advisor-head { grid-template-columns: minmax(0, 1fr) auto; align-items: end; } }
 
-.advisor { padding-block: var(--space-6) var(--space-8); scroll-margin-top: calc(var(--header-h) - 1.25rem); }
+.advisor { padding-block: var(--space-5) var(--space-6); scroll-margin-top: calc(var(--header-h) - 1.25rem); }
 .no-js .advisor-steps, .no-js .advisor-drop { display: none; }
 .no-js .advisor-start { grid-template-columns: 1fr; }
 
-/* Kroki: cztery paski kroków, jak pasek „Meble” w logo. Grafitowy znacznik przesuwa się na bieżący krok. */
-.advisor-steps { --h: 3.5rem; --gap: 0.375rem; position: relative; margin-bottom: var(--space-7); }
+/* Kroki: cienki pasek z numerami; grafitowa kreska przesuwa się pod bieżący krok. */
+.advisor-steps { --h: 3rem; --gap: 0.5rem; position: relative; margin-bottom: var(--space-5); }
 .advisor-steps__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); margin: 0; padding: 0; list-style: none; }
 .advisor-steps__item { position: relative; }
-.advisor-steps__item::before {
-  content: ""; position: absolute; inset: 0; background: var(--color-surface);
- 
-}
+.advisor-steps__item::before { content: ""; position: absolute; inset: auto 0 0 0; height: 1px; background: var(--color-line-strong); }
 .advisor-steps__marker {
-  position: absolute; top: 0; left: 0; width: calc((100% - 3 * var(--gap)) / 4); height: var(--h); pointer-events: none;
+  position: absolute; top: calc(var(--h) - 2px); left: 0; width: calc((100% - 3 * var(--gap)) / 4); height: 2px; pointer-events: none;
   background: var(--color-dark);
   transform: translateX(calc(var(--i, 0) * (100% + var(--gap))));
   transition: transform 640ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .advisor-steps__btn {
-  position: relative; z-index: 1; display: flex; align-items: center; gap: 0.75rem; width: 100%; height: var(--h);
-  padding: 0 1rem 0 1rem; border: 0; background: none; text-align: left;
-  font: var(--weight-medium) 1rem/1.2 var(--font-sans); color: var(--color-text); transition: color var(--dur) var(--ease-out);
+  position: relative; z-index: 1; display: flex; align-items: center; gap: 0.625rem; width: 100%; height: var(--h);
+  padding: 0; border: 0; background: none; text-align: left;
+  font: var(--weight-medium) 0.9375rem/1.2 var(--font-sans); color: var(--color-text); transition: color var(--dur) var(--ease-out);
 }
-.advisor-steps__btn[aria-current="step"] { color: #fff; }
 .advisor-steps__btn:disabled { color: var(--color-text-muted); cursor: default; }
 .advisor-steps__btn:not(:disabled):not([aria-current]):hover .advisor-steps__label { text-decoration: underline; text-underline-offset: 3px; }
 .advisor-steps__n {
-  flex: none; display: grid; place-items: center; width: 1.75rem; height: 1.75rem; border-radius: 50%;
-  box-shadow: inset 0 0 0 1.5px currentColor; font: var(--weight-regular) 1rem/1 var(--font-display);
+  flex: none; display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%;
+  box-shadow: inset 0 0 0 1px currentColor; font: var(--weight-regular) 0.875rem/1 var(--font-display);
 }
-.advisor-steps__check { display: none; width: 0.9375rem; height: 0.9375rem; stroke-width: 2.4; }
+.advisor-steps__btn[aria-current="step"] .advisor-steps__n { background: var(--color-dark); color: #fff; box-shadow: none; }
+.advisor-steps__check { display: none; width: 0.875rem; height: 0.875rem; stroke-width: 2.4; }
 .advisor-steps__item.is-done .advisor-steps__num { display: none; }
 .advisor-steps__item.is-done .advisor-steps__check { display: block; }
 .advisor-steps__item.is-done .advisor-steps__n { background: var(--color-dark); color: #fff; box-shadow: none; }
 .advisor-steps__now { display: none; }
 @media (max-width: 47.9rem) {
-  .advisor-steps { --h: 2.75rem; --gap: 0.25rem; margin-bottom: var(--space-6); }
-  .advisor-steps__btn { justify-content: center; padding: 0 0 0 0; }
+  .advisor-steps { --h: 2.75rem; --gap: 0.25rem; margin-bottom: var(--space-4); }
+  .advisor-steps__btn { justify-content: center; padding: 0; }
   .advisor-steps__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .advisor-steps__now { display: block; margin-top: 0.75rem; font-size: var(--text-sm); color: var(--color-text-muted); }
+  .advisor-steps__now { display: block; margin-top: 0.5rem; font-size: var(--text-sm); color: var(--color-text-muted); }
   .advisor-steps__now b { font-weight: var(--weight-medium); color: var(--color-text); }
 }
 
@@ -813,44 +809,55 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
 @keyframes advisor-in { from { opacity: 0.4; transform: translateY(10px); } }
 @keyframes advisor-spin { to { transform: rotate(360deg); } }
 
-/* Krok 1 */
-.advisor-start { display: grid; gap: var(--space-7); }
-@media (min-width: 64rem) {
-  .advisor-start { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-rows: auto 1fr; align-items: start; row-gap: var(--space-6); }
-  .advisor-rooms { grid-column: 2; grid-row: 1 / span 2; }
-}
-.advisor-tips__title { margin-bottom: var(--space-3); font: var(--weight-medium) var(--text-lg)/1.3 var(--font-sans); }
-.advisor-tips__list { display: grid; gap: 0.5rem; margin: 0; padding-left: 1.25rem; color: var(--color-text-muted); }
-.advisor-tips__list b { font-weight: var(--weight-medium); color: var(--color-text); }
-@media (min-width: 48rem) { .advisor-tips__list { grid-template-columns: 1fr 1fr; column-gap: var(--space-6); } }
+/* Krok 1: pole zdjęcia na zdjęciu wnętrza (biały tekst na przyciemnionym kadrze), pod nim rząd zdjęć pomieszczeń */
+.advisor-start { display: grid; gap: var(--space-6); }
 .advisor-drop {
-  position: relative; display: grid; justify-items: center; align-content: center; gap: 0.75rem; min-height: 22rem;
-  padding: var(--space-7) var(--space-5); border-radius: 0; background: var(--color-surface); text-align: center;
+  position: relative; isolation: isolate; overflow: hidden; display: grid; justify-items: center; align-content: center; gap: 0.75rem;
+  min-height: clamp(24rem, 36vw, 32rem); padding: var(--space-7) var(--space-5); border-radius: 0; background: var(--color-dark);
+  color: #fff; text-align: center;
 }
+.advisor-drop::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 50% 55%, rgb(var(--scrim) / 0.42), rgb(var(--scrim) / 0.66)); }
+.advisor-drop__bg.media { position: absolute; inset: 0; z-index: -2; aspect-ratio: auto; height: 100%; border-radius: 0; }
+.advisor-drop__bg .media__img { width: 100%; height: 100%; object-fit: cover; filter: var(--photo-grade); }
+.advisor-drop__bg .media__note { display: none; }
 .advisor-drop[aria-busy="true"] { cursor: progress; }
-.advisor-drop__ico { width: 2.75rem; height: 2.75rem; stroke-width: 1.3; }
-.advisor-drop__title { font: var(--weight-display) var(--text-2xl)/1.15 var(--font-display); }
-.advisor-drop__hint { color: var(--color-text-muted); }
-.advisor-drop__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); margin-top: var(--space-3); }
-.advisor-drop__formats { max-width: 26rem; margin-top: var(--space-2); font-size: var(--text-xs); line-height: 1.45; color: var(--color-text-muted); }
-.advisor-drop__error { max-width: 30rem; color: var(--color-error); font-weight: var(--weight-medium); }
+.advisor-drop__ico { width: 2.5rem; height: 2.5rem; stroke-width: 1.3; }
+.advisor-drop__title { font: var(--weight-display) clamp(2rem, 1.4rem + 2vw, 3.25rem)/1.05 var(--font-display); text-wrap: balance; }
+.advisor-drop__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); margin-top: var(--space-2); }
+.advisor-drop__hint, .advisor-drop__tips { font-size: var(--text-sm); line-height: 1.45; color: rgb(255 255 255 / 0.86); }
+.advisor-drop__tips { margin-top: var(--space-2); }
+.advisor-drop__error { max-width: 30rem; padding: 0.5rem 0.875rem; background: var(--color-bg); color: var(--color-error); font-weight: var(--weight-medium); }
+.advisor-drop__error[hidden] { display: none; }
 .advisor-drop__over {
   position: absolute; inset: 0.75rem; display: none; place-items: center; border-radius: 0;
-  background: rgb(255 255 255 / 0.92); box-shadow: inset 0 0 0 2px var(--color-text); font: var(--weight-display) var(--text-2xl)/1 var(--font-display);
+  background: rgb(255 255 255 / 0.92); box-shadow: inset 0 0 0 2px var(--color-text); color: var(--color-text); font: var(--weight-display) var(--text-2xl)/1 var(--font-display);
 }
 .advisor-drop.is-over .advisor-drop__over { display: grid; }
-.advisor-rooms__title { margin-bottom: var(--space-4); font: var(--weight-medium) var(--text-lg)/1.3 var(--font-sans); }
-.advisor-rooms__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4) 0.75rem; margin: 0; padding: 0; list-style: none; }
-@media (min-width: 40rem) and (max-width: 63.9rem) { .advisor-rooms__list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-/* Nieparzysta liczba pomieszczeń: ostatnie zajmuje cały wiersz, zamiast wisieć samo w rogu */
-.advisor-rooms__list > li:last-child:nth-child(odd) { grid-column: 1 / -1; }
-.advisor-rooms__list > li:last-child:nth-child(odd) .media { --media-ratio: 3 / 1; }
-.advisor-room { display: grid; gap: 0.5rem; text-decoration: none; }
+.advisor-rooms__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 1rem; margin-bottom: var(--space-4); }
+.advisor-rooms__title { font: var(--weight-medium) var(--text-lg)/1.3 var(--font-sans); }
+.advisor-rooms__note { font-size: var(--text-sm); color: var(--color-text-muted); }
+/* Telefon i tablet: rząd przewijany w bok; komputer: wszystkie pomieszczenia w jednym rzędzie */
+.advisor-rooms__list {
+  display: grid; grid-auto-flow: column; grid-auto-columns: 42%; gap: 0.5rem; margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter);
+  list-style: none; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none;
+}
+.advisor-rooms__list::-webkit-scrollbar { display: none; }
+.advisor-rooms__list > li { scroll-snap-align: start; }
+@media (min-width: 40rem) { .advisor-rooms__list { grid-auto-columns: 26%; } }
+@media (min-width: 64rem) {
+  .advisor-rooms__list { grid-auto-flow: row; grid-template-columns: repeat(7, minmax(0, 1fr)); margin: 0; padding: 0; overflow: visible; }
+}
+.advisor-room { position: relative; display: block; overflow: hidden; color: #fff; text-decoration: none; }
 .advisor-room .media { border-radius: 0; }
-.advisor-room__name { font-weight: var(--weight-medium); }
+.advisor-room .media__img { filter: var(--photo-grade); }
+.advisor-room::after { content: ""; position: absolute; inset: 45% 0 0; background: linear-gradient(transparent, rgb(var(--scrim) / 0.62)); pointer-events: none; }
+.advisor-room__name { position: absolute; left: 0.75rem; right: 0.75rem; bottom: 0.625rem; z-index: 1; font-weight: var(--weight-medium); line-height: 1.25; }
+.advisor-room .media__note { top: 0.5rem; bottom: auto; }
 .advisor-room:hover .advisor-room__name { text-decoration: underline; text-underline-offset: 3px; }
-@media (prefers-reduced-motion: no-preference) { .advisor-room:hover .media__img { transform: scale(1.03); } }
-.advisor-rooms__note { margin-top: var(--space-4); font-size: var(--text-sm); color: var(--color-text-muted); }
+@media (prefers-reduced-motion: no-preference) {
+  .advisor-room .media__img { transition: transform 700ms var(--ease-expo); }
+  .advisor-room:hover .media__img { transform: scale(1.04); }
+}
 
 /* Krok 2 */
 .advisor-seen { display: grid; gap: var(--space-6); }
