@@ -1,7 +1,6 @@
 ---
-// Stopka (kierunek C): u góry hasło, przyciski i kontakt; pod spodem cztery równe kolumny linków
-// (pomieszczenia, najczęstsze rodzaje mebli, pomoc w wyborze, firma), pod nimi wszystkie kolekcje w jednym indeksie,
-// na dole prawo i notka DEMO. Treść: src/content/pages/site.json → footer.
+// Stopka (kierunek C), zwarta: na komputerze jeden rząd (marka z kontaktem i cztery kolumny linków), pod nim
+// indeks kolekcji, na dole prawo i notka DEMO. Na telefonie kolumny i kolekcje są zwinięte (details). Treść: src/content/pages/site.json → footer.
 import { CONSENT_SCRIPTS, DEMO } from '../config';
 import { collections, products, rooms, site, types, url, year } from '../lib/site';
 import { fill, sierotki } from '../lib/text';
@@ -24,40 +23,41 @@ const c = f.contact;
 ---
 <footer class="site-footer">
   <div class="container">
-    <div class="site-footer__top">
+    <div class="site-footer__main">
       <div class="site-footer__brand">
         <img src="/brand/liveo-logo.svg" alt="Liveo Meble" width="96" height="36" loading="lazy" />
         <p class="site-footer__lead">{sierotki(f.lead)}</p>
+        <address class="site-footer__contact">
+          <a href={c.phoneHref}>{c.phone}</a>
+          <a href={`mailto:${c.email}`}>{c.email}</a>
+          <span>Liveo Meble sp. z o.o., {c.address}</span>
+        </address>
         <p class="site-footer__cta">
           <a class="btn btn--light" href={url.stores()}>Gdzie kupić</a>
           <a class="link" href={url.advisor}>Doradca wnętrz</a>
         </p>
       </div>
-      <address class="site-footer__contact">
-        <span class="site-footer__label">Liveo Meble sp. z o.o.</span>
-        <span>{c.address}</span>
-        <a href={c.phoneHref}>{c.phone}</a>
-        <a href={`mailto:${c.email}`}>{c.email}</a>
-      </address>
-    </div>
 
-    <div class="site-footer__cols">
       {columns.map((col, i) => (
         <nav class="site-footer__col" aria-labelledby={`stopka-${i}`}>
-          <h2 class="site-footer__title" id={`stopka-${i}`}>{col.title}</h2>
-          <ul class="site-footer__list">
-            {col.items.map(it => <li><a href={it.href}>{it.label}</a></li>)}
-            {col.more && <li class="site-footer__more"><a href={col.more.href}>{col.more.label}</a></li>}
-          </ul>
+          <details class="site-footer__fold" open data-fold>
+            <summary><h2 class="site-footer__title" id={`stopka-${i}`}>{col.title}</h2></summary>
+            <ul class="site-footer__list">
+              {col.items.map(it => <li><a href={it.href}>{it.label}</a></li>)}
+              {col.more && <li class="site-footer__more"><a href={col.more.href}>{col.more.label}</a></li>}
+            </ul>
+          </details>
         </nav>
       ))}
     </div>
 
     <nav class="site-footer__collections" aria-labelledby="stopka-kolekcje">
-      <h2 class="site-footer__title" id="stopka-kolekcje">{f.collectionsTitle} <span>{collections.length}</span></h2>
-      <ul>
-        {collections.map(col => <li><a href={url.collection(col.slug)}>{col.name}</a></li>)}
-      </ul>
+      <details class="site-footer__fold" open data-fold>
+        <summary><h2 class="site-footer__title" id="stopka-kolekcje">{f.collectionsTitle} <span>{collections.length}</span></h2></summary>
+        <ul>
+          {collections.map(col => <li><a href={url.collection(col.slug)}>{col.name}</a></li>)}
+        </ul>
+      </details>
     </nav>
 
     <div class="site-footer__bottom">
@@ -75,3 +75,14 @@ const c = f.contact;
     </div>
   </div>
 </footer>
+
+<script>
+  // Na telefonie listy stopki są zwinięte (rozwija je stuknięcie w nagłówek); na komputerze zawsze rozwinięte
+  // i nieklikalne. Bez JS wszystko jest rozwinięte.
+  const wide = matchMedia('(min-width: 64rem)');
+  const folds = [...document.querySelectorAll<HTMLDetailsElement>('.site-footer [data-fold]')];
+  const sync = () => folds.forEach(d => { d.open = wide.matches; });
+  sync();
+  wide.addEventListener('change', sync);
+  folds.forEach(d => d.querySelector('summary')?.addEventListener('click', e => { if (wide.matches) e.preventDefault(); }));
+</script>
