@@ -56,6 +56,8 @@
       ],
       "drop": {
         "title": "Dodaj zdjęcie pokoju",
+        "lead": "Doradca odczyta kolory i styl wnętrza, a potem ułoży komplety mebli z jednej kolekcji Liveo.",
+        "example": "Przykład propozycji",
         "hint": "albo przeciągnij je tutaj",
         "pick": "Wybierz zdjęcie",
         "camera": "Zrób zdjęcie",
