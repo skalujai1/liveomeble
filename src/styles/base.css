@@ -87,11 +87,6 @@ main { display: block; padding-bottom: var(--space-8); }
 .btn:disabled { opacity: 0.6; cursor: progress; }
 .link-button { border: 0; background: none; padding: 0; text-decoration: underline; text-underline-offset: 0.18em; }
 
-/* ---------- Pasek DEMO ---------- */
-.demo-bar { background: var(--color-demo-bg); color: var(--color-demo-text); font-size: var(--text-sm); }
-.demo-bar__text { max-width: var(--container); margin-inline: auto; padding: var(--space-2) var(--gutter); }
-.demo-bar__more { opacity: 0.85; }
-
 /* ---------- Nagłówek i menu: src/styles/theme.css (kierunek A) ---------- */
 
 /* ---------- Okruszki ---------- */

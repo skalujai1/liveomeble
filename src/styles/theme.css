@@ -44,13 +44,6 @@ strong, b { font-weight: var(--weight-bold); }
 .btn--text { box-shadow: none; }
 @media (max-width: 30rem) { .btn { white-space: normal; } }
 
-/* ---------- Pasek DEMO ---------- */
-.demo-bar { font-size: var(--text-xs); }
-.demo-bar__text { padding-block: 0.375rem; line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-/* Pasek ma zawsze jeden wiersz (na telefonie bez dopowiedzenia), więc jego wysokość jest znana i hero na cały ekran może ją odjąć */
-@media (max-width: 47.99rem) { .demo-bar__more { display: none; } }
-:root:has(.demo-bar) { --demo-h: calc(var(--text-xs) * 1.5 + 0.75rem); }
-
 /* ---------- Nagłówek ---------- */
 /* Na telefonie nagłówek przykleja się cały (top: 0); od 60rem chowa się tylko górny pasek (-2.25rem). */
 .site-header {
@@ -449,7 +442,7 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
 }
 
 /* ---------- Stopka (kierunek C): hasło i kontakt, cztery równe kolumny, indeks kolekcji ---------- */
-.site-footer { background: var(--color-dark); color: #fff; border-top: 0; padding-block: clamp(2.5rem, 1.75rem + 2vw, 3.5rem) var(--space-5); margin-top: 0; font-size: 0.9375rem; }
+.site-footer { background: var(--color-footer); color: #fff; border-top: 0; padding-block: clamp(2.5rem, 1.75rem + 2vw, 3.5rem) var(--space-5); margin-top: 0; font-size: 0.9375rem; }
 .site-footer :focus-visible { outline-color: #fff; }
 .site-footer a { color: rgb(255 255 255 / 0.82); text-decoration: none; transition: color var(--dur) var(--ease-out); }
 .site-footer a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
@@ -461,7 +454,7 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
 .site-footer__contact a { color: #fff; }
 .site-footer__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem; margin: var(--space-2) 0 0; }
 .site-footer__cta .btn { width: auto; }
-.site-footer__cta .btn:hover { color: var(--color-dark); text-decoration: none; }
+.site-footer__cta .btn:hover { color: var(--color-footer); text-decoration: none; }
 .site-footer__cta .link { color: #fff; text-decoration: underline; text-underline-offset: 5px; }
 .site-footer__title { margin: 0; font: var(--weight-medium) 0.75rem/1.4 var(--font-sans); letter-spacing: 0.12em; text-transform: uppercase; color: rgb(255 255 255 / 0.6); }
 .site-footer__title span { margin-left: 0.375rem; }
