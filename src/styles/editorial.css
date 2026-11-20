@@ -359,7 +359,8 @@
 }
 
 /* ---------- Drobne poprawki sekcji na stronie głównej ---------- */
-.page-home .section--products { padding-block: var(--space-8); }
+/* Polecane meble: lniany pas, na nim białe kafle (wcześniej białe i lniane kafle na jasnym tle zlewały się) */
+.page-home .section--products { padding-block: clamp(3rem, 2rem + 3vw, 5rem); background: var(--color-surface); }
 
 /* ---------- Hero kolekcji (strona kolekcji) ---------- */
 .collection-hero { position: relative; height: calc(100svh - var(--demo-h, 0px)); min-height: 34rem; max-height: 68rem; overflow: hidden; color: #fff; background: var(--color-dark); }
@@ -727,10 +728,10 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 /* ---------- Strona główna: polecane meble jako kafle 4 w rzędzie (wszystko w jednym pudełku), na telefonie 2 ---------- */
 .featured-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; margin: 0; padding: 0; list-style: none; text-align: center; }
 @media (min-width: 75rem) { .featured-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; } }
-.featured-tile { position: relative; display: flex; flex-direction: column; align-items: center; padding: clamp(1.5rem, 1rem + 1vw, 2rem) clamp(0.75rem, 0.5rem + 0.6vw, 1.25rem) 0; border-radius: 0; overflow: hidden; }
-.featured-tile--white { background: #fff; }
-.featured-tile--linen { background: var(--color-surface); }
-.featured-tile__text { display: grid; justify-items: center; gap: 0.375rem; width: 100%; }
+.featured-tile { position: relative; display: grid; grid-template-rows: subgrid; grid-row: span 6; justify-items: center; row-gap: 0.375rem; background: #fff; transition: box-shadow 400ms var(--ease-expo), translate 400ms var(--ease-expo); padding: clamp(1.5rem, 1rem + 1vw, 2rem) clamp(0.75rem, 0.5rem + 0.6vw, 1.25rem) 0; border-radius: 0; overflow: hidden; }
+/* Napisy i przyciski w jednej linii we wszystkich kaflach rzędu (subgrid), nawet gdy nazwa ma dwa wiersze */
+.featured-tile__text { display: contents; }
+.featured-tile:hover { box-shadow: 0 18px 40px rgb(42 36 32 / 0.14); translate: 0 -4px; }
 .featured-tile__kicker { margin: 0; font-size: 0.6875rem; font-weight: var(--weight-medium); letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-text-muted); }
 /* Nazwa mieści się w jednym wierszu („Szafka RTV DANTE DT01”), więc wymiary i przyciski w sąsiednich kaflach stoją na jednej wysokości. */
 .featured-tile__title { margin: 0; font: var(--weight-display) clamp(1.125rem, 0.95rem + 0.5vw, 1.375rem)/1.15 var(--font-display); text-wrap: balance; }
@@ -748,7 +749,10 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .featured-tile .pill--solid::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 0; }
 .featured-tile .pill--line { position: relative; z-index: 2; }
 .featured-tile .pill--solid:focus-visible { outline-offset: 3px; }
-.featured-tile__media { display: block; width: 100%; margin-top: auto; }
+.featured-tile__media { position: relative; display: block; width: 100%; align-self: end; margin-top: 0.5rem; }
+.featured-tile__room { position: absolute; inset: 0 calc(-1 * clamp(0.75rem, 0.5rem + 0.6vw, 1.25rem)); display: flex; align-items: flex-end; padding: 0.75rem; background: center / cover no-repeat; opacity: 0; transition: opacity 500ms var(--ease-out); pointer-events: none; }
+.featured-tile__room span { padding: 0.25rem 0.5rem; background: rgb(255 255 255 / 0.92); font-size: 0.75rem; color: var(--color-text); }
+.featured-tile.is-ready:hover .featured-tile__room { opacity: 1; }
 .featured-tile__media .media { aspect-ratio: 1; background: transparent; box-shadow: none; }
 .featured-tile__media .media--contain .media__img { padding: 6% 8% 2%; mix-blend-mode: multiply; filter: none; }
 @media (prefers-reduced-motion: no-preference) {
@@ -759,7 +763,7 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
    („Gdzie kupić” jest w nagłówku i na stronie mebla) */
 @media (max-width: 47.9rem) {
   .featured-tile__colors > span:not(.featured-tile__dots), .featured-tile .pill--line { display: none; }
-  .featured-tile__cta { align-self: stretch; }
+  .featured-tile__cta { justify-self: stretch; }
   .featured-tile .pill { width: 100%; }
 }
 

@@ -1,10 +1,10 @@
 ---
 // Polecane meble na stronie głównej: 4 kafle w rzędzie (na telefonie 2), wszystko w jednym
-// pudełku — kolekcja, nazwa, krótki opis, dwa przyciski i duże zdjęcie mebla. Kafle na przemian białe
-// i lniane; packshoty z kart Liveo mają białe tło, więc na lnie znika ono przez mix-blend-mode: multiply.
+// pudełku — kolekcja, nazwa, krótki opis, dwa przyciski i duże zdjęcie mebla. Białe kafle na lnianym pasie;
+// po najechaniu packshot płynnie przechodzi w zdjęcie kolekcji we wnętrzu.
 // Cały kafel prowadzi do mebla (rozciągnięty link „Zobacz mebel”); „Gdzie kupić” leży nad nim.
 import Media from './Media.astro';
-import { packshotFor } from '../lib/images';
+import { collectionImage, packshotFor, srcOf } from '../lib/images';
 import { collectionOf, colorCount, defaultVariant, dimsLong, finishById, site, url, type Product } from '../lib/site';
 
 interface Props { products: Product[] }
@@ -15,14 +15,15 @@ const tiles = products.map((p, i) => {
   const col = collectionOf(p);
   return {
     p, col, img: packshotFor(p, v),
-    tone: i % 4 === 0 || i % 4 === 3 ? 'white' : 'linen',
+    // zdjęcie kolekcji we wnętrzu: pokazuje się po najechaniu (ładowane dopiero wtedy, scripts/motion.ts initCardFlip)
+    room: (() => { const r = collectionImage(col, 'wide'); return r?.pub ? srcOf(r.pub, 640) : null; })(),
     dots: p.variants.slice(0, 6).map(x => ({ c1: hex(x.finish.front), c2: hex(x.finish.body ?? x.finish.front) })),
   };
 });
 ---
 <ul class="featured-tiles">
-  {tiles.map(({ p, col, img, tone, dots }) => (
-    <li class:list={['featured-tile', `featured-tile--${tone}`]}>
+  {tiles.map(({ p, col, img, room, dots }) => (
+    <li class:list={['featured-tile', { 'featured-tile--flip': room }]}>
       <div class="featured-tile__text">
         <p class="featured-tile__kicker">{site.labels.collection} {col.name}</p>
         <h3 class="featured-tile__title">{p.name}</h3>
@@ -40,6 +41,7 @@ const tiles = products.map((p, i) => {
       </div>
       <div class="featured-tile__media">
         <Media image={img} alt="" widths={[480, 1000]} sizes="(min-width: 75rem) 18rem, 46vw" ratio="1 / 1" fit="contain" placeholderLabel={p.name} />
+        {room && <span class="featured-tile__room" data-src={room} aria-hidden="true"><span>Kolekcja {col.name} we wnętrzu</span></span>}
       </div>
     </li>
   ))}

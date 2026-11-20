@@ -302,10 +302,10 @@ function initShowcase() {
 function initCardFlip() {
   if (!matchMedia('(hover: hover)').matches) return;
   document.addEventListener('pointerover', e => {
-    const card = (e.target as Element).closest?.<HTMLElement>('.product-card--flip');
+    const card = (e.target as Element).closest?.<HTMLElement>('.product-card--flip, .featured-tile--flip');
     if (!card || card.dataset.flip) return;
     card.dataset.flip = '1';
-    const el = card.querySelector<HTMLElement>('.product-card__second[data-src]');
+    const el = card.querySelector<HTMLElement>('.product-card__second[data-src], .featured-tile__room[data-src]');
     if (!el) return;
     const src = el.dataset.src!;
     el.removeAttribute('data-src');
