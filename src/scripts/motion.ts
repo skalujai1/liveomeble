@@ -97,7 +97,8 @@ function initHotspots() {
   };
   for (const list of lists) {
     let active: HTMLElement | null = null;
-    let timer = 0;
+    let auto: HTMLElement | null = null; // karta otwarta sama (nie przez użytkownika)
+    let timer = 0, t1 = 0, t2 = 0;
     const off = () => {
       active?.classList.remove('is-active');
       active = null;
@@ -119,12 +120,27 @@ function initHotspots() {
     list.querySelectorAll<HTMLElement>('.hero-spot').forEach(spot => {
       const link = spot.querySelector<HTMLElement>('.hero-spot__link');
       if (!link) return;
-      link.addEventListener('pointerenter', () => on(spot));
+      link.addEventListener('pointerenter', () => { auto = null; on(spot); });
       link.addEventListener('pointerleave', later);
-      link.addEventListener('focusin', () => on(spot));
+      link.addEventListener('focusin', () => { auto = null; on(spot); });
       link.addEventListener('focusout', () => { clearTimeout(timer); off(); });
     });
     addEventListener('resize', () => { clearTimeout(timer); off(); });
+    // Kropka oznaczona w hotspots.json („auto”) sama pokazuje swój mebel w czasie slajdu: gdy kropki już stoją
+    // (wejście kończy się po 1,6 s), do chwili przed zmianą slajdu, więc slajd nie trwa dłużej. Ruch użytkownika ma pierwszeństwo.
+    const slide = list.closest<HTMLElement>('[data-slide]');
+    const stop = () => { clearTimeout(t1); clearTimeout(t2); if (auto && active === auto) off(); auto = null; };
+    slide?.addEventListener('slide:show', e => {
+      stop();
+      const delay = (e as CustomEvent<number>).detail;
+      t1 = window.setTimeout(() => {
+        if (active || !list.offsetWidth) return; // użytkownik już coś pokazuje albo kropek nie widać (telefon)
+        auto = list.querySelector<HTMLElement>('.hero-spot[data-auto]:not(.is-covered)') ?? list.querySelector<HTMLElement>('.hero-spot:not(.is-covered)');
+        if (auto) on(auto);
+      }, 2000);
+      t2 = window.setTimeout(stop, delay - 1200);
+    });
+    slide?.addEventListener('slide:hide', stop);
   }
   const hero = document.querySelector<HTMLElement>('[data-hero]');
   const bar = hero?.querySelector<HTMLElement>('.hero-curtain__bar');
@@ -180,6 +196,7 @@ function initHero() {
       wake(slides[(next + 1) % slides.length]);
       slides[i].classList.remove('is-active');
       slides[i].classList.add('is-leaving');
+      slides[i].dispatchEvent(new Event('slide:hide'));
       const prev = slides[i];
       setTimeout(() => prev.classList.remove('is-leaving'), 1400);
       i = next;
@@ -195,7 +212,10 @@ function initHero() {
       hero.style.setProperty('--slide', String(i));
       if (focusSlide) slides[i].querySelector<HTMLElement>('a')?.focus({ preventScroll: true });
       schedule();
+      announce();
     };
+    // kropki slajdu (initHotspots) pokazują mebel tylko przy pracującej karuzeli
+    const announce = () => { if (!stopped) slides[i].dispatchEvent(new CustomEvent('slide:show', { detail: DELAY })); };
     const schedule = () => {
       clearTimeout(timer);
       // restart paska postępu (animacja CSS na aktywnej pozycji indeksu)
@@ -236,6 +256,7 @@ function initHero() {
 
     hero.classList.add('is-live');
     setStopped(stopped);
+    announce();
     // następny slajd dopiero po wczytaniu strony, żeby nie odbierał łącza pierwszemu zdjęciu (LCP)
     if (document.readyState === 'complete') wake(slides[1]);
     else addEventListener('load', () => wake(slides[1]), { once: true });
@@ -360,8 +381,8 @@ export function initMotion() {
   document.documentElement.classList.add('motion-ready');
   initReveal();
   initHeader();
+  initHotspots(); // przed initHero: słucha zdarzeń slajdów
   initHero();
-  initHotspots();
   initCardFlip();
   initMorph();
   initRails();
