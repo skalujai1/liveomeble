@@ -634,6 +634,28 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 
 /* Rodzaje mebli (kafle): packshot na lnie, nazwa w szeryfie */
 .type-tiles { gap: 1.5rem 0.75rem; }
+/* Sekcja „Rodzaje mebli” na /meble/ i stronach rodzajów: lniany pas z białymi kaflami, żeby kafle nie zlewały się
+   z jasnym tłem strony; 18 rodzajów w dwóch pełnych rzędach po 9 (komputer), 6 albo 3 w rzędzie na mniejszych ekranach. */
+.section--types { margin-top: var(--space-5); padding-block: clamp(2rem, 1.25rem + 2vw, 3.25rem); background: var(--color-surface); }
+.section--types .section__header { margin-bottom: var(--space-5); }
+.section--types .section__title { font-size: var(--text-2xl); }
+/* telefon: jeden rząd przewijany w bok (zamiast sześciu rzędów przed listą mebli) */
+@media (max-width: 39.99rem) {
+  .section--types .type-tiles {
+    grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 30%; gap: 0.5rem;
+    margin-inline: calc(-1 * var(--gutter)); padding: 0 var(--gutter) 0.25rem; overflow-x: auto;
+    scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none;
+  }
+  .section--types .type-tiles::-webkit-scrollbar { display: none; }
+  .section--types .type-tile { scroll-snap-align: start; }
+}
+@media (min-width: 40rem) { .section--types .type-tiles { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1.25rem 0.5rem; } }
+@media (min-width: 75rem) { .section--types .type-tiles { grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 1.5rem 0.625rem; } }
+.section--types .type-tile__thumb { background: #fff; }
+.section--types .type-tile__thumb img { mix-blend-mode: normal; }
+.section--types .type-tile a:hover .type-tile__thumb { box-shadow: 0 10px 24px rgb(42 36 32 / 0.12); }
+.section--types .type-tile__thumb { transition: box-shadow var(--dur) var(--ease-out); }
+.section--types .type-tile__name { margin-top: 0.625rem; font-size: 1rem; color: var(--color-text); }
 .type-tile__thumb { background: var(--color-surface); }
 .type-tile__thumb img { inset: 9%; width: 82%; height: 82%; }
 /* Rodzaj bez packshotu (zestawy kuchenne): kadr z aranżacji wypełnia kafel, zamiast wisieć mały pośrodku lnu */

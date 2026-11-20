@@ -29,7 +29,7 @@ const path = url.products;
 
   {page.sections.slice(1).map((s: any) => {
     if (s.type === 'categories') return (
-      <Section id={s.id} title={s.title}>
+      <Section id={s.id} title={s.title} class="section--types">
         <CategoryTiles />
       </Section>
     );
