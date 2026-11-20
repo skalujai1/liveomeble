@@ -7,11 +7,9 @@ import { url, type Collection } from '../lib/site';
 
 interface Props {
   collections: Collection[];
-  /** Kolekcje, które mają już view-transition-name na tej stronie (rozkładówki) — nazwa musi być unikalna. */
-  named?: string[];
   label: string;
 }
-const { collections, named = [], label } = Astro.props;
+const { collections, label } = Astro.props;
 ---
 <div class="rail" data-rail>
   <ul class="rail__track" data-rail-track aria-label={label}>
@@ -20,7 +18,7 @@ const { collections, named = [], label } = Astro.props;
       return (
         <li class="rail__item">
           <a class="rail__link" href={url.collection(c.slug)}>
-            <span class="rail__pic" style={named.includes(c.slug) ? undefined : `view-transition-name: kolekcja-${c.slug}`}>
+            <span class="rail__pic">
               <Media image={img} alt="" widths={[1280]} sizes="(min-width: 64rem) 26vw, (min-width: 40rem) 42vw, 76vw" ratio="4 / 5" placeholderLabel={`Kolekcja ${c.name}`} />
               {c.isNew && <span class="badge rail__badge">Nowość</span>}
             </span>

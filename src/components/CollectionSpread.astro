@@ -1,7 +1,7 @@
 ---
 // Rozkładówka kolekcji (jak w drukowanym katalogu): ujęcie pod kątem, pion i zbliżenie detalu, obok nazwa
 // w skali plakatu, charakter, kolory, liczba mebli i dwa działania. Obrazy wchodzą „odsłoną” (data-reveal, motion.ts).
-// Ujęcie główne nosi view-transition-name kolekcji — przy przejściu do kolekcji płynnie zamienia się w jej hero.
+// Po kliknięciu ujęcie główne płynnie zamienia się w hero kolekcji (initMorph w motion.ts).
 import Media from './Media.astro';
 import { collectionImage } from '../lib/images';
 import { colorsCount, finishById, finishLabels, productsByCollection, roomsList, url, type Collection } from '../lib/site';
@@ -24,7 +24,7 @@ const detail = collectionImage(c, 'detail');
 const dots = c.finishes.map(f => ({ label: f.label, a: finishById.get(f.front)?.hex ?? '#ccc', b: finishById.get(f.body ?? f.front)?.hex ?? '#ccc' }));
 ---
 <article class:list={['spread', { 'spread--flip': flip }]} aria-labelledby={`rozkladowka-${c.slug}`}>
-  <a class="spread__fig spread__fig--angle" href={url.collection(c.slug)} tabindex="-1" data-reveal style={`view-transition-name: kolekcja-${c.slug}`}>
+  <a class="spread__fig spread__fig--angle" href={url.collection(c.slug)} tabindex="-1" data-reveal>
     <Media image={angle} alt={altOf(angle, 'Aranżacja')} widths={[1280, 2400]} sizes="(min-width: 64rem) 62vw, 100vw" ratio="3 / 2" placeholderLabel={`Kolekcja ${c.name}`} />
   </a>
   <figure class="spread__fig spread__fig--tall" data-reveal style="--d: 120ms">

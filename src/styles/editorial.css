@@ -21,6 +21,8 @@
 @media (prefers-reduced-motion: reduce) {
   @view-transition { navigation: none; }
 }
+/* Strona wczytana z wyprzedzeniem: animacje czekają na wejście (klasę zdejmuje skrypt w <head>) */
+.pre *, .pre *::before, .pre *::after { animation-play-state: paused !important; }
 
 /* ---------- Odsłona: tekst wjeżdża, obraz wyłania się ze szczeliny ---------- */
 @media (prefers-reduced-motion: no-preference) {
@@ -787,7 +789,8 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
   /* Karta → strona mebla: kadr klikniętej karty i zdjęcie główne noszą tę samą nazwę przejścia
      (karcie nadaje ją skrypt w chwili kliknięcia: initProductMorph), więc mebel „przelatuje” na swoją stronę. */
   .page-product .gallery__item.is-active .media { view-transition-name: mebel; }
-  ::view-transition-old(mebel), ::view-transition-new(mebel) { height: 100%; object-fit: cover; }
+  ::view-transition-old(mebel), ::view-transition-new(mebel),
+  ::view-transition-old(kolekcja), ::view-transition-new(kolekcja) { height: 100%; object-fit: cover; }
   ::view-transition-group(mebel) { z-index: 1; }
 
   /* Nazwa kolekcji podnosi się jak szyld: obrót wokół dolnej krawędzi zamiast zwykłego wjazdu */

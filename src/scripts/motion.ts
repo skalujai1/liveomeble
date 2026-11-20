@@ -315,32 +315,43 @@ function initCardFlip() {
   }, { passive: true });
 }
 
-// Przejście karta → strona mebla (View Transitions między dokumentami): kadr klikniętej karty dostaje nazwę „mebel”,
-// taką samą jak zdjęcie główne na stronie mebla, więc przeglądarka płynnie przeprowadza jedno w drugie.
-// Powrót (strona mebla → lista) obsługuje krótki skrypt w <head> (BaseLayout), bo musi zdążyć przed pierwszą klatką.
-function initProductMorph() {
+// Przejścia „kadr w kadr” (View Transitions między dokumentami). Nazwę przejścia dostaje tylko kliknięty kadr, w chwili
+// przejścia: karta mebla → zdjęcie główne na stronie mebla („mebel”), zdjęcie kolekcji z rozkładówki albo pasa → hero
+// kolekcji („kolekcja”). Stałe nazwy na wszystkich kadrach były drogie: przeglądarka fotografuje i animuje każdy z nich.
+// Drugą stronę pary (hero kolekcji, powrót strona mebla → lista) ustawia skrypt w <head> (BaseLayout), bo musi zdążyć
+// przed pierwszą klatką nowej strony.
+function initMorph() {
   if (!('onpageswap' in window) || reduce()) return;
-  let clicked: HTMLElement | null = null;
+  let frame: HTMLElement | null = null;
+  let name = '';
   document.addEventListener('click', e => {
+    const t = e.target as Element;
     // tylko linki do mebla (kafel „Polecane” ma też link „Gdzie kupić”); adresy w serwisie są względne od korzenia
-    const a = (e.target as Element).closest?.('a[href^="/produkt/"]');
-    clicked = a ? a.closest<HTMLElement>('.product-card, .featured-tile') : null;
+    const card = t.closest?.('a[href^="/produkt/"]')?.closest('.product-card, .featured-tile');
+    // zdjęcie albo przycisk „Zobacz kolekcję” w rozkładówce, karta w pasie kolekcji
+    const coll = t.closest?.('.spread__fig--angle, .spread__cta .btn, .rail__link')?.closest('.spread, .rail__link');
+    frame = card?.querySelector<HTMLElement>('.product-card__frame, .featured-tile__media')
+      ?? coll?.querySelector<HTMLElement>('.spread__fig--angle, .rail__pic') ?? null;
+    name = card ? 'mebel' : 'kolekcja';
   }, true);
   addEventListener('pageswap', e => {
-    const vt = (e as Event & { viewTransition?: { finished: Promise<void> } }).viewTransition;
+    const ev = e as Event & { viewTransition?: { finished: Promise<void> }; activation?: { entry?: { url?: string } } };
+    const vt = ev.viewTransition;
     if (!vt) return;
-    // lista po powrocie wie, której karcie nadać nazwę
-    try { sessionStorage.setItem('lv-morph', location.pathname); } catch { /* tryb prywatny */ }
-    const frame = clicked?.querySelector<HTMLElement>('.product-card__frame, .featured-tile__media');
-    if (!frame) return;
+    const f = frame;
+    // lista po powrocie wie, której karcie nadać nazwę; hero kolekcji wie, że przyjmuje kliknięte zdjęcie
+    const to = ev.activation?.entry?.url;
+    try {
+      sessionStorage.setItem('lv-morph', location.pathname);
+      sessionStorage.setItem('lv-kolekcja', f && name === 'kolekcja' && to ? new URL(to).pathname : '');
+    } catch { /* tryb prywatny */ }
+    if (!f) return;
     // nazwa musi być jedna na stronę: zdjęcie główne (strona mebla → inny mebel z kompletu) oddaje ją karcie
-    document.querySelectorAll<HTMLElement>('.gallery__item .media').forEach(m => { m.style.viewTransitionName = 'none'; });
-    frame.style.viewTransitionName = 'mebel';
+    const owners = name === 'mebel' ? [...document.querySelectorAll<HTMLElement>('.gallery__item .media')] : [];
+    owners.forEach(m => { m.style.viewTransitionName = 'none'; });
+    f.style.viewTransitionName = name;
     // po powrocie z pamięci podręcznej (bfcache) strona ma być w stanie wyjściowym
-    const reset = () => {
-      frame.style.viewTransitionName = '';
-      document.querySelectorAll<HTMLElement>('.gallery__item .media').forEach(m => { m.style.viewTransitionName = ''; });
-    };
+    const reset = () => { f.style.viewTransitionName = ''; owners.forEach(m => { m.style.viewTransitionName = ''; }); };
     vt.finished.then(reset, reset);
   });
 }
@@ -352,7 +363,7 @@ export function initMotion() {
   initHero();
   initHotspots();
   initCardFlip();
-  initProductMorph();
+  initMorph();
   initRails();
   initShowcase();
 }

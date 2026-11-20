@@ -1,7 +1,7 @@
 ---
 // Hero kolekcji na cały ekran (kadr cinema 2:1, na telefonie pion 4:5) pod przezroczystym nagłówkiem.
-// H1 w skali plakatu, charakter, liczba mebli i kolorów, dwa działania. view-transition-name = ta sama nazwa co ujęcie kolekcji
-// na liście i na stronie głównej, więc przejście płynnie powiększa kliknięte zdjęcie do hero.
+// H1 w skali plakatu, charakter, liczba mebli i kolorów, dwa działania. Kliknięte zdjęcie kolekcji
+// (rozkładówka, pas kolekcji) płynnie powiększa się do hero: nazwa przejścia „kolekcja” w editorial.css i initMorph.
 import HeroPicture from './HeroPicture.astro';
 import Rich from './Rich.astro';
 import { collectionImage } from '../lib/images';
@@ -17,7 +17,7 @@ const [, prefix, name] = h1.match(/^(Kolekcja)\s+(.+)$/) ?? [null, null, h1];
 const dots = c.finishes.map(f => ({ label: f.label, a: finishById.get(f.front)?.hex ?? '#ccc', b: finishById.get(f.body ?? f.front)?.hex ?? '#ccc' }));
 ---
 <section class="collection-hero on-dark" aria-labelledby="h1" data-overlay-hero>
-  <div class="collection-hero__media" style={`view-transition-name: kolekcja-${c.slug}`}>
+  <div class="collection-hero__media">
     <HeroPicture wide={wide} {alt} class="collection-hero__pic" sizes="100vw" />
   </div>
   <div class="container collection-hero__copy">
