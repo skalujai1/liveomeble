@@ -35,16 +35,17 @@ const spreads = heroCollections.filter(c => c.arrangements.length >= 4)
   .slice(0, 3);
 const first = heroCollections[0];
 
-// Polecane: po jednym meblu z innej kolekcji i innego rodzaju, z własnym zdjęciem.
+// Polecane: 8 mebli (dwa rzędy po 4), po jednym z innej kolekcji i innego rodzaju, z własnym zdjęciem.
 const seenCol = new Set<string>();
 const seenType = new Set<string>();
 const featured = productsSorted
   .filter(p => p.variants[0].images?.packshot && !p.variants[0].images.packshotIsScene)
+  .filter(p => p.type !== 'polka') // płaska półka wygląda na kaflu jak pusty kafel
   .filter(p => {
     if (seenCol.has(p.collection) || seenType.has(p.type)) return false;
     seenCol.add(p.collection); seenType.add(p.type); return true;
   })
-  .slice(0, 4);
+  .slice(0, 8);
 
 const advisorCol = heroCollections.find(c => c.heroRoom !== first.heroRoom) ?? heroCollections[1];
 const advisorImg = collectionImage(advisorCol, 'detail');

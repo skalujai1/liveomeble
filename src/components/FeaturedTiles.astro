@@ -1,7 +1,7 @@
 ---
 // Polecane meble na stronie głównej: 4 kafle w rzędzie (na telefonie 2), wszystko w jednym
-// pudełku — kolekcja, nazwa, krótki opis, dwa przyciski i duże zdjęcie mebla. Białe kafle na lnianym pasie;
-// po najechaniu packshot płynnie przechodzi w zdjęcie kolekcji we wnętrzu.
+// pudełku — kolekcja, nazwa, krótki opis, dwa przyciski i duże zdjęcie mebla. Lniane kafle (białe tło packshotu znika
+// przez mix-blend-mode: multiply); po najechaniu packshot płynnie przechodzi w zdjęcie kolekcji we wnętrzu.
 // Cały kafel prowadzi do mebla (rozciągnięty link „Zobacz mebel”); „Gdzie kupić” leży nad nim.
 import Media from './Media.astro';
 import { collectionImage, packshotFor, srcOf } from '../lib/images';
@@ -40,7 +40,7 @@ const tiles = products.map((p, i) => {
         </p>
       </div>
       <div class="featured-tile__media">
-        <Media image={img} alt="" widths={[480, 1000]} sizes="(min-width: 75rem) 18rem, 46vw" ratio="1 / 1" fit="contain" placeholderLabel={p.name} />
+        <Media image={img} alt="" widths={[480, 1000]} sizes="(min-width: 75rem) 24vw, 46vw" ratio="1 / 1" fit="contain" placeholderLabel={p.name} />
         {room && <span class="featured-tile__room" data-src={room} aria-hidden="true"><span>Kolekcja {col.name} we wnętrzu</span></span>}
       </div>
     </li>
