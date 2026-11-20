@@ -1,18 +1,16 @@
 ---
-// Szkielet każdej strony: <head> (SEO + JSON-LD), skip-link, pasek DEMO, nagłówek, <main>, stopka,
+// Szkielet każdej strony: <head> (SEO + JSON-LD), skip-link, nagłówek, <main>, stopka,
 // zgody cookies i leniwy doradca wnętrz.
 import '../styles/tokens.css';
 import '../styles/base.css';
 import '../styles/theme.css';
 import '../styles/editorial.css';
 import SeoHead from '../components/SeoHead.astro';
-import DemoBar from '../components/DemoBar.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import AssistantLoader from '../components/AssistantLoader.astro';
-import { DEMO } from '../config';
 import { breadcrumbList, organization, website, type Crumb, type Node } from '../lib/jsonld';
 import { site } from '../lib/site';
 
@@ -99,7 +97,6 @@ const ld: Node[] = [website(), organization(), ...jsonLd, ...(crumbs ? [breadcru
   </head>
   <body class:list={[pageClass, { 'has-overlay': overlay }]}>
     <a class="skip-link" href="#tresc">{site.skipLink}</a>
-    {DEMO && <DemoBar />}
     <SiteHeader {path} />
     <main id="tresc" tabindex="-1">
       <slot name="hero" />

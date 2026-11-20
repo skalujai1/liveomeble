@@ -17,7 +17,8 @@
   --color-accent-contrast: #ffffff;
   --color-walnut: #4a3427;
   --color-forest: #2f4637;          /* las: Gdzie kupić, Dla sklepów, „Nowość” (biały 10.4:1) */
-  --color-dark: #2a2420;               /* ciemny brąz: duże płaszczyzny — stopka, pasek górny, pas z doradcą */
+  --color-dark: #2a2420;               /* ciemny brąz: duże płaszczyzny — pasek górny, pas z doradcą */
+  --color-footer: #0b0b0b;             /* stopka: czerń (decyzja Michała 20.11.2026) */
   --color-link: #2a2420;
   --color-promo: #9e2a35;           /* wino: cena promocyjna, plakietka rabatu (biały 7.4:1, na bieli 7.3:1) */
   --color-new: #2f4637;
