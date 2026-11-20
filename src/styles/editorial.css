@@ -6,16 +6,24 @@
  */
 :root {
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* przejścia między stronami: rusza spokojnie, w połowie czasu jest w połowie drogi, długo i miękko hamuje */
+  --ease-morph: cubic-bezier(0.33, 0.12, 0.15, 1);
+  --dur-page: 1100ms;
   --dur-reveal: 700ms;
   --rail-pad: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
 }
 
 /* ---------- Przejścia między stronami (View Transitions, natywnie w przeglądarce) ---------- */
 @view-transition { navigation: auto; }
-::view-transition-old(root) { animation: 180ms ease-out both vt-out; }
-::view-transition-new(root) { animation: 520ms var(--ease-expo) both odslona; }
-::view-transition-group(*) { animation-duration: 560ms; animation-timing-function: var(--ease-expo); }
+::view-transition-old(root) { animation: 360ms ease-out both vt-out; }
+::view-transition-new(root) { animation: 900ms var(--ease-morph) both odslona; }
+::view-transition-group(*) { animation-duration: var(--dur-page); animation-timing-function: var(--ease-morph); }
+/* Zdjęcie kolekcji leci do hero (typ ustawia skrypt w <head>): reszta strony tylko się przenika, bez szczeliny,
+   żeby za lecącym zdjęciem nie otwierał się ciemny pas. Jeden gest naraz. */
+html:active-view-transition-type(kolekcja)::view-transition-old(root) { animation: 700ms ease both vt-out; }
+html:active-view-transition-type(kolekcja)::view-transition-new(root) { animation: 700ms ease both vt-in; }
 @keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; } }
 /* Odsłona: jedyny gest ruchu w serwisie — kadr otwiera się z poziomej szczeliny w połowie wysokości */
 @keyframes odslona { from { clip-path: inset(50% 0 50% 0); } to { clip-path: inset(0); } }
 @media (prefers-reduced-motion: reduce) {
@@ -792,6 +800,8 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
   ::view-transition-old(mebel), ::view-transition-new(mebel),
   ::view-transition-old(kolekcja), ::view-transition-new(kolekcja) { height: 100%; object-fit: cover; }
   ::view-transition-group(mebel) { z-index: 1; }
+  /* dwa różne zdjęcia (rozkładówka i hero) przenikają się na początku lotu, potem leci już samo hero (bez długiego podwójnego obrazu) */
+  ::view-transition-old(kolekcja), ::view-transition-new(kolekcja) { animation-duration: 500ms; }
 
   /* Nazwa kolekcji podnosi się jak szyld: obrót wokół dolnej krawędzi zamiast zwykłego wjazdu */
   .is-live .hero-curtain__slide.is-active .hero-curtain__copy > .hero-curtain__name,

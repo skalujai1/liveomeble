@@ -77,6 +77,7 @@ const ld: Node[] = [website(), organization(), ...jsonLd, ...(crumbs ? [breadcru
           // zdjęcie rośnie do hero; nagłówek i napis hero (osobne warstwy nad nim) nie chowają się pod lecącym zdjęciem
           var named = [[hero, 'kolekcja'], [document.querySelector('.site-header'), 'naglowek'], [document.querySelector('.collection-hero__copy'), 'kolekcja-napis']];
           named.forEach(function (p) { if (p[0]) p[0].style.viewTransitionName = p[1]; });
+          if (e.viewTransition.types) e.viewTransition.types.add('kolekcja');
           var done = function () { named.forEach(function (p) { if (p[0]) p[0].style.viewTransitionName = ''; }); };
           return e.viewTransition.finished.then(done, done);
         }
