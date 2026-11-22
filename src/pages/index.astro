@@ -89,7 +89,7 @@ const advisorImg = collectionImage(advisorCol, 'detail');
       <h2 class="rail-section__title" id="wszystkie-tytul">Wszystkie kolekcje</h2>
       <a class="link" href={kol.more.href}>{fill(kol.more.label, { count: collections.length })}</a>
     </header>
-    <CollectionRail {collections} named={spreads.map(c => c.slug)} label="Kolekcje Liveo" />
+    <CollectionRail {collections} label="Kolekcje Liveo" />
   </section>
 
   <section class="section rooms-section" aria-labelledby="pomieszczenia-tytul">

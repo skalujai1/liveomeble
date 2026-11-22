@@ -48,16 +48,39 @@ const ld: Node[] = [website(), organization(), ...jsonLd, ...(crumbs ? [breadcru
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
     <script is:inline>
-      // Powrót ze strony mebla na listę: karta tego mebla dostaje nazwę przejścia „mebel”, więc zdjęcie wraca na swoje miejsce
-      // (druga połowa initProductMorph z scripts/motion.ts; tutaj, bo musi zdążyć przed pierwszą klatką nowej strony).
+      document.documentElement.classList.replace('no-js', 'js');
+      // strona wczytana z wyprzedzeniem (reguły niżej) stoi z animacjami w miejscu, dopóki ktoś na nią nie wejdzie
+      if (document.prerendering) {
+        document.documentElement.classList.add('pre');
+        document.addEventListener('prerenderingchange', function () { document.documentElement.classList.remove('pre'); }, { once: true });
+      }
+    </script>
+    <!-- Najechanie na link wczytuje następną stronę z wyprzedzeniem (Chrome, Edge): przejście startuje od razu,
+         a zdjęcie w hero jest już pobrane. Inne przeglądarki pomijają ten blok. -->
+    <script is:inline type="speculationrules" set:html={JSON.stringify({ prerender: [{ where: { and: [{ href_matches: '/*' }, { not: { selector_matches: "[href^='#'], [target], [download]" } }] }, eagerness: 'moderate' }] })} />
+    <script is:inline>
+      // Druga połowa initMorph z scripts/motion.ts (tutaj, bo musi zdążyć przed pierwszą klatką nowej strony):
+      // hero kolekcji przyjmuje kliknięte zdjęcie kolekcji, a po powrocie ze strony mebla karta tego mebla dostaje nazwę
+      // przejścia „mebel”, więc zdjęcie wraca na swoje miejsce.
       addEventListener('pagereveal', function (e) {
-        var from = null;
-        try { from = sessionStorage.getItem('lv-morph'); sessionStorage.removeItem('lv-morph'); } catch (_) {}
+        var from = null, kol = null;
+        try {
+          from = sessionStorage.getItem('lv-morph'); sessionStorage.removeItem('lv-morph');
+          kol = sessionStorage.getItem('lv-kolekcja'); sessionStorage.removeItem('lv-kolekcja');
+        } catch (_) {}
         document.querySelectorAll('.product-card__frame, .featured-tile__media').forEach(function (f) { f.style.viewTransitionName = ''; });
         if (!e.viewTransition) return;
         var inView = function (el) { var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
+        var hero = document.querySelector('.collection-hero__media');
+        if (hero && kol === location.pathname) {
+          // zdjęcie rośnie do hero; nagłówek i napis hero (osobne warstwy nad nim) nie chowają się pod lecącym zdjęciem
+          var named = [[hero, 'kolekcja'], [document.querySelector('.site-header'), 'naglowek'], [document.querySelector('.collection-hero__copy'), 'kolekcja-napis']];
+          named.forEach(function (p) { if (p[0]) p[0].style.viewTransitionName = p[1]; });
+          if (e.viewTransition.types) e.viewTransition.types.add('kolekcja');
+          var done = function () { named.forEach(function (p) { if (p[0]) p[0].style.viewTransitionName = ''; }); };
+          return e.viewTransition.finished.then(done, done);
+        }
         // strona mebla otwarta niżej (np. powrót do kompletu): zdjęcie główne poza ekranem nie bierze udziału w przejściu
         var main = document.querySelector('.gallery__item.is-active .media');
         if (main) {
@@ -108,7 +131,8 @@ const ld: Node[] = [website(), organization(), ...jsonLd, ...(crumbs ? [breadcru
     {assistant && <AssistantLoader />}
     <script>
       import { initMotion } from '../scripts/motion';
-      initMotion();
+      if ((document as Document & { prerendering?: boolean }).prerendering) document.addEventListener('prerenderingchange', initMotion, { once: true });
+      else initMotion();
     </script>
   </body>
 </html>

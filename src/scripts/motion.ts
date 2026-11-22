@@ -97,7 +97,8 @@ function initHotspots() {
   };
   for (const list of lists) {
     let active: HTMLElement | null = null;
-    let timer = 0;
+    let auto: HTMLElement | null = null; // karta otwarta sama (nie przez użytkownika)
+    let timer = 0, t1 = 0, t2 = 0;
     const off = () => {
       active?.classList.remove('is-active');
       active = null;
@@ -119,12 +120,27 @@ function initHotspots() {
     list.querySelectorAll<HTMLElement>('.hero-spot').forEach(spot => {
       const link = spot.querySelector<HTMLElement>('.hero-spot__link');
       if (!link) return;
-      link.addEventListener('pointerenter', () => on(spot));
+      link.addEventListener('pointerenter', () => { auto = null; on(spot); });
       link.addEventListener('pointerleave', later);
-      link.addEventListener('focusin', () => on(spot));
+      link.addEventListener('focusin', () => { auto = null; on(spot); });
       link.addEventListener('focusout', () => { clearTimeout(timer); off(); });
     });
     addEventListener('resize', () => { clearTimeout(timer); off(); });
+    // Kropka oznaczona w hotspots.json („auto”) sama pokazuje swój mebel w czasie slajdu: gdy kropki już stoją
+    // (wejście kończy się po 1,6 s), do chwili przed zmianą slajdu, więc slajd nie trwa dłużej. Ruch użytkownika ma pierwszeństwo.
+    const slide = list.closest<HTMLElement>('[data-slide]');
+    const stop = () => { clearTimeout(t1); clearTimeout(t2); if (auto && active === auto) off(); auto = null; };
+    slide?.addEventListener('slide:show', e => {
+      stop();
+      const delay = (e as CustomEvent<number>).detail;
+      t1 = window.setTimeout(() => {
+        if (active || !list.offsetWidth) return; // użytkownik już coś pokazuje albo kropek nie widać (telefon)
+        auto = list.querySelector<HTMLElement>('.hero-spot[data-auto]:not(.is-covered)') ?? list.querySelector<HTMLElement>('.hero-spot:not(.is-covered)');
+        if (auto) on(auto);
+      }, 2000);
+      t2 = window.setTimeout(stop, delay - 1200);
+    });
+    slide?.addEventListener('slide:hide', stop);
   }
   const hero = document.querySelector<HTMLElement>('[data-hero]');
   const bar = hero?.querySelector<HTMLElement>('.hero-curtain__bar');
@@ -180,6 +196,7 @@ function initHero() {
       wake(slides[(next + 1) % slides.length]);
       slides[i].classList.remove('is-active');
       slides[i].classList.add('is-leaving');
+      slides[i].dispatchEvent(new Event('slide:hide'));
       const prev = slides[i];
       setTimeout(() => prev.classList.remove('is-leaving'), 1400);
       i = next;
@@ -195,7 +212,10 @@ function initHero() {
       hero.style.setProperty('--slide', String(i));
       if (focusSlide) slides[i].querySelector<HTMLElement>('a')?.focus({ preventScroll: true });
       schedule();
+      announce();
     };
+    // kropki slajdu (initHotspots) pokazują mebel tylko przy pracującej karuzeli
+    const announce = () => { if (!stopped) slides[i].dispatchEvent(new CustomEvent('slide:show', { detail: DELAY })); };
     const schedule = () => {
       clearTimeout(timer);
       // restart paska postępu (animacja CSS na aktywnej pozycji indeksu)
@@ -236,6 +256,7 @@ function initHero() {
 
     hero.classList.add('is-live');
     setStopped(stopped);
+    announce();
     // następny slajd dopiero po wczytaniu strony, żeby nie odbierał łącza pierwszemu zdjęciu (LCP)
     if (document.readyState === 'complete') wake(slides[1]);
     else addEventListener('load', () => wake(slides[1]), { once: true });
@@ -315,32 +336,43 @@ function initCardFlip() {
   }, { passive: true });
 }
 
-// Przejście karta → strona mebla (View Transitions między dokumentami): kadr klikniętej karty dostaje nazwę „mebel”,
-// taką samą jak zdjęcie główne na stronie mebla, więc przeglądarka płynnie przeprowadza jedno w drugie.
-// Powrót (strona mebla → lista) obsługuje krótki skrypt w <head> (BaseLayout), bo musi zdążyć przed pierwszą klatką.
-function initProductMorph() {
+// Przejścia „kadr w kadr” (View Transitions między dokumentami). Nazwę przejścia dostaje tylko kliknięty kadr, w chwili
+// przejścia: karta mebla → zdjęcie główne na stronie mebla („mebel”), zdjęcie kolekcji z rozkładówki albo pasa → hero
+// kolekcji („kolekcja”). Stałe nazwy na wszystkich kadrach były drogie: przeglądarka fotografuje i animuje każdy z nich.
+// Drugą stronę pary (hero kolekcji, powrót strona mebla → lista) ustawia skrypt w <head> (BaseLayout), bo musi zdążyć
+// przed pierwszą klatką nowej strony.
+function initMorph() {
   if (!('onpageswap' in window) || reduce()) return;
-  let clicked: HTMLElement | null = null;
+  let frame: HTMLElement | null = null;
+  let name = '';
   document.addEventListener('click', e => {
+    const t = e.target as Element;
     // tylko linki do mebla (kafel „Polecane” ma też link „Gdzie kupić”); adresy w serwisie są względne od korzenia
-    const a = (e.target as Element).closest?.('a[href^="/produkt/"]');
-    clicked = a ? a.closest<HTMLElement>('.product-card, .featured-tile') : null;
+    const card = t.closest?.('a[href^="/produkt/"]')?.closest('.product-card, .featured-tile');
+    // zdjęcie albo przycisk „Zobacz kolekcję” w rozkładówce, karta w pasie kolekcji
+    const coll = t.closest?.('.spread__fig--angle, .spread__cta .btn, .rail__link')?.closest('.spread, .rail__link');
+    frame = card?.querySelector<HTMLElement>('.product-card__frame, .featured-tile__media')
+      ?? coll?.querySelector<HTMLElement>('.spread__fig--angle, .rail__pic') ?? null;
+    name = card ? 'mebel' : 'kolekcja';
   }, true);
   addEventListener('pageswap', e => {
-    const vt = (e as Event & { viewTransition?: { finished: Promise<void> } }).viewTransition;
+    const ev = e as Event & { viewTransition?: { finished: Promise<void> }; activation?: { entry?: { url?: string } } };
+    const vt = ev.viewTransition;
     if (!vt) return;
-    // lista po powrocie wie, której karcie nadać nazwę
-    try { sessionStorage.setItem('lv-morph', location.pathname); } catch { /* tryb prywatny */ }
-    const frame = clicked?.querySelector<HTMLElement>('.product-card__frame, .featured-tile__media');
-    if (!frame) return;
+    const f = frame;
+    // lista po powrocie wie, której karcie nadać nazwę; hero kolekcji wie, że przyjmuje kliknięte zdjęcie
+    const to = ev.activation?.entry?.url;
+    try {
+      sessionStorage.setItem('lv-morph', location.pathname);
+      sessionStorage.setItem('lv-kolekcja', f && name === 'kolekcja' && to ? new URL(to).pathname : '');
+    } catch { /* tryb prywatny */ }
+    if (!f) return;
     // nazwa musi być jedna na stronę: zdjęcie główne (strona mebla → inny mebel z kompletu) oddaje ją karcie
-    document.querySelectorAll<HTMLElement>('.gallery__item .media').forEach(m => { m.style.viewTransitionName = 'none'; });
-    frame.style.viewTransitionName = 'mebel';
+    const owners = name === 'mebel' ? [...document.querySelectorAll<HTMLElement>('.gallery__item .media')] : [];
+    owners.forEach(m => { m.style.viewTransitionName = 'none'; });
+    f.style.viewTransitionName = name;
     // po powrocie z pamięci podręcznej (bfcache) strona ma być w stanie wyjściowym
-    const reset = () => {
-      frame.style.viewTransitionName = '';
-      document.querySelectorAll<HTMLElement>('.gallery__item .media').forEach(m => { m.style.viewTransitionName = ''; });
-    };
+    const reset = () => { f.style.viewTransitionName = ''; owners.forEach(m => { m.style.viewTransitionName = ''; }); };
     vt.finished.then(reset, reset);
   });
 }
@@ -349,10 +381,10 @@ export function initMotion() {
   document.documentElement.classList.add('motion-ready');
   initReveal();
   initHeader();
+  initHotspots(); // przed initHero: słucha zdarzeń slajdów
   initHero();
-  initHotspots();
   initCardFlip();
-  initProductMorph();
+  initMorph();
   initRails();
   initShowcase();
 }

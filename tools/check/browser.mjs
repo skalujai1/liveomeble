@@ -121,6 +121,8 @@ for (const path of PAGES) {
 // 4. „Znajdź salon” z nagłówka → /gdzie-kupic/?kod=… pokazuje najbliższe salony.
 {
   const { ctx, page } = await open('/', 1280);
+  await page.click('.site-header__search');
+  if (!(await page.evaluate(() => document.activeElement?.id === 'naglowek-kod'))) fail('znajdź salon', 'lupa w nagłówku nie przenosi fokusu do pola kodu');
   await page.fill('#naglowek-kod', '35-060');
   await Promise.all([page.waitForURL(/\/gdzie-kupic\/\?kod=35-060/), page.press('#naglowek-kod', 'Enter')]);
   await page.waitForTimeout(1500);

@@ -8,7 +8,7 @@ import hotspots from '../content/hotspots.json';
 import { collectionImage, packshotFor, srcOf } from '../lib/images';
 import { colorCount, dimsLong, finishById, productsByCollection, site, url, type Collection } from '../lib/site';
 
-type Spot = { sku: string; x: number; y: number; box: [number, number, number, number] };
+type Spot = { sku: string; x: number; y: number; box: [number, number, number, number]; auto?: boolean };
 const HOTSPOTS = hotspots as unknown as Record<string, { image: string; spots: Spot[] }>;
 
 interface Props { collections: Collection[] }
@@ -54,7 +54,7 @@ function spotsFor(c: Collection, base: string | undefined, items: ReturnType<typ
           <div class="hero-spots-wrap">
           <ul class="hero-spots" style={`--ar: ${s.ar.toFixed(4)}`} aria-label={`Meble na zdjęciu kolekcji ${s.c.name}`} data-spots>
             {s.spots.map(sp => (
-              <li class="hero-spot" style={`--x: ${sp.x}%; --y: ${sp.y}%`} data-box={sp.box.join(' ')}>
+              <li class="hero-spot" style={`--x: ${sp.x}%; --y: ${sp.y}%`} data-box={sp.box.join(' ')} data-auto={sp.auto ? '' : undefined}>
                 <a class="hero-spot__link" href={sp.href} aria-label={`${sp.name}, ${sp.dims}`}>
                   <span class="hero-spot__line" aria-hidden="true"></span>
                   <span class="hero-spot__dot" aria-hidden="true"></span>
