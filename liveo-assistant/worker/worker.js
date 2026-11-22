@@ -2,8 +2,8 @@
 //
 // POST /chat   { messages: [{role:'user'|'assistant', content}], context: { catalog, state } }
 //           →  { reply, action, model }   albo   { error } (widżet przechodzi wtedy w tryb lokalny)
-// POST /wizualizacja { room, furniture (data URL JPEG/PNG/WEBP), name, dims, aspect, consent: true }
-//           →  { image (data URL), model }   albo   { error }
+// POST /wizualizacja { room, items: [{ image, name, dims }] (1–3 meble, data URL JPEG/PNG/WEBP), aspect, consent: true }
+//           →  { image (data URL), model, spots: [{ n, x, y }] }   albo   { error, detail }
 // GET  /health →  { ok, configured }
 //
 // Sekret OPENROUTER_API_KEY ustawiamy w Cloudflare (wrangler secret / GitHub Actions) – nigdy w repo
@@ -18,7 +18,7 @@ const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const IMAGES_URL = 'https://openrouter.ai/api/v1/images';
 // Wizualizacja: model obrazów OpenAI (ten sam co w ChatGPT) przez OpenRouter; zmiana modelu: zmienna IMAGE_MODEL.
 // Limit na IP jest „best effort” (pamięć jednej instancji); twardy limit kosztów to limit wydatków na kluczu OpenRouter.
-const VIS = { model: 'openai/gpt-image-2', fallback: 'google/gemini-3.1-flash-image', quality: 'medium', bodyBytes: 7_000_000, imageBytes: 3_000_000, limit: 6, windowMs: 60 * 60_000, timeoutMs: 120_000 };
+const VIS = { model: 'openai/gpt-image-2', fallback: 'google/gemini-3.1-flash-image', locator: 'google/gemini-2.5-flash', maxItems: 3, quality: 'medium', bodyBytes: 7_000_000, imageBytes: 3_000_000, limit: 6, windowMs: 60 * 60_000, timeoutMs: 120_000 };
 const ASPECTS = ['1:1', '4:3', '3:4', '3:2', '2:3', '16:9', '9:16'];
 const DATA_URL = /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/]+=*$/;
 // Tylko płatne modele (bez :free – darmowe znikają bez ostrzeżenia). Kolejność = kolejność prób.
@@ -116,10 +116,11 @@ export default {
 // ---------------------------------------------------------------------------
 // Wizualizacja: mebel z katalogu wstawiony w zdjęcie pokoju klienta
 
-const VIS_PROMPT = (name, dims) => `Edit the FIRST image: it is a photo of the customer's room. Insert the piece of furniture shown in the SECOND image (product photo of "${name}"${dims ? `, real size ${dims}` : ''}) into this room so the result looks like a real photograph.
+const VIS_PROMPT = items => `Edit the FIRST image: it is a photo of the customer's room. Insert the furniture shown in the next ${items.length === 1 ? 'image' : `${items.length} images`} into this room so the result looks like a real photograph:
+${items.map((it, i) => `- image ${i + 2}: "${it.name}"${it.dims ? `, real size ${it.dims}` : ''}`).join('\n')}
 Keep everything else exactly as it is: walls, floor, windows, lighting, camera angle and all existing objects.
-Place the furniture in one natural, free spot (for example against a free wall, standing on the floor), at a realistic scale for its real size, with correct perspective, contact shadows and lighting that matches the room.
-Keep the furniture's design, colours, materials, handles, legs and proportions exactly as in the product photo.
+Place each piece in its own natural, free spot (for example against a free wall, standing on the floor), at a realistic scale for its real size, with correct perspective, contact shadows and lighting that matches the room. Pieces must not overlap.
+Keep each piece's design, colours, materials, handles, legs and proportions exactly as in its product photo.
 Do not add any other furniture, decorations, people, text, watermarks or logos.`;
 
 const visHits = new Map();
@@ -143,15 +144,51 @@ export function readVisual(body) {
     return v;
   };
   const text = (v, max) => (typeof v === 'string' ? v.replace(/[\u0000-\u001f"`<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max) : '');
-  const name = text(body.name, 120);
-  if (!name) throw new Error('brak nazwy mebla');
-  return {
-    room: image(body.room),
-    furniture: image(body.furniture),
-    name,
-    dims: text(body.dims, 80),
-    aspect: ASPECTS.includes(body.aspect) ? body.aspect : '4:3',
-  };
+  const list = Array.isArray(body.items) ? body.items : [{ image: body.furniture, name: body.name, dims: body.dims }];
+  if (!list.length || list.length > VIS.maxItems) throw new Error(`od 1 do ${VIS.maxItems} mebli`);
+  const items = list.map(it => {
+    const name = text(it?.name, 120);
+    if (!name) throw new Error('brak nazwy mebla');
+    return { image: image(it.image), name, dims: text(it.dims, 80) };
+  });
+  return { room: image(body.room), items, aspect: ASPECTS.includes(body.aspect) ? body.aspect : '4:3' };
+}
+
+/** Gdzie na gotowym obrazie stoją wstawione meble (środek w % szerokości i wysokości) — do kropek z nazwą i linkiem. */
+export function parseSpots(text, count) {
+  const m = String(text || '').match(/\{[\s\S]*\}/);
+  if (!m) return [];
+  let data;
+  try { data = JSON.parse(m[0]); } catch { return []; }
+  const seen = new Set();
+  return (Array.isArray(data.items) ? data.items : [])
+    .map(it => ({ n: Math.round(Number(it?.n)), x: Number(it?.x), y: Number(it?.y) }))
+    .filter(it => it.n >= 1 && it.n <= count && !seen.has(it.n) && seen.add(it.n) && Number.isFinite(it.x) && Number.isFinite(it.y))
+    .map(it => ({ n: it.n, x: Math.min(97, Math.max(3, it.x)), y: Math.min(97, Math.max(3, it.y)) }));
+}
+
+async function locate(env, image, items) {
+  try {
+    const res = await fetch(OPENROUTER_URL, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${env.OPENROUTER_API_KEY}`, 'Content-Type': 'application/json', 'HTTP-Referer': env.SITE_URL || 'https://liveomeble.pl', 'X-Title': 'Liveo Doradca wnetrz - kropki' },
+      body: JSON.stringify({
+        model: env.LOCATE_MODEL || VIS.locator,
+        temperature: 0,
+        max_tokens: 200,
+        messages: [{ role: 'user', content: [
+          { type: 'text', text: `This photo of a room contains these furniture pieces:\n${items.map((it, i) => `${i + 1}. ${it.name}`).join('\n')}\nFor each piece you can see, give the centre of the piece in percent of the image width (x, from the left) and height (y, from the top). Reply only with JSON: {"items":[{"n":1,"x":50,"y":60}]}. Skip pieces you cannot see.` },
+          { type: 'image_url', image_url: { url: image } },
+        ] }],
+      }),
+      signal: AbortSignal.timeout(20_000),
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return parseSpots(data?.choices?.[0]?.message?.content, items.length);
+  } catch {
+    return [];
+  }
 }
 
 async function visualize(req, env, cors) {
@@ -194,7 +231,10 @@ async function visualize(req, env, cors) {
         const data = await res.json();
         const img = data?.data?.[0];
         console.log(JSON.stringify({ event: 'visual', model, status: res.status, ms: Date.now() - started, cost: data?.usage?.cost ?? null }));
-        if (img?.b64_json) return json({ image: `data:${img.media_type || 'image/jpeg'};base64,${img.b64_json}`, model }, 200, cors.headers);
+        if (img?.b64_json) {
+          const image = `data:${img.media_type || 'image/jpeg'};base64,${img.b64_json}`;
+          return json({ image, model, spots: await locate(env, image, input.items) }, 200, cors.headers);
+        }
         last = { error: 'unavailable', status: 503, detail: 'pusta odpowiedź modelu' };
         continue;
       }
@@ -217,11 +257,8 @@ async function visualize(req, env, cors) {
 export function visBody(model, input, env = {}) {
   const body = {
     model,
-    prompt: VIS_PROMPT(input.name, input.dims),
-    input_references: [
-      { type: 'image_url', image_url: { url: input.room } },
-      { type: 'image_url', image_url: { url: input.furniture } },
-    ],
+    prompt: VIS_PROMPT(input.items),
+    input_references: [input.room, ...input.items.map(it => it.image)].map(url => ({ type: 'image_url', image_url: { url } })),
     aspect_ratio: input.aspect,
   };
   if (model.startsWith('openai/')) Object.assign(body, { quality: env.IMAGE_QUALITY || VIS.quality, output_format: 'jpeg' });

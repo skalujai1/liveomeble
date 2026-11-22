@@ -80,16 +80,16 @@ Każda odpowiedź doradcy jest oznaczona jako odpowiedź asystenta AI.
 
 ### Wizualizacja AI (mebel w Twoim zdjęciu)
 
-Funkcja „Zobacz w moim pokoju” w doradcy wnętrz wstawia wybrany mebel Liveo w zdjęcie Twojego pokoju. Jest dobrowolna: działa tylko wtedy, gdy zaznaczysz zgodę na przetwarzanie zdjęcia i klikniesz przycisk przy meblu. Bez zgody możesz korzystać z doradcy, wybierając pomieszczenie zamiast zdjęcia.
+Funkcja wizualizacji w doradcy wnętrz wstawia wybrane meble Liveo (do 3 naraz) w zdjęcie Twojego pokoju i zaznacza na gotowym obrazie, gdzie stoją. Jest dobrowolna: działa tylko wtedy, gdy zaznaczysz zgodę na przetwarzanie zdjęcia i klikniesz „Wstaw do zdjęcia”. Bez zgody możesz korzystać z doradcy, wybierając pomieszczenie zamiast zdjęcia.
 
-- **Jakie dane:** zdjęcie Twojego pomieszczenia, zmniejszone w przeglądarce do najwyżej 1024 pikseli na dłuższym boku, oraz zdjęcie, nazwa i wymiary wybranego mebla z naszego katalogu. Nie potrzebujemy Twojego imienia, adresu e-mail ani innych danych kontaktowych.
+- **Jakie dane:** zdjęcie Twojego pomieszczenia, zmniejszone w przeglądarce do najwyżej 1024 pikseli na dłuższym boku, oraz zdjęcia, nazwy i wymiary wybranych mebli z naszego katalogu. Nie potrzebujemy Twojego imienia, adresu e-mail ani innych danych kontaktowych.
 - **Zdjęcie może zawierać dane osobowe:** na przykład wizerunek osób, dokumenty, zdjęcia rodzinne albo widok za oknem. **Zanim wyślesz zdjęcie, upewnij się, że nie ma na nim osób ani rzeczy, których nie chcesz pokazywać.**
 - **Cel:** przygotowanie poglądowej wizualizacji mebla w Twoim wnętrzu, na Twoją prośbę.
 - **Podstawa prawna:** Twoja zgoda (art. 6 ust. 1 lit. a RODO). Zgoda jest dobrowolna. Możesz ją wycofać w każdej chwili: odznacz pole zgody w doradcy albo po prostu nie korzystaj z wizualizacji. Wycofanie zgody nie wpływa na zgodność z prawem przetwarzania, które nastąpiło przed jej wycofaniem.
-- **Jak to działa:** Twoja przeglądarka wysyła zdjęcie pokoju i zdjęcie mebla do naszego serwera pośredniczącego (Cloudflare Workers, Cloudflare, Inc.). Serwer przekazuje je do usługi OpenRouter (OpenRouter, Inc., USA), a ta do dostawcy modelu, który tworzy obraz (obecnie OpenAI, model GPT Image). Gotowy obraz wraca do Twojej przeglądarki. Jeśli zmienimy dostawcę modelu, zaktualizujemy tę informację.
-- **Jak długo:** nie zapisujemy zdjęć ani wizualizacji na naszych serwerach i nie łączymy ich z żadnym profilem. Nasz serwer zapisuje tylko dane techniczne: nazwę modelu, status i czas odpowiedzi, bez zdjęć. Wizualizacja jest tylko w Twojej przeglądarce, dopóki jej nie pobierzesz albo nie zamkniesz strony. Okres, przez który OpenRouter i dostawca modelu mogą przechowywać przesłane dane (na przykład w celu wykrywania nadużyć), określają ich warunki [do uzupełnienia: sprawdzić ustawienia konta OpenRouter, w tym tryb bez przechowywania danych, i umowy powierzenia].
+- **Jak to działa:** Twoja przeglądarka wysyła zdjęcie pokoju i zdjęcia mebli do naszego serwera pośredniczącego (Cloudflare Workers, Cloudflare, Inc.). Serwer przekazuje je do usługi OpenRouter (OpenRouter, Inc., USA), a ta do dostawcy modelu, który tworzy obraz (obecnie OpenAI, model GPT Image; gdy ten odmówi, zapasowo Google, model Gemini). Następnie gotowy obraz trafia, również przez OpenRouter, do modelu Google Gemini, który odczytuje, w którym miejscu obrazu stoi każdy mebel, żeby pokazać kropki z nazwami. Gotowy obraz i położenie mebli wracają do Twojej przeglądarki. Jeśli zmienimy dostawcę modelu, zaktualizujemy tę informację.
+- **Jak długo:** nie zapisujemy zdjęć ani wizualizacji na naszych serwerach i nie łączymy ich z żadnym profilem. Nasz serwer zapisuje tylko dane techniczne: nazwę modelu, status i czas odpowiedzi, bez zdjęć. Wizualizacja jest tylko w Twojej przeglądarce, dopóki jej nie pobierzesz albo nie zamkniesz strony. Okres, przez który OpenRouter i dostawcy modeli mogą przechowywać przesłane dane (na przykład w celu wykrywania nadużyć), określają ich warunki [do uzupełnienia: sprawdzić ustawienia konta OpenRouter, w tym tryb bez przechowywania danych, i umowy powierzenia].
 - **Odbiorcy:** podmioty wymienione wyżej, które przetwarzają dane na nasze zlecenie (punkt 3).
-- **Przekazanie poza EOG:** OpenRouter i OpenAI mają siedzibę w USA. Dane przekazujemy na zasadach opisanych w punkcie 4 [do weryfikacji przez prawnika].
+- **Przekazanie poza EOG:** OpenRouter, OpenAI i Google mają siedzibę w USA. Dane przekazujemy na zasadach opisanych w punkcie 4 [do weryfikacji przez prawnika].
 - **Bez decyzji automatycznych:** wizualizacja nie służy do profilowania i nie wywołuje wobec Ciebie skutków prawnych.
 - **Wynik jest poglądowy:** obraz tworzy sztuczna inteligencja. Kolory, proporcje, rozmiar i ustawienie mebla mogą różnić się od rzeczywistości. Wizualizacja nie jest ofertą ani opisem cech towaru: wiążące są dane na stronie mebla i informacje od salonu partnerskiego.
 - **Twoje prawa:** przysługują Ci prawa opisane w punkcie 5, w tym prawo do wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych. Ponieważ nie zapisujemy zdjęć, po wygenerowaniu wizualizacji nie mamy ich kopii, którą moglibyśmy wydać albo usunąć.
@@ -115,7 +115,7 @@ Nie sprzedajemy danych. Przekazujemy je tylko firmom, które pomagają nam prowa
 - dostawca hostingu i sieci CDN: [do uzupełnienia],
 - dostawca serwera pośredniczącego (API strony i doradcy): [do uzupełnienia: np. Cloudflare, Inc.],
 - dostawca poczty elektronicznej, przez który wysyłamy odpowiedzi i powiadomienia z formularzy: [do uzupełnienia],
-- dostawcy modeli AI dla doradcy wnętrz i wizualizacji AI: OpenRouter, Inc. (USA) oraz dostawca modelu, dla wizualizacji obecnie OpenAI (USA) [do uzupełnienia: dostawca modelu czatu],
+- dostawcy modeli AI dla doradcy wnętrz i wizualizacji AI: OpenRouter, Inc. (USA) oraz dostawcy modeli, dla wizualizacji obecnie OpenAI (USA) i Google (USA) [do uzupełnienia: dostawca modelu czatu],
 - dostawca i serwis systemu ERP Navireo, w zakresie danych partnerów i zamówień: [do uzupełnienia],
 - [do uzupełnienia: biuro rachunkowe, kancelaria prawna, inne].
 

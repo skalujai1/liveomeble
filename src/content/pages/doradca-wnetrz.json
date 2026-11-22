@@ -87,27 +87,31 @@
         ]
       },
       "consent": {
-        "label": "Zgadzam się na przetwarzanie zdjęcia mojego pokoju: przeglądarka odczyta z niego kolory, a gdy kliknę „Zobacz w moim pokoju”, zdjęcie zostanie wysłane do modelu AI, który wstawi w nie wybrany mebel.",
+        "label": "Zgadzam się na przetwarzanie zdjęcia mojego pokoju: przeglądarka odczyta z niego kolory, a gdy kliknę „Wstaw do zdjęcia”, zdjęcie zostanie wysłane do modeli AI, które wstawią w nie wybrane meble i zaznaczą, gdzie stoją.",
         "link": "Co robimy ze zdjęciem",
         "href": "/polityka-prywatnosci/#wizualizacja-ai",
         "required": "Zaznacz zgodę na przetwarzanie zdjęcia, żeby dodać zdjęcie pokoju."
       },
       "visual": {
-        "button": "Zobacz w moim pokoju",
-        "title": "{name} w Twoim pokoju",
-        "loading": "Wstawiam mebel do Twojego zdjęcia. To może chwilę potrwać.",
+        "loading": "Wstawiam meble do Twojego zdjęcia. To może chwilę potrwać.",
         "caption": "Wizualizacja poglądowa wygenerowana przez sztuczną inteligencję. Kolory, proporcje, rozmiar i ustawienie mebla mogą różnić się od rzeczywistości. Przed zakupem sprawdź wymiary na stronie mebla i obejrzyj go w salonie partnerskim.",
-        "consentAsk": "Do wizualizacji wyślemy Twoje zdjęcie pokoju i zdjęcie mebla do modelu AI. Nie zapisujemy ich.",
-        "generate": "Wygeneruj wizualizację",
         "download": "Pobierz obraz",
-        "product": "Zobacz mebel",
-        "retry": "Wygeneruj jeszcze raz",
         "errors": {
           "rate_limited": "Wykorzystano limit wizualizacji na teraz. Spróbuj ponownie za jakiś czas.",
           "rejected": "Model AI nie przygotował tej wizualizacji. Spróbuj z innym zdjęciem pokoju.",
           "bad_request": "Nie udało się wysłać zdjęcia. Dodaj zdjęcie jeszcze raz i spróbuj ponownie.",
           "default": "Wizualizacja jest chwilowo niedostępna. Spróbuj ponownie później."
-        }
+        },
+        "studioTitle": "Twój pokój z meblami Liveo",
+        "studioHint": "Dodaj do 3 mebli przyciskiem + przy meblach niżej i wstaw je do zdjęcia.",
+        "add": "+ Dodaj do pokoju",
+        "added": "✓ W pokoju",
+        "full": "Masz już 3 meble",
+        "remove": "Usuń",
+        "go": "Wstaw do zdjęcia",
+        "showOriginal": "Pokaż moje zdjęcie",
+        "showResult": "Pokaż wizualizację",
+        "consentNeeded": "Zaznacz zgodę, żeby wysłać zdjęcie do wizualizacji."
       }
     },
     {
@@ -127,11 +131,11 @@
       },
       {
         "q": "Czy moje zdjęcie jest gdzieś wysyłane?",
-        "a": "Kolory zdjęcia odczytuje Twoja przeglądarka i do tego nic nie wysyłamy. Zdjęcie trafia do modelu AI tylko wtedy, gdy zaznaczysz zgodę i klikniesz „Zobacz w moim pokoju”: wtedy wysyłamy je razem ze zdjęciem mebla, żeby powstała wizualizacja. Nie zapisujemy zdjęć ani wizualizacji. Szczegóły są w polityce prywatności."
+        "a": "Kolory zdjęcia odczytuje Twoja przeglądarka i do tego nic nie wysyłamy. Zdjęcie trafia do modelu AI tylko wtedy, gdy zaznaczysz zgodę i klikniesz „Wstaw do zdjęcia”: wtedy wysyłamy je razem ze zdjęciami wybranych mebli, żeby powstała wizualizacja. Nie zapisujemy zdjęć ani wizualizacji. Szczegóły są w polityce prywatności."
       },
       {
-        "q": "Czym jest wizualizacja „Zobacz w moim pokoju”?",
-        "a": "To obraz, na którym model AI wstawia wybrany mebel Liveo w zdjęcie Twojego pokoju. Jest poglądowy: kolory, proporcje i rozmiar mogą różnić się od rzeczywistości, dlatego przed zakupem sprawdź wymiary na stronie mebla i obejrzyj go w salonie."
+        "q": "Czym jest wizualizacja mebli w moim pokoju?",
+        "a": "Po dodaniu zdjęcia możesz wybrać do 3 mebli Liveo i wstawić je w zdjęcie swojego pokoju. Obraz tworzy model AI, a kropki na nim pokazują, który to mebel. Wizualizacja jest poglądowa: kolory, proporcje i rozmiar mogą różnić się od rzeczywistości, dlatego przed zakupem sprawdź wymiary na stronie mebla i obejrzyj go w salonie."
       },
       {
         "q": "Jak doradca dobiera meble do zdjęcia?",

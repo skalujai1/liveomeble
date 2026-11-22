@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import worker, { parseReply, sanitizeAction } from '../worker.js';
+import worker, { parseReply, sanitizeAction, parseSpots } from '../worker.js';
 
 test('parseReply: poprawny JSON z akcją', () => {
   const r = parseReply('{"reply":"Proponuję salon.","action":{"type":"room","room":"salon"}}');
@@ -191,4 +191,24 @@ test('wizualizacja: odrzucenie przez GPT Image → zapasowy model Google; powód
   const data = await res.json();
   assert.equal(res.status, 422); assert.equal(data.error, 'rejected'); assert.match(data.detail, /safety/);
   assert.equal(calls.length, 2);
+});
+
+test('wizualizacja: do 3 mebli naraz, kropki z modelu lokalizującego', async () => {
+  const calls = mockOpenRouter((body, n) => n === 1
+    ? new Response(JSON.stringify({ data: [{ b64_json: 'QQ==' }] }), { status: 200 })
+    : ok('{"items":[{"n":1,"x":20,"y":60},{"n":3,"x":150,"y":55},{"n":9,"x":5,"y":5}]}'));
+  const items = [1, 2, 3].map(i => ({ image: IMG, name: `Mebel ${i}`, dims: '' }));
+  const res = await worker.fetch(vreq({ room: IMG, items, aspect: '16:9', consent: true }), ENV, {});
+  const data = await res.json();
+  assert.equal(res.status, 200);
+  assert.equal(calls[0].body.input_references.length, 4);
+  assert.match(calls[0].body.prompt, /image 4: "Mebel 3"/);
+  assert.equal(calls[1].url, 'https://openrouter.ai/api/v1/chat/completions');
+  assert.deepEqual(data.spots, [{ n: 1, x: 20, y: 60 }, { n: 3, x: 97, y: 55 }]);
+  const four = [...items, items[0]];
+  assert.equal((await worker.fetch(vreq({ room: IMG, items: four, consent: true }), ENV, {})).status, 400);
+});
+test('parseSpots: zły JSON → brak kropek', () => {
+  assert.deepEqual(parseSpots('nie wiem', 2), []);
+  assert.deepEqual(parseSpots('```json\n{"items":[{"n":2,"x":"40","y":70}]}\n```', 2), [{ n: 2, x: 40, y: 70 }]);
 });

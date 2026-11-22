@@ -437,27 +437,74 @@ export function initAdvisor() {
           p.regular && h('s', { class: 'price__regular' }, h('span', { class: 'visually-hidden' }, 'Cena regularna: '), formatPrice(p.regular))),
         p.regular && h('p', { class: 'price__lowest' }, `Najniższa cena z 30 dni przed obniżką: ${formatPrice(p.lowest30 ?? p.regular)}`)),
       off >= 5 && h('p', { class: 'product-card__badges' }, h('span', { class: 'badge badge--promo' }, `−${off}%`)),
-      visButton(p));
+      addButton(p));
   }
 
-  // ----- wizualizacja AI: mebel wstawiony w zdjęcie pokoju (Worker /wizualizacja → OpenRouter → model obrazów) -----
-  // Przycisk jest tylko przy zdjęciu klienta. Zdjęcie wysyłamy wyłącznie po kliknięciu i przy zaznaczonej zgodzie.
+  // ----- studio wizualizacji: zdjęcie klienta na górze, do 3 mebli dodanych plusem, kropki z nazwą i linkiem ---------
+  // Worker /wizualizacja → OpenRouter (model obrazów, potem model, który zaznacza, gdzie stoją meble).
+  // Zdjęcie wysyłamy wyłącznie po kliknięciu „Wstaw do zdjęcia” i przy zaznaczonej zgodzie.
+  const MAX_PICK = 3;
   const visUrl = boot.chatUrl ? boot.chatUrl.replace(/\/chat\/?$/, '/wizualizacja') : '';
   const V = boot.visual || {};
-  const dlg = root.querySelector<HTMLDialogElement>('[data-vis]');
-  const visStage = $('[data-vis-stage]');
-  const visConsent = $('[data-vis-consent]');
-  const visConsentCheck = $<HTMLInputElement>('[data-vis-consent-check]');
-  const visActions = $('[data-vis-actions]');
-  const visDownload = $<HTMLAnchorElement>('[data-vis-download]');
-  const visProductLink = $<HTMLAnchorElement>('[data-vis-product]');
-  let visProduct: Product | null = null;
-  let visBusy = false;
-  let visDetail = ''; // powód odrzucenia od modelu (pokazujemy drobnym drukiem, pomaga zdiagnozować)
+  const studio = $('[data-studio]');
+  const stImg = $<HTMLImageElement>('[data-studio-img]');
+  const stSpots = $('[data-studio-spots]');
+  const stStatus = $('[data-studio-status]');
+  const stPicked = $('[data-studio-picked]');
+  const stConsent = $('[data-studio-consent]');
+  const stConsentCheck = $<HTMLInputElement>('[data-studio-consent-check]');
+  const stGo = $<HTMLButtonElement>('[data-studio-go]');
+  const stToggle = $<HTMLButtonElement>('[data-studio-toggle]');
+  const stDownload = $<HTMLAnchorElement>('[data-studio-download]');
+  const ST = { picked: [] as Product[], result: null as string | null, spots: [] as { n: number; x: number; y: number }[], forPhoto: '', busy: false, showOriginal: false, made: [] as Product[] };
+  const nameOf = (p: Product) => p.model || p.name;
 
-  function visButton(p: Product) {
-    if (!S.photo || !visUrl || !dlg) return null;
-    return h('button', { class: 'advisor-card__vis', type: 'button', onclick: () => openVisual(p) }, V.button || 'Zobacz w moim pokoju');
+  function addButton(p: Product) {
+    if (!S.photo || !visUrl) return null;
+    return h('button', { class: 'advisor-card__add', type: 'button', 'data-add': p.url, onclick: () => togglePick(p) });
+  }
+  function paintAddButtons() {
+    const full = ST.picked.length >= MAX_PICK;
+    root.querySelectorAll<HTMLButtonElement>('[data-add]').forEach(b => {
+      const on = ST.picked.some(x => x.url === b.dataset.add);
+      b.setAttribute('aria-pressed', String(on));
+      b.disabled = !on && (full || ST.busy);
+      b.textContent = on ? V.added || '✓ W pokoju' : full ? V.full || 'Masz już 3 meble' : V.add || '+ Dodaj do pokoju';
+    });
+  }
+  function togglePick(p: Product) {
+    const i = ST.picked.findIndex(x => x.url === p.url);
+    if (i >= 0) ST.picked.splice(i, 1);
+    else if (ST.picked.length < MAX_PICK) ST.picked.push(p);
+    updateStudio();
+  }
+  function updateStudio() {
+    if (!S.photo || !visUrl) { studio.hidden = true; return; }
+    if (ST.forPhoto !== S.photo) Object.assign(ST, { picked: [], result: null, spots: [], made: [], forPhoto: S.photo, showOriginal: false });
+    studio.hidden = false;
+    const showing = ST.result && !ST.showOriginal ? ST.result : S.photo;
+    if (stImg.src !== showing) stImg.src = showing;
+    stImg.alt = ST.result && !ST.showOriginal ? `Wizualizacja: ${ST.made.map(nameOf).join(', ')} we wnętrzu z Twojego zdjęcia` : 'Twoje zdjęcie pokoju';
+    // kropki tylko na wizualizacji: numer jak na liście, nazwa po najechaniu, klik prowadzi do mebla
+    stSpots.replaceChildren(...(ST.result && !ST.showOriginal ? ST.spots : []).map(sp => {
+      const p = ST.made[sp.n - 1];
+      return p ? h('li', { class: 'advisor-studio__spot', style: `--x:${sp.x}%;--y:${sp.y}%` },
+        h('a', { href: p.url, 'aria-label': `${sp.n}. ${nameOf(p)}` },
+          h('span', { class: 'advisor-studio__dot', 'aria-hidden': 'true' }, String(sp.n)),
+          h('span', { class: 'advisor-studio__label', 'aria-hidden': 'true' }, nameOf(p), h('small', null, 'Zobacz mebel →')))) : null;
+    }).filter(Boolean) as HTMLElement[]);
+    stPicked.replaceChildren(...ST.picked.map((p, i) => h('li', null,
+      h('img', { src: p.img, alt: '', width: 56, height: 56, loading: 'lazy' }),
+      h('span', null, h('b', null, `${i + 1}. ${nameOf(p)}`), p.color ? h('small', null, p.color.label) : null),
+      h('button', { class: 'link-button', type: 'button', onclick: () => togglePick(p), disabled: ST.busy }, V.remove || 'Usuń'))));
+    stConsent.hidden = consentBox.checked;
+    stGo.disabled = ST.busy || !ST.picked.length;
+    stGo.textContent = `${V.go || 'Wstaw do zdjęcia'}${ST.picked.length ? ` (${ST.picked.length})` : ''}`;
+    stToggle.hidden = !ST.result || ST.busy;
+    stToggle.textContent = ST.showOriginal ? V.showResult || 'Pokaż wizualizację' : V.showOriginal || 'Pokaż moje zdjęcie';
+    stDownload.hidden = !ST.result || ST.busy;
+    if (ST.result) stDownload.href = ST.result;
+    paintAddButtons();
   }
   const toDataUrl = async (src: string) => {
     const res = await fetch(src);
@@ -475,64 +522,59 @@ export function initAdvisor() {
     img.onerror = () => ok('4:3');
     img.src = src;
   });
-  const pending = (...extra: (HTMLElement | null)[]) =>
-    visStage.replaceChildren(h('img', { class: 'advisor-vis__img is-pending', src: S.photo!, alt: '' }), ...extra.filter(Boolean) as HTMLElement[]);
-
-  function openVisual(p: Product) {
-    if (!dlg || !S.photo) return;
-    visProduct = p;
-    $('[data-vis-title]').textContent = String(V.title || '{name}').replace('{name}', p.model || p.name);
-    visActions.hidden = true;
-    pending();
-    if (!dlg.open) dlg.showModal();
-    if (consentBox.checked) void generate();
-    else { visConsentCheck.checked = false; visConsent.hidden = false; visConsentCheck.focus(); }
-  }
+  const status = (text: string, kind: 'loading' | 'error' | '' = '') => {
+    stStatus.hidden = !text;
+    stStatus.className = `advisor-studio__status${kind ? ` is-${kind}` : ''}`;
+    stStatus.replaceChildren(...(kind === 'loading' ? [h('span', { class: 'advisor-vis__spinner', 'aria-hidden': 'true' })] : []), text);
+    studio.classList.toggle('is-busy', kind === 'loading');
+  };
 
   async function generate() {
-    const p = visProduct;
-    if (!p || !S.photo || visBusy) return;
-    visBusy = true;
-    visConsent.hidden = true;
-    visActions.hidden = true;
-    pending(h('p', { class: 'advisor-vis__loading' }, h('span', { class: 'advisor-vis__spinner', 'aria-hidden': 'true' }), V.loading || 'Wstawiam mebel do Twojego zdjęcia.'));
-    visProductLink.href = p.url;
+    if (ST.busy || !S.photo || !ST.picked.length) return;
+    if (!consentBox.checked) { status(V.consentNeeded || 'Zaznacz zgodę.', 'error'); stConsentCheck.focus(); return; }
+    const picked = [...ST.picked];
+    ST.busy = true;
+    ST.showOriginal = true; // w trakcie: oryginał pod przyciemnieniem
+    updateStudio();
+    status(V.loading || 'Wstawiam meble do Twojego zdjęcia.', 'loading');
+    studio.scrollIntoView({ block: 'start', behavior: 'smooth' });
     try {
-      const furniture = await toDataUrl(p.img.replace(/-480\.webp$/, '-1000.webp')).catch(() => toDataUrl(p.img));
+      const items = await Promise.all(picked.map(async p => ({
+        image: await toDataUrl(p.img.replace(/-480\.webp$/, '-1000.webp')).catch(() => toDataUrl(p.img)),
+        name: nameOf(p),
+        dims: p.dims || '',
+      })));
       const res = await fetch(visUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ room: S.photo, furniture, name: p.model || p.name, dims: p.dims || '', aspect: await aspectOf(S.photo), consent: true }),
+        body: JSON.stringify({ room: S.photo, items, aspect: await aspectOf(S.photo), consent: true }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || typeof data.image !== 'string') {
         if (data.detail) console.warn('[Liveo] wizualizacja:', data.detail);
-        visDetail = typeof data.detail === 'string' ? data.detail : '';
-        throw new Error(data.error || 'default');
+        const msg = V.errors?.[data.error] || V.errors?.default || 'Wizualizacja jest chwilowo niedostępna.';
+        throw new Error(data.detail ? `${msg} (${data.detail})` : msg);
       }
-      visStage.replaceChildren(h('img', { class: 'advisor-vis__img', src: data.image, alt: `Wizualizacja: ${p.model || p.name} we wnętrzu z Twojego zdjęcia` }));
-      visDownload.href = data.image;
-      visDownload.hidden = false;
-      track('wizualizacja_ai', { mebel: p.model || p.name });
+      Object.assign(ST, { result: data.image, spots: Array.isArray(data.spots) ? data.spots : [], made: picked, showOriginal: false });
+      status('');
+      track('wizualizacja_ai', { mebli: picked.length });
     } catch (err) {
-      const code = (err as Error).message;
-      pending(h('p', { class: 'advisor-vis__error', role: 'alert' }, V.errors?.[code] || V.errors?.default || 'Wizualizacja jest chwilowo niedostępna.',
-        visDetail ? h('small', { class: 'advisor-vis__detail' }, `Powód: ${visDetail}`) : null));
-      visDetail = '';
-      visDownload.hidden = true;
+      ST.showOriginal = !ST.result;
+      status((err as Error).message || 'Wizualizacja jest chwilowo niedostępna.', 'error');
     } finally {
-      visBusy = false;
-      visActions.hidden = false;
+      ST.busy = false;
+      updateStudio();
     }
   }
-  $('[data-vis-generate]').addEventListener('click', () => {
-    if (!visConsentCheck.checked) { visConsentCheck.focus(); return; }
-    consentBox.checked = true; // ta sama zgoda co w polu zdjęcia
-    void generate();
+  stGo.addEventListener('click', () => void generate());
+  stConsentCheck.addEventListener('change', () => {
+    consentBox.checked = stConsentCheck.checked; // ta sama zgoda co w polu zdjęcia
+    if (stConsentCheck.checked && !stStatus.classList.contains('is-loading')) status('');
+    updateStudio();
   });
-  $('[data-vis-retry]').addEventListener('click', () => void generate());
-  $('[data-vis-close]').addEventListener('click', () => dlg?.close());
-  dlg?.addEventListener('click', e => { if (e.target === dlg) dlg.close(); }); // klik w tło zamyka okno
+  stToggle.addEventListener('click', () => { ST.showOriginal = !ST.showOriginal; updateStudio(); });
+  // komplety rysują się od nowa przy każdej zmianie filtrów: odśwież studio i przyciski „+”
+  new MutationObserver(() => updateStudio()).observe(results, { childList: true });
 
   /** Kółko koloru mebli; kolor dwóch płyt („Biały mat / dąb naturalny”) jako dwie połówki. */
   function finishChip(color: { label: string } | null) {

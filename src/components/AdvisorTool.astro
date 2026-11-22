@@ -226,6 +226,32 @@ const tip = (t: string) => t.charAt(0).toLocaleUpperCase('pl') + t.slice(1);
             </div>
           </details>
         </aside>
+        <!-- Studio wizualizacji: zdjęcie klienta zawsze na górze, do 3 mebli dodanych plusem przy kartach,
+             po wygenerowaniu kropki z nazwą i linkiem (scripts/advisor.ts → Worker /wizualizacja) -->
+        <section class="advisor-studio" data-studio hidden aria-labelledby="studio-tytul">
+          <div class="advisor-studio__stage">
+            <div class="advisor-studio__frame" data-studio-frame>
+              <img class="advisor-studio__img" data-studio-img alt="Twoje zdjęcie pokoju" width="1024" height="768" />
+              <ul class="advisor-studio__spots" data-studio-spots aria-label="Meble na wizualizacji"></ul>
+              <p class="advisor-studio__status" data-studio-status role="status" hidden></p>
+            </div>
+          </div>
+          <div class="advisor-studio__side">
+            <h3 class="advisor-studio__title" id="studio-tytul">{tool.visual.studioTitle}</h3>
+            <p class="advisor-studio__hint">{tool.visual.studioHint}</p>
+            <ol class="advisor-studio__picked" data-studio-picked></ol>
+            <label class="advisor-consent" data-studio-consent hidden>
+              <input type="checkbox" data-studio-consent-check />
+              <span>{tool.consent.label} <a href={tool.consent.href} target="_blank" rel="noopener">{tool.consent.link}</a></span>
+            </label>
+            <p class="advisor-studio__go"><button class="btn btn--primary" type="button" data-studio-go disabled>{tool.visual.go}</button></p>
+            <p class="advisor-studio__links">
+              <button class="link-button" type="button" data-studio-toggle hidden>{tool.visual.showOriginal}</button>
+              <a class="link" data-studio-download download="liveo-wizualizacja.jpg" href="#" hidden>{tool.visual.download}</a>
+            </p>
+            <p class="advisor-studio__caption">{tool.visual.caption}</p>
+          </div>
+        </section>
         <div class="advisor-results" data-results aria-live="polite"></div>
       </div>
     </div>
@@ -242,31 +268,6 @@ const tip = (t: string) => t.charAt(0).toLocaleUpperCase('pl') + t.slice(1);
         <StoreFinder id="doradca-sklepy" headingLevel={3} limit={4} more={{ label: 'Wszystkie sklepy i mapa', href: '/gdzie-kupic/' }} />
       </div>
     </div>
-    <!-- Wizualizacja AI: mebel wstawiony w zdjęcie pokoju (scripts/advisor.ts → Worker /wizualizacja) -->
-    <dialog class="advisor-vis" data-vis aria-labelledby="vis-tytul">
-      <div class="advisor-vis__head">
-        <h2 class="advisor-vis__title" id="vis-tytul" data-vis-title>Wizualizacja</h2>
-        <button class="advisor-vis__close" type="button" data-vis-close>
-          <span class="visually-hidden">Zamknij</span>
-          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
-        </button>
-      </div>
-      <div class="advisor-vis__stage" data-vis-stage aria-live="polite"></div>
-      <div class="advisor-vis__consent" data-vis-consent hidden>
-        <p>{tool.visual.consentAsk}</p>
-        <label class="advisor-consent">
-          <input type="checkbox" data-vis-consent-check />
-          <span>{tool.consent.label} <a href={tool.consent.href} target="_blank" rel="noopener">{tool.consent.link}</a></span>
-        </label>
-        <p><button class="btn btn--primary" type="button" data-vis-generate>{tool.visual.generate}</button></p>
-      </div>
-      <p class="advisor-vis__caption">{tool.visual.caption}</p>
-      <p class="advisor-vis__actions" data-vis-actions hidden>
-        <a class="btn btn--primary" data-vis-download download="liveo-wizualizacja.jpg" href="#">{tool.visual.download}</a>
-        <a class="btn btn--secondary" data-vis-product href="#">{tool.visual.product}</a>
-        <button class="link-button" type="button" data-vis-retry>{tool.visual.retry}</button>
-      </p>
-    </dialog>
   </div>
   <script type="application/json" is:inline data-advisor-boot set:html={JSON.stringify(boot).replace(/</g, '\\u003c')} />
 </section>

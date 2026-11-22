@@ -1005,33 +1005,53 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .advisor-consent input { flex: none; width: 1.125rem; height: 1.125rem; margin-top: 0.125rem; accent-color: var(--color-accent); }
 .advisor-consent a { color: var(--color-text); }
 .advisor-card { position: relative; }
-.advisor-card__vis {
-  position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.375rem; margin-top: 0.625rem; padding: 0.5rem 0.75rem;
+.advisor-vis__spinner { flex: none; width: 1.25rem; height: 1.25rem; border: 2px solid var(--color-line-strong); border-top-color: var(--color-accent); border-radius: 50%; animation: advisor-spin 900ms linear infinite; }
+
+/* Studio wizualizacji (doradca, krok „Komplety”): zdjęcie klienta na górze, do 3 mebli, kropki z nazwą i linkiem */
+.advisor-studio { display: grid; gap: var(--space-5); margin-bottom: var(--space-7); padding: var(--space-4); background: var(--color-surface); }
+@media (min-width: 64rem) { .advisor-studio { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: var(--space-6); padding: var(--space-5); align-items: start; } }
+.advisor-studio__frame { position: relative; overflow: hidden; background: var(--color-bg); }
+.advisor-studio__img { display: block; width: 100%; height: auto; max-height: 72vh; object-fit: contain; transition: filter 400ms ease, opacity 400ms ease; }
+.advisor-studio.is-busy .advisor-studio__img { filter: blur(3px) saturate(0.6); opacity: 0.6; }
+.advisor-studio__spots { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
+.advisor-studio__spot { position: absolute; left: var(--x); top: var(--y); pointer-events: auto; }
+.advisor-studio__spot a { position: absolute; left: 0; top: 0; translate: -50% -50%; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; text-decoration: none; color: var(--color-text); }
+.advisor-studio__dot {
+  display: grid; place-items: center; width: 1.75rem; height: 1.75rem; border-radius: 50%; background: #fff; font: var(--weight-medium) 0.875rem/1 var(--font-sans);
+  box-shadow: 0 0 0 0.375rem rgb(255 255 255 / 0.35), 0 2px 12px rgb(0 0 0 / 0.3); transition: transform 300ms var(--ease-expo);
+}
+.advisor-studio__spot a:is(:hover, :focus-visible) .advisor-studio__dot { transform: scale(0.9); }
+.advisor-studio__label {
+  position: absolute; left: calc(50% + 1.5rem); top: 50%; translate: 0 -50%; display: grid; gap: 0.125rem; width: max-content; max-width: 16rem;
+  padding: 0.5rem 0.75rem; background: var(--color-bg); box-shadow: var(--shadow-overlay); font: var(--weight-display) 0.9375rem/1.25 var(--font-display);
+  opacity: 0; visibility: hidden; transition: opacity 200ms ease, visibility 0s linear 200ms;
+}
+.advisor-studio__label small { font: var(--weight-medium) 0.75rem/1.3 var(--font-sans); color: var(--color-accent); }
+.advisor-studio__spot a:is(:hover, :focus-visible) .advisor-studio__label { opacity: 1; visibility: visible; transition: opacity 200ms ease, visibility 0s; }
+.advisor-studio__status {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: flex; align-items: center; gap: 0.75rem; width: max-content; max-width: min(26rem, 90%); margin: 0;
+  padding: 0.875rem 1.125rem; background: var(--color-bg); box-shadow: var(--shadow-overlay); font-size: 0.9375rem; line-height: 1.45;
+}
+.advisor-studio__status.is-error { color: var(--color-error); }
+.advisor-studio__status[hidden] { display: none; }
+.advisor-studio__side { display: grid; gap: var(--space-3); align-content: start; }
+.advisor-studio__title { font: var(--weight-display) clamp(1.375rem, 1.1rem + 0.8vw, 1.75rem)/1.15 var(--font-display); }
+.advisor-studio__hint { color: var(--color-text-muted); line-height: 1.5; }
+.advisor-studio__picked { display: grid; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+.advisor-studio__picked li { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr) auto; gap: 0.75rem; align-items: center; padding: 0.375rem; background: var(--color-bg); }
+.advisor-studio__picked img { width: 3.5rem; height: 3.5rem; object-fit: contain; background: var(--color-surface); mix-blend-mode: multiply; }
+.advisor-studio__picked b { display: block; font-weight: var(--weight-medium); line-height: 1.3; }
+.advisor-studio__picked small { font-size: 0.8125rem; color: var(--color-text-muted); }
+.advisor-studio__picked .link-button { font-size: 0.8125rem; color: var(--color-text-muted); }
+.advisor-studio__go { margin: var(--space-2) 0 0; }
+.advisor-studio__go .btn { width: 100%; }
+.advisor-studio__links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 0; font-size: 0.9375rem; }
+.advisor-studio__links:not(:has(> :not([hidden]))) { display: none; }
+.advisor-studio__caption { font-size: 0.8125rem; line-height: 1.5; color: var(--color-text-muted); }
+.advisor-card__add {
+  position: relative; z-index: 2; display: inline-flex; align-items: center; margin-top: 0.625rem; padding: 0.5rem 0.75rem;
   border: 1px solid var(--color-accent); background: var(--color-bg); color: var(--color-accent); font: var(--weight-medium) 0.8125rem/1.2 var(--font-sans); cursor: pointer;
   transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
 }
-.advisor-card__vis::before { content: "✦"; font-size: 0.75rem; }
-.advisor-card__vis:hover { background: var(--color-accent); color: #fff; }
-.advisor-vis { width: min(60rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); padding: 0; border: 0; background: var(--color-bg); color: var(--color-text); box-shadow: var(--shadow-overlay); }
-.advisor-vis::backdrop { background: rgb(var(--scrim) / 0.6); }
-.advisor-vis > * { margin-inline: var(--space-5); }
-.advisor-vis__head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: var(--space-4); margin-bottom: var(--space-3); }
-.advisor-vis__title { font: var(--weight-display) clamp(1.375rem, 1.1rem + 0.8vw, 1.875rem)/1.15 var(--font-display); }
-.advisor-vis__close { flex: none; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 0; background: none; color: var(--color-text); cursor: pointer; }
-.advisor-vis__close .ico { width: 1.5rem; height: 1.5rem; }
-.advisor-vis__stage { position: relative; display: grid; place-items: center; background: var(--color-surface); min-height: 12rem; }
-.advisor-vis__img { display: block; width: 100%; height: auto; max-height: 68dvh; object-fit: contain; }
-.advisor-vis__img.is-pending { filter: blur(2px) saturate(0.6); opacity: 0.55; }
-.advisor-vis__loading, .advisor-vis__error {
-  position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: flex; align-items: center; gap: 0.75rem; max-width: 26rem; margin: 0;
-  padding: 0.875rem 1.125rem; background: var(--color-bg); box-shadow: var(--shadow-overlay); font-size: 0.9375rem; line-height: 1.45;
-}
-.advisor-vis__error { color: var(--color-error); }
-.advisor-vis__spinner { flex: none; width: 1.25rem; height: 1.25rem; border: 2px solid var(--color-line-strong); border-top-color: var(--color-accent); border-radius: 50%; animation: advisor-spin 900ms linear infinite; }
-.advisor-vis__consent { display: grid; gap: 0.5rem; margin-top: var(--space-4); }
-.advisor-vis__caption { margin-top: var(--space-3); font-size: 0.8125rem; line-height: 1.5; color: var(--color-text-muted); }
-.advisor-vis__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; margin-top: var(--space-4); margin-bottom: var(--space-5); }
-.advisor-vis__actions[hidden], .advisor-vis__consent[hidden], .advisor-vis__actions [hidden] { display: none; }
-.advisor-vis__consent:not([hidden]) ~ .advisor-vis__caption { margin-bottom: var(--space-5); }
-.advisor-vis__error { flex-direction: column; align-items: flex-start; }
-.advisor-vis__detail { display: block; margin-top: 0.375rem; font-size: 0.75rem; color: var(--color-text-muted); overflow-wrap: anywhere; }
+.advisor-card__add:hover:not(:disabled), .advisor-card__add[aria-pressed="true"] { background: var(--color-accent); color: #fff; }
+.advisor-card__add:disabled { opacity: 0.45; cursor: default; }
