@@ -18,7 +18,7 @@ const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const IMAGES_URL = 'https://openrouter.ai/api/v1/images';
 // Wizualizacja: model obrazów OpenAI (ten sam co w ChatGPT) przez OpenRouter; zmiana modelu: zmienna IMAGE_MODEL.
 // Limit na IP jest „best effort” (pamięć jednej instancji); twardy limit kosztów to limit wydatków na kluczu OpenRouter.
-const VIS = { model: 'openai/gpt-image-2', quality: 'medium', bodyBytes: 7_000_000, imageBytes: 3_000_000, limit: 6, windowMs: 60 * 60_000, timeoutMs: 120_000 };
+const VIS = { model: 'openai/gpt-image-2', fallback: 'google/gemini-3.1-flash-image', quality: 'medium', bodyBytes: 7_000_000, imageBytes: 3_000_000, limit: 6, windowMs: 60 * 60_000, timeoutMs: 120_000 };
 const ASPECTS = ['1:1', '4:3', '3:4', '3:2', '2:3', '16:9', '9:16'];
 const DATA_URL = /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/]+=*$/;
 // Tylko płatne modele (bez :free – darmowe znikają bez ostrzeżenia). Kolejność = kolejność prób.
@@ -173,44 +173,60 @@ async function visualize(req, env, cors) {
     return json({ error: 'bad_request', message: err.message }, 400, cors.headers);
   }
 
-  const model = env.IMAGE_MODEL || VIS.model;
-  const started = Date.now();
-  try {
-    const res = await fetch(IMAGES_URL, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${env.OPENROUTER_API_KEY}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': env.SITE_URL || 'https://liveomeble.pl',
-        'X-Title': 'Liveo Doradca wnetrz - wizualizacja',
-      },
-      body: JSON.stringify({
-        model,
-        prompt: VIS_PROMPT(input.name, input.dims),
-        input_references: [
-          { type: 'image_url', image_url: { url: input.room } },
-          { type: 'image_url', image_url: { url: input.furniture } },
-        ],
-        aspect_ratio: input.aspect,
-        quality: env.IMAGE_QUALITY || VIS.quality,
-        output_format: 'jpeg',
-        output_compression: 85,
-        n: 1,
-      }),
-      signal: AbortSignal.timeout(VIS.timeoutMs),
-    });
-    console.log(JSON.stringify({ event: 'visual', model, status: res.status, ms: Date.now() - started }));
-    if (res.status === 402) return json({ error: 'no_credits' }, 503, cors.headers);
-    if (res.status === 400 || res.status === 422) return json({ error: 'rejected' }, 422, cors.headers);
-    if (!res.ok) return json({ error: 'unavailable' }, 503, cors.headers);
-    const data = await res.json();
-    const img = data?.data?.[0];
-    if (!img?.b64_json) return json({ error: 'unavailable' }, 503, cors.headers);
-    return json({ image: `data:${img.media_type || 'image/jpeg'};base64,${img.b64_json}`, model }, 200, cors.headers);
-  } catch {
-    console.error(JSON.stringify({ event: 'visual_failed', model, ms: Date.now() - started }));
-    return json({ error: 'unavailable' }, 503, cors.headers);
+  // Kolejność prób: model główny (IMAGE_MODEL), potem zapasowy (IMAGE_FALLBACK), gdy pierwszy odrzuci albo zawiedzie.
+  const models = [...new Set([env.IMAGE_MODEL || VIS.model, env.IMAGE_FALLBACK || VIS.fallback].filter(Boolean))];
+  let last = { error: 'unavailable', status: 503, detail: '' };
+  for (const model of models) {
+    const started = Date.now();
+    try {
+      const res = await fetch(IMAGES_URL, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${env.OPENROUTER_API_KEY}`,
+          'Content-Type': 'application/json',
+          'HTTP-Referer': env.SITE_URL || 'https://liveomeble.pl',
+          'X-Title': 'Liveo Doradca wnetrz - wizualizacja',
+        },
+        body: JSON.stringify(visBody(model, input, env)),
+        signal: AbortSignal.timeout(VIS.timeoutMs),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const img = data?.data?.[0];
+        console.log(JSON.stringify({ event: 'visual', model, status: res.status, ms: Date.now() - started, cost: data?.usage?.cost ?? null }));
+        if (img?.b64_json) return json({ image: `data:${img.media_type || 'image/jpeg'};base64,${img.b64_json}`, model }, 200, cors.headers);
+        last = { error: 'unavailable', status: 503, detail: 'pusta odpowiedź modelu' };
+        continue;
+      }
+      // powód odrzucenia (bez obrazów): pomaga ustalić, czy to parametr, format, czy moderacja treści
+      const detail = String((await res.json().catch(() => null))?.error?.message || '').replace(/data:[^\s"]+/g, '[obraz]').slice(0, 300);
+      console.error(JSON.stringify({ event: 'visual_failed', model, status: res.status, ms: Date.now() - started, detail }));
+      if (res.status === 402) return json({ error: 'no_credits' }, 503, cors.headers);
+      last = res.status === 400 || res.status === 422
+        ? { error: 'rejected', status: 422, detail }
+        : { error: 'unavailable', status: 503, detail };
+    } catch (err) {
+      console.error(JSON.stringify({ event: 'visual_failed', model, ms: Date.now() - started, detail: String(err?.name || 'error') }));
+      last = { error: 'unavailable', status: 503, detail: 'brak odpowiedzi modelu' };
+    }
   }
+  return json({ error: last.error, detail: last.detail }, last.status, cors.headers);
+}
+
+/** Parametry zależne od dostawcy modelu (każdy przyjmuje inny zestaw, zbędne pole kończy się błędem 400). */
+export function visBody(model, input, env = {}) {
+  const body = {
+    model,
+    prompt: VIS_PROMPT(input.name, input.dims),
+    input_references: [
+      { type: 'image_url', image_url: { url: input.room } },
+      { type: 'image_url', image_url: { url: input.furniture } },
+    ],
+    aspect_ratio: input.aspect,
+  };
+  if (model.startsWith('openai/')) Object.assign(body, { quality: env.IMAGE_QUALITY || VIS.quality, output_format: 'jpeg' });
+  if (model.startsWith('google/')) body.resolution = '1K';
+  return body;
 }
 
 // ---------------------------------------------------------------------------

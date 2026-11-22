@@ -453,6 +453,7 @@ export function initAdvisor() {
   const visProductLink = $<HTMLAnchorElement>('[data-vis-product]');
   let visProduct: Product | null = null;
   let visBusy = false;
+  let visDetail = ''; // powód odrzucenia od modelu (pokazujemy drobnym drukiem, pomaga zdiagnozować)
 
   function visButton(p: Product) {
     if (!S.photo || !visUrl || !dlg) return null;
@@ -504,14 +505,20 @@ export function initAdvisor() {
         body: JSON.stringify({ room: S.photo, furniture, name: p.model || p.name, dims: p.dims || '', aspect: await aspectOf(S.photo), consent: true }),
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok || typeof data.image !== 'string') throw new Error(data.error || 'default');
+      if (!res.ok || typeof data.image !== 'string') {
+        if (data.detail) console.warn('[Liveo] wizualizacja:', data.detail);
+        visDetail = typeof data.detail === 'string' ? data.detail : '';
+        throw new Error(data.error || 'default');
+      }
       visStage.replaceChildren(h('img', { class: 'advisor-vis__img', src: data.image, alt: `Wizualizacja: ${p.model || p.name} we wnętrzu z Twojego zdjęcia` }));
       visDownload.href = data.image;
       visDownload.hidden = false;
       track('wizualizacja_ai', { mebel: p.model || p.name });
     } catch (err) {
       const code = (err as Error).message;
-      pending(h('p', { class: 'advisor-vis__error', role: 'alert' }, V.errors?.[code] || V.errors?.default || 'Wizualizacja jest chwilowo niedostępna.'));
+      pending(h('p', { class: 'advisor-vis__error', role: 'alert' }, V.errors?.[code] || V.errors?.default || 'Wizualizacja jest chwilowo niedostępna.',
+        visDetail ? h('small', { class: 'advisor-vis__detail' }, `Powód: ${visDetail}`) : null));
+      visDetail = '';
       visDownload.hidden = true;
     } finally {
       visBusy = false;

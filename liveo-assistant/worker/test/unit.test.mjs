@@ -176,3 +176,19 @@ test('wizualizacja: limit na IP → 429', async () => {
   for (let i = 0; i < 7; i++) last = await worker.fetch(vreq(VIS_OK, ip), ENV, {});
   assert.equal(last.status, 429);
 });
+test('wizualizacja: odrzucenie przez GPT Image → zapasowy model Google; powód odrzucenia w odpowiedzi', async () => {
+  let calls = mockOpenRouter((body, n) => n === 1
+    ? new Response(JSON.stringify({ error: { message: 'Invalid parameter: quality' } }), { status: 400 })
+    : new Response(JSON.stringify({ data: [{ b64_json: 'QQ==' }] }), { status: 200 }));
+  let res = await worker.fetch(vreq(VIS_OK), ENV, {});
+  assert.equal(res.status, 200);
+  assert.equal((await res.json()).model, 'google/gemini-3.1-flash-image');
+  assert.equal(calls[0].body.quality, 'medium');
+  assert.equal(calls[1].body.quality, undefined);
+  assert.equal(calls[1].body.resolution, '1K');
+  calls = mockOpenRouter(() => new Response(JSON.stringify({ error: { message: 'blocked by safety system' } }), { status: 400 }));
+  res = await worker.fetch(vreq(VIS_OK), ENV, {});
+  const data = await res.json();
+  assert.equal(res.status, 422); assert.equal(data.error, 'rejected'); assert.match(data.detail, /safety/);
+  assert.equal(calls.length, 2);
+});
