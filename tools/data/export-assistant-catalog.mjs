@@ -60,6 +60,9 @@ const imgOf = v => {
   return `${pk.base}-${w}.webp`;
 };
 
+const cm = n => String(n).replace('.', ',');
+const dimsText = d => (d && d.w && d.h ? `szer. ${cm(d.w)} × wys. ${cm(d.h)}${d.d ? ` × gł. ${cm(d.d)}` : ''} cm` : '');
+
 const out = [];
 for (const p of products) {
   const coll = C[p.collection];
@@ -78,6 +81,8 @@ for (const p of products) {
       color: colorProfile(v.finish, v.colorLabel),
       bestseller: !!p.bestseller,
       delivery72: !!p.delivery72,
+      // wymiary dla wizualizacji AI (skala mebla na zdjęciu pokoju)
+      dims: dimsText(p.dims),
     });
   }
 }

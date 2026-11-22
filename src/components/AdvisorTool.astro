@@ -21,6 +21,8 @@ const boot = {
   rooms: Object.fromEntries(rooms.map(r => [r.assistantKey, { slug: r.slug, name: r.name, accusative: r.accusative, genitive: r.genitive }])),
   finishHex: Object.fromEntries(boardFinishes.map(f => [f.label.toLocaleLowerCase('pl'), f.hex])),
   ask: tool.ask,
+  visual: tool.visual,
+  consent: tool.consent,
 };
 const budgets = [500, 800, 1000, 1500, 2000];
 const tones = [{ v: '1', label: 'Jaśniejsze' }, { v: '0', label: 'Jak wnętrze' }, { v: '-1', label: 'Ciemniejsze' }];
@@ -84,6 +86,10 @@ const tip = (t: string) => t.charAt(0).toLocaleUpperCase('pl') + t.slice(1);
               <button class="btn btn--primary" type="button" data-pick="camera" hidden>{tool.drop.camera}</button>
               <button class="btn btn--primary" type="button" data-pick="file" data-label-touch={tool.drop.gallery}>{tool.drop.pick}</button>
             </div>
+            <label class="advisor-consent">
+              <input type="checkbox" data-consent-photo />
+              <span>{tool.consent.label} <a href={tool.consent.href} target="_blank" rel="noopener">{tool.consent.link}</a></span>
+            </label>
             <p class="advisor-drop__hint" data-desktop-only>{tool.drop.hint} · {tool.drop.formats}</p>
             <p class="advisor-drop__tips-title">{tool.tips.title}</p>
             <ul class="advisor-drop__tips">
@@ -236,6 +242,31 @@ const tip = (t: string) => t.charAt(0).toLocaleUpperCase('pl') + t.slice(1);
         <StoreFinder id="doradca-sklepy" headingLevel={3} limit={4} more={{ label: 'Wszystkie sklepy i mapa', href: '/gdzie-kupic/' }} />
       </div>
     </div>
+    <!-- Wizualizacja AI: mebel wstawiony w zdjęcie pokoju (scripts/advisor.ts → Worker /wizualizacja) -->
+    <dialog class="advisor-vis" data-vis aria-labelledby="vis-tytul">
+      <div class="advisor-vis__head">
+        <h2 class="advisor-vis__title" id="vis-tytul" data-vis-title>Wizualizacja</h2>
+        <button class="advisor-vis__close" type="button" data-vis-close>
+          <span class="visually-hidden">Zamknij</span>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
+      </div>
+      <div class="advisor-vis__stage" data-vis-stage aria-live="polite"></div>
+      <div class="advisor-vis__consent" data-vis-consent hidden>
+        <p>{tool.visual.consentAsk}</p>
+        <label class="advisor-consent">
+          <input type="checkbox" data-vis-consent-check />
+          <span>{tool.consent.label} <a href={tool.consent.href} target="_blank" rel="noopener">{tool.consent.link}</a></span>
+        </label>
+        <p><button class="btn btn--primary" type="button" data-vis-generate>{tool.visual.generate}</button></p>
+      </div>
+      <p class="advisor-vis__caption">{tool.visual.caption}</p>
+      <p class="advisor-vis__actions" data-vis-actions hidden>
+        <a class="btn btn--primary" data-vis-download download="liveo-wizualizacja.jpg" href="#">{tool.visual.download}</a>
+        <a class="btn btn--secondary" data-vis-product href="#">{tool.visual.product}</a>
+        <button class="link-button" type="button" data-vis-retry>{tool.visual.retry}</button>
+      </p>
+    </dialog>
   </div>
   <script type="application/json" is:inline data-advisor-boot set:html={JSON.stringify(boot).replace(/</g, '\\u003c')} />
 </section>

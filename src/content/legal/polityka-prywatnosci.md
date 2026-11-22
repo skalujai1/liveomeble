@@ -6,7 +6,7 @@ description: "Jak Liveo Meble przetwarza dane osobowe na stronie: formularze, wy
 status: "wzor"
 legalReview: "wymagana"
 version: "0.1 (wzór)"
-updated: "2026-10-20"
+updated: "2026-11-22"
 effectiveFrom: "[do uzupełnienia]"
 ---
 
@@ -70,13 +70,30 @@ Zamówienia złożone w strefie partnera przekazujemy do naszego systemu ERP (Na
 
 Doradca wnętrz to asystent oparty na sztucznej inteligencji. Działa w dwóch częściach:
 
-- **Zdjęcie pokoju** analizuje model uruchamiany w Twojej przeglądarce. Zdjęcie nie jest wysyłane na nasz serwer ani do nikogo innego i nie jest zapisywane. Pliki modelu przeglądarka pobiera z [do uzupełnienia: nasz serwer albo nazwa zewnętrznego dostawcy], przy tym pobraniu dostawca widzi adres IP Twojego urządzenia.
+- **Zdjęcie pokoju** analizuje model uruchamiany w Twojej przeglądarce. Do odczytania kolorów zdjęcie nie jest wysyłane na nasz serwer ani do nikogo innego i nie jest zapisywane. Zdjęcie wysyłamy tylko wtedy, gdy sam poprosisz o wizualizację AI (opis niżej). Pliki modelu przeglądarka pobiera z [do uzupełnienia: nasz serwer albo nazwa zewnętrznego dostawcy], przy tym pobraniu dostawca widzi adres IP Twojego urządzenia.
 - **Tekst rozmowy** (wiadomości, które wpisujesz) przesyłamy przez nasz serwer pośredniczący [do uzupełnienia: Cloudflare Workers] do usługi [do uzupełnienia: OpenRouter, Inc., USA], która przekazuje go dostawcy modelu językowego [do uzupełnienia: nazwa dostawcy i kraj], żeby wygenerować odpowiedź. Razem z tekstem przesyłamy skrót naszego katalogu mebli. Nie przesyłamy zdjęć ani Twoich danych kontaktowych.
 - **Nie zapisujemy treści rozmów.** Nasz serwer zapisuje tylko dane techniczne: nazwę modelu, status i czas odpowiedzi. Zasady przechowywania danych przez OpenRouter i dostawcę modelu: [do uzupełnienia, sprawdzić ustawienia konta i umowy].
 - **Nie wpisuj w czacie danych osobowych**: doradca ich nie potrzebuje.
 - **Podstawa prawna:** nasz prawnie uzasadniony interes: pomoc w wyborze mebli na Twoją prośbę (art. 6 ust. 1 lit. f RODO) [do weryfikacji przez prawnika].
 
 Każda odpowiedź doradcy jest oznaczona jako odpowiedź asystenta AI.
+
+### Wizualizacja AI (mebel w Twoim zdjęciu)
+
+Funkcja „Zobacz w moim pokoju” w doradcy wnętrz wstawia wybrany mebel Liveo w zdjęcie Twojego pokoju. Jest dobrowolna: działa tylko wtedy, gdy zaznaczysz zgodę na przetwarzanie zdjęcia i klikniesz przycisk przy meblu. Bez zgody możesz korzystać z doradcy, wybierając pomieszczenie zamiast zdjęcia.
+
+- **Jakie dane:** zdjęcie Twojego pomieszczenia, zmniejszone w przeglądarce do najwyżej 1024 pikseli na dłuższym boku, oraz zdjęcie, nazwa i wymiary wybranego mebla z naszego katalogu. Nie potrzebujemy Twojego imienia, adresu e-mail ani innych danych kontaktowych.
+- **Zdjęcie może zawierać dane osobowe:** na przykład wizerunek osób, dokumenty, zdjęcia rodzinne albo widok za oknem. **Zanim wyślesz zdjęcie, upewnij się, że nie ma na nim osób ani rzeczy, których nie chcesz pokazywać.**
+- **Cel:** przygotowanie poglądowej wizualizacji mebla w Twoim wnętrzu, na Twoją prośbę.
+- **Podstawa prawna:** Twoja zgoda (art. 6 ust. 1 lit. a RODO). Zgoda jest dobrowolna. Możesz ją wycofać w każdej chwili: odznacz pole zgody w doradcy albo po prostu nie korzystaj z wizualizacji. Wycofanie zgody nie wpływa na zgodność z prawem przetwarzania, które nastąpiło przed jej wycofaniem.
+- **Jak to działa:** Twoja przeglądarka wysyła zdjęcie pokoju i zdjęcie mebla do naszego serwera pośredniczącego (Cloudflare Workers, Cloudflare, Inc.). Serwer przekazuje je do usługi OpenRouter (OpenRouter, Inc., USA), a ta do dostawcy modelu, który tworzy obraz (obecnie OpenAI, model GPT Image). Gotowy obraz wraca do Twojej przeglądarki. Jeśli zmienimy dostawcę modelu, zaktualizujemy tę informację.
+- **Jak długo:** nie zapisujemy zdjęć ani wizualizacji na naszych serwerach i nie łączymy ich z żadnym profilem. Nasz serwer zapisuje tylko dane techniczne: nazwę modelu, status i czas odpowiedzi, bez zdjęć. Wizualizacja jest tylko w Twojej przeglądarce, dopóki jej nie pobierzesz albo nie zamkniesz strony. Okres, przez który OpenRouter i dostawca modelu mogą przechowywać przesłane dane (na przykład w celu wykrywania nadużyć), określają ich warunki [do uzupełnienia: sprawdzić ustawienia konta OpenRouter, w tym tryb bez przechowywania danych, i umowy powierzenia].
+- **Odbiorcy:** podmioty wymienione wyżej, które przetwarzają dane na nasze zlecenie (punkt 3).
+- **Przekazanie poza EOG:** OpenRouter i OpenAI mają siedzibę w USA. Dane przekazujemy na zasadach opisanych w punkcie 4 [do weryfikacji przez prawnika].
+- **Bez decyzji automatycznych:** wizualizacja nie służy do profilowania i nie wywołuje wobec Ciebie skutków prawnych.
+- **Wynik jest poglądowy:** obraz tworzy sztuczna inteligencja. Kolory, proporcje, rozmiar i ustawienie mebla mogą różnić się od rzeczywistości. Wizualizacja nie jest ofertą ani opisem cech towaru: wiążące są dane na stronie mebla i informacje od salonu partnerskiego.
+- **Twoje prawa:** przysługują Ci prawa opisane w punkcie 5, w tym prawo do wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych. Ponieważ nie zapisujemy zdjęć, po wygenerowaniu wizualizacji nie mamy ich kopii, którą moglibyśmy wydać albo usunąć.
+- **Osoby niepełnoletnie:** osoby, które nie ukończyły 16 lat, mogą korzystać z wizualizacji tylko za zgodą rodzica albo opiekuna.
 
 ### Pliki cookie i pamięć przeglądarki
 
@@ -98,7 +115,7 @@ Nie sprzedajemy danych. Przekazujemy je tylko firmom, które pomagają nam prowa
 - dostawca hostingu i sieci CDN: [do uzupełnienia],
 - dostawca serwera pośredniczącego (API strony i doradcy): [do uzupełnienia: np. Cloudflare, Inc.],
 - dostawca poczty elektronicznej, przez który wysyłamy odpowiedzi i powiadomienia z formularzy: [do uzupełnienia],
-- dostawcy modeli AI dla doradcy wnętrz: [do uzupełnienia: OpenRouter, Inc. i dostawca modelu],
+- dostawcy modeli AI dla doradcy wnętrz i wizualizacji AI: OpenRouter, Inc. (USA) oraz dostawca modelu, dla wizualizacji obecnie OpenAI (USA) [do uzupełnienia: dostawca modelu czatu],
 - dostawca i serwis systemu ERP Navireo, w zakresie danych partnerów i zamówień: [do uzupełnienia],
 - [do uzupełnienia: biuro rachunkowe, kancelaria prawna, inne].
 

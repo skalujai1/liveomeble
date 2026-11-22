@@ -124,3 +124,55 @@ test('worker: brak klucza → 503 not_configured; /health nie ujawnia klucza', a
   const h = await (await worker.fetch(new Request('https://w.test/health'), ENV, {})).json();
   assert.deepEqual(h, { ok: true, configured: true });
 });
+
+// --- wizualizacja (mebel wstawiony w zdjęcie pokoju) ---------------------------
+const IMG = 'data:image/jpeg;base64,' + 'A'.repeat(400);
+const vreq = (body, ip = String(Math.random()), origin = 'https://liveomeble.pl') => new Request('https://w.test/wizualizacja', {
+  method: 'POST', headers: { 'Content-Type': 'application/json', Origin: origin, 'CF-Connecting-IP': ip }, body: JSON.stringify(body),
+});
+const VIS_OK = { room: IMG, furniture: IMG, name: 'Komoda DANTE DT04', dims: '108,5 × 88 × 40 cm', aspect: '4:3', consent: true };
+
+test('wizualizacja: bez zgody → 400, bez wywołania OpenRouter', async () => {
+  const calls = mockOpenRouter(() => new Response('{}'));
+  const res = await worker.fetch(vreq({ ...VIS_OK, consent: false }), ENV, {});
+  assert.equal(res.status, 400);
+  assert.match((await res.json()).message, /zgod/);
+  assert.equal(calls.length, 0);
+});
+test('wizualizacja: zły format zdjęcia i obca domena są odrzucane', async () => {
+  const calls = mockOpenRouter(() => new Response('{}'));
+  assert.equal((await worker.fetch(vreq({ ...VIS_OK, room: 'https://zly.pl/a.jpg' }), ENV, {})).status, 400);
+  assert.equal((await worker.fetch(vreq({ ...VIS_OK, furniture: 'data:image/svg+xml;base64,AAAA' }), ENV, {})).status, 400);
+  assert.equal((await worker.fetch(vreq(VIS_OK, undefined, 'https://obca.pl'), ENV, {})).status, 403);
+  assert.equal(calls.length, 0);
+});
+test('wizualizacja: oba zdjęcia trafiają do /images, klucz tylko w nagłówku, wynik jako data URL', async () => {
+  const calls = mockOpenRouter(() => new Response(JSON.stringify({ data: [{ b64_json: 'QUJD', media_type: 'image/jpeg' }] }), { status: 200 }));
+  const res = await worker.fetch(vreq({ ...VIS_OK, name: 'Komoda "DT04" <b>' }), ENV, {});
+  const data = await res.json();
+  assert.equal(res.status, 200);
+  assert.equal(data.image, 'data:image/jpeg;base64,QUJD');
+  assert.equal(calls[0].url, 'https://openrouter.ai/api/v1/images');
+  assert.equal(calls[0].headers.Authorization, 'Bearer test-key');
+  assert.equal(calls[0].body.model, 'openai/gpt-image-2');
+  assert.equal(calls[0].body.input_references.length, 2);
+  assert.equal(calls[0].body.aspect_ratio, '4:3');
+  assert.ok(!calls[0].body.prompt.includes('"DT04"') && !calls[0].body.prompt.includes('<b>'));
+  assert.ok(!JSON.stringify(data).includes('test-key'));
+});
+test('wizualizacja: model z IMAGE_MODEL, 402 → no_credits, odrzucenie przez model → 422', async () => {
+  let calls = mockOpenRouter(() => new Response('{}', { status: 402 }));
+  let res = await worker.fetch(vreq(VIS_OK), { ...ENV, IMAGE_MODEL: 'google/gemini-3.1-flash-image' }, {});
+  assert.equal(res.status, 503); assert.equal((await res.json()).error, 'no_credits');
+  assert.equal(calls[0].body.model, 'google/gemini-3.1-flash-image');
+  calls = mockOpenRouter(() => new Response('{}', { status: 400 }));
+  res = await worker.fetch(vreq(VIS_OK), ENV, {});
+  assert.equal(res.status, 422); assert.equal((await res.json()).error, 'rejected');
+});
+test('wizualizacja: limit na IP → 429', async () => {
+  mockOpenRouter(() => new Response(JSON.stringify({ data: [{ b64_json: 'QQ==' }] }), { status: 200 }));
+  const ip = 'limit-wizualizacji';
+  let last;
+  for (let i = 0; i < 7; i++) last = await worker.fetch(vreq(VIS_OK, ip), ENV, {});
+  assert.equal(last.status, 429);
+});

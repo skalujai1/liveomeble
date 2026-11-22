@@ -2,15 +2,25 @@
 //
 // POST /chat   { messages: [{role:'user'|'assistant', content}], context: { catalog, state } }
 //           →  { reply, action, model }   albo   { error } (widżet przechodzi wtedy w tryb lokalny)
+// POST /wizualizacja { room, furniture (data URL JPEG/PNG/WEBP), name, dims, aspect, consent: true }
+//           →  { image (data URL), model }   albo   { error }
 // GET  /health →  { ok, configured }
 //
 // Sekret OPENROUTER_API_KEY ustawiamy w Cloudflare (wrangler secret / GitHub Actions) – nigdy w repo
-// ani w przeglądarce. Zdjęcia klienta tu nie trafiają: widżet analizuje je lokalnie, wysyła tylko tekst.
-// Treść rozmów nie jest logowana (RODO) – w logach tylko model, status i czas.
+// ani w przeglądarce. Czat dostaje tylko tekst: kolory zdjęcia analizuje przeglądarka klienta.
+// Zdjęcie pokoju trafia tu wyłącznie po kliknięciu „Zobacz w moim pokoju” i przy zaznaczonej zgodzie (consent):
+// przekazujemy je do modelu obrazów przez OpenRouter i odsyłamy wynik do przeglądarki. Nie zapisujemy zdjęć ani wyników,
+// nie logujemy treści rozmów ani obrazów (RODO) – w logach tylko model, status i czas.
 
 import BUNDLED_KNOWLEDGE from '../data/wiedza.txt';
 
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
+const IMAGES_URL = 'https://openrouter.ai/api/v1/images';
+// Wizualizacja: model obrazów OpenAI (ten sam co w ChatGPT) przez OpenRouter; zmiana modelu: zmienna IMAGE_MODEL.
+// Limit na IP jest „best effort” (pamięć jednej instancji); twardy limit kosztów to limit wydatków na kluczu OpenRouter.
+const VIS = { model: 'openai/gpt-image-2', quality: 'medium', bodyBytes: 7_000_000, imageBytes: 3_000_000, limit: 6, windowMs: 60 * 60_000, timeoutMs: 120_000 };
+const ASPECTS = ['1:1', '4:3', '3:4', '3:2', '2:3', '16:9', '9:16'];
+const DATA_URL = /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/]+=*$/;
 // Tylko płatne modele (bez :free – darmowe znikają bez ostrzeżenia). Kolejność = kolejność prób.
 const DEFAULT_MODELS = ['google/gemini-2.5-flash-lite', 'meta-llama/llama-3.3-70b-instruct', 'google/gemini-2.0-flash-001'];
 const TIMEOUT_MS = 25_000;
@@ -70,6 +80,7 @@ export default {
     if (url.pathname === '/health' && req.method === 'GET') {
       return json({ ok: true, configured: Boolean(env.OPENROUTER_API_KEY) }, 200, cors.headers);
     }
+    if (url.pathname === '/wizualizacja') return visualize(req, env, cors);
     if (url.pathname !== '/chat') return json({ error: 'not_found' }, 404, cors.headers);
     if (req.method !== 'POST') return json({ error: 'method_not_allowed' }, 405, cors.headers);
     if (!cors.allowed) return json({ error: 'origin_not_allowed' }, 403, cors.headers);
@@ -101,6 +112,106 @@ export default {
     }
   },
 };
+
+// ---------------------------------------------------------------------------
+// Wizualizacja: mebel z katalogu wstawiony w zdjęcie pokoju klienta
+
+const VIS_PROMPT = (name, dims) => `Edit the FIRST image: it is a photo of the customer's room. Insert the piece of furniture shown in the SECOND image (product photo of "${name}"${dims ? `, real size ${dims}` : ''}) into this room so the result looks like a real photograph.
+Keep everything else exactly as it is: walls, floor, windows, lighting, camera angle and all existing objects.
+Place the furniture in one natural, free spot (for example against a free wall, standing on the floor), at a realistic scale for its real size, with correct perspective, contact shadows and lighting that matches the room.
+Keep the furniture's design, colours, materials, handles, legs and proportions exactly as in the product photo.
+Do not add any other furniture, decorations, people, text, watermarks or logos.`;
+
+const visHits = new Map();
+function visLimit(ip) {
+  const now = Date.now();
+  const recent = (visHits.get(ip) || []).filter(t => now - t < VIS.windowMs);
+  if (recent.length >= VIS.limit) { visHits.set(ip, recent); return false; }
+  recent.push(now);
+  visHits.set(ip, recent);
+  if (visHits.size > 5000) visHits.delete(visHits.keys().next().value);
+  return true;
+}
+
+/** Sprawdza i normalizuje wejście wizualizacji; rzuca Error z krótkim opisem. */
+export function readVisual(body) {
+  if (!body || typeof body !== 'object') throw new Error('niepoprawny JSON');
+  if (body.consent !== true) throw new Error('brak zgody na przetwarzanie zdjęcia');
+  const image = v => {
+    if (typeof v !== 'string' || !DATA_URL.test(v)) throw new Error('zdjęcie musi być w formacie JPG, PNG albo WEBP');
+    if (Math.floor((v.length - v.indexOf(',') - 1) * 3 / 4) > VIS.imageBytes) throw new Error('za duże zdjęcie');
+    return v;
+  };
+  const text = (v, max) => (typeof v === 'string' ? v.replace(/[\u0000-\u001f"`<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max) : '');
+  const name = text(body.name, 120);
+  if (!name) throw new Error('brak nazwy mebla');
+  return {
+    room: image(body.room),
+    furniture: image(body.furniture),
+    name,
+    dims: text(body.dims, 80),
+    aspect: ASPECTS.includes(body.aspect) ? body.aspect : '4:3',
+  };
+}
+
+async function visualize(req, env, cors) {
+  if (req.method !== 'POST') return json({ error: 'method_not_allowed' }, 405, cors.headers);
+  if (!cors.allowed) return json({ error: 'origin_not_allowed' }, 403, cors.headers);
+  if (!env.OPENROUTER_API_KEY) return json({ error: 'not_configured' }, 503, cors.headers);
+  const ip = req.headers.get('CF-Connecting-IP') || 'local';
+  if (!visLimit(ip)) return json({ error: 'rate_limited' }, 429, { ...cors.headers, 'Retry-After': '600' });
+
+  let input;
+  try {
+    if (Number(req.headers.get('Content-Length') || 0) > VIS.bodyBytes) throw new Error('za duże zapytanie');
+    const raw = await req.text();
+    if (raw.length > VIS.bodyBytes) throw new Error('za duże zapytanie');
+    let body;
+    try { body = JSON.parse(raw); } catch { throw new Error('niepoprawny JSON'); }
+    input = readVisual(body);
+  } catch (err) {
+    return json({ error: 'bad_request', message: err.message }, 400, cors.headers);
+  }
+
+  const model = env.IMAGE_MODEL || VIS.model;
+  const started = Date.now();
+  try {
+    const res = await fetch(IMAGES_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${env.OPENROUTER_API_KEY}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': env.SITE_URL || 'https://liveomeble.pl',
+        'X-Title': 'Liveo Doradca wnetrz - wizualizacja',
+      },
+      body: JSON.stringify({
+        model,
+        prompt: VIS_PROMPT(input.name, input.dims),
+        input_references: [
+          { type: 'image_url', image_url: { url: input.room } },
+          { type: 'image_url', image_url: { url: input.furniture } },
+        ],
+        aspect_ratio: input.aspect,
+        quality: env.IMAGE_QUALITY || VIS.quality,
+        output_format: 'jpeg',
+        output_compression: 85,
+        n: 1,
+      }),
+      signal: AbortSignal.timeout(VIS.timeoutMs),
+    });
+    console.log(JSON.stringify({ event: 'visual', model, status: res.status, ms: Date.now() - started }));
+    if (res.status === 402) return json({ error: 'no_credits' }, 503, cors.headers);
+    if (res.status === 400 || res.status === 422) return json({ error: 'rejected' }, 422, cors.headers);
+    if (!res.ok) return json({ error: 'unavailable' }, 503, cors.headers);
+    const data = await res.json();
+    const img = data?.data?.[0];
+    if (!img?.b64_json) return json({ error: 'unavailable' }, 503, cors.headers);
+    return json({ image: `data:${img.media_type || 'image/jpeg'};base64,${img.b64_json}`, model }, 200, cors.headers);
+  } catch {
+    console.error(JSON.stringify({ event: 'visual_failed', model, ms: Date.now() - started }));
+    return json({ error: 'unavailable' }, 503, cors.headers);
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Wejście

@@ -18,7 +18,7 @@
       "id": "hero",
       "type": "hero",
       "lead": "Wyślij zdjęcie pokoju, a dobierzemy meble z jednej kolekcji w jego kolorach.",
-      "privacy": "Zdjęcie zostaje w Twojej przeglądarce.",
+      "privacy": "Kolory odczytuje Twoja przeglądarka. Zdjęcie wysyłamy do AI tylko, gdy poprosisz o wizualizację.",
       "aiNote": "Odpowiada AI i może się pomylić.",
       "_notes": [
         "Narzędzie działa na tej stronie (src/components/AdvisorTool.astro + src/scripts/advisor.ts). Mały czat z liveo-assistant/ jest na pozostałych stronach i przenosi tu zdjęcie oraz wynik.",
@@ -85,6 +85,29 @@
           "inna kolekcja",
           "szafa do przedpokoju"
         ]
+      },
+      "consent": {
+        "label": "Zgadzam się na przetwarzanie zdjęcia mojego pokoju: przeglądarka odczyta z niego kolory, a gdy kliknę „Zobacz w moim pokoju”, zdjęcie zostanie wysłane do modelu AI, który wstawi w nie wybrany mebel.",
+        "link": "Co robimy ze zdjęciem",
+        "href": "/polityka-prywatnosci/#wizualizacja-ai",
+        "required": "Zaznacz zgodę na przetwarzanie zdjęcia, żeby dodać zdjęcie pokoju."
+      },
+      "visual": {
+        "button": "Zobacz w moim pokoju",
+        "title": "{name} w Twoim pokoju",
+        "loading": "Wstawiam mebel do Twojego zdjęcia. To może chwilę potrwać.",
+        "caption": "Wizualizacja poglądowa wygenerowana przez sztuczną inteligencję. Kolory, proporcje, rozmiar i ustawienie mebla mogą różnić się od rzeczywistości. Przed zakupem sprawdź wymiary na stronie mebla i obejrzyj go w salonie partnerskim.",
+        "consentAsk": "Do wizualizacji wyślemy Twoje zdjęcie pokoju i zdjęcie mebla do modelu AI. Nie zapisujemy ich.",
+        "generate": "Wygeneruj wizualizację",
+        "download": "Pobierz obraz",
+        "product": "Zobacz mebel",
+        "retry": "Wygeneruj jeszcze raz",
+        "errors": {
+          "rate_limited": "Wykorzystano limit wizualizacji na teraz. Spróbuj ponownie za jakiś czas.",
+          "rejected": "Model AI nie przygotował tej wizualizacji. Spróbuj z innym zdjęciem pokoju.",
+          "bad_request": "Nie udało się wysłać zdjęcia. Dodaj zdjęcie jeszcze raz i spróbuj ponownie.",
+          "default": "Wizualizacja jest chwilowo niedostępna. Spróbuj ponownie później."
+        }
       }
     },
     {
@@ -104,7 +127,11 @@
       },
       {
         "q": "Czy moje zdjęcie jest gdzieś wysyłane?",
-        "a": "Nie. Zdjęcie analizuje Twoja przeglądarka i nigdzie go nie wysyłamy. Do modelu AI (przez serwis OpenRouter) trafia tylko tekst, który wpiszesz w polu „Napisz, czego szukasz”. Nie zapisujemy go, ale nie wpisuj tam danych osobowych."
+        "a": "Kolory zdjęcia odczytuje Twoja przeglądarka i do tego nic nie wysyłamy. Zdjęcie trafia do modelu AI tylko wtedy, gdy zaznaczysz zgodę i klikniesz „Zobacz w moim pokoju”: wtedy wysyłamy je razem ze zdjęciem mebla, żeby powstała wizualizacja. Nie zapisujemy zdjęć ani wizualizacji. Szczegóły są w polityce prywatności."
+      },
+      {
+        "q": "Czym jest wizualizacja „Zobacz w moim pokoju”?",
+        "a": "To obraz, na którym model AI wstawia wybrany mebel Liveo w zdjęcie Twojego pokoju. Jest poglądowy: kolory, proporcje i rozmiar mogą różnić się od rzeczywistości, dlatego przed zakupem sprawdź wymiary na stronie mebla i obejrzyj go w salonie."
       },
       {
         "q": "Jak doradca dobiera meble do zdjęcia?",

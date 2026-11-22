@@ -8,13 +8,16 @@ import {
 } from '../../liveo-assistant/widget/recommender.js';
 
 type Room = { slug: string; name: string; accusative: string; genitive: string };
+import { track } from './analytics';
+
 type Boot = {
   engineUrl: string; catalogUrl: string; embeddingsUrl: string; chatUrl: string;
   rooms: Record<string, Room>; finishHex: Record<string, string>;
+  visual?: Record<string, any>; consent?: { required: string };
 };
 type Product = {
   name: string; collection: string; model: string; type: string; rooms?: string[]; price: number | null; regular: number | null;
-  lowest30?: number | null; url: string; img: string; color?: { label: string } | null;
+  lowest30?: number | null; url: string; img: string; color?: { label: string } | null; dims?: string;
 };
 type Catalog = { products: Product[]; collections: Record<string, string> };
 type Set_ = { collection: string; color: { label: string } | null; items: Product[]; total: number };
@@ -165,8 +168,17 @@ export function initAdvisor() {
     gallery.classList.replace('btn--primary', 'btn--secondary');
     $$('[data-desktop-only]').forEach(el => { el.hidden = true; });
   }
-  $('[data-pick="camera"]').addEventListener('click', () => cameraInput.click());
-  $('[data-pick="file"]').addEventListener('click', () => fileInput.click());
+  // Zgoda na przetwarzanie zdjęcia jest w polu zdjęcia; bez niej nie otwieramy wyboru pliku (polityka: #wizualizacja-ai)
+  const consentBox = $<HTMLInputElement>('[data-consent-photo]');
+  const needConsent = () => {
+    if (consentBox.checked) return false;
+    showDropError(boot.consent?.required || 'Zaznacz zgodę na przetwarzanie zdjęcia.');
+    consentBox.focus();
+    return true;
+  };
+  consentBox.addEventListener('change', () => { if (consentBox.checked) dropError.hidden = true; });
+  $('[data-pick="camera"]').addEventListener('click', () => { if (!needConsent()) cameraInput.click(); });
+  $('[data-pick="file"]').addEventListener('click', () => { if (!needConsent()) fileInput.click(); });
   for (const input of [fileInput, cameraInput]) {
     input.addEventListener('change', () => {
       const file = input.files?.[0];
@@ -207,7 +219,7 @@ export function initAdvisor() {
   }
 
   async function onPhoto(file: File) {
-    if (S.busy) return;
+    if (S.busy || needConsent()) return;
     if (!file.type.startsWith('image/') && !/\.(heic|heif)$/i.test(file.name)) {
       showDropError('To nie jest zdjęcie. Wybierz plik JPG, PNG albo WEBP.');
       return;
@@ -424,8 +436,96 @@ export function initAdvisor() {
           h('span', { class: 'price__current' }, formatPrice(p.price)),
           p.regular && h('s', { class: 'price__regular' }, h('span', { class: 'visually-hidden' }, 'Cena regularna: '), formatPrice(p.regular))),
         p.regular && h('p', { class: 'price__lowest' }, `Najniższa cena z 30 dni przed obniżką: ${formatPrice(p.lowest30 ?? p.regular)}`)),
-      off >= 5 && h('p', { class: 'product-card__badges' }, h('span', { class: 'badge badge--promo' }, `−${off}%`)));
+      off >= 5 && h('p', { class: 'product-card__badges' }, h('span', { class: 'badge badge--promo' }, `−${off}%`)),
+      visButton(p));
   }
+
+  // ----- wizualizacja AI: mebel wstawiony w zdjęcie pokoju (Worker /wizualizacja → OpenRouter → model obrazów) -----
+  // Przycisk jest tylko przy zdjęciu klienta. Zdjęcie wysyłamy wyłącznie po kliknięciu i przy zaznaczonej zgodzie.
+  const visUrl = boot.chatUrl ? boot.chatUrl.replace(/\/chat\/?$/, '/wizualizacja') : '';
+  const V = boot.visual || {};
+  const dlg = root.querySelector<HTMLDialogElement>('[data-vis]');
+  const visStage = $('[data-vis-stage]');
+  const visConsent = $('[data-vis-consent]');
+  const visConsentCheck = $<HTMLInputElement>('[data-vis-consent-check]');
+  const visActions = $('[data-vis-actions]');
+  const visDownload = $<HTMLAnchorElement>('[data-vis-download]');
+  const visProductLink = $<HTMLAnchorElement>('[data-vis-product]');
+  let visProduct: Product | null = null;
+  let visBusy = false;
+
+  function visButton(p: Product) {
+    if (!S.photo || !visUrl || !dlg) return null;
+    return h('button', { class: 'advisor-card__vis', type: 'button', onclick: () => openVisual(p) }, V.button || 'Zobacz w moim pokoju');
+  }
+  const toDataUrl = async (src: string) => {
+    const res = await fetch(src);
+    if (!res.ok) throw new Error('img');
+    const blob = await res.blob();
+    return await new Promise<string>((ok, bad) => { const r = new FileReader(); r.onload = () => ok(String(r.result)); r.onerror = bad; r.readAsDataURL(blob); });
+  };
+  const aspectOf = (src: string) => new Promise<string>(ok => {
+    const img = new Image();
+    img.onload = () => {
+      const r = img.naturalWidth / Math.max(1, img.naturalHeight);
+      const opts: [string, number][] = [['1:1', 1], ['4:3', 4 / 3], ['3:4', 3 / 4], ['3:2', 1.5], ['2:3', 2 / 3], ['16:9', 16 / 9], ['9:16', 9 / 16]];
+      ok(opts.reduce((a, b) => (Math.abs(b[1] - r) < Math.abs(a[1] - r) ? b : a))[0]);
+    };
+    img.onerror = () => ok('4:3');
+    img.src = src;
+  });
+  const pending = (...extra: (HTMLElement | null)[]) =>
+    visStage.replaceChildren(h('img', { class: 'advisor-vis__img is-pending', src: S.photo!, alt: '' }), ...extra.filter(Boolean) as HTMLElement[]);
+
+  function openVisual(p: Product) {
+    if (!dlg || !S.photo) return;
+    visProduct = p;
+    $('[data-vis-title]').textContent = String(V.title || '{name}').replace('{name}', p.model || p.name);
+    visActions.hidden = true;
+    pending();
+    if (!dlg.open) dlg.showModal();
+    if (consentBox.checked) void generate();
+    else { visConsentCheck.checked = false; visConsent.hidden = false; visConsentCheck.focus(); }
+  }
+
+  async function generate() {
+    const p = visProduct;
+    if (!p || !S.photo || visBusy) return;
+    visBusy = true;
+    visConsent.hidden = true;
+    visActions.hidden = true;
+    pending(h('p', { class: 'advisor-vis__loading' }, h('span', { class: 'advisor-vis__spinner', 'aria-hidden': 'true' }), V.loading || 'Wstawiam mebel do Twojego zdjęcia.'));
+    visProductLink.href = p.url;
+    try {
+      const furniture = await toDataUrl(p.img.replace(/-480\.webp$/, '-1000.webp')).catch(() => toDataUrl(p.img));
+      const res = await fetch(visUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ room: S.photo, furniture, name: p.model || p.name, dims: p.dims || '', aspect: await aspectOf(S.photo), consent: true }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || typeof data.image !== 'string') throw new Error(data.error || 'default');
+      visStage.replaceChildren(h('img', { class: 'advisor-vis__img', src: data.image, alt: `Wizualizacja: ${p.model || p.name} we wnętrzu z Twojego zdjęcia` }));
+      visDownload.href = data.image;
+      visDownload.hidden = false;
+      track('wizualizacja_ai', { mebel: p.model || p.name });
+    } catch (err) {
+      const code = (err as Error).message;
+      pending(h('p', { class: 'advisor-vis__error', role: 'alert' }, V.errors?.[code] || V.errors?.default || 'Wizualizacja jest chwilowo niedostępna.'));
+      visDownload.hidden = true;
+    } finally {
+      visBusy = false;
+      visActions.hidden = false;
+    }
+  }
+  $('[data-vis-generate]').addEventListener('click', () => {
+    if (!visConsentCheck.checked) { visConsentCheck.focus(); return; }
+    consentBox.checked = true; // ta sama zgoda co w polu zdjęcia
+    void generate();
+  });
+  $('[data-vis-retry]').addEventListener('click', () => void generate());
+  $('[data-vis-close]').addEventListener('click', () => dlg?.close());
+  dlg?.addEventListener('click', e => { if (e.target === dlg) dlg.close(); }); // klik w tło zamyka okno
 
   /** Kółko koloru mebli; kolor dwóch płyt („Biały mat / dąb naturalny”) jako dwie połówki. */
   function finishChip(color: { label: string } | null) {
