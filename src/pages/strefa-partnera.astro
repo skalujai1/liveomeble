@@ -3,6 +3,8 @@
 // Logowanie dowolnymi danymi otwiera panel w przeglądarce. Katalog partnera z kart produktu Liveo (symbole, EAN,
 // paczki) — bez cen, których karty nie mają. Zamówienia zapisywane tylko w localStorage — nic nie jest wysyłane.
 // noindex, nofollow; poza sitemap.xml i llms.txt; bez FAQPage i cen w JSON-LD.
+import Media from '../components/Media.astro';
+import { roomImage as partnerRoomImage } from '../lib/images';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Faq from '../components/Faq.astro';
 import { PARTNER_DEMO } from '../config';
@@ -13,6 +15,8 @@ import { fill } from '../lib/text';
 const page = pages.strefaPartnera;
 const path = url.partnerZone;
 const L = page.login;
+// zdjęcie obok logowania (strona była samym formularzem i tekstem)
+const loginImg = partnerRoomImage('salon', 'wide', 4);
 const P = page.panel;
 const vat = PARTNER_DEMO.vatRate;
 
@@ -77,7 +81,8 @@ const tabs = P.nav.items;
     <noscript><p class="section__note">Strefa partnera działa w przeglądarce i wymaga włączonego JavaScriptu.</p></noscript>
 
     <!-- Logowanie -->
-    <section class="section" id={L.id} data-view="login" aria-labelledby="logowanie-tytul">
+    <section class="section partner-login" id={L.id} data-view="login" aria-labelledby="logowanie-tytul">
+      <div class="partner-login__main">
       <h2 id="logowanie-tytul" class="section__title">Logowanie</h2>
       <p class="section__lead">{L.lead}</p>
       <div class="form__row">
@@ -112,6 +117,11 @@ const tabs = P.nav.items;
           </div>
         </div>
       </div>
+      </div>
+      <figure class="partner-login__media">
+        <Media image={loginImg} alt="" widths={[640, 1000]} sizes="(min-width: 64rem) 34vw, 100vw" ratio="4 / 5" placeholderLabel="Aranżacja" />
+        <figcaption>Katalog z symbolami, kodami EAN i paczkami, dostępność i zamówienia w jednym miejscu.</figcaption>
+      </figure>
     </section>
 
     <!-- Panel (po zalogowaniu) -->

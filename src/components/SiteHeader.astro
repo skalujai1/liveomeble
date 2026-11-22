@@ -1,6 +1,6 @@
 ---
 // Nagłówek: jeden pasek (decyzja Michała 20.11: bez brązowego paska pomocniczego nad nim). Logo, menu z mega-menu
-// „Meble” i „Kolekcje”, linki dodatkowe (B2B, strefa partnera, blog, kontakt), lupa z polem „Znajdź salon”
+// „Meble” i „Kolekcje”, linki dodatkowe (B2B, strefa partnera, blog, kontakt), lupa z wyszukiwarką mebli i salonów (scripts/search.ts)
 // (natywny popover, działa bez JS) i link „Gdzie kupić”. Bez JS: „Meble” i „Kolekcje” są zwykłymi linkami,
 // menu mobilne jest listą pod nagłówkiem.
 import Thumb from './Thumb.astro';
@@ -124,16 +124,18 @@ const secondary = [
       </nav>
 
       <button class="site-header__search" type="button" popovertarget="naglowek-szukaj">
-        <span class="visually-hidden">Znajdź salon po kodzie pocztowym</span>
+        <span class="visually-hidden">Szukaj mebla albo salonu</span>
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" /><path d="m20 20-4.2-4.2" /></svg>
       </button>
-      <form id="naglowek-szukaj" class="site-header__finder" popover action={url.stores()} method="get" role="search" aria-label="Znajdź salon partnerski">
-        <label class="site-header__finder-label" for="naglowek-kod">Znajdź salon partnerski</label>
-        <input id="naglowek-kod" name="kod" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="6" placeholder="Kod pocztowy, np. 35-060" autofocus />
+      <form id="naglowek-szukaj" class="site-header__finder" popover action={url.stores()} method="get" role="search" aria-label="Szukaj mebla albo salonu">
+        <label class="site-header__finder-label" for="naglowek-kod">Szukaj mebla albo salonu <kbd>Ctrl K</kbd></label>
+        <input id="naglowek-kod" name="kod" type="text" autocomplete="off" maxlength="60" placeholder="np. DT04, biała komoda, 35-060" autofocus />
         <button class="site-header__finder-btn" type="submit">
-          <span class="visually-hidden">Pokaż salony</span>
+          <span class="visually-hidden">Szukaj</span>
           <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" /><path d="m20 20-4.2-4.2" /></svg>
         </button>
+        <p class="visually-hidden" role="status" data-search-status></p>
+        <div class="site-search" data-search-results></div>
       </form>
 
       <a class="site-header__where" href={url.stores()} aria-current={current('/gdzie-kupic/')}>
@@ -148,4 +150,6 @@ const secondary = [
   import { initMenu, initMega } from '../scripts/menu';
   initMenu();
   initMega();
+  import { initSearch } from '../scripts/search';
+  initSearch();
 </script>

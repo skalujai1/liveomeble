@@ -1,16 +1,39 @@
 ---
-// Kontakt — docs/ia.md 3.14, treść: src/content/pages/kontakt.json (dane kontaktowe [do potwierdzenia])
+// Kontakt — docs/ia.md 3.14, treść: src/content/pages/kontakt.json.
+// Układ obrazkowy: nagłówek obok zdjęcia z kartą kontaktu (telefon, e-mail, adres od razu na górze), cztery sprawy
+// jako kafle z ikonami, formularz obok zdjęcia z odesłaniem do salonu, pytania.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHeader from '../components/PageHeader.astro';
-import Section from '../components/Section.astro';
 import ContentSection from '../components/ContentSection.astro';
 import Form from '../components/Form.astro';
 import Faq from '../components/Faq.astro';
+import Media from '../components/Media.astro';
+import Rich from '../components/Rich.astro';
 import { faqPage, ORG_ID, webPage } from '../lib/jsonld';
+import { roomImage } from '../lib/images';
 import { pages, section, url } from '../lib/site';
 
 const page = pages.kontakt;
 const path = url.contact;
+const intro = section(page, 'wstep');
+const routing = section(page, 'sprawy');
+const details = section(page, 'dane');
+const form = section(page, 'formularz');
+const social = section(page, 'social');
+const item = (type: string) => details.items.find((i: any) => i.type === type);
+const tel = item('tel');
+const email = item('email');
+const address = item('address');
+const mapHref = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address.value.replace(/\s*\(.*\)$/, ''))}`;
+
+const heroImg = roomImage('przedpokoj', 'wide');
+const formImg = roomImage('salon', 'wide', 3);
+// ikony spraw (w kolejności z kontakt.json): salon, dostawa i montaż, części i instrukcja, współpraca
+const icons = [
+  '<path d="M3 10.5 12 4l9 6.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-5h4v5"/>',
+  '<path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/>',
+  '<path d="M4 8 12 4l8 4v8l-8 4-8-4z"/><path d="m4 8 8 4 8-4M12 12v8"/>',
+  '<path d="M7 11 10 8l3 2 3-3 4 4-6 6-3-2-2 2-5-5z"/><path d="M3 12l2-2M21 12l-2-2"/>',
+];
 ---
 <BaseLayout
   title={page.seo.title}
@@ -23,17 +46,54 @@ const path = url.contact;
     faqPage(path, page.faq.items),
   ]}
 >
-  <PageHeader h1={page.h1} lead={section(page, 'wstep').lead} />
+  <header class="contact-hero container">
+    <div class="contact-hero__text">
+      <h1 class="contact-hero__title">{page.h1}</h1>
+      <p class="contact-hero__lead"><Rich text={intro.lead} /></p>
+    </div>
+    <div class="contact-hero__media">
+      <Media image={heroImg} alt="" widths={[1000, 1600]} sizes="(min-width: 64rem) 50vw, 100vw" ratio="4 / 3" priority placeholderLabel="Aranżacja" />
+      <address class="contact-card">
+        <span class="contact-card__name">{details.title}</span>
+        <a class="contact-card__big" href={`tel:${tel.value.replace(/\s+/g, '')}`}>{tel.value}</a>
+        <a class="contact-card__big" href={`mailto:${email.value}`}>{email.value}</a>
+        <span>{address.value}</span>
+        <a class="link" href={mapHref} target="_blank" rel="noopener">{details.map.label}</a>
+      </address>
+    </div>
+  </header>
 
-  {page.sections.slice(1).map((s: any) =>
-    s.type === 'form' ? (
-      <Section id={s.id} title={s.title} lead={s.lead} width="narrow">
-        <div class="form-card">
-          <Form id="formularz-kontaktowy" formId="contact" fields={s.fields} consent={s.consent} submit={s.submit} success={s.success} error={s.error} />
-        </div>
-      </Section>
-    ) : <ContentSection s={s} />,
-  )}
+  <section class="contact-routes container" aria-labelledby="sprawy">
+    <h2 id="sprawy" class="contact-routes__title">{routing.title}</h2>
+    <ul class="contact-routes__list">
+      {routing.items.map((it: any, i: number) => (
+        <li class="contact-route">
+          <svg class="ico contact-route__ico" viewBox="0 0 24 24" aria-hidden="true" set:html={icons[i % icons.length]} />
+          <h3 class="contact-route__title">{it.title}</h3>
+          <p class="contact-route__text">{it.text}</p>
+          {it.cta && <p class="contact-route__cta"><a class="btn btn--secondary" href={it.cta.href}>{it.cta.label}</a></p>}
+        </li>
+      ))}
+    </ul>
+  </section>
 
+  <section class="contact-form container" id={form.id} aria-labelledby="formularz-tytul">
+    <div class="contact-form__main">
+      <h2 id="formularz-tytul" class="contact-form__title">{form.title}</h2>
+      {form.lead && <p class="contact-form__lead">{form.lead}</p>}
+      <div class="form-card">
+        <Form id="formularz-kontaktowy" formId="contact" fields={form.fields} consent={form.consent} submit={form.submit} success={form.success} error={form.error} />
+      </div>
+    </div>
+    <div class="contact-form__aside">
+      <Media image={formImg} alt="" widths={[640, 1000]} sizes="(min-width: 64rem) 34vw, 100vw" ratio="4 / 5" placeholderLabel="Salon" />
+      <div class="contact-form__note">
+        <p><b>Kupujesz albo reklamujesz mebel?</b> Najszybciej pomoże salon, w którym go kupujesz.</p>
+        <p><a class="btn btn--dark" href={url.stores()}>Znajdź salon</a></p>
+      </div>
+    </div>
+  </section>
+
+  {social.items?.length > 0 && <ContentSection s={social} />}
   <Faq title={page.faq.title} items={page.faq.items} />
 </BaseLayout>

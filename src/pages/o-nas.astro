@@ -1,18 +1,40 @@
 ---
-// O nas — docs/ia.md 3.13, treść: src/content/pages/o-nas.json (tylko potwierdzone fakty; reszta oznaczona [do potwierdzenia])
+// O nas — docs/ia.md 3.13, treść: src/content/pages/o-nas.json (tylko potwierdzone fakty).
+// Układ obrazkowy: duże zdjęcie z nagłówkiem, pas liczb z katalogu i bazy salonów, sekcje tekstu obok zdjęć
+// kolekcji (kolaż), pas dla sklepów na zdjęciu, dane firmy i pytania. Liczby liczone z danych przy budowie.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHeader from '../components/PageHeader.astro';
 import ContentSection from '../components/ContentSection.astro';
 import Faq from '../components/Faq.astro';
+import Media from '../components/Media.astro';
+import Rich from '../components/Rich.astro';
 import { faqPage, ORG_ID, webPage } from '../lib/jsonld';
-import { roomImage } from '../lib/images';
-import { pages, section, url } from '../lib/site';
+import { collectionImage, roomImage } from '../lib/images';
+import { collections, pages, products, resellers, section, url } from '../lib/site';
+import { plural } from '../lib/text';
 
 const page = pages.oNas;
 const path = url.about;
-// Obraz nagłówka: aranżacja (atrapa 3D do czasu zdjęć od Liveo).
+const intro = section(page, 'wstep');
+const why = section(page, 'kolekcje');
+const sell = section(page, 'jak-sprzedajemy');
+const b2b = section(page, 'dla-sklepow');
+const company = section(page, 'dane-firmy');
+
 const heroImg = roomImage('jadalnia', 'wide');
 const heroAlt = heroImg?.title ? `Aranżacja: ${heroImg.title}` : '';
+// kolaż kolekcji: trzy różne kolekcje z dużym zdjęciem aranżacji
+const pick = (slug: string) => collections.find(c => c.slug === slug);
+const collage = ['milton', 'ate', 'remi'].map(pick).filter(Boolean).map(c => ({ c: c!, img: collectionImage(c!, 'wide') }));
+const sellImg = roomImage('salon', 'wide', 2);
+const b2bImg = roomImage('sypialnia', 'wide', 1);
+
+const delivery = products.filter((p: any) => p.delivery72).length;
+const stats = [
+  { n: collections.length, label: plural({ one: 'kolekcja', few: 'kolekcje', many: 'kolekcji' }, collections.length).replace(/^\d+\s*/, '') },
+  { n: products.length, label: plural({ one: 'mebel w katalogu', few: 'meble w katalogu', many: 'mebli w katalogu' }, products.length).replace(/^\d+\s*/, '') },
+  { n: resellers.length, label: plural({ one: 'salon partnerski', few: 'salony partnerskie', many: 'salonów partnerskich' }, resellers.length).replace(/^\d+\s*/, '') },
+  { n: delivery, label: plural({ one: 'mebel z dostawą w 72 h', few: 'meble z dostawą w 72 h', many: 'mebli z dostawą w 72 h' }, delivery).replace(/^\d+\s*/, '') },
+];
 ---
 <BaseLayout
   title={page.seo.title}
@@ -25,7 +47,61 @@ const heroAlt = heroImg?.title ? `Aranżacja: ${heroImg.title}` : '';
     faqPage(path, page.faq.items),
   ]}
 >
-  <PageHeader image={heroImg} imageAlt={heroAlt} placeholderLabel="Aranżacja" h1={page.h1} lead={section(page, 'wstep').lead} />
-  {page.sections.slice(1).map((s: any) => <ContentSection s={s} />)}
+  <header class="about-hero container">
+    <div class="about-hero__media">
+      <Media image={heroImg} alt={heroAlt} widths={[1280, 1920, 2400]} sizes="(min-width: 80rem) 76rem, 100vw" ratio="21 / 9" priority placeholderLabel="Aranżacja" />
+    </div>
+    <div class="about-hero__text">
+      <h1 class="about-hero__title"><Rich text={page.h1} /></h1>
+      <p class="about-hero__lead"><Rich text={intro.lead} /></p>
+    </div>
+  </header>
+
+  <section class="about-stats" aria-label="Liveo w liczbach">
+    <ul class="container about-stats__list">
+      {stats.map(s => <li><b>{s.n}</b><span>{s.label}</span></li>)}
+    </ul>
+  </section>
+
+  <section class="about-split container" aria-labelledby="o-nas-kolekcje">
+    <div class="about-split__text">
+      <h2 id="o-nas-kolekcje" class="about-split__title">{why.title}</h2>
+      <p class="about-split__lead"><Rich text={why.text} /></p>
+      <p><a class="btn btn--dark" href={why.cta.href}>{why.cta.label}</a></p>
+    </div>
+    <ul class="about-collage" aria-label="Przykładowe kolekcje">
+      {collage.map(({ c, img }) => (
+        <li>
+          <a href={url.collection(c.slug)}>
+            <Media image={img} alt="" widths={[640, 1000]} sizes="(min-width: 64rem) 30vw, 50vw" ratio="4 / 3" placeholderLabel={`Kolekcja ${c.name}`} />
+            <span class="about-collage__name">{c.name}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="about-split about-split--flip container" aria-labelledby="o-nas-salony">
+    <div class="about-split__text">
+      <h2 id="o-nas-salony" class="about-split__title">{sell.title}</h2>
+      <p class="about-split__lead"><Rich text={sell.text} /></p>
+      <p><a class="btn btn--dark" href={sell.cta.href}>{sell.cta.label}</a></p>
+    </div>
+    <div class="about-split__media">
+      <Media image={sellImg} alt="" widths={[1000, 1600]} sizes="(min-width: 64rem) 46vw, 100vw" ratio="4 / 3" placeholderLabel="Salon" />
+      <p class="about-split__badge"><b>{resellers.length}</b> {plural({ one: 'salon', few: 'salony', many: 'salonów' }, resellers.length).replace(/^\d+\s*/, '')} w Polsce i Słowenii</p>
+    </div>
+  </section>
+
+  <section class="about-band" aria-labelledby="o-nas-b2b">
+    <Media image={b2bImg} alt="" widths={[1600, 2400]} sizes="100vw" ratio="21 / 7" class="about-band__bg" placeholderLabel="Aranżacja" />
+    <div class="container about-band__inner">
+      <h2 id="o-nas-b2b" class="about-band__title">{b2b.title}</h2>
+      <p class="about-band__text">{b2b.text}</p>
+      <p><a class="btn btn--white" href={b2b.cta.href}>{b2b.cta.label}</a></p>
+    </div>
+  </section>
+
+  <ContentSection s={company} />
   <Faq title={page.faq.title} items={page.faq.items} />
 </BaseLayout>
