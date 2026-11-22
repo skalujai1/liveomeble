@@ -992,3 +992,8 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .site-search__more { padding-top: 0.25rem; }
 .site-search__postcode { width: 100%; min-height: 2.75rem; border: 0; background: var(--color-surface); color: var(--color-text); font-weight: var(--weight-medium); text-align: left; padding: 0 1rem; cursor: pointer; }
 .site-search__postcode:hover { background: color-mix(in srgb, var(--color-surface) 85%, var(--color-text) 8%); }
+
+/* Listy mebli: „Pokaż więcej” pod siatką (po 24 meble) */
+.listing__more { display: flex; justify-content: center; margin: var(--space-6) 0 0; }
+.listing__more .btn { min-width: 16rem; }
+.room-group__more { margin: var(--space-4) 0 0; }

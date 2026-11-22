@@ -53,6 +53,7 @@ function setupListing(root: HTMLElement) {
   const count = root.querySelector<HTMLElement>('[data-listing-count]');
   const empty = root.querySelector<HTMLElement>('[data-listing-empty]');
   const toggle = root.querySelector<HTMLButtonElement>('[data-listing-toggle]');
+  const more = root.querySelector<HTMLButtonElement>('[data-listing-more]');
   if (!form || !list) return;
   const items = [...list.querySelectorAll<HTMLElement>('[data-listing-item]')];
   const forms = JSON.parse(count?.dataset.forms ?? '{}');
@@ -67,16 +68,43 @@ function setupListing(root: HTMLElement) {
     });
   }
 
+  // „Pokaż więcej”: lista pokazuje po PAGE pasujących mebli (wcześniej wszystkie naraz: 469 kart na /meble/).
+  // Wszystkie karty zostają w kodzie strony; filtry i sortowanie działają na całym katalogu.
+  const PAGE = 24;
+  let limit = PAGE;
+  let matched = new Set<HTMLElement>(items);
+  const paint = () => {
+    let i = 0;
+    for (const el of list.children as HTMLCollectionOf<HTMLElement>) {
+      if (!matched.has(el)) { el.hidden = true; continue; }
+      el.hidden = i >= limit;
+      i++;
+    }
+    if (more) {
+      const rest = matched.size - limit;
+      more.hidden = rest <= 0;
+      more.textContent = `Pokaż więcej (${rest > PAGE ? `${PAGE} z ${rest}` : rest})`;
+    }
+  };
+  more?.addEventListener('click', () => {
+    const first = [...list.children].filter(el => matched.has(el as HTMLElement))[limit] as HTMLElement | undefined;
+    limit += PAGE;
+    paint();
+    first?.querySelector<HTMLAnchorElement>('a')?.focus({ preventScroll: true });
+  });
+
   const apply = (f: Filters, { updateUrl = true } = {}) => {
     let shown = 0;
+    matched = new Set();
     for (const el of items) {
       const ok = matches(el, f);
-      el.hidden = !ok;
-      if (ok) shown++;
+      if (ok) { matched.add(el); shown++; }
     }
     const sorter = SORTERS[f.sort] ?? SORTERS.polecane;
     const sorted = [...items].sort(sorter);
     if (sorted.some((el, i) => list.children[i] !== el)) list.append(...sorted);
+    limit = PAGE;
+    paint();
     if (count) {
       const tpl = forms[PR.select(shown)] ?? forms.many ?? '{n}';
       const text = tpl.replace('{n}', String(shown));
@@ -95,6 +123,7 @@ function setupListing(root: HTMLElement) {
     }
   };
 
+  paint();
   const fromUrl = readUrl();
   const hasParams = FILTER_KEYS.some(k => new URLSearchParams(location.search).has(k));
   if (hasParams) {

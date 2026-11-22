@@ -87,6 +87,7 @@ const total = productCount(products.length);
   <ul class="product-grid" data-listing-list aria-label={cfg.title}>
     {products.map((p, i) => <ProductCard product={p} headingLevel={headingLevel} order={i} />)}
   </ul>
+  <p class="listing__more"><button class="btn btn--secondary" type="button" data-listing-more hidden>Pokaż więcej</button></p>
   <div class="listing__empty" data-listing-empty hidden>
     <p class="listing__empty-title"><strong>{cfg.empty!.title}</strong></p>
     <p>{cfg.empty!.text}</p>
