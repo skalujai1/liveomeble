@@ -105,18 +105,32 @@ export function typeImage(typeId: string, list: Product[] = productsSorted): Ima
 /** Lista plików (do raportu w kontroli buildu). */
 export const availableRenders: string[] = [];
 
-/** Zdjęcie aranżacji, na którym widać mebel danego rodzaju: tylko aranżacje nazwane symbolem mebla tego rodzaju
- *  (np. „remi_rm11_…” = szafka na buty REMI RM11). Gdy takiego zdjęcia nie ma — null (nagłówek pokazuje wtedy
- *  kolaż zdjęć mebli tego rodzaju, a nie przypadkowe wnętrze). */
-export function typeSceneImage(typeId: string, list: Product[]): ImageRef | null {
-  const byCode = new Map(list.map(p => [String(p.sku || '').split(' ')[0].toLowerCase(), p]));
-  for (const c of collections) {
-    for (const a of c.arrangements as (PublicImage & { room: string })[]) {
-      const file = a.base.split('/').pop()!.toLowerCase();
-      const codes = [...file.matchAll(/_([a-z]{1,3}\d{2,3})(?=[_-])/g)].map(m => m[1]);
-      const p = codes.map(k => byCode.get(k)).find(Boolean);
-      if (p && p.type === typeId && a.w >= 1600) return ref(a, `${p.name} w aranżacji`);
-    }
-  }
-  return null;
+/** Zdjęcie aranżacji do nagłówka strony rodzaju mebla. Wybrane ręcznie (przegląd wszystkich aranżacji z kart, 23.11.2026)
+ *  tak, żeby ten rodzaj mebla był na pierwszym planie: przy ławach ława na środku salonu, przy lustrach lustro itd.
+ *  Gdy plik zniknie z kart (inna nazwa po aktualizacji), nagłówek pokaże kolaż zdjęć mebli tego rodzaju. */
+const TYPE_SCENES: Record<string, string> = {
+  rtv: '8cfe9ced35-remi_rm01_bialy-evoke_2160px',
+  komoda: 'be686dec2a-dante_06_antracyt_2160px',
+  witryna: '9315ec6ea9-ate_02_2160px',
+  kredens: '453172977e-sandy_03_2160px',
+  regal: '00baf3871e-aris_01_2160px',
+  szafka: '389b44eb04-remi_rm05_bialy-evoke_2160px',
+  polka: '54fea29f6c-ate_01_2160px',
+  lawa: '116ff15534-s-line_01_2160px',
+  stol: '5d3f6941ad-prisco_02_2160px',
+  lozko: '61291359df-besto_05_2160px',
+  szafka_nocna: 'bd3bd2de88-besto_04_2160px',
+  szafa: '6113966489-montana_mt01_evoke_2160px',
+  toaletka: 'ba8c0c0ff7-remi_03_bialy-evoke_2160px',
+  lustro: 'eb3db16e69-ate_05_2160px',
+  biurko: '6fb6de67ee-kubo_01_2160px',
+  szafka_na_buty: 'ea829eeb04-remi_rm11_bialy-evoke_2160px',
+  wieszak: 'f4ed064d97-mati_05_2160px',
+  kuchnia: '8f6fb838c1-tiffany_z180_bialy-bialy-bialy_1440px',
+};
+export function typeSceneImage(typeId: string): ImageRef | null {
+  const name = TYPE_SCENES[typeId];
+  const img = name ? arrangementByName(name, '') : null;
+  if (name && !img) console.warn(`[images] TYPE_SCENES: brak aranżacji „${name}” dla rodzaju ${typeId}`);
+  return img;
 }

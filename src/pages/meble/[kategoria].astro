@@ -34,7 +34,7 @@ const h1 = fill(tpl.h1, vars);
 const faq = tpl.faq.items.map(it => ({ q: fill(it.q, vars), a: fill(it.a, vars) }));
 const guide = item.guide ? (await getArticles()).find(a => a.data.slug === item.guide) : null;
 const typeRooms = rooms.filter(r => t.rooms.includes(r.slug));
-const headImg = typeSceneImage(t.id, products);
+const headImg = typeSceneImage(t.id);
 // bez zdjęcia aranżacji z tym meblem: kolaż 4 mebli tego rodzaju z różnych kolekcji (zawsze widać właściwy mebel)
 const collage = (() => {
   const seen = new Set<string>();
@@ -55,7 +55,7 @@ const collage = (() => {
   ]}
 >
   {headImg ? (
-    <PageHeader {h1} lead={item.intro} image={headImg} imageAlt={`Aranżacja: ${headImg.title}`} placeholderLabel={t.plural} />
+    <PageHeader {h1} lead={item.intro} image={headImg} imageAlt={`${t.plural} w aranżacji`} placeholderLabel={t.plural} />
   ) : (
     <PageHeader {h1} lead={item.intro}>
       <ul class="type-collage" slot="media" aria-hidden="true">
