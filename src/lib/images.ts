@@ -105,24 +105,18 @@ export function typeImage(typeId: string, list: Product[] = productsSorted): Ima
 /** Lista plików (do raportu w kontroli buildu). */
 export const availableRenders: string[] = [];
 
-/** Zdjęcie aranżacji do nagłówka strony rodzaju mebla: aranżacja z typowego dla rodzaju pomieszczenia, z kolekcji,
- *  która ma meble tego rodzaju (półki i szafki RTV w salonie, łóżka w sypialni, wieszaki w przedpokoju itd.). */
-const TYPE_ROOM: Record<string, string> = {
-  rtv: 'salon', komoda: 'salon', witryna: 'salon', kredens: 'jadalnia', regal: 'salon', szafka: 'salon', polka: 'salon',
-  lawa: 'salon', stol: 'jadalnia', lozko: 'sypialnia', szafka_nocna: 'sypialnia', szafa: 'sypialnia', toaletka: 'pokoj-mlodziezowy',
-  lustro: 'przedpokoj', biurko: 'biuro', szafka_na_buty: 'przedpokoj', wieszak: 'przedpokoj', kuchnia: 'kuchnia',
-};
+/** Zdjęcie aranżacji, na którym widać mebel danego rodzaju: tylko aranżacje nazwane symbolem mebla tego rodzaju
+ *  (np. „remi_rm11_…” = szafka na buty REMI RM11). Gdy takiego zdjęcia nie ma — null (nagłówek pokazuje wtedy
+ *  kolaż zdjęć mebli tego rodzaju, a nie przypadkowe wnętrze). */
 export function typeSceneImage(typeId: string, list: Product[]): ImageRef | null {
-  const room = TYPE_ROOM[typeId] ?? 'salon';
-  const withType = new Set(list.filter(p => p.type === typeId).map(p => p.collection));
-  const order = [...collections].sort((a, b) => Number(withType.has(b.slug)) - Number(withType.has(a.slug)));
-  // różne rodzaje z tego samego pokoju dostają różne zdjęcia (przesunięcie według kolejności rodzaju)
-  const shift = Object.keys(TYPE_ROOM).filter(k => TYPE_ROOM[k] === room).indexOf(typeId);
-  const hits = order.filter(c => withType.has(c.slug)).flatMap(c => (c.arrangements as (PublicImage & { room: string })[])
-    .filter(a => a.room === room && a.w >= 1600).slice(0, 1).map(a => ({ a, c })));
-  if (hits.length) {
-    const { a, c } = hits[Math.max(0, shift) % hits.length];
-    return ref(a, `Kolekcja ${c.name} ${roomLocative(room)}`);
+  const byCode = new Map(list.map(p => [String(p.sku || '').split(' ')[0].toLowerCase(), p]));
+  for (const c of collections) {
+    for (const a of c.arrangements as (PublicImage & { room: string })[]) {
+      const file = a.base.split('/').pop()!.toLowerCase();
+      const codes = [...file.matchAll(/_([a-z]{1,3}\d{2,3})(?=[_-])/g)].map(m => m[1]);
+      const p = codes.map(k => byCode.get(k)).find(Boolean);
+      if (p && p.type === typeId && a.w >= 1600) return ref(a, `${p.name} w aranżacji`);
+    }
   }
-  return roomImage(room, 'wide', Math.max(0, shift));
+  return null;
 }

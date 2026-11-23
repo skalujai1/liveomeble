@@ -1074,3 +1074,9 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 
 /* Strony rodzajów mebli i „Meble”: lista bliżej nagłówka ze zdjęciem (23.11.2026) */
 .page-category #lista, .page-products #lista { padding-top: var(--space-5); }
+
+/* Rodzaje mebli bez zdjęcia aranżacji z tym meblem: kolaż 4 mebli tego rodzaju na lnie (zawsze widać właściwy mebel) */
+.type-collage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+.type-collage li { display: grid; place-items: center; aspect-ratio: 4 / 3; background: var(--color-surface); overflow: hidden; }
+.type-collage img { width: 82%; height: 82%; object-fit: contain; mix-blend-mode: multiply; }
+.type-collage li:only-child { grid-column: 1 / -1; aspect-ratio: 16 / 9; }

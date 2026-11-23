@@ -19,8 +19,9 @@ interface Props {
 }
 const { h1, lead, ctas = [], image, imageAlt = '', placeholderLabel = '', note } = Astro.props;
 const hasMedia = image !== undefined;
+const hasSlotMedia = Astro.slots.has('media');
 ---
-<header class:list={['page-header', { 'page-header--media': hasMedia }]}>
+<header class:list={['page-header', { 'page-header--media': hasMedia || hasSlotMedia }]}>
   <div class="container page-header__inner">
     <div class="page-header__text">
       <h1 class="page-header__title"><Rich text={h1} /></h1>
@@ -37,6 +38,7 @@ const hasMedia = image !== undefined;
       )}
       {note && <p class="page-header__note"><Rich text={note} /></p>}
     </div>
+    <slot name="media" />
     {hasMedia && (
       <Media
         image={image ?? null}

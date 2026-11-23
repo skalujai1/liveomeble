@@ -7,7 +7,8 @@ import ProductListing from '../../components/ProductListing.astro';
 import CategoryTiles from '../../components/CategoryTiles.astro';
 import Faq from '../../components/Faq.astro';
 import { getArticles } from '../../lib/articles';
-import { typeSceneImage } from '../../lib/images';
+import { packshotFor, typeSceneImage } from '../../lib/images';
+import Thumb from '../../components/Thumb.astro';
 import { faqPage, itemList, webPage } from '../../lib/jsonld';
 import { collectionNames, collections, num, pages, products, productsByType, rooms, types, url, type FurnitureType } from '../../lib/site';
 import { fill, lowerFirst } from '../../lib/text';
@@ -34,6 +35,12 @@ const faq = tpl.faq.items.map(it => ({ q: fill(it.q, vars), a: fill(it.a, vars) 
 const guide = item.guide ? (await getArticles()).find(a => a.data.slug === item.guide) : null;
 const typeRooms = rooms.filter(r => t.rooms.includes(r.slug));
 const headImg = typeSceneImage(t.id, products);
+// bez zdjęcia aranżacji z tym meblem: kolaż 4 mebli tego rodzaju z różnych kolekcji (zawsze widać właściwy mebel)
+const collage = (() => {
+  const seen = new Set<string>();
+  return list.filter(p => !seen.has(p.collection) && seen.add(p.collection))
+    .map(p => ({ img: packshotFor(p, p.variants[0]) })).filter(x => x.img).slice(0, 4);
+})();
 ---
 <BaseLayout
   title={item.seo.title}
@@ -47,7 +54,15 @@ const headImg = typeSceneImage(t.id, products);
     faqPage(path, faq),
   ]}
 >
-  <PageHeader {h1} lead={item.intro} image={headImg} imageAlt={headImg?.title ? `Aranżacja: ${headImg.title}` : ''} placeholderLabel={t.plural} />
+  {headImg ? (
+    <PageHeader {h1} lead={item.intro} image={headImg} imageAlt={`Aranżacja: ${headImg.title}`} placeholderLabel={t.plural} />
+  ) : (
+    <PageHeader {h1} lead={item.intro}>
+      <ul class="type-collage" slot="media" aria-hidden="true">
+        {collage.map(({ img }) => <li><Thumb image={img} sizes="(min-width: 64rem) 18vw, 45vw" widths={[480, 1000]} /></li>)}
+      </ul>
+    </PageHeader>
+  )}
 
   <Section id="lista" title={`${t.plural}: lista`} titleHidden>
     <ProductListing products={list} action={path} hide={['typ']} />
