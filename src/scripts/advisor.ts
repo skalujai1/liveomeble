@@ -23,6 +23,8 @@ type Catalog = { products: Product[]; collections: Record<string, string> };
 type Set_ = { collection: string; color: { label: string } | null; items: Product[]; total: number };
 
 const HANDOFF_KEY = 'lv-advisor';
+// Stan doradcy na czas karty przeglądarki: po wejściu w mebel i powrocie strzałką „wstecz” wraca zdjęcie, komplety i wizualizacja.
+const STATE_KEY = 'lv-advisor-state';
 const BUDGETS = [500, 800, 1000, 1500, 2000];
 const PLACES: Record<string, string> = {
   podjazd: 'podjazd', budynek: 'budynek z zewnątrz', ogrod: 'ogród albo taras', samochod: 'samochód lub ulicę', krajobraz: 'krajobraz',
@@ -131,6 +133,7 @@ export function initAdvisor() {
 
   function go(step: number, { focus = true } = {}) {
     S.step = step;
+    queueMicrotask(saveState);
     S.reached = Math.max(S.reached, step);
     panels.forEach((p, i) => { p.hidden = i !== step; });
     tabs.forEach((t, i) => {
@@ -505,6 +508,7 @@ export function initAdvisor() {
     stDownload.hidden = !ST.result || ST.busy;
     if (ST.result) stDownload.href = ST.result;
     paintAddButtons();
+    saveState();
   }
   const toDataUrl = async (src: string) => {
     const res = await fetch(src);
@@ -828,6 +832,67 @@ export function initAdvisor() {
     if (select && [...select.options].some(o => o.value === slug)) select.value = slug;
   }
 
+  // ----- pamięć stanu w karcie (sessionStorage, tylko ta przeglądarka; znika po zamknięciu karty) -------------
+  let saved = '';
+  const shrink = (src: string) => new Promise<string>(ok => {
+    const img = new Image();
+    img.onload = () => {
+      const k = Math.min(1, 1280 / Math.max(img.naturalWidth, img.naturalHeight));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k);
+      c.getContext('2d')!.drawImage(img, 0, 0, c.width, c.height);
+      ok(c.toDataURL('image/jpeg', 0.82));
+    };
+    img.onerror = () => ok(src);
+    img.src = src;
+  });
+  let resultSmall: { from: string; to: string } | null = null;
+  function saveState() {
+    if (restoring) return;
+    try {
+      if (!S.photo && !S.room) { sessionStorage.removeItem(STATE_KEY); return; }
+      if (ST.result && resultSmall?.from !== ST.result) {
+        const from = ST.result;
+        void shrink(from).then(to => { resultSmall = { from, to }; saveState(); });
+      }
+      const state = {
+        v: 1, step: S.step, reached: S.reached, photo: S.photo, analysis: S.analysis, room: S.room, tone: S.tone, type: S.type, main: S.main,
+        consent: consentBox.checked,
+        studio: { picked: ST.picked, made: ST.made, spots: ST.spots, result: resultSmall?.from === ST.result ? resultSmall.to : null },
+      };
+      const json = JSON.stringify(state);
+      if (json !== saved) { sessionStorage.setItem(STATE_KEY, json); saved = json; }
+    } catch { /* brak miejsca albo tryb prywatny: bez pamięci stanu */ }
+  }
+  let restoring = false;
+  async function restoreState(): Promise<boolean> {
+    let st: any = null;
+    try { st = JSON.parse(sessionStorage.getItem(STATE_KEY) || 'null'); } catch { /* */ }
+    if (st?.v !== 1 || (!st.photo && !st.room)) return false;
+    restoring = true;
+    Object.assign(S, {
+      photo: typeof st.photo === 'string' && st.photo.startsWith('data:image/') ? st.photo : null,
+      analysis: st.analysis || null, room: boot.rooms[st.room] ? st.room : null, tone: Number(st.tone) || 0,
+      type: typeof st.type === 'string' ? st.type : '', main: st.main || null, reached: Number(st.reached) || 0,
+    });
+    if (st.consent) consentBox.checked = true;
+    renderSeen();
+    const step = Math.min(Number(st.step) || 0, S.room ? 3 : S.photo ? 1 : 0);
+    go(step, { focus: false });
+    if (S.room) await renderResults();
+    const t = st.studio || {};
+    if (S.photo && Array.isArray(t.picked)) {
+      Object.assign(ST, {
+        forPhoto: S.photo, picked: t.picked.slice(0, MAX_PICK), made: Array.isArray(t.made) ? t.made : [],
+        spots: Array.isArray(t.spots) ? t.spots : [], result: typeof t.result === 'string' && t.result.startsWith('data:image/') ? t.result : null, showOriginal: false,
+      });
+      if (ST.result) resultSmall = { from: ST.result, to: ST.result };
+    }
+    restoring = false;
+    updateStudio();
+    return true;
+  }
+
   // ----- od nowa --------------------------------------------------------------------
   $$('[data-restart]').forEach(b => b.addEventListener('click', () => {
     Object.assign(S, { reached: 0, photo: null, analysis: null, room: null, tone: 0, maxPrice: null, cheaper: false, type: '', main: null, alts: 2 });
@@ -836,6 +901,9 @@ export function initAdvisor() {
     askReply.hidden = true;
     renderSeen();
     history.replaceState(null, '', location.pathname + location.hash);
+    Object.assign(ST, { picked: [], made: [], spots: [], result: null, forPhoto: '' });
+    updateStudio();
+    try { sessionStorage.removeItem(STATE_KEY); } catch { /* */ }
     go(0);
   }));
 
@@ -861,7 +929,11 @@ export function initAdvisor() {
     if (S.room) renderResults();
   } else if (roomParam) {
     startWithRoom(roomParam, { focus: false });
+  } else {
+    void restoreState();
   }
+  // powrót strzałką z pamięci podręcznej przeglądarki (bfcache): strona jest jak była, tylko odśwież studio
+  addEventListener('pageshow', e => { if ((e as PageTransitionEvent).persisted) updateStudio(); });
   // katalog w czasie bezczynności — pierwsze kliknięcie pokoju pokazuje wynik od razu
   const idle = (window as any).requestIdleCallback as ((cb: () => void) => void) | undefined;
   (idle ?? setTimeout)(() => { catalog().catch(() => {}); });
