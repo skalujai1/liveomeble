@@ -1,9 +1,10 @@
 ---
 // Polecane meble na stronie głównej: 4 kafle w rzędzie (na telefonie 2), wszystko w jednym
-// pudełku — kolekcja, nazwa, krótki opis, dwa przyciski i duże zdjęcie mebla. Lniane kafle (białe tło packshotu znika
+// pudełku — kolekcja, nazwa, wymiary, cena (sklep liveomeble.pl, z promocją), dwa przyciski i duże zdjęcie mebla. Lniane kafle (białe tło packshotu znika
 // przez mix-blend-mode: multiply); po najechaniu packshot płynnie przechodzi w zdjęcie kolekcji we wnętrzu.
 // Cały kafel prowadzi do mebla (rozciągnięty link „Zobacz mebel”); „Gdzie kupić” leży nad nim.
 import Media from './Media.astro';
+import PriceBlock from './PriceBlock.astro';
 import { collectionImage, packshotFor, srcOf } from '../lib/images';
 import { collectionOf, colorCount, defaultVariant, dimsLong, finishById, site, url, type Product } from '../lib/site';
 
@@ -28,6 +29,7 @@ const tiles = products.map((p, i) => {
         <p class="featured-tile__kicker">{site.labels.collection} {col.name}</p>
         <h3 class="featured-tile__title">{p.name}</h3>
         <p class="featured-tile__sub">{dimsLong(p)}</p>
+        <PriceBlock product={p} />
         <p class="featured-tile__colors">
           <span class="featured-tile__dots" role="img" aria-label={`Kolory: ${p.variants.map(x => x.colorLabel).join(', ')}`}>
             {dots.map(d => <i style={`--c: ${d.c1}; --c2: ${d.c2}`}></i>)}

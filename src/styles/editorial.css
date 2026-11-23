@@ -661,6 +661,10 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .price--full { gap: 0.375rem; padding: var(--space-4) 0; border-block: 1px solid var(--color-line); }
 .price--full .price__note { margin: 0.25rem 0 0; font-size: var(--text-sm); color: var(--color-text-muted); max-width: 34rem; }
 .price--full .price__note a { color: var(--color-text); }
+/* Cena w kaflu polecanych mebli (strona główna) */
+.featured-tile .price { margin: 0.375rem 0 0; gap: 0.125rem; }
+.featured-tile .price__current { font: var(--weight-medium) 1.125rem/1.3 var(--font-sans); }
+.featured-tile .price__lowest { font-size: 0.75rem; }
 /* Brak ceny w sklepie: spokojne „Cena wkrótce” zamiast pustego miejsca */
 .price__soon { font: var(--weight-medium) 1rem/1.3 var(--font-sans); color: var(--color-text-muted); }
 .price--full.price--soon .price__soon { font: var(--weight-display) var(--text-xl)/1.2 var(--font-display); color: var(--color-text); }
@@ -760,7 +764,7 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 /* ---------- Strona główna: polecane meble jako kafle 4 w rzędzie (wszystko w jednym pudełku), na telefonie 2 ---------- */
 .featured-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; margin: 0; padding: 0; list-style: none; text-align: center; }
 @media (min-width: 75rem) { .featured-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; } }
-.featured-tile { position: relative; display: grid; grid-template-rows: subgrid; grid-row: span 6; justify-items: center; row-gap: 0.375rem; background: var(--color-surface); transition: box-shadow 400ms var(--ease-expo), translate 400ms var(--ease-expo); padding: clamp(1.5rem, 1rem + 1vw, 2rem) clamp(0.75rem, 0.5rem + 0.6vw, 1.25rem) 0; border-radius: 0; overflow: hidden; }
+.featured-tile { position: relative; display: grid; grid-template-rows: subgrid; grid-row: span 7; justify-items: center; row-gap: 0.375rem; background: var(--color-surface); transition: box-shadow 400ms var(--ease-expo), translate 400ms var(--ease-expo); padding: clamp(1.5rem, 1rem + 1vw, 2rem) clamp(0.75rem, 0.5rem + 0.6vw, 1.25rem) 0; border-radius: 0; overflow: hidden; }
 /* Napisy i przyciski w jednej linii we wszystkich kaflach rzędu (subgrid), nawet gdy nazwa ma dwa wiersze */
 .featured-tile__text { display: contents; }
 .featured-tile:hover { box-shadow: 0 18px 40px rgb(42 36 32 / 0.14); translate: 0 -4px; }
