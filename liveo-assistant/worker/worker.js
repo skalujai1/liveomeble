@@ -18,6 +18,7 @@ const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const IMAGES_URL = 'https://openrouter.ai/api/v1/images';
 // Wizualizacja: model obrazów OpenAI (ten sam co w ChatGPT) przez OpenRouter; zmiana modelu: zmienna IMAGE_MODEL.
 // Limit na IP jest „best effort” (pamięć jednej instancji); twardy limit kosztów to limit wydatków na kluczu OpenRouter.
+// Główny model GPT Image 2 (OpenAI), zapasowo Nano Banana 2 (Google); zmiana: IMAGE_MODEL, IMAGE_FALLBACK, IMAGE_QUALITY.
 const VIS = { model: 'openai/gpt-image-2', fallback: 'google/gemini-3.1-flash-image', locator: 'google/gemini-2.5-flash', maxItems: 3, quality: 'medium', bodyBytes: 7_000_000, imageBytes: 3_000_000, limit: 6, windowMs: 60 * 60_000, timeoutMs: 120_000 };
 const ASPECTS = ['1:1', '4:3', '3:4', '3:2', '2:3', '16:9', '9:16'];
 const DATA_URL = /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/]+=*$/;
@@ -81,6 +82,7 @@ export default {
       return json({ ok: true, configured: Boolean(env.OPENROUTER_API_KEY) }, 200, cors.headers);
     }
     if (url.pathname === '/wizualizacja') return visualize(req, env, cors);
+    if (url.pathname === '/wizualizacja/kropki') return spotsEndpoint(req, env, cors);
     if (url.pathname !== '/chat') return json({ error: 'not_found' }, 404, cors.headers);
     if (req.method !== 'POST') return json({ error: 'method_not_allowed' }, 405, cors.headers);
     if (!cors.allowed) return json({ error: 'origin_not_allowed' }, 403, cors.headers);
@@ -191,6 +193,28 @@ async function locate(env, image, items) {
   }
 }
 
+/** POST /wizualizacja/kropki { image (gotowa wizualizacja), names: [..1–3], consent: true } → { spots } */
+async function spotsEndpoint(req, env, cors) {
+  if (req.method !== 'POST') return json({ error: 'method_not_allowed' }, 405, cors.headers);
+  if (!cors.allowed) return json({ error: 'origin_not_allowed' }, 403, cors.headers);
+  if (!env.OPENROUTER_API_KEY) return json({ error: 'not_configured' }, 503, cors.headers);
+  if (!rateLimit(req.headers.get('CF-Connecting-IP') || 'local')) return json({ error: 'rate_limited' }, 429, cors.headers);
+  let body;
+  try {
+    if (Number(req.headers.get('Content-Length') || 0) > VIS.bodyBytes) throw new Error('za duże zapytanie');
+    const raw = await req.text();
+    if (raw.length > VIS.bodyBytes) throw new Error('za duże zapytanie');
+    body = JSON.parse(raw);
+  } catch {
+    return json({ error: 'bad_request' }, 400, cors.headers);
+  }
+  const names = Array.isArray(body?.names) ? body.names.filter(n => typeof n === 'string').map(n => n.replace(/[\u0000-\u001f"`<>]/g, ' ').trim().slice(0, 120)).filter(Boolean) : [];
+  if (body?.consent !== true || typeof body.image !== 'string' || !DATA_URL.test(body.image) || !names.length || names.length > VIS.maxItems) {
+    return json({ error: 'bad_request' }, 400, cors.headers);
+  }
+  return json({ spots: await locate(env, body.image, names.map(name => ({ name }))) }, 200, cors.headers);
+}
+
 async function visualize(req, env, cors) {
   if (req.method !== 'POST') return json({ error: 'method_not_allowed' }, 405, cors.headers);
   if (!cors.allowed) return json({ error: 'origin_not_allowed' }, 403, cors.headers);
@@ -233,7 +257,8 @@ async function visualize(req, env, cors) {
         console.log(JSON.stringify({ event: 'visual', model, status: res.status, ms: Date.now() - started, cost: data?.usage?.cost ?? null }));
         if (img?.b64_json) {
           const image = `data:${img.media_type || 'image/jpeg'};base64,${img.b64_json}`;
-          return json({ image, model, spots: await locate(env, image, input.items) }, 200, cors.headers);
+          // kropki osobnym zapytaniem (/wizualizacja/kropki): obraz pokazuje się od razu, bez czekania na drugi model
+          return json({ image, model }, 200, cors.headers);
         }
         last = { error: 'unavailable', status: 503, detail: 'pusta odpowiedź modelu' };
         continue;

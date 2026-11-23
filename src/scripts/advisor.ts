@@ -540,7 +540,7 @@ export function initAdvisor() {
     studio.scrollIntoView({ block: 'start', behavior: 'smooth' });
     try {
       const items = await Promise.all(picked.map(async p => ({
-        image: await toDataUrl(p.img.replace(/-480\.webp$/, '-1000.webp')).catch(() => toDataUrl(p.img)),
+        image: await toDataUrl(p.img), // miniatura 480 px: mniej danych do wysłania, model i tak widzi mebel
         name: nameOf(p),
         dims: p.dims || '',
       })));
@@ -555,9 +555,10 @@ export function initAdvisor() {
         const msg = V.errors?.[data.error] || V.errors?.default || 'Wizualizacja jest chwilowo niedostępna.';
         throw new Error(data.detail ? `${msg} (${data.detail})` : msg);
       }
-      Object.assign(ST, { result: data.image, spots: Array.isArray(data.spots) ? data.spots : [], made: picked, showOriginal: false });
+      Object.assign(ST, { result: data.image, spots: [], made: picked, showOriginal: false });
       status('');
       track('wizualizacja_ai', { mebli: picked.length });
+      void loadSpots(data.image, picked); // kropki po chwili, obraz już widać
     } catch (err) {
       ST.showOriginal = !ST.result;
       status((err as Error).message || 'Wizualizacja jest chwilowo niedostępna.', 'error');
@@ -565,6 +566,19 @@ export function initAdvisor() {
       ST.busy = false;
       updateStudio();
     }
+  }
+  async function loadSpots(image: string, picked: Product[]) {
+    try {
+      const res = await fetch(`${visUrl}/kropki`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image, names: picked.map(nameOf), consent: true }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (ST.result !== image || !Array.isArray(data.spots)) return; // w międzyczasie nowa wizualizacja
+      ST.spots = data.spots;
+      updateStudio();
+    } catch { /* bez kropek obraz dalej jest użyteczny */ }
   }
   stGo.addEventListener('click', () => void generate());
   stConsentCheck.addEventListener('change', () => {

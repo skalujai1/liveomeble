@@ -155,6 +155,7 @@ test('wizualizacja: oba zdjęcia trafiają do /images, klucz tylko w nagłówku,
   assert.equal(calls[0].url, 'https://openrouter.ai/api/v1/images');
   assert.equal(calls[0].headers.Authorization, 'Bearer test-key');
   assert.equal(calls[0].body.model, 'openai/gpt-image-2');
+  assert.equal(calls[0].body.quality, 'medium');
   assert.equal(calls[0].body.input_references.length, 2);
   assert.equal(calls[0].body.aspect_ratio, '4:3');
   assert.ok(!calls[0].body.prompt.includes('"DT04"') && !calls[0].body.prompt.includes('<b>'));
@@ -162,9 +163,9 @@ test('wizualizacja: oba zdjęcia trafiają do /images, klucz tylko w nagłówku,
 });
 test('wizualizacja: model z IMAGE_MODEL, 402 → no_credits, odrzucenie przez model → 422', async () => {
   let calls = mockOpenRouter(() => new Response('{}', { status: 402 }));
-  let res = await worker.fetch(vreq(VIS_OK), { ...ENV, IMAGE_MODEL: 'google/gemini-3.1-flash-image' }, {});
+  let res = await worker.fetch(vreq(VIS_OK), { ...ENV, IMAGE_MODEL: 'openai/gpt-image-1-mini' }, {});
   assert.equal(res.status, 503); assert.equal((await res.json()).error, 'no_credits');
-  assert.equal(calls[0].body.model, 'google/gemini-3.1-flash-image');
+  assert.equal(calls[0].body.model, 'openai/gpt-image-1-mini');
   calls = mockOpenRouter(() => new Response('{}', { status: 400 }));
   res = await worker.fetch(vreq(VIS_OK), ENV, {});
   assert.equal(res.status, 422); assert.equal((await res.json()).error, 'rejected');
@@ -176,7 +177,7 @@ test('wizualizacja: limit na IP → 429', async () => {
   for (let i = 0; i < 7; i++) last = await worker.fetch(vreq(VIS_OK, ip), ENV, {});
   assert.equal(last.status, 429);
 });
-test('wizualizacja: odrzucenie przez GPT Image → zapasowy model Google; powód odrzucenia w odpowiedzi', async () => {
+test('wizualizacja: odrzucenie przez GPT Image → zapasowy Nano Banana; powód odrzucenia w odpowiedzi', async () => {
   let calls = mockOpenRouter((body, n) => n === 1
     ? new Response(JSON.stringify({ error: { message: 'Invalid parameter: quality' } }), { status: 400 })
     : new Response(JSON.stringify({ data: [{ b64_json: 'QQ==' }] }), { status: 200 }));
@@ -193,20 +194,27 @@ test('wizualizacja: odrzucenie przez GPT Image → zapasowy model Google; powód
   assert.equal(calls.length, 2);
 });
 
-test('wizualizacja: do 3 mebli naraz, kropki z modelu lokalizującego', async () => {
-  const calls = mockOpenRouter((body, n) => n === 1
-    ? new Response(JSON.stringify({ data: [{ b64_json: 'QQ==' }] }), { status: 200 })
-    : ok('{"items":[{"n":1,"x":20,"y":60},{"n":3,"x":150,"y":55},{"n":9,"x":5,"y":5}]}'));
+test('wizualizacja: do 3 mebli naraz; obraz bez czekania na kropki, kropki osobnym zapytaniem', async () => {
+  let calls = mockOpenRouter(() => new Response(JSON.stringify({ data: [{ b64_json: 'QQ==' }] }), { status: 200 }));
   const items = [1, 2, 3].map(i => ({ image: IMG, name: `Mebel ${i}`, dims: '' }));
-  const res = await worker.fetch(vreq({ room: IMG, items, aspect: '16:9', consent: true }), ENV, {});
-  const data = await res.json();
+  let res = await worker.fetch(vreq({ room: IMG, items, aspect: '16:9', consent: true }), ENV, {});
+  let data = await res.json();
   assert.equal(res.status, 200);
+  assert.equal(calls.length, 1);
   assert.equal(calls[0].body.input_references.length, 4);
   assert.match(calls[0].body.prompt, /image 4: "Mebel 3"/);
-  assert.equal(calls[1].url, 'https://openrouter.ai/api/v1/chat/completions');
+  assert.equal(data.spots, undefined);
+  assert.equal((await worker.fetch(vreq({ room: IMG, items: [...items, items[0]], consent: true }), ENV, {})).status, 400);
+
+  calls = mockOpenRouter(() => ok('{"items":[{"n":1,"x":20,"y":60},{"n":3,"x":150,"y":55},{"n":9,"x":5,"y":5}]}'));
+  const kreq = body => new Request('https://w.test/wizualizacja/kropki', { method: 'POST', headers: { 'Content-Type': 'application/json', Origin: 'https://liveomeble.pl', 'CF-Connecting-IP': String(Math.random()) }, body: JSON.stringify(body) });
+  res = await worker.fetch(kreq({ image: IMG, names: ['Mebel 1', 'Mebel 2', 'Mebel 3'], consent: true }), ENV, {});
+  data = await res.json();
+  assert.equal(res.status, 200);
+  assert.equal(calls[0].url, 'https://openrouter.ai/api/v1/chat/completions');
   assert.deepEqual(data.spots, [{ n: 1, x: 20, y: 60 }, { n: 3, x: 97, y: 55 }]);
-  const four = [...items, items[0]];
-  assert.equal((await worker.fetch(vreq({ room: IMG, items: four, consent: true }), ENV, {})).status, 400);
+  assert.equal((await worker.fetch(kreq({ image: IMG, names: ['A'], consent: false }), ENV, {})).status, 400);
+  assert.equal((await worker.fetch(kreq({ image: 'https://x.pl/a.jpg', names: ['A'], consent: true }), ENV, {})).status, 400);
 });
 test('parseSpots: zły JSON → brak kropek', () => {
   assert.deepEqual(parseSpots('nie wiem', 2), []);
