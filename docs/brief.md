@@ -199,6 +199,15 @@ To **ton producenta mebli**, nie agencji. Mówimy jak dobry sprzedawca w salonie
 
 ---
 
+### Decyzje Michała o ruchu i układzie (od 20 do 23.11.2026, obowiązują wszystkich autorów)
+
+- **Nic nie jedzie z przewijaniem.** Żadnego `position: sticky` poza nagłówkiem strony: ani zdjęć i kolumn obok formularzy, ani nagłówków sekcji, filtrów czy spisu treści. Zgłoszone dwa razy (FAQ i zdjęcie pomieszczeń, potem zdjęcie przy formularzu kontaktowym). Zdejmując sticky, zostaw `position: relative`, jeśli w środku są elementy `absolute`.
+- **Zdjęcia mebli po najechaniu stoją nieruchomo** (bez pochylania i przesuwania packshotu).
+- **Nagłówek to jeden pasek**, bez paska pomocniczego nad nim. **Stopka brązowa** (`--color-dark`), nie czarna.
+- **Mapa salonów płaska**, bez wstawania w 3D.
+- **Kropka na meblu w hero** to sama kropka i karta, bez przyciemniania zdjęcia; jedna kropka na slajd (`"auto": true` w `src/content/hotspots.json`) sama pokazuje kartę w trakcie slajdu.
+- **Zero długich myślników** w tekstach strony i czatu („—” oraz „ – ”): zamiast nich dwukropek, przecinek, kropka albo nawias.
+
 ## 9. Treści w repozytorium
 
 | Miejsce | Co |

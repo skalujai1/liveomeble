@@ -171,7 +171,7 @@ export function explainSet(set, prefs, hasPhoto) {
   if (!why.length) why.push(c.light > 0.6 ? 'jasna, uniwersalna kolorystyka' : 'ponadczasowa kolorystyka');
   const list = why.length > 1 ? why.slice(0, -1).join(', ') + ' i ' + why.at(-1) : why[0];
   return hasPhoto
-    ? `${list[0].toUpperCase() + list.slice(1)} – ${why.length > 1 ? 'pasują' : 'pasuje'} do tego, co widzę na zdjęciu.`
+    ? `${list[0].toUpperCase() + list.slice(1)}: ${why.length > 1 ? 'pasują' : 'pasuje'} do tego, co widzę na zdjęciu.`
     : `${list[0].toUpperCase() + list.slice(1)}.`;
 }
 

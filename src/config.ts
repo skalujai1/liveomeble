@@ -37,6 +37,8 @@ export const ASSISTANT = {
   /** Arkusz fontów widżetu — lokalny, żeby widżet nie pobierał Google Fonts. */
   fontsCssUrl: '/liveo-assistant/fonts.css',
   logoUrl: '/brand/liveo-logo.svg',
+  /** Zdjęcie wnętrza w powitaniu czatu (pobierane dopiero po otwarciu panelu). */
+  heroUrl: '/katalog/54fea29f6c-ate_01_2160px-1280.webp',
   /** Podstrona pełnego doradcy — czat przenosi tam zdjęcie i wynik (przycisk „Otwórz pełnego doradcę”). */
   advisorUrl: '/doradca-wnetrz/',
   contactUrl: '/kontakt/',

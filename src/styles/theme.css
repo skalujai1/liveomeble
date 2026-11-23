@@ -580,7 +580,7 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
   }
   .listing > .listing__filters-toggle { display: none; }
   .listing > .filters {
-    grid-area: filters; position: sticky; top: 6rem; max-height: calc(100vh - 7rem); overflow-y: auto; overscroll-behavior: contain;
+    grid-area: filters; position: relative; /* bez sticky: nic nie jedzie z przewijaniem (docs/brief.md, rozdz. 8) */
     padding: 0 0.5rem 1rem 0; background: none; border-radius: 0; gap: var(--space-4);
   }
   .listing .filters__groups { grid-template-columns: 1fr; gap: 0; }
@@ -737,8 +737,7 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
   .page-article .article-body > * + * { margin-top: var(--space-4); }
   .page-article .article-body > h2 { margin-top: var(--space-7); }
   .page-article .article-body > .toc {
-    grid-column: 2; grid-row: 1 / span 400; align-self: start; position: sticky; top: 7.5rem; margin-top: 0;
-    max-height: calc(100vh - 9rem); overflow-y: auto; overscroll-behavior: contain;
+    grid-column: 2; grid-row: 1 / span 400; align-self: start; position: relative; margin-top: 0;
   }
 }
 

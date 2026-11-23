@@ -953,8 +953,7 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .contact-form__note { display: grid; gap: var(--space-3); font-size: 1.0625rem; line-height: 1.55; }
 .contact-form__note b { font-weight: var(--weight-medium); }
 @media (min-width: 64rem) {
-  .contact-form { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-8); }
-  .contact-form__aside { position: sticky; top: 7rem; }
+  .contact-form { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-8); align-items: start; }
 }
 
 /* Strefa partnera (22.11.2026): logowanie obok zdjęcia zamiast samego formularza */
@@ -966,7 +965,6 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .partner-login__media figcaption { font-size: 0.9375rem; line-height: 1.5; color: var(--color-text-muted); }
 @media (min-width: 64rem) {
   .partner-login { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-8); align-items: start; }
-  .partner-login__media { position: sticky; top: 7rem; }
 }
 @media (max-width: 63.99rem) { .partner-login__media .media { aspect-ratio: 16 / 9; } }
 

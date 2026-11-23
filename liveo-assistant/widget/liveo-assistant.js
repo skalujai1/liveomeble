@@ -24,6 +24,7 @@ const CFG = {
   embeddingsUrl: new URL('../data/text-embeddings.json', HERE).href,
   cssUrl: new URL('liveo-assistant.css', HERE).href,
   logoUrl: 'https://liveomeble.pl/img/liveo_logo.svg',
+  heroUrl: '',          // zdjęcie wnętrza w powitaniu (pobierane dopiero przy pierwszym otwarciu); puste = bez zdjęcia
   contactUrl: 'https://liveomeble.pl/kontakt',
   storesUrl: '/gdzie-kupic/',
   advisorUrl: '',       // podstrona pełnego doradcy; pusty = bez przycisku przejścia
@@ -99,7 +100,7 @@ const OBJECTS = {
   osoba: 'Widzę na zdjęciu osobę, ale nie widzę wnętrza.',
   zwierze: 'Na tym zdjęciu jest zwierzę, ale nie widzę wnętrza.',
   jedzenie: 'To zdjęcie jedzenia, a nie pomieszczenia.',
-  dokument: 'To wygląda na dokument, rysunek albo zrzut ekranu – do takiego zdjęcia nie dobiorę mebli.',
+  dokument: 'To wygląda na dokument, rysunek albo zrzut ekranu. Do takiego zdjęcia nie dobiorę mebli.',
 };
 
 // ---------------------------------------------------------------------------
@@ -177,8 +178,8 @@ class LiveoAssistant {
                         onclick: () => this.fileInput.click() }),
           this.input, this.sendBtn),
         h('p', { class: 'fineprint' }, CFG.chatUrl
-          ? 'Odpowiada asystent AI i może się mylić · zdjęcia zostają na Twoim urządzeniu'
-          : 'Wersja testowa · zdjęcia analizujemy tylko na Twoim urządzeniu')),
+          ? 'AI może się mylić · zdjęcia zostają na Twoim urządzeniu'
+          : 'Wersja testowa · zdjęcia zostają na Twoim urządzeniu')),
       this.fileInput, this.cameraInput, this.dropzone);
 
     // przeciągnij i upuść
@@ -326,28 +327,25 @@ class LiveoAssistant {
 
   // ----- powitanie ------------------------------------------------------------
   greet() {
-    this.bot(md('Pokaż mi pokój, który urządzasz. Dobiorę do niego **komplet mebli z jednej kolekcji** w kolorach pasujących do wnętrza.'));
     this.add(this.buildUpload(), { scroll: false });
     // pokoje z katalogu – po jego wczytaniu (bez czekania, gdy katalog się nie wczyta)
-    const showRooms = () => this.chips(this.roomChips(), 'Nie masz zdjęcia? Wybierz pomieszczenie', { grid: true });
+    const showRooms = () => this.chips(this.roomChips(), 'Nie masz zdjęcia? Wybierz pomieszczenie');
     (this.catalogReady || Promise.resolve()).then(showRooms, showRooms);
   }
 
   buildUpload() {
     const card = h('div', { class: 'upload' },
-      h('span', { class: 'upload-ic', html: I.camera, 'aria-hidden': 'true' }),
-      h('p', { class: 'upload-title' }, 'Dodaj zdjęcie pokoju'),
-      h('p', { class: 'upload-lead' }, isTouch ? 'Zrób zdjęcie całego pomieszczenia albo wybierz je z galerii.' : 'Przeciągnij plik tutaj albo wklej go skrótem Ctrl+V.'),
+      CFG.heroUrl && h('img', { class: 'upload-photo', src: CFG.heroUrl, alt: '', decoding: 'async', onerror: e => e.target.remove() }),
+      h('p', { class: 'upload-title' }, 'Pokaż mi swój pokój'),
+      h('p', { class: 'upload-lead' }, 'Dobiorę komplet mebli z jednej kolekcji w kolorach Twojego wnętrza.'),
       h('div', { class: 'actions' },
         isTouch && h('button', { class: 'btn', type: 'button', html: `${I.camera}<span>Zrób zdjęcie</span>`, onclick: () => this.cameraInput.click() }),
-        h('button', { class: 'btn' + (isTouch ? ' ghost' : ''), type: 'button', html: `<span>${isTouch ? 'Z galerii' : 'Wybierz zdjęcie'}</span>`,
+        h('button', { class: 'btn' + (isTouch ? ' ghost' : ''), type: 'button', html: isTouch ? '<span>Z galerii</span>' : `${I.camera}<span>Dodaj zdjęcie</span>`,
                       onclick: () => this.fileInput.click() })),
-      h('p', { class: 'hint' }, 'JPG, PNG albo WEBP. Zdjęcie z iPhone’a w formacie HEIC zapisz jako JPG.'),
       CFG.demoSamples && h('div', { class: 'samples' },
         h('span', null, 'Albo sprawdź, jak to działa, na przykładzie:'),
         h('div', { class: 'row' }, SAMPLES.map(s => h('button', { class: 'sample', type: 'button', 'aria-label': `Przykład: ${s.label}`,
-          onclick: () => this.analyzePhoto(s.url) }, h('img', { src: s.url.replace('w=900', 'w=300'), alt: '', loading: 'lazy' }), h('span', null, s.label))))),
-      h('p', { class: 'privacy', html: `${I.lock}<span>Zdjęcie analizuje Twoja przeglądarka. Nie wysyłamy go na serwer.</span>` }));
+          onclick: () => this.analyzePhoto(s.url) }, h('img', { src: s.url.replace('w=900', 'w=300'), alt: '', loading: 'lazy' }), h('span', null, s.label))))));
     return h('div', { class: 'msg wide' }, card);
   }
 
@@ -451,12 +449,12 @@ class LiveoAssistant {
           ? `Wygląda na to, że to zdjęcie przedstawia **${place}**.`
           : OBJECTS[d.scene.key] || 'Na tym zdjęciu nie widzę wnętrza.';
         const extra = d.scene.key === 'ogrod' ? ' Nie mamy w ofercie mebli ogrodowych.' : '';
-        await this.say(`${head}\nTutaj nie pomogę – Liveo tworzy meble do wnętrz.${extra} Wyślij zdjęcie pomieszczenia, które chcesz urządzić, np. salonu, sypialni albo przedpokoju.`);
+        await this.say(`${head}\nTutaj nie pomogę: Liveo tworzy meble do wnętrz.${extra} Wyślij zdjęcie pomieszczenia, które chcesz urządzić, np. salonu, sypialni albo przedpokoju.`);
         return this.chips([this.photoChip(), notRoom]);
       }
 
       case 'nofurn': {
-        const what = d.scene.key === 'garaz' ? '**garaż** – tutaj nasze meble raczej się nie sprawdzą' : '**łazienka** – w ofercie Liveo nie ma mebli łazienkowych';
+        const what = d.scene.key === 'garaz' ? '**garaż**, a tutaj nasze meble raczej się nie sprawdzą' : '**łazienka**, a w ofercie Liveo nie ma mebli łazienkowych';
         await this.say(`To ${what}.\nChętnie za to doradzę przy salonie, sypialni, jadalni, przedpokoju czy domowym biurze.`);
         return this.chips(this.roomChips(undefined, [this.photoChip()]));
       }
@@ -469,7 +467,7 @@ class LiveoAssistant {
       case 'ask':
       default:
         await this.say(d.reason === 'empty'
-          ? 'To **puste pomieszczenie** – dobry moment na urządzanie. Powiedz mi, czym ma być:'
+          ? 'To **puste pomieszczenie**, dobry moment na urządzanie. Powiedz mi, czym ma być:'
           : 'Nie mam pewności, jakie to pomieszczenie. Podpowiesz?');
         return this.askRoomChips(a, d.suggestions, true);
     }
@@ -502,10 +500,10 @@ class LiveoAssistant {
       const style = analysis.styles[0];
       const pal = analysis.palette;
       const styleTxt = style.p > 0.3 ? ` w stylu **${style.label}**` : '';
-      const doubt = confidence < 0.6 && alternatives[0] ? `\nJeśli to raczej ${ROOMS[alternatives[0]].name}, kliknij niżej – przełączę propozycje.` : '';
+      const doubt = confidence < 0.6 && alternatives[0] ? `\nJeśli to raczej ${ROOMS[alternatives[0]].name}, kliknij niżej, a przełączę propozycje.` : '';
       this.groupStart = await this.say(`Widzę **${r.acc}**${styleTxt}, w ${locative(pal.words)} barwach.${doubt}`, swatches(pal));
     } else if (analysis) {
-      this.groupStart = await this.say(`Dobrze – urządzamy **${r.acc}**. Dopasuję meble do kolorów z Twojego zdjęcia.`, swatches(analysis.palette));
+      this.groupStart = await this.say(`Dobrze, urządzamy **${r.acc}**. Dopasuję meble do kolorów z Twojego zdjęcia.`, swatches(analysis.palette));
     }
     this.alternatives = analysis && !confirmed ? alternatives : [];
     return this.showSet({ first: true });
@@ -578,7 +576,7 @@ class LiveoAssistant {
     const budget = this.opts.maxPrice ? ` do ${formatPrice(this.opts.maxPrice)}` : '';
     const msg = await this.say(this.analysis
       ? `${cap(name)}${budget}, które najlepiej pasują do Twojego wnętrza:`
-      : `${cap(name)}${budget} – oto moje propozycje:`);
+      : `${cap(name)}${budget}, oto moje propozycje:`);
     this.add(this.buildCards(items), { scroll: false });
     this.scrollTo(msg);
     const others = (this.room ? ROOMS[this.room].types : []).filter(t => t !== type && this.products.some(p => p.type === t)).slice(0, 2);
@@ -602,7 +600,9 @@ class LiveoAssistant {
     };
     cards.addEventListener('scroll', sync, { passive: true });
     setTimeout(sync, 50);
-    return h('div', { class: 'msg wide' }, h('div', { class: 'reco' }, prev, cards, next));
+    const note = items.every(p => p.price == null) && h('p', { class: 'reco-note' }, 'Ceny podaje salon partnerski. ',
+      CFG.storesUrl && h('a', { href: CFG.storesUrl }, 'Znajdź salon'));
+    return h('div', { class: 'msg wide' }, h('div', { class: 'reco' }, prev, cards, next), note);
   }
 
   buildCard(p, i) {
@@ -614,9 +614,7 @@ class LiveoAssistant {
         off >= 5 && h('span', { class: 'badge' }, `−${off}%`)),
       h('span', { class: 'name' }, name),
       p.color && h('span', { class: 'color' }, p.color.label),
-      p.price != null
-        ? h('span', { class: 'price' + (p.regular ? ' on-sale' : '') }, h('b', null, formatPrice(p.price)), p.regular && h('s', null, formatPrice(p.regular)))
-        : h('span', { class: 'price' }, 'Cena w salonie partnerskim'),
+      p.price != null && h('span', { class: 'price' + (p.regular ? ' on-sale' : '') }, h('b', null, formatPrice(p.price)), p.regular && h('s', null, formatPrice(p.regular))),
       // Omnibus: przekreślona cena zawsze razem z najniższą ceną z 30 dni przed obniżką
       p.regular && h('span', { class: 'lowest' }, `Najniższa z 30 dni: ${formatPrice(p.lowest30 ?? p.regular)}`));
   }
@@ -747,7 +745,7 @@ class LiveoAssistant {
       return this.chips(this.roomChips(undefined, [this.photoChip()]));
     }
     if (q.outdoor && !q.room) {
-      await this.say('Liveo tworzy meble do wnętrz – nie mamy mebli ogrodowych ani balkonowych. Chętnie pomogę za to w domu.');
+      await this.say('Liveo tworzy meble do wnętrz, nie mamy mebli ogrodowych ani balkonowych. Chętnie pomogę za to w domu.');
       return this.chips(this.roomChips(undefined, [this.photoChip()]));
     }
     const tone = q.lighter ? 1 : q.darker ? -1 : 0;
@@ -784,16 +782,16 @@ class LiveoAssistant {
       return this.chips([{ label: 'Kontakt z Liveo', href: CFG.contactUrl }, this.photoChip(false)]);
     }
     if (q.greet) {
-      await this.say('Dzień dobry. Wyślij zdjęcie pomieszczenia albo napisz, czego szukasz – np. „biała komoda do sypialni”.');
+      await this.say('Dzień dobry. Wyślij zdjęcie pomieszczenia albo napisz, czego szukasz, np. „biała komoda do sypialni”.');
       return this.chips(this.roomChips(undefined, [this.photoChip()]));
     }
     if (q.thanks) {
-      await this.say('Cała przyjemność po mojej stronie. Gdyby coś jeszcze – jestem tutaj.');
+      await this.say('Cała przyjemność po mojej stronie. Gdyby coś jeszcze, jestem tutaj.');
       return this.chips([this.photoChip(false), this.room && { label: 'Inna kolekcja', run: () => this.showSet() }]);
     }
     if (q.room) return this.showSet({ first: true });
     await this.say(q.help
-      ? 'Wyślij mi zdjęcie pomieszczenia – rozpoznam, jakie to wnętrze, jaki ma styl i kolory, i pokażę pasujące meble Liveo. Możesz też pisać, np. „szafa do przedpokoju”, „inna kolekcja”, „jaśniejsze”.'
+      ? 'Wyślij mi zdjęcie pomieszczenia: rozpoznam, jakie to wnętrze, jaki ma styl i kolory, i pokażę pasujące meble Liveo. Możesz też pisać, np. „szafa do przedpokoju”, „inna kolekcja”, „jaśniejsze”.'
       : 'Najlepiej rozumiem zdjęcia wnętrz i krótkie polecenia, np. „komoda do salonu” albo „pokaż jaśniejsze”.');
     return this.chips(this.roomChips(undefined, [this.photoChip()]));
   }
