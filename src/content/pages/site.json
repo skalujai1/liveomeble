@@ -82,10 +82,6 @@
       {
         "label": "Dla partnerów",
         "href": "/dla-partnerow/"
-      },
-      {
-        "label": "Strefa partnera",
-        "href": "/strefa-partnera/"
       }
     ]
   },
@@ -144,10 +140,6 @@
           {
             "label": "Dla partnerów",
             "href": "/dla-partnerow/"
-          },
-          {
-            "label": "Strefa partnera",
-            "href": "/strefa-partnera/"
           }
         ]
       }

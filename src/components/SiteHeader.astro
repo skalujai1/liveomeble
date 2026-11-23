@@ -1,8 +1,9 @@
 ---
-// Nagłówek: jeden pasek (decyzja Michała 20.11: bez brązowego paska pomocniczego nad nim). Logo, menu z mega-menu
-// „Meble” i „Kolekcje”, linki dodatkowe (B2B, strefa partnera, blog, kontakt), lupa z wyszukiwarką mebli i salonów (scripts/search.ts)
-// (natywny popover, działa bez JS) i link „Gdzie kupić”. Bez JS: „Meble” i „Kolekcje” są zwykłymi linkami,
-// menu mobilne jest listą pod nagłówkiem.
+// Nagłówek: jeden pasek (decyzje Michała 20 i 23.11). Po lewej logo i jedno menu w jednym stylu: „Meble” i „Kolekcje”
+// z mega-menu, „Pomieszczenia”, „Doradca wnętrz”, a za cienką kreską „Dla sklepów”, „Blog”, „Kontakt” (od 80rem;
+// węziej są w stopce i w menu mobilnym). Po prawej lupa z wyszukiwarką mebli i salonów (scripts/search.ts, natywny
+// popover) i przycisk „Gdzie kupić”. Strefa partnera jest na razie bez linków (strona zostaje pod swoim adresem).
+// Bez JS: „Meble” i „Kolekcje” są zwykłymi linkami, menu mobilne jest listą pod nagłówkiem.
 import Thumb from './Thumb.astro';
 import { typeImage, collectionImage } from '../lib/images';
 import { collections, productCount, products, productsByCollection, rooms, site, types, url } from '../lib/site';
@@ -19,9 +20,8 @@ const restTypes = withProducts.slice(8);
 // mega-menu: 12 kolekcji z aranżacjami (kolejność z danych); pełna lista na /kolekcje/ i w menu mobilnym
 const megaCollections = collections.filter(c => c.arrangements.length).slice(0, 12).map(c => ({ c, img: collectionImage(c), count: productCount(productsByCollection(c.slug).length) }));
 const allCollections = collections.map(c => ({ c, count: productCount(productsByCollection(c.slug).length) }));
-const secondary = [
-  { label: 'Dla sklepów (B2B)', href: url.partners },
-  { label: 'Strefa partnera', href: url.partnerZone },
+const more = [
+  { label: 'Dla sklepów', href: url.partners },
   { label: 'Blog', href: url.guides },
   { label: 'Kontakt', href: url.contact },
 ];
@@ -98,6 +98,11 @@ const secondary = [
           <li class:list={['site-nav__item', { 'is-active': inSection('/doradca-wnetrz/') }]}>
             <a class="site-nav__link" href={url.advisor} aria-current={current(url.advisor)}>Doradca wnętrz</a>
           </li>
+          {more.map((m, i) => (
+            <li class:list={['site-nav__item site-nav__item--more', { 'site-nav__item--first': i === 0, 'is-active': inSection(m.href) }]}>
+              <a class="site-nav__link" href={m.href} aria-current={current(m.href)}>{m.label}</a>
+            </li>
+          ))}
         </ul>
 
         <div class="site-nav__mobile-extra">
@@ -110,17 +115,7 @@ const secondary = [
               </a></li>
             ))}
           </ul>
-          <ul class="site-nav__mobile-secondary">
-            <li><a href={url.guides}>Blog</a></li>
-            {secondary.filter(s => s.href !== url.guides).map(s => <li><a href={s.href}>{s.label}</a></li>)}
-          </ul>
         </div>
-      </nav>
-
-      <nav class="site-header__more" aria-label="Dodatkowe">
-        <ul>
-          {secondary.map(s => <li><a href={s.href} aria-current={current(s.href)}>{s.label}</a></li>)}
-        </ul>
       </nav>
 
       <button class="site-header__search" type="button" popovertarget="naglowek-szukaj">
@@ -140,7 +135,7 @@ const secondary = [
 
       <a class="site-header__where" href={url.stores()} aria-current={current('/gdzie-kupic/')}>
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.4" /></svg>
-        <span><b>Gdzie kupić</b><small>Salony partnerskie</small></span>
+        <span>Gdzie kupić</span>
       </a>
     </div>
   </div>

@@ -12,9 +12,15 @@ export function initMenu() {
     toggle.setAttribute('aria-expanded', String(open));
     document.documentElement.classList.toggle('menu-open', open);
     if (label) label.textContent = (open ? label.dataset.close : label.dataset.open) ?? label.textContent;
+    if (open) menu.scrollTop = 0; // każde otwarcie zaczyna od góry listy, nie od miejsca, w którym ktoś ją zostawił
     if (!open && focusToggle) toggle.focus();
   };
   toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  // Po stuknięciu w link i powrocie „wstecz” przeglądarka przywraca stronę z pamięci razem z otwartym menu
+  // (i zablokowanym przewijaniem), a po obrocie tabletu menu mobilne zostawało na układzie komputerowym.
+  window.addEventListener('pagehide', () => setOpen(false));
+  window.addEventListener('pageshow', e => { if (e.persisted) setOpen(false); });
+  matchMedia('(min-width: 60rem)').addEventListener('change', e => { if (e.matches) setOpen(false); });
 
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true' && !document.querySelector('[data-mega-item].is-open')) {

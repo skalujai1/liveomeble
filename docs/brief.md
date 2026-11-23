@@ -203,7 +203,9 @@ To **ton producenta mebli**, nie agencji. Mówimy jak dobry sprzedawca w salonie
 
 - **Nic nie jedzie z przewijaniem.** Żadnego `position: sticky` poza nagłówkiem strony: ani zdjęć i kolumn obok formularzy, ani nagłówków sekcji, filtrów czy spisu treści. Zgłoszone dwa razy (FAQ i zdjęcie pomieszczeń, potem zdjęcie przy formularzu kontaktowym). Zdejmując sticky, zostaw `position: relative`, jeśli w środku są elementy `absolute`.
 - **Zdjęcia mebli po najechaniu stoją nieruchomo** (bez pochylania i przesuwania packshotu).
-- **Nagłówek to jeden pasek**, bez paska pomocniczego nad nim. **Stopka brązowa** (`--color-dark`), nie czarna.
+- **Nagłówek to jeden pasek**, bez paska pomocniczego nad nim: po lewej jedno menu w jednym stylu (główne pozycje, a za cienką kreską „Dla sklepów”, „Blog”, „Kontakt”), po prawej tylko lupa i przycisk „Gdzie kupić”. **Stopka brązowa** (`--color-dark`), nie czarna.
+- **Strefa partnera jest na razie ukryta**: strona zostaje pod `/strefa-partnera/`, ale nie prowadzi do niej żaden link (menu, stopka, strona dla sklepów). Wróci, gdy Michał o to poprosi.
+- **Przejście między stronami nie blokuje strony**: pierwsze kliknięcie w jego trakcie kończy animację i trafia w cel (skrypt `pagereveal` w `BaseLayout.astro`). Nie usuwać, bo przez sekundę po zmianie strony nic nie reagowało (zgłoszone jako zepsute menu na telefonie).
 - **Mapa salonów płaska**, bez wstawania w 3D.
 - **Kropka na meblu w hero** to sama kropka i karta, bez przyciemniania zdjęcia; jedna kropka na slajd (`"auto": true` w `src/content/hotspots.json`) sama pokazuje kartę w trakcie slajdu.
 - **Zero długich myślników** w tekstach strony i czatu („—” oraz „ – ”): zamiast nich dwukropek, przecinek, kropka albo nawias.

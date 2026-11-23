@@ -22,11 +22,6 @@
           "label": "Zgłoś sklep",
           "href": "#zgloszenie",
           "variant": "primary"
-        },
-        {
-          "label": "Zaloguj się do strefy partnera",
-          "href": "/strefa-partnera/",
-          "variant": "secondary"
         }
       ]
     },
@@ -184,16 +179,6 @@
         "text": "Dziękujemy za zgłoszenie. Kopię wysłaliśmy na adres {email}. Handlowiec Liveo odezwie się do Ciebie."
       },
       "error": "Nie udało się wysłać zgłoszenia. Spróbuj ponownie za chwilę albo zadzwoń do biura Liveo: +48 17 58 18 000."
-    },
-    {
-      "id": "logowanie",
-      "type": "band",
-      "title": "Już z nami współpracujesz?",
-      "text": "Zaloguj się do strefy partnera, żeby zobaczyć ceny, stany i złożyć zamówienie.",
-      "cta": {
-        "label": "Strefa partnera",
-        "href": "/strefa-partnera/"
-      }
     }
   ],
   "faq": {
