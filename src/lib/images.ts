@@ -104,3 +104,25 @@ export function typeImage(typeId: string, list: Product[] = productsSorted): Ima
 
 /** Lista plików (do raportu w kontroli buildu). */
 export const availableRenders: string[] = [];
+
+/** Zdjęcie aranżacji do nagłówka strony rodzaju mebla: aranżacja z typowego dla rodzaju pomieszczenia, z kolekcji,
+ *  która ma meble tego rodzaju (półki i szafki RTV w salonie, łóżka w sypialni, wieszaki w przedpokoju itd.). */
+const TYPE_ROOM: Record<string, string> = {
+  rtv: 'salon', komoda: 'salon', witryna: 'salon', kredens: 'jadalnia', regal: 'salon', szafka: 'salon', polka: 'salon',
+  lawa: 'salon', stol: 'jadalnia', lozko: 'sypialnia', szafka_nocna: 'sypialnia', szafa: 'sypialnia', toaletka: 'pokoj-mlodziezowy',
+  lustro: 'przedpokoj', biurko: 'biuro', szafka_na_buty: 'przedpokoj', wieszak: 'przedpokoj', kuchnia: 'kuchnia',
+};
+export function typeSceneImage(typeId: string, list: Product[]): ImageRef | null {
+  const room = TYPE_ROOM[typeId] ?? 'salon';
+  const withType = new Set(list.filter(p => p.type === typeId).map(p => p.collection));
+  const order = [...collections].sort((a, b) => Number(withType.has(b.slug)) - Number(withType.has(a.slug)));
+  // różne rodzaje z tego samego pokoju dostają różne zdjęcia (przesunięcie według kolejności rodzaju)
+  const shift = Object.keys(TYPE_ROOM).filter(k => TYPE_ROOM[k] === room).indexOf(typeId);
+  const hits = order.filter(c => withType.has(c.slug)).flatMap(c => (c.arrangements as (PublicImage & { room: string })[])
+    .filter(a => a.room === room && a.w >= 1600).slice(0, 1).map(a => ({ a, c })));
+  if (hits.length) {
+    const { a, c } = hits[Math.max(0, shift) % hits.length];
+    return ref(a, `Kolekcja ${c.name} ${roomLocative(room)}`);
+  }
+  return roomImage(room, 'wide', Math.max(0, shift));
+}

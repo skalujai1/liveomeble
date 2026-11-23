@@ -7,8 +7,9 @@ import ProductListing from '../../components/ProductListing.astro';
 import CategoryTiles from '../../components/CategoryTiles.astro';
 import Faq from '../../components/Faq.astro';
 import { getArticles } from '../../lib/articles';
+import { typeSceneImage } from '../../lib/images';
 import { faqPage, itemList, webPage } from '../../lib/jsonld';
-import { collectionNames, collections, num, pages, productsByType, rooms, types, url, type FurnitureType } from '../../lib/site';
+import { collectionNames, collections, num, pages, products, productsByType, rooms, types, url, type FurnitureType } from '../../lib/site';
 import { fill, lowerFirst } from '../../lib/text';
 
 export function getStaticPaths() {
@@ -32,6 +33,7 @@ const h1 = fill(tpl.h1, vars);
 const faq = tpl.faq.items.map(it => ({ q: fill(it.q, vars), a: fill(it.a, vars) }));
 const guide = item.guide ? (await getArticles()).find(a => a.data.slug === item.guide) : null;
 const typeRooms = rooms.filter(r => t.rooms.includes(r.slug));
+const headImg = typeSceneImage(t.id, products);
 ---
 <BaseLayout
   title={item.seo.title}
@@ -45,7 +47,7 @@ const typeRooms = rooms.filter(r => t.rooms.includes(r.slug));
     faqPage(path, faq),
   ]}
 >
-  <PageHeader {h1} lead={item.intro} />
+  <PageHeader {h1} lead={item.intro} image={headImg} imageAlt={headImg?.title ? `Aranżacja: ${headImg.title}` : ''} placeholderLabel={t.plural} />
 
   <Section id="lista" title={`${t.plural}: lista`} titleHidden>
     <ProductListing products={list} action={path} hide={['typ']} />

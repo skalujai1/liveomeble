@@ -231,7 +231,7 @@ html:active-view-transition-type(kolekcja)::view-transition-new(root) { animatio
 }
 
 /* ---------- Rozkładówki kolekcji ---------- */
-.spreads { padding-block: var(--space-6) var(--space-9); }
+.spreads { padding-block: clamp(3.5rem, 2.5rem + 3vw, 5.5rem) var(--space-9); }
 .spreads__head { display: grid; gap: var(--space-4); margin-bottom: var(--space-8); }
 .spreads__head > * { max-width: 46rem; }
 .spreads__title { font-size: var(--text-4xl); line-height: 1.02; letter-spacing: -0.02em; }
@@ -1062,3 +1062,11 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
   .product { grid-template-areas: 'gallery head' 'gallery summary' 'desc summary'; grid-template-rows: auto auto 1fr; }
   .product__desc { grid-area: desc; margin-top: var(--space-6); }
 }
+
+/* Gdzie kupić: nagłówek nad wyszukiwarką w lewej kolumnie, mapa od góry w prawej (23.11.2026) */
+.stores-top { padding-top: var(--space-4); }
+.stores-top__head { margin-bottom: var(--space-6); }
+.stores-top__head .page-header__lead { margin-top: var(--space-4); max-width: 34rem; }
+
+/* Strony rodzajów mebli i „Meble”: lista bliżej nagłówka ze zdjęciem (23.11.2026) */
+.page-category #lista, .page-products #lista { padding-top: var(--space-5); }

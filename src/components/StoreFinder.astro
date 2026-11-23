@@ -51,6 +51,7 @@ const quickCities = [...byCity.values()].sort((a, b) => b.n - a.n || a.city.loca
 ---
 <div class:list={['store-finder', { 'store-finder--map': showMap }]} id={id} data-store-finder data-limit={limit} data-sync-url={syncUrl ? '1' : undefined}>
   <div class="store-finder__main">
+  <slot name="head" />
   <form class="store-finder__form" action="/gdzie-kupic/" method="get" novalidate data-sf-form>
     <div class="field store-finder__postcode">
       <label class="field__label" for={`${id}-kod`}>{form.postcodeLabel}</label>

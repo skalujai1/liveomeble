@@ -62,17 +62,9 @@ const advisorImg = collectionImage(advisorCol, 'detail');
 >
   <HomeHero slot="hero" collections={heroCollections} />
 
-  <section class="manifest" aria-labelledby="h1">
-    <div class="container manifest__inner">
-      <h1 class="manifest__title" id="h1" data-reveal><Rich text={page.h1} /></h1>
-      <div class="manifest__side" data-reveal style="--d: 120ms">
-        <p class="manifest__lead"><Rich text={hero.lead} /></p>
-        <p class="manifest__cta">
-          {hero.cta.map((c: any, i: number) => <a class:list={['btn', i ? 'btn--secondary' : 'btn--dark']} href={c.href}>{c.label}</a>)}
-        </p>
-      </div>
-    </div>
-  </section>
+  <!-- H1 strony głównej (dla wyszukiwarek i czytników ekranu); wizualnie strona przechodzi z hero od razu do kolekcji -->
+  <h1 class="visually-hidden" id="h1"><Rich text={page.h1} /></h1>
+
 
   <section class="spreads" id={kol.id} aria-labelledby="kolekcje-tytul">
     <header class="container spreads__head" data-reveal>

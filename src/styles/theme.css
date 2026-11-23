@@ -576,8 +576,11 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
 @media (min-width: 64rem) {
   .listing {
     grid-template-columns: 15.5rem minmax(0, 1fr); column-gap: 2.5rem; row-gap: var(--space-4); align-items: start;
-    grid-template-areas: "filters count" "filters grid" "filters empty";
+    grid-template-areas: "filters count" "filters grid" "filters more" "filters empty";
+    /* nadmiar wysokości (długa kolumna filtrów) idzie do ostatniego wiersza, nie odsuwa siatki od licznika */
+    grid-template-rows: auto auto auto 1fr;
   }
+  .listing > .listing__more { grid-area: more; }
   .listing > .listing__filters-toggle { display: none; }
   .listing > .filters {
     grid-area: filters; position: relative; /* bez sticky: nic nie jedzie z przewijaniem (docs/brief.md, rozdz. 8) */

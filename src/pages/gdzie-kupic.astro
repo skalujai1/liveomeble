@@ -1,7 +1,7 @@
 ---
 // Gdzie kupić — docs/ia.md 3.9, treść: src/content/pages/gdzie-kupic.json
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHeader from '../components/PageHeader.astro';
+import Rich from '../components/Rich.astro';
 import Section from '../components/Section.astro';
 import ContentSection from '../components/ContentSection.astro';
 import StoreFinder from '../components/StoreFinder.astro';
@@ -22,11 +22,17 @@ const finder = section(page, 'wyszukiwarka');
   breadcrumbs={[{ name: 'Gdzie kupić', url: path }]}
   jsonLd={[webPage('WebPage', { path, title: page.seo.title, description: page.seo.description, hasBreadcrumb: true }), faqPage(path, page.faq.items)]}
 >
-  <PageHeader h1={page.h1} lead={finder.lead} />
-
-  <Section id="wyszukiwarka" title="Wyszukiwarka salonów" titleHidden>
-    <StoreFinder id="sklepy" headingLevel={2} showMap syncUrl />
-  </Section>
+  <!-- Nagłówek w lewej kolumnie nad wyszukiwarką, mapa od góry w prawej: bez pustego pola nad formularzem -->
+  <section class="section stores-top" id="wyszukiwarka" aria-labelledby="h1">
+    <div class="container">
+      <StoreFinder id="sklepy" headingLevel={2} showMap syncUrl>
+        <header class="stores-top__head" slot="head">
+          <h1 class="page-header__title" id="h1"><Rich text={page.h1} /></h1>
+          <p class="page-header__lead"><Rich text={finder.lead} /></p>
+        </header>
+      </StoreFinder>
+    </div>
+  </section>
 
   <Section id="wyniki" title="Salony partnerskie według województw">
     <StoreDirectory />
