@@ -39,14 +39,30 @@ export function validateData(data) {
       if (v.ean && !/^\d{13}$/.test(v.ean)) e.push(`${w}/${v.code}: EAN ${v.ean}`);
     }
     for (const u of Object.values(p.documents)) if (u && !u.startsWith('https://')) e.push(`${w}: dokument nie po https ${u}`);
-    if ('basePrice' in p || 'priceHistory' in p) e.push(`${w}: karty nie mają cen — pole ceny nie powinno istnieć`);
+    if ('basePrice' in p || 'priceHistory' in p) e.push(`${w}: cena należy do wariantu (variant.basePrice), nie do mebla`);
+    for (const v of p.variants) {
+      if ('basePrice' in v && !(typeof v.basePrice === 'number' && v.basePrice > 0)) e.push(`${w}/${v.code}: cena ${v.basePrice}`);
+    }
   }
   for (const c of collections) {
     if (!products.some(p => p.collection === c.slug)) e.push(`kolekcja ${c.slug}: brak mebli`);
     if (!c.rooms.length || !c.rooms.every(r => roomSlugs.has(r))) e.push(`kolekcja ${c.slug}: pomieszczenia`);
     for (const a of c.arrangements) if (!roomSlugs.has(a.room)) e.push(`kolekcja ${c.slug}: aranżacja bez pomieszczenia`);
   }
-  if (promotions.length) e.push('promocje: karty nie zawierają promocji — lista powinna być pusta');
+  // promocje ze sklepu liveomeble.pl: cena stała na indeks wariantu, niższa niż cena regularna tego wariantu
+  const variantBySku = new Map(products.flatMap(p => p.variants.map(v => [v.sku, v])));
+  const promoIds = new Set();
+  for (const pr of promotions) {
+    if (promoIds.has(pr.id)) e.push(`promocja ${pr.id}: zdublowane id`);
+    promoIds.add(pr.id);
+    if (!['fixedPrice', 'percent'].includes(pr.kind) || !(pr.value > 0)) e.push(`promocja ${pr.id}: ${pr.kind} ${pr.value}`);
+    for (const sku of pr.scope?.skus ?? []) {
+      const v = variantBySku.get(sku);
+      if (!v) e.push(`promocja ${pr.id}: nieznany indeks ${sku}`);
+      else if (pr.kind === 'fixedPrice' && !(pr.value < v.basePrice)) e.push(`promocja ${pr.id}: cena ${pr.value} nie niższa niż ${v.basePrice}`);
+    }
+    if (pr.startsAt && pr.endsAt && !(new Date(pr.startsAt) < new Date(pr.endsAt))) e.push(`promocja ${pr.id}: daty ${pr.startsAt}–${pr.endsAt}`);
+  }
 
   // kody pocztowe
   const pref = postcodes.prefixes;

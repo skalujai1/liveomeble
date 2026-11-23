@@ -5,7 +5,7 @@
 //   meta       <html lang="pl">, unikalne <title> (≤ 60) i description (≤ 155), canonical (absolutny, ze „/”), robots, OG, Twitter
 //   nagłówki   jeden <h1>, bez przeskoków (h1 → h2 → h3)
 //   JSON-LD    jeden blok @graph, parsuje się, wymagane typy dla szablonu, FAQPage = FAQ na stronie (słowo w słowo),
-//              BreadcrumbList = okruszki na stronie, Product bez Offer (karty produktu Liveo nie mają cen), GTIN = 13 cyfr
+//              BreadcrumbList = okruszki na stronie, Offer z ceną w PLN (ceny ze sklepu liveomeble.pl), GTIN = 13 cyfr
 //   linki      każdy link wewnętrzny i zasób (href, src, srcset) istnieje w dist/, kotwice #id istnieją, adresy stron z „/”
 //   a11y       unikalne id, etykiety pól formularzy, nazwy przycisków, alt/width/height obrazów, lazy poza LCP
 //   sitemap    wszystkie strony indeksowane (i tylko one) z lastmod; robots.txt; llms.txt
@@ -225,8 +225,10 @@ for (const [path, page] of pages) {
     const variants = p['@type'] === 'ProductGroup' ? p.hasVariant || [] : [p];
     if (!p.name || !(p.sku || p.productGroupID)) err(path, 'Product: brak name/sku');
     for (const v of variants) {
-      // Karty produktu Liveo nie mają cen — cena w JSON-LD mogłaby pochodzić tylko z niezweryfikowanego źródła.
-      if (v.offers || p.offers) err(path, `Product ${v.sku}: Offer bez ceny z kart produktu — usuń albo podłącz cennik`);
+      // Ceny ze sklepu liveomeble.pl: Offer tylko z ceną w PLN; promocja (cena przekreślona) z datą końca → priceValidUntil.
+      const o = v.offers || p.offers;
+      if (o && (!(Number(o.price) > 0) || o.priceCurrency !== 'PLN')) err(path, `Offer ${v.sku}: brak ceny w PLN`);
+      if (o?.priceSpecification && !(Number(o.priceSpecification.price) > Number(o.price))) err(path, `Offer ${v.sku}: cena przekreślona nie wyższa niż cena`);
       if (v.gtin13 && !/^\d{13}$/.test(v.gtin13)) err(path, `Product ${v.sku}: gtin13 „${v.gtin13}” nie ma 13 cyfr`);
       if (!v.color) err(path, `Product ${v.sku}: brak koloru`);
     }

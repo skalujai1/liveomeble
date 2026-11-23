@@ -215,7 +215,7 @@
         },
         {
           "q": "Gdzie kupić meble z kolekcji {name}?",
-          "a": "Meble z kolekcji {name} kupisz w salonach partnerskich Liveo, gdzie poznasz cenę i termin dostawy. Wpisz kod pocztowy w wyszukiwarce na tej stronie, a pokażemy najbliższe salony."
+          "a": "Meble z kolekcji {name} kupisz w salonach partnerskich Liveo, gdzie poznasz termin dostawy i koszt montażu. Wpisz kod pocztowy w wyszukiwarce na tej stronie, a pokażemy najbliższe salony."
         }
       ]
     }

@@ -9,7 +9,7 @@ import Faq from '../../components/Faq.astro';
 import { getArticles } from '../../lib/articles';
 import { typeSceneImage } from '../../lib/images';
 import { faqPage, itemList, webPage } from '../../lib/jsonld';
-import { collectionNames, collections, num, pages, products, productsByType, rooms, types, url, type FurnitureType } from '../../lib/site';
+import { collectionNames, collections, formatPrice, num, pages, priceAt, products, productsByType, rooms, types, url, type FurnitureType } from '../../lib/site';
 import { fill, lowerFirst } from '../../lib/text';
 
 export function getStaticPaths() {
@@ -25,12 +25,16 @@ const path = url.category(t.slug);
 const list = productsByType(t.id);
 const widths = list.map(p => p.dims.w).filter((w): w is number => !!w);
 const colls = collections.filter(c => list.some(p => p.collection === c.slug));
+// Przedział cen (wszystkie kolory, z promocjami w chwili budowy) do FAQ „Ile kosztują…”
+const prices = list.flatMap(p => p.variants.map(v => priceAt(p, v.code)?.price)).filter((x): x is number => x != null);
+const [minPrice, maxPrice] = prices.length ? [Math.min(...prices), Math.max(...prices)] : [null, null];
 const vars = {
   plural: t.plural, pluralLower: lowerFirst(t.plural),
   collectionsList: collectionNames(colls.map(c => c.slug)), minWidth: num(Math.min(...widths)), maxWidth: num(Math.max(...widths)),
+  priceRange: minPrice == null ? '' : minPrice === maxPrice ? formatPrice(minPrice) : `od ${formatPrice(minPrice)} do ${formatPrice(maxPrice!)}`,
 };
 const h1 = fill(tpl.h1, vars);
-const faq = tpl.faq.items.map(it => ({ q: fill(it.q, vars), a: fill(it.a, vars) }));
+const faq = tpl.faq.items.map((it: { q: string; a: string; aNoPrice?: string }) => ({ q: fill(it.q, vars), a: fill(!vars.priceRange && it.aNoPrice ? it.aNoPrice : it.a, vars) }));
 const guide = item.guide ? (await getArticles()).find(a => a.data.slug === item.guide) : null;
 const typeRooms = rooms.filter(r => t.rooms.includes(r.slug));
 const headImg = typeSceneImage(t.id, products);

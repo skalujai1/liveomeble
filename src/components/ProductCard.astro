@@ -2,10 +2,11 @@
 // Karta mebla na listach (kierunek C): kwadratowy kadr na lnie (białe tło packshotu znika przez mix-blend-mode),
 // po najechaniu drugi widok z karty produktu (np. z otwartymi drzwiami), nazwa w szeryfie (zawiera już nazwę kolekcji),
 // wymiary, dostawa w 72 h i kolory. Atrybuty data-* opisują mebel dla filtrów (scripts/listing.ts) —
-// bez JS karta jest zwykłym linkiem. Karty produktu Liveo nie mają cen.
+// bez JS karta jest zwykłym linkiem z ceną z dnia budowy (ceny ze sklepu liveomeble.pl, scripts/prices.ts przelicza promocje).
 import Media from './Media.astro';
+import PriceBlock from './PriceBlock.astro';
 import { packshotFor, srcOf, type PublicImage } from '../lib/images';
-import { collectionOf, colorCount, defaultVariant, dimsLong, finishById, pages, site, typeOf, url, variantBoardColors, type Product } from '../lib/site';
+import { collectionOf, colorCount, defaultVariant, dimsLong, discountPercent, finishById, pages, priceAt, site, typeOf, url, variantBoardColors, type Product } from '../lib/site';
 import { fill } from '../lib/text';
 
 interface Props {
@@ -19,6 +20,8 @@ interface Props {
 }
 const { product: p, code, headingLevel = 3, order = 0, sizes = '(min-width: 75rem) 18rem, (min-width: 48rem) 30vw, 46vw' } = Astro.props;
 const v = (code && p.variants.find(x => x.code === code)) || defaultVariant(p);
+const price = priceAt(p, v.code);
+const off = price ? discountPercent(price) : 0;
 const img = packshotFor(p, v);
 const card = pages.meble.sections.find(s => s.id === 'lista')!.card!;
 const col = collectionOf(p);
@@ -45,6 +48,8 @@ const second = !img?.approximate ? ((v.gallery ?? []) as PublicImage[]).find(g =
   data-delivery={p.delivery72 ? '72h' : ''}
   data-width={p.dims.w}
   data-order={order}
+  data-price={price?.price}
+  data-promo={off ? '1' : '0'}
 >
   <a class="product-card__link" href={href}>
     <span class="product-card__frame">
@@ -58,9 +63,11 @@ const second = !img?.approximate ? ((v.gallery ?? []) as PublicImage[]).find(g =
         placeholderLabel={typeOf(p).name}
       />
       {second && <span class="product-card__second" data-src={srcOf(second, 480)} aria-hidden="true"></span>}
+      {price && <span class="badge badge--promo product-card__promo" data-promo-badge hidden={!off}>{off ? `−${off}%` : ''}</span>}
     </span>
     <H class="product-card__title">{p.name}</H>
   </a>
+  <PriceBlock product={p} code={v.code} />
   <p class="product-card__meta">
     <span class="product-card__dims">{dimsLong(p)}</span>
     {p.delivery72 && <span class="product-card__delivery">{site.labels.delivery72}</span>}

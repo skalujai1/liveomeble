@@ -22,7 +22,8 @@
       "items": [
         {
           "q": "Ile kosztują {pluralLower} Liveo?",
-          "a": "Cenę podaje salon partnerski. Liveo sprzedaje meble przez salony w całej Polsce, a na stronie każdego mebla wyszukasz najbliższy salon z jego kolekcją."
+          "a": "{plural} Liveo kosztują {priceRange} — to ceny ze sklepu liveomeble.pl, razem z bieżącymi promocjami. Cenę każdego koloru zobaczysz na karcie mebla, a kupisz go w salonie partnerskim: na stronie mebla wyszukasz najbliższy salon z jego kolekcją.",
+          "aNoPrice": "Cenę podaje salon partnerski. Liveo sprzedaje meble przez salony w całej Polsce, a na stronie każdego mebla wyszukasz najbliższy salon z jego kolekcją."
         },
         {
           "q": "W jakich kolekcjach są {pluralLower}?",

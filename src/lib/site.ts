@@ -6,6 +6,7 @@ import finishesJson from '../data/finishes.json';
 import metaJson from '../data/meta.json';
 import postcodesJson from '../data/postcodes.json';
 import productsJson from '../data/products.json';
+import promotionsJson from '../data/promotions.json';
 import resellersJson from '../data/resellers.json';
 import roomsJson from '../data/rooms.json';
 import typesJson from '../data/types.json';
@@ -26,6 +27,7 @@ import kontaktJson from '../content/pages/kontakt.json';
 import poradnikJson from '../content/pages/poradnik.json';
 
 import { fill, listJoin, lowerFirst, plural } from './text';
+import { formatPrice, priceFor } from './pricing.js';
 
 // ---------------------------------------------------------------------------
 // Typy (luźne — dane przychodzą z JSON-ów)
@@ -133,13 +135,27 @@ export const url = {
 };
 
 // ---------------------------------------------------------------------------
-// Produkty: warianty, opisy. Karty produktu nie mają cen ani stanów — cenę podaje salon partnerski.
+// Produkty: warianty, opisy, ceny. Ceny: sklep liveomeble.pl (tools/data/import-ceny.py), promocje → promotions.json.
 // ---------------------------------------------------------------------------
 
 /** Domyślny wariant: pierwszy (generator stawia na początku wariant z własnym zdjęciem). */
 export function defaultVariant(p: Product): Variant {
   return p.variants[0];
 }
+
+/** Promocje (ze sklepu liveomeble.pl, docelowo z Navireo). */
+export const promotions = promotionsJson as Parameters<typeof priceFor>[2];
+
+export type PriceInfo = ReturnType<typeof priceFor>;
+/** Cena wariantu w chwili budowy albo null, gdy dla wariantu nie ma ceny (cenę poda salon partnerski). */
+export function priceAt(p: Product, code?: string, now: Date = BUILD_NOW): PriceInfo | null {
+  const v = p.variants.find(x => x.code === code) ?? defaultVariant(p);
+  if ((v as { basePrice?: number }).basePrice == null) return null;
+  return priceFor(p, v.code, promotions, now);
+}
+/** Rabat w procentach do plakietki („−19%”). */
+export const discountPercent = (x: PriceInfo) => (x.regular ? Math.round((1 - x.price / x.regular) * 100) : 0);
+export { formatPrice };
 
 export const dims = (p: Product) => fill(site.dims.format, { w: num(p.dims.w), h: num(p.dims.h), d: num(p.dims.d) });
 export const dimsLong = (p: Product) => fill(p.dims.d ? site.dims.formatLong : site.dims.formatLongNoDepth, { w: num(p.dims.w), h: num(p.dims.h), d: num(p.dims.d) });

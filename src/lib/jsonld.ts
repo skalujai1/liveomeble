@@ -129,13 +129,38 @@ export function article(o: {
 const cm = (value: number) => ({ '@type': 'QuantitativeValue', value, unitCode: 'CMT' });
 const kg = (value: number) => ({ '@type': 'QuantitativeValue', value, unitCode: 'KGM' });
 
-export type VariantLd = {
-  code: string; sku: string; gtin13?: string | null; color: string; url: string; image?: string;
+export type OfferInput = {
+  /** Cena brutto (ze sklepu liveomeble.pl, z promocją). */
+  price: number;
+  /** Cena przed obniżką (tylko przy promocji) → StrikethroughPrice. */
+  regular: number | null;
+  /** Ostatni dzień promocji ("YYYY-MM-DD") → priceValidUntil. */
+  validUntil: string | null;
 };
+
+export type VariantLd = {
+  code: string; sku: string; gtin13?: string | null; color: string; url: string; image?: string; offer?: OfferInput | null;
+};
+
+/** Oferta wariantu: cena w PLN; mebel kupuje się w salonach partnerskich (InStoreOnly). */
+function offer(o: OfferInput, url: string): Node {
+  return {
+    '@type': 'Offer',
+    url: abs(url),
+    price: o.price.toFixed(2),
+    priceCurrency: 'PLN',
+    availability: 'https://schema.org/InStoreOnly',
+    itemCondition: 'https://schema.org/NewCondition',
+    ...(o.validUntil ? { priceValidUntil: o.validUntil } : {}),
+    ...(o.regular
+      ? { priceSpecification: { '@type': 'UnitPriceSpecification', priceType: 'https://schema.org/StrikethroughPrice', price: o.regular.toFixed(2), priceCurrency: 'PLN' } }
+      : {}),
+  };
+}
 
 /**
  * Mebel: jeden kolor → Product; kilka kolorów → ProductGroup (variesBy: color) z wariantami Product.
- * Bez Offer: karty produktu Liveo nie mają cen, a Liveo sprzedaje przez salony partnerskie.
+ * Offer tylko dla wariantu z ceną ze sklepu liveomeble.pl; Liveo sprzedaje przez salony partnerskie.
  */
 export function productLd(o: {
   path: string; name: string; description: string; sku: string; category: string;
@@ -161,6 +186,7 @@ export function productLd(o: {
     color: v.color,
     url: abs(v.url),
     ...(v.image ? { image: abs(v.image) } : {}),
+    ...(v.offer ? { offers: offer(v.offer, v.url) } : {}),
     ...(standalone ? common : { isVariantOf: { '@id': `${url}#product` } }),
   });
   if (o.variants.length === 1) return variant(o.variants[0], true);

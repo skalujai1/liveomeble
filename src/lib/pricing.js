@@ -24,6 +24,7 @@
 //     pusty zakres = cały asortyment. scope.skus pasuje do indeksu produktu albo wariantu,
 //   - lowest30 (Omnibus, art. 6a ustawy o informowaniu o cenach towarów i usług):
 //     najniższa cena z 30 dni PRZED rozpoczęciem obniżki; brak historii → cena regularna.
+//     Promocja może podać lowest30 ze źródła (sklep liveomeble.pl, Navireo) — wtedy ma pierwszeństwo.
 
 export const CURRENCY = 'PLN';
 const DAY = 86400000;
@@ -185,7 +186,7 @@ export function priceFor(product, variantCode, promotions = [], now = new Date()
     price: best.price,
     regular,
     promo: { id: best.promo.id, label: best.promo.label ?? best.promo.name ?? null, endsAt: best.promo.endsAt ?? null },
-    lowest30: lowestPriceBefore(history, best.promo.startsAt, { fallback: regular }),
+    lowest30: Number.isFinite(best.promo.lowest30) ? best.promo.lowest30 : lowestPriceBefore(history, best.promo.startsAt, { fallback: regular }),
     currency: CURRENCY,
   };
 }

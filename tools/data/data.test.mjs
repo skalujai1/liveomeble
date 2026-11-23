@@ -14,12 +14,14 @@ test('dane przechodzą kontrolę spójności', () => {
   assert.deepEqual(validateData(data), []);
 });
 
-test('prawdziwy katalog: 30+ kolekcji z kart, 400+ mebli, 400+ salonów, bez cen i promocji', () => {
+test('prawdziwy katalog: 30+ kolekcji z kart, 400+ mebli, 400+ salonów, ceny wariantów ze sklepu', () => {
   assert.ok(data.collections.length >= 30, String(data.collections.length));
   assert.ok(data.products.length >= 400, String(data.products.length));
   assert.ok(data.resellers.length >= 400);
-  assert.equal(data.promotions.length, 0);
-  for (const p of data.products) assert.ok(!('basePrice' in p), p.slug);
+  for (const p of data.products) assert.ok(!('basePrice' in p), `${p.slug}: cena jest w wariancie`);
+  const priced = data.products.flatMap(p => p.variants).filter(v => 'basePrice' in v);
+  if (data.meta.prices) assert.ok(priced.length >= 300, `wariantów z ceną: ${priced.length}`);
+  for (const v of priced) assert.ok(v.basePrice > 0, v.sku);
   for (const name of ['ARIS', 'DANTE', 'IRMA', 'MILTON', 'REMI']) assert.ok(data.collections.some(c => c.name === name), name);
 });
 
@@ -73,7 +75,8 @@ test('eksport katalogu doradcy: format widżetu, jeden rekord na wariant, bez ce
       assert.ok(x.rooms.length && x.rooms.every(r => keys.has(r)), `${x.id}: ${x.rooms}`);
       assert.ok(x.url.startsWith('/produkt/'), x.url);
       assert.ok(x.img?.startsWith('/katalog/'), `${x.id}: ${x.img}`);
-      assert.equal(x.price, null);
+      if (x.price == null) assert.equal(x.regular, null, x.id);
+      else assert.ok(x.price > 0 && (x.regular == null || x.regular > x.price), `${x.id}: ${x.price}/${x.regular}`);
       for (const k of ['light', 'wood', 'black', 'gloss']) assert.ok(k in x.color, `${x.id}: color.${k}`);
       assert.ok(x.color.light >= 0 && x.color.light <= 1);
     }

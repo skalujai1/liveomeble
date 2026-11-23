@@ -10,6 +10,7 @@ prawdziwe salony partnerskie z liveomeble.pl. Pliki w tym katalogu generuje `nod
 |---|---|---|
 | 1. Import kart | `python tools/data/import-karty.py "<folder z xlsx>"` (openpyxl) | karty produktu `*.xlsx` (Drive Liveo: „karty produktu dla białegostoku”, 46 plików) → `tools/data/karty-liveo.json` |
 | 1b. Salony | `python tools/data/import-salony.py` (openpyxl) | **baza salonów `tools/data/salony-liveo.xlsx`** (źródło prawdy od 03.11.2026) → `tools/data/salony-liveo.json` |
+| 1c. Ceny | `python3 tools/data/import-ceny.py` (bez zależności, ok. 15 min) | **sklep liveomeble.pl**: cena, cena przed obniżką, Omnibus, daty promocji każdego mebla → `tools/data/ceny-liveomeble.json` (data odczytu w pliku). Uruchamiamy, gdy zmieniają się ceny lub promocje w sklepie. |
 | 1c. Granice | `python tools/data/build-geo.py <wojewodztwa-min.geojson>` | PRG (GUGiK) z github.com/ppatrzyk/polska-geojson → `src/lib/geo-pl.json` (mapa salonów) |
 | 2. Zdjęcia | `npm run images` (`tools/data/fetch-images.mjs`, sharp) | linki z kart (serwer `upload.liveomeble.pl`) → `public/katalog/*.webp` + `manifest.json` (poza repozytorium; w CI w cache) |
 | 3. Dane strony | `npm run data` (`tools/data/generate.mjs`) | `karty-liveo.json` + `salony-liveo.json` + manifest zdjęć → `src/data/*.json` |
@@ -22,7 +23,7 @@ prawdziwe salony partnerskie z liveomeble.pl. Pliki w tym katalogu generuje `nod
 - **Łóżka**: osobny mebel na rozmiar materaca i wersję (z pojemnikiem / bez stelaża), np. „Łóżko 160 z pojemnikiem ATE AT15”.
 - **Kuchnie** tylko jako gotowe zestawy (TIFFANY T-35, długość 180–260 cm; A/B/C to kolory). Pojedyncze szafki, fronty, blaty i cokoły (PATI, TIFFANY) — pominięte.
 - **Pominięte** jako akcesoria: uchwyty, LED i zasilacze, panele zagłowia, półki i fronty do szaf, korpusy FRESCO (system szaf z elementów). Lista w `karty-liveo.json → excluded` (z powodem).
-- **Bez cen i promocji**: karty nie mają cen detalicznych (tylko cenę dropshipping netto w 11 wierszach — nie pokazujemy jej). Strona odsyła po cenę do salonu partnerskiego. `promotions.json` jest pusty, `src/lib/pricing.js` czeka na cennik z Navireo.
+- **Ceny i promocje 1:1 ze sklepu liveomeble.pl** (karty nie mają cen detalicznych). `generate.mjs` łączy stronę sklepu z wariantem po indeksie („DT01 D/C/T/A KPL”), a gdy sklep go nie podaje — po modelu, rozmiarze łóżka, pojemniku (S.P.) i kolorach. Cena regularna → `variant.basePrice`, promocja → `promotions.json` (`fixedPrice` na indeks, z wartością Omnibus ze sklepu). Generator sprawdza, że cena policzona przez `priceFor()` = cena w sklepie co do grosza (inaczej przerywa). Warianty bez strony w sklepie albo niejednoznaczne: `meta.json` → `prices.missing` / `prices.unresolved` — na stronie „Cenę sprawdzisz w salonie partnerskim”.
 - Kolory: nazwy z kolumn KOLORYSTYKA KORPUSU / FRONTU, skróty z nazw handlowych rozwinięte („DĄB CR. T” → „dąb cremona torro”). Próbki kolorów (`finishes.json → hex`) są poglądowe.
 - Opis kolekcji: zdania z opisów marketingowych z kart, które dotyczą całej serii (kolorów, charakteru) — bez dopisywania własnych.
 
@@ -44,7 +45,7 @@ prawdziwe salony partnerskie z liveomeble.pl. Pliki w tym katalogu generuje `nod
 
 - `images.ts` — zdjęcia katalogu z `public/katalog` (packshot wariantu, aranżacje kolekcji i pokoi).
 - `locator.js` — `normalizePostcode`, `lookupPostcode`, `haversineKm`, `nearestResellers`.
-- `pricing.js` — silnik cen i promocji (Omnibus), gotowy na cennik z Navireo; dziś nieużywany przez strony.
+- `pricing.js` — silnik cen i promocji (Omnibus): ceny na stronie (PriceBlock), w JSON-LD i w doradcy; ten sam format przyjmie cennik z Navireo.
 
 ## Eksport dla doradcy wnętrz
 

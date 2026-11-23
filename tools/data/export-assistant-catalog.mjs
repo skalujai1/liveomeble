@@ -6,8 +6,8 @@
 // Format zgodny z liveo-assistant/widget/recommender.js i liveo-assistant.js:
 //   { products: [{ id, name, collection, model, type, rooms, price, regular, url, img, color, bestseller }],
 //     collections: { NAZWA: "/kolekcje/<slug>/" } }
-// Jeden rekord na wariant kolorystyczny. Katalog pochodzi z kart produktu Liveo, które nie mają cen —
-// price = null (widżet pokazuje wtedy „Cena w salonie partnerskim” i nie filtruje po budżecie).
+// Jeden rekord na wariant kolorystyczny. Ceny: sklep liveomeble.pl (variant.basePrice + promotions.json), liczone
+// przez priceFor() na chwilę --now. Wariant bez ceny → price = null (widżet pokazuje „Cena w salonie partnerskim”).
 //
 // Uwagi do formatu widżetu:
 //   - name: WIELKIMI LITERAMI (jak w starym katalogu sklepu). recommender.fitsRoom()
@@ -19,6 +19,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { priceFor } from '../../src/lib/pricing.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const args = Object.fromEntries(process.argv.slice(2).map(a => /^--([^=]+)=(.*)$/.exec(a)).filter(Boolean).map(m => [m[1], m[2]]));
@@ -32,10 +33,18 @@ const finishes = read('finishes');
 const rooms = read('rooms');
 const collections = read('collections');
 const products = read('products');
+const promotions = read('promotions');
 
 const F = Object.fromEntries(finishes.map(f => [f.id, f]));
 const C = Object.fromEntries(collections.map(c => [c.slug, c]));
 const ROOM_KEY = Object.fromEntries(rooms.map(r => [r.slug, r.assistantKey]));
+
+/** Cena wariantu (z promocją i Omnibusem) albo null, gdy sklep nie ma ceny tego wariantu. */
+const priceOf = (p, v) => {
+  if (v.basePrice == null) return { price: null, regular: null, lowest30: null };
+  const r = priceFor(p, v.code, promotions, now);
+  return { price: r.price, regular: r.regular, lowest30: r.lowest30 };
+};
 
 const assistantRooms = p => [...new Set(p.rooms.map(r => ROOM_KEY[r]).filter(Boolean))];
 
@@ -74,8 +83,7 @@ for (const p of products) {
       model: p.name,
       type: p.type,
       rooms: assistantRooms(p),
-      price: null,
-      regular: null,
+      ...priceOf(p, v),
       url: `/produkt/${p.slug}/${v.code === p.variants[0].code ? '' : `?kolor=${v.code}`}`,
       img: imgOf(v),
       color: colorProfile(v.finish, v.colorLabel),
@@ -90,7 +98,7 @@ for (const p of products) {
 const catalog = {
   source: 'karty-produktu-liveo',
   demo: false,
-  note: 'Katalog z kart produktu Liveo (bez cen). Generowany z src/data przez tools/data/export-assistant-catalog.mjs.',
+  note: 'Katalog z kart produktu Liveo, ceny ze sklepu liveomeble.pl. Generowany z src/data przez tools/data/export-assistant-catalog.mjs.',
   updated: now.toISOString(),
   count: out.length,
   collections: Object.fromEntries(collections.map(c => [c.name.toLocaleUpperCase('pl'), `/kolekcje/${c.slug}/`])),

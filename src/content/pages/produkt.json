@@ -5,7 +5,7 @@
   "_notes": [
     "Szablon strony mebla. Dane: products.json z kart produktu Liveo (+ collections, finishes, types, rooms, resellers).",
     "Wariant koloru w adresie: /produkt/{slug}/?kolor={code} — canonical zawsze bez parametru. Domyślny wariant: pierwszy (z własnym zdjęciem).",
-    "Karty produktu nie mają cen ani stanów — zamiast ceny odsyłamy do salonu partnerskiego (site.price).",
+    "Ceny i promocje ze sklepu liveomeble.pl (PriceBlock, site.price); wariant bez ceny w sklepie → odesłanie do salonu partnerskiego.",
     "FAQ jest generowany z danych — każda odpowiedź wynika z pól mebla, nic nie dopisujemy ręcznie."
   ],
   "seo": {

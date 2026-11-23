@@ -161,7 +161,7 @@
     ],
     "company": "LIVEO Meble sp. z o.o. · ul. Borki 5, 36-130 Raniżów · tel. +48 17 58 18 000 · biuro@liveomeble.pl",
     "copyright": "© {year} Liveo Meble sp. z o.o.",
-    "demoNotice": "Wersja robocza strony. Katalog pochodzi z kart produktu Liveo, salony partnerskie z liveomeble.pl. Ceny podaje salon partnerski.",
+    "demoNotice": "Wersja robocza strony. Katalog pochodzi z kart produktu Liveo, salony partnerskie z liveomeble.pl. Ceny ze sklepu liveomeble.pl.",
     "contact": {
       "address": "ul. Borki 5, 36-130 Raniżów",
       "phone": "+48 17 58 18 000",
@@ -188,10 +188,18 @@
     "send": "Wyślij"
   },
   "price": {
+    "label": "Cena",
+    "promo": "Cena promocyjna",
+    "srOld": "Cena przed obniżką",
+    "lowest30": "Najniższa cena z 30 dni przed obniżką: {price}",
+    "promoUntil": "Promocja trwa do {lastDay} włącznie",
+    "buyNote": "Meble Liveo kupisz w salonach partnerskich. Tam poznasz termin dostawy i koszt montażu.",
+    "soon": "Cena wkrótce",
+    "soonNote": "Cenę tego koloru właśnie uzupełniamy. Do tego czasu poznasz ją w salonie partnerskim.",
     "inStore": "Cenę sprawdzisz w salonie partnerskim",
     "inStoreNote": "Liveo sprzedaje meble przez salony partnerskie. Tam poznasz cenę, termin dostawy i koszt montażu.",
     "inStoreLink": "Znajdź salon z tą kolekcją",
-    "_note": "Karty produktu Liveo (eksport Navireo) nie zawierają cen detalicznych — strona ich nie pokazuje."
+    "_note": "Ceny i promocje 1:1 ze sklepu liveomeble.pl (tools/data/import-ceny.py). Wariant bez ceny w sklepie → soon (karta i strona mebla). Przekreślona cena zawsze razem z linią lowest30."
   },
   "stock": {
     "dostepny": "Dostępny",
@@ -209,8 +217,8 @@
     "depth": "Głębokość",
     "weight": "Waga",
     "format": "{w} × {h} × {d} cm",
-    "formatLong": "szer.\u00a0{w} × wys.\u00a0{h} × gł.\u00a0{d}\u00a0cm",
-    "formatLongNoDepth": "szer.\u00a0{w} × wys.\u00a0{h}\u00a0cm",
+    "formatLong": "szer. {w} × wys. {h} × gł. {d} cm",
+    "formatLongNoDepth": "szer. {w} × wys. {h} cm",
     "weightFormat": "ok. {kg} kg"
   },
   "plural": {

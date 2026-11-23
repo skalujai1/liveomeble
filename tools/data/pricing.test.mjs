@@ -108,6 +108,12 @@ describe('priceFor — wybór promocji i zakres', () => {
     assert.equal(r.promo.id, 'kolekcja');
   });
 
+  test('lowest30 podane przez źródło promocji ma pierwszeństwo przed historią', () => {
+    const r = priceFor(product(), 'DN', [promo({ id: 'fx', kind: 'fixedPrice', value: 799, lowest30: 949 })], NOW);
+    assert.equal(r.price, 799);
+    assert.equal(r.lowest30, 949);
+  });
+
   test('fixedPrice ustawia cenę', () => {
     const r = priceFor(product(), 'DN', [promo({ id: 'fx', kind: 'fixedPrice', value: 799 })], NOW);
     assert.equal(r.price, 799);

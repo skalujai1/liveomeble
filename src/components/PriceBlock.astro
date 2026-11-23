@@ -1,13 +1,59 @@
 ---
-// Zamiast ceny: karty produktu Liveo nie mają cen detalicznych — cenę i dostępność podaje salon partnerski.
-// Link prowadzi do wyszukiwarki salonów z wybraną kolekcją.
-import { site, url, type Product } from '../lib/site';
+// Cena mebla — 1:1 ze sklepu liveomeble.pl (tools/data/import-ceny.py), liczona przez priceFor() (src/lib/pricing.js)
+// na chwilę budowy. W przeglądarce scripts/prices.ts przelicza ją na bieżącą chwilę: promocja z datą końca
+// znika o czasie bez przebudowy strony. Przy promocji zawsze razem: cena promocyjna, przekreślona cena
+// sprzed obniżki i najniższa cena z 30 dni (Omnibus). Wariant bez ceny w sklepie → „Cena wkrótce”.
+import { formatPrice } from '../lib/pricing.js';
+import { priceAt, site, url, type Product } from '../lib/site';
+import { dateLong, fill, promoLastDay } from '../lib/text';
 
-interface Props { product: Product }
-const { product } = Astro.props;
+interface Props {
+  product: Product;
+  /** Kod wariantu; domyślnie pierwszy. */
+  code?: string;
+  size?: 'card' | 'full';
+  /** Na stronie mebla: blok widoczny tylko dla wybranego koloru (scripts/product.ts przełącza [data-variant-only]). */
+  variantOnly?: boolean;
+  hidden?: boolean;
+}
+const { product, code, size = 'card', variantOnly = false, hidden = false } = Astro.props;
+const variant = code ?? product.variants[0].code;
+const p = priceAt(product, variant);
 const t = site.price;
+const promo = !!(p && p.regular && p.regular > p.price);
+const lastDay = promo ? promoLastDay(p!.promo?.endsAt) : null;
+const only = variantOnly ? { 'data-variant-only': '', 'data-variant': variant, hidden } : {};
 ---
-<div class="price price--store">
-  <p class="price__main">{t.inStore}</p>
-  <p class="price__note">{t.inStoreNote} <a href={url.stores(product.collection)}>{t.inStoreLink}</a></p>
-</div>
+{p ? (
+  <div
+    class:list={['price', `price--${size}`, { 'price--promo': promo }]}
+    data-price
+    data-product={product.sku}
+    data-price-variant={variant}
+    data-promo-end={promo ? p.promo?.endsAt ?? undefined : undefined}
+    {...only}
+  >
+    <p class="price__main">
+      <span class="visually-hidden" data-price-sr data-label={t.label} data-label-promo={t.promo}>{promo ? t.promo : t.label}: </span>
+      <span class="price__current" data-price-current>{formatPrice(p.price)}</span>
+      <span class="price__regular" data-price-regular-wrap hidden={!promo}>
+        <span class="visually-hidden">{t.srOld}: </span><s data-price-regular>{promo ? formatPrice(p.regular!) : ''}</s>
+      </span>
+    </p>
+    <p class="price__lowest" data-price-lowest hidden={!promo}>{promo ? fill(t.lowest30, { price: formatPrice(p.lowest30 ?? p.regular!) }) : ''}</p>
+    {size === 'full' && (
+      <p class="price__until" data-price-until hidden={!lastDay}>{lastDay ? fill(t.promoUntil, { lastDay: dateLong(lastDay) }) : ''}</p>
+    )}
+    {size === 'full' && <p class="price__note">{t.buyNote} <a href={url.stores(product.collection)}>{t.inStoreLink}</a></p>}
+  </div>
+) : (
+  <div class:list={['price', `price--${size}`, 'price--soon']} {...only}>
+    <p class="price__main"><span class="price__soon">{t.soon}</span></p>
+    {size === 'full' && <p class="price__note">{t.soonNote} <a href={url.stores(product.collection)}>{t.inStoreLink}</a></p>}
+  </div>
+)}
+
+<script>
+  import { initPrices } from '../scripts/prices';
+  initPrices();
+</script>

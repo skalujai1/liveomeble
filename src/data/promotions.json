@@ -1,1 +1,662 @@
-[]
+[
+  {
+    "id": "sklep-an04-dc-k-kpl-witryna-niska-aston-an04",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 599,
+    "scope": {
+      "skus": [
+        "AN04 DC/K KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 1049,
+    "source": "https://liveomeble.pl/aston/1497-3756-aston-an04-witryna-niska.html"
+  },
+  {
+    "id": "sklep-an05-dc-k-kpl-witryna-aston-an05",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 599,
+    "scope": {
+      "skus": [
+        "AN05 DC/K KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 879,
+    "source": "https://liveomeble.pl/aston/1498-3758-aston-an05-witryna-lewa.html"
+  },
+  {
+    "id": "sklep-an06-dc-k-kpl-witryna-aston-an06",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 599,
+    "scope": {
+      "skus": [
+        "AN06 DC/K KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 879,
+    "source": "https://liveomeble.pl/aston/1499-3761-aston-an06-witryna-prawa.html"
+  },
+  {
+    "id": "sklep-an07-dc-k-kpl-regal-aston-an07",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 399,
+    "scope": {
+      "skus": [
+        "AN07 DC/K KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 669,
+    "source": "https://liveomeble.pl/aston/1500-3759-aston-an07-regal-lewy.html"
+  },
+  {
+    "id": "sklep-an08-dc-k-kpl-regal-aston-an08",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 399,
+    "scope": {
+      "skus": [
+        "AN08 DC/K KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 669,
+    "source": "https://liveomeble.pl/aston/1501-3762-aston-an08-regal-prawy.html"
+  },
+  {
+    "id": "sklep-an10-dc-k-kpl-szafka-aston-an10",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 599,
+    "scope": {
+      "skus": [
+        "AN10 DC/K KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 829,
+    "source": "https://liveomeble.pl/aston/1503-3764-aston-an10-szafka-prawa.html"
+  },
+  {
+    "id": "sklep-an11-dc-k-kpl-szafa-aston-an11",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 799,
+    "scope": {
+      "skus": [
+        "AN11 DC/K KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 1289,
+    "source": "https://liveomeble.pl/aston/1504-3765-aston-an11-szafa.html"
+  },
+  {
+    "id": "sklep-an12-dc-k-kpl-biurko-aston-an12",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 299,
+    "scope": {
+      "skus": [
+        "AN12 DC/K KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 509,
+    "source": "https://liveomeble.pl/aston/1505-3766-aston-an12-biurko.html"
+  },
+  {
+    "id": "sklep-an14-dc-k-kpl-polka-aston-an14",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 109,
+    "scope": {
+      "skus": [
+        "AN14 DC/K KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 209,
+    "source": "https://liveomeble.pl/aston/1507-3768-aston-an14-polka-wiszaca.html"
+  },
+  {
+    "id": "sklep-bt02-d-b-kpl-komoda-besto-bt02",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 645,
+    "scope": {
+      "skus": [
+        "BT02 D/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 509,
+    "source": "https://liveomeble.pl/besto/343-2816-besto-bt02-dab-e-bial-polysk-komoda-kpl.html"
+  },
+  {
+    "id": "sklep-bt04-d-b-kpl-kredens-besto-bt04",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 919,
+    "scope": {
+      "skus": [
+        "BT04 D/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 729,
+    "source": "https://liveomeble.pl/besto/345-2818-besto-bt04-dab-e-bial-polysk-kredens-kpl.html"
+  },
+  {
+    "id": "sklep-bt05-d-b-kpl-witryna-besto-bt05",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 859,
+    "scope": {
+      "skus": [
+        "BT05 D/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 679,
+    "source": "https://liveomeble.pl/besto/346-2819-besto-bt05-dab-e-bial-polysk-witryna-lp-kpl.html"
+  },
+  {
+    "id": "sklep-bt06-d-b-kpl-szafka-besto-bt06",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 819,
+    "scope": {
+      "skus": [
+        "BT06 D/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 649,
+    "source": "https://liveomeble.pl/besto/347-2820-besto-bt06-dab-e-bial-polysk-szafka-lp-kpl.html"
+  },
+  {
+    "id": "sklep-bt07-d-b-kpl-regal-besto-bt07",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 729,
+    "scope": {
+      "skus": [
+        "BT07 D/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 579,
+    "source": "https://liveomeble.pl/besto/348-2821-besto-bt07-dab-e-bial-polysk-regal-lp-kpl.html"
+  },
+  {
+    "id": "sklep-bt09-d-b-kpl-szafa-besto-bt09",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 2049,
+    "scope": {
+      "skus": [
+        "BT09 D/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 1625,
+    "source": "https://liveomeble.pl/besto/350-2825-besto-bt09-dab-e-bial-polysk-szafa-4d-kpl.html"
+  },
+  {
+    "id": "sklep-bt10-d-kpl-polka-besto-bt10",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 269,
+    "scope": {
+      "skus": [
+        "BT10 D KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 209,
+    "source": "https://liveomeble.pl/besto/351-2831-besto-bt10-dab-e-polki-4d-kpl.html"
+  },
+  {
+    "id": "sklep-bt11-d-kpl-polka-wiszaca-besto-bt11",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 205,
+    "scope": {
+      "skus": [
+        "BT11 D KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 135,
+    "source": "https://liveomeble.pl/besto/352-2828-besto-bt11-dab-e-polka-kpl.html"
+  },
+  {
+    "id": "sklep-bt12-140-d-b-s-p-kpl-lozko-140-z-pojemnikiem-besto-bt12",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 1849,
+    "scope": {
+      "skus": [
+        "BT12/140 D/B S.P KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 1469,
+    "source": "https://liveomeble.pl/besto/353-2829-besto-bt12-loze-140-z-pojemnikiem-na-posciel.html"
+  },
+  {
+    "id": "sklep-bt12-160-d-b-s-p-kpl-lozko-160-z-pojemnikiem-besto-bt12",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 1919,
+    "scope": {
+      "skus": [
+        "BT12/160 D/B S.P KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 1519,
+    "source": "https://liveomeble.pl/besto/733-2833-besto-bt12-loze-160-z-pojemnikiem-na-posciel.html"
+  },
+  {
+    "id": "sklep-bt12-180-d-b-s-p-kpl-lozko-180-z-pojemnikiem-besto-bt12",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 2029,
+    "scope": {
+      "skus": [
+        "BT12/180 D/B S.P KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 1609,
+    "source": "https://liveomeble.pl/besto/734-2834-besto-bt12-loze-180-z-pojemnikiem-na-posciel.html"
+  },
+  {
+    "id": "sklep-bt13-d-b-kpl-szafka-nocna-besto-bt13",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 285,
+    "scope": {
+      "skus": [
+        "BT13 D/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 225,
+    "source": "https://liveomeble.pl/besto/356-2835-besto-bt13-dab-e-bial-polysk-szafka-nocna-kpl.html"
+  },
+  {
+    "id": "sklep-bt31-d-kpl-stol-rozkladany-besto-bt31",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 669,
+    "scope": {
+      "skus": [
+        "BT31 D KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 529,
+    "source": "https://liveomeble.pl/besto/358-2837-besto-bt31-dab-e-stol-kpl.html"
+  },
+  {
+    "id": "sklep-gt01-d-cz-d-kpl-szafka-rtv-g-te-gt01",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 479,
+    "scope": {
+      "skus": [
+        "GT01 D/CZ/D KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 511,
+    "source": "https://liveomeble.pl/g-te/760-5445-g-te-gt01-rtv-czarny-polyskdab-.html"
+  },
+  {
+    "id": "sklep-gt02-d-cz-d-kpl-komoda-g-te-gt02",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 429,
+    "scope": {
+      "skus": [
+        "GT02 D/CZ/D KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 463,
+    "source": "https://liveomeble.pl/g-te/761-5447-g-te-gt02-komoda-czarny-polyskdab-.html"
+  },
+  {
+    "id": "sklep-gt03-d-cz-d-kpl-komoda-g-te-gt03",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 659,
+    "scope": {
+      "skus": [
+        "GT03 D/CZ/D KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 707,
+    "source": "https://liveomeble.pl/g-te/762-5448-g-te-gt03-komoda-czarny-polyskdab-.html"
+  },
+  {
+    "id": "sklep-gt04-d-cz-d-kpl-witryna-g-te-gt04",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 639,
+    "scope": {
+      "skus": [
+        "GT04 D/CZ/D KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 682,
+    "source": "https://liveomeble.pl/g-te/763-5449-g-te-gt04-witryna-czarny-polyskdab-.html"
+  },
+  {
+    "id": "sklep-gt06-d-cz-d-kpl-witryna-g-te-gt06",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 549,
+    "scope": {
+      "skus": [
+        "GT06 D/CZ/D KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 582,
+    "source": "https://liveomeble.pl/g-te/765-5452-g-te-gt06-witryna-lp-czarny-polyskdab-.html"
+  },
+  {
+    "id": "sklep-it01-de-de-kpl-szafka-rtv-intenso-it01",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 289,
+    "scope": {
+      "skus": [
+        "IT01 DE/DE KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 329,
+    "source": "https://liveomeble.pl/intenso/1538-4084-intenso-it01-rtv.html"
+  },
+  {
+    "id": "sklep-it07-de-de-kpl-witryna-intenso-it07",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 459,
+    "scope": {
+      "skus": [
+        "IT07 DE/DE KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 519,
+    "source": "https://liveomeble.pl/intenso/1544-4090-intenso-it07-witryna-lp.html"
+  },
+  {
+    "id": "sklep-it09-de-de-kpl-szafa-intenso-it09",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 651,
+    "scope": {
+      "skus": [
+        "IT09 DE/DE KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 615,
+    "source": "https://liveomeble.pl/intenso/1546-4092-intenso-it09-szafa.html"
+  },
+  {
+    "id": "sklep-it10-de-de-kpl-polka-intenso-it10",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 76,
+    "scope": {
+      "skus": [
+        "IT10 DE/DE KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 100,
+    "source": "https://liveomeble.pl/intenso/1547-4333-intenso-it10-polka-wiszaca.html"
+  },
+  {
+    "id": "sklep-kb01-dn-b-kpl-komoda-kubo-kb01",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 421,
+    "scope": {
+      "skus": [
+        "KB01 DN/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 434,
+    "source": "https://liveomeble.pl/kubo/403-5406-kubo-kb01-dab-nagano-bialy-komoda-kpl.html"
+  },
+  {
+    "id": "sklep-kb02-dn-b-kpl-komoda-kubo-kb02",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 597,
+    "scope": {
+      "skus": [
+        "KB02 DN/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 599,
+    "source": "https://liveomeble.pl/kubo/404-5407-kubo-kb02-dab-nagano-bialy-komoda-kpl.html"
+  },
+  {
+    "id": "sklep-kb04-dn-b-kpl-szafka-kubo-kb04",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 514,
+    "scope": {
+      "skus": [
+        "KB04 DN/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 529,
+    "source": "https://liveomeble.pl/kubo/406-5408-kubo-kb04-dab-nagano-bialy-szafka-kpl.html"
+  },
+  {
+    "id": "sklep-kb05-dn-b-kpl-szafa-kubo-kb05",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 719,
+    "scope": {
+      "skus": [
+        "KB05 DN/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 744,
+    "source": "https://liveomeble.pl/kubo/407-5410-kubo-kb05-dab-nagano-bialy-szafa-kpl.html"
+  },
+  {
+    "id": "sklep-kb06-dn-bialy-kpl-szafa-narozna-kubo-kb06",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 759,
+    "scope": {
+      "skus": [
+        "KB06 DN/BIAŁY KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 785,
+    "source": "https://liveomeble.pl/kubo/408-5411-kubo-kb06-dab-nagano-bialy-szafa-narozna-kpl.html"
+  },
+  {
+    "id": "sklep-kb07-dn-b-kpl-biurko-kubo-kb07",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 298,
+    "scope": {
+      "skus": [
+        "KB07 DN/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 299,
+    "source": "https://liveomeble.pl/kubo/409-5412-kubo-kb07-dab-nagano-bialy-biurko-kpl.html"
+  },
+  {
+    "id": "sklep-kb08-dn-b-kpl-polka-kubo-kb08",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 64,
+    "scope": {
+      "skus": [
+        "KB08 DN/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 119,
+    "source": "https://liveomeble.pl/kubo/410-5413-kubo-kb08-dab-nagano-bialy-polka-kpl.html"
+  },
+  {
+    "id": "sklep-kb09-dn-b-kpl-polka-kubo-kb09",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 97,
+    "scope": {
+      "skus": [
+        "KB09 DN/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 99,
+    "source": "https://liveomeble.pl/kubo/411-5414-kubo-kb09-dab-nagano-bialy-polka-kpl.html"
+  },
+  {
+    "id": "sklep-kb10-dn-b-kpl-lozko-kubo-kb10",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 445,
+    "scope": {
+      "skus": [
+        "KB10 DN/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 589,
+    "source": "https://liveomeble.pl/kubo/412-5444-kubo-kb10-dab-nagano-bialy-lozko-kpl.html"
+  },
+  {
+    "id": "sklep-kb11-dn-b-kpl-szafka-nocna-kubo-kb11",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 168,
+    "scope": {
+      "skus": [
+        "KB11 DN/B KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 179,
+    "source": "https://liveomeble.pl/kubo/413-5416-kubo-kb11-dab-nagano-bialy-szafka-nocna-kpl.html"
+  },
+  {
+    "id": "sklep-kb12-dn-kpl-lawa-kubo-kb12",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 140,
+    "scope": {
+      "skus": [
+        "KB12 DN KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 149,
+    "source": "https://liveomeble.pl/kubo/414-453-kubo-kb12-dab-nagano-lawa-kpl.html"
+  },
+  {
+    "id": "sklep-na10-orz-orzech-kpl-lustro-naomi-na10",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 199,
+    "scope": {
+      "skus": [
+        "NA10 ORZ/ORZECH KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 299,
+    "source": "https://liveomeble.pl/naomi/122-3144-naomi-na-10-orzechorzech-wenge-lustro-kpl.html"
+  },
+  {
+    "id": "sklep-na11-orz-orzech-kpl-lawa-naomi-na11",
+    "label": "Promocja",
+    "kind": "fixedPrice",
+    "value": 249,
+    "scope": {
+      "skus": [
+        "NA11 ORZ/ORZECH KPL"
+      ]
+    },
+    "startsAt": null,
+    "endsAt": null,
+    "lowest30": 329,
+    "source": "https://liveomeble.pl/naomi/123-1027-naomi-na-11-orzechwenge-lawa-kpl.html"
+  }
+]

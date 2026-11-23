@@ -11,10 +11,10 @@ import Faq from '../../components/Faq.astro';
 import { collectionImage, packshotFor, srcOf, type PublicImage } from '../../lib/images';
 import { abs, faqPage, productLd, webPage, type VariantLd } from '../../lib/jsonld';
 import {
-  collectionOf, defaultVariant, dimsLong, finishById, num, pages, products, productsSorted, site, typeOf, url,
+  collectionOf, defaultVariant, dimsLong, finishById, num, pages, priceAt, products, productsSorted, site, typeOf, url,
   type Product,
 } from '../../lib/site';
-import { descriptionBlocks, fill, firstSentence, listJoin, lowerFirst } from '../../lib/text';
+import { descriptionBlocks, fill, firstSentence, listJoin, lowerFirst, promoLastDay } from '../../lib/text';
 
 export function getStaticPaths() {
   return products.map(p => ({ params: { slug: p.slug }, props: { p } }));
@@ -85,9 +85,14 @@ const descriptions = [...new Set(p.variants.map(v => v.description).filter(Boole
 // Obraz OG: packshot wariantu domyślnego na lnianym tle 1200×630 (src/pages/og).
 const ogImage = variants[0].ldImage ? `/og/produkty/${p.slug}.jpg` : null;
 
-const ld: VariantLd[] = variants.map(({ v, ldImage }) => ({
-  code: v.code, sku: v.sku, gtin13: v.ean, color: v.colorLabel, url: url.product(p.slug, v.code), image: ldImage,
-}));
+const ld: VariantLd[] = variants.map(({ v, ldImage }) => {
+  const pr = priceAt(p, v.code);
+  const promo = !!(pr?.regular && pr.regular > pr.price);
+  return {
+    code: v.code, sku: v.sku, gtin13: v.ean, color: v.colorLabel, url: url.product(p.slug, v.code), image: ldImage,
+    offer: pr ? { price: pr.price, regular: promo ? pr.regular : null, validUntil: promo ? promoLastDay(pr.promo?.endsAt) : null } : null,
+  };
+});
 const summary = sec('podsumowanie');
 const dimsSec = sec('wymiary');
 const shop = sec('gdzie-kupic');
@@ -186,7 +191,7 @@ const dimRows = dimsSec.rows.filter((r: any) => vars[r.key] != null && vars[r.ke
         <div><dt>Kolory</dt><dd>{p.variants.length}</dd></div>
       </dl>
 
-      <PriceBlock product={p} />
+      {variants.map(({ v }) => <PriceBlock product={p} code={v.code} size="full" variantOnly hidden={v.code !== dv.code} />)}
       {p.delivery72 && <p class="stock stock--dostepny">{summary.delivery}</p>}
       {p.assembly && <p class="summary__assembly">{fill(summary.assembly, vars)}</p>}
       {variants.map(({ v }) => (

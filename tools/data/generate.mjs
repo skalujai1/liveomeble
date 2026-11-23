@@ -7,13 +7,16 @@
 //   tools/data/karty-liveo.json   ← tools/data/import-karty.py (karty produktu xlsx z eksportu Navireo, Drive Liveo)
 //   tools/data/salony-liveo.json  ← tools/data/import-salony.py (baza salonów salony-liveo.xlsx)
 //   public/katalog/manifest.json  ← tools/data/fetch-images.mjs (zdjęcia z serwera Liveo, WebP)
-// Karty nie mają cen detalicznych ani stanów magazynowych — strona ich nie pokazuje (cena w salonie partnerskim).
+//   tools/data/ceny-liveomeble.json ← tools/data/import-ceny.py (ceny i promocje ze sklepu liveomeble.pl)
+// Karty nie mają cen ani stanów. Ceny bierzemy ze sklepu liveomeble.pl 1:1: indeks wariantu w karcie = indeks w sklepie.
+// Cena regularna → variant.basePrice, promocja (przekreślona cena w sklepie) → promotions.json (fixedPrice na indeks).
 // Bez zależności — tylko Node (ESM). Wynik jest deterministyczny dla tych samych plików źródłowych.
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validateData } from './validate.mjs';
+import { priceFor, warsawISO } from '../../src/lib/pricing.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -30,6 +33,8 @@ const args = parseArgs(process.argv.slice(2));
 const OUT = resolve(ROOT, args.out || 'src/data');
 const KARTY = JSON.parse(readFileSync(join(ROOT, 'tools/data/karty-liveo.json'), 'utf8'));
 const TODAY = args.today || KARTY.imported;
+const CENY_PATH = join(ROOT, 'tools/data/ceny-liveomeble.json');
+const CENY = existsSync(CENY_PATH) ? JSON.parse(readFileSync(CENY_PATH, 'utf8')) : null;
 const IMAGES = existsSync(join(ROOT, 'public/katalog/manifest.json'))
   ? JSON.parse(readFileSync(join(ROOT, 'public/katalog/manifest.json'), 'utf8'))
   : {};
@@ -372,7 +377,153 @@ const FINISHES = [...decorsUsed].sort().map(label => {
   if (!hex) throw new Error(`Brak próbki koloru dla dekoru „${label}” (DECOR_HEX w generate.mjs)`);
   return { id: slugify(label), label: cap(label), group: 'board', hex, wood: WOOD.test(label), light: lightness(hex), gloss: /połysk/.test(label) };
 });
+// ---------------------------------------------------------------------------
+// Ceny ze sklepu liveomeble.pl (1:1). Wariant łączymy ze stroną sklepu:
+//   1) po indeksie (reference = symbol wariantu w karcie, np. „DT01 D/C/T/A KPL”),
+//   2) gdy sklep nie podaje indeksu (np. DANTE) — po modelu („Kod / symbol producenta”) i kolorach (korpus + front).
+// Kilka stron sklepu z różną ceną dla jednego wariantu → bierzemy tę, której nazwa zawiera model mebla
+// (np. łóżko BT12/140, a nie BT12/160 z błędnie wpisanym indeksem). Dalej niejednoznacznie → wariant bez ceny
+// i wpis w meta.prices.unresolved (nie zgadujemy). Brak strony w sklepie → meta.prices.missing.
+// ---------------------------------------------------------------------------
+const refKey = s => String(s ?? '').toUpperCase().replace(/\s+/g, ' ').trim();
+const plain = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ł/g, 'l');
+const modelKey = s => plain(s).replace(/[^a-z0-9]/g, '');
+const words = s => plain(s).split(/[^a-z0-9]+/).filter(Boolean);
+const jaccard = (a, b) => {
+  let n = 0;
+  for (const x of a) if (b.has(x)) n++;
+  return a.size + b.size - n ? n / (a.size + b.size - n) : 0;
+};
+// Słowa kolorów = słowa z nazw kolorów w katalogu („dąb”, „evoke”, „zielony”, „mat” …)
+const COLOR_WORDS = new Set(products.flatMap(p => p.variants.flatMap(v => words(v.colorLabel))));
+const colorSet = s => new Set(words(s).filter(w => COLOR_WORDS.has(w)));
+const labelColors = v => colorSet(v.colorLabel);
+// Kolory strony sklepu: atrybuty (korpus, front), a gdy ich nie ma — adres strony („…-lawa-rozkladana-dab-evoke.html”)
+const shopColors = it => {
+  const attrs = new Set([...colorSet(it.body), ...colorSet(it.front)]);
+  return attrs.size ? attrs : colorSet((it.url.split('/').pop() ?? '').replace(/^\d+-\d+-|\.html$/g, ''));
+};
+// Model: pierwsze słowo indeksu wariantu („BT12/160”, „DT01”); rozmiar łóżka i pojemnik na pościel (S.P.)
+const token = v => String(v.sku).split(' ')[0];
+const baseOf = s => modelKey(String(s ?? '').split('/')[0]);
+const SIZE = /(?:\/|\b)(80|90|120|140|160|180|200)\b/;
+const variantSize = v => SIZE.exec(token(v))?.[1] ?? null;
+const shopSize = it => SIZE.exec(`${it.model ?? ''} ${it.name ?? ''}`)?.[1] ?? null;
+const hasSP = s => /\bS\s?[./]?\s?P\b/i.test(s ?? '');
+const shopSP = it => hasSP(it.model) || /Z POJEMNIKIEM/i.test(it.name ?? '');
+
+const shopItems = CENY?.items ?? [];
+const group = key => {
+  const m = new Map();
+  for (const it of shopItems) {
+    const k = key(it);
+    if (k) m.set(k, [...(m.get(k) ?? []), it]);
+  }
+  return m;
+};
+const byRef = group(it => it.reference && refKey(it.reference));
+const byBase = group(it => (it.model || /^_?([A-Z]{1,3}\d{1,3})\b/.exec(it.name ?? '')?.[1]) && baseOf(it.model || /^_?([A-Z]{1,3}\d{1,3})\b/.exec(it.name)[1]));
+
+/** Czy strona sklepu może opisywać ten wariant: model (bez rozmiaru), rozmiar łóżka, pojemnik, kolekcja. */
+function compatible(it, p, v) {
+  const base = baseOf(token(v));
+  if (it.model && baseOf(it.model) !== base && baseOf(it.model) !== baseOf(p.sku)) return false;
+  if (it.collection && modelKey(it.collection) !== modelKey(p.collection)) return false;
+  const vs = variantSize(v), ss = shopSize(it);
+  if (vs && ss && vs !== ss) return false;
+  const spMatters = p.variants.some(x => hasSP(x.sku)) && p.variants.some(x => !hasSP(x.sku));
+  if (spMatters && hasSP(v.sku) !== shopSP(it)) return false;
+  return true;
+}
+/** Warianty tego samego mebla, które różni tylko kolor (ten sam model, rozmiar i pojemnik). */
+const siblings = (p, v) => p.variants.filter(x => baseOf(token(x)) === baseOf(token(v)) && variantSize(x) === variantSize(v) && hasSP(x.sku) === hasSP(v.sku));
+/** Kolory strony wskazują właśnie ten wariant: wszystkie są w nazwie jego koloru i pasuje najlepiej spośród rodzeństwa. */
+function colorPoints(it, p, v) {
+  const sib = siblings(p, v);
+  const S = shopColors(it);
+  const fits = S.size > 0 && [...S].every(w => labelColors(v).has(w));
+  // jedyny wariant: strona bez kolorów albo o innym zapisie koloru też pasuje, ale zgodna kolorem wygrywa
+  // (np. ława LA01 jest w trzech kolekcjach, a strony sklepu różnią się tylko kolorem w adresie)
+  if (sib.length === 1) return fits ? 1 + jaccard(S, labelColors(v)) : 0.01;
+  if (!fits) return 0;
+  const mine = jaccard(S, labelColors(v));
+  return sib.every(o => o === v || jaccard(S, labelColors(o)) < mine) ? mine : 0;
+}
+
+function shopFor(p, v) {
+  const same = l => l.every(it => it.price === l[0].price && it.regular === l[0].regular);
+  let how = 'indeks';
+  let list = (byRef.get(refKey(v.sku)) ?? []).filter(it => compatible(it, p, v));
+  if (!list.length || !same(list)) {
+    // bez indeksu albo indeks na kilku stronach z różną ceną → model + rozmiar + kolory
+    const pool = list.length ? list : (byBase.get(baseOf(token(v))) ?? []).filter(it => compatible(it, p, v));
+    if (!list.length) how = 'model i kolor';
+    const scored = pool.map(it => ({ it, pts: colorPoints(it, p, v) })).filter(x => x.pts > 0);
+    const top = Math.max(0, ...scored.map(x => x.pts));
+    list = scored.filter(x => x.pts === top).map(x => x.it);
+  }
+  if (!list.length) return { how: null };
+  if (!same(list)) return { how, conflict: list };
+  return { how, it: list[0] };
+}
+
+// Data ze sklepu „2026-11-30 23:59:59” (czas polski) → chwila w ISO; koniec promocji = pierwsza chwila PO niej.
+const shopDate = (v, end = false) => {
+  const m = /^(\d{4}-\d{2}-\d{2}) (\d{2}):(\d{2}):(\d{2})$/.exec(v ?? '');
+  if (!m || m[1].startsWith('0000')) return null;
+  const iso = warsawISO(m[1], +m[2], +m[3]);
+  return end && m[2] === '23' && m[3] === '59' ? new Date(+new Date(iso) + 60_000).toISOString() : new Date(iso).toISOString();
+};
 const promotions = [];
+const priceStats = { byIndex: 0, byModelColor: 0, missing: [], unresolved: [] };
+const chosen = new Map(); // wariant → strona sklepu
+for (const p of products) {
+  for (const v of p.variants) {
+    const r = shopFor(p, v);
+    if (!r.how) { priceStats.missing.push(v.sku); continue; }
+    if (r.conflict) { priceStats.unresolved.push(`${v.sku}: ${r.conflict.map(it => `${it.price}${it.regular ? `/${it.regular}` : ''} ${it.url}`).join(' | ')}`); continue; }
+    const c = r.it;
+    chosen.set(v, c);
+    if (r.how === 'indeks') priceStats.byIndex++; else priceStats.byModelColor++;
+    v.basePrice = c.regular ?? c.price;
+    if (c.regular && c.price < c.regular) {
+      promotions.push({
+        id: `sklep-${slugify(v.sku)}-${slugify(p.slug)}`,
+        label: 'Promocja',
+        kind: 'fixedPrice',
+        value: c.price,
+        scope: { skus: [v.sku] },
+        startsAt: shopDate(c.from),
+        endsAt: shopDate(c.to, true),
+        // Omnibus ze sklepu („Najniższa cena tego produktu z ostatnich 30 dni”) — 1:1, gdy sklep ją podaje
+        ...(c.omnibus ? { lowest30: c.omnibus } : {}),
+        source: c.url,
+      });
+    }
+  }
+}
+const pricedVariants = priceStats.byIndex + priceStats.byModelColor;
+// Kontrola 1:1: cena policzona przez stronę (priceFor) = cena w sklepie, co do grosza, dla każdego wariantu z ceną.
+const NOW_CHECK = CENY ? new Date(CENY.fetchedAt) : new Date();
+const priceMismatch = [];
+for (const p of products) {
+  for (const v of p.variants) {
+    const c = chosen.get(v);
+    if (!c) continue;
+    const r = priceFor(p, v.code, promotions, NOW_CHECK);
+    if (r.price !== c.price || (r.regular ?? null) !== (c.regular ?? null)) priceMismatch.push(`${v.sku}: sklep ${c.price}/${c.regular}, strona ${r.price}/${r.regular}`);
+    if (c.regular && c.omnibus && r.lowest30 !== c.omnibus) priceMismatch.push(`${v.sku}: Omnibus sklep ${c.omnibus}, strona ${r.lowest30}`);
+  }
+}
+if (priceMismatch.length) {
+  console.error(`Ceny niezgodne ze sklepem:\n- ${priceMismatch.join('\n- ')}`);
+  process.exit(1);
+}
+if (CENY) {
+  console.log(`Ceny ze sklepu: ${pricedVariants} z ${products.reduce((a, p) => a + p.variants.length, 0)} wariantów `
+    + `(po indeksie ${priceStats.byIndex}, po modelu i kolorze ${priceStats.byModelColor}), promocji ${promotions.length}, `
+    + `bez strony w sklepie ${priceStats.missing.length}, niejednoznacznych ${priceStats.unresolved.length}`);
+}
 
 // ---------------------------------------------------------------------------
 // Kody pocztowe: 2 pierwsze cyfry → przybliżony środek okręgu (±kilkadziesiąt km).
@@ -527,7 +678,8 @@ if (errors.length) {
 
 const meta = {
   demo: false,
-  note: 'Katalog z kart produktu Liveo (eksport Navireo, Drive „karty produktu dla białegostoku”), salony z liveomeble.pl. Bez cen i stanów — karty ich nie zawierają.',
+  note: 'Katalog z kart produktu Liveo (eksport Navireo, Drive „karty produktu dla białegostoku”), salony z liveomeble.pl, ceny i promocje ze sklepu liveomeble.pl. Bez stanów magazynowych.',
+  prices: CENY ? { source: CENY.source, fetchedAt: CENY.fetchedAt, variants: pricedVariants, byIndex: priceStats.byIndex, byModelColor: priceStats.byModelColor, promotions: promotions.length, missing: priceStats.missing, unresolved: priceStats.unresolved } : null,
   generatedFor: TODAY,
   source: KARTY.source,
   generator: 'tools/data/generate.mjs',
