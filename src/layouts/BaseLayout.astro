@@ -100,6 +100,25 @@ const ld: Node[] = [website(), organization(), ...jsonLd, ...(crumbs ? [breadcru
         frame.style.viewTransitionName = 'mebel';
         e.viewTransition.finished.then(clear, clear);
       });
+      // Przejście między stronami nie może blokować strony. W jego trakcie przeglądarka kieruje każde kliknięcie
+      // w <html> (zawartość jest wtedy tylko obrazem), więc przez sekundę „Menu” i linki nie reagowały. Pierwsze
+      // kliknięcie kończy animację i trafia w to, w co celował palec albo kursor.
+      addEventListener('pagereveal', function (e) {
+        var vt = e.viewTransition;
+        if (!vt) return;
+        var onClick = function (ev) {
+          if (ev.target !== document.documentElement) return;
+          var x = ev.clientX, y = ev.clientY;
+          vt.skipTransition();
+          vt.finished.then(function () {
+            var el = document.elementFromPoint(x, y);
+            if (el && el !== document.documentElement) el.click();
+          }, function () {});
+        };
+        addEventListener('click', onClick, true);
+        var off = function () { removeEventListener('click', onClick, true); };
+        vt.finished.then(off, off);
+      });
     </script>
     <SeoHead {title} {description} {path} {robots} {ogType} {ogImage} {ogImageAlt} {canonical} jsonLd={ld} />
     <meta name="color-scheme" content="light" />

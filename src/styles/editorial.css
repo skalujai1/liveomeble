@@ -24,6 +24,7 @@ html:active-view-transition-type(kolekcja)::view-transition-old(root) { animatio
 html:active-view-transition-type(kolekcja)::view-transition-new(root) { animation: 700ms ease both vt-in; }
 @keyframes vt-out { to { opacity: 0; } }
 @keyframes vt-in { from { opacity: 0; } }
+/* Kliknięcia w trakcie przejścia obsługuje skrypt w <head> (BaseLayout): pierwsze kończy animację i trafia w cel. */
 /* Odsłona: jedyny gest ruchu w serwisie — kadr otwiera się z poziomej szczeliny w połowie wysokości */
 @keyframes odslona { from { clip-path: inset(50% 0 50% 0); } to { clip-path: inset(0); } }
 @media (prefers-reduced-motion: reduce) {
@@ -58,7 +59,10 @@ html:active-view-transition-type(kolekcja)::view-transition-new(root) { animatio
 }
 .js.menu-open.has-overlay .site-header { background: var(--color-bg); color: var(--color-text); }
 .has-overlay .site-header:not(.is-solid):not(:hover):not(:focus-within) .site-header__logo img { filter: brightness(0) invert(1); }
-.has-overlay .site-header:not(.is-solid):not(:hover):not(:focus-within) :is(.site-nav__link, .site-nav__mega-toggle, .site-header__where, .site-header__where small, .site-header__toggle, .site-header__more a, .site-header__search) { color: #fff; }
+.has-overlay .site-header:not(.is-solid):not(:hover):not(:focus-within) :is(.site-nav__link, .site-nav__mega-toggle, .site-header__where, .site-header__toggle, .site-header__search) { color: #fff; }
+@media (min-width: 60rem) {
+  .has-overlay .site-header:not(.is-solid):not(:hover):not(:focus-within) .site-header__where { background: transparent; box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.8); }
+}
 .has-overlay .site-header:not(.is-solid):not(:hover):not(:focus-within) :focus-visible { outline-color: #fff; }
 .js.menu-open.has-overlay .site-header__logo img { filter: none; }
 .site-header__logo img { transition: filter 400ms ease; }

@@ -58,22 +58,24 @@ strong, b { font-weight: var(--weight-bold); }
   order: 3; display: inline-flex; align-items: center; gap: 0.375rem; min-height: 2.75rem; padding: 0 0.625rem;
   border: 0; border-radius: var(--radius); background: none; font-weight: var(--weight-medium); white-space: nowrap;
 }
-.site-header__finder, .site-header__search, .site-header__more { display: none; }
+.site-header__finder, .site-header__search { display: none; }
 .site-header__where {
   order: 2; display: inline-flex; align-items: center; gap: 0.25rem; min-height: 2.75rem; padding: 0 0.375rem;
   text-decoration: none; font-weight: var(--weight-medium); font-size: var(--text-sm); white-space: nowrap;
 }
-.site-header__where small { display: none; }
-.site-header__where b { font-weight: var(--weight-medium); }
-.site-header__where:hover b { text-decoration: underline; }
+.site-header__where:hover span { text-decoration: underline; text-underline-offset: 3px; }
 
 /* Menu mobilne: pełny ekran pod nagłówkiem */
 .site-nav { display: grid; gap: var(--space-5); padding: var(--space-3) 0 var(--space-6); }
 .js .site-nav {
-  display: none; position: fixed; inset: 3.75rem 0 0; z-index: var(--z-overlay); overflow-y: auto;
+  display: none; position: fixed; inset: 3.75rem 0 0; z-index: var(--z-overlay); overflow-y: auto; overscroll-behavior: contain;
   background: var(--color-bg); padding: var(--space-2) var(--gutter) var(--space-8);
 }
 .js.menu-open .site-nav { display: grid; align-content: start; }
+@media (prefers-reduced-motion: no-preference) and (max-width: 59.99rem) {
+  .js.menu-open .site-nav { animation: menu-in 260ms var(--ease-out) both; }
+}
+@keyframes menu-in { from { opacity: 0; translate: 0 -0.5rem; } }
 .js.menu-open body { overflow: hidden; }
 /* Otwarte menu zaczyna się 3.75rem od góry okna, więc nagłówek (logo i „Zamknij”) staje na samej górze —
    inaczej pasek DEMO nad nim zsuwa go pod menu i przycisku zamknięcia nie da się kliknąć. */
@@ -95,16 +97,14 @@ strong, b { font-weight: var(--weight-bold); }
 .site-nav__mobile-collections a { display: block; text-decoration: none; font-weight: var(--weight-medium); }
 .site-nav__mobile-collections img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; margin-bottom: 0.375rem; filter: var(--photo-grade); }
 .site-nav__mobile-collections span { color: var(--color-text-muted); font-weight: var(--weight-regular); font-size: var(--text-sm); }
-.site-nav__mobile-secondary { display: grid; gap: 0.25rem; font-size: 1rem; line-height: 2.25rem; }
-.site-nav__mobile-secondary a { text-decoration: none; }
 .no-js .site-nav__mobile-extra { display: none; }
 
 /* Na najwęższych ekranach napis „Gdzie kupić” zostaje dla czytników ekranu (nazwa linku), wizualnie sama ikona. */
 @media (max-width: 23.4rem) { .site-header__where span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } }
 
 @media (min-width: 60rem) {
-  .site-header__row { min-height: 5rem; gap: 1rem; }
-  .site-header__logo { margin-right: 0.5rem; }
+  .site-header__row { min-height: 5rem; gap: 0.75rem; }
+  .site-header__logo { margin-right: 1rem; }
   .site-header__logo img { height: 2.5rem; }
   .site-header__toggle { display: none !important; }
   .site-nav, .js .site-nav {
@@ -133,11 +133,11 @@ strong, b { font-weight: var(--weight-bold); }
   .site-nav__mega-toggle[aria-expanded="true"] .ico { transform: rotate(180deg); }
   .site-nav__mobile-extra { display: none; }
 
-  /* Linki dodatkowe: cichsze od menu (bez wersalików), tylko gdy mieszczą się w jednym rzędzie z resztą */
-  .site-header__more ul { display: flex; gap: 1rem; margin: 0; padding: 0; list-style: none; }
-  .site-header__more a { display: block; padding: 0.5rem 0; font-size: 0.8125rem; text-decoration: none; white-space: nowrap; }
-  .site-header__more a:hover, .site-header__more a[aria-current="page"] { text-decoration: underline; text-underline-offset: 4px; }
-  /* Lupa otwiera pole kodu pocztowego pod nagłówkiem, przy prawej krawędzi treści */
+  /* Druga grupa menu (Dla sklepów, Blog, Kontakt): ten sam styl, od pierwszej oddziela ją cienka kreska */
+  .site-nav__item--first { margin-left: 0.625rem; padding-left: 0.625rem; }
+  .site-nav__item--first::before { content: ""; position: absolute; left: 0; top: 50%; width: 1px; height: 1rem; margin-top: -0.5rem; background: currentColor; opacity: 0.22; }
+  .site-nav__item--first { position: relative; }
+  /* Lupa otwiera wyszukiwarkę pod nagłówkiem, przy prawej krawędzi treści */
   .site-header__search {
     flex: none; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; margin-left: auto; padding: 0;
     border: 0; background: none; color: inherit;
@@ -159,9 +159,16 @@ strong, b { font-weight: var(--weight-bold); }
     background: var(--color-accent); color: var(--color-accent-contrast); display: grid; place-items: center;
   }
   .site-header__finder-btn .ico { width: 1.25rem; height: 1.25rem; stroke-width: 2; }
-  .site-header__where { order: 0; gap: 0.5rem; padding: 0; font-size: 1rem; line-height: 1.2; }
-  .site-header__where small { display: block; font-size: 0.8125rem; color: var(--color-text-muted); margin-top: 2px; font-weight: var(--weight-regular); }
-  .site-header__where span { display: block; }
+  /* „Gdzie kupić” to jedyna akcja w pasku: orzechowy przycisk (nad zdjęciem hero biały obrys, editorial.css) */
+  .site-header__where {
+    order: 0; flex: none; gap: 0.5rem; min-height: 2.75rem; padding: 0 1.125rem 0 0.875rem;
+    background: var(--color-accent); color: var(--color-accent-contrast);
+    font-size: 0.8125rem; line-height: 1; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+  }
+  .site-header__where .ico { width: 1.125rem; height: 1.125rem; }
+  .site-header__where:hover { background: var(--color-accent-hover); }
+  .site-header__where:hover span { text-decoration: none; }
 
   /* Mega-menu: display:none, dopóki zamknięte — obrazy (loading=lazy) nie pobierają się na każdej stronie. */
   /* Warstwa .mega ma pełną szerokość okna, ale klikalny jest tylko sam panel: zjazd myszą w bok (na marginesy
@@ -215,21 +222,13 @@ strong, b { font-weight: var(--weight-bold); }
   .mega__collection:hover b { text-decoration: underline; }
   .mega__all { grid-column: 1 / -1; }
 }
-@media (min-width: 80rem) {
-  .site-header__more { display: block; margin-left: auto; }
-  .site-header__search { margin-left: 0; }
-  /* w jednym rzędzie z linkami dodatkowymi „Gdzie kupić” bez podpisu */
-  .site-header__where { flex: none; }
-  .site-header__where small { display: none; }
-  .site-header__row { gap: 0.875rem; }
-  .site-header__more ul { gap: 0.875rem; }
-  .site-nav__link { padding: 0 0.5rem; }
-  .site-nav__item--mega .site-nav__link { padding-right: 0.125rem; }
-  .site-nav__link::after { left: 0.5rem; right: 0.5rem; }
+/* Węższy komputer: druga grupa menu nie mieści się w jednym rzędzie (jest w stopce) */
+@media (min-width: 60rem) and (max-width: 79.99rem) {
+  .site-nav__item--more { display: none; }
 }
-@media (min-width: 60rem) and (max-width: 74.9rem) {
-  .site-header__where small { display: none; }
+@media (min-width: 60rem) and (max-width: 67.99rem) {
   .site-nav__link { padding: 0 0.5rem; }
+  .site-nav__link::after { left: 0.5rem; right: 0.5rem; }
 }
 
 /* ---------- Okruszki ---------- */
