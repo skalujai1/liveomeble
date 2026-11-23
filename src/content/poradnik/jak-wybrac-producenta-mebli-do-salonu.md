@@ -27,7 +27,7 @@ faq:
   - q: "Jak zostać partnerem Liveo?"
     a: "Wypełnij formularz na stronie Dla partnerów. Handlowiec Liveo oddzwoni i omówi warunki współpracy."
 factCheck:
-  - "Dane Liveo z kart produktu (eksport Navireo, 28.10.2026): 32 kolekcje, 469 mebli, 666 wariantów kolorystycznych, kod EAN przy 656 wariantach, instrukcja montażu PDF przy 461 meblach, animacja przy 236, oznaczenie dostawy w 72 h przy 460 meblach, wszystkie do samodzielnego montażu."
+  - "Dane Liveo z kart produktu (eksport Navireo, 28.10.2026): 32 kolekcje, 469 mebli, 666 wariantów kolorystycznych, kod EAN przy 656 wariantach, instrukcja montażu PDF przy 461 meblach (działający plik przy 457), animacja przy 236 (działający plik przy 67, sprawdzone 23.11.2026), oznaczenie dostawy w 72 h przy 460 meblach, wszystkie do samodzielnego montażu."
   - "Wyszukiwarka salonów na liveomeble: 448 salonów partnerskich (443 w Polsce, 5 w Słowenii), stan bazy salonów z listopada 2026."
 ---
 
@@ -63,7 +63,7 @@ Bez dobrych danych trudno prowadzić magazyn, sklep internetowy i obsługę klie
 - zdjęcia mebli na białym tle i zdjęcia aranżacji,
 - instrukcje montażu w PDF.
 
-**W Liveo:** karty produktu podają wymiary, paczki z wagą i kodami EAN (kod ma 656 z 666 wariantów), materiały i rysunki wymiarowe. Instrukcję montażu w PDF ma 461 mebli, a animację mebla 236.
+**W Liveo:** karty produktu podają wymiary, paczki z wagą i kodami EAN (kod ma 656 z 666 wariantów), materiały i rysunki wymiarowe. Instrukcję montażu w PDF ma 457 mebli, a animację mebla 67.
 
 ## 5. Jak meble są pakowane i składane?
 

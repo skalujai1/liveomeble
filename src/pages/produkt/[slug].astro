@@ -199,10 +199,10 @@ const dimRows = dimsSec.rows.filter((r: any) => vars[r.key] != null && vars[r.ke
         {komplet.length > 0 && <a class="btn btn--secondary" href={summary.ctaSecondary.href}>{fill(summary.ctaSecondary.label, vars)}</a>}
       </p>
     </div>
-  </article>
-
-  {descriptions.length > 0 && (
-    <Section id="opis" title={sec('opis').title} width="narrow">
+    <!-- Opis w lewej kolumnie pod galerią (komputer): wypełnia miejsce obok długiej kolumny z danymi -->
+    {descriptions.length > 0 && (
+    <section class="product__desc" id="opis" aria-labelledby="opis-tytul">
+      <h2 class="product__desc-title" id="opis-tytul">{sec('opis').title}</h2>
       {variants.filter(({ v }) => v.description).map(({ v }) => (
         <div class="prose" data-variant-only data-variant={v.code} hidden={descriptions.length > 1 ? v.code !== dv.code : v !== variants.find(x => x.v.description)!.v}>
           {(() => { const d = descriptionBlocks(v.description); return (<>
@@ -211,8 +211,10 @@ const dimRows = dimsSec.rows.filter((r: any) => vars[r.key] != null && vars[r.ke
           </>); })()}
         </div>
       ))}
-    </Section>
-  )}
+    </section>
+    )}
+  </article>
+
 
   <Section id="wymiary" title={dimsSec.title} lead={dimsSec.lead}>
     <div class="dims-layout">

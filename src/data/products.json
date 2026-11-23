@@ -113,7 +113,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS01.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS01_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -243,7 +243,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS02_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -380,7 +380,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS03.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS03_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -519,7 +519,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS04.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS04_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -647,7 +647,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS05.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS05_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -794,7 +794,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS06_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -942,7 +942,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS07_AS08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS07_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -1090,7 +1090,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS07_AS08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS08_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -1236,7 +1236,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS09.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS09_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -1386,7 +1386,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS10.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS10_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -1546,7 +1546,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS11_AS12.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS11_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -1744,7 +1744,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS13.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS13_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -1912,7 +1912,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS14_140_AS14_160_AS14_180.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS14_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -2084,7 +2084,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS14_140_AS14_160_AS14_180.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS14_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -2256,7 +2256,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS14_140_AS14_160_AS14_180.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS14_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -2380,7 +2380,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aris/Instrukcja_AS15.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ARIS/AS15_GIF_1400px.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -2808,7 +2808,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aston/Instrukcja_AN01.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/AN01_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -2978,7 +2978,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aston/Instrukcja_AN02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/AN02_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -3148,7 +3148,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aston/Instrukcja_AN03.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/AN03_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -3320,7 +3320,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aston/Instrukcja_AN04.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/AN04_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -3492,7 +3492,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aston/Instrukcja_AN05_AN06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/AN05_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -3664,7 +3664,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aston/Instrukcja_AN05_AN06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/AN06_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -3829,7 +3829,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aston/Instrukcja_AN07_AN08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/AN07_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -3994,7 +3994,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aston/Instrukcja_AN07_AN08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/AN08_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -4160,7 +4160,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aston/Instrukcja_AN09_AN10.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/AN09_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -4326,7 +4326,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aston/Instrukcja_AN09_AN10.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/AN10_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -4491,7 +4491,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aston/Instrukcja_AN11.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/AN11_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -4605,7 +4605,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aston/Instrukcja_AN12.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/AN12_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -4759,7 +4759,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Aston/Instrukcja_AN13.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/AN13_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -4996,7 +4996,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Uniwersalne%20Lawy_stoly/Instrukcja_LA11.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/LA11_cremona_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -5141,7 +5141,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Uniwersalne%20Lawy_stoly/Instrukcja_ST10.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ASTON/ST10_cremona_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -5301,7 +5301,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ate/Instrukcja_AT01.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/AT01_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -5467,7 +5467,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ate/Instrukcja_AT02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/AT02_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -5633,7 +5633,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ate/Instrukcja_AT03.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/AT03_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -5805,7 +5805,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ate/Instrukcja_AT04.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/AT04_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -5973,7 +5973,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ate/Instrukcja_AT05_AT06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/AT05_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -6141,7 +6141,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ate/Instrukcja_AT05_AT06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/AT06_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -6306,7 +6306,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ate/Instrukcja_AT07.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/AT07_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -6440,7 +6440,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ate/Instrukcja_AT08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/AT08_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -6593,7 +6593,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ate/Instrukcja_AT09.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/AT09_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -6879,7 +6879,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ate/Instrukcja_AT11_AT12.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/AT11_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -7170,7 +7170,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ate/Instrukcja_AT13_AT14.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/AT13_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -8302,7 +8302,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ate/Instrukcja_AT15.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/AT15_160_SP_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -8795,7 +8795,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ate/Instrukcja_AT16.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/AT16_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -8921,7 +8921,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Uniwersalne%20Lawy_stoly/Instrukcja_LA09.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/LA09_dab_kamienny_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -9066,7 +9066,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Uniwersalne%20Lawy_stoly/Instrukcja_ST08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ATE/ST08_dab_kamienny_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -23072,7 +23072,7 @@
       "h": 1116
     },
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Dorian/Instrukcja_DN14.pdf http://pub.liveomeble.pl/instrukcje/Dorian/Instrukcja_Spody_Stelaz_podnosnik_DN14_140_160_180.pdf",
+      "instruction": "https://pub.liveomeble.pl/instrukcje/Dorian/Instrukcja_DN14.pdf",
       "animation": null,
       "drawing": null
     },
@@ -23255,7 +23255,7 @@
       "h": 1116
     },
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Dorian/Instrukcja_DN14.pdf http://pub.liveomeble.pl/instrukcje/Dorian/Instrukcja_Spody_Stelaz_podnosnik_DN14_140_160_180.pdf",
+      "instruction": "https://pub.liveomeble.pl/instrukcje/Dorian/Instrukcja_DN14.pdf",
       "animation": null,
       "drawing": null
     },
@@ -23438,7 +23438,7 @@
       "h": 1116
     },
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Dorian/Instrukcja_DN14.pdf http://pub.liveomeble.pl/instrukcje/Dorian/Instrukcja_Spody_Stelaz_podnosnik_DN14_140_160_180.pdf",
+      "instruction": "https://pub.liveomeble.pl/instrukcje/Dorian/Instrukcja_DN14.pdf",
       "animation": null,
       "drawing": null
     },
@@ -26214,7 +26214,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ferro/Instrukcja_FE18.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ferro/FE18_160_SP_2160px.mp5",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -26391,7 +26391,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ferro/Instrukcja_FE18.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ferro/FE18_160_SP_2160px.mp6",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -26568,7 +26568,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Ferro/Instrukcja_FE18.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/ferro/FE18_160_SP_2160px.mp7",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -29430,7 +29430,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/g-te/Instrukcja_GT01.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/G-TE/GT01.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -29571,7 +29571,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/g-te/Instrukcja_GT02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/G-TE/GT02.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -29712,7 +29712,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/g-te/Instrukcja_GT03.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/G-TE/GT03.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -29860,7 +29860,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/g-te/Instrukcja_GT04.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/G-TE/GT04.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -30008,7 +30008,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/g-te/Instrukcja_GT06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/G-TE/GT6.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -30137,7 +30137,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/g-te/Instrukcja_GT08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/G-TE/GT08.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -30235,7 +30235,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/g-te/Instrukcja_GT09.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/G-TE/GT09.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -30380,7 +30380,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Intenso/Instrukcja_IT01.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/INTENSO/IT01_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -30527,7 +30527,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Intenso/Instrukcja_IT02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/INTENSO/IT02_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -30674,7 +30674,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Intenso/Instrukcja_IT03.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/INTENSO/IT03_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -30832,7 +30832,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Intenso/Instrukcja_IT04.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/INTENSO/IT04__2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -30986,7 +30986,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Intenso/Instrukcja_IT05.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/INTENSO/IT05_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -31146,7 +31146,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Intenso/Instrukcja_IT06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/INTENSO/IT06_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -31453,7 +31453,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Intenso/Instrukcja_IT08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/INTENSO/IT08_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -31606,7 +31606,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Intenso/Instrukcja_IT09.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/INTENSO/IT09_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -31870,7 +31870,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Intenso/Instrukcja_IT11.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/INTENSO/IT11__2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -32299,7 +32299,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM01.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/RTV%20IM1_Czarna.mp4 http://upload.liveomeble.pl/anim/IRMA/RTV%20IM1_Bia%b3a.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -32472,7 +32472,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/RTV%20IM2_Czarna.mp4 http://upload.liveomeble.pl/anim/IRMA/RTV%20IM2_Bia%b3a.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -32652,7 +32652,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM03.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/Komoda%20IM3_Czarna.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -32832,7 +32832,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM04.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/Komoda%20IM4_Bia%b3a.mp4 http://upload.liveomeble.pl/anim/IRMA/Komoda%20IM4_Czarna.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -33013,7 +33013,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM05.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/Kredens%20IM5_Bia%b3a.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -33192,7 +33192,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM06_IM07.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/Witryna%20Lewa%20IM6_Bia%b3a.mp4 http://upload.liveomeble.pl/anim/IRMA/Witryna%20Lewa%20IM6_Czarna.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -33370,7 +33370,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM06_IM07.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/Witryna%20Lewa%20IM7_Bia%b3a.mp4 http://upload.liveomeble.pl/anim/IRMA/Witryna%20Lewa%20IM7_Czarna.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -33543,7 +33543,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/Regal%20Zamkniety%20IM8_Czarna.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -33722,7 +33722,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM09.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/Szafa%202D%20IM9_Bia%b3a.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -33858,7 +33858,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM10_IM11.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/P%f3%b3ka%20mala%20IM10_Bia%b3a.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -33994,7 +33994,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM10_IM11.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/P%f3%b3ka%20du%bfa%20IM11_Bia%b3a.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -34174,7 +34174,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM14.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/Szafa%203D%20IM14_Biala.mp4 http://upload.liveomeble.pl/anim/IRMA/Szafa%203D%20IM14_Czarna.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -34355,7 +34355,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM15.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/Szafa%20Przesuwna%20IM15_Bia%b3a.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -34493,8 +34493,8 @@
       "h": 2372
     },
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM16.pdf http://pub.liveomeble.pl/instrukcje/Irma/Instrukcja%20_LED_IM16.pdf http://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_spody_IM16.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/%a3%f3%bfko%20160%20IM16%20-%20Bez%20Pojemnika_Czarna.mp4",
+      "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM16.pdf",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -34666,8 +34666,8 @@
       "h": 2372
     },
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM16.pdf http://pub.liveomeble.pl/instrukcje/Irma/Instrukcja%20_LED_IM16.pdf http://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_spody_IM16.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/%a3%f3%bfko%20160%20IM16%20-%20Pojemnik_Bia%b3a.mp4",
+      "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM16.pdf",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -34809,8 +34809,8 @@
       "h": 2372
     },
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM16.pdf http://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_spody_IM16.pdf http://pub.liveomeble.pl/instrukcje/Irma/Instrukcja%20_LED_IM16.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/%a3%f3%bfko%20160%20IM16%20-%20Bez%20Pojemnika_Czarna.mp4",
+      "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM16.pdf",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -34982,8 +34982,8 @@
       "h": 2372
     },
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM16.pdf http://pub.liveomeble.pl/instrukcje/Irma/Instrukcja%20_LED_IM16.pdf http://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_spody_IM16.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/%a3%f3%bfko%20160%20IM16%20-%20Pojemnik_Bia%b3a.mp4",
+      "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM16.pdf",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -35125,8 +35125,8 @@
       "h": 2372
     },
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM16.pdf http://pub.liveomeble.pl/instrukcje/Irma/Instrukcja%20_LED_IM16.pdf http://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_spody_IM16.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/%a3%f3%bfko%20160%20IM16%20-%20Bez%20Pojemnika_Czarna.mp4",
+      "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM16.pdf",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -35298,8 +35298,8 @@
       "h": 2372
     },
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM16.pdf http://pub.liveomeble.pl/instrukcje/Irma/Instrukcja%20_LED_IM16.pdf http://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_spody_IM16.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/%a3%f3%bfko%20160%20IM16%20-%20Pojemnik_Bia%b3a.mp4",
+      "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM16.pdf",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -35438,7 +35438,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM17_IM18.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/Szafka%20Nocna%20Lewa%20IM%2017_Bia%b3a.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -35572,7 +35572,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Irma/Instrukcja_IM17_IM18.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/IRMA/Szafka%20Nocna%20Prawa%20IM%2018_Bia%b3a.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -35729,7 +35729,7 @@
     ],
     "drawing": null,
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Lawy%20stoly/Instrukcja_LA01.pdf",
+      "instruction": null,
       "animation": null,
       "drawing": "https://pub.liveomeble.pl/instrukcje/Uniwersalne%20Lawy_stoly/Instrukcja_LA01.pdf"
     },
@@ -35879,8 +35879,8 @@
     ],
     "drawing": null,
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Lawy%20stoly/Instrukcja_ST02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/G-TE/ST02.gif",
+      "instruction": null,
+      "animation": null,
       "drawing": "https://pub.liveomeble.pl/instrukcje/Uniwersalne%20Lawy_stoly/Instrukcja_ST02.pdf"
     },
     "bed": null,
@@ -37781,7 +37781,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Kris/Instrukcja_KS01.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/KRIS/KS01_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -37943,7 +37943,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Kris/Instrukcja_KS02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/KRIS/KS02_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -38105,7 +38105,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Kris/Instrukcja_KS03.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/KRIS/KS03_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -38273,7 +38273,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Kris/Instrukcja_KS04.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/KRIS/KS04_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -38441,7 +38441,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Kris/Instrukcja_KS05_KS06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/KRIS/KS05_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -38609,7 +38609,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Kris/Instrukcja_KS05_KS06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/KRIS/KS06_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -38766,7 +38766,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Kris/Instrukcja_KS07_KS08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/KRIS/KS07_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -38923,7 +38923,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Kris/Instrukcja_KS07_KS08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/KRIS/KS08_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -39084,7 +39084,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Kris/Instrukcja_KS09.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/KRIS/KS09_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -39345,7 +39345,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Uniwersalne%20Lawy_stoly/Instrukcja_LA01.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/KRIS/LA01_dab_evoke_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -39486,7 +39486,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Uniwersalne%20Lawy_stoly/Instrukcja_ST02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/KRIS/ST02_dab_evoke_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -42822,7 +42822,7 @@
       "h": 1232
     },
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Lionel/Instrukcja_LI12%20_140.pdf http://pub.liveomeble.pl/instrukcje/Lionel/Instrukcja_spody_LI12_140_LI12_160_LI12_180.pdf http://pub.liveomeble.pl/instrukcje/Lionel/Instrukcja_stelaz_LI12_140_LI12_160_LI12_180.pdf",
+      "instruction": "https://pub.liveomeble.pl/instrukcje/Lionel/Instrukcja_LI12%20_140.pdf",
       "animation": null,
       "drawing": null
     },
@@ -43097,7 +43097,7 @@
       "h": 1232
     },
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Lionel/Instrukcja_LI12_160.pdf http://pub.liveomeble.pl/instrukcje/Lionel/Instrukcja_spody_LI12_140_LI12_160_LI12_180.pdf http://pub.liveomeble.pl/instrukcje/Lionel/Instrukcja_stelaz_LI12_140_LI12_160_LI12_180.pdf",
+      "instruction": "https://pub.liveomeble.pl/instrukcje/Lionel/Instrukcja_LI12_160.pdf",
       "animation": null,
       "drawing": null
     },
@@ -43372,7 +43372,7 @@
       "h": 1232
     },
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Lionel/Instrukcja_LI12_180.pdf http://pub.liveomeble.pl/instrukcje/Lionel/Instrukcja_spody_LI12_140_LI12_160_LI12_180.pdf http://pub.liveomeble.pl/instrukcje/Lionel/Instrukcja_stelaz_LI12_140_LI12_160_LI12_180.pdf",
+      "instruction": "https://pub.liveomeble.pl/instrukcje/Lionel/Instrukcja_LI12_180.pdf",
       "animation": null,
       "drawing": null
     },
@@ -47605,7 +47605,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Uniwersalne%20Lawy_stoly/Instrukcja_LA13.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/LA13_cremona_cotta_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -47761,7 +47761,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI01.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI01_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -47917,7 +47917,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI02_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -48083,7 +48083,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI03.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI03_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -48249,7 +48249,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI04.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI04_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -48415,7 +48415,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI05.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI05_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -48583,7 +48583,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI06_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -48751,7 +48751,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI07.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI07_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -48908,7 +48908,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI08_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -49065,8 +49065,8 @@
     ],
     "drawing": null,
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI09.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI09_2160px.mp4",
+      "instruction": null,
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -49234,7 +49234,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI10.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI10_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -49631,7 +49631,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI13.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI13_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -49787,7 +49787,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI14.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI14_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -49921,7 +49921,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI15.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI15_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -50108,7 +50108,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI16_MI17.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI16_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -50273,7 +50273,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI18.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI18_120_SP_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -50442,7 +50442,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI18.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI18_140_SP_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -50611,7 +50611,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI18.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI18_160_SP_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -50780,7 +50780,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI18.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI18_180_SP_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -50936,7 +50936,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Mati/Instrukcja_MI19.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/MI19_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -51081,7 +51081,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Uniwersalne%20Lawy_stoly/Instrukcja_ST12.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/MATI/ST12_cremona_cotta_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -58283,7 +58283,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Prisco/Instrukcja_PR01.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/PRISCO/PR01.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -58408,7 +58408,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Prisco/Instrukcja_PR02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/PRISCO/PR02.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -58540,7 +58540,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Prisco/Instrukcja_PR03.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/PRISCO/PR03.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -58680,7 +58680,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Prisco/Instrukcja_PR04.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/PRISCO/PR04.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -58820,7 +58820,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Prisco/Instrukcja_PR05.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/PRISCO/PR05.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -58960,7 +58960,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Prisco/Instrukcja_PR06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/PRISCO/PR06.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -59101,7 +59101,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Prisco/Instrukcja_PR07.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/PRISCO/PR07.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -59191,7 +59191,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Prisco/Instrukcja_PR08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/PRISCO/PR08.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -59307,7 +59307,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Prisco/Instrukcja_PR09.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/PRISCO/PR09.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -59423,7 +59423,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Prisco/Instrukcja_PR10.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/PRISCO/PR10.gif",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -64546,7 +64546,7 @@
       "h": 2372
     },
     "documents": {
-      "instruction": "https://pub.liveomeble.pl/instrukcje/Remi/Instrukcja_RM16.pdf",
+      "instruction": null,
       "animation": "https://upload.liveomeble.pl/anim/remi/bialy/RM16_bialy_2160px.mp4",
       "drawing": null
     },
@@ -64956,7 +64956,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Uniwersalne%20Lawy_stoly/instrukcja_LA07.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/S-LINE/LA07_evoke-czarny_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -65107,7 +65107,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/S_line/Instrukcja_SL01.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/S-LINE/SL01_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -65258,7 +65258,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/S_line/Instrukcja_SL02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/S-LINE/SL02_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -65416,7 +65416,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/S_line/Instrukcja_SL03.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/S-LINE/SL03_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -65582,7 +65582,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/S_line/Instrukcja_SL04.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/S-LINE/SL04_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -65741,7 +65741,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/S_line/Instrukcja_SL05_SL06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/S-LINE/SL05_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -65900,7 +65900,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/S_line/Instrukcja_SL05_SL06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/S-LINE/SL06_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -66047,7 +66047,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/S_line/Instrukcja_SL07.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/S-LINE/SL07_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -66205,7 +66205,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/S_line/Instrukcja_SL08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/S-LINE/SL08_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -66459,7 +66459,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Uniwersalne%20Lawy_stoly/Instrukcja_ST04.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/S-LINE/ST04_evoke_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -70545,7 +70545,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Uniwersalne%20Lawy_stoly/Instrukcja_LA01.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/VERO/LA01_orzech_opera_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -70686,7 +70686,7 @@
     "drawing": null,
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Uniwersalne%20Lawy_stoly/Instrukcja_ST02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/VERO/ST02_orzech_opera_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -70845,7 +70845,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Vero/Instrukcja_VR01.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/VERO/VR01_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -71011,7 +71011,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Vero/Instrukcja_VR02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/VERO/VR02_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -71177,7 +71177,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Vero/Instrukcja_VR03.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/VERO/VR03_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -71349,7 +71349,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Vero/Instrukcja_VR04.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/VERO/VR04_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -71521,7 +71521,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Vero/Instrukcja_VR05_VR06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/VERO/VR05_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -71693,7 +71693,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Vero/Instrukcja_VR05_VR06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/VERO/VR06_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -71854,7 +71854,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Vero/Instrukcja_VR07_VR08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/VERO/VR07_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -72015,7 +72015,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Vero/Instrukcja_VR07_VR08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/VERO/VR08_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -72180,7 +72180,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/Vero/Instrukcja_VR09.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/VERO/VR09_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -73928,7 +73928,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y01.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y01_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -74065,7 +74065,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y02.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y02_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -74206,7 +74206,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y03.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y03_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -74349,7 +74349,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y04.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y04_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -74504,7 +74504,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y05.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y05_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -74639,7 +74639,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y06.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y06_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -74787,7 +74787,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y07.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y07_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -74954,7 +74954,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y08.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y08_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -75130,7 +75130,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y09.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y09_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -75373,7 +75373,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y11.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y11_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -75488,7 +75488,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y12.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y12_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -75588,7 +75588,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y13.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y13_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -75720,7 +75720,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y14.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y14_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -75852,7 +75852,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y15.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y15_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -75985,7 +75985,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y16_Y17.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y16_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -76117,7 +76117,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y16_Y17.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y17_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": null,
@@ -76412,7 +76412,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y18.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y18_140_SP_LED_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -76712,7 +76712,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y18.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y18_160_SP_LED_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": {
@@ -77012,7 +77012,7 @@
     },
     "documents": {
       "instruction": "https://pub.liveomeble.pl/instrukcje/York/Instrukcja_Y18.pdf",
-      "animation": "https://upload.liveomeble.pl/anim/YORK/Y18_180_SP_LED_2160px.mp4",
+      "animation": null,
       "drawing": null
     },
     "bed": {

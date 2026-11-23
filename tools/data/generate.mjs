@@ -42,6 +42,13 @@ const slugify = s => s.toLowerCase().replace(/[ąćęłńóśźż]/g, c => PL[c]
 const cap = s => (s ? s[0].toUpperCase() + s.slice(1) : s);
 const joinPl = list => (list.length < 2 ? list.join('') : `${list.slice(0, -1).join(', ')} i ${list.at(-1)}`);
 const https = u => (u ? u.replace(/^http:\/\//, 'https://') : u);
+// Linki do plików (instrukcje, animacje, rysunki): w eksporcie bywają martwe (404) albo sklejone po dwa w jednym polu.
+// Bierzemy pierwszy działający adres według tools/data/links-ok.json (node tools/data/check-links.mjs); bez listy — pierwszy adres.
+const LINKS_OK = (() => { try { return new Set(JSON.parse(readFileSync(new URL('./links-ok.json', import.meta.url), 'utf8')).ok); } catch { return null; } })();
+const live = u => {
+  const all = String(u || '').split(/\s+/).filter(x => /^https?:\/\//.test(x)).map(https);
+  return (LINKS_OK ? all.find(x => LINKS_OK.has(x)) : all[0]) ?? null;
+};
 /** Zdjęcie z manifestu (pobrane i przeskalowane) — albo null, gdy go nie ma. */
 const image = u => {
   let e = u && IMAGES[https(u)];
@@ -284,7 +291,7 @@ for (const [collName, list] of collMap) {
       equipment: k.equipment ? tidy(k.equipment) : null,
       packages: packages.map(x => ({ ean: x.ean ?? null, w: x.w ?? null, h: x.h ?? null, d: x.d ?? null, kg: x.kg ?? null })),
       drawing: image(k.drawing),
-      documents: { instruction: https(k.instruction), animation: https(k.animation), drawing: image(k.drawing) ? null : https(k.drawing) },
+      documents: { instruction: live(k.instruction), animation: live(k.animation), drawing: image(k.drawing) ? null : live(k.drawing) },
       bed: k.bed ?? null, kitchenLength: k.kitchenLength ?? null,
       style: k.style === 'glamour' ? 'glamour' : 'nowoczesny',
       images: { packshot: def.images.packshot },
