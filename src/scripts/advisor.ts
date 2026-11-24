@@ -965,8 +965,10 @@ export function initAdvisor() {
     dropTitle.textContent = on ? W.title || dropTexts.title : dropTexts.title;
     dropLead.textContent = on ? W.lead || dropTexts.lead : dropTexts.lead;
     if (!want) return;
-    const img = $<HTMLImageElement>('[data-pick-img]');
-    const big = want.imgBig || want.img; // większy packshot do dużego kadru; do modelu AI idzie miniatura (generate)
+    // zdjęcie tworzymy dopiero z adresem (bez pustego <img> w HTML); większy packshot do dużego kadru, do modelu AI idzie miniatura
+    const big = want.imgBig || want.img;
+    const frame = $('[data-pick-frame]');
+    const img = frame.querySelector('img') ?? frame.appendChild(h('img', { alt: '', width: 1000, height: 750, decoding: 'async' }) as HTMLImageElement);
     if (img.getAttribute('src') !== big) img.src = big;
     const link = $<HTMLAnchorElement>('[data-pick-link]');
     link.textContent = nameOf(want);

@@ -78,7 +78,7 @@ const tip = (t: string) => t.charAt(0).toLocaleUpperCase('pl') + t.slice(1);
             {/* Wejście ze strony mebla (?mebel=): zamiast zdjęcia przykładowego wnętrza wybrany mebel czeka na zdjęcie pokoju
                 (wypełnia scripts/advisor.ts z katalogu doradcy) */}
             <div class="advisor-pick" data-pick-card hidden>
-              <div class="advisor-pick__frame"><img data-pick-img alt="" width="1000" height="750" decoding="async" /></div>
+              <div class="advisor-pick__frame" data-pick-frame></div>
               <div class="advisor-pick__body">
                 <p class="advisor-pick__name"><span class="visually-hidden">{tool.product.label}: </span><a data-pick-link href="/meble/">{tool.product.loading}</a></p>
                 <p class="advisor-pick__meta" data-pick-meta></p>
