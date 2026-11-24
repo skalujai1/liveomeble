@@ -22,6 +22,7 @@ const boot = {
   finishHex: Object.fromEntries(boardFinishes.map(f => [f.label.toLocaleLowerCase('pl'), f.hex])),
   ask: tool.ask,
   visual: tool.visual,
+  product: tool.product,
   consent: tool.consent,
 };
 const budgets = [500, 800, 1000, 1500, 2000];
@@ -69,6 +70,16 @@ const tip = (t: string) => t.charAt(0).toLocaleUpperCase('pl') + t.slice(1);
       <div class="advisor-start">
         <div class="advisor-drop" data-drop>
           <div class="advisor-drop__photo">
+            {/* Wejście ze strony mebla (?mebel=): zamiast zdjęcia przykładowego wnętrza wybrany mebel czeka na zdjęcie pokoju
+                (wypełnia scripts/advisor.ts z katalogu doradcy) */}
+            <div class="advisor-pick" data-pick-card hidden>
+              <div class="advisor-pick__frame"><img data-pick-img alt="" width="1000" height="750" decoding="async" /></div>
+              <div class="advisor-pick__body">
+                <p class="advisor-pick__name"><span class="visually-hidden">{tool.product.label}: </span><a data-pick-link href="/meble/">{tool.product.loading}</a></p>
+                <p class="advisor-pick__meta" data-pick-meta></p>
+                <button class="link-button advisor-pick__remove" type="button" data-pick-remove>{tool.product.remove}</button>
+              </div>
+            </div>
             <Media image={arrangementByName('54fea29f6c-ate_01_2160px', 'Salon z meblami ATE') ?? roomImage('salon', 'wide', 1)} alt="" widths={[1280, 1920]} sizes="(min-width: 64rem) 46rem, 100vw" ratio="16 / 10" class="advisor-drop__bg" placeholderLabel="Salon" />
             {exColl && exThumbs.length > 1 && (
               <div class="advisor-example" aria-hidden="true">
@@ -238,7 +249,7 @@ const tip = (t: string) => t.charAt(0).toLocaleUpperCase('pl') + t.slice(1);
           </div>
           <div class="advisor-studio__side">
             <h3 class="advisor-studio__title" id="studio-tytul">{tool.visual.studioTitle}</h3>
-            <p class="advisor-studio__hint">{tool.visual.studioHint}</p>
+            <p class="advisor-studio__hint" data-studio-hint>{tool.visual.studioHint}</p>
             <ol class="advisor-studio__picked" data-studio-picked></ol>
             <label class="advisor-consent" data-studio-consent hidden>
               <input type="checkbox" data-studio-consent-check />

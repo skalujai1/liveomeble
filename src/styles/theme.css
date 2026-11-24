@@ -875,6 +875,29 @@ select.field__control { appearance: none; background: #fff url("data:image/svg+x
   .advisor-example { animation: advisor-example-in 900ms var(--ease-expo) 500ms both; }
 }
 @keyframes advisor-example-in { from { opacity: 0; translate: 0 0.75rem; } }
+/* Wejście ze strony mebla (?mebel=): wybrany mebel czeka na zdjęcie pokoju zamiast przykładowego wnętrza.
+   Ten sam len co panel obok, między nimi cienka kreska: po lewej rzecz, po prawej to, co trzeba zrobić. */
+.advisor-pick {
+  position: absolute; inset: 0; z-index: 1; display: grid; grid-template-rows: minmax(0, 1fr) auto;
+  background: var(--color-surface); box-shadow: inset 0 -1px 0 var(--color-line);
+}
+.advisor-pick[hidden] { display: none; }
+/* zdjęcie mebla wpisane w kadr (object-fit), nigdy nie wchodzi na podpis */
+.advisor-pick__frame { position: relative; min-height: 0; }
+.advisor-pick__frame img {
+  position: absolute; left: var(--space-5); top: var(--space-5); width: calc(100% - 2 * var(--space-5)); height: calc(100% - var(--space-5));
+  object-fit: contain; mix-blend-mode: multiply;
+}
+.advisor-pick__body { display: grid; gap: 0.25rem; justify-items: start; padding: var(--space-4) var(--space-5) var(--space-5); }
+.advisor-pick__name { font: var(--weight-display) clamp(1.375rem, 1.1rem + 0.9vw, 1.875rem)/1.12 var(--font-display); text-wrap: balance; }
+.advisor-pick__name a { color: inherit; text-decoration: none; }
+.advisor-pick__name a:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.advisor-pick__meta { font-size: var(--text-sm); line-height: 1.45; color: var(--color-text-muted); }
+.advisor-pick__remove { margin-top: 0.375rem; font-size: 0.8125rem; color: var(--color-text-muted); }
+.advisor-start.is-pick :is(.advisor-example, .advisor-rooms) { display: none; }
+.advisor-start.is-pick .advisor-drop__title { font-size: clamp(2rem, 1.45rem + 1.7vw, 3rem); }
+@media (max-width: 63.99rem) { .advisor-start.is-pick .advisor-drop__bg.media { aspect-ratio: 1 / 1; } }
+@media (min-width: 64rem) { .advisor-pick { box-shadow: inset -1px 0 0 var(--color-line); } }
 @media (min-width: 64rem) {
   .advisor-drop { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); min-height: clamp(30rem, 38vw, 34rem); }
   .advisor-drop__bg.media { position: absolute; inset: 0; aspect-ratio: auto; height: 100%; }

@@ -60,6 +60,10 @@
         "label": "Zobacz komplet {collectionName}",
         "href": "#komplet"
       },
+      "roomView": {
+        "title": "Zobacz ten mebel w\u00a0swoim pokoju",
+        "text": "Dodaj zdjęcie pokoju, a AI wstawi w nie ten mebel w wybranym kolorze."
+      },
       "delivery": "Dostawa w 72 godziny",
       "codes": "Symbol: {sku}",
       "ean": "EAN: {ean}"

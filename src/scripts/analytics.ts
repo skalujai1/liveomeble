@@ -27,6 +27,7 @@ export function initAnalytics() {
     else if (/\/anim\//i.test(href)) track('animacja_360', { plik: href.split('/').pop() });
     else if (a.classList.contains('hero-spot__link')) track('klik_kropka_mebla', { mebel: a.getAttribute('aria-label')?.split(',')[0] });
     else if (a.matches('[data-open-assistant]')) track('doradca_otwarcie', { skad: a.dataset.openAssistant });
+    else if (a.matches('[data-room-view]')) track('klik_mebel_w_pokoju', { mebel: document.querySelector('h1')?.textContent?.trim() });
     else if (href.startsWith('/gdzie-kupic/')) track('klik_gdzie_kupic', { etykieta: text(a) });
   });
   // Przycisk czatu doradcy (to <button>, nie link)

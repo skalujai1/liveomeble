@@ -92,6 +92,14 @@
         "href": "/polityka-prywatnosci/#wizualizacja-ai",
         "required": "Zaznacz zgodę na przetwarzanie zdjęcia, żeby dodać zdjęcie pokoju."
       },
+      "product": {
+        "label": "Wybrany mebel",
+        "title": "Zobacz ten mebel w\u00a0swoim pokoju",
+        "lead": "Dodaj zdjęcie pokoju, a wstawisz w nie wybrany mebel jednym kliknięciem. Potem możesz dodać jeszcze dwa meble Liveo.",
+        "remove": "Usuń mebel",
+        "loading": "Wczytuję mebel",
+        "studioHint": "Wybrany mebel jest już na liście. Kliknij „Wstaw do zdjęcia” albo dodaj jeszcze dwa meble przyciskiem + niżej."
+      },
       "visual": {
         "loading": "Wstawiam meble do Twojego zdjęcia. To może chwilę potrwać.",
         "caption": "Wizualizacja poglądowa wygenerowana przez sztuczną inteligencję. Kolory, proporcje, rozmiar i ustawienie mebla mogą różnić się od rzeczywistości. Przed zakupem sprawdź wymiary na stronie mebla i obejrzyj go w salonie partnerskim.",
@@ -135,7 +143,7 @@
       },
       {
         "q": "Czym jest wizualizacja mebli w moim pokoju?",
-        "a": "Po dodaniu zdjęcia możesz wybrać do 3 mebli Liveo i wstawić je w zdjęcie swojego pokoju. Obraz tworzy model AI, a kropki na nim pokazują, który to mebel. Wizualizacja jest poglądowa: kolory, proporcje i rozmiar mogą różnić się od rzeczywistości, dlatego przed zakupem sprawdź wymiary na stronie mebla i obejrzyj go w salonie."
+        "a": "Po dodaniu zdjęcia możesz wybrać do 3 mebli Liveo i wstawić je w zdjęcie swojego pokoju. Możesz też zacząć od strony mebla: przycisk „Zobacz ten mebel w swoim pokoju” przenosi go do doradcy w wybranym kolorze. Obraz tworzy model AI, a kropki na nim pokazują, który to mebel. Wizualizacja jest poglądowa: kolory, proporcje i rozmiar mogą różnić się od rzeczywistości, dlatego przed zakupem sprawdź wymiary na stronie mebla i obejrzyj go w salonie."
       },
       {
         "q": "Jak doradca dobiera meble do zdjęcia?",

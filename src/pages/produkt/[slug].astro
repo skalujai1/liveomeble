@@ -8,6 +8,7 @@ import ProductGrid from '../../components/ProductGrid.astro';
 import StoreFinder from '../../components/StoreFinder.astro';
 import ContentSection from '../../components/ContentSection.astro';
 import Faq from '../../components/Faq.astro';
+import { CHAT_URL } from '../../config';
 import { collectionImage, packshotFor, srcOf, type PublicImage } from '../../lib/images';
 import { abs, faqPage, productLd, webPage, type VariantLd } from '../../lib/jsonld';
 import {
@@ -203,6 +204,15 @@ const dimRows = dimsSec.rows.filter((r: any) => vars[r.key] != null && vars[r.ke
         <a class="btn btn--primary" href={summary.ctaPrimary.href}>{summary.ctaPrimary.label}</a>
         {komplet.length > 0 && <a class="btn btn--secondary" href={summary.ctaSecondary.href}>{fill(summary.ctaSecondary.label, vars)}</a>}
       </p>
+      {/* Wizualizacja „w swoim pokoju”: doradca wnętrz otwiera się z tym meblem w wybranym kolorze i prosi o zdjęcie pokoju
+          (?mebel= to id z katalogu doradcy: slug--kod koloru). Jeden link na kolor, przełącza je wybór koloru jak ceny. */}
+      {CHAT_URL && variants.map(({ v }) => (
+        <a class="room-view" href={`${url.advisor}?mebel=${p.slug}--${v.code}`} rel="nofollow" data-room-view data-variant-only data-variant={v.code} hidden={v.code !== dv.code}>
+          <svg class="ico room-view__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z" /><circle cx="12" cy="13" r="3.2" /></svg>
+          <span class="room-view__text"><b>{summary.roomView.title}</b><span>{summary.roomView.text}</span></span>
+          <svg class="ico room-view__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </a>
+      ))}
     </div>
     <!-- Opis w lewej kolumnie pod galerią (komputer): wypełnia miejsce obok długiej kolumny z danymi -->
     {descriptions.length > 0 && (

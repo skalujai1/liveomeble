@@ -208,6 +208,7 @@ To **ton producenta mebli**, nie agencji. Mówimy jak dobry sprzedawca w salonie
 - **Przejście między stronami nie blokuje strony**: pierwsze kliknięcie w jego trakcie kończy animację i trafia w cel (skrypt `pagereveal` w `BaseLayout.astro`). Nie usuwać, bo przez sekundę po zmianie strony nic nie reagowało (zgłoszone jako zepsute menu na telefonie).
 - **Mapa salonów płaska**, bez wstawania w 3D.
 - **Kropka na meblu w hero** to sama kropka i karta, bez przyciemniania zdjęcia; jedna kropka na slajd (`"auto": true` w `src/content/hotspots.json`) sama pokazuje kartę w trakcie slajdu.
+- **Mebel w swoim pokoju (24.11.2026):** każda strona mebla ma pod przyciskami kafel „Zobacz ten mebel w swoim pokoju”, osobny dla każdego koloru. Prowadzi do `/doradca-wnetrz/?mebel=<slug>--<kod koloru>` (id z katalogu doradcy). Doradca pokazuje wtedy wybrany mebel zamiast przykładowego wnętrza, prosi o zdjęcie pokoju, a po analizie otwiera od razu studio z tym meblem na liście. Gdy w karcie przeglądarki jest już zdjęcie pokoju, kolejny mebel z karty dołącza do tego samego studia. Zdjęcie wychodzi do modelu dopiero po kliknięciu „Wstaw do zdjęcia”, jak dotąd.
 - **Zero długich myślników** w tekstach strony i czatu („—” oraz „ – ”): zamiast nich dwukropek, przecinek, kropka albo nawias.
 
 ## 9. Treści w repozytorium

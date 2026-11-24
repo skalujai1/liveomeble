@@ -3,6 +3,7 @@
 // Analiza zdjęcia (engine.js: MobileCLIP + paleta barw) ładuje się dopiero przy pierwszym zdjęciu,
 // z kopii widżetu w /liveo-assistant/widget/ (tools/sync-assistant.mjs). Zdjęcie nie opuszcza przeglądarki.
 // Czat przekazuje tu zdjęcie, analizę i komplet przez sessionStorage „lv-advisor” (liveo-assistant.js, handoff()).
+// Strona mebla przekazuje mebel i kolor w adresie (?mebel=<id z katalogu>): mebel czeka na zdjęcie pokoju i trafia prosto do studia.
 import {
   ROOMS, TYPES, prefsFromAnalysis, recommendSets, recommendByType, explainSet, formatPrice, parseQuery, catalogSummary, hasPrices,
 } from '../../liveo-assistant/widget/recommender.js';
@@ -13,10 +14,10 @@ import { track } from './analytics';
 type Boot = {
   engineUrl: string; catalogUrl: string; embeddingsUrl: string; chatUrl: string;
   rooms: Record<string, Room>; finishHex: Record<string, string>;
-  visual?: Record<string, any>; consent?: { required: string };
+  visual?: Record<string, any>; product?: Record<string, string>; consent?: { required: string };
 };
 type Product = {
-  name: string; collection: string; model: string; type: string; rooms?: string[]; price: number | null; regular: number | null;
+  id?: string; imgBig?: string; name: string; collection: string; model: string; type: string; rooms?: string[]; price: number | null; regular: number | null;
   lowest30?: number | null; url: string; img: string; color?: { label: string } | null; dims?: string;
 };
 type Catalog = { products: Product[]; collections: Record<string, string> };
@@ -103,6 +104,9 @@ export function initAdvisor() {
     alts: 2,
     ai: [] as { role: 'user' | 'assistant'; content: string }[],
   };
+  // Mebel przekazany ze strony mebla (?mebel=): czeka na zdjęcie pokoju i trafia do studia jako pierwszy (niżej: startWithWant)
+  let want: Product | null = null;
+  const W = boot.product || {};
 
   // ----- dane i silnik (leniwie) ------------------------------------------------
   let productsCache: Product[] = [];
@@ -279,6 +283,7 @@ export function initAdvisor() {
       const d = analysis.decision;
       if (d.type === 'room') S.room = d.room;
       renderSeen();
+      if (want) await openStudioWithWant();
     } finally {
       S.busy = false;
       drop.removeAttribute('aria-busy');
@@ -459,6 +464,8 @@ export function initAdvisor() {
   const stGo = $<HTMLButtonElement>('[data-studio-go]');
   const stToggle = $<HTMLButtonElement>('[data-studio-toggle]');
   const stDownload = $<HTMLAnchorElement>('[data-studio-download]');
+  const stHint = $('[data-studio-hint]');
+  const stHintText = stHint.textContent || '';
   const ST = { picked: [] as Product[], result: null as string | null, spots: [] as { n: number; x: number; y: number }[], forPhoto: '', busy: false, showOriginal: false, made: [] as Product[] };
   const nameOf = (p: Product) => p.model || p.name;
 
@@ -477,14 +484,16 @@ export function initAdvisor() {
   }
   function togglePick(p: Product) {
     const i = ST.picked.findIndex(x => x.url === p.url);
+    if (i >= 0 && want?.url === p.url) { want = null; paintWant(); } // usunięty ręcznie: nie wraca przy następnym zdjęciu
     if (i >= 0) ST.picked.splice(i, 1);
     else if (ST.picked.length < MAX_PICK) ST.picked.push(p);
     updateStudio();
   }
   function updateStudio() {
     if (!S.photo || !visUrl) { studio.hidden = true; return; }
-    if (ST.forPhoto !== S.photo) Object.assign(ST, { picked: [], result: null, spots: [], made: [], forPhoto: S.photo, showOriginal: false });
+    if (ST.forPhoto !== S.photo) Object.assign(ST, { picked: want ? [want] : [], result: null, spots: [], made: [], forPhoto: S.photo, showOriginal: false });
     studio.hidden = false;
+    stHint.textContent = (want && ST.picked.some(x => x.url === want!.url) && !ST.result && W.studioHint) || stHintText;
     const showing = ST.result && !ST.showOriginal ? ST.result : S.photo;
     if (stImg.src !== showing) stImg.src = showing;
     stImg.alt = ST.result && !ST.showOriginal ? `Wizualizacja: ${ST.made.map(nameOf).join(', ')} we wnętrzu z Twojego zdjęcia` : 'Twoje zdjęcie pokoju';
@@ -893,6 +902,80 @@ export function initAdvisor() {
     return true;
   }
 
+  // ----- wejście ze strony mebla: ?mebel=<id z katalogu doradcy, czyli slug--kod koloru> ---------------------------
+  // Mebel czeka na zdjęcie pokoju (krok 1 pokazuje go zamiast przykładowego wnętrza), a po zdjęciu trafia prosto do
+  // studia jako pierwszy z trzech. Gdy w tej karcie przeglądarki jest już zdjęcie pokoju, mebel od razu dołącza do studia.
+  const wantId = new URLSearchParams(location.search).get('mebel');
+  const startBox = $('.advisor-start');
+  const pickCard = $('[data-pick-card]');
+  const dropTitle = $('.advisor-drop__title');
+  const dropLead = $('.advisor-drop__lead');
+  const dropTexts = { title: dropTitle.textContent || '', lead: dropLead.textContent || '' };
+
+  function paintWant(loading = false) {
+    const on = !!want || loading;
+    startBox.classList.toggle('is-pick', on);
+    pickCard.hidden = !on;
+    dropTitle.textContent = on ? W.title || dropTexts.title : dropTexts.title;
+    dropLead.textContent = on ? W.lead || dropTexts.lead : dropTexts.lead;
+    if (!want) return;
+    const img = $<HTMLImageElement>('[data-pick-img]');
+    const big = want.imgBig || want.img; // większy packshot do dużego kadru; do modelu AI idzie miniatura (generate)
+    if (img.getAttribute('src') !== big) img.src = big;
+    const link = $<HTMLAnchorElement>('[data-pick-link]');
+    link.textContent = nameOf(want);
+    link.href = want.url;
+    $('[data-pick-meta]').textContent = [want.color?.label, want.dims].filter(Boolean).join(' · ');
+  }
+  const dropWantParam = () => {
+    const u = new URL(location.href);
+    if (!u.searchParams.has('mebel')) return;
+    u.searchParams.delete('mebel');
+    history.replaceState(history.state, '', u.pathname + u.search + u.hash);
+  };
+  $('[data-pick-remove]').addEventListener('click', () => { want = null; paintWant(); dropWantParam(); });
+
+  /** Zdjęcie już jest: pokój z analizy albo z mebla, komplet z jego kolekcji jako pierwszy, mebel w studiu. */
+  async function openStudioWithWant({ focus = true } = {}): Promise<boolean> {
+    if (!want || !S.photo || !visUrl) return false;
+    const kind = S.analysis?.decision?.type;
+    // zdjęcie, które nie pokazuje pokoju (ulica, łazienka, sam mebel): zostajemy przy komunikacie z kroku 2
+    if (S.analysis && kind !== 'room' && kind !== 'ask') return false;
+    try { await catalog(); } catch { return false; }
+    if (!S.room || !availableRoom(S.room, productsCache)) {
+      S.room = (want.rooms || []).find(k => availableRoom(k, productsCache)) ?? Object.keys(boot.rooms).find(k => availableRoom(k, productsCache)) ?? null;
+    }
+    if (!S.room) return false;
+    Object.assign(S, { main: want.collection, type: '' });
+    S.reached = Math.max(S.reached, 2);
+    go(2, { focus });
+    await renderResults();
+    // studio zna już to zdjęcie (np. po powrocie do doradcy z kolejnym meblem): mebel dochodzi na koniec listy,
+    // żeby numery wcześniejszych mebli zgadzały się z kropkami na gotowej wizualizacji; przy komplecie trzech ustępuje ostatni
+    if (ST.forPhoto === S.photo && !ST.picked.some(x => x.url === want!.url)) {
+      if (ST.picked.length >= MAX_PICK) ST.picked.pop();
+      ST.picked.push(want);
+    }
+    updateStudio();
+    dropWantParam(); // mebel jest w studiu i w pamięci karty: odświeżenie strony nie dokłada go drugi raz
+    studio.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    return true;
+  }
+
+  async function startWithWant(id: string) {
+    paintWant(true); // od razu układ „wybrany mebel”, bez mignięcia przykładowego wnętrza
+    const restored = await restoreState(); // zdjęcie pokoju z tej karty przeglądarki, jeśli już było
+    try {
+      const data = await catalog();
+      want = data.products.find(p => p.id === id) ?? null;
+    } catch { want = null; }
+    paintWant();
+    if (!want) { dropWantParam(); return; }
+    track('doradca_mebel_z_karty', { mebel: nameOf(want) });
+    if (await openStudioWithWant({ focus: false })) return;
+    if (restored || S.step !== 0) go(0, { focus: false }); // brak zdjęcia pokoju: zaczynamy od jego dodania
+  }
+
   // ----- od nowa --------------------------------------------------------------------
   $$('[data-restart]').forEach(b => b.addEventListener('click', () => {
     Object.assign(S, { reached: 0, photo: null, analysis: null, room: null, tone: 0, maxPrice: null, cheaper: false, type: '', main: null, alts: 2 });
@@ -901,6 +984,8 @@ export function initAdvisor() {
     askReply.hidden = true;
     renderSeen();
     history.replaceState(null, '', location.pathname + location.hash);
+    want = null;
+    paintWant();
     Object.assign(ST, { picked: [], made: [], spots: [], result: null, forPhoto: '' });
     updateStudio();
     try { sessionStorage.removeItem(STATE_KEY); } catch { /* */ }
@@ -929,6 +1014,8 @@ export function initAdvisor() {
     if (S.room) renderResults();
   } else if (roomParam) {
     startWithRoom(roomParam, { focus: false });
+  } else if (wantId && visUrl) {
+    void startWithWant(wantId);
   } else {
     void restoreState();
   }

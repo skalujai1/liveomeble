@@ -4,7 +4,7 @@
 //   node tools/data/export-assistant-catalog.mjs [--now=2026-10-20T12:00:00+02:00] [--out=liveo-assistant/data/catalog.json]
 //
 // Format zgodny z liveo-assistant/widget/recommender.js i liveo-assistant.js:
-//   { products: [{ id, name, collection, model, type, rooms, price, regular, url, img, color, bestseller }],
+//   { products: [{ id, name, collection, model, type, rooms, price, regular, url, img, imgBig, color, bestseller }],
 //     collections: { NAZWA: "/kolekcje/<slug>/" } }
 // Jeden rekord na wariant kolorystyczny. Ceny: sklep liveomeble.pl (variant.basePrice + promotions.json), liczone
 // przez priceFor() na chwilę --now. Wariant bez ceny → price = null (widżet pokazuje „Cena w salonie partnerskim”).
@@ -69,6 +69,13 @@ const imgOf = v => {
   return `${pk.base}-${w}.webp`;
 };
 
+/** Większy packshot (pierwsza szerokość powyżej 480 px) do dużego kadru „wybrany mebel” w doradcy. */
+const imgBigOf = v => {
+  const pk = v.images?.packshot;
+  const w = pk?.widths.filter(x => x > 480).sort((a, b) => a - b)[0];
+  return w ? `${pk.base}-${w}.webp` : imgOf(v);
+};
+
 const cm = n => String(n).replace('.', ',');
 const dimsText = d => (d && d.w && d.h ? `szer. ${cm(d.w)} × wys. ${cm(d.h)}${d.d ? ` × gł. ${cm(d.d)}` : ''} cm` : '');
 
@@ -86,6 +93,7 @@ for (const p of products) {
       ...priceOf(p, v),
       url: `/produkt/${p.slug}/${v.code === p.variants[0].code ? '' : `?kolor=${v.code}`}`,
       img: imgOf(v),
+      imgBig: imgBigOf(v),
       color: colorProfile(v.finish, v.colorLabel),
       bestseller: !!p.bestseller,
       delivery72: !!p.delivery72,
