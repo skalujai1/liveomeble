@@ -144,8 +144,6 @@ html:active-view-transition-type(kolekcja)::view-transition-new(root) { animatio
   .is-live.is-ticking .hero-curtain__dot[aria-current="true"] .hero-curtain__tick { animation: curtain-tick 7s linear both; }
   .is-live:is(.is-paused, .is-held) .hero-curtain__dot[aria-current="true"] .hero-curtain__tick { animation-play-state: paused; }
 }
-/* Wejście na stronę: pierwszy slajd bez odsłony, oddechu skali i wjazdu tekstu (klasa z initHero, znika przy zmianie slajdu) */
-.is-live .hero-curtain__slide.is-still, .is-live .hero-curtain__slide.is-still * { animation: none !important; }
 @keyframes curtain-breathe { from { scale: 1.06; } to { scale: 1; } }
 @keyframes copy-in { from { opacity: 0; translate: 0 32px; } }
 @keyframes curtain-tick { from { transform: scaleX(0); } to { transform: scaleX(1); } }
@@ -866,6 +864,32 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
   }
 }
 @keyframes name-rise { from { opacity: 0; transform: perspective(50rem) rotateX(-72deg) translateY(12%); } }
+
+/* ---------- Wejście na stronę: „ostrość” (25.11.2026) ----------
+   Od pierwszej klatki w kadrze leży rozmyta miniatura zdjęcia (HeroPicture: --lqip), nigdy białe tło. Gdy zdjęcie się
+   wczyta, miniatura nad nim znika, a kadr lekko osiada, jak obiektyw łapiący ostrość. Na stronie głównej tekst slajdu
+   łapie ostrość po kolei, a kropki dochodzą na końcu. Zastępuje odsłonę ze szczeliny tylko przy wejściu (klasa is-intro
+   z initHero); kolejne slajdy mają swój zwykły ruch. Ten blok stoi po regułach slajdów, żeby je przesłaniać. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .media--lqip::after { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--lqip) 50% 58% / cover no-repeat; pointer-events: none; }
+  .js .media--lqip.is-in::after { animation: lqip-out 1100ms ease both; }
+
+  .is-live .hero-curtain__slide.is-intro,
+  .is-live .hero-curtain__slide.is-intro :is(.media__img, .hero-spots-wrap) { animation: none; }
+  .is-live .hero-curtain__slide.is-intro .media.is-in .media__img,
+  .is-live .hero-curtain__slide.is-intro .media.is-in ~ .hero-spots-wrap { animation: intro-settle 2200ms var(--ease-expo) both; }
+  .is-live .hero-curtain__slide.is-intro .hero-curtain__copy > *,
+  .is-live .hero-curtain__slide.is-intro .hero-curtain__copy > .hero-curtain__name { animation: intro-focus 1200ms var(--ease-out) both 200ms; transform-origin: 50% 50%; }
+  .is-live .hero-curtain__slide.is-intro .hero-curtain__copy > .hero-curtain__meta { animation-delay: 380ms; }
+  .is-live .hero-curtain__slide.is-intro .hero-curtain__copy > .hero-curtain__cta { animation-delay: 540ms; }
+  /* kropki dochodzą dopiero na ostrym kadrze (animacja z opóźnieniem działa też, gdy zdjęcie jest w pamięci podręcznej) */
+  .is-live .hero-curtain__slide.is-intro .hero-spot { animation: none; opacity: 0; }
+  .is-live .hero-curtain__slide.is-intro .media.is-in ~ .hero-spots-wrap .hero-spot { animation: intro-dot 700ms ease both 1100ms; opacity: 1; }
+}
+@keyframes lqip-out { to { opacity: 0; visibility: hidden; } }
+@keyframes intro-settle { from { scale: 1.035; } }
+@keyframes intro-focus { from { opacity: 0; filter: blur(12px); translate: 0 0.5rem; } }
+@keyframes intro-dot { from { opacity: 0; } }
 /* bez przygaszania: karta przy krawędzi tylko się odchyla, tekst zostaje w pełnym kontraście */
 /* oś obrotu zmienia stronę tylko w płaskim środku (bez obrotu) — inaczej karta wystaje w głąb i pas łapie przewijanie w pionie */
 @keyframes rail-arc {

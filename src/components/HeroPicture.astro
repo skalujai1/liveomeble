@@ -19,6 +19,8 @@ const MOBILE = '(max-width: 59.99rem)';
 
 // Pierwszy kadr bez białej plamy: zanim przyjdzie zdjęcie, w ramce leży jego miniatura 32 px (ok. 0,5 KB w HTML),
 // którą przeglądarka rozmywa przy powiększeniu. Tylko obraz LCP (priority) i tylko zdjęcia z public/katalog.
+// Ta sama miniatura leży też warstwą NAD zdjęciem (.media--lqip::after) i znika po jego wczytaniu: kadr „łapie ostrość”.
+// Samo zdjęcie jest cały czas w pełni widoczne pod spodem, więc pomiar LCP się nie zmienia.
 const lqipCache = ((globalThis as any).__lqip ??= new Map<string, Promise<string | null>>()) as Map<string, Promise<string | null>>;
 function lqip(src: string) {
   if (!lqipCache.has(src)) {
@@ -59,9 +61,10 @@ if (wide.pub) {
 }
 const placeholder = priority && wide.pub ? await lqip(fallback) : null;
 ---
-<div class:list={['media', cls]} style={placeholder ? `background: url(${placeholder}) 50% 58% / cover no-repeat` : undefined}>
+<div class:list={['media', cls, { 'media--lqip': placeholder }]} style={placeholder ? `--lqip: url(${placeholder}); background: var(--lqip) 50% 58% / cover no-repeat` : undefined}>
   <picture>
     {sources.map(s => <source media={s.media} type={s.type} srcset={lazy ? undefined : s.srcset} data-srcset={lazy ? s.srcset : undefined} sizes={s.sizes} />)}
-    <img class="media__img" src={lazy ? undefined : fallback} data-src={lazy ? fallback : undefined} {width} {height} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" fetchpriority={priority ? 'high' : 'auto'} />
+    {/* onload w znaczniku, nie w skrypcie strony: działa też, gdy zdjęcie wczyta się przed skryptami (animacja „ostrość”, editorial.css) */}
+    <img class="media__img" src={lazy ? undefined : fallback} data-src={lazy ? fallback : undefined} {width} {height} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" fetchpriority={priority ? 'high' : 'auto'} onload={placeholder ? "this.closest('.media').classList.add('is-in')" : undefined} />
   </picture>
 </div>

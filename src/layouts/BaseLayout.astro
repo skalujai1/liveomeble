@@ -137,7 +137,8 @@ const ld: Node[] = [website(), organization(), ...jsonLd, ...(crumbs ? [breadcru
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <slot name="head" />
   </head>
-  <body class:list={[pageClass, { 'has-overlay': overlay }]}>
+  {/* at-hero od razu w HTML (potem przełącza ją initHeader): przycisk czatu nie miga w rogu, zanim ruszą skrypty */}
+  <body class:list={[pageClass, { 'has-overlay': overlay, 'at-hero': overlay }]}>
     <a class="skip-link" href="#tresc">{site.skipLink}</a>
     <SiteHeader {path} />
     <main id="tresc" tabindex="-1">

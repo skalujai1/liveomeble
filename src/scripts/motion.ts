@@ -135,6 +135,7 @@ function initHotspots() {
       const delay = (e as CustomEvent<number>).detail;
       t1 = window.setTimeout(() => {
         if (active || !list.offsetWidth) return; // użytkownik już coś pokazuje albo kropek nie widać (telefon)
+        if (slide.querySelector('.media--lqip:not(.is-in)')) return; // zdjęcie jeszcze się wczytuje: karta nie wyprzedza kadru
         auto = list.querySelector<HTMLElement>('.hero-spot[data-auto]:not(.is-covered)') ?? list.querySelector<HTMLElement>('.hero-spot:not(.is-covered)');
         if (auto) on(auto);
       }, 2000);
@@ -194,7 +195,7 @@ function initHero() {
       if (next === i) return;
       wake(slides[next]);
       wake(slides[(next + 1) % slides.length]);
-      slides[i].classList.remove('is-active', 'is-still');
+      slides[i].classList.remove('is-active', 'is-intro');
       slides[i].classList.add('is-leaving');
       slides[i].dispatchEvent(new Event('slide:hide'));
       const prev = slides[i];
@@ -254,9 +255,9 @@ function initHero() {
       if (Math.abs(dx) > 50) show(i + (dx < 0 ? 1 : -1));
     }, { passive: true });
 
-    // pierwsza kolekcja stoi od razu, bez odsłony (decyzja Michała 24.11: wejście na stronę nie ma oślepiać);
-    // ruch wraca od pierwszej zmiany slajdu
-    slides[i].classList.add('is-still');
+    // wejście na stronę ma własną, spokojną animację „ostrość” zamiast odsłony ze szczeliny (decyzje Michała 24 i 25.11:
+    // bez białego błysku, ale z animacją); zwykły ruch slajdów wraca od pierwszej zmiany slajdu
+    slides[i].classList.add('is-intro');
     hero.classList.add('is-live');
     setStopped(stopped);
     announce();
