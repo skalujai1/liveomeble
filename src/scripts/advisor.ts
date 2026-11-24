@@ -179,11 +179,11 @@ export function initAdvisor() {
   const consentBox = $<HTMLInputElement>('[data-consent-photo]');
   const needConsent = () => {
     if (consentBox.checked) return false;
-    showDropError(boot.consent?.required || 'Zaznacz zgodę na przetwarzanie zdjęcia.');
+    showDropError(boot.consent?.required || 'Zaznacz zgodę na przetwarzanie zdjęcia.', { consent: true });
     consentBox.focus();
     return true;
   };
-  consentBox.addEventListener('change', () => { if (consentBox.checked) dropError.hidden = true; });
+  consentBox.addEventListener('change', () => { if (consentBox.checked) { dropError.hidden = true; clearTimeout(dropErrorTimer); } });
   $('[data-pick="camera"]').addEventListener('click', () => { if (!needConsent()) cameraInput.click(); });
   $('[data-pick="file"]').addEventListener('click', () => { if (!needConsent()) fileInput.click(); });
   for (const input of [fileInput, cameraInput]) {
@@ -211,9 +211,20 @@ export function initAdvisor() {
   // Kafle pomieszczeń bez zdjęcia to zwykłe linki do stron pomieszczeń (wszystkie meble do pokoju ze wszystkich
   // kolekcji). Doradca dobiera komplet z jednej kolekcji tylko do zdjęcia albo pokoju z czatu (?pokoj=).
 
-  function showDropError(text: string) {
-    dropError.textContent = text;
+  // Komunikat leży kartą na zdjęciu (nie wydłuża panelu), znika sam po kilku sekundach albo po zaznaczeniu zgody.
+  // Przy braku zgody pole zgody dostaje krótkie podświetlenie, żeby było wiadomo, czego dotyczy.
+  let dropErrorTimer = 0;
+  function showDropError(text: string, { consent = false } = {}) {
+    clearTimeout(dropErrorTimer);
+    dropError.querySelector('[data-drop-error-text]')!.textContent = text;
     dropError.hidden = false;
+    dropErrorTimer = window.setTimeout(() => { dropError.hidden = true; }, consent ? 5000 : 9000);
+    if (consent) {
+      const box = consentBox.closest<HTMLElement>('.advisor-consent');
+      box?.classList.remove('is-attention');
+      void box?.offsetWidth; // ponowne kliknięcie znów uruchamia podświetlenie
+      box?.classList.add('is-attention');
+    }
   }
 
   async function startWithRoom(key: string, { focus = true } = {}) {
@@ -464,6 +475,10 @@ export function initAdvisor() {
   const stGo = $<HTMLButtonElement>('[data-studio-go]');
   const stToggle = $<HTMLButtonElement>('[data-studio-toggle]');
   const stDownload = $<HTMLAnchorElement>('[data-studio-download]');
+  const stOffer = $('[data-studio-offer]');
+  const stOfferTitle = $('[data-studio-offer-title]');
+  const stOfferList = $('[data-studio-offer-list]');
+  let offer: { title: string; items: Product[] } = { title: '', items: [] }; // meble z bieżącego kompletu (renderResults)
   const stHint = $('[data-studio-hint]');
   const stHintText = stHint.textContent || '';
   const ST = { picked: [] as Product[], result: null as string | null, spots: [] as { n: number; x: number; y: number }[], forPhoto: '', busy: false, showOriginal: false, made: [] as Product[] };
@@ -481,6 +496,31 @@ export function initAdvisor() {
       b.disabled = !on && (full || ST.busy);
       b.textContent = on ? V.added || '✓ W pokoju' : full ? V.full || 'Masz już 3 meble' : V.add || '+ Dodaj do pokoju';
     });
+  }
+  /** Pasek mebli z kompletu w studiu: miniatura i nazwa, klik dodaje albo usuwa z pokoju (jak „+” przy kartach). */
+  function renderOffer() {
+    stOffer.hidden = !offer.items.length;
+    if (!offer.items.length) return;
+    stOfferTitle.textContent = offer.title;
+    const full = ST.picked.length >= MAX_PICK;
+    stOfferList.replaceChildren(...offer.items.map(p => {
+      const on = ST.picked.some(x => x.url === p.url);
+      const mark = h('span', { class: 'advisor-offer__state', 'aria-hidden': 'true' });
+      mark.innerHTML = `<svg class="ico" viewBox="0 0 24 24">${on ? '<path d="M20 6 9 17l-5-5"/>' : '<path d="M12 5v14M5 12h14"/>'}</svg>`;
+      return h('li', null, h('button', {
+        class: 'advisor-offer', type: 'button', 'aria-pressed': String(on), disabled: ST.busy || (!on && full),
+        title: on ? `${nameOf(p)}: usuń z pokoju` : full ? V.full || 'Masz już 3 meble' : `${nameOf(p)}: dodaj do pokoju`,
+        onclick: () => togglePick(p),
+      },
+        h('span', { class: 'advisor-offer__pic' }, h('img', { src: p.img, alt: '', width: 120, height: 120, loading: 'lazy', decoding: 'async' })),
+        h('span', { class: 'advisor-offer__name' }, nameOf(p)),
+        mark));
+    }), h('li', null, h('button', { class: 'advisor-offer advisor-offer--more', type: 'button', onclick: () => results.scrollIntoView({ block: 'start', behavior: 'smooth' }) },
+      h('span', { class: 'advisor-offer__name' }, V.offerMore || 'Inne meble niżej'))));
+  }
+  function focusOffer() {
+    stOffer.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    stOfferList.querySelector<HTMLButtonElement>('.advisor-offer[aria-pressed="false"]:not(:disabled)')?.focus({ preventScroll: true });
   }
   function togglePick(p: Product) {
     const i = ST.picked.findIndex(x => x.url === p.url);
@@ -505,10 +545,15 @@ export function initAdvisor() {
           h('span', { class: 'advisor-studio__dot', 'aria-hidden': 'true' }, String(sp.n)),
           h('span', { class: 'advisor-studio__label', 'aria-hidden': 'true' }, nameOf(p), h('small', null, 'Zobacz mebel →')))) : null;
     }).filter(Boolean) as HTMLElement[]);
+    // zawsze trzy miejsca o stałej wysokości: dodanie mebla wypełnia miejsce, panel nie rośnie
     stPicked.replaceChildren(...ST.picked.map((p, i) => h('li', null,
       h('img', { src: p.img, alt: '', width: 56, height: 56, loading: 'lazy' }),
       h('span', null, h('b', null, `${i + 1}. ${nameOf(p)}`), p.color ? h('small', null, p.color.label) : null),
-      h('button', { class: 'link-button', type: 'button', onclick: () => togglePick(p), disabled: ST.busy }, V.remove || 'Usuń'))));
+      h('button', { class: 'link-button', type: 'button', onclick: () => togglePick(p), disabled: ST.busy }, V.remove || 'Usuń'))),
+    ...Array.from({ length: MAX_PICK - ST.picked.length }, () => h('li', { class: 'is-empty' },
+      h('button', { class: 'advisor-studio__slot-btn', type: 'button', disabled: ST.busy || !offer.items.length, onclick: focusOffer },
+        h('span', { class: 'advisor-studio__slot', 'aria-hidden': 'true' }, '+'), h('span', null, V.empty || 'Dodaj mebel')))));
+    renderOffer();
     stConsent.hidden = consentBox.checked;
     stGo.disabled = ST.busy || !ST.picked.length;
     stGo.textContent = `${V.go || 'Wstaw do zdjęcia'}${ST.picked.length ? ` (${ST.picked.length})` : ''}`;
@@ -637,6 +682,7 @@ export function initAdvisor() {
     if (S.type) {
       const items = recommendByType(data.products, S.type, p, { room: S.room, maxPrice: S.maxPrice ?? undefined, budget: S.cheaper, limit: 8 }) as Product[];
       if (!items.length) return emptyState(`Nie ma takich mebli${S.maxPrice ? ` do ${formatPrice(S.maxPrice)}` : ''}.`, S.maxPrice ? { label: 'Usuń limit ceny', run: () => { S.maxPrice = null; renderResults(); } } : undefined);
+      offer = { title: V.offerTitleType || 'Dodaj z listy', items };
       results.replaceChildren(h('div', null,
         h('h3', { class: 'advisor-results__title' }, `${TYPES[S.type][1]}${S.maxPrice ? ` do ${formatPrice(S.maxPrice)}` : ''}, które najlepiej pasują ${forWhom}`),
         h('ul', { class: 'product-grid advisor-grid' }, items.map(card)),
@@ -654,6 +700,7 @@ export function initAdvisor() {
     const alts = sets.filter(s => s !== main);
     const why = explainSet(main, p, !!S.analysis);
     const href = collectionsCache[main.collection];
+    offer = { title: (V.offerTitle || 'Dodaj z kompletu {collection}').replace('{collection}', main.collection), items: main.items };
 
     const mainEl = h('article', { class: 'advisor-set', 'aria-labelledby': 'komplet-tytul' },
       h('header', { class: 'advisor-set__head' },
@@ -666,7 +713,6 @@ export function initAdvisor() {
           finishChip(main.color))),
       h('ul', { class: 'product-grid advisor-grid' }, main.items.map(card)),
       h('footer', { class: 'advisor-set__foot' },
-        h('p', { class: 'advisor-set__total' }, main.total > 0 ? [`${pieces(main.items.length)} razem `, h('b', null, formatPrice(main.total))] : `${pieces(main.items.length)} z jednej kolekcji · cenę podaje salon partnerski`),
         h('div', { class: 'advisor-set__actions' },
           href && h('a', { class: 'btn btn--secondary', href }, `Cała kolekcja ${main.collection}`),
           h('button', { class: 'btn btn--primary', type: 'button', onclick: () => { S.reached = 3; go(3); } }, `Gdzie kupić ${main.collection}`))));
@@ -680,7 +726,7 @@ export function initAdvisor() {
         h('div', { class: 'advisor-alt__thumbs', 'aria-hidden': 'true' }, s.items.slice(0, 4).map(it => h('img', { src: it.img, alt: '', loading: 'lazy', width: 160, height: 160 }))),
         h('div', { class: 'advisor-alt__body' },
           h('p', { class: 'advisor-alt__name' }, `Kolekcja ${s.collection}`),
-          h('p', { class: 'advisor-alt__meta' }, finishChip(s.color), h('span', null, s.total > 0 ? `${pieces(s.items.length)} · ${formatPrice(s.total)}` : pieces(s.items.length)))),
+          h('p', { class: 'advisor-alt__meta' }, finishChip(s.color), h('span', null, pieces(s.items.length)))),
         h('button', { class: 'btn btn--secondary', type: 'button', onclick: () => pickSet(s.collection) }, 'Pokaż ten komplet')))),
       alts.length > shown.length && h('button', { class: 'link-button advisor-alts__more', type: 'button', onclick: () => { S.alts += 2; renderResults(); } },
         `Pokaż kolejne kolekcje (${alts.length - shown.length})`)) : null;
@@ -833,7 +879,7 @@ export function initAdvisor() {
   function renderChosen(set: Set_) {
     $('[data-chosen]').replaceChildren(
       h('p', { class: 'advisor-chosen__title' }, `Twój komplet: kolekcja ${set.collection}`),
-      h('p', { class: 'advisor-chosen__meta' }, finishChip(set.color), h('span', null, set.total > 0 ? `${pieces(set.items.length)} razem ${formatPrice(set.total)}` : pieces(set.items.length))),
+      h('p', { class: 'advisor-chosen__meta' }, finishChip(set.color), h('span', null, pieces(set.items.length))),
       h('div', { class: 'advisor-chosen__thumbs', 'aria-hidden': 'true' }, set.items.slice(0, 6).map(it => h('img', { src: it.img, alt: '', loading: 'lazy', width: 160, height: 160 }))),
       h('button', { class: 'link-button', type: 'button', 'data-go': '2' }, 'Wróć do kompletów'));
     const select = root.querySelector<HTMLSelectElement>('#doradca-sklepy [data-sf-collection]');

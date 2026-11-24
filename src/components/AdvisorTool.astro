@@ -70,6 +70,11 @@ const tip = (t: string) => t.charAt(0).toLocaleUpperCase('pl') + t.slice(1);
       <div class="advisor-start">
         <div class="advisor-drop" data-drop>
           <div class="advisor-drop__photo">
+            {/* Komunikat (brak zgody, zły plik) jako karta na zdjęciu: nie wydłuża panelu i sam znika (scripts/advisor.ts) */}
+            <p class="advisor-drop__error" role="alert" data-drop-error hidden>
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7.5v5.5M12 16.5v.01" /></svg>
+              <span data-drop-error-text></span>
+            </p>
             {/* Wejście ze strony mebla (?mebel=): zamiast zdjęcia przykładowego wnętrza wybrany mebel czeka na zdjęcie pokoju
                 (wypełnia scripts/advisor.ts z katalogu doradcy) */}
             <div class="advisor-pick" data-pick-card hidden>
@@ -106,7 +111,6 @@ const tip = (t: string) => t.charAt(0).toLocaleUpperCase('pl') + t.slice(1);
             <ul class="advisor-drop__tips">
               {tool.tips.items.map((t: string) => <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" set:html={check} />{tip(t)}</li>)}
             </ul>
-            <p class="advisor-drop__error" role="alert" data-drop-error hidden></p>
             <input type="file" accept="image/*" hidden aria-label={tool.drop.pick} data-file />
             <input type="file" accept="image/*" capture="environment" hidden aria-label={tool.drop.camera} data-camera />
           </div>
@@ -261,6 +265,11 @@ const tip = (t: string) => t.charAt(0).toLocaleUpperCase('pl') + t.slice(1);
               <a class="link" data-studio-download download="liveo-wizualizacja.jpg" href="#" hidden>{tool.visual.download}</a>
             </p>
             <p class="advisor-studio__caption">{tool.visual.caption}</p>
+          </div>
+          {/* Meble z bieżącego kompletu do dodania jednym kliknięciem, bez przewijania do kart niżej */}
+          <div class="advisor-studio__offer" data-studio-offer hidden>
+            <p class="advisor-studio__offer-title" id="studio-oferta" data-studio-offer-title></p>
+            <ul class="advisor-studio__offer-list" data-studio-offer-list aria-labelledby="studio-oferta"></ul>
           </div>
         </section>
         <div class="advisor-results" data-results aria-live="polite"></div>

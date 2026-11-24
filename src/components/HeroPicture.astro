@@ -3,6 +3,9 @@
 // albo obraz z src/assets (AVIF + WebP przez astro:assets). Na telefonie kadr pionowy daje CSS (object-fit: cover).
 // eager + fetchpriority=high, width/height (bez przesunięć układu).
 import { getImage } from 'astro:assets';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import sharp from 'sharp';
 import { srcOf, srcsetOf, type ImageRef } from '../lib/images';
 
 /**
@@ -13,6 +16,19 @@ interface Props { wide: ImageRef; tall?: ImageRef | null; alt: string; class?: s
 const { wide, tall, alt, class: cls, sizes = '(min-width: 80rem) 76rem, 100vw', priority = true } = Astro.props;
 const lazy = !priority;
 const MOBILE = '(max-width: 59.99rem)';
+
+// Pierwszy kadr bez białej plamy: zanim przyjdzie zdjęcie, w ramce leży jego miniatura 32 px (ok. 0,5 KB w HTML),
+// którą przeglądarka rozmywa przy powiększeniu. Tylko obraz LCP (priority) i tylko zdjęcia z public/katalog.
+const lqipCache = ((globalThis as any).__lqip ??= new Map<string, Promise<string | null>>()) as Map<string, Promise<string | null>>;
+function lqip(src: string) {
+  if (!lqipCache.has(src)) {
+    const file = join(process.cwd(), 'public', src);
+    lqipCache.set(src, existsSync(file)
+      ? sharp(file).resize(32).webp({ quality: 45 }).toBuffer().then(b => `data:image/webp;base64,${b.toString('base64')}`, () => null)
+      : Promise.resolve(null));
+  }
+  return lqipCache.get(src)!;
+}
 
 let sources: { media?: string; type: string; srcset: string; sizes: string }[] = [];
 let fallback = '';
@@ -41,8 +57,9 @@ if (wide.pub) {
   fallback = (await getImage({ src: wide.src, width: 1440, format: 'jpg' })).src;
   ({ width, height } = wide.src);
 }
+const placeholder = priority && wide.pub ? await lqip(fallback) : null;
 ---
-<div class:list={['media', cls]}>
+<div class:list={['media', cls]} style={placeholder ? `background: url(${placeholder}) 50% 58% / cover no-repeat` : undefined}>
   <picture>
     {sources.map(s => <source media={s.media} type={s.type} srcset={lazy ? undefined : s.srcset} data-srcset={lazy ? s.srcset : undefined} sizes={s.sizes} />)}
     <img class="media__img" src={lazy ? undefined : fallback} data-src={lazy ? fallback : undefined} {width} {height} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" fetchpriority={priority ? 'high' : 'auto'} />

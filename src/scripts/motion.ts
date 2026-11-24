@@ -194,7 +194,7 @@ function initHero() {
       if (next === i) return;
       wake(slides[next]);
       wake(slides[(next + 1) % slides.length]);
-      slides[i].classList.remove('is-active');
+      slides[i].classList.remove('is-active', 'is-still');
       slides[i].classList.add('is-leaving');
       slides[i].dispatchEvent(new Event('slide:hide'));
       const prev = slides[i];
@@ -254,6 +254,9 @@ function initHero() {
       if (Math.abs(dx) > 50) show(i + (dx < 0 ? 1 : -1));
     }, { passive: true });
 
+    // pierwsza kolekcja stoi od razu, bez odsłony (decyzja Michała 24.11: wejście na stronę nie ma oślepiać);
+    // ruch wraca od pierwszej zmiany slajdu
+    slides[i].classList.add('is-still');
     hero.classList.add('is-live');
     setStopped(stopped);
     announce();

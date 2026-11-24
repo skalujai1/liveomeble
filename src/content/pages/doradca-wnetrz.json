@@ -98,7 +98,7 @@
         "lead": "Dodaj zdjęcie pokoju, a wstawisz w nie wybrany mebel jednym kliknięciem. Potem możesz dodać jeszcze dwa meble Liveo.",
         "remove": "Usuń mebel",
         "loading": "Wczytuję mebel",
-        "studioHint": "Wybrany mebel jest już na liście. Kliknij „Wstaw do zdjęcia” albo dodaj jeszcze dwa meble przyciskiem + niżej."
+        "studioHint": "Wybrany mebel jest już na liście. Kliknij „Wstaw do zdjęcia” albo dodaj jeszcze dwa meble z listy pod zdjęciem."
       },
       "visual": {
         "loading": "Wstawiam meble do Twojego zdjęcia. To może chwilę potrwać.",
@@ -111,11 +111,15 @@
           "default": "Wizualizacja jest chwilowo niedostępna. Spróbuj ponownie później."
         },
         "studioTitle": "Twój pokój z meblami Liveo",
-        "studioHint": "Dodaj do 3 mebli przyciskiem + przy meblach niżej i wstaw je do zdjęcia.",
+        "studioHint": "Wybierz do 3 mebli z listy pod zdjęciem i wstaw je do zdjęcia.",
         "add": "+ Dodaj do pokoju",
         "added": "✓ W pokoju",
         "full": "Masz już 3 meble",
         "remove": "Usuń",
+        "empty": "Dodaj mebel",
+        "offerTitle": "Dodaj z kompletu {collection}",
+        "offerTitleType": "Dodaj z listy",
+        "offerMore": "Inne meble niżej",
         "go": "Wstaw do zdjęcia",
         "showOriginal": "Pokaż moje zdjęcie",
         "showResult": "Pokaż wizualizację",
