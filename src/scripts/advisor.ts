@@ -540,7 +540,7 @@ export function initAdvisor() {
     // kropki tylko na wizualizacji: numer jak na liście, nazwa po najechaniu, klik prowadzi do mebla
     stSpots.replaceChildren(...(ST.result && !ST.showOriginal ? ST.spots : []).map(sp => {
       const p = ST.made[sp.n - 1];
-      return p ? h('li', { class: 'advisor-studio__spot', style: `--x:${sp.x}%;--y:${sp.y}%` },
+      return p ? h('li', { class: `advisor-studio__spot${sp.x > 55 ? ' is-left' : ''}`, style: `--x:${sp.x}%;--y:${sp.y}%` },
         h('a', { href: p.url, 'aria-label': `${sp.n}. ${nameOf(p)}` },
           h('span', { class: 'advisor-studio__dot', 'aria-hidden': 'true' }, String(sp.n)),
           h('span', { class: 'advisor-studio__label', 'aria-hidden': 'true' }, nameOf(p), h('small', null, 'Zobacz mebel →')))) : null;

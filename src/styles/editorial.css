@@ -171,6 +171,7 @@ html:active-view-transition-type(kolekcja)::view-transition-new(root) { animatio
   width: max(100cqw, calc(100cqh * var(--ar))); aspect-ratio: var(--ar); translate: -50% -58%;
 }
 .hero-spot { position: absolute; left: var(--x); top: var(--y); pointer-events: auto; }
+.hero-spot.is-active { z-index: 2; } /* otwarta karta nad pozostałymi kropkami */
 .hero-spot.is-covered { display: none; }
 .hero-spot__link { position: absolute; left: 0; top: 0; translate: -50% -50%; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; color: var(--color-text); text-decoration: none; }
 .hero-spot__link:focus-visible { outline: 2px solid #fff; outline-offset: 0; border-radius: 50%; }
@@ -1068,6 +1069,10 @@ mark.todo { background: none; color: var(--color-text-muted); padding: 0; border
 .advisor-studio.is-busy .advisor-studio__img { filter: blur(3px) saturate(0.6); opacity: 0.6; }
 .advisor-studio__spots { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
 .advisor-studio__spot { position: absolute; left: var(--x); top: var(--y); pointer-events: auto; }
+/* kropka pod kursorem (albo z fokusem) razem z etykietą leży nad pozostałymi: link „Zobacz mebel” nie chowa się pod numerkami */
+.advisor-studio__spot:is(:hover, :focus-within) { z-index: 2; }
+/* kropka w prawej części zdjęcia: etykieta otwiera się w lewo, żeby nie wyszła poza kadr */
+.advisor-studio__spot.is-left .advisor-studio__label { left: auto; right: calc(50% + 1.5rem); }
 .advisor-studio__spot a { position: absolute; left: 0; top: 0; translate: -50% -50%; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; text-decoration: none; color: var(--color-text); }
 .advisor-studio__dot {
   display: grid; place-items: center; width: 1.75rem; height: 1.75rem; border-radius: 50%; background: #fff; font: var(--weight-medium) 0.875rem/1 var(--font-sans);
