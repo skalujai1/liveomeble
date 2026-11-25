@@ -106,6 +106,8 @@ const ld: Node[] = [website(), organization(), ...jsonLd, ...(crumbs ? [breadcru
       addEventListener('pagereveal', function (e) {
         var vt = e.viewTransition;
         if (!vt) return;
+        // wejście przez przejście między stronami: animacja wejścia „ostrość” (editorial.css) się nie nakłada na przejście
+        document.documentElement.classList.add('vt');
         var onClick = function (ev) {
           if (ev.target !== document.documentElement) return;
           var x = ev.clientX, y = ev.clientY;
