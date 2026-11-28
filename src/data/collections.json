@@ -144,6 +144,182 @@
         "h": 2160,
         "url": "https://upload.liveomeble.pl/img/dante/DANTE_02_bialy_2160px.jpg",
         "room": "salon"
+      },
+      {
+        "base": "/katalog/99fa57079c-dante_05_bialy_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_05_bialy_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/14b05f0ded-dante_04_bialy_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_04_bialy_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/e2c3d71d9e-dante_06_bialy_2160px",
+        "widths": [
+          1280,
+          2160
+        ],
+        "w": 2160,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_06_bialy_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/c1b467d72a-dante_03_bialy",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_03_bialy.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/d7522e26f3-dante_01_kaszmir_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_01_kaszmir_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/62cf0af1a3-dante_02_kaszmir_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_02_kaszmir_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/8bf7dab389-dante_05_kaszmir_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_05_kaszmir_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/c7f1b5b134-dante_04_kaszmir_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_04_kaszmir_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/21a9716332-dante_06_kaszmir_2160px",
+        "widths": [
+          1280,
+          2160
+        ],
+        "w": 2160,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_06_kaszmir_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/defc36e757-dante_03_kaszmir",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_03_kaszmir.jpg",
+        "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/9bd79f37ae-dante_01_szary_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_01_szary_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/992df357cb-dante_02_szary_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_02_szary_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/dff4ba4096-dante_05_szary_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_05_szary_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/6a07e03513-dante_04_szary_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_04_szary_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/b6f728bd3e-dante_06_szary_2160px",
+        "widths": [
+          1280,
+          2160
+        ],
+        "w": 2160,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_06_szary_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/fe3fd1218b-dante_03_szary",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/dante/DANTE_03_szary.jpg",
+        "room": "sypialnia"
       }
     ],
     "productCount": 24,
@@ -290,6 +466,60 @@
         "h": 2160,
         "url": "https://upload.liveomeble.pl/img/remi/REMI_RM11_bialy-evoke_2160px.jpg",
         "room": "przedpokoj"
+      },
+      {
+        "base": "/katalog/601de77b14-remi_rm12_bialy-evoke_1080px",
+        "widths": [
+          1072
+        ],
+        "w": 1072,
+        "h": 1080,
+        "url": "https://upload.liveomeble.pl/img/remi/REMI_RM12_bialy-evoke_1080px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/d5321c9fc0-remi_04_castello_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2978,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/remi/REMI_04_castello_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/36149009e1-remi_01_evoke_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3176,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/remi/REMI_01_evoke_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/e8627df707-remi_02_evoke_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2735,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/remi/REMI_02_evoke_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/c8b08ecf36-remi_05_sonoma_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3248,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/remi/REMI_05_sonoma_2160px.jpg",
+        "room": "salon"
       }
     ],
     "productCount": 19,
@@ -433,6 +663,50 @@
         "h": 2160,
         "url": "https://upload.liveomeble.pl/img/milton/MILTON_02_kaszmir_2160px.jpg",
         "room": "salon"
+      },
+      {
+        "base": "/katalog/7aa77984fb-milton_03_kaszmir_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/milton/MILTON_03_kaszmir_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/a27efe8f1f-milton_01_szary_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/milton/MILTON_01_szary_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/a1018b7be8-milton_02_szary_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/milton/MILTON_02_szary_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/59beddf33f-milton_03_szary_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/milton/MILTON_03_szary_2160px.jpg",
+        "room": "salon"
       }
     ],
     "productCount": 12,
@@ -550,6 +824,26 @@
         "w": 1128,
         "h": 720,
         "url": "https://upload.liveomeble.pl/img/irma-dab/IRMA_02_v2_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/88ec5180e2-irma_01_v2_720px",
+        "widths": [
+          1198
+        ],
+        "w": 1198,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/irma-dab/IRMA_01_v2_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/850df3f1db-irma_04_720px",
+        "widths": [
+          1124
+        ],
+        "w": 1124,
+        "h": 720,
+        "url": "https://upload.liveomeble.pl/img/irma-dab/IRMA_04_720px.jpg",
         "room": "salon"
       },
       {
@@ -758,6 +1052,17 @@
         "h": 2160,
         "url": "https://upload.liveomeble.pl/img/mati/MATI_05_2160px.jpg",
         "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/78c6551353-mati_06_2160px",
+        "widths": [
+          1280,
+          2160
+        ],
+        "w": 2160,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/mati/MATI_06_2160px.jpg",
+        "room": "salon"
       }
     ],
     "productCount": 23,
@@ -1201,6 +1506,28 @@
         "h": 2160,
         "url": "https://upload.liveomeble.pl/img/forrest/FORREST_06_2160px.jpg",
         "room": "sypialnia"
+      },
+      {
+        "base": "/katalog/8694b1c7dc-forrest_04_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3194,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/forrest/FORREST_04_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/10452df527-forrest_07_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3441,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/forrest/FORREST_07_2160px.jpg",
+        "room": "salon"
       }
     ],
     "productCount": 18,
@@ -1290,6 +1617,17 @@
         "w": 3240,
         "h": 2160,
         "url": "https://upload.liveomeble.pl/img/besto/BESTO_02_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/036e97c8f3-besto_06_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3123,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/besto/BESTO_06_2160px.jpg",
         "room": "salon"
       }
     ],
@@ -1578,6 +1916,182 @@
         "h": 1440,
         "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z200_szary-bialy-bialy_1440px.jpg",
         "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/1dd2de0611-tiffany_z220_szary-bialy-bialy_1440px",
+        "widths": [
+          1280,
+          2171
+        ],
+        "w": 2171,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z220_szary-bialy-bialy_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/cf94f19d66-tiffany_z240_szary-bialy-bialy_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z240_szary-bialy-bialy_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/defd6bc19d-tiffany_z240_szary-bialy-craft_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z240_szary-bialy-craft_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/8051b55780-tiffany_z260_szary-bialy-bialy_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z260_szary-bialy-bialy_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/eaeba8180f-tiffany_z260_szary-bialy-craft_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z260_szary-bialy-craft_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/29a42232d9-tiffany_z180_szary-bialy-bialy_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z180_szary-bialy-bialy_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/feb289f0bc-tiffany_z200_szary-szary-bialy_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2418,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z200_szary-szary-bialy_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/98af92523c-tiffany_z220_szary-szary-bialy_1440px",
+        "widths": [
+          1280,
+          2171
+        ],
+        "w": 2171,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z220_szary-szary-bialy_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/a330e9e9e8-tiffany_z220_szary-szary-crafty_1440px",
+        "widths": [
+          1280,
+          2171
+        ],
+        "w": 2171,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z220_szary-szary-crafty_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/e9ce5a03e2-tiffany_z240_szary-szary-bialy_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z240_szary-szary-bialy_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/17421d589e-tiffany_z240_szary-szary-crafty_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z240_szary-szary-crafty_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/54a7e86c2f-tiffany_z260_szary-szary-bialy_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z260_szary-szary-bialy_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/7e55c6f746-tiffany_z260_szary-szary-craft_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z260_szary-szary-craft_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/7df4330e2d-tiffany_z180_szary-szary-bialy_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2560,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_Z180_szary-szary-bialy_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/ed9f29655a-tiffany_r1_narozna-biala_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2561,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_R1_narozna-biala_1440px.jpg",
+        "room": "kuchnia"
+      },
+      {
+        "base": "/katalog/a3e488ede8-tiffany_r2_narozna-biala_1440px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2561,
+        "h": 1440,
+        "url": "https://upload.liveomeble.pl/img/tiffany/TIFFANY_R2_narozna-biala_1440px.jpg",
+        "room": "kuchnia"
       }
     ],
     "productCount": 5,
@@ -1656,6 +2170,61 @@
         "w": 1082,
         "h": 720,
         "url": "https://upload.liveomeble.pl/img/snobi/SNOBI_03_720px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/f2b51de2c5-snobi_01_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3244,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/snobi/SNOBI_01_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/27925d816f-snobi_02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3042,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/snobi/SNOBI_02_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/53a4b06fe6-snobi_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3245,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/snobi/SNOBI_03_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/2aead56c6b-snobi_04_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2910,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/snobi/SNOBI_04_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/f2f065b6ab-snobi_05_2160px",
+        "widths": [
+          1280,
+          2398
+        ],
+        "w": 2398,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/snobi/SNOBI_05_2160px.jpg",
         "room": "salon"
       }
     ],
@@ -1925,6 +2494,17 @@
         "h": 2160,
         "url": "https://upload.liveomeble.pl/img/kris/KRIS_01_2160px.jpg",
         "room": "salon"
+      },
+      {
+        "base": "/katalog/0bb809302c-kris_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 2795,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/kris/KRIS_03_2160px.jpg",
+        "room": "salon"
       }
     ],
     "productCount": 12,
@@ -2053,6 +2633,17 @@
         "w": 3600,
         "h": 2160,
         "url": "https://upload.liveomeble.pl/img/marco/MARCO_R03_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/6895a4dd79-marco_r02_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3600,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/marco/MARCO_R02_2160px.jpg",
         "room": "salon"
       }
     ],
@@ -2778,6 +3369,17 @@
         "w": 3175,
         "h": 2160,
         "url": "https://upload.liveomeble.pl/img/g-te/G-TE_02_2160px.jpg",
+        "room": "salon"
+      },
+      {
+        "base": "/katalog/712e1a63d0-g-te_03_2160px",
+        "widths": [
+          1280,
+          2400
+        ],
+        "w": 3240,
+        "h": 2160,
+        "url": "https://upload.liveomeble.pl/img/g-te/G-TE_03_2160px.jpg",
         "room": "salon"
       }
     ],
