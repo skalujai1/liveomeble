@@ -42,6 +42,15 @@ const slugify = s => s.toLowerCase().replace(/[ąćęłńóśźż]/g, c => PL[c]
 const cap = s => (s ? s[0].toUpperCase() + s.slice(1) : s);
 const joinPl = list => (list.length < 2 ? list.join('') : `${list.slice(0, -1).join(', ')} i ${list.at(-1)}`);
 const https = u => (u ? u.replace(/^http:\/\//, 'https://') : u);
+import { animationFor, extraArrangements, sceneKey } from './upload-extra.mjs';
+const GALLERY_PER_VARIANT = 8;
+// animacja z serwera Liveo po symbolu, gdy link z karty nie działa; kolor z nazwy pierwszego zdjęcia (DT04_AZ_a.jpg → AZ)
+const animFromServer = k => {
+  const code = String(k.code || '').split(' ')[0];
+  const first = decodeURIComponent(String(k.variants?.[0]?.photos?.[0] || '').split('/').pop());
+  const color = first.toUpperCase().startsWith(code.toUpperCase() + '_') ? first.split('_')[1] : '';
+  return code ? animationFor(code, color) : null;
+};
 // Linki do plików (instrukcje, animacje, rysunki): w eksporcie bywają martwe (404) albo sklejone po dwa w jednym polu.
 // Bierzemy pierwszy działający adres według tools/data/links-ok.json (node tools/data/check-links.mjs); bez listy — pierwszy adres.
 const LINKS_OK = (() => { try { return new Set(JSON.parse(readFileSync(new URL('./links-ok.json', import.meta.url), 'utf8')).ok); } catch { return null; } })();
@@ -267,8 +276,8 @@ for (const [collName, list] of collMap) {
         code, sku: v.symbol, ean: v.ean, colorLabel: v.label || 'Standard',
         finish: { body: parts[0] ? decorId(parts[0]) : null, front: decorId(parts[1] ?? parts[0] ?? 'dąb'), accent: parts[2] ? decorId(parts[2]) : null },
         images: { packshot: photo ?? scene, packshotIsScene: !photo && !!scene },
-        // dodatkowe zdjęcia z karty (do 3, pobrane lokalnie); brakujące na serwerze Liveo pomijamy
-        gallery: v.photos.slice(1, 4).map(image).filter(Boolean),
+        // dodatkowe zdjęcia z karty (do 8: inne kąty, otwarte drzwi; pobrane lokalnie); brakujące na serwerze Liveo pomijamy
+        gallery: v.photos.slice(1, 1 + GALLERY_PER_VARIANT).map(image).filter(Boolean),
         description: v.description && !isEnglish(v.description) ? v.description : null,
       };
     });
@@ -291,7 +300,7 @@ for (const [collName, list] of collMap) {
       equipment: k.equipment ? tidy(k.equipment) : null,
       packages: packages.map(x => ({ ean: x.ean ?? null, w: x.w ?? null, h: x.h ?? null, d: x.d ?? null, kg: x.kg ?? null })),
       drawing: image(k.drawing),
-      documents: { instruction: live(k.instruction), animation: live(k.animation), drawing: image(k.drawing) ? null : live(k.drawing) },
+      documents: { instruction: live(k.instruction), animation: live(k.animation) ?? animFromServer(k), drawing: image(k.drawing) ? null : live(k.drawing) },
       bed: k.bed ?? null, kitchenLength: k.kitchenLength ?? null,
       style: k.style === 'glamour' ? 'glamour' : 'nowoczesny',
       images: { packshot: def.images.packshot },
@@ -329,10 +338,13 @@ const collections = [...collMap.keys()].map(collName => {
     m.set(r, (m.get(r) || 0) + 1);
     arrRoom.set(https(a), m);
   }
-  const arrangements = (KARTY.arrangements[collName] || []).map(https).map(u => {
+  const kartyArr = (KARTY.arrangements[collName] || []).map(https);
+  // pomieszczenie kadru z serwera (spoza kart) bierzemy z tego samego ujęcia w innym kolorze, jeśli jest w kartach
+  const roomByScene = new Map(kartyArr.map(u => [sceneKey(u), u]));
+  const arrangements = [...kartyArr, ...extraArrangements(collName, kartyArr)].map(u => {
     const img = image(u);
     if (!img) return null;
-    const votes = [...(arrRoom.get(u) || new Map())].sort((a, b) => b[1] - a[1]);
+    const votes = [...(arrRoom.get(u) || arrRoom.get(roomByScene.get(sceneKey(u))) || new Map())].sort((a, b) => b[1] - a[1]);
     return { ...img, url: u, room: votes[0]?.[0] ?? collRooms[0] };
   }).filter(Boolean)
     // najpierw zdjęcia tej kolekcji (nazwa w pliku), potem wspólne z innych kart (np. stół z kolekcji G-TE przy IRMA)

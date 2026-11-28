@@ -6,19 +6,20 @@
 // Nie trzymamy zdjęć w repozytorium: karty (tools/data/karty-liveo.json) wskazują oryginały na serwerze Liveo,
 // a ten skrypt przed buildem pobiera tylko to, czego jeszcze nie ma w public/katalog/ (lokalnie i w CI — cache).
 // Packshot wariantu: 480 i 1000 px szerokości. Aranżacje kolekcji: 1280 i 2400 px (oryginały mają ~2,4 MB).
-// Dodatkowe zdjęcia wariantu (do 3): 1000 px. Rysunek wymiarowy: 1200 px. Instrukcje PDF i animacje strona linkuje do serwera Liveo.
+// Dodatkowe zdjęcia wariantu (do 8): 1000 px. Rysunek wymiarowy: 1200 px. Instrukcje PDF i animacje strona linkuje do serwera Liveo.
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import { extraArrangements } from './upload-extra.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const OUT = join(ROOT, 'public/katalog');
 const MANIFEST = join(OUT, 'manifest.json');
 const force = process.argv.includes('--force');
 const karty = JSON.parse(readFileSync(join(ROOT, 'tools/data/karty-liveo.json'), 'utf8'));
-export const ARRANGEMENTS_PER_COLLECTION = 8;
+export const ARRANGEMENTS_PER_COLLECTION = 24;
 
 export const https = u => u.replace(/^http:\/\//, 'https://');
 
@@ -27,13 +28,15 @@ const jobs = new Map();
 for (const p of karty.products) {
   for (const v of p.variants) if (v.photos[0]) jobs.set(https(v.photos[0]), [480, 1000, v.photos.slice(1).map(https)]);
 }
-export const GALLERY_PER_VARIANT = 3;
+export const GALLERY_PER_VARIANT = 8;
 for (const p of karty.products) {
   for (const v of p.variants) for (const u of v.photos.slice(1, 1 + GALLERY_PER_VARIANT)) if (!jobs.has(https(u))) jobs.set(https(u), [1000, null, []]);
   if (p.drawing) jobs.set(https(p.drawing), [1200, null, []]);
 }
-for (const list of Object.values(karty.arrangements)) {
-  for (const u of list.slice(0, ARRANGEMENTS_PER_COLLECTION)) jobs.set(https(u), [1280, 2400, []]);
+for (const [coll, list] of Object.entries(karty.arrangements)) {
+  // karty + nowe kadry z serwera Liveo, których nie ma w kartach (tools/data/upload-extra.mjs)
+  const all = [...list.map(https), ...extraArrangements(coll, list.map(https))];
+  for (const u of all.slice(0, ARRANGEMENTS_PER_COLLECTION)) jobs.set(https(u), [1280, 2400, []]);
 }
 
 mkdirSync(OUT, { recursive: true });
